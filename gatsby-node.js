@@ -46,7 +46,13 @@ const query = `
                 ${seoFields}
                 featuredImage {
                     node {
-                        ${mediaFields}
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
+                                }
+                            }
+                        }
                     }
                 }
                 postDetails {
@@ -56,7 +62,13 @@ const query = `
                             slug
                             featuredImage {
                                 node {
-                                    ${mediaFields}
+                                    localFile {
+                                        childImageSharp {
+                                            fluid {
+                                                src
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -98,7 +110,7 @@ const query = `
                             
                             featuredImage {
                                 node {
-                                    remoteFile {
+                                    localFile {
                                         childImageSharp {
                                             fluid {
                                                 src
@@ -117,7 +129,7 @@ const query = `
 
                             featuredImage {
                                 node {
-                                    remoteFile {
+                                    localFile {
                                         childImageSharp {
                                             fluid {
                                                 src
@@ -138,7 +150,7 @@ const query = `
                             
                             featuredImage {
                                 node {
-                                    remoteFile {
+                                    localFile {
                                         childImageSharp {
                                             fluid {
                                                 src
