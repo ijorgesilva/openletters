@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from 'gatsby'
 import { withTrans } from '../i18n/withTrans'
 import CookieConsent from 'react-cookie-consent'
@@ -186,7 +186,7 @@ const Layout = ( { data, children, t, i18n, location } ) => {
                 as={"link"} 
                 menuGlobalGive={menuGive} 
                 menuGlobalHelp={menuHelp} 
-                menuCampusSelector={data.allWpCampus}
+                // menuCampusSelector={data.allWpCampus}
             />
 
             <main>
@@ -199,20 +199,7 @@ const Layout = ( { data, children, t, i18n, location } ) => {
     )
 }
   
-//   Layout.propTypes = {
-//     children: PropTypes.node.isRequired,
-//   }
+Layout.propTypes = {
+    children: PropTypes.node.isRequired,
+}
 export default withTrans(Layout)
-
-export const query = graphql`
-    query MyQuery {
-
-        allWpCampus {
-            nodes {
-                title
-                slug
-            }
-        }
-
-    }
-`

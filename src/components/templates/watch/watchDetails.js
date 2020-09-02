@@ -11,7 +11,7 @@ import './watchDetails.scss'
 import VideoJsPlayerCustom from '../../player/videoJsPlayerVod'
 
 
-export default function  WatchDetails(props){
+export default function  WatchDetails( props ){
     
     const { title, excerpt, content, featuredImage, VodVideo } = props.pageContext
 
@@ -32,22 +32,20 @@ export default function  WatchDetails(props){
                 }
                 <Container fluid>
                     <Row>
+                    
                         <Col>
                             <div className="sticky">
-
                                 <div className="extract" dangerouslySetInnerHTML={{__html: excerpt}}></div>
-                                
                                 {
                                     (VodVideo.dayDate) ? <div className="date">{VodVideo.dayDate}</div>: null
                                 }
                                 {
                                     (VodVideo.speaker) ? <address className="author">{VodVideo.speaker.map ( ( speaker, index ) => (<>{(index) ? ', ': ''} <span key={index}>{speaker.title}</span></>))}</address> : null
                                 }
-
                                 <hr />
-
                             </div>
                         </Col>
+
                         <Col xs={6}>
                             <div className="mt-5 mb-5">
                                 {/* <Img fluid="" /> */}
@@ -56,9 +54,10 @@ export default function  WatchDetails(props){
                             </div>
                             <article dangerouslySetInnerHTML={{__html: content }}></article>
                         </Col>
-                        <Col>
 
+                        <Col>
                         </Col>
+
                     </Row>
                 </Container>
             </section>
