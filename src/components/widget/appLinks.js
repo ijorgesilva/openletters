@@ -1,0 +1,18 @@
+import React from "react"
+
+// assets
+import appStoreIcon from "../../assets/img/global/Download_on_the_App_Store_Badge.svg"
+import playStoreIcon from "../../assets/img/global/Google_Play_Store_badge_EN.svg"
+
+export default function AppLinks (props){
+    return (
+        <div className={`${props.className}`}>
+            <a href={props.appStoreUrl} title="Download on App Store" target="_blank" rel="noreferrer" alt="Download on App Store"> 
+                <img src={appStoreIcon} width="150" alt="Apple App" /> 
+            </a>
+            <a href={props.playStoreUrl} title="Get it on the Play Store" target="_blank" rel="noreferrer" alt="Get it on the Play Store"> 
+                <img src={playStoreIcon} width="150" alt="Android App" /> 
+            </a>
+        </div>
+    )
+}

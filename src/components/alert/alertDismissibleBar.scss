@@ -1,0 +1,27 @@
+.alertdismissiblebar {
+    background-color: var(--color-six);
+
+    .alert-dismissible {
+        margin-bottom: 0px;
+        padding: 30px;
+        border-radius: unset;
+        background-color: var(--color-six-dark-shade-three);
+        color: var(--color-four);
+        border: unset;
+
+        a {
+            font-weight: 900;
+            text-decoration: underline;
+        }
+        p {
+            margin-bottom: 0px;
+        }
+
+        .close {
+            color: var(--color-white);
+            top: 17px;
+            right: 17px;
+            margin: auto;
+        }
+    }
+}
