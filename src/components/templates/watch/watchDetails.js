@@ -49,7 +49,9 @@ export default function  WatchDetails( props ){
                         <Col xs={6}>
                             <div className="mt-5 mb-5">
                                 {/* <Img fluid="" /> */}
-                                {VodVideo.campus.title}
+                                {
+                                    (VodVideo.campus) ? VodVideo.campus.title : undefined
+                                }
                                 <h1 className="">{title}</h1>
                             </div>
                             <article dangerouslySetInnerHTML={{__html: content }}></article>
