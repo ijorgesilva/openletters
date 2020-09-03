@@ -1,0 +1,32 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+.navglobal {
+    position: relative;
+    z-index: 5;
+    height: 60px;
+    
+    .dropdown-menu {
+        padding: 1rem o;
+    }
+    .dropdown {
+        .nav-link {
+            color: var(--color-white);
+        }
+    }
+    .navbar {
+        height: 60px;
+    }
+    .dropdown-divider {
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding: 0px;
+    }
+    @include media("≥phone", "<850px") {
+        .navbar-toggler {
+            display: none;
+        }
+        &.navbar {
+            padding: unset;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

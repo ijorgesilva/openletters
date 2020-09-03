@@ -1,0 +1,82 @@
+.dropdownmenu {
+
+    &.dropdown {
+        > button {
+
+            margin: 0px;
+            padding: 10px 23px 10px 15px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            border-radius: unset;
+            border: unset;
+            text-transform: initial;
+            min-height: 60px;
+            color: var(--color-six-shade-three);
+
+            &:active,
+            &:focus {
+                background-color: var(--color-one) !important;
+            }
+
+            &::after{
+                margin-top: 10px;
+                z-index: 1;
+                display: none;
+            }
+            &:hover,
+            &.btn-primary:hover {
+                color: var(--color-white);
+                background-color: var(--color-one);
+            }
+            &[aria-expanded="true"]{
+                color: var(--color-white);
+                background-color: var(--color-one);
+            }
+        }
+        .dropdown-menu {
+            background-color: var(--color-one);
+            p{
+                color: var(--color-one-shade-three);
+                padding: .5rem 2rem;
+                text-align: center;
+            }
+
+            h6 {
+                margin-top: 2rem;
+                text-transform: uppercase;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 900;
+                min-width: 300px;
+            }
+            .dropdown-header {
+                text-transform: uppercase;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 900;
+            }
+            .dropdown-item {
+                color: var(--color-white);
+                font-size: 1rem;
+                font-weight: 400;
+                letter-spacing: 1px;
+                padding: .5rem 2rem;
+                &:hover {
+                    color: var(--color-white);
+                    background-color: var(--color-one-dark-shade-one);
+                }
+                &:focus {
+                    background-color: var(--color-one-dark-shade-two);
+                }
+                &:active {
+                    background-color: var(--color-one-dark-shade-three);
+                }
+            }
+            &.show {
+                border: unset;
+                border-radius: unset;
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.c-intro {
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+
+    .c-member__intro {
+        max-width: 600px;
+    }
+}
