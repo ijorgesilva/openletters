@@ -9,6 +9,7 @@ const path = require(`path`)
 
 const mediaFields = `
     altText
+    encodeURI
     uri
     sourceUrl
     title
