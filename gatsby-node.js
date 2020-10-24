@@ -7,12 +7,18 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 
-const mediaFields = `
-    altText
-    encodeURI
-    uri
-    sourceUrl
-    title
+const featuredImageFields = `
+    featuredImage {
+        node {
+            localFile {
+                childImageSharp {
+                    fluid(maxWidth: 1800) {
+                        src
+                    }
+                }
+            }
+        }
+    }
 `
 
 const seoFields = `
@@ -23,12 +29,18 @@ const seoFields = `
         metaKeywords 
         opengraphDescription 
         opengraphImage {
-            ${mediaFields}
+            altText
+            uri
+            sourceUrl
+            title
         }
         opengraphTitle 
         twitterDescription 
         twitterImage {
-            ${mediaFields}
+            altText
+            uri
+            sourceUrl
+            title
         }
         twitterTitle
     }
@@ -39,41 +51,46 @@ const query = `
 
         allWpPost(filter: {status: {eq: "publish"}})  {
             nodes{
+                id
                 title
                 excerpt
                 slug
                 content
-                modified
+                date(formatString: "YYYYMMDD")
+                modified(formatString: "YYYYMMDD")
+                ${featuredImageFields}
                 ${seoFields}
-                featuredImage {
-                    node {
-                        localFile {
-                            childImageSharp {
-                                fluid {
-                                    src
-                                }
-                            }
+                postDetails {
+                    postCampus {
+                        ... on WpCampus {
+                            id
+                            title
+                            slug
+                            ${featuredImageFields}
+                        }
+                    }
+                    postAuthor {
+                        ... on WpSpeaker {
+                            id
+                            title
+                            slug
+                            ${featuredImageFields}
                         }
                     }
                 }
-                postDetails {
-                    campus {
-                        ... on WpCampus {
-                            title
-                            slug
-                            featuredImage {
-                                node {
-                                    localFile {
-                                        childImageSharp {
-                                            fluid {
-                                                src
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                author {
+                    node {
+                      slug
+                      firstName
+                      description
+                      lastName
                     }
+                }
+                terms {
+                  nodes {
+                    slug
+                    name
+                  }
                 }
             }
         }
@@ -86,19 +103,15 @@ const query = `
                 content
                 excerpt
                 modified
-                ${seoFields}
-                featuredImage {
-                    node {
-                        localFile {
-                          childImageSharp {
-                            fluid {
-                              src
-                            }
-                          }
-                        }
-                    }
+                terms {
+                  nodes {
+                    slug
+                    name
+                  }
                 }
-                VodVideo {
+                ${seoFields}
+                ${featuredImageFields}
+                videoDetails {
                     oneLiner
                     transcript
                     dayDate
@@ -108,38 +121,43 @@ const query = `
                             id
                             title
                             slug
-                            
-                            featuredImage {
-                                node {
-                                    localFile {
-                                        childImageSharp {
-                                            fluid {
-                                                src
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
+                            ${featuredImageFields}
                         }
                     }
                     serie {
                         ... on WpSerie {
                             id
                             title
-
-                            featuredImage {
-                                node {
+                            slug
+                            serieGraphics {
+                                poster {
                                     localFile {
                                         childImageSharp {
-                                            fluid {
+                                            fluid(maxWidth: 1800) {
                                                 src
                                             }
                                         }
                                     }
                                 }
+                                logo {
+                                    localFile {
+                                        childImageSharp {
+                                            fluid(maxWidth: 1800) {
+                                                src
+                                            }
+                                        }
+                                    }
+                                }
+                                background {
+                                    localFile {
+                                        childImageSharp {
+                                            fluid {
+                                                src 
+                                            }
+                                        }
+                                    }
+                                }
                             }
-
                         }
                     }
                     url
@@ -148,54 +166,199 @@ const query = `
                             id
                             title
                             uri
-                            
-                            featuredImage {
-                                node {
-                                    localFile {
-                                        childImageSharp {
-                                            fluid {
-                                                src
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
+                            ${featuredImageFields}
                         }
                     }
                 }
             }
         }
 
-    }  
+        allWpSerie (filter: {status: {eq: "publish"}}) {
+            nodes {
+                id
+                title
+                slug
+                content
+                ${seoFields}
+                serieDetails {
+                    trailer
+                    trailerPoster {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src 
+                                }
+                            }
+                        }
+                    }
+                }
+                serieGraphics {
+                    logo {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
+                                }
+                            }
+                        }
+                    }
+                    background {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
+                                }
+                            }
+                        }
+                    }
+                }
+                terms {
+                  nodes {
+                    slug
+                    name
+                  }
+                }
+            }
+        }
+
+        
+        allWpNewspost (filter: {status: {eq: "publish"}})  {
+            nodes{
+                id
+                title
+                excerpt
+                slug
+                content
+                date(formatString: "YYYYMMDD")
+                modified(formatString: "YYYYMMDD")
+                ${featuredImageFields}
+                ${seoFields}
+                terms {
+                  nodes {
+                    slug
+                    name
+                  }
+                }
+            }
+        }
+
+
+        allWpEvent(filter: {status: {eq: "publish"}}) {
+            nodes{
+                id
+                title
+                excerpt
+                slug
+                content
+                date(formatString: "YYYYMMDD")
+                modified(formatString: "YYYYMMDD")
+                ${featuredImageFields}
+                ${seoFields}
+                eventDetails {
+                    eventAddress
+                    eventCampus {
+                        ... on WpCampus {
+                            id
+                            title
+                            slug
+                        }
+                    }
+                    eventDates {
+                        eventDate
+                        time
+                    }
+                    eventLink {
+                        eventLinkText
+                        eventLinkUrl
+                    }
+                }
+                terms {
+                  nodes {
+                    slug
+                    name
+                  }
+                }
+            }
+        }
+
+    }
 `
 
-exports.createPages = async( {actions, graphql} ) => {
-    const { data } = await graphql(`
-        ${query}
-    `)
+exports.createPages = async( { page, actions, graphql, reporter } ) => {
 
-    if(!data.allWpVideoOnDemand) return null
+    const { createPage } = actions
 
-    data.allWpPost.nodes.forEach(post => {
+    const result = await graphql(
+        `${query}`
+    )
+
+    if (result.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`)
+        return
+    }
+
+    result.data.allWpVideoOnDemand.nodes.forEach( video => {
+        createPage({
+            path: `/watch/message/${video.slug}`,
+            component: path.resolve(`./src/components/templates/watch/watchDetails.js`),
+            context: {
+                ...video,
+                title: video.title,
+                slug: video.slug,
+                id: video.id,
+                layout: "watchDetails"
+            }
+        })
+    })
+
+    result.data.allWpSerie.nodes.forEach( serie => {
+        actions.createPage({
+            path: `/watch/serie/${serie.slug}`,
+            component: path.resolve(`./src/components/templates/watch/watchSeries.js`),
+            context: {
+                ...serie,
+                title: serie.title,
+                slug: serie.slug,
+                id: serie.id,
+            }
+        })
+    })
+    
+    result.data.allWpPost.nodes.forEach(post => {
         actions.createPage({
             path: `/blog/${post.slug}`,
             component: path.resolve(`./src/components/templates/post/postDetails.js`),
             context: {
                 ...post,
-                slug: post.slug
+                title: post.title,
+                slug: post.slug,
+                id: post.id,
             }
         })
     })
 
-    data.allWpVideoOnDemand.nodes.forEach(video => {
+    result.data.allWpNewspost.nodes.forEach(news => {
         actions.createPage({
-            path: `/message/${video.slug}`,
-            component: path.resolve(`./src/components/templates/watch/watchDetails.js`),
+            path: `/news/${news.slug}`,
+            component: path.resolve(`./src/components/templates/news/newsDetails.js`),
             context: {
-                ...video,
-                id: video.id,
-                slug: video.slug
+                ...news,
+                title: news.title,
+                slug: news.slug,
+                id: news.id,
+            }
+        })
+    })
+    
+    result.data.allWpEvent.nodes.forEach(event => {
+        actions.createPage({
+            path: `/events/${event.slug}`,
+            component: path.resolve(`./src/components/templates/event/eventDetails.js`),
+            context: {
+                ...event,
+                title: event.title,
+                slug: event.slug,
+                id: event.id,
             }
         })
     })

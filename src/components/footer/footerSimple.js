@@ -1,14 +1,14 @@
 import React from 'react'
 
-export default function FooterSimple(props) {
+export default function FooterSimple( {text, links, linkText, ...props} ) {
     return (
         <section className="c-footer z-index-2">
             <div className="c-container  z-index-1 position-relative">
                 <div className="c-footer__logo"></div>
                 <div className="c-footer__copyright">
-                    {props.text}
+                    {text}
                     {
-                        props.links.map((link) => (
+                        links.map((link) => (
                             <span>&nbsp; <a href={link.link} className="c-footer__copyright--link">{link.linkText}</a></span>
                         ))
                     }

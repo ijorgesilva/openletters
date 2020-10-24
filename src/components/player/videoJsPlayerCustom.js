@@ -5,8 +5,8 @@ import videojs from 'video.js'
 import 'videojs-logo'
 import 'videojs-logo/dist/videojs-logo.css'
 import 'video.js/dist/video-js.css'
-import 'videojs-contrib-quality-levels'
-import {qualitySelector} from 'videojs-hls-quality-selector'
+// import 'videojs-contrib-quality-levels'
+// import {qualitySelector} from 'videojs-hls-quality-selector'
 
 // Assets
 import watermarkLogo from '../../assets/img/global/logo_icon_white.png'
@@ -32,11 +32,11 @@ export default function VideoJsPlayerCustom (props) {
         }
 
         const p = videojs(videoRef.current, videoJsOptions, function onPlayerReady() {
-            console.log('')
+            
         })
 
         // player.registerPlugin( 'hlsQualitySelector', qualitySelector )
-        p.hlsQualitySelector({ displayCurrentQuality: true })
+        // p.hlsQualitySelector({ displayCurrentQuality: true })
 
         p.logo({
             image: watermarkLogo,
@@ -68,7 +68,7 @@ export default function VideoJsPlayerCustom (props) {
     return (
         <>
             <div data-vjs-player>
-                <video poster={props.poster} ref={videoRef} className="video-js vjs-big-play-centered"></video>
+                <video poster={props.poster} ref={videoRef} className={`${props.className} video-js vjs-big-play-centered`}></video>
             </div>
             {/* <Button onClick={skipTo}></Button>  */}
         </>

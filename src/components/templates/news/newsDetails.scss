@@ -1,0 +1,65 @@
+.page-news {
+    .sticky {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 40px;
+    }
+    .createdDate {        
+        font-weight: 100;
+        font-size: 0.8rem;
+    }
+    article {
+        .mainTitle { 
+            h1 {
+                font-weight: var(--font-weight-display);
+                font-size: 3rem;
+                line-height: 3rem;
+            }
+        }
+        p, h1, h2, h3, h4, h5, h6 {
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        blockquote {
+            margin: 2rem auto;
+            max-width: 600px;
+            > p {
+                margin: 2rem auto 0px auto;
+            }
+            cite {
+                color: #6c7781;
+                font-weight: 100;
+            }
+        }
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        pre {
+            background-color: #eee;
+            padding: 1.6em;
+        }
+        .authors {
+            display: flex;
+            align-items: center;
+            .author {
+                display: flex;
+                align-items: center;
+                margin-left: 1rem;
+                .photo {
+                    height: 45px;
+                    width: 45px;
+                    border-radius: 100%;
+                }
+                address {
+                    margin-bottom: unset;
+                    margin-left: 0.7rem;
+                }
+            }
+        }
+        .gatsby-image-wrapper {
+            width: 100% !important;
+        }
+    }
+}

@@ -30,9 +30,11 @@ const responsive = {
 
 export default function TestimonialCarousel(props){
     return (
-        <section className={`$props.class`} id={props.id}>
-            <Container fluid><div dangerouslySetInnerHTML={{__html:props.title}}></div></Container>
-            <div className={`carousel-background`}>
+        <section className={`testimonialCarousel $props.class`} id={props.id}>
+            <Container fluid>
+                <div dangerouslySetInnerHTML={{__html:props.title}}></div>
+            </Container>
+            <Container fluid className={`carousel-background`}>
                 <Carousel 
                     swipeable={false}
                     draggable={false}
@@ -61,7 +63,7 @@ export default function TestimonialCarousel(props){
                         ))
                     }
                 </Carousel>
-            </div>
+            </Container>
         </section>
     )
 }

@@ -27,26 +27,10 @@ export default function BlurbVerticalDark (props) {
                             (props.title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: props.title}}></h5>
                             : null
                         }
-                        
-                        {/* {
-                            (props.subtitle) ? 
-                                <h4 className="mb-1"> 
-                                    {props.subtitle.map( ( sub, index ) => (
-                                                <>
-                                                    { (index) ? ', ': '' } <span key={index}> {sub.title} </span>
-                                                </>
-                                            )
-                                        )
-                                    }
-                                </h4>
-                            : undefined
-                        } */}
-                        
                         {
                             (props.excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={props.excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                             : <></>
                         }
-                        
                     </div>
                 </Link>
             </div>

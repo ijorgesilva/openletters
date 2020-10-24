@@ -3,7 +3,12 @@
     &.flag-select{
         padding-bottom: 0px;
     }
-
+    .flag-select__options.to--left {
+        right: 0px;
+    }
+    .flag-select__btn::before {
+        display: none;
+    }
     button {
         margin: 0px;
         padding: 12px 12px 8px 12px;

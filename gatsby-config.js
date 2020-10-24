@@ -13,6 +13,14 @@ module.exports = {
 
   siteMetadata: {
     siteUrl: urljoin(config.siteUrl, config.pathPrefix),
+
+    title: config.siteTitle,
+    titleTemplate: "%s"+' '+config.separator+' '+config.siteTitle,
+    description: config.siteDescription,
+    url: config.siteUrl,
+    image: config.siteLogo,
+    twitterUsername: config.twitterUsername,
+
     rssMetadata: {
       site_url: urljoin(config.siteUrl, config.pathPrefix),
       feed_url: urljoin(config.siteUrl, config.pathPrefix, config.siteRss),
@@ -34,7 +42,7 @@ module.exports = {
         {
           resolve: `gatsby-plugin-layout`,
           options: {
-            component: `${__dirname}/src/components/layout.js`
+            component: `${__dirname}/src/components/layouts/index.js`
           }
         },    
         {

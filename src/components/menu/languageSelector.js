@@ -65,7 +65,8 @@ export default function LanguageSelector(props){
                 className={props.className}
                 defaultCountry={selectedOption.flag}
                 countries={flags}
-                customLabels={{"US": 'EN', "ES": "ES"}} 
+                customLabels={{"US": 'English', "ES": "Español"}} 
+                alignOptions="left"
                 onSelect={onSelectFlag}
             />
         </>

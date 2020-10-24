@@ -1,0 +1,105 @@
+.campusSelector {
+
+    height: 100%;
+
+    .item__control{
+        height: 100%;
+        background-color: transparent;
+        color: var(--color-one);
+        border: unset;
+        border-radius: unset;
+        box-shadow: unset;
+
+        .item__value-container{
+            width: auto;
+            min-width: 150px;
+            .item__placeholder {
+                color: var(--color-six-shade-three);
+            }
+            .item__input{
+                color: var(--color-white);
+            }
+        }
+
+        &.item__control--is-focused {
+            .item__value-container {
+                .item__single-value {
+                    color: var(--color-white);
+                }
+                .item__placeholder {
+                    color: var(--color-white);
+                }
+            }
+        }
+
+        &.item__control--menu-is-open {
+            background-color: var(--color-one) !important;
+
+            .item__value-container {
+                .item__single-value {
+                    color: var(--color-white);
+                }
+                .item__placeholder {
+                    color: var(--color-white);
+                }
+            }
+
+            &:hover{
+                border-color: unset;
+            }
+
+            .item__indicators {
+                .item__indicator {
+                    color: var(--color-white);
+                }
+            }
+
+        }
+
+        .item__single-value {
+            color: var(--color-six-shade-three);
+        }
+
+        .item__indicators {
+            .item__indicator-separator {
+                display: none;
+            }
+            .item__indicator {
+                color: var(--color-one);
+            }
+        }
+
+    }
+
+    .item__menu {
+        margin: unset;
+        border-radius: unset;
+        background-color: var(--color-one);
+        color: var(--color-white);
+        box-shadow: unset;
+
+        .item__menu-list {
+            padding: .5rem 0;
+
+            .item__option {
+                padding: .5rem 2rem;
+                letter-spacing: 1px;
+
+                &:hover{
+                    color: var(--color-white);
+                    background-color: var(--color-one-dark-shade-one);
+                }
+            }
+            .item__option--is-focused {
+                background-color: var(--color-one-dark-shade-two);
+            }
+            .item__option--is-selected {
+                background-color: var(--color-one-dark-shade-three);
+            }
+            .item__menu-notice{
+                color: var(--color-white);
+            }
+        }
+    }
+
+}

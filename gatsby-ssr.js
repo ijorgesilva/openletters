@@ -3,5 +3,18 @@
  *
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
+// import React from 'react'
+// import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+// import fetch from 'isomorphic-fetch'
 
-// You can delete this file if you're not using it
+// const client = new ApolloClient({
+//     cache: new InMemoryCache(),
+//     link: new HttpLink({
+//         fetch,
+//         uri: 'https://cms.victorychur.ch/graphql',
+//     })
+//   });
+
+// export const wrapRootElement = ( {element} ) => (
+//     <ApolloProvider client={client}>{element}</ApolloProvider>
+// )

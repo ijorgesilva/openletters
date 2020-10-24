@@ -1,26 +1,86 @@
+
 .watchDetails {
+    .watchCampus {
+        color: rgba(var(--color-six-dark-shade-three),1);
+        font-weight: 600;
+    }
+    .watchAuthor {
+        color: rgba(var(--color-six-dark-shade-three),1);
+        font-weight: 500;
+        opacity: 0.7;
+        margin-bottom: 0rem;
+    }
+    .watchDate {
+        font-weight: 100;
+        font-size: 0.8rem;
+    }
+
+    .nav-tabs {
+        
+        border-bottom: 2px solid #EAEAEA;
+        margin-bottom: 3rem;
+        background-color: var(--color-white);
+        
+        .nav-link {
+            color: var(--color-gray-five);
+            padding: 1rem 2rem 1rem 2rem;
+            font-weight: 100;
+            &.active{
+                color: var(--color-black);
+                font-weight: 900;
+                border-bottom: 3px solid var(--color-four);
+            }
+            &:hover {
+                color: var(--color-black);
+            }
+        }
+    }
     .sticky {
         position: -webkit-sticky; /* Safari */
         position: sticky;
-        top: 0;
+        top: 40px;
     }
-    article {
-        h1 {
+
+    .watchContent {
+
+        .introCard {
+
+            &.introCardGrid {
+                display: grid;
+                grid-gap: 20px;
+                grid-template-columns: 120px 1fr;
+                align-items: center;
+            }
+
+            h1 {
+                font-size: 3rem;
+                line-height: 3rem;
+                margin-bottom: 0px;
+            }
+            h2,
+            a h2 {
+                font-size: 2rem;
+                line-height: 2rem;
+                font-weight: 300;
+                margin-bottom: 0px;
+                text-decoration: none;
+                color: var(--color-black);
+            }
+            a{
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .serieGraphic {
+                height: 120px;
+                width: 120px;
+                border-radius: 100%;
+            }
 
         }
-        > p, > ol, > ul {
-            margin: 0px auto;
-            max-width: 600px;
-        }
-        blockquote {
-            margin: 20px auto;
-            max-width: 800px;
-            p {
-                font-style: italic;
-            }
-            cite {
-                font-style: normal;
-            }
+
+        .sticky {
+            top: 0px;
         }
     }
 }

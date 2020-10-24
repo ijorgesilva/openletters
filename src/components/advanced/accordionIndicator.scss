@@ -1,56 +1,64 @@
-.c-accordion {
+.accordionIndicator {
     .card {
         .card-header {
-            padding: .75rem 1.70rem .75rem 1.25rem;
+            padding: .75rem 45px .75rem 1.25rem;
+            span {
+                padding: 10px;
+                border-radius: 100px;
+                background-color: var(--color-five-shade-two);
+                display: flex;
+                color: var(--color-white);
+                position: absolute;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                line-height: 9px;
+                top: 10px;
+                justify-content: center;
+                transition: all 300ms ease;
+
+                &:hover {
+                    background-color: var(--color-five);
+                }
+            }
         }
     }
+    &.accordion {
+        margin: 0px auto;
+        ul {
+            li {
+                display: block;
+                &:before {
+                    content: "○";
+                    font-size: 9px;
+                    float: left;
+                    margin-top: 4px;
+                    margin-left: -17px;
+                }
+            }
+        }
+        .card  {
+            .card-header {
+                background-color: transparent;
+                font-weight: 600;
+            }
+        }
+    }
+    .btn {
+        padding: 0px;
+        color: var(--color-black);
+        letter-spacing: 1px;
+        text-transform: initial;
+        font-weight: 900;
+        text-decoration: none;
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
 }
 
-.accordion ul li {
-    display: block;
-}
-
-.accordion ul li:before {
-    content: "○";
-    font-size: 9px;
-    float: left;
-    margin-top: 4px;
-    margin-left: -17px;
-}
 /* Accordion Plus Minus Icon  */
-.accordion.c-accordion > .card > .card-header {
-    background-color: transparent;
-    font-weight: 600;
-}
-.c-accordion .btn {
-    padding: 0px;
-    color: var(--color-black);
-    letter-spacing: 1px;
-    text-transform: initial;
-    font-weight: 900;
-    text-decoration: none;
-}
-.c-accordion .card-header span {
-    padding: 10px;
-    border-radius: 100px;
-    background-color: var(--color-five-shade-two);
-    display: flex;
-    color: var(--color-white);
-    position: absolute;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    line-height: 9px;
-    top: 10px;
-    justify-content: center;
-    transition: all 300ms ease;
-}
-.c-accordion .card-header:hover span {
-    background-color: var(--color-five);
-}
-.c-accordion .btn:hover {
-    box-shadow: none;
-}
 .c-accordion .panel-title > a:before {
     float: right !important;
     font-family: FontAwesome;

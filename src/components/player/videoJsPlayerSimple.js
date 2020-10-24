@@ -9,7 +9,7 @@ export default function VideoJsPlayerSimple (props) {
     }
 
     function onPlayerReady(player) {
-        console.log("Player is ready: ", player);
+        // console.log("Player is ready: ", player);
     }
 
     return (

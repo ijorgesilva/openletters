@@ -1,6 +1,8 @@
 .dropdownmenu {
 
-    &.dropdown {
+    &.dropdown,
+    &.dropleft,
+    &.dropright {
         > button {
 
             margin: 0px;
@@ -36,6 +38,8 @@
         }
         .dropdown-menu {
             background-color: var(--color-one);
+            left: unset;
+            right: 0px;
             p{
                 color: var(--color-one-shade-three);
                 padding: .5rem 2rem;

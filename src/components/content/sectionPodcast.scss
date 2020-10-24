@@ -1,0 +1,28 @@
+.SectionPodcast{
+    padding: 3rem 0px;
+
+    .graphic {
+        height: 200px;
+        width: 100%;
+
+        img {
+            width: auto;
+            height: auto;
+            object-fit: contain !important;
+        }
+    }
+    span {
+        color: var(--color-six-shade-three);
+    }
+    h2{
+        color: var(--color-five);
+    }
+    p {
+        color: rgba(255,255,255,0.3);
+    }
+    .links {
+        display: flex;
+        grid-gap: 15px;
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,59 @@
+.blurbHorizontal {
+
+    border: unset;
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+
+    a {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 0.6fr 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        min-height: 200px;
+        border: solid 2px rgba(255,255,255,0);
+        transition: var(--transition-regular);
+        .card-body {
+            .tags{
+                position: absolute;
+                top: 10px;
+
+                img {
+                    width: 14px;
+                }
+            }
+        }
+        .card-img{
+            height: 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px 0 0 5px !important;
+        }
+        &:hover {
+            text-decoration: none;
+            border: solid 2px var(--color-six-shade-three);
+            border-radius: var(--border-radius);
+        }
+        .card-subtitle {
+            font-weight: 100;
+            font-size: 0.7rem;
+            line-height: 0.7rem;
+            color: var(--color-gray-five);
+        }
+        .card-title {
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .card-text {
+            font-weight: 300;
+            font-size: 0.9rem;
+            line-height: 1rem;
+            color: var(--color-gray-five);
+        }
+    }
+    
+}

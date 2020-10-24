@@ -1,0 +1,21 @@
+.tagSimple {
+    display: block;
+    margin: 3rem 0rem;
+
+    span {
+        font-weight: 300;
+        border-style: solid;
+        border-width: 2px;
+        padding: 0.7rem 1.5rem;
+        margin-left: 1rem;
+        border-color: var(--color-gray-five);
+        color: var(--color-gray-five);
+    }
+
+    &.light {
+        span {
+            border-color: var(--color-gray-one);
+            color: var(--color-gray-one);
+        }
+    }
+}

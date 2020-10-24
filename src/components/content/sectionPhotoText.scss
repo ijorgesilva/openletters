@@ -1,0 +1,27 @@
+.sectionPhotoText {
+    min-height: 600px;
+    position: relative;
+    .col {
+        height: 100%;
+    }
+    .photo{
+        min-height: 600px;
+        width: 100%;
+        background-position: center center;
+        background-size: cover;
+        align-items: center;
+    }
+    .content{
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        position: relative;
+
+        h3 {
+            font-size: 60px;
+            line-height: 55px;
+            color: var(--color-four);
+        }
+    }
+}

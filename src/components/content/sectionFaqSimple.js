@@ -5,16 +5,16 @@ import "./sectionFaqSimple.scss"
 import SectionEmpty from "./sectionEmpty"
 import AccordionIndicator from "../advanced/accordionIndicator"
 
-export default function SectionFaqSimple(props) {
+export default function SectionFaqSimple( { id, className, title, children, data, defaultActiveKey, ...props} ) {
     return (
-        <SectionEmpty id={props.id} className={`c-faq section ${props.className}`}>
+        <SectionEmpty id={id} className={`sectionFaqSimple ${className}`}>
             <Container>
-                <h2 class="h-color-one" dangerouslySetInnerHTML={{__html: props.title}}></h2>
-                {props.children}
+                <h2 class="h-color-one text-center" dangerouslySetInnerHTML={{__html: title}}></h2>
+                {children}
                 <AccordionIndicator 
-                    className="c-accordion mt-5 mw-600px" 
-                    defaultActiveKey={props.defaultActiveKey} 
-                    data={props.data}
+                    className="mt-5 mw-600px" 
+                    defaultActiveKey={defaultActiveKey} 
+                    data={data}
                 />
             </Container>
         </SectionEmpty>
