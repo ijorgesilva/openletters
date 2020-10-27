@@ -12,9 +12,15 @@ export const smallGroupMenu = [
     {name: "Leader Login", link: "https://my.victoryatl.com/default.aspx?page=4236", as: "", target: "_blank"},
 ]
 
-export const eventsBrand =  {name: "Events", link: "/events"}
+export const eventsBrand =  {name: "Events", link: "/events", as: "link"}
 export const eventsMenu = [
     // {name: "Events", link: "/events", as: "", target: ""},
+]
+
+export const watchBrand =  {name: "Watch", link: "/watch", as: "link"}
+export const watchMenu = [
+    {name: "Messages List", link: "/watch/messages/list", as: "link", target: ""},
+    {name: "Series List", link: "/watch/series/list", as: "link", target: ""},
 ]
 
 
@@ -38,7 +44,7 @@ export const menuLocal = [
                     {name: "My.Victory", link: "https://my.victoryatl.com/"},
                     {name: "Small Groups", link: "/smallgroups/", as: "link"},
                     {name: "Serve", link: "/serve/"},
-                    {name: "Events", link: "/event-directory/"},
+                    {name: "Events", link: "/events/", as: 'link'},
                     {name: "Download App", link: "/app/"},
                     {name: "Subscribe", link: "/newsletter/"}
                 ]

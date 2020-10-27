@@ -1,4 +1,5 @@
 const config = {
+  wordpressUri: 'https://cms.victorychur.ch/graphql',
   siteTitle: "Victory Church", // Site title.
   separator: "|",
   siteTitleShort: "Victory", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
@@ -12,7 +13,7 @@ const config = {
   disqusShortname: "", // Disqus shortname.
   dateFromFormat: "YYYY-MM-DD", // Date format used in the frontmatter.
   dateFormat: "DD/MM/YYYY", // Date format for display.
-  postsPerPage: 12, // Amount of posts displayed per listing page.
+  postsPerPage: 6, // Amount of posts displayed per listing page.
 
   siteRss: "/rss.xml", // Path to the RSS file.
   siteRssTitle: "Victory RSS feed", // Title of the RSS feed
@@ -23,7 +24,22 @@ const config = {
   
   copyright: "Copyright © Victory Church", // Copyright string for the footer of the website and RSS feed.
   themeColor: "#0F0A1B", // Used for setting manifest and progress theme colors.
-  backgroundColor: "#f8f8f8" // Used for setting manifest background color.
+  backgroundColor: "#f8f8f8", // Used for setting manifest background color.
+
+  /* List view */
+  watchMessageListSlug: "/watch/messages/list",
+  watchSerieListSlug: "/watch/series/list",
+  blogPostListSlug: "/blog",
+  newsPostListSlug: "/news",
+  eventsPostListSlug: "/events",
+
+  /* Details view */
+  watchMessageDetailsSlug: "/watch/message",
+  watchSerieDetailsSlug: "/watch/serie",
+  blogPostDetailsSlug: "/blog",
+  newsPostDetailsSlug: "/news",
+  eventPostDetailsSlug: "/events",
+  
 };
 
 // Validate
