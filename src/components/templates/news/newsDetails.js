@@ -1,7 +1,7 @@
 // Dependencies
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from "react-i18next"
 
 // Components
 import { getDate } from '../../utils/utils'
@@ -13,9 +13,12 @@ import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
 import { blogMenu, blogMenuBrand } from '../../../../data/menues'
 import './newsDetails.scss'
 
-export default function newsDetails( { pageContext, location } ){
-    
-    const { title, excerpt, date, modified, featuredImage, content, terms } = pageContext
+export default function NewsDetails( { pageContext, location } ){
+
+    /* Standard fields */
+    const { t } = useTranslation()
+        
+    const { title, node: {excerpt, date, modified, featuredImage, content, terms} } = pageContext
 
     const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )

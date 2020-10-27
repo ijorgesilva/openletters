@@ -8,16 +8,17 @@ import Img from 'gatsby-image'
 import { getDate } from '../../utils/utils'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
-// import NetSimple from '../../button/netSimple'
 import TagSimple from '../../tag/tagSimple'
 import ShareSimpleIcon from '../../social/shareSimpleIcon'
 import './postDetails.scss'
 import { blogMenu, blogMenuBrand } from '../../../../data/menues'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
 
-export default function  postDetails( { pageContext, location } ){
+export default function PostDetails( { pageContext, location } ){
     
-    const { title, excerpt, date, modified, featuredImage, content, terms, postDetails } = pageContext
+    const { title, node: {excerpt, date, modified, featuredImage, content, terms, postDetails} } = pageContext
+
+    console.log(pageContext)
 
     const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )

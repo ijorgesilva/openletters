@@ -1,11 +1,10 @@
 // Dependencies
-import React from "react"
+import React from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Button, Accordion, Card } from 'react-bootstrap'
 
 // Components
-import './index.scss'
 import HeaderPage from '../../components/headerPage'
 import HeroBasic from "../../components/hero/heroBasic"
 import SectionTextBasic from "../../components/content/sectionTextBasic"
@@ -20,6 +19,7 @@ import SectionFaqSimple from "../../components/content/sectionFaqSimple"
 import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
 import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
 import {smallGroupBrand, smallGroupMenu} from '../../../data/menues'
+import './index.scss'
 
 export default function SmallGroupsPage( { data, location } ) {
 

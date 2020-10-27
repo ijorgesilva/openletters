@@ -1,0 +1,10 @@
+.page-watch {
+    &.series{
+        body {
+            background-color: var(--color-gray-one);
+            .navlocal {
+                position: relative;
+            }
+        }
+    }
+}

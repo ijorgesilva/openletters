@@ -16,7 +16,7 @@ import './watchDetails.scss'
 
 export default function WatchDetails( { pageContext, location } ) {
     
-    const { title, excerpt, content, featuredImage, videoDetails, terms } = pageContext
+    const { title, node: {excerpt, content, featuredImage, videoDetails, terms} } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()

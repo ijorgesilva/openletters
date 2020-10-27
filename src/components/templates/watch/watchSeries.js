@@ -15,9 +15,9 @@ import VideoJsPlayerTrailer from '../../vod/player/VideoJsPlayerTrailer'
 import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 import './watchSeries.scss'
 
-export default function WatchSeries( { pageContext, location, data } ) {
+export default function WatchSeries( { pageContext, location } ) {
 
-    const { title, excerpt, content, terms, serieDetails, serieGraphics } = pageContext
+    const { title, node: {excerpt, content, terms, serieDetails, serieGraphics} } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()

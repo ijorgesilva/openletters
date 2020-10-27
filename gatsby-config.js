@@ -57,7 +57,7 @@ module.exports = {
           options: {
             url:
               process.env.WPGRAPHQL_URL ||
-              `https://cms.victorychur.ch/graphql`,
+              config.wordpressUri,
             verbose: true,
             develop: {
               hardCacheMediaFiles: true,

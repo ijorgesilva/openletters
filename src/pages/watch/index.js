@@ -114,35 +114,8 @@ export default function WatchPage( { data, location } ){
 export const query = graphql`
     query {
 
-        sectionCTA: wpContentSection( status: {eq: "publish"}, slug: {eq: "visit-us"}) {
-            title
-            sectionDetails {
-                sectionClassname
-                sectionContent
-                sectionSubtitle
-                sectionVariant
-
-                sectionButton {
-                    sectionButtonText
-                    sectionButtonType
-                    sectionButtonUrl
-                }
-                sectionLink {
-                    sectionLinkText
-                    sectionLinkType
-                    sectionLinkUrl
-                }
-                sectionPhoto {
-                    localFile {
-                        childImageSharp {
-                            fluid {
-                                src
-                            }
-                        }
-                    }
-                }
-
-            }
+        playButton: file(relativePath: {eq: "img/global/button__play-white.svg"}) {
+            publicURL
         }
 
         sectionPhoto: file(relativePath: {eq: "img/watch/placeholder@2x.jpg"}) {
@@ -344,10 +317,38 @@ export const query = graphql`
                 }
             }
         }
-
-        playButton: file(relativePath: {eq: "img/global/button__play-white.svg"}) {
-            publicURL
-        }
           
+        sectionCTA: wpContentSection( status: {eq: "publish"}, slug: {eq: "visit-us"}) {
+            title
+            sectionDetails {
+                sectionClassname
+                sectionContent
+                sectionSubtitle
+                sectionVariant
+
+                sectionButton {
+                    sectionButtonText
+                    sectionButtonType
+                    sectionButtonUrl
+                }
+                sectionLink {
+                    sectionLinkText
+                    sectionLinkType
+                    sectionLinkUrl
+                }
+                sectionPhoto {
+                    localFile {
+                        childImageSharp {
+                            fluid {
+                                src
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        
     }  
 `
