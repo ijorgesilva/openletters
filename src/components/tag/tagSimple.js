@@ -7,7 +7,7 @@ export default function TagSimple(props){
         <div className={(props.variant) ? `tagSimple ${props.variant}` : 'tagSimple dark'}>
             {
                 (props.terms) ?
-                    props.terms.nodes.map( (term, index) => (
+                    props.tags.nodes.map( (term, index) => (
                         <span className="user-select-none" key={index}>
                             {term.name}
                         </span>

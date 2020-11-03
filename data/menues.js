@@ -1,5 +1,7 @@
 
-
+/*
+ * Section Menues
+ */
 export const blogMenuBrand = {name: "Blog", link: "/blog"}
 export const blogMenu = [
     {name: "News", link: "/news", as: "", target: ""},
@@ -182,4 +184,12 @@ export const menuCampus = [
     {value: "ham", label: "Hamilton Mill"},
     {value: "mid", label: "Midtown"},
     {value: "onl", label: "Online", link: "https://live.victoryatl.com"},
+]
+
+/*
+ * Watch Menu
+ */
+export const watchDetailsBrand = {name: "Watch", link: "/watch"}
+export const watchDetailsMenu = [
+    // {name: "News", link: "/news", as: "", target: ""},
 ]

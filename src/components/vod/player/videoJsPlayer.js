@@ -9,25 +9,27 @@ import 'video.js/dist/video-js.css'
 // import {qualitySelector} from 'videojs-hls-quality-selector'
 
 // Assets
-import watermarkLogo from '../../../assets/img/global/logo_icon_white.png'
+// import watermarkLogo from '../../../assets/img/global/logo_icon_white.png'
 // Src: https://github.com/chrisboustead/videojs-hls-quality-selector/issues/23#issuecomment-602013962
 // Fix https://github.com/chrisboustead/videojs-hls-quality-selector/issues/10#issuecomment-575770360
 
-export default function VideoJsPlayerCustom (props) {
+export default function VideoJsPlayerCustom ({className, poster, src, ...props}) {
 
     const videoRef = useRef()
     const [player, setPlayer] = useState(undefined)
 
+    const playerClassName = (className) ? className : ''
+    
     useEffect(() => {
 
         const videoJsOptions = {
-            autoplay: false,
+            autoplay: true,
             controls: true,
-            fluid: true,
+            fluid: false,
             muted: false,
             responsive: true,
             sources: [{
-                src: props.src,
+                src: src,
             }],
         }
 
@@ -38,16 +40,16 @@ export default function VideoJsPlayerCustom (props) {
         // player.registerPlugin( 'hlsQualitySelector', qualitySelector )
         // p.hlsQualitySelector({ displayCurrentQuality: true })
 
-        p.logo({
-            image: watermarkLogo,
-            positon: "top-right",
-            width: 50,
-            height: 50,
-            fadeDelay: null,
-            opacity: 0.7,
-            offsetH: 20,
-            offsetV: 20,
-        })
+        // p.logo({
+        //     image: watermarkLogo,
+        //     positon: "top-right",
+        //     width: 50,
+        //     height: 50,
+        //     fadeDelay: null,
+        //     opacity: 0.7,
+        //     offsetH: 20,
+        //     offsetV: 20,
+        // })
         
         setPlayer(p)
 
@@ -67,8 +69,8 @@ export default function VideoJsPlayerCustom (props) {
 
     return (
         <>
-            <div data-vjs-player>
-                <video poster={props.poster} ref={videoRef} className="video-js vjs-big-play-centered"></video>
+            <div data-vjs-player className={playerClassName}>
+                <video poster={poster} ref={videoRef} className={`video-js vjs-big-play-centered`}></video>
             </div>
             {/* <Button onClick={skipTo}></Button>  */}
         </>

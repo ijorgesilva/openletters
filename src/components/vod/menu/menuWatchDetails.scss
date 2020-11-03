@@ -1,0 +1,74 @@
+.watchDetails {
+    position: relative;
+
+    .navbar-brand {
+        a {
+            font-weight: 600;
+            padding: .5rem 1rem;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .navbar-nav {
+        overflow: auto;
+        white-space: nowrap;
+        position: relative;
+        .nav-item {
+            display: flex;
+            align-items: stretch;
+            .nav-link {
+                padding: .5rem 1rem;
+                display: flex;
+                align-items: center;
+                &.active {
+                    font-weight: 600;
+                }
+            }
+            &:last-child{
+                padding-right: 5rem;
+            }
+        }
+    }
+
+    &.bg-dark {
+        background-color: rgba(var(--color-six-dark-shade-three),1) !important;
+
+        a{
+            &.close{
+                span {
+                    color: var(--color-white);
+                }
+            }
+        }
+        .navbar-brand {
+            a {
+                color: var(--color-white);
+            }
+        }
+        .navbar-nav {
+            .nav-item {
+                .nav-link {
+                    color: var(--color-white);
+                    &.active {
+                        border-bottom: solid 3px var(--color-white);
+                    }
+                }
+            }
+        }
+    }
+    a {
+        &.close {
+            font-size: 2.5rem;
+            font-weight: 100;
+            opacity: .4;
+            text-decoration: none;
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}

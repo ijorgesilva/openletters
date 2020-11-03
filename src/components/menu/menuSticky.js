@@ -8,7 +8,7 @@ export default function MenuSticky( {id, menuLinks, link, linkText, className, .
 
     return (
 
-        <section id={id} className={`menuSticky c-fmenu sticky-top p-0 d-none d-sm-block ${className}`} id="sticky-menu-lead">
+        <section id={id} className={`menuSticky c-fmenu sticky-top p-0 d-none d-sm-block ${className}`}>
             <div className="container-lg">
                 <div className="items navbar">
                     <nav className="navbar navbar-expand-sm h-scroll-horizontal" id="menulead">

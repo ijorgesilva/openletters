@@ -74,6 +74,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: serie.node.title,
                 slug: serie.node.slug,
                 id: serie.node.id,
+                layout: "serieDetails"
             }
         })
     })
@@ -101,6 +102,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: post.node.title,
                 slug: post.node.slug,
                 id: post.node.id,
+                layout: "postDetails"
             }
         })
     })
@@ -129,6 +131,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: news.node.title,
                 slug: news.node.slug,
                 id: news.node.id,
+                layout: "newsDetails"
             }
         })
     })
@@ -156,7 +159,17 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: event.node.title,
                 slug: event.node.slug,
                 id: event.node.id,
+                layout: "eventDetails"
             }
+        })
+    })
+
+    /* Redirects creation */
+    result.data.allWpRedirect.nodes.forEach( _ => {
+        actions.createRedirect({ 
+            fromPath: _.redirect.redirectFrompath, 
+            toPath: _.redirect.redirectTopath, 
+            isPermanent: _.redirect.redirectIspermanent
         })
     })
 
@@ -167,7 +180,7 @@ const featuredImageFields = `
         node {
             localFile {
                 childImageSharp {
-                    fluid(maxWidth: 1800) {
+                    fluid {
                         src
                     }
                 }
@@ -242,11 +255,11 @@ const query = `
                         lastName
                         }
                     }
-                    terms {
-                    nodes {
-                        slug
-                        name
-                    }
+                    tags {
+                        nodes {
+                            slug
+                            name
+                        }
                     }
                 }
             }
@@ -269,7 +282,7 @@ const query = `
                         dayDate
                         embed
                         url
-                        campus {
+                        videoCampus {
                             ... on WpCampus {
                                 id
                                 title
@@ -322,7 +335,7 @@ const query = `
                             }
                         }
                     }
-                    terms {
+                    videoOnDemandTags {
                         nodes {
                             slug
                             name
@@ -372,7 +385,7 @@ const query = `
                             }
                         }
                     }
-                    terms {
+                    videoOnDemandTags {
                         nodes {
                             slug
                             name
@@ -395,7 +408,7 @@ const query = `
                     modified(formatString: "YYYYMMDD")
                     ${featuredImageFields}
                     ${seoFields}
-                    terms {
+                    newsTags {
                         nodes {
                             slug
                             name
@@ -404,7 +417,6 @@ const query = `
                 }
             }
         }
-
 
         allWpEvent(filter: {status: {eq: "publish"}}) {
             edges{
@@ -436,15 +448,25 @@ const query = `
                             eventLinkUrl
                         }
                     }
-                    terms {
-                    nodes {
-                        slug
-                        name
-                    }
+                    eventTags {
+                        nodes {
+                            slug
+                            name
+                        }
                     }
                 }
             }
         }
 
+        allWpRedirect {
+            nodes {
+                redirect {
+                    redirectFrompath
+                    redirectIspermanent
+                    redirectTopath
+                }
+            }
+        }
+        
     }
 `

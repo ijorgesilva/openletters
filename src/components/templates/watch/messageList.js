@@ -70,7 +70,7 @@ export const query = graphql`
                     content
                     excerpt
                     modified(formatString: "YYYYMMDD")
-                    terms {
+                    videoOnDemandTags {
                         nodes {
                             slug
                             name
@@ -93,7 +93,7 @@ export const query = graphql`
                         dayDate
                         embed
                         url
-                        campus {
+                        videoCampus {
                             ... on WpCampus {
                                 id
                                 title

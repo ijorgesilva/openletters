@@ -11,7 +11,10 @@ import sanitizeHtml from 'sanitize-html'
 import HeaderPage from '../../headerPage'
 import ShareSimpleIcon from '../../social/shareSimpleIcon'
 import TagSimple from '../../tag/tagSimple'
+import config from '../../../../data/SiteConfig'
+import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import VideoJsPlayerTrailer from '../../vod/player/VideoJsPlayerTrailer'
+import {watchDetailsBrand, watchDetailsMenu} from '../../../../data/menues'
 import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 import './watchSeries.scss'
 
@@ -21,6 +24,8 @@ export default function WatchSeries( { pageContext, location } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
+
+    const closeUrl = config.watchSlug
 
     const poster = serieDetails.trailerPoster ? serieDetails.trailerPoster.localFile.childImageSharp.fluid.src : undefined
 
@@ -32,6 +37,12 @@ export default function WatchSeries( { pageContext, location } ) {
                 cover={poster}
                 description={excerpt}
                 article={true}
+            />
+
+            <MenuWatchDetails 
+                menuBrand={watchDetailsBrand} 
+                menu={watchDetailsMenu} 
+                close={closeUrl}
             />
 
             <div className="WatchSeries">
@@ -114,7 +125,6 @@ export default function WatchSeries( { pageContext, location } ) {
                     // />
                 }
             
-
             </div>
 
         </>

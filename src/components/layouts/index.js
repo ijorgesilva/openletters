@@ -4,14 +4,14 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from 'gatsby'
 import { withTrans } from '../../i18n/withTrans'
 import CookieConsent from 'react-cookie-consent'
-import * as queryString from 'query-string'
+// import * as queryString from 'query-string'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Components
 import {menuLocal, menuHelp, menuGive, footerLinks, menuCampus} from '../../../data/menues'
 import NetSimple from '../../components/button/netSimple'
 import Navigation from "../menu/navigation"
-import WatchDetails from '../vod/menu/watchDetails'
+import MenuGlobal from "../menu/menuGlobal"
 import FooterSimpleText from "../footer/footerSimpleText"
 import "../global.scss"
 import "../layout.scss"
@@ -26,7 +26,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
         }
     `)
     
-    if (pageContext.layout === "watchDetails") {
+    if (pageContext.layout === "watchDetails" || pageContext.layout === "serieDetails") {
         return (
             <>
                 <CookieConsent
@@ -39,13 +39,17 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                 >
                     {t('global.cookie-consent')}
                 </CookieConsent>
-                
-                <NetSimple 
-                    variant="floating-left"
-                    close
+
+                <MenuGlobal 
+                    className={"h-background-six-shade-three"} 
+                    menuCampusSelector={menuCampus} 
+                    helpMenu={menuHelp} 
+                    giveMenu={menuGive} 
                 />
 
-                <WatchDetails />
+                <NetSimple 
+                    variant="floating-left"
+                />
 
                 <main>
                     {children}

@@ -8,7 +8,7 @@ import Img from 'gatsby-image'
 // Components
 import './sectionTextPhoto.scss'
 
-export default function SectionTextPhoto( { title, subtitle, className, photo, content, variant, link, linkText, buttonLink, buttonText, id, ...props } ) {
+export default function SectionTextPhoto( { title, subtitle, className, photo, content, variant, link, linkType, linkText, buttonLink, buttonType, buttonText, id, ...props } ) {
 
     const data = useStaticQuery(graphql`
         query{
@@ -37,20 +37,33 @@ export default function SectionTextPhoto( { title, subtitle, className, photo, c
                         <p>
                             {content}
                         </p>
+                            
                         <div className="buttons z-index-2">
                             {
-                                (link && linkText) ? 
-                                    <Link to={link} className={buttonClasses} >
+                                (linkType === 'internal' && link && linkText) ? 
+                                    <Link to={link} className={buttonClasses} title={linkText}>
                                         {linkText}
                                     </Link>
-                                : undefined
+                                : 
+                                    (linkType === 'external' && link && linkText) ?
+                                        <a href={link} className={buttonClasses} title={linkText}>
+                                            {linkText}
+                                        </a>
+                                    : 
+                                        undefined
                             }
                             {
-                                (buttonLink && buttonText) ? 
+                                (buttonType === 'internal' && buttonLink && buttonText) ? 
                                     <Link to={buttonLink} className="arrow z-index-2 d-block" >
                                         {buttonText}
                                     </Link>
-                                : undefined
+                                :          
+                                    (buttonType === 'external' && buttonLink && buttonText) ?                           
+                                        <a href={buttonLink} className="arrow z-index-2 d-block" >
+                                            {buttonText}
+                                        </a>
+                                    : 
+                                        undefined
                             }
                         </div>
                     </Col>

@@ -7,6 +7,10 @@ const urljoin = require("url-join");
 const path = require("path");
 const config = require("./data/SiteConfig");
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV || 'development'}`
+})
+
 module.exports = {
   
   pathPrefix: config.pathPrefix === "" ? "/" : config.pathPrefix,
@@ -65,6 +69,7 @@ module.exports = {
             debug: {
               graphql: {
                 writeQueriesToDisk: true,
+                showQueryVarsOnError: true,
               },
             },
             type: {
@@ -132,5 +137,19 @@ module.exports = {
             defaultQuality: 75,
           },
         },
+        {
+          resolve: `gatsby-plugin-canonical-urls`,
+          options: {
+            siteUrl: config.siteUrl,
+            stripQueryString: true,
+          },
+        },
+        {
+          resolve: `gatsby-plugin-s3`,
+          options: {
+            bucketName: process.env.S3_BUCKET_NAME
+          }
+        },
+        `gatsby-plugin-client-side-redirect` // Important: Keep it last
   ],
 }

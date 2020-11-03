@@ -100,7 +100,7 @@ export const query = graphql`
                             }
                         }
                     }
-                    terms {
+                    videoOnDemandTags {
                         nodes {
                             slug
                             name

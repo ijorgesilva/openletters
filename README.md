@@ -1,5 +1,3 @@
-
-
 ### Start develop server for local network access
 <!-- Source https://github.com/gatsbyjs/gatsby/issues/5801#issuecomment-395786936 -->
 
@@ -14,3 +12,9 @@ https://www.npmjs.com/package/include-media
 
 ## Run Storybook
 `$ npm run storybook`
+
+## Deploy to S3
+`$ npm run build && npm run deploy`
+S3 credentials and backet name can be found on .env.production
+- Gatsby plugin: https://www.gatsbyjs.com/plugins/gatsby-plugin-s3/
+- Recipe: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/with-dotenv.md

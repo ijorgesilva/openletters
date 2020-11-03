@@ -8,6 +8,7 @@ import 'react-multi-carousel/lib/styles.css'
 // Components
 import BlurbVerticalDark from '../blurb/blurbVerticalDark'
 import {responsive} from '../../../../data/feedConfiguration'
+import config from '../../../../data/SiteConfig'
 import './sectionFeedCarouselVod.scss'
 
 export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, ...props } ){
@@ -51,10 +52,10 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
                                 className={ (objLength === index + 1) ? 'last' : undefined }
                                 featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
                                 noImage={noImage}
-                                link={ (obj.slug) ? `/watch/message/${obj.slug}` : null }
+                                link={ (obj.slug) ? `${config.watchMessageDetailsSlug}/${obj.slug}` : null }
                                 title={ (obj.videoDetails.serie) ? obj.title : null }
-                                serieTitle={(obj.videoDetails.serie.title) ? obj.videoDetails.serie.title : null}
-                                serieLink={(obj.videoDetails.serie.slug) ? `/watch/serie/${obj.videoDetails.serie.slug}` : null}
+                                serieTitle={(obj.videoDetails.serie) ? obj.videoDetails.serie.title : null}
+                                serieLink={(obj.videoDetails.serie) ? `/watch/serie/${obj.videoDetails.serie.slug}` : null}
                                 subtitle={ (obj.videoDetails.speaker) ? (obj.videoDetails.speaker) : null }
                                 excerpt={ (obj.excerpt) ? obj.excerpt : null }
                                 //iconImage={ (iconCarousel) ? iconCarousel : null }

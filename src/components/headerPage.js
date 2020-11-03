@@ -13,7 +13,7 @@ export default function HeaderPage( { title, location, cover, description, artic
     return (
         <>
             <Helmet>
-                <html class={`page-${current[1]} ${current[2]}`} />
+                <html class={`page-${current[1]}${ (current[2]) ? ' ' + current[2] : ''}`} />
             </Helmet>
             <SEO 
                 postPath={url} 

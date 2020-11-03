@@ -225,7 +225,7 @@ export const query = graphql`
       }            
     }
 
-    news: allWpNewspost(filter: {terms: {nodes: {elemMatch: {slug: {in: "small-groups-host"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
+    news: allWpNewspost(filter: {newsTags: {nodes: {elemMatch: {slug: {in: "small-groups-host"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
       nodes {
         title
         excerpt
@@ -245,7 +245,7 @@ export const query = graphql`
       }
     }
 
-    events: allWpEvent(filter: {terms: {nodes: {elemMatch: {slug: {in: "small-groups-host"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
+    events: allWpEvent(filter: {eventTags: {nodes: {elemMatch: {slug: {in: "small-groups-host"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
       nodes {
         title
         excerpt

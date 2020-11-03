@@ -5,23 +5,23 @@ import MenuLocal from "../menu/menuLocal"
 
 import './navigation.scss'
 
-export default function Navigation(props){
+export default function Navigation( { menuCampusSelector, menuGlobalHelp, menuGlobalGive, menuLocal, logo, as, siteTitle, ...props } ){
     
     return (
         <header className="c-nav h-background-six-shade-three">
 
             <MenuGlobal 
                 className={"h-background-six-shade-three"} 
-                menuCampusSelector={props.menuCampusSelector} 
-                helpMenu={props.menuGlobalHelp} 
-                giveMenu={props.menuGlobalGive} 
+                menuCampusSelector={menuCampusSelector} 
+                helpMenu={menuGlobalHelp} 
+                giveMenu={menuGlobalGive} 
             />
 
             <MenuLocal 
-                data={props.menuLocal} 
-                logo={props.logo} 
-                as={props.as}>
-                {props.siteTitle}
+                data={menuLocal} 
+                logo={logo} 
+                as={as}>
+                {siteTitle}
             </MenuLocal>
 
         </header>

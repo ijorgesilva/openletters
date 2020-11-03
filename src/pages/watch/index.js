@@ -11,16 +11,18 @@ import SectionFeedCarousel from '../../components/vod/feed/sectionFeedCarousel'
 import SectionFeedCarouselDescription from '../../components/vod/feed/sectionFeedCarouselDescription'
 import SectionPodcast from '../../components/content/sectionPodcast'
 import SectionTextPhoto from '../../components/content/sectionTextPhoto'
+import config from '../../../data/SiteConfig'
 
 export default function WatchPage( { data, location } ){
     
     const { t } = useTranslation()
 
-    const serieLink = `/watch/serie/`+ getSerieLink(data.hero.nodes[0])
+    const serieLink = `${config.watchSerieDetailsSlug}/`+ getSerieLink(data.hero.nodes[0])
     const heroDescription = getHeroDescription(data.hero.nodes[0])
 
     const backgroundImage = getHeroBackground(data.hero.nodes[0], data.noImage.childImageSharp)
 
+    console.log(data.hero)
     return (
         <>
             
@@ -41,8 +43,8 @@ export default function WatchPage( { data, location } ){
                 description={heroDescription}
                 playText={t('global.watch.watch-now')}
                 serieLinkText={t('global.watch.more-info')}
-                playUrl={ (data.hero.nodes[0].slug) ? `/watch/message/${data.hero.nodes[0].slug}` : undefined }
-                seriesUrl={ (data.hero.nodes[0].slug) ? `/watch/message/${data.hero.nodes[0].slug}` : undefined }
+                playUrl={ (data.hero.nodes[0].slug) ? `${config.watchMessageDetailsSlug}/${data.hero.nodes[0].slug}` : undefined }
+                seriesUrl={ (data.hero.nodes[0].slug) ? `${config.watchMessageDetailsSlug}/${data.hero.nodes[0].slug}` : undefined }
                 backgroundImage={backgroundImage}
                 iconPlay={data.playButton.publicURL}
             />
@@ -95,16 +97,18 @@ export default function WatchPage( { data, location } ){
             />
 
             <SectionTextPhoto 
-                title="Test"
-                subtitle="Excepteur sint "
-                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                buttonLink="#"
-                buttonText="Know more"
-                link="#"
-                linkText="Press here"
-                className="h-background-six"
-                variant="light"
-                photo={data.sectionPhoto.childImageSharp.fluid}
+                title={data.sectionCTA.title}
+                className={data.sectionCTA.sectionDetails.sectionClassname}// "h-background-six"
+                content={data.sectionCTA.sectionDetails.sectionContent}
+                subtitle={data.sectionCTA.sectionDetails.sectionSubtitle}
+                variant={data.sectionCTA.sectionDetails.sectionVariant} //"light"
+                buttonText={data.sectionCTA.sectionDetails.sectionButton.sectionButtonText}
+                buttonType={data.sectionCTA.sectionDetails.sectionButton.sectionButtonType}
+                buttonLink={data.sectionCTA.sectionDetails.sectionButton.sectionButtonUrl}
+                linkText={data.sectionCTA.sectionDetails.sectionLink.sectionLinkText}
+                linkType={data.sectionCTA.sectionDetails.sectionLink.sectionLinkType}
+                    link={data.sectionCTA.sectionDetails.sectionLink.sectionLinkUrl}
+                   photo={data.sectionCTA.sectionDetails.sectionPhoto.localFile.childImageSharp.fluid}
             />
 
         </>
@@ -116,14 +120,6 @@ export const query = graphql`
 
         playButton: file(relativePath: {eq: "img/global/button__play-white.svg"}) {
             publicURL
-        }
-
-        sectionPhoto: file(relativePath: {eq: "img/watch/placeholder@2x.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
         }
 
         noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
