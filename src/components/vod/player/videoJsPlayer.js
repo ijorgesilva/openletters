@@ -1,3 +1,7 @@
+/*
+        Deprecated
+*/
+
 import React, { useRef, useState, useEffect } from 'react'
 
 // Player

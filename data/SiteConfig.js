@@ -5,11 +5,12 @@ const config = {
   siteTitleShort: "Victory", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
   siteTitleAlt: "", // Alternative site title for SEO.
   siteLogo: "/logos/logo-1024.png", // Logo used for SEO and manifest.
-  siteUrl: "https://victoryatl.com", // Domain of your website without pathPrefix.
-  pathPrefix: "/smallgroups", // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
+  siteUrl: "https://new.victoryatl.com", // Domain of your website without pathPrefix.
+  pathPrefix: "", // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
   siteDescription: "Victory Church located on Atlanta Georgia", // Website description used for RSS feeds/meta description tag.
   siteFBAppID: "", // FB Application ID for using app insights
   googleAnalyticsID: "UA-76678443-1", // GA tracking ID.
+  facebookPixel: "",
   disqusShortname: "", // Disqus shortname.
   dateFromFormat: "YYYY-MM-DD", // Date format used in the frontmatter.
   dateFormat: "DD/MM/YYYY", // Date format for display.
@@ -43,6 +44,10 @@ const config = {
 
   /* Menu subscribe */
   mailChimpUrl: "https://victoryatl.us6.list-manage.com/subscribe/post?u=3b7891d118a85a8202d7cead5&id=8a2be25566",
+
+  /* Feature Statuses */
+  menuCampusSelector: false,
+  menuLanguageSelector: true,
   
 };
 

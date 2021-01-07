@@ -15,6 +15,20 @@ https://www.npmjs.com/package/include-media
 
 ## Deploy to S3
 `$ npm run build && npm run deploy`
-S3 credentials and backet name can be found on .env.production
+
+S3 credentials and bucket name can be found on .env.production
 - Gatsby plugin: https://www.gatsbyjs.com/plugins/gatsby-plugin-s3/
 - Recipe: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/with-dotenv.md
+
+### Deploy pre-requisites
+- Install AWS CLI (https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- Install AWS Credentials
+    
+    Unix:
+    `$ export AWS_ACCESS_KEY_ID="your_key_id"`
+    `$ export AWS_SECRET_ACCESS_KEY="your_secret_key"`
+    
+    Or ~/.aws/credentials
+    [default]
+    aws_access_key_id = <YOUR_ACCESS_KEY_ID>
+    aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>

@@ -1,0 +1,56 @@
+@import "../../../../node_modules/include-media/dist/_include-media.scss";
+
+.tabSeasons {
+    .list {
+        display: grid;
+        grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+        grid-gap: 30px;
+    }
+    .nav-item {
+        .nav-link {
+            background-color: transparent;
+            font-weight: 100;
+            color: rgba(var(--color-white), 0.5);
+            transition: var(--transition-fast);
+            &.active {
+                color: rgba(var(--color-white), 1);
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+@include media("<desktop") {
+
+}
+@include media("<=tablet") {
+
+    .tabSeasons {
+        .list {
+            
+        }
+        .flex-column {
+            &.nav {
+                &.nav-pills{
+                    display: flex;
+                    flex-direction: row !important;
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+    }
+
+}
+@include media("<=desktop", "portrait", "retina3x", "retina2x") {
+
+}
+
+@include media("<=phone") {
+
+    .tabSeasons {
+        .list {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+}

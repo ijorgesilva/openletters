@@ -27,13 +27,6 @@ export default function BlurbHorizontal( { title, subtitle, keyIndex, featuredIm
                     <div className="tags">
                         <span className={`badge badge-pill badge-image text-white ${tagClass}`} dangerouslySetInnerHTML={{__html: tag}}></span> 
                     </div>
-                    {/* {
-                        (tags) ?
-                            tags.map((tag, index) => (
-                                <span key={index} className="badge badge-pill badge-image h-background-six text-white" dangerouslySetInnerHTML={{__html: }}></span> 
-                            ))
-                        : undefined
-                    } */}
                     {
                         (subtitle) ? <h6 className="card-subtitle">{subtitle}</h6> : undefined
                     }

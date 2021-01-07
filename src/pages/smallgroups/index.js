@@ -1,8 +1,10 @@
 // Dependencies
 import React from "react"
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Tab, Nav, Container, Button } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 // Components
 import HeaderPage from '../../components/headerPage'
@@ -19,10 +21,41 @@ import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
 import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
 import './index.scss'
 
+function ToastAlertBar( {title, content, linkText, link, type, target} ){
+  return (
+      <>
+            <strong>{title}</strong>
+            <br/>
+            {content}
+            <br/>
+            {
+              (link && linkText) ?
+                  (type === 'internal') ?
+                    <Link className="arrow text-light" to={link}>{linkText}</Link>
+                  :
+                    <a className="arrow text-light" href={link} target={target}>{linkText}</a>
+              : undefined
+            }
+      </>
+  )
+}
+
 export default function SmallGroupsPage( { data, location } ) {
 
   /* Standard fields */
   const { t } = useTranslation()
+  
+  const notify = toast.info(
+        <ToastAlertBar 
+          title={(data.alertbar.nodes[0].alertBar.alertbarTitle) ? data.alertbar.nodes[0].alertBar.alertbarTitle : undefined}
+          content={(data.alertbar.nodes[0].alertBar.alertbarContent) ? data.alertbar.nodes[0].alertBar.alertbarContent : undefined}
+          linkText={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkText) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkText : undefined}
+          link={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkUrl) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkUrl : undefined}
+          type={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkType) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkType : undefined}
+          target={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkTarget) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkTarget : undefined}
+        />
+  )
+
   
   /* Page specific content */
   const stickyMenuJoin = (t) => [
@@ -104,6 +137,18 @@ export default function SmallGroupsPage( { data, location } ) {
             menu={smallGroupMenu}
         />
 
+      <ToastContainer 
+        position="top-right"
+        autoClose={20000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <HeroBasic
         title={t('smallgroups.hero')}
         subtitle={t('smallgroups.hero-subtitle')}
@@ -129,25 +174,27 @@ export default function SmallGroupsPage( { data, location } ) {
           <hr/>
 
           {
-            ( itemsLenght > 0 ) ?
-              <SectionFeedCarouselMultipleSources
-                title = {t('smallgroups.tab-host-section-news-title')}
-                id="news"
-                className="h-background-gray-one"
-                itemsNews={data.news}
-                itemsEvents={data.events}
-                slugOne = "/news/"
-                slugTwo = "/events/"
-                itemsVisible = {3}
-              />
-            : 
-              <SectionEmpty 
-                className="h-background-gray-one" 
-                title = {t('smallgroups.tab-host-section-news-title')} 
-                id="news"
-              >
-                <AlertEmptyState variant="transparent" className="mt-5" content="" />
-              </SectionEmpty>
+            (data.news) ? 
+              ( itemsLenght > 0 ) ?
+                <SectionFeedCarouselMultipleSources
+                  title = {t('smallgroups.tab-host-section-news-title')}
+                  id="news"
+                  className="h-background-gray-one"
+                  itemsNews={data.news}
+                  itemsEvents={data.events}
+                  slugOne = "/news/"
+                  slugTwo = "/events/"
+                  itemsVisible = {3}
+                />
+              : 
+                <SectionEmpty 
+                  className="h-background-gray-one" 
+                  title = {t('smallgroups.tab-host-section-news-title')} 
+                  id="news"
+                >
+                  <AlertEmptyState variant="transparent" className="mt-5" content="" />
+                </SectionEmpty>
+            : undefined
           }
           
           <MenuSticky 
@@ -231,6 +278,7 @@ export default function SmallGroupsPage( { data, location } ) {
           subtitle={t('smallgroups.share-content')} 
           photo={data.backgroundShare.childImageSharp.fluid}
           variant="light"
+          location={location}
         />
 
       </div>
@@ -251,6 +299,21 @@ export const query = graphql`
         }            
       }
         
+      alertbar: allWpAlertbar(filter: {alertbarTags: {nodes: {elemMatch: {slug: {in: "page-small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 1) {
+        nodes {
+          alertBar {
+            alertbarTitle
+            alertbarContent
+            alertbarLink {
+              alertbarLinkText
+              alertbarLinkType
+              alertbarLinkUrl
+              alertbarLinkTarget
+            }
+          }
+        }
+      }
+
       news: allWpNewspost(filter: {newsTags: {nodes: {elemMatch: {slug: {in: "small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
         nodes {
           title

@@ -22,7 +22,6 @@ export default function WatchPage( { data, location } ){
 
     const backgroundImage = getHeroBackground(data.hero.nodes[0], data.noImage.childImageSharp)
 
-    console.log(data.hero)
     return (
         <>
             
@@ -46,7 +45,7 @@ export default function WatchPage( { data, location } ){
                 playUrl={ (data.hero.nodes[0].slug) ? `${config.watchMessageDetailsSlug}/${data.hero.nodes[0].slug}` : undefined }
                 seriesUrl={ (data.hero.nodes[0].slug) ? `${config.watchMessageDetailsSlug}/${data.hero.nodes[0].slug}` : undefined }
                 backgroundImage={backgroundImage}
-                iconPlay={data.playButton.publicURL}
+                // iconPlay={data.playButton.publicURL}
             />
             
             {(isEmpty(data.latest.nodes)) ?
@@ -57,7 +56,6 @@ export default function WatchPage( { data, location } ){
                     id="latest"
                     title={t('global.watch.section-latest-title')}
                     items={data.latest}
-                    iconCarousel={data.playButton.publicURL}
                     blurbType="vertical-dark"
                     itemsVisible = {5}
                 />
@@ -72,7 +70,6 @@ export default function WatchPage( { data, location } ){
                         title="Forgiveness"
                         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                         items={data.forgiveness}
-                        iconCarousel={data.playButton.publicURL}
                         itemsVisible = {4}
                     />
             }
@@ -86,7 +83,6 @@ export default function WatchPage( { data, location } ){
                     title="Classics"
                     items={data.classics}
                     itemsVisible = {5}
-                    iconCarousel={data.playButton.publicURL}
                 />
             }
 
@@ -96,20 +92,20 @@ export default function WatchPage( { data, location } ){
                 iTunes="https://itunes.apple.com/us/podcast/victory-world-church/id219403834"
             />
 
-            <SectionTextPhoto 
-                title={data.sectionCTA.title}
-                className={data.sectionCTA.sectionDetails.sectionClassname}// "h-background-six"
-                content={data.sectionCTA.sectionDetails.sectionContent}
-                subtitle={data.sectionCTA.sectionDetails.sectionSubtitle}
-                variant={data.sectionCTA.sectionDetails.sectionVariant} //"light"
-                buttonText={data.sectionCTA.sectionDetails.sectionButton.sectionButtonText}
-                buttonType={data.sectionCTA.sectionDetails.sectionButton.sectionButtonType}
-                buttonLink={data.sectionCTA.sectionDetails.sectionButton.sectionButtonUrl}
-                linkText={data.sectionCTA.sectionDetails.sectionLink.sectionLinkText}
-                linkType={data.sectionCTA.sectionDetails.sectionLink.sectionLinkType}
-                    link={data.sectionCTA.sectionDetails.sectionLink.sectionLinkUrl}
-                   photo={data.sectionCTA.sectionDetails.sectionPhoto.localFile.childImageSharp.fluid}
-            />
+                    <SectionTextPhoto 
+                        title={(data.sectionCTA.sectionDetails.sectionTitle) ? data.sectionCTA.sectionDetails.sectionTitle : undefined }
+                        className={(data.sectionCTA.sectionDetails.sectionClassname) ? data.sectionCTA.sectionDetails.sectionClassname : undefined }
+                        content={(data.sectionCTA.sectionDetails.sectionContent) ? data.sectionCTA.sectionDetails.sectionContent : undefined }
+                        subtitle={(data.sectionCTA.sectionDetails.sectionSubtitle) ? data.sectionCTA.sectionDetails.sectionSubtitle : undefined }
+                        variant={(data.sectionCTA.sectionDetails.sectionVariant) ? data.sectionCTA.sectionDetails.sectionVariant : undefined }
+                        buttonText={(data.sectionCTA.sectionDetails.sectionButton.sectionButtonText) ? data.sectionCTA.sectionDetails.sectionButton.sectionButtonText : undefined }
+                        buttonType={(data.sectionCTA.sectionDetails.sectionButton.sectionButtonType) ? data.sectionCTA.sectionDetails.sectionButton.sectionButtonType : undefined }
+                        buttonLink={(data.sectionCTA.sectionDetails.sectionButton.sectionButtonUrl) ? data.sectionCTA.sectionDetails.sectionButton.sectionButtonUrl : undefined }
+                        linkText={(data.sectionCTA.sectionDetails.sectionLink.sectionLinkText) ? data.sectionCTA.sectionDetails.sectionLink.sectionLinkText : undefined }
+                        linkType={(data.sectionCTA.sectionDetails.sectionLink.sectionLinkType) ? data.sectionCTA.sectionDetails.sectionLink.sectionLinkType : undefined }
+                            link={(data.sectionCTA.sectionDetails.sectionLink.sectionLinkUrl) ? data.sectionCTA.sectionDetails.sectionLink.sectionLinkUrl : undefined }
+                        photo={(data.sectionCTA.sectionDetails.sectionPhoto.localFile.childImageSharp.fluid) ? data.sectionCTA.sectionDetails.sectionPhoto.localFile.childImageSharp.fluid : undefined }
+                    />
 
         </>
     )
@@ -315,8 +311,8 @@ export const query = graphql`
         }
           
         sectionCTA: wpContentSection( status: {eq: "publish"}, slug: {eq: "visit-us"}) {
-            title
             sectionDetails {
+                sectionTitle
                 sectionClassname
                 sectionContent
                 sectionSubtitle

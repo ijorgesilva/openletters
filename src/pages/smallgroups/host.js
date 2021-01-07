@@ -98,7 +98,7 @@ export default function SmallGroupsPage( { data, location } ) {
         <HeaderPage 
             title={t('smallgroups.title')} 
             location={location} 
-            cover={data.heroImage.publicURL}
+            cover={(data.heroImage) ? data.heroImage.publicURL : undefined}
             description={t('smallgroups.meta-description')}
             article={true}
         />
@@ -111,7 +111,7 @@ export default function SmallGroupsPage( { data, location } ) {
         <HeroBasic
           title={t('smallgroups.hero')}
           subtitle={t('smallgroups.hero-subtitle')}
-          backgroundPhoto={data.heroImage.publicURL}
+          backgroundPhoto={(data.heroImage) ? data.heroImage.publicURL : undefined}
           className={"c-hero position-relative z-index-1"}
           >
             <Button className="btn btn--animation btn--three" variant="none" href="#application" target="_self">
@@ -128,25 +128,27 @@ export default function SmallGroupsPage( { data, location } ) {
                   <hr/>
 
                   {
-                    ( itemsLenght > 0 ) ?
-                      <SectionFeedCarouselMultipleSources
-                        title = {t('smallgroups.tab-host-section-news-title')}
-                        id="news"
-                        className="h-background-gray-one"
-                        itemsNews={data.news}
-                        itemsEvents={data.events}
-                        slugOne = "/news/"
-                        slugTwo = "/events/"
-                        itemsVisible = {3}
-                      />
-                    : 
-                      <SectionEmpty 
-                        className="h-background-gray-one" 
-                        title = {t('smallgroups.tab-host-section-news-title')} 
-                        id="news"
-                      >
-                        <AlertEmptyState variant="transparent" className="mt-5" content="" />
-                      </SectionEmpty>
+                    (data.news) ?
+                      ( itemsLenght > 0 ) ?
+                        <SectionFeedCarouselMultipleSources
+                          title = {t('smallgroups.tab-host-section-news-title')}
+                          id="news"
+                          className="h-background-gray-one"
+                          itemsNews={data.news}
+                          itemsEvents={data.events}
+                          slugOne = "/news/"
+                          slugTwo = "/events/"
+                          itemsVisible = {3}
+                        />
+                      : 
+                        <SectionEmpty 
+                          className="h-background-gray-one" 
+                          title = {t('smallgroups.tab-host-section-news-title')} 
+                          id="news"
+                        >
+                          <AlertEmptyState variant="transparent" className="mt-5" content="" />
+                        </SectionEmpty>
+                    : undefined
                   }
 
                   <MenuSticky link={"#application"} linkText={t('smallgroups.apply-now')} menuLinks={stickyMenuLead(t)}></MenuSticky>
@@ -205,6 +207,7 @@ export default function SmallGroupsPage( { data, location } ) {
           subtitle={t('smallgroups.share-content')} 
           photo={data.backgroundShare.childImageSharp.fluid}
           variant="light"
+          location={location}
         />
 
       </div>
@@ -283,7 +286,7 @@ export const query = graphql`
       }
     }
 
-      heroImage: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
+      heroImage: file(relativePath: {eq: "img/smallgroups/hero-host-group.jpg"}) {
             childImageSharp {
                 fluid {
                     src

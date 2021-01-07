@@ -1,0 +1,103 @@
+@import "../../../../node_modules/include-media/dist/_include-media.scss";
+
+.sidebarFeedVod {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 100%;
+
+    .rcs-custom-scroll {
+        padding-right: 20px;
+    }
+
+    .header {
+        min-height: 70px;
+        &.card {
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            height: 70px;
+            overflow: hidden;
+            .card-img {
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+                height: 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .card-img-overlay {
+                display: flex;
+                align-items: center;
+                background-color: rgba(0,0,0,0.5);
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+                
+                .card-title{
+                    font-weight: 600;
+                    text-align: left;
+                    margin-bottom: 0px;
+                    width: 100%;
+                    a {
+                        color: rgba(var(--color-white),1);
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .list {
+        margin-top: 1rem;
+        position: relative;
+        overflow-y: auto;
+        display: grid;
+        grid-row-gap: 20px;
+        padding: 0 1rem 1rem;
+    }
+}
+
+@include media("<desktop") {
+    .sidebarFeedVod {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+@include media("<=tablet") {
+    .sidebarFeedVod {
+        min-height: 420px;
+        border: unset;
+        
+        .header {
+            min-height: 70px;
+            border-radius: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            &.card {
+                border-radius: unset;
+                background-color: unset !important;
+                height: 70px;
+                .card-img {
+                    display: none;
+                }
+                .card-img-overlay {
+                    background-color: unset;
+                    border-radius: unset;
+                }
+            }
+        }
+        .playlist {
+            border-radius: unset;
+        }
+    }
+}
+@include media("<=desktop", "portrait", "retina3x", "retina2x") {
+    .sidebarFeedVod {
+        // min-height: 420px;
+    }
+}
+@include media("<=phone") {
+    .sidebarFeedVod {
+        // min-height: 320px;
+    }
+}

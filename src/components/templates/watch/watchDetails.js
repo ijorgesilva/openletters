@@ -1,45 +1,67 @@
 // Dependencies
-import React from 'react'
-import { Container, Row, Col, Tabs, Tab, Alert } from 'react-bootstrap'
+import React, {useEffect} from 'react'
+import { Tabs, Tab, Alert } from 'react-bootstrap'
 import { useTranslation } from "react-i18next"
-import Img from 'gatsby-image'
+import { graphql } from 'gatsby'
 import { Link } from 'gatsby'
-
-// import { useStaticQuery, graphql } from 'gatsby'
-import { useQuery, gql } from '@apollo/client';
+import Img from 'gatsby-image'
 
 // Components
-import { getDate } from '../../utils/utils'
+import config from '../../../../data/SiteConfig'
+import { isEmpty, getDate } from '../../utils/utils'
+import { watchDetailsBrand, watchDetailsMenu } from '../../../../data/menues'
+import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
+import ToolbarWatchDetails from '../../vod/toolbar/toolbarWatchDetails'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
-import ShareSimpleIcon from '../../social/shareSimpleIcon'
-import VideoJsPlayerCustom from '../../vod/player/videoJsPlayer'
-import config from '../../../../data/SiteConfig'
+// import VideoJsPlayerCustom from '../../vod/player/videoJsPlayer'
+import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
-import {watchDetailsBrand, watchDetailsMenu} from '../../../../data/menues'
 import SectionTextPhoto from '../../content/sectionTextPhoto'
+import FeedListMultipleSources from '../../feed/feedListMultipleSources'
 import './watchDetails.scss'
 
-
-export default function WatchDetails( { pageContext, location, className, ...props } ) {
+export default function WatchDetails( { pageContext, location, className, data, ...props } ) {
     
-    const { title, node: {excerpt, content, featuredImage, videoDetails, terms} } = pageContext
+    const { title, slug, node: {excerpt, content, featuredImage, videoDetails, terms} } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
-    
-    // const { loading, error, data } = useQuery(watchData)
-    
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <p>Error :(</p>
 
-    const poster = featuredImage ? featuredImage.node.localFile.childImageSharp.fluid.src : '' //data.noImage.childImageSharp.fluid.src
+    let videosSerie = { nodes: [] }
+    data.videos.nodes.map( (video, index) => (
+        (video.slug === slug) ? 
+            videosSerie.nodes.push({'active': true, ...video })
+        : 
+            videosSerie.nodes.push(video)
+    ))
+    
+    const poster = featuredImage ? featuredImage.node.localFile.childImageSharp.fluid.src : '' 
     const vodDate = getDate(videoDetails.dayDate,2,'us','LLLL d, yyyy' )
 
     const closeUrl = (videoDetails.serie) ? config.watchSerieDetailsSlug + '/' + videoDetails.serie.slug : config.watchSlug
 
-    return (
+    /* Scrolled Player */
+    const [scrolledPlayer,setScrolledPlayer]=React.useState(false);
+    const handleScroll=() => {
+        const offset=window.scrollY;
+        if(offset > 700 ){
+            setScrolledPlayer(true);
+        }
+        else{
+            setScrolledPlayer(false);
+        }
+    }
+    useEffect(() => {
+        window.addEventListener('scroll',handleScroll)
+    })
+    let playerClasses=['player'];
+    if(scrolledPlayer) {
+        playerClasses.push('scrolled')
+    }
+    /*. Scrolled Player */
 
+    return (
         <div className={`watchDetails ${(className)? className : ''}`}>
             
             <HeaderPage 
@@ -56,107 +78,148 @@ export default function WatchDetails( { pageContext, location, className, ...pro
                 close={closeUrl}
             />
 
-            <section className="watchPlayer p-0" id="video">
-                <Container fluid className="h-background-six-shade-three mb-5">
-                    <Row>
+            <div className="watchPlayer h-background-six-shade-three" id="video">
 
-                        <Col className="playerLeft">
-                        </Col>
+                    <div className="content-container">
+                        
+                        <div></div>
 
-                        <Col xs={12} sm={12} className="p-0">
+                        <div className={playerClasses.join(" ")}>
                             {
                                 (videoDetails.url) ?
-                                    <VideoJsPlayerCustom 
+                                    <VideoReactPlayer
                                         src={videoDetails.url}
-                                        poster={poster}
-                                        className={'p-0 vjs-16-9'}
+                                        config={{
+                                            file: {
+                                                attributes: {
+                                                    poster: poster,
+                                                    autoplay: true,
+                                                }
+                                            }
+                                        }}
                                     />
                                 : null
                             }
-                        </Col>
+                        </div>
 
-                        <Col className="playerRight">
-                        </Col>
-
-                    </Row>
-                </Container>
-            </section>
-
-            <main className="mt-5 mb-5">
-                <Container>
-                    <Row>
-
-                        <Col className="watchLeft" xs={12} md={2} lg={2}>
-                            <div className="sticky">
-                                {
-                                    (videoDetails.campus) ? 
-                                        <div className="watchCampus mb-3">
-                                            {
-                                                videoDetails.campus.map ( (campus, index) => (
-                                                    <span key={index} className="user-select-none d-block">{campus.title}</span>
-                                                ))
-                                            }
-                                        </div> 
-                                    : undefined
-                                }
-                                {
-                                    (videoDetails.speaker) ? 
-                                        <div className="watchSpeaker">
-                                            <address className="watchAuthor">
-                                                {videoDetails.speaker.map ( ( speaker, index ) => (
-                                                            <>{(index) ? ', ': ''}
-                                                                 <span className="user-select-none" key={index}>{speaker.title}</span>
-                                                            </>
-                                                        )
-                                                    )
-                                                }
-                                            </address>
-                                        </div> 
-                                    : null
-                                }
-                                {
-                                    (videoDetails.dayDate) ? 
-                                        <div className="watchDate user-select-none">
-                                            {vodDate}
-                                        </div>
-                                        : null
-                                }
-                                <hr />
-                                <ShareSimpleIcon />
-                            </div>
-                        </Col>
-
-                        <Col id="content" className="watchContent" xs={12} md={8} lg={8}>
-
-                            {
-                                (videoDetails.serie.slug) ?
-                                    <div className="introCard introCardGrid mb-5">
-                                        <Link to={`${config.watchSerieDetailsSlug}/${videoDetails.serie.slug}`}>
-                                            <Img className="serieGraphic" fluid={videoDetails.serie.serieGraphics.poster.localFile.childImageSharp.fluid} alt="" />
-                                        </Link>
-                                        <div>
-                                            <h1 className="">{title}</h1>
-                                            {
-                                                (videoDetails.serie.title) ? <Link to={`${config.watchSerieDetailsSlug}/${videoDetails.serie.slug}`}><h2>{videoDetails.serie.title}</h2></Link> : undefined
-                                            }
-                                        </div>
-                                    </div>
+                        <div className="playlist">
+                            {(isEmpty(data.videos.nodes)) ?
+                                    undefined
                                 : 
-                                    <div className="introCard mb-5">
-                                        <div>
-                                            <h1 className="">{title}</h1>
-                                            {
-                                                (videoDetails.serie.title) ? <h2 className="">{videoDetails.serie.title}</h2> : undefined
-                                            }
-                                        </div>
-                                    </div>
+                                <SidebarFeedVod 
+                                    title={ (videoDetails.serie) ? videoDetails.serie.title : undefined}
+                                    background={(videoDetails.serie.serieGraphics.background) ? videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src : undefined}
+                                    className="h-background-six-shade-three" 
+                                    serieSlug={videoDetails.serie.slug}
+                                    id={ (videoDetails.serie) ? videoDetails.serie.slug : undefined }
+                                    items={videosSerie}
+                                />
                             }
+                        </div>
+                        
+                    </div>
 
-                            <div className="watchResources" id="resources">
-                                
+            </div>
+
+            <main className="main">
+                <div className="columns">
+
+                        <div className="sidebar-left" id="left">
+                            <div className="sticky">
+                                <div className="details">
+                                    {
+                                        (videoDetails.campus) ? 
+                                            <div className="watchCampus mb-3">
+                                                {
+                                                    videoDetails.campus.map ( (campus, index) => (
+                                                        <span key={index} className="user-select-none d-block">{campus.title}</span>
+                                                    ))
+                                                }
+                                            </div> 
+                                        : undefined
+                                    }
+                                    {
+                                        (videoDetails.speaker) ? 
+                                            <div className="watchSpeaker">
+                                                <address className="watchAuthor">
+                                                    {videoDetails.speaker.map ( ( speaker, index ) => (
+                                                                <>{(index) ? ', ': ''}
+                                                                    <span className="user-select-none" key={index}>{speaker.title}</span>
+                                                                </>
+                                                            )
+                                                        )
+                                                    }
+                                                </address>
+                                            </div> 
+                                        : null
+                                    }
+                                    {
+                                        (videoDetails.dayDate) ? 
+                                            <div className="watchDate user-select-none">
+                                                {vodDate}
+                                            </div>
+                                            : null
+                                    }
+                                </div>
+
+                                <ToolbarWatchDetails 
+                                    location={location} 
+                                />
+
                             </div>
+                        </div>
 
-                            <div className="extract" dangerouslySetInnerHTML={{__html: excerpt}}></div>
+                        <div className="content" id="content">
+
+                            
+                                <div className="overview">
+                                    {
+                                        (videoDetails.serie) ?
+                                            (videoDetails.serie.slug) ?
+                                                <div className="introCard introCardGrid mb-5">
+                                                    <Link className="serieGraphic" to={`${config.watchSerieDetailsSlug}/${videoDetails.serie.slug}`}>
+                                                        <Img className="graphic" fluid={(videoDetails.serie.serieGraphics.poster) ? videoDetails.serie.serieGraphics.poster.localFile.childImageSharp.fluid : undefined} alt="" />
+                                                    </Link>
+                                                    <div>
+                                                        <h1 className="">{title}</h1>
+                                                        {
+                                                            (videoDetails.serie.title) ? <Link to={`${config.watchSerieDetailsSlug}/${videoDetails.serie.slug}`}><h2>{videoDetails.serie.title}</h2></Link> : undefined
+                                                        }
+                                                    </div>
+                                                </div>
+                                            : 
+                                                <div className="introCard mb-5">
+                                                    <div>
+                                                        <h1 className="">{title}</h1>
+                                                        {
+                                                            (videoDetails.serie.title) ? <h2 className="">{videoDetails.serie.title}</h2> : undefined
+                                                        }
+                                                    </div>
+                                                </div>
+                                        : undefined
+                                    }
+                                    
+                                    <div className="extract" dangerouslySetInnerHTML={{__html: excerpt}}></div>
+
+                                </div>
+
+
+                            
+                            {   
+                                (videoDetails.videoAttachments) ? 
+                                    <div className="attachments" id="resources">
+                                    {
+                                        videoDetails.videoAttachments.map( (attachment, index) => (
+                                            (attachment.attachment.attachmentFile && attachment.status === 'publish') ?
+                                                <a className="item" href={attachment.attachment.attachmentFile.localFile.publicURL} title={attachment.title} target="_blank">
+                                                    <img src={data.attachmentIcon.publicURL} /><div key={index}>{attachment.title}</div>
+                                                </a>
+                                            : undefined
+                                        ))
+                                    }
+                                    </div>
+                                : undefined
+                            }
 
                             <Tabs className="mt-5 sticky" defaultActiveKey="notes" id="">
                                 <Tab eventKey="notes" title="Notes">
@@ -168,12 +231,11 @@ export default function WatchDetails( { pageContext, location, className, ...pro
                                                 {t('global.watch.content-empty')}
                                             </Alert>
                                     }
-                                    
                                 </Tab>
                                 <Tab eventKey="transcript" title="Transcript">
                                     {
-                                        (videoDetails.transcript) ? 
-                                            videoDetails.transcript 
+                                        (videoDetails.videoTranscript) ? 
+                                            videoDetails.videoTranscript 
                                         :   
                                             <Alert variant="dark">
                                                 {t('global.watch.transcript-empty')}
@@ -184,41 +246,104 @@ export default function WatchDetails( { pageContext, location, className, ...pro
                             
                             <TagSimple terms={terms} />
                             
-                        </Col>
+                        </div>
 
-                        <Col className="watchRight" xs={12} md={2} lg={2}>
-                        </Col>
+                        <div className="sidebar-right" id="right">
+                            <div className="sticky">
+                                {
+                                    (videoDetails.videoRelatedResources) ?
+                                        <div className="resources">
+                                            <h5 className="user-select-none">
+                                                {t('global.related-resources')}
+                                            </h5>
+                                            <FeedListMultipleSources 
+                                                className="related"
+                                                data={videoDetails.videoRelatedResources}
+                                                excerpt={false}
+                                                slug={config.blogPostDetailsSlug}
+                                                noImage={data.noImage}
+                                            />
+                                        </div>
+                                    : 
+                                        undefined
+                                }
+                            </div>
+                        </div>
 
-                    </Row>
-                </Container>
+                </div>
             </main>
-            
-            <section>
-                {/* {
-                    data.videos.nodes.map( (video, index) =>(
-                        <p key={index}>
-                            {video.title}
-                        </p>
-                    ))
-                } */}
-            </section>
 
-            <SectionTextPhoto 
-                title="Title"
-                className="h-background-one"
-                content="orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                subtitle="lorem ipsum dolor sit amet"
-                variant="light"
-                buttonText="Text"
-                buttonType="internal"
-                buttonLink="/"
-                linkText=""
-                linkType=""
-                    link=""
-                   photo=""
-            />
+            {
+                (videoDetails.videoCtaSection) ? 
+                    <SectionTextPhoto 
+                        title={videoDetails.videoCtaSection.sectionDetails.sectionTitle}
+                        className={(videoDetails.videoCtaSection.sectionDetails.sectionClassname) ? videoDetails.videoCtaSection.sectionDetails.sectionClassname : undefined}
+                        content={(videoDetails.videoCtaSection.sectionDetails.sectionContent) ? videoDetails.videoCtaSection.sectionDetails.sectionContent : undefined}
+                        subtitle={(videoDetails.videoCtaSection.sectionDetails.sectionSubtitle) ? videoDetails.videoCtaSection.sectionDetails.sectionSubtitle : undefined}
+                        variant={videoDetails.videoCtaSection.sectionDetails.sectionVariant}
+                        buttonText={(videoDetails.videoCtaSection.sectionDetails.sectionButton) ? videoDetails.videoCtaSection.sectionDetails.sectionButton.sectionButtonText : undefined}
+                        buttonType={(videoDetails.videoCtaSection.sectionDetails.sectionButton) ? videoDetails.videoCtaSection.sectionDetails.sectionButton.sectionButtonType : undefined}
+                        buttonLink={(videoDetails.videoCtaSection.sectionDetails.sectionButton) ? videoDetails.videoCtaSection.sectionDetails.sectionButton.sectionButtonUrl : undefined}
+                        linkText={(videoDetails.videoCtaSection.sectionDetails.sectionLink) ? videoDetails.videoCtaSection.sectionDetails.sectionLink.sectionLinkText : undefined}
+                        linkType={(videoDetails.videoCtaSection.sectionDetails.sectionLink) ? videoDetails.videoCtaSection.sectionDetails.sectionLink.sectionLinkType : undefined}
+                        link={(videoDetails.videoCtaSection.sectionDetails.sectionLink) ? videoDetails.videoCtaSection.sectionDetails.sectionLink.sectionLinkUrl : undefined}
+                        photo={(videoDetails.videoCtaSection.sectionDetails.sectionPhoto) ? videoDetails.videoCtaSection.sectionDetails.sectionPhoto.localFile.childImageSharp.fluid : undefined}
+                    />
+                : undefined
+            }
 
         </div>
     )
+
 }
 
+export const query = graphql`
+    query getVideos($serieId: String!){
+
+        videos: allWpVideoOnDemand (filter: {videoDetails: {videoSerieId: {eq: $serieId}}, status: {eq: "publish"}}, sort: {fields: videoDetails___dayDate, order: DESC}, limit: 10) {
+            nodes{
+                title
+                slug
+                excerpt
+                featuredImage {
+                    node {
+                        localFile {
+                          childImageSharp {
+                            fluid {
+                              src
+                            }
+                          }
+                        }
+                    }
+                }
+                videoDetails {
+                    oneLiner
+                    dayDate
+                    url
+                    serie {
+                        ... on WpSerie {
+                            id
+                            title
+                            slug
+                        }
+                    }
+                }
+
+            }
+        }
+
+        attachmentIcon: file(relativePath: {eq: "img/global/attachment-dark.svg"}) {
+            publicURL
+        }
+
+        noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
+            childImageSharp {
+                fluid {
+                    src
+                }
+            }
+        }
+
+    }
+    
+`

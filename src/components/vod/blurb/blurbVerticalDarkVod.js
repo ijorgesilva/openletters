@@ -5,9 +5,9 @@ import Img from 'gatsby-image'
 import TextTruncate from 'react-text-truncate'
 
 // Components
-import './blurbVerticalDark.scss'
+import './blurbVerticalDarkVod.scss'
 
-export default function BlurbVerticalDark ( { className, link, iconImage, featuredImage, noImage, title, serieTitle, serieLink, excerpt } ) {
+export default function BlurbVerticalDarkVod ( { className, link, iconImage, featuredImage, noImage, title, serieTitle, serieLink, excerpt } ) {
 
     return (
         
@@ -32,9 +32,7 @@ export default function BlurbVerticalDark ( { className, link, iconImage, featur
                         <h5 className="card-title mb-1">
                             {
                                 (title && link) ? 
-                                    <Link to={link}>
-                                        {title}
-                                    </Link>
+                                    <Link to={link} dangerouslySetInnerHTML={{__html:title}}></Link>
                                 : undefined
                             }
                             {

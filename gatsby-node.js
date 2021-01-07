@@ -46,6 +46,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: video.node.title,
                 slug: video.node.slug,
                 id: video.node.id,
+                serieId: (video.node.videoDetails.serie) ? video.node.videoDetails.serie.databaseId.toString() : '',
                 layout: "watchDetails"
             }
         })
@@ -74,6 +75,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                 title: serie.node.title,
                 slug: serie.node.slug,
                 id: serie.node.id,
+                serieId: serie.node.databaseId.toString(),
                 layout: "serieDetails"
             }
         })
@@ -278,10 +280,62 @@ const query = `
                     ${featuredImageFields}
                     videoDetails {
                         oneLiner
-                        transcript
+                        videoTranscript
                         dayDate
-                        embed
+                        videoEmbed
                         url
+
+                        videoAttachments {
+                            ... on WpDocument {
+                                id
+                                title
+                                status
+                                attachment {
+                                    attachmentFile {
+                                        id
+                                        title
+                                        localFile {
+                                            publicURL
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        videoCtaSection {
+                            ... on WpContentSection {
+                                id
+                                databaseId
+                                sectionDetails {
+                                    sectionTitle
+                                    sectionSubtitle
+                                    sectionVariant
+                                    sectionClassname
+                                    sectionContent
+                                    sectionPhoto{
+                                        localFile {
+                                            childImageSharp {
+                                                fluid(maxWidth: 1200) {
+                                                    src
+                                                }
+                                            }
+                                        }
+                                    }
+                                    sectionLink {
+                                      sectionLinkText
+                                      sectionLinkType
+                                      sectionLinkUrl
+                                    }
+                                    sectionButton {
+                                      sectionButtonText
+                                      sectionButtonType
+                                      sectionButtonUrl
+                                    }
+                                }
+                            }
+                        }
+
+                        videoCampusId
                         videoCampus {
                             ... on WpCampus {
                                 id
@@ -290,9 +344,12 @@ const query = `
                                 ${featuredImageFields}
                             }
                         }
+
+                        videoSerieId
                         serie {
                             ... on WpSerie {
                                 id
+                                databaseId
                                 title
                                 slug
                                 serieGraphics {
@@ -334,6 +391,32 @@ const query = `
                                 ${featuredImageFields}
                             }
                         }
+
+                        videoRelatedResources {
+                            ... on WpPost {
+                                id
+                                slug
+                                title
+                                excerpt
+                                status
+                                ${featuredImageFields}
+                            }
+                            ... on WpLinkitem {
+                                id
+                                title
+                                excerpt
+                                status
+                                ${featuredImageFields}
+                                linkDetails {
+                                    linkLink {
+                                        linkLinkTarget
+                                        linkLinkType
+                                        linkLinkUrl
+                                    }
+                                }
+                            }
+                        }
+
                     }
                     videoOnDemandTags {
                         nodes {
@@ -352,14 +435,74 @@ const query = `
                     title
                     slug
                     content
+                    databaseId
                     ${seoFields}
                     serieDetails {
                         trailer
+                        serieSeasonsActive
                         trailerPoster {
                             localFile {
                                 childImageSharp {
                                     fluid {
                                         src 
+                                    }
+                                }
+                            }
+                        }
+
+                        serieDetailsSectionFooter {
+                            ... on WpContentSection {
+                                id
+                                databaseId
+                                sectionDetails {
+                                    sectionTitle
+                                    sectionSubtitle
+                                    sectionVariant
+                                    sectionClassname
+                                    sectionContent
+                                    sectionPhoto{
+                                        localFile {
+                                            childImageSharp {
+                                                fluid(maxWidth: 1200) {
+                                                    src
+                                                }
+                                            }
+                                        }
+                                    }
+                                    sectionLink {
+                                      sectionLinkText
+                                      sectionLinkType
+                                      sectionLinkUrl
+                                    }
+                                    sectionButton {
+                                      sectionButtonText
+                                      sectionButtonType
+                                      sectionButtonUrl
+                                    }
+                                }
+                            }
+                        }
+                        
+                        serieRelatedResources{
+                            ... on WpPost {
+                                id
+                                slug
+                                title
+                                excerpt
+                                status
+                                ${featuredImageFields}
+                            }
+                            ... on WpLinkitem {
+                                id
+                                title
+                                excerpt
+                                status
+                                ${featuredImageFields}
+                                linkDetails {
+                                    linkLink {
+                                        linkLinkTarget
+                                        linkLinkType
+                                        linkLinkUrl
                                     }
                                 }
                             }

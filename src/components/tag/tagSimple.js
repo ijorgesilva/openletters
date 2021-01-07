@@ -2,12 +2,12 @@
 import React from 'react'
 import './tagSimple.scss'
 
-export default function TagSimple(props){
+export default function TagSimple( { terms, variant } ) {
     return (
-        <div className={(props.variant) ? `tagSimple ${props.variant}` : 'tagSimple dark'}>
+        <div className={(variant) ? `tagSimple ${variant}` : 'tagSimple dark'}>
             {
-                (props.terms) ?
-                    props.tags.nodes.map( (term, index) => (
+                (terms) ?
+                    terms.nodes.map( (term, index) => (
                         <span className="user-select-none" key={index}>
                             {term.name}
                         </span>

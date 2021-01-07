@@ -1,15 +1,20 @@
 .tagSimple {
     display: block;
-    margin: 3rem 0rem;
+    padding: 2rem 0rem;
 
     span {
-        font-weight: 300;
-        border-style: solid;
-        border-width: 2px;
-        padding: 0.7rem 1.5rem;
+        font-weight: 100;
+        padding: 0.4rem 1rem;
         margin-left: 1rem;
+        border-width: 1px;
+        border-style: solid;
         border-color: var(--color-gray-five);
         color: var(--color-gray-five);
+        opacity: 0.5;
+        transition: var(--transition-fast);
+        &:hover{
+            opacity: 1;
+        }
     }
 
     &.light {

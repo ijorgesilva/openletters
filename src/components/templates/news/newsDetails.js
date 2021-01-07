@@ -55,7 +55,7 @@ export default function NewsDetails( { pageContext, location } ){
                         <Col>
                             <div className="watchLeft sticky">
                                 <hr />
-                                <ShareSimpleIcon />
+                                <ShareSimpleIcon location={location} />
                             </div>
                         </Col>
 

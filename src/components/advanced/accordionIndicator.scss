@@ -7,7 +7,7 @@
                 border-radius: 100px;
                 background-color: var(--color-five-shade-two);
                 display: flex;
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
                 position: absolute;
                 right: 10px;
                 width: 30px;
@@ -100,7 +100,7 @@
     padding: 5px;
     margin-right: 20px;
     border-radius: 50%;
-    color: var(--color-white);
+    color: rgba(var(--color-white),1);
     background-color: var(--color-five);
     content: url('../../assets/img/global/arrow_icon_white.svg');
     float: left;

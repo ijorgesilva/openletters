@@ -2,7 +2,7 @@
 
     border: unset;
     border-radius: var(--border-radius);
-    background-color: var(--color-white);
+    background-color: rgba(var(--color-white),1);
 
     a {
         display: grid;

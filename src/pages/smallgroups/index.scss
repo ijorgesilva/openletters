@@ -23,7 +23,7 @@
 }
 .c-tabs a.active.c-tabs__link.nav-link {
     border-top: 3px solid var(--color-five);
-    background-color: var(--color-white);
+    background-color: rgba(var(--color-white),1);
     border-bottom: unset;
     color: var(--color-black);
     border-left: unset !important;
@@ -93,7 +93,7 @@ p.paragraph--first {
 
 .c-tabs--simple a.nav-link.active {
     background-color: var(--color-five);
-    color: var(--color-white);
+    color: rgba(var(--color-white),1);
     border: none;
     border-radius: unset;
 }

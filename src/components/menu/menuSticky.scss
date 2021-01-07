@@ -22,10 +22,10 @@
                 color: var(--color-six-shade-three);
 
                 &:hover {
-                    color: var(--color-white);
+                    color: rgba(var(--color-white),1);
                 }
                 &:active {
-                    color: var(--color-white);
+                    color: rgba(var(--color-white),1);
                 }
                 
             }

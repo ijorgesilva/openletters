@@ -33,16 +33,23 @@
 		"404-description": "Ooops! The page you are looking for has been removed or relocated.",
 		"404-go-back": "Go back",
 		"404-title": "Page not found",
+		"about-serie": "About the Series",
 		"accept": "Accept",
 		"close": "Close",
 		"cookie-consent": "This website uses cookies to enhance the user experience.",
+		"empty": {
+			"text-not-available": "No description available"
+		},
 		"footer-copyright": "© Copyright. Victory Church. All Rights Reserved.",
 		"no-records": "Nothing to show!",
+		"related-resources": "Resources",
 		"watch": {
 			"content-empty": "No notes available",
 			"more-info": "More info",
+			"seasons": "Seasons",
 			"section-latest-title": "Latest Messages",
 			"transcript-empty": "No transcripts available",
+			"videos": "Videos",
 			"watch-now": "Watch now"
 		}
 	},

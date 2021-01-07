@@ -7,7 +7,7 @@ import 'react-multi-carousel/lib/styles.css'
 import TextTruncate from 'react-text-truncate'
 
 // Components
-import BlurbVerticalDark from '../blurb/blurbVerticalDark'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import './sectionFeedCarouselVod.scss'
 
@@ -63,7 +63,7 @@ export default function SectionFeedCarouselDescription( { title, description, it
                         >
                             {
                                 items.nodes.map( (obj, index) => (
-                                    <BlurbVerticalDark 
+                                    <BlurbVerticalDarkVod 
                                         key={index}
                                         className={ (objLength === index + 1) ? 'last' : undefined }
                                         featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }

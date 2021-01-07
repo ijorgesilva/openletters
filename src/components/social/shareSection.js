@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react'
+import { useTranslation } from "react-i18next"
 import { useStaticQuery, graphql } from 'gatsby'
 import { Container, Col, Row } from 'react-bootstrap'
 import Img from 'gatsby-image'
@@ -7,8 +8,14 @@ import {FacebookShareButton, TwitterShareButton} from 'react-share'
 
 // Components
 import './shareSection.scss'
+import config from '../../../data/SiteConfig'
 
-export default function ShareSection( { title, id, subtitle, className, variant, photo, ...props } ) {
+export default function ShareSection( { title, id, subtitle, className, variant, photo, location, ...props } ) {
+
+    /* Standard fields */
+    const { t } = useTranslation()
+
+    const canonicalUrl = config.siteUrl + location.pathname
 
     const data = useStaticQuery(graphql`
         query{
@@ -48,12 +55,12 @@ export default function ShareSection( { title, id, subtitle, className, variant,
                         }
                         <div className="buttons z-index-2">
                             <FacebookShareButton className="button button--white user-select-none"
-                            quote="" hashtag="" url="https://victoryatl.com" >
+                            quote="" hashtag="" url={canonicalUrl} >
                                 <img src={data.facebook.publicURL} alt="Share on Twitter"/>
                             </FacebookShareButton>
 
                             <TwitterShareButton className="button button--white user-select-none"
-                                url="https://victoryatl.com" title="">
+                                url={canonicalUrl} title="">
                                 <img src={data.twitter.publicURL} alt="Share on Facebook"/>
                             </TwitterShareButton>
                         </div>

@@ -3,13 +3,21 @@
 .heroSimple {
     .jumbotron {
         
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin-bottom: 0px;
         border-radius: unset;
         padding: 10rem 0rem 7rem 0rem;
 
+        .content {
+            p {
+                max-width: 520px;
+            }
+        }
         h1,
         h1 > a {
-            color: var(--color-white);
+            color: rgba(var(--color-white),1);
             font-size: 2rem;
             line-height: 2rem;
             letter-spacing: 1px;
@@ -40,6 +48,9 @@
             }
         }
         .heroBackground {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-position: center top;
             background-size: cover;
             position: absolute;
@@ -93,7 +104,7 @@
     }
     .heroSimple { 
         .jumbotron{
-            padding: 15rem 0rem 0rem 0rem;
+            padding: 10rem 0rem 0rem 0rem;
             .heroBackgroundIcon {
                 display: none;
             }
@@ -101,9 +112,5 @@
     }
 }
 @include media("<=tablet", 'portrait') {
-    .heroSimple {
-        .jumbotron {
-            height: calc(100vh - 60px);
-        }
-    }
+    
 }

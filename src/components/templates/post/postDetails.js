@@ -1,6 +1,7 @@
 // Dependencies
 import React from 'react'
 // import { useStaticQuery, graphql } from 'gatsby'
+import { useTranslation } from "react-i18next"
 import { Container, Row, Col } from 'react-bootstrap'
 import Img from 'gatsby-image'
 
@@ -18,8 +19,9 @@ export default function PostDetails( { pageContext, location } ){
     
     const { title, node: {excerpt, date, modified, featuredImage, content, terms, postDetails} } = pageContext
 
-    console.log(pageContext)
-
+    /* Standard fields */
+    const { t } = useTranslation()
+    
     const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
     const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
@@ -28,10 +30,10 @@ export default function PostDetails( { pageContext, location } ){
         <>
 
             <HeaderPage 
-                title={title} 
+                title={(title) ? title : undefined} 
                 location={location} 
-                cover={featuredImage.node.localFile.childImageSharp.fluid.src}
-                description={excerpt}
+                cover={(featuredImage) ? featuredImage.node.localFile.childImageSharp.fluid.src : undefined}
+                description={(excerpt) ? excerpt : excerpt}
                 article={true}
             />
             
@@ -44,7 +46,7 @@ export default function PostDetails( { pageContext, location } ){
 
                 <HeroPost 
                     title={title}
-                    backgroundPhoto={featuredImage.node.localFile.childImageSharp.fluid.src}
+                    backgroundPhoto={(featuredImage) ? featuredImage.node.localFile.childImageSharp.fluid.src : undefined}
                     className="z-index-0"
                 />
                 
@@ -55,7 +57,7 @@ export default function PostDetails( { pageContext, location } ){
                         <Col>
                             <div className="watchLeft sticky">
                                 <hr />
-                                <ShareSimpleIcon />
+                                <ShareSimpleIcon location={location} />
                             </div>
                         </Col>
 

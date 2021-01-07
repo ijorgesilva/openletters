@@ -89,9 +89,9 @@ export const query = graphql`
                     }
                     videoDetails {
                         oneLiner
-                        transcript
+                        videoTranscript
                         dayDate
-                        embed
+                        videoEmbed
                         url
                         videoCampus {
                             ... on WpCampus {

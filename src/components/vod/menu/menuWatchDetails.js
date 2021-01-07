@@ -15,7 +15,7 @@ export default function MenuWatchDetails ( { menu, menuBrand, variant, className
     const variantName = (variant) ? variant : "dark"
 
     return (
-        <Navbar className={`watchDetails ${className}`} bg={variantName} activeKey={activeKey} id={id}>
+        <Navbar className={`watchDetails ${(className) ? className : ''}`} bg={variantName} activeKey={activeKey} id={id}>
 
             <Nav className="mr-auto">
 

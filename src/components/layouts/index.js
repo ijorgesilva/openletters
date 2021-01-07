@@ -4,7 +4,6 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from 'gatsby'
 import { withTrans } from '../../i18n/withTrans'
 import CookieConsent from 'react-cookie-consent'
-// import * as queryString from 'query-string'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Components
@@ -45,10 +44,6 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                     menuCampusSelector={menuCampus} 
                     helpMenu={menuHelp} 
                     giveMenu={menuGive} 
-                />
-
-                <NetSimple 
-                    variant="floating-left"
                 />
 
                 <main>

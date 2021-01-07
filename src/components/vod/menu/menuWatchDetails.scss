@@ -1,5 +1,6 @@
 .watchDetails {
     position: relative;
+    z-index: 1;
 
     .navbar-brand {
         a {
@@ -39,25 +40,30 @@
         a{
             &.close{
                 span {
-                    color: var(--color-white);
+                    color: rgba(var(--color-white),1);
                 }
             }
         }
         .navbar-brand {
             a {
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
             }
         }
         .navbar-nav {
             .nav-item {
                 .nav-link {
-                    color: var(--color-white);
+                    color: rgba(var(--color-white),1);
                     &.active {
-                        border-bottom: solid 3px var(--color-white);
+                        border-bottom: solid 3px rgba(var(--color-white),1);
                     }
                 }
             }
         }
+    }
+    &.transparent {
+        background: transparent !important;
+        position: absolute;
+        width: 100%;
     }
     a {
         &.close {

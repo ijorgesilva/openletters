@@ -2,12 +2,12 @@
 import React from 'react'
 
 // Components
-import BlurbVerticalDark from '../blurb/blurbVerticalDark'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import noImage from '../../../assets/img/global/noimage.jpg'
 
 export default {
-    title: 'vod/blurb/blurbVerticalDark',
-    component: BlurbVerticalDark,
+    title: 'vod/blurb/blurbVerticalDarkVod',
+    component: BlurbVerticalDarkVod,
     parameters: {
         backgrounds: {
           default: 'dark-purple'
@@ -15,7 +15,7 @@ export default {
     }
 }
   
-const Template = (args) => <BlurbVerticalDark {...args} />
+const Template = (args) => <BlurbVerticalDarkVod {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {

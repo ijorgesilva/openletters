@@ -235,7 +235,8 @@ figcaption {
   height: auto; }
 
 #page {
-  word-wrap: break-word; }
+  word-wrap: break-word; 
+}
 
 .wp-block-image figcaption {
   margin-top: .5em;
@@ -248,7 +249,8 @@ figcaption {
 
 @media (min-width: 912px) {
   .jumbotron {
-    padding: 8rem 2rem; } }
+    padding: 8rem 2rem; } 
+}
 
 .woocommerce div.product form.cart div.quantity {
   float: none;
@@ -268,3 +270,48 @@ figcaption {
 #wrapper-navbar img {
   width: 202px;
   height: 33px; }
+
+/*
+  Global
+ */
+ 
+.content-container {
+  max-width: var(--max-layout-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  position: relative;
+  &.fluid {
+    width: 100%;
+    max-width: unset;
+  }
+}
+ 
+
+/* 
+  Bootstrap
+*/
+/* Tabs */
+.nav-tabs {
+
+  &.light {
+    border-bottom: 1px solid rgba(var(--color-white), 0.1);
+    margin-bottom: 2rem;
+    .nav-link {
+      color: rgba(var(--color-white), 0.4);
+      font-weight: 100;
+      &.active {
+        background-color: transparent !important;
+        color: rgba(var(--color-white), 1);
+        font-weight: 600;
+        border-bottom: 3px solid var(--color-four);
+      }
+    }
+
+    > .tab-pane {
+      padding: 3rem 0;
+    }
+  }
+
+}

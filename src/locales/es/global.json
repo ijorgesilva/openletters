@@ -33,16 +33,23 @@
 		"404-description": "¡Vaya! La página que está buscando ha sido eliminada o reubicada.",
 		"404-go-back": "Volver al inicio",
 		"404-title": "Página no encontrada",
+		"about-serie": "Acerca de la Serie",
 		"accept": "Aceptar",
 		"close": "Cerrar",
 		"cookie-consent": "Este sitio web utiliza cookies para mejorar la experiencia del usuario.",
+		"empty": {
+			"text-not-available": "No hay descripción disponible"
+		},
 		"footer-copyright": "© Copyright. Victory Church. Todos los derechos reservados.",
 		"no-records": "Nada que mostrar!",
+		"related-resources": "Recursos",
 		"watch": {
 			"content-empty": "No hay notas disponibles",
 			"more-info": "Más información",
+			"seasons": "Temporadas",
 			"section-latest-title": "Últimos mensajes",
 			"transcript-empty": "No hay transcripciones disponibles",
+			"videos": "Videos",
 			"watch-now": "Reproducir ahora"
 		}
 	},

@@ -1,3 +1,7 @@
+/*
+        Deprecated
+*/
+
 // Dependencies
 import React, { useRef, useState, useEffect } from 'react'
 import videojs from 'video.js'

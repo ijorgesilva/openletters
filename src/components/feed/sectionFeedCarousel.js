@@ -11,7 +11,7 @@ import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'
 import { getDate } from '../../components/utils/utils'
 
-export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, date, ...props } ) {
+export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, date, count, ...props } ) {
 
     const defaultVisible = 4
 
@@ -48,7 +48,7 @@ export default function SectionFeedCarousel ( { title, items, className, id, slu
                         items.nodes.map( (obj, index) => (
                             <BlurbHorizonal 
                                 key={ index }
-                                title={ obj.title }
+                                title={` ${ (count === true) ? index + 1 : '' } obj.title `}
                                 featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                 className={ (objLength === index + 1) ? 'last' : undefined }
                                 noImage={ noImage }

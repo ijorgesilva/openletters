@@ -79,7 +79,7 @@ module.exports = {
                     ? // Lets just pull 50 posts in development to make it easy on ourselves.
                       10
                     : // and we don't actually need more than 5000 in production for this particular site
-                      400,
+                      5000,
               },
             },
           },
@@ -123,7 +123,7 @@ module.exports = {
               anonymize: true
             },
             facebookPixel: {
-              pixelId: 'Y'
+              pixelId: config.facebookPixel,
             },
             environments: ['production', 'development']
           },
@@ -150,6 +150,6 @@ module.exports = {
             bucketName: process.env.S3_BUCKET_NAME
           }
         },
-        `gatsby-plugin-client-side-redirect` // Important: Keep it last
+        `gatsby-plugin-meta-redirect` // make sure to put last in the array
   ],
 }

@@ -76,7 +76,7 @@ export default function EventDetails( { pageContext, location } ){
                                     : undefined
                                 }
                                 <hr />
-                                <ShareSimpleIcon />
+                                <ShareSimpleIcon location={location} />
                             </div>
                         </Col>
 

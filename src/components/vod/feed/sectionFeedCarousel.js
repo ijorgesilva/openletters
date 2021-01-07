@@ -6,12 +6,12 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 // Components
-import BlurbVerticalDark from '../blurb/blurbVerticalDark'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
 import './sectionFeedCarouselVod.scss'
 
-export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, ...props } ){
+export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, ...props } ){
 
     const defaultVisible = 5
 
@@ -29,36 +29,42 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
 
     const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
 
-    const objLength = items.nodes.length
+    const objLength = (items) ? items.nodes.length : 0
 
     return (
 
         <section className={`sectionFeedCarouselVod ${className}`} id={id}>
             <Container fluid>
-                <h4 className="h-color-six-shade-three mb-5">{title}</h4>
+                {
+                    (title) ? 
+                        <h4 className="h-color-six-shade-three mb-5">{title}</h4>
+                    : 
+                        undefined
+                }
                 <Carousel 
                     swipeable={true}
                     draggable={true}
                     showDots={false}
                     infinite={true}
+                    partialVisible={true}
                     responsive={ (itemsVisible) ? responsive[itemsVisible] : responsive[defaultVisible] }
                     itemClass="item"
                     containerClass="carousel-container"
                 >
                     {
-                        items.nodes.map( (obj, index) => (
-                            <BlurbVerticalDark 
+                        items.nodes.map( (item, index) => (
+                            <BlurbVerticalDarkVod 
                                 key={index}
                                 className={ (objLength === index + 1) ? 'last' : undefined }
-                                featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
+                                featuredImage={ (item.featuredImage) ? item.featuredImage.node.localFile.childImageSharp.fluid : undefined }
                                 noImage={noImage}
-                                link={ (obj.slug) ? `${config.watchMessageDetailsSlug}/${obj.slug}` : null }
-                                title={ (obj.videoDetails.serie) ? obj.title : null }
-                                serieTitle={(obj.videoDetails.serie) ? obj.videoDetails.serie.title : null}
-                                serieLink={(obj.videoDetails.serie) ? `/watch/serie/${obj.videoDetails.serie.slug}` : null}
-                                subtitle={ (obj.videoDetails.speaker) ? (obj.videoDetails.speaker) : null }
-                                excerpt={ (obj.excerpt) ? obj.excerpt : null }
-                                //iconImage={ (iconCarousel) ? iconCarousel : null }
+                                link={ (item.slug) ? `${config.watchMessageDetailsSlug}/${item.slug}` : null }
+                                title={ `${ (count === true) ? '<span>' + (index + 1) + ' |</span> ' : '' }  ${item.title}` }
+                                serieTitle={(item.videoDetails.serie) ? item.videoDetails.serie.title : null}
+                                serieLink={(item.videoDetails.serie) ? `${config.watchSerieDetailsSlug}/${item.videoDetails.serie.slug}` : null}
+                                subtitle={ (item.videoDetails.speaker) ? (item.videoDetails.speaker) : null }
+                                excerpt={ (item.excerpt) ? item.excerpt : null }
+                                iconImage={ (iconCarousel) ? iconCarousel : null }
                             />
                         ))
                     }

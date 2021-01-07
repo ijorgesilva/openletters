@@ -1,144 +1,306 @@
 @import "../../../../node_modules/include-media/dist/_include-media.scss";
 
 .watchDetails {
+
     .watchPlayer {
-        max-height: calc(90vh - 120px);
-        div[data-vjs-player],
-        .video-js {
-            background-color: var(--color-six-dark-shade-three);
-            width: 100%;
-            height: 100%;
-            min-height: calc(90vh - 120px);
-        }
-    }
-    .watchCampus {
-        color: rgba(var(--color-six-dark-shade-three),1);
-        font-weight: 600;
-    }
-    .watchAuthor {
-        color: rgba(var(--color-six-dark-shade-three),1);
-        font-weight: 500;
-        opacity: 0.7;
-        margin-bottom: 0rem;
-    }
-    .watchDate {
-        font-weight: 100;
-        font-size: 0.8rem;
-    }
-    .nav-tabs {
-        
-        border-bottom: 2px solid #EAEAEA;
-        margin-bottom: 3rem;
-        background-color: var(--color-white);
-        
-        .nav-link {
-            color: var(--color-gray-five);
-            padding: 1rem 2rem 1rem 2rem;
-            font-weight: 100;
-            &.active{
-                color: var(--color-black);
-                font-weight: 900;
-                border-bottom: 3px solid var(--color-four);
+        border-top: 1px solid rgba(var(--color-white),0.1);
+        padding: 1rem 0;
+
+        .content-container {
+            max-width: unset;
+            margin: 0px auto;
+            display: grid;
+            grid-template-columns: 0.4fr 1fr 0.4fr;
+            grid-template-rows: auto;
+
+            div[data-vjs-player],
+            .video-js {
+                width: 100%;
+                margin: 0px auto;
+                min-height: 520px;
             }
-            &:hover {
-                color: var(--color-black);
+            .vjs-poster {
+                background-color: var(--color-six-dark-shade-three);
             }
         }
 
     }
-    .sticky {
-        position: -webkit-sticky; /* Safari */
-        position: sticky;
-        top: 40px;
-    }
 
-    .watchContent {
+    main {
+        max-width: var(--max-layout-width);
+        margin: 70px auto 100px auto;
 
-        .introCard {
+        .columns {
+            display: grid;
+            grid-template-columns: 0.3fr 1fr 0.3fr;
+            grid-gap: 3rem;
 
-            &.introCardGrid {
-                display: grid;
-                grid-gap: 20px;
-                grid-template-columns: 120px 1fr;
-                align-items: center;
+            .sidebar-left {
+                padding-left: 20px;
+
+                .sticky {
+                    position: -webkit-sticky; /* Safari */
+                    position: sticky;
+                    top: 40px;
+                }
+                .details {
+                    border-bottom: 1px solid var(--color-gray-two);
+                    padding-bottom: 1rem;
+
+                    .watchCampus {
+                        color: rgba(var(--color-six-dark-shade-three),1);
+                        font-weight: 600;
+                    }
+                    .watchAuthor {
+                        color: rgba(var(--color-six-dark-shade-three),1);
+                        font-weight: 500;
+                        opacity: 0.7;
+                        margin-bottom: 0rem;
+                    }
+                    .watchDate {
+                        font-weight: 100;
+                        font-size: 0.8rem;
+                    }
+
+                }
             }
+            
+            .content {
+                margin-top: 2rem;
+                .overview {
+                    .introCard {
 
-            h1 {
-                font-size: 3rem;
-                line-height: 3rem;
-                margin-bottom: 0px;
+                        &.introCardGrid {
+                            display: grid;
+                            grid-gap: 20px;
+                            grid-template-columns: 120px 1fr;
+                            align-items: center;
+                        }
+
+                        h1 {
+                            font-size: 3rem;
+                            line-height: 3rem;
+                            margin-bottom: 0px;
+                        }
+                        h2,
+                        a h2 {
+                            font-size: 2rem;
+                            line-height: 2rem;
+                            font-weight: 300;
+                            margin-bottom: 0px;
+                            text-decoration: none;
+                            color: var(--color-black);
+                        }
+                        a{
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                        .serieGraphic {
+                            .graphic {
+                                height: 120px;
+                                width: 120px;
+                                img {
+                                    border-radius: 100%;
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
-            h2,
-            a h2 {
-                font-size: 2rem;
-                line-height: 2rem;
-                font-weight: 300;
-                margin-bottom: 0px;
-                text-decoration: none;
-                color: var(--color-black);
+            
+            .sidebar-right {
+                padding-right: 20px;
+                margin-bottom: 20px;
+                .sticky {
+                    position: -webkit-sticky; /* Safari */
+                    position: sticky;
+                    top: 40px;
+                }
+                .resources {
+                    > h5{
+                        margin-bottom: 2rem;
+                    }
+                }
             }
-            a{
+        }
+        
+        .nav-tabs {
+            border-bottom: 2px solid #EAEAEA;
+            margin-bottom: 3rem;
+            background-color: rgba(var(--color-white),1);
+            
+            .nav-link {
+                color: var(--color-gray-five);
+                padding: 1rem 2rem 1rem 2rem;
+                font-weight: 100;
+                &.active{
+                    color: var(--color-black);
+                    font-weight: 900;
+                    border-bottom: 3px solid var(--color-four);
+                }
                 &:hover {
-                    text-decoration: none;
+                    color: var(--color-black);
                 }
             }
-            .serieGraphic {
-                height: 120px;
-                width: 120px;
-                border-radius: 100%;
+            &.sticky {
+                position: -webkit-sticky; /* Safari */
+                position: sticky;
+                top: 0px;
             }
 
         }
 
-        .sticky {
-            top: 0px;
+        .attachments {
+            background-color: #E6F3F5;
+            border-radius: 7px;
+            margin: 2rem 0;
+            padding: 1rem;
+
+            > a {
+                &.item {
+                    display: flex;
+                    margin: 5px 0px;
+                }
+            }
         }
+
     }
 }
 
-@include media(">=tablet", "<desktop") {
+@include media("<desktop") {
     .watchDetails {
-        .watchLeft {
-            display: none;
-        }
+
         .watchPlayer {
-            max-height: unset;
-            div[data-vjs-player],
-            .video-js {
-                height: unset;
-                padding-top: 56.25%;
-                min-height: unset;
+
+            .content-container{
+                max-height: unset;
+                grid-template-columns: 1fr;
+
+                div[data-vjs-player],
+                .video-js {
+                    height: unset;
+                    padding-top: 56.25%;
+                    min-height: unset;
+                    height: 520px;
+                }
             }
         }
+
+        main {
+            margin-top: 0px;
+        }
+
     }
 }
 
-@include media("<tablet") {
+@include media("<=tablet") {
     .watchDetails {
-        .watchLeft {
-            display: none;
-        }
         .watchPlayer {
-            max-height: unset;
-            div[data-vjs-player],
-            .video-js {
-                height: unset;
-                padding-top: 56.25%;
-                min-height: unset;
+
+            .content-container {
+                max-height: unset;
+                grid-template-columns: 1fr;
+                margin-bottom: 0px;
+
+                div[data-vjs-player],
+                .video-js {
+                    padding-top: 56.25%;
+                    height: 240px;
+                }
+    
+                .player {
+                    &.scrolled{
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        z-index: 10;
+                        height: 240px;
+                    }
+                }
+
+            }
+
+        }
+
+        main {
+            .columns{
+                grid-template-columns: 1fr;
+
+                .sidebar-left {
+                    padding: 0px;
+                    .details {
+                        display: none;
+                    }
+                }
+
+                .content {
+                    padding: 0px;
+                    .tab-content {
+                        padding: 0px 20px;
+                    }
+                    .overview {
+                        padding: 0px 20px;
+                        .introCard {
+                            
+                            &.introCardGrid {
+                                align-items: start;
+                                grid-template-columns: 1fr;
+                            }
+                            .serieGraphic {
+                                .graphic {
+                                    height: 80px;
+                                    width: 80px;
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .attachments {
+                        margin: 0px 20px;
+                    }
+                }
+
+                .sidebar-right {
+                    padding: 0px;
+                    margin: 0px 20px;
+                }
+
+                .nav-tabs {
+                    &.sticky {
+                        position: -webkit-sticky; /* Safari */
+                        position: sticky;
+                        top: 240px;
+                    }
+                }
+
             }
         }
 
-        .watchContent {
-            .introCard {
-                &.introCardGrid {
-                    align-items: start;
-                    grid-template-columns: 80px 1fr;
-                }
-                .serieGraphic {
-                    height: 80px;
-                    width: 80px;
+    }
+}
+
+@include media("<=phone") {
+    .watchDetails {
+
+        main {
+            .columns{
+                .content {
+                    .overview {
+                        .introCard {
+                            &.introCardGrid {
+                                display: flex;
+                            }
+                            .serieGraphic {
+                                display: none;
+                            }
+                        }
+                    }
                 }
             }
         }
+
     }
 }
