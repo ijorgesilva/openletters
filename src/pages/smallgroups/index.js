@@ -3,12 +3,12 @@ import React from "react"
 import { graphql, Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Tab, Nav, Container, Button } from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 // Components
 import HeaderPage from '../../components/headerPage'
 import HeroBasic from '../../components/hero/heroBasic'
+import BlurbHorizontalDarkFeatured from '../../components/blurb/blurbHorizontalDarkFeatured'
 import SectionEmpty from '../../components/content/sectionEmpty'
 import SectionTextBasic from "../../components/content/sectionTextBasic"
 import MenuSticky from "../../components/menu/menuSticky"
@@ -20,42 +20,12 @@ import AlertEmptyState from '../../components/alert/alertEmptyState'
 import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
 import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
 import './index.scss'
-
-function ToastAlertBar( {title, content, linkText, link, type, target} ){
-  return (
-      <>
-            <strong>{title}</strong>
-            <br/>
-            {content}
-            <br/>
-            {
-              (link && linkText) ?
-                  (type === 'internal') ?
-                    <Link className="arrow text-light" to={link}>{linkText}</Link>
-                  :
-                    <a className="arrow text-light" href={link} target={target}>{linkText}</a>
-              : undefined
-            }
-      </>
-  )
-}
+import config from '../../../data/SiteConfig'
 
 export default function SmallGroupsPage( { data, location } ) {
 
   /* Standard fields */
   const { t } = useTranslation()
-  
-  const notify = toast.info(
-        <ToastAlertBar 
-          title={(data.alertbar.nodes[0].alertBar.alertbarTitle) ? data.alertbar.nodes[0].alertBar.alertbarTitle : undefined}
-          content={(data.alertbar.nodes[0].alertBar.alertbarContent) ? data.alertbar.nodes[0].alertBar.alertbarContent : undefined}
-          linkText={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkText) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkText : undefined}
-          link={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkUrl) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkUrl : undefined}
-          type={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkType) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkType : undefined}
-          target={(data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkTarget) ? data.alertbar.nodes[0].alertBar.alertbarLink.alertbarLinkTarget : undefined}
-        />
-  )
-
   
   /* Page specific content */
   const stickyMenuJoin = (t) => [
@@ -121,6 +91,20 @@ export default function SmallGroupsPage( { data, location } ) {
   
   const itemsLenght = data.news.nodes.length + data.events.nodes.length
 
+  // const latestUpdate = ( data.news && data.events ) ? 
+  //                         ( data.news.nodes[0].date > data.events.nodes[0].date ) ?
+  //                           data.news.nodes[0]
+  //                         :
+  //                           data.events.nodes[0]
+  //                       : 
+  //                         ( data.news || data.events ) ?
+  //                             ( data.news ) ?
+  //                               data.news.nodes[0]
+  //                             :
+  //                               data.events.nodes[0]
+  //                         :
+  //                           undefined
+
   return (
     <>
 
@@ -137,18 +121,6 @@ export default function SmallGroupsPage( { data, location } ) {
             menu={smallGroupMenu}
         />
 
-      <ToastContainer 
-        position="top-right"
-        autoClose={20000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
       <HeroBasic
         title={t('smallgroups.hero')}
         subtitle={t('smallgroups.hero-subtitle')}
@@ -158,118 +130,126 @@ export default function SmallGroupsPage( { data, location } ) {
           <Button className="btn btn--animation btn--three" variant="none" href="https://my.victoryatl.com/default.aspx?page=4364" target="_blank" >
             {t('smallgroups.find-a-group')}
           </Button>
+          {/* <BlurbHorizontalDarkFeatured 
+            title={ (latestUpdate.title) ? latestUpdate.title : undefined}
+            subtitle={ (latestUpdate.)}
+            featuredImage
+            className
+            link
+            excerpt
+          /> */}
       </HeroBasic>
 
       <div className="p-0 position-relative z-index-2">
 
-          <SectionTextBasic id={'intro'} 
-            link={'https://my.victoryatl.com/default.aspx?page=4364'} 
-            linkText={t('smallgroups.find-a-group')}
-            title={t('smallgroups.tab-join-intro-title')} 
-            target="_blank"
-            >
-            {t('smallgroups.tab-join-intro-content')}
-          </SectionTextBasic>
+        <SectionTextBasic id={'intro'} 
+          link={'https://my.victoryatl.com/default.aspx?page=4364'} 
+          linkText={t('smallgroups.find-a-group')}
+          title={t('smallgroups.tab-join-intro-title')} 
+          target="_blank"
+          >
+          {t('smallgroups.tab-join-intro-content')}
+        </SectionTextBasic>
 
-          <hr/>
+        <hr/>
 
-          {
-            (data.news) ? 
-              ( itemsLenght > 0 ) ?
-                <SectionFeedCarouselMultipleSources
-                  title = {t('smallgroups.tab-host-section-news-title')}
-                  id="news"
-                  className="h-background-gray-one"
-                  itemsNews={data.news}
-                  itemsEvents={data.events}
-                  slugOne = "/news/"
-                  slugTwo = "/events/"
-                  itemsVisible = {3}
-                />
-              : 
-                <SectionEmpty 
-                  className="h-background-gray-one" 
-                  title = {t('smallgroups.tab-host-section-news-title')} 
-                  id="news"
-                >
-                  <AlertEmptyState variant="transparent" className="mt-5" content="" />
-                </SectionEmpty>
-            : undefined
-          }
-          
-          <MenuSticky 
-            link={"https://my.victoryatl.com/default.aspx?page=4364"} 
-            linkText={t('smallgroups.find-a-group')} 
-            menuLinks={stickyMenuJoin(t)} 
-          />
+        {
+          ( data.news || data.events ) ? 
+            ( itemsLenght > 0 ) ?
+              <SectionFeedCarouselMultipleSources
+                title = {t('smallgroups.tab-host-section-news-title')}
+                id="news"
+                className="h-background-gray-one"
+                itemsNews = { (data.news) ? data.news : undefined}
+                itemsEvents = { (data.events) ? data.events : undefined}
+                slugOne = { (data.news) ? `${config.newsPostListSlug}/` : undefined}
+                slugTwo = { (data.events) ? `${config.eventsPostListSlug}/` : undefined}
+                itemsVisible = {3}
+              />
+            : 
+              <SectionEmpty 
+                className="h-background-gray-one" 
+                title = {t('smallgroups.tab-host-section-news-title')} 
+                id="news"
+              >
+                <AlertEmptyState variant="transparent" className="mt-5" content="" />
+              </SectionEmpty>
+          : undefined
+        }
+        
+        <MenuSticky 
+          link={"https://my.victoryatl.com/default.aspx?page=4364"} 
+          linkText={t('smallgroups.find-a-group')} 
+          menuLinks={stickyMenuJoin(t)} 
+        />
 
-          <SectionPhotoText 
-            className="h-background-six-shade-three"
-            id={'about'} 
-            photo={data.aboutPhoto.childImageSharp.fluid.src}
-            title={t('smallgroups.tab-join-section-phototext-title')}
-            text={t('smallgroups.tab-join-section-phototext-content')}
-          />
+        <SectionPhotoText 
+          className="h-background-six-shade-three"
+          id={'about'} 
+          photo={data.aboutPhoto.childImageSharp.fluid.src}
+          title={t('smallgroups.tab-join-section-phototext-title')}
+          text={t('smallgroups.tab-join-section-phototext-content')}
+        />
 
-          {/* Group Types */}
-          <section className="c-groups overflow-hidden" id="types">
-              <div className="g-circlewords g-circlewords--pillar-two" style={decorCircleWords}></div>
+        {/* Group Types */}
+        <section className="c-groups overflow-hidden" id="types">
+            <div className="g-circlewords g-circlewords--pillar-two" style={decorCircleWords}></div>
 
-              <Container>
-                <div className="c-groups__introduction">
-                    <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: t('smallgroups.tab-join-section-grouptypes-title')}}></h2>
-                    <p className="mt-5">{t('smallgroups.tab-join-section-grouptypes-content')}</p>
-                </div>
+            <Container>
+              <div className="c-groups__introduction">
+                  <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: t('smallgroups.tab-join-section-grouptypes-title')}}></h2>
+                  <p className="mt-5">{t('smallgroups.tab-join-section-grouptypes-content')}</p>
+              </div>
 
-                <Tab.Container className="mt-5 tabbable" defaultActiveKey="1">
+              <Tab.Container className="mt-5 tabbable" defaultActiveKey="1">
 
-                  <Nav className="c-tabs--simple mt-5 user-select-none">
-                    {smallGroupsTypes(t).map( (smallGroupTypeTab, index) => (
-                          <Nav.Item key={index}>
-                            <Nav.Link eventKey={smallGroupTypeTab.id}> {smallGroupTypeTab.tabTitle} </Nav.Link>
-                          </Nav.Item>
-                        )
-                      )}
-                  </Nav>
-
-                  <Tab.Content>
-                    {smallGroupsTypes(t).map((smallGroupTypePane, index) => (
-                        <Tab.Pane key={index} eventKey={smallGroupTypePane.id}>
-                          <div className="c-groups__panel">
-                              <div className="c-groups__content">
-                                <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: smallGroupTypePane.title}}></h2>
-                                <div className="c-groups__overview mt-5" dangerouslySetInnerHTML={{__html: smallGroupTypePane.content}}></div>
-                                {
-                                  (smallGroupTypePane.link && smallGroupTypePane.linkText) ?
-                                  <Button className="btn btn--animation btn--dark-outline mt-5" href={smallGroupTypePane.link} target="_blank" rel="noreferrer">
-                                    {smallGroupTypePane.linkText}
-                                  </Button>
-                                  : <div></div>
-                                }
-                              </div>
-                              <div className="c-groups__photo user-select-none" dangerouslySetInnerHTML={{__html: smallGroupTypePane.sideContent}}></div>
-                          </div>
-                        </Tab.Pane>
+                <Nav className="c-tabs--simple mt-5 user-select-none">
+                  {smallGroupsTypes(t).map( (smallGroupTypeTab, index) => (
+                        <Nav.Item key={index}>
+                          <Nav.Link eventKey={smallGroupTypeTab.id}> {smallGroupTypeTab.tabTitle} </Nav.Link>
+                        </Nav.Item>
                       )
                     )}
-                  </Tab.Content>
+                </Nav>
 
-                </Tab.Container>
-                
-              </Container>
-          </section>
-          {/*. Group Types */}
+                <Tab.Content>
+                  {smallGroupsTypes(t).map((smallGroupTypePane, index) => (
+                      <Tab.Pane key={index} eventKey={smallGroupTypePane.id}>
+                        <div className="c-groups__panel">
+                            <div className="c-groups__content">
+                              <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: smallGroupTypePane.title}}></h2>
+                              <div className="c-groups__overview mt-5" dangerouslySetInnerHTML={{__html: smallGroupTypePane.content}}></div>
+                              {
+                                (smallGroupTypePane.link && smallGroupTypePane.linkText) ?
+                                <Button className="btn btn--animation btn--dark-outline mt-5" href={smallGroupTypePane.link} target="_blank" rel="noreferrer">
+                                  {smallGroupTypePane.linkText}
+                                </Button>
+                                : <div></div>
+                              }
+                            </div>
+                            <div className="c-groups__photo user-select-none" dangerouslySetInnerHTML={{__html: smallGroupTypePane.sideContent}}></div>
+                        </div>
+                      </Tab.Pane>
+                    )
+                  )}
+                </Tab.Content>
 
-          {/* <TestimonialWall 
-            testimonials={leadTestimonials(t)} 
-            id="testimonials" 
-            title={t('smallgroups.testimonials-title')} /> */}
+              </Tab.Container>
+              
+            </Container>
+        </section>
+        {/*. Group Types */}
 
-            <TestimonialCarousel 
-              testimonials={leadTestimonials(t)} 
-              id="testimonials" 
-              title={t('smallgroups.testimonials-title')}
-            />
+        {/* <TestimonialWall 
+          testimonials={leadTestimonials(t)} 
+          id="testimonials" 
+          title={t('smallgroups.testimonials-title')} /> */}
+
+        <TestimonialCarousel 
+          testimonials={leadTestimonials(t)} 
+          id="testimonials" 
+          title={t('smallgroups.testimonials-title')}
+        />
         
         <ShareSection 
           className="h-background-one"
@@ -351,7 +331,7 @@ export const query = graphql`
               }
               eventDates {
                   eventDate
-                  time
+                  eventTime
               }
               eventLink {
                   eventLinkText

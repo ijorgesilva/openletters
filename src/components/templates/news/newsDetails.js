@@ -8,7 +8,7 @@ import { getDate } from '../../utils/utils'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
-import ShareSimpleIcon from '../../social/shareSimpleIcon'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
 import { blogMenu, blogMenuBrand } from '../../../../data/menues'
 import './newsDetails.scss'
@@ -55,7 +55,7 @@ export default function NewsDetails( { pageContext, location } ){
                         <Col>
                             <div className="watchLeft sticky">
                                 <hr />
-                                <ShareSimpleIcon location={location} />
+                                <ToolbarDetails location={location} />
                             </div>
                         </Col>
 

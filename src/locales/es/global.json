@@ -1,6 +1,7 @@
 {
 	"blog": {
 		"created-date": "Creado el ",
+		"description": "Consulte nuestras últimas publicaciones y artículos",
 		"meta-description": "",
 		"modified-date": "Modificado el",
 		"title": "Blog"
@@ -13,12 +14,6 @@
 			"netSimple-pray-request": "Solicitar oración",
 			"netSimple-serve": "Servir",
 			"netSimple-title": "Interactuar"
-		},
-		"feed": {
-			"SectionFeedCarouselMultipleSources": {
-				"event": "Evento",
-				"news": "Noticias"
-			}
 		},
 		"podcast": {
 			"subtitle": "Escuchas",
@@ -35,14 +30,21 @@
 		"404-title": "Página no encontrada",
 		"about-serie": "Acerca de la Serie",
 		"accept": "Aceptar",
+		"article": "Artículo",
 		"close": "Cerrar",
 		"cookie-consent": "Este sitio web utiliza cookies para mejorar la experiencia del usuario.",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
 		},
+		"event": "Evento",
 		"footer-copyright": "© Copyright. Victory Church. Todos los derechos reservados.",
+		"news": "Noticias",
+		"news-description": "Revisa las últimas noticias",
+		"news-title": "Noticias",
 		"no-records": "Nada que mostrar!",
+		"notes": "Notas",
 		"related-resources": "Recursos",
+		"transcripts": "Transcripciones",
 		"watch": {
 			"content-empty": "No hay notas disponibles",
 			"more-info": "Más información",

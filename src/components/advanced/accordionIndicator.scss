@@ -46,7 +46,7 @@
     }
     .btn {
         padding: 0px;
-        color: var(--color-black);
+        color: rgba(var(--color-black),1);
         letter-spacing: 1px;
         text-transform: initial;
         font-weight: 900;
@@ -87,7 +87,7 @@
     width: 90%;
     text-align: left;
     font-weight: 900;
-    color: var(--color-black);
+    color: rgba(var(--color-black),1);
     text-transform: initial;
     letter-spacing: 1px;
 }

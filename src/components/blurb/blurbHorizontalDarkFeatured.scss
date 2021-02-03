@@ -1,4 +1,4 @@
-.blurbHorizontal {
+.blurbHorizontalDarkFeatured {
 
     border: unset;
     border-radius: var(--border-radius);
@@ -7,32 +7,17 @@
     a {
         display: grid;
         grid-gap: 5px;
-        grid-template-columns: minmax(150px, 0.6fr) 1fr;
+        grid-template-columns: 0.6fr 1fr;
         grid-template-rows: 1fr;
         align-items: center;
         min-height: 200px;
         border: solid 2px rgba(255,255,255,0);
         transition: var(--transition-regular);
-
         .card-body {
-            display: grid;
-            grid-template-rows: repeat(auto-fill, minmax(32px, 1fr));
-            grid-template-columns: 1fr;
-            grid-gap: 10px;
-
             .tags{
-                > div {
-                    display: inline-flex;
-                    flex-wrap: wrap;
-                    margin: 4px;
-                    font-weight: 300;
-                    padding: 0.4rem 1rem;
-                    border-width: 1px;
-                    border-style: solid;
-                    color: rgba(var(--color-black),0.5);
-                    border-color: rgba(var(--color-black),0.3);
-                    border-radius: 5px;
-                }
+                position: absolute;
+                top: 10px;
+
                 img {
                     width: 14px;
                 }
@@ -70,5 +55,4 @@
             color: var(--color-gray-five);
         }
     }
-    
 }

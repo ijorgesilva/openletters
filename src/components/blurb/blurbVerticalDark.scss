@@ -78,3 +78,10 @@
     }
     
 }
+.card {
+    &.dark {
+        h5 {
+            color: rgba(var(--color-black),1);
+        }
+    }
+}

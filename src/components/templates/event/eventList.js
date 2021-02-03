@@ -76,7 +76,7 @@ export const query = graphql`
                             localFile {
                                 childImageSharp {
                                     fluid {
-                                    src
+                                        src
                                     }
                                 }
                             }

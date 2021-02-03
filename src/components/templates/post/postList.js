@@ -2,6 +2,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from "react-i18next"
 
 // Components
 import PaginationBasic from '../../pagination/paginationBasic'
@@ -15,16 +16,19 @@ import './postList.scss'
 
 export default function PostList ( { location, data, pageContext } ) {
 
+    /* Standard fields */
+    const { t } = useTranslation()
+
     const noImage = (data.noImage.childImageSharp) ? data.noImage.childImageSharp.fluid.src : undefined
 
     return (
         <>
 
             <HeaderPage 
-                title="Blog"
+                title={t('blog.title')}
                 location={location} 
-                cover={data.blogPoster.publicURL}
-                description="Blog content lorem ipsum"
+                cover={ (data.blogPoster) ? data.blogPoster.publicURL : undefined }
+                description={t('blog.description')}
             />
             
             <HorizontalScrollingMenu
@@ -41,10 +45,12 @@ export default function PostList ( { location, data, pageContext } ) {
                                     <BlurbHorizontal 
                                         key={index}
                                         className={'mb-4'}
-                                        featuredImage={ (obj.node.featuredImage) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage  }
+                                        featuredImage={ ( obj.node.featuredImage != null ) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage }
                                         title={obj.node.title}
-                                        subtitle={getDate(obj.node.modified.toString(),2,'us','LLLL d, yyyy' )}
-                                        // subtitle={obj.modified.toString()}
+                                        subtitle={ getDate(obj.node.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
+
+                                        tags={ ( obj.node.tags.nodes ) ? obj.node.tags : undefined }
+                                        
                                         link={`${config.blogPostDetailsSlug}/${obj.node.slug}`}
                                         linkText={obj.node.title}
                                         excerpt={obj.node.excerpt}
@@ -76,10 +82,16 @@ export const query = graphql`
                             localFile {
                                 childImageSharp {
                                     fluid {
-                                    src
+                                        src
                                     }
                                 }
                             }
+                        }
+                    }
+                    tags {
+                        nodes {
+                            slug
+                            name
                         }
                     }
                 }
@@ -97,7 +109,6 @@ export const query = graphql`
         blogPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             publicURL
         }
-
 
     }  
 `

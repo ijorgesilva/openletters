@@ -165,7 +165,7 @@ REFACTOR
 }
 
 .c-video__player {
-    background-color: var(--color-black);
+    background-color: rgba(var(--color-black),1);
 }
 
 
@@ -314,4 +314,34 @@ figcaption {
     }
   }
 
+}
+/* Pagination */
+.page-item{
+
+  &.active {
+    .page-link {
+      z-index: 3;
+      color: #fff;
+      background-color: var(--color-one);
+      border-color: var(--color-one);
+    }
+  }
+
+  .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: var(--color-one);
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    &:hover {
+      z-index: 2;
+      color: var(--color-one-dark-shade-two);
+      text-decoration: none;
+      background-color: #e9ecef;
+      border-color: #dee2e6;
+    }
+  }
 }

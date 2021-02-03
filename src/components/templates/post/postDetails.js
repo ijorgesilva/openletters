@@ -10,7 +10,7 @@ import { getDate } from '../../utils/utils'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
-import ShareSimpleIcon from '../../social/shareSimpleIcon'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 import './postDetails.scss'
 import { blogMenu, blogMenuBrand } from '../../../../data/menues'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
@@ -57,7 +57,7 @@ export default function PostDetails( { pageContext, location } ){
                         <Col>
                             <div className="watchLeft sticky">
                                 <hr />
-                                <ShareSimpleIcon location={location} />
+                                <ToolbarDetails location={location} />
                             </div>
                         </Col>
 
@@ -79,8 +79,8 @@ export default function PostDetails( { pageContext, location } ){
 
                             <div className="authors">
                             {   
-                                (postDetails.postAuthor) ?
-                                    postDetails.postAuthor.map( (author, index) => (
+                                (postDetails.blogPostSpeaker) ?
+                                    postDetails.blogPostSpeaker.map( (author, index) => (
                                         <>
                                             <div className="author">
                                                 {

@@ -42,9 +42,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
     const styleNoPhoto = {
         backgroundImage: (data.noImage) ? "url("+ data.noImage.childImageSharp.fluid.src +")" : 'none'
     }
-
-    console.log(videoOnDemandTags)
-
+    
     return (
         <>
             <HeaderPage 
@@ -208,11 +206,11 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             </Tab>
 
                             {
-                                (serieDetails.serieRelatedResources) ?
+                                (serieDetails.serieRelatedResourcesGeneral) ?
                                     <Tab eventKey="1" title={t('global.related-resources')}>
                                         <FeedListEven
                                             className="h-background-six-shade-three"
-                                            items={serieDetails.serieRelatedResources}
+                                            items={serieDetails.serieRelatedResourcesGeneral}
                                             variant='light'
                                         />
                                     </Tab>

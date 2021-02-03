@@ -1,6 +1,7 @@
 {
 	"blog": {
 		"created-date": "Created on ",
+		"description": "Check our latest post and articles",
 		"meta-description": "",
 		"modified-date": "Modified on ",
 		"title": "Blog"
@@ -13,12 +14,6 @@
 			"netSimple-pray-request": "Pray request",
 			"netSimple-serve": "Serve",
 			"netSimple-title": "Interact"
-		},
-		"feed": {
-			"SectionFeedCarouselMultipleSources": {
-				"event": "Event",
-				"news": "News"
-			}
 		},
 		"podcast": {
 			"subtitle": "Are you a",
@@ -35,14 +30,21 @@
 		"404-title": "Page not found",
 		"about-serie": "About the Series",
 		"accept": "Accept",
+		"article": "Post",
 		"close": "Close",
 		"cookie-consent": "This website uses cookies to enhance the user experience.",
 		"empty": {
 			"text-not-available": "No description available"
 		},
+		"event": "Event",
 		"footer-copyright": "© Copyright. Victory Church. All Rights Reserved.",
+		"news": "News",
+		"news-description": "Read the latest news and updates from us",
+		"news-title": "News",
 		"no-records": "Nothing to show!",
+		"notes": "Notes",
 		"related-resources": "Resources",
+		"transcripts": "Transcripts",
 		"watch": {
 			"content-empty": "No notes available",
 			"more-info": "More info",

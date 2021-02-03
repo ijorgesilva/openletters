@@ -37,14 +37,6 @@ export default function SmallGroupsPage( { data, location } ) {
   //   top: '-220px',
   //   left: '30px'
   // }
-
-  const playerPlaylist = (t) => [
-    {
-      src: t('smallgroups.tab-host-section-video-link'),
-      poster: t('smallgroups.tab-host-section-video-poster'),
-      skipTo: '40'
-    }
-  ]
   
   const leadSteps = (t) => [
     {
@@ -95,29 +87,29 @@ export default function SmallGroupsPage( { data, location } ) {
   return (
     <>
 
-        <HeaderPage 
-            title={t('smallgroups.title')} 
-            location={location} 
-            cover={(data.heroImage) ? data.heroImage.publicURL : undefined}
-            description={t('smallgroups.meta-description')}
-            article={true}
-        />
+      <HeaderPage 
+          title={t('smallgroups.title')} 
+          location={location} 
+          cover={(data.heroImage) ? data.heroImage.publicURL : undefined}
+          description={t('smallgroups.meta-description')}
+          article={true}
+      />
 
-        <HorizontalScrollingMenu
-            menuBrand={smallGroupBrand}
-            menu={smallGroupMenu}
-        />
+      <HorizontalScrollingMenu
+          menuBrand={smallGroupBrand}
+          menu={smallGroupMenu}
+      />
 
-        <HeroBasic
-          title={t('smallgroups.hero')}
-          subtitle={t('smallgroups.hero-subtitle')}
-          backgroundPhoto={(data.heroImage) ? data.heroImage.publicURL : undefined}
-          className={"c-hero position-relative z-index-1"}
-          >
-            <Button className="btn btn--animation btn--three" variant="none" href="#application" target="_self">
-                {t('smallgroups.host-a-group')}
-            </Button>
-        </HeroBasic>
+      <HeroBasic
+        title={t('smallgroups.hero')}
+        subtitle={t('smallgroups.hero-subtitle')}
+        backgroundPhoto={(data.heroImage) ? data.heroImage.publicURL : undefined}
+        className={"c-hero position-relative z-index-1"}
+        >
+          <Button className="btn btn--animation btn--three" variant="none" href="#application" target="_self">
+              {t('smallgroups.host-a-group')}
+          </Button>
+      </HeroBasic>
 
       <div className="p-0 position-relative z-index-2">
 
@@ -128,16 +120,16 @@ export default function SmallGroupsPage( { data, location } ) {
                   <hr/>
 
                   {
-                    (data.news) ?
+                    (data.news || data.events) ?
                       ( itemsLenght > 0 ) ?
                         <SectionFeedCarouselMultipleSources
                           title = {t('smallgroups.tab-host-section-news-title')}
                           id="news"
                           className="h-background-gray-one"
-                          itemsNews={data.news}
-                          itemsEvents={data.events}
-                          slugOne = "/news/"
-                          slugTwo = "/events/"
+                          itemsNews = { (data.news) ? data.news : undefined}
+                          itemsEvents = { (data.events) ? data.news : undefined}
+                          slugOne = { (data.news) ? "/news/" : undefined}
+                          slugTwo = { (data.events) ? "/events/" : undefined}
                           itemsVisible = {3}
                         />
                       : 
@@ -156,8 +148,10 @@ export default function SmallGroupsPage( { data, location } ) {
                   <SectionVideoPlayerSimple 
                       id="about_lead" 
                       title={t('smallgroups.tab-host-section-player-title')}
-                      playerId={"smallgrouplead"}
-                      playerPlaylist={playerPlaylist(t)}
+                      src={t('smallgroups.tab-host-section-video-link')}
+                      poster={t('smallgroups.tab-host-section-video-poster')}
+                      controls
+                      pip
                   />
 
                   <SectionSteps 
@@ -265,7 +259,7 @@ export const query = graphql`
             }
             eventDates {
                 eventDate
-                time
+                eventTime
             }
             eventLink {
                 eventLinkText

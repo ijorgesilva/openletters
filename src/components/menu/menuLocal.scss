@@ -50,7 +50,7 @@
                 padding: 15px 25px;
 
                 &:hover {
-                    color: var(--color-black);
+                    color: rgba(var(--color-black),1);
                 }
             }
         }

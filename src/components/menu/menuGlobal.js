@@ -32,14 +32,7 @@ export default function MenuGlobal( { helpMenu, giveMenu, menuCampusSelector, ma
 
                 <Navbar.Collapse className="c-global__top p-0 justify-content-end" id="global-navbar-nav">
                     <Nav className="">
-                        {
-                            (mailChimpUrl) ?
-                                <FollowDropdown mailchimpUrl={mailChimpUrl} />
-                            : 
-                                (config.mailChimpUrl) ?
-                                    <FollowDropdown mailchimpUrl={config.mailChimpUrl} />
-                                : undefined
-                        }
+                        <FollowDropdown mailchimpUrl={config.mailChimpUrl} />
                         
                         {
                             (helpMenu) ?

@@ -75,3 +75,4 @@ WordPress/
 # Third party apps
 .babel
 .code-workspace
+get-pip.py

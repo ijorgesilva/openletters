@@ -5,8 +5,23 @@
  */
 
 // You can delete this file if you're not using it
-const path = require(`path`)
-const config = require("./data/SiteConfig");
+const path = require('path')
+const config = require('./data/SiteConfig')
+
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions;
+
+    const typeDefs = `
+
+        type WpBlockAttributesObject {
+            foobar: String
+        }
+
+    `;
+
+    createTypes(typeDefs);
+
+};
 
 exports.createPages = async( { page, actions, graphql, reporter } ) => {
 
@@ -22,6 +37,8 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
     }
 
     let numberPages 
+
+    /* Page creation for Locales  */
 
     /* Messages creation */
     numberPages = Math.ceil(result.data.allWpVideoOnDemand.edges.length / config.postsPerPage)
@@ -219,54 +236,6 @@ const seoFields = `
 const query = `
     query {
 
-        allWpPost(filter: {status: {eq: "publish"}})  {
-            edges{
-                node{
-                    id
-                    title
-                    excerpt
-                    slug
-                    content
-                    date(formatString: "YYYYMMDD")
-                    modified(formatString: "YYYYMMDD")
-                    ${featuredImageFields}
-                    ${seoFields}
-                    postDetails {
-                        postCampus {
-                            ... on WpCampus {
-                                id
-                                title
-                                slug
-                                ${featuredImageFields}
-                            }
-                        }
-                        postAuthor {
-                            ... on WpSpeaker {
-                                id
-                                title
-                                slug
-                                ${featuredImageFields}
-                            }
-                        }
-                    }
-                    author {
-                        node {
-                        slug
-                        firstName
-                        description
-                        lastName
-                        }
-                    }
-                    tags {
-                        nodes {
-                            slug
-                            name
-                        }
-                    }
-                }
-            }
-        }
-
         allWpVideoOnDemand (filter: {status: {eq: "publish"}}) {
             edges{
                 node {
@@ -278,6 +247,7 @@ const query = `
                     modified
                     ${seoFields}
                     ${featuredImageFields}
+                    
                     videoDetails {
                         oneLiner
                         videoTranscript
@@ -315,7 +285,7 @@ const query = `
                                     sectionPhoto{
                                         localFile {
                                             childImageSharp {
-                                                fluid(maxWidth: 1200) {
+                                                fluid {
                                                     src
                                                 }
                                             }
@@ -356,7 +326,7 @@ const query = `
                                     poster {
                                         localFile {
                                             childImageSharp {
-                                                fluid(maxWidth: 1800) {
+                                                fluid {
                                                     src
                                                 }
                                             }
@@ -365,7 +335,7 @@ const query = `
                                     logo {
                                         localFile {
                                             childImageSharp {
-                                                fluid(maxWidth: 1800) {
+                                                fluid {
                                                     src
                                                 }
                                             }
@@ -450,40 +420,7 @@ const query = `
                             }
                         }
 
-                        serieDetailsSectionFooter {
-                            ... on WpContentSection {
-                                id
-                                databaseId
-                                sectionDetails {
-                                    sectionTitle
-                                    sectionSubtitle
-                                    sectionVariant
-                                    sectionClassname
-                                    sectionContent
-                                    sectionPhoto{
-                                        localFile {
-                                            childImageSharp {
-                                                fluid(maxWidth: 1200) {
-                                                    src
-                                                }
-                                            }
-                                        }
-                                    }
-                                    sectionLink {
-                                      sectionLinkText
-                                      sectionLinkType
-                                      sectionLinkUrl
-                                    }
-                                    sectionButton {
-                                      sectionButtonText
-                                      sectionButtonType
-                                      sectionButtonUrl
-                                    }
-                                }
-                            }
-                        }
-                        
-                        serieRelatedResources{
+                        serieRelatedResourcesGeneral{
                             ... on WpPost {
                                 id
                                 slug
@@ -507,6 +444,40 @@ const query = `
                                 }
                             }
                         }
+                        
+                        serieDetailsSectionFooter {
+                            ... on WpContentSection {
+                                id
+                                databaseId
+                                sectionDetails {
+                                    sectionTitle
+                                    sectionSubtitle
+                                    sectionVariant
+                                    sectionClassname
+                                    sectionContent
+                                    sectionPhoto{
+                                        localFile {
+                                            childImageSharp {
+                                                fluid {
+                                                    src
+                                                }
+                                            }
+                                        }
+                                    }
+                                    sectionLink {
+                                      sectionLinkText
+                                      sectionLinkType
+                                      sectionLinkUrl
+                                    }
+                                    sectionButton {
+                                      sectionButtonText
+                                      sectionButtonType
+                                      sectionButtonUrl
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                     serieGraphics {
                         logo {
@@ -538,7 +509,54 @@ const query = `
             }
         }
 
-        
+        allWpPost(filter: {status: {eq: "publish"}})  {
+            edges{
+                node{
+                    id
+                    title
+                    excerpt
+                    slug
+                    content
+                    date(formatString: "YYYYMMDD")
+                    modified(formatString: "YYYYMMDD")
+                    ${featuredImageFields}
+                    ${seoFields}
+                    postDetails {
+                        blogPostCampus {
+                            ... on WpCampus {
+                                id
+                                title
+                                slug
+                                ${featuredImageFields}
+                            }
+                        }
+                        blogPostSpeaker {
+                            ... on WpSpeaker {
+                                id
+                                title
+                                slug
+                                ${featuredImageFields}
+                            }
+                        }
+                    }
+                    author {
+                        node {
+                            slug
+                            firstName
+                            description
+                            lastName
+                        }
+                    }
+                    tags {
+                        nodes {
+                            slug
+                            name
+                        }
+                    }
+                }
+            }
+        }
+ 
         allWpNewspost (filter: {status: {eq: "publish"}})  {
             edges{
                 node{
@@ -584,7 +602,7 @@ const query = `
                         }
                         eventDates {
                             eventDate
-                            time
+                            eventTime
                         }
                         eventLink {
                             eventLinkText
@@ -610,6 +628,6 @@ const query = `
                 }
             }
         }
-        
+
     }
 `

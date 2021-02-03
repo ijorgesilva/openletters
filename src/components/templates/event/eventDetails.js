@@ -8,7 +8,7 @@ import { getDate } from '../../utils/utils'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
-import ShareSimpleIcon from '../../social/shareSimpleIcon'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
 import { eventsBrand, eventsMenu } from '../../../../data/menues'
 import './eventDetails.scss'
@@ -62,7 +62,7 @@ export default function EventDetails( { pageContext, location } ){
                                 {
                                     (eventDetails.eventDates) ?
                                         <>
-                                            <span>{eventDetails.eventDates.eventDate} {eventDetails.eventDates.time}</span>
+                                            <span>{eventDetails.eventDates.eventDate} {eventDetails.eventDates.eventTime}</span>
                                         </>
                                     : undefined
                                 }
@@ -76,7 +76,7 @@ export default function EventDetails( { pageContext, location } ){
                                     : undefined
                                 }
                                 <hr />
-                                <ShareSimpleIcon location={location} />
+                                <ToolbarDetails location={location} />
                             </div>
                         </Col>
 

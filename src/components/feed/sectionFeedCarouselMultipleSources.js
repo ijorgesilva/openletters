@@ -51,6 +51,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                     draggable={true}
                     showDots={false}
                     infinite={true}
+                    partialVisible={true}
                     responsive={ (itemsVisible) ? responsive[itemsVisible] : responsive[defaultVisible] }
                     itemClass="item"
                     containerClass="carousel-container"
@@ -65,8 +66,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                     className={ (objLengthOne === index + 1) ? 'last' : undefined }
                                     noImage={ noImage }
                                     // tag={"<img src='"+data.newsIcon.publicURL+"' alt='News'/> News"}
-                                    tag={t('components.feed.SectionFeedCarouselMultipleSources.news')}
-                                    tagClassName={"h-background-six"}
+                                    tag={t('global.news')}
                                     link={ (obj.slug) ? `${slugOne}${obj.slug}` : null }
                                     // subtitle = { (obj.date) ? getDate(obj.date,2,'us','LLLL d, yyyy') : undefined }
                                     excerpt = { (obj.excerpt) ? obj.excerpt : null }
@@ -84,10 +84,10 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                     className={ (objLengthTwo === index + 1) ? 'last' : undefined }
                                     noImage={ noImage }
                                     // tag={"<img src='"+data.eventIcon.publicURL+"' alt='Event'/> Event"}
-                                    tag={t('components.feed.SectionFeedCarouselMultipleSources.event')}
+                                    tag={t('global.event')}
                                     link={ (obj.slug) ? `${slugTwo}${obj.slug}` : null }
-                                    subtitle = { (obj.eventDetails.eventDates[0].eventDate) ? getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy')+' - '+obj.eventDetails.eventDates[0].time : undefined }
-                                    excerpt = { (obj.excerpt) ? obj.excerpt : null }
+                                    // subtitle={ ( obj.eventDetails.eventDates[0].eventDate ) ? getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy')+' - '+obj.eventDetails.eventDates[0].time : undefined }
+                                    excerpt={ (obj.excerpt) ? obj.excerpt : null }
                                 />
                             ))
                         : undefined

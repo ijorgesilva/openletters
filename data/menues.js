@@ -11,6 +11,8 @@ export const smallGroupBrand =  {name: "Small Groups", link: "/smallgroups"}
 export const smallGroupMenu = [
     {name: "Join", link: "/smallgroups", as: "", target: ""},
     {name: "Host", link: "/smallgroups/host", as: "", target: ""},
+    {name: "Events", link: "/smallgroups/events", as: "", target: ""},
+    {name: "Blog & News", link: "/smallgroups/blog", as: "", target: ""},
     {name: "Leader Login", link: "https://my.victoryatl.com/default.aspx?page=4236", as: "", target: "_blank"},
 ]
 
@@ -31,14 +33,7 @@ export const watchMenu = [
  */
 
 export const menuLocal = [
-    // {name: "Campus", link: "#", 
-    //     submenu: [
-    //         {name: "Norcross", link: "/"},
-    //         {name: "Hamilton Mill", link: "/hamiltonmill"},
-    //         {name: "Midtown", link: "/midtown"},
-    //         {name: "Online", link: "https://live.victoryatl.com"},
-    //     ]
-    // },
+    
     {name: "About", link: "#", megamenu: true,
         submenu: [
             {name: "About us", link:"#", header: true,

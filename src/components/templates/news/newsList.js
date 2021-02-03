@@ -2,6 +2,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from "react-i18next"
 
 // Components
 import PaginationBasic from '../../pagination/paginationBasic'
@@ -15,16 +16,19 @@ import './newsList.scss'
 
 export default function PostList ( { location, data, pageContext } ) {
 
+    /* Standard fields */
+    const { t } = useTranslation()
+
     const noImage = (data.noImage.childImageSharp) ? data.noImage.childImageSharp.fluid.src : undefined
 
     return (
         <>
 
             <HeaderPage 
-                title="News"
+                title={t('global.news-title')}
                 location={location} 
-                cover={data.newsPoster.publicURL}
-                description="News content lorem ipsum"
+                cover={ (data.newsPoster) ? data.newsPoster.publicURL : undefined }
+                description={t('global.news-description')}
             />
             
             <HorizontalScrollingMenu
@@ -38,13 +42,16 @@ export default function PostList ( { location, data, pageContext } ) {
                         <Col xs={12} md={8}>
                             {data.news.edges.map( (obj, index) => (
                                 <>
-
                                     <BlurbHorizontal 
                                         key={index}
                                         className={'mb-4'}
-                                        featuredImage={ (obj.node.featuredImage) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage  }
+
+                                        featuredImage={ ( obj.node.featuredImage.node != null ) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage }
                                         title={obj.node.title}
                                         subtitle={getDate(obj.node.modified.toString(),2,'us','LLLL d, yyyy' )}
+
+                                        tags={ ( obj.node.newTags ) ? obj.node.newTags : undefined }
+
                                         link={`${config.newsPostDetailsSlug}/${obj.node.slug}`}
                                         linkText={obj.node.title}
                                         excerpt={obj.node.excerpt}
@@ -82,6 +89,12 @@ export const query = graphql`
                             }
                         }
                     }
+                    newsTags {
+                        nodes {
+                            slug
+                            name
+                        }
+                    }
                 }
             }
         }
@@ -97,7 +110,6 @@ export const query = graphql`
         newsPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             publicURL
         }
-
 
     }  
 `

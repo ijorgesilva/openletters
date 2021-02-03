@@ -8,22 +8,22 @@ import Img from 'gatsby-image'
 
 // Components
 import config from '../../../../data/SiteConfig'
+import watchDetailsConfig from '../../../../data/SiteConfig'
 import { isEmpty, getDate } from '../../utils/utils'
 import { watchDetailsBrand, watchDetailsMenu } from '../../../../data/menues'
 import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
-import ToolbarWatchDetails from '../../vod/toolbar/toolbarWatchDetails'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
-// import VideoJsPlayerCustom from '../../vod/player/videoJsPlayer'
+import FeedListEven from '../../feed/feedListEven'
 import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import SectionTextPhoto from '../../content/sectionTextPhoto'
-import FeedListMultipleSources from '../../feed/feedListMultipleSources'
 import './watchDetails.scss'
 
 export default function WatchDetails( { pageContext, location, className, data, ...props } ) {
     
-    const { title, slug, node: {excerpt, content, featuredImage, videoDetails, terms} } = pageContext
+    const { title, slug, node: {excerpt, content, featuredImage, videoDetails, videoOnDemandTags} } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -61,6 +61,10 @@ export default function WatchDetails( { pageContext, location, className, data, 
     }
     /*. Scrolled Player */
 
+    const styleBackgroundHero = {
+        backgroundImage: (videoDetails.serie.serieGraphics.background) ? "url(" + videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src + ")" : "none"
+    }
+
     return (
         <div className={`watchDetails ${(className)? className : ''}`}>
             
@@ -82,8 +86,6 @@ export default function WatchDetails( { pageContext, location, className, data, 
 
                     <div className="content-container">
                         
-                        <div></div>
-
                         <div className={playerClasses.join(" ")}>
                             {
                                 (videoDetails.url) ?
@@ -108,7 +110,7 @@ export default function WatchDetails( { pageContext, location, className, data, 
                                 : 
                                 <SidebarFeedVod 
                                     title={ (videoDetails.serie) ? videoDetails.serie.title : undefined}
-                                    background={(videoDetails.serie.serieGraphics.background) ? videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src : undefined}
+                                    background={(watchDetailsConfig.sidebarBackground && videoDetails.serie.serieGraphics.background) ? videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src : undefined}
                                     className="h-background-six-shade-three" 
                                     serieSlug={videoDetails.serie.slug}
                                     id={ (videoDetails.serie) ? videoDetails.serie.slug : undefined }
@@ -117,6 +119,11 @@ export default function WatchDetails( { pageContext, location, className, data, 
                             }
                         </div>
                         
+                    </div>
+
+                    <div className="background">
+                        <div className="overlay"></div>
+                        <div className="poster" style={styleBackgroundHero}></div>
                     </div>
 
             </div>
@@ -162,7 +169,7 @@ export default function WatchDetails( { pageContext, location, className, data, 
                                     }
                                 </div>
 
-                                <ToolbarWatchDetails 
+                                <ToolbarDetails 
                                     location={location} 
                                 />
 
@@ -222,7 +229,7 @@ export default function WatchDetails( { pageContext, location, className, data, 
                             }
 
                             <Tabs className="mt-5 sticky" defaultActiveKey="notes" id="">
-                                <Tab eventKey="notes" title="Notes">
+                                <Tab eventKey="notes" title={t('global.notes')}>
                                     {
                                         (content) ? 
                                             <article dangerouslySetInnerHTML={{__html: content }}></article> 
@@ -232,7 +239,7 @@ export default function WatchDetails( { pageContext, location, className, data, 
                                             </Alert>
                                     }
                                 </Tab>
-                                <Tab eventKey="transcript" title="Transcript">
+                                <Tab eventKey="transcript" title={t('global.transcripts')}>
                                     {
                                         (videoDetails.videoTranscript) ? 
                                             videoDetails.videoTranscript 
@@ -242,31 +249,43 @@ export default function WatchDetails( { pageContext, location, className, data, 
                                             </Alert>
                                     }
                                 </Tab>
+
+                                {
+                                    (videoDetails.videoRelatedResources) ?
+                                        <Tab eventKey="resources" title={t('global.related-resources')}>
+                                            <div className="resources"></div>
+                                            <FeedListEven
+                                                className=""
+                                                items={videoDetails.videoRelatedResources}
+                                                slug={config.blogPostDetailsSlug}
+                                                excerpt={false}
+                                                noImage={data.noImage}
+                                                variant=''
+                                            />
+                                            {/* <FeedListMultipleSources 
+                                                className="related"
+                                                data={videoDetails.videoRelatedResources}
+                                            /> */}
+                                        </Tab>
+                                    : 
+                                        undefined
+                                }
+
                             </Tabs>
                             
-                            <TagSimple terms={terms} />
+                            {
+                                (videoOnDemandTags) ?
+                                    <TagSimple terms={videoOnDemandTags} variant="" />
+                                : 
+                                    undefined
+                            }
                             
                         </div>
 
                         <div className="sidebar-right" id="right">
                             <div className="sticky">
-                                {
-                                    (videoDetails.videoRelatedResources) ?
-                                        <div className="resources">
-                                            <h5 className="user-select-none">
-                                                {t('global.related-resources')}
-                                            </h5>
-                                            <FeedListMultipleSources 
-                                                className="related"
-                                                data={videoDetails.videoRelatedResources}
-                                                excerpt={false}
-                                                slug={config.blogPostDetailsSlug}
-                                                noImage={data.noImage}
-                                            />
-                                        </div>
-                                    : 
-                                        undefined
-                                }
+                                        
+                                    
                             </div>
                         </div>
 

@@ -19,8 +19,6 @@ export default function SidebarFeedVod( { items, serieSlug, title, background, c
         backgroundImage: "url("+ background +")"
     }
 
-    console.log(items)
-
     return (
         <section className={`sidebarFeedVod ${className}`}id={id}>
             {

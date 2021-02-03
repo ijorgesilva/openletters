@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function FooterSimple( {text, links, linkText, ...props} ) {
     return (
-        <section className="c-footer z-index-2">
+        <footer className="c-footer z-index-2">
             <div className="c-container  z-index-1 position-relative">
                 <div className="c-footer__logo"></div>
                 <div className="c-footer__copyright">
@@ -15,6 +15,6 @@ export default function FooterSimple( {text, links, linkText, ...props} ) {
                 </div>
             </div>
             <div className="c-footer__background z-index-0"></div>
-        </section>
+        </footer>
     )
 }
