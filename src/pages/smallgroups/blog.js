@@ -5,9 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from "react-i18next"
 
 // Components
-// import PaginationBasic from '../../components/pagination/paginationBasic'
 import AlertEmptyState from '../../components/alert/alertEmptyState'
-import SectionEmpty from '../../components/content/sectionEmpty'
 import { getDate } from '../../components/utils/utils'
 import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
 import BlurbHorizontal from '../../components/blurb/blurbHorizontal'

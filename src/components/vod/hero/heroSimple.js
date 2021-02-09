@@ -1,7 +1,7 @@
 // Dependencies
 import React from 'react'
 import { Link } from 'gatsby'
-import { Jumbotron, Container, Col, Row } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 import TextTruncate from 'react-text-truncate'
 import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,7 +9,6 @@ import { faInfo, faPlay } from '@fortawesome/fontawesome-free-solid'
 
 // Components
 import './heroSimple.scss'
-// import { isEmpty } from '../../../components/utils/utils'
 
 export default function HeroSimple( { backgroundImage, className, id, iconSerie, iconSerieLink, iconSerieTitle, playUrl, title, serieLinkText, description, playText, iconPlay } ) {
 

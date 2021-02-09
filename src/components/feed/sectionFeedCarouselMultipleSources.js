@@ -86,7 +86,15 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                     // tag={"<img src='"+data.eventIcon.publicURL+"' alt='Event'/> Event"}
                                     tag={t('global.event')}
                                     link={ (obj.slug) ? `${slugTwo}${obj.slug}` : null }
-                                    // subtitle={ ( obj.eventDetails.eventDates[0].eventDate ) ? getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy')+' - '+obj.eventDetails.eventDates[0].time : undefined }
+                                    subtitle={
+                                        (obj.eventDetails.eventDates[0].eventDate && obj.eventDetails.eventDates[0].eventTime) ? 
+                                                getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' ) + ' | ' + obj.eventDetails.eventDates[0].eventTime
+                                        : 
+                                            (obj.eventDetails.eventDates[0].eventDate) ? 
+                                                getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' )
+                                            :
+                                                undefined
+                                    }
                                     excerpt={ (obj.excerpt) ? obj.excerpt : null }
                                 />
                             ))

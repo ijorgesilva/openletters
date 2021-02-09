@@ -36,22 +36,16 @@
         grid-template-areas: 'content .';
     }
 
-    .c-hero__buttons {
-        display: inline;
+    .c-hero__children {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     @include media("≥phone", "<850px") {
         h1, h2, h3, h4, h5 {
             text-align: center;
             max-width: unset;
-        }
-        .c-hero__buttons {
-            display: flex;
-            flex-direction: column;
-            
-            .btn {
-                margin: 10px 0px;
-            }
         }
     }
 

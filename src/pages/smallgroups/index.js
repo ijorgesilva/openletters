@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react"
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Tab, Nav, Container, Button } from 'react-bootstrap'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -130,16 +130,16 @@ export default function SmallGroupsPage( { data, location } ) {
           <Button className="btn btn--animation btn--three" variant="none" href="https://my.victoryatl.com/default.aspx?page=4364" target="_blank" >
             {t('smallgroups.find-a-group')}
           </Button>
-          {/* <BlurbHorizontalDarkFeatured 
-            title={ (latestUpdate.title) ? latestUpdate.title : undefined}
-            subtitle={ (latestUpdate.)}
-            featuredImage
-            className
-            link
-            excerpt
-          /> */}
+          <BlurbHorizontalDarkFeatured 
+            title={'Latest Event lorem'}// (latestUpdate.title) ? latestUpdate.title : undefined
+            subtitle={'Check out our lorem ipsum'}
+            featuredImage={data.noImage.childImageSharp.fluid.src}
+            className={''}
+            link={'/events'}
+            excerpt={'Lorem ipsum dolor sit amet. Salvatore'}
+          />
       </HeroBasic>
-
+      
       <div className="p-0 position-relative z-index-2">
 
         <SectionTextBasic id={'intro'} 
@@ -147,7 +147,7 @@ export default function SmallGroupsPage( { data, location } ) {
           linkText={t('smallgroups.find-a-group')}
           title={t('smallgroups.tab-join-intro-title')} 
           target="_blank"
-          >
+        >
           {t('smallgroups.tab-join-intro-content')}
         </SectionTextBasic>
 
@@ -267,9 +267,16 @@ export default function SmallGroupsPage( { data, location } ) {
   )
 }
 
-
 export const query = graphql`
   query{
+
+      noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
+            childImageSharp {
+                fluid {
+                    src
+                }
+            }
+      }  
 
       backgroundShare: file(relativePath: {eq: "img/smallgroups/share_background.jpg"}) {  
         childImageSharp {

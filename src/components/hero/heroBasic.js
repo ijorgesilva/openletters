@@ -20,7 +20,7 @@ export default function HeroBasic( {title, subtitle, backgroundPhoto, className,
                     <div>
                         <h1 className="display-1 text-uppercase text-white" dangerouslySetInnerHTML={{__html: title}}></h1>
                         <h5 className="text-white mt-4 mb-3" dangerouslySetInnerHTML={{__html: subtitle}}></h5>
-                        <div className="c-hero__buttons mt-3">
+                        <div className="c-hero__children mt-3">
                             {children}
                         </div>
                     </div>

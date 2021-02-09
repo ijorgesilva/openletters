@@ -72,21 +72,21 @@ export default function SectionPodcast ( { title, subtitle, content, Spotify, So
                         <div className="links">
                             {
                                 (iTunes) ?
-                                    <a href={iTunes} target="_blank">
+                                    <a href={iTunes} target="_blank" rel="noreferrer">
                                         <img src={data.appleIcon.publicURL} alt="iTunes"/>
                                     </a>
                                 : undefined
                             }
                             {
                                 (Spotify) ?
-                                    <a href={iTunes} target="_blank">
+                                    <a href={iTunes} target="_blank" rel="noreferrer">
                                         <img src={data.spotifyIcon.publicURL} alt="Spotify"/>
                                     </a>
                                 : undefined
                             }
                             {
                                 (Soundcloud) ?
-                                    <a href={iTunes} target="_blank">
+                                    <a href={iTunes} target="_blank" rel="noreferrer">
                                         <img src={data.soundcloudIcon.publicURL} alt="Spotify"/>
                                     </a>
                                 : undefined

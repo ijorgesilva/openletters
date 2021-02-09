@@ -2,7 +2,7 @@
 
     border: unset;
     border-radius: var(--border-radius);
-    background-color: rgba(var(--color-white),1);
+    background-color: rgba(var(--color-six-dark-shade-three),0.4);
 
     a {
         display: grid;
@@ -13,7 +13,34 @@
         min-height: 200px;
         border: solid 2px rgba(255,255,255,0);
         transition: var(--transition-regular);
+        .card-img{
+            height: 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px 0 0 5px !important;
+        }
         .card-body {
+            .card-subtitle {
+                font-weight: 100;
+                font-size: 0.7rem;
+                line-height: 0.7rem;
+                color: rgba(var(--color-white),0.8);
+            }
+            .card-title {
+                color: rgba(var(--color-white),1);
+                font-weight: bold;
+                letter-spacing: 0.5px;
+                font-size: 1.2rem;
+                line-height: 1.2rem;
+                margin-bottom: 5px;
+            }
+            .card-text {
+                color: rgba(var(--color-white),0.6);
+                font-weight: 300;
+                font-size: 0.9rem;
+                line-height: 1rem;
+            }
             .tags{
                 position: absolute;
                 top: 10px;
@@ -23,36 +50,10 @@
                 }
             }
         }
-        .card-img{
-            height: 100%;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 5px 0 0 5px !important;
-        }
         &:hover {
             text-decoration: none;
-            border: solid 2px var(--color-six-shade-three);
+            border: solid 1px rgba(var(--color-white),0.3);
             border-radius: var(--border-radius);
-        }
-        .card-subtitle {
-            font-weight: 100;
-            font-size: 0.7rem;
-            line-height: 0.7rem;
-            color: var(--color-gray-five);
-        }
-        .card-title {
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            font-size: 1.2rem;
-            line-height: 1.2rem;
-            margin-bottom: 5px;
-        }
-        .card-text {
-            font-weight: 300;
-            font-size: 0.9rem;
-            line-height: 1rem;
-            color: var(--color-gray-five);
         }
     }
 }

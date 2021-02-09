@@ -76,3 +76,6 @@ WordPress/
 .babel
 .code-workspace
 get-pip.py
+
+# Sensible Information
+*.pub

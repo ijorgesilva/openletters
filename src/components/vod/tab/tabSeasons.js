@@ -2,7 +2,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 // import Carousel from 'react-multi-carousel'
-import { Tabs, Tab, Row, Col, Nav } from 'react-bootstrap'
+import { Tab, Row, Col, Nav } from 'react-bootstrap'
 
 // Components
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
