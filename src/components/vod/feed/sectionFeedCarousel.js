@@ -1,60 +1,70 @@
 // Dependencies
 import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-import './sectionFeedCarousel.scss'
 
 // Components
-import BlurbVerticalDark from '../../blurb/blurbVerticalDark'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
+import {responsive} from '../../../../data/feedConfiguration'
+import config from '../../../../data/SiteConfig'
+import './sectionFeedCarouselVod.scss'
 
-const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 4
-    },
-    mobile: {
-      breakpoint: { max: 375, min: 0 },
-      items: 3
-    }
-  };
+export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, ...props } ){
 
-export default function SectionFeedCarousel(props){
+    const defaultVisible = 5
+
+    const data = useStaticQuery(graphql`
+        query{
+            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
+                childImageSharp {
+                    fluid {
+                        src
+                    }
+                }
+            }
+        }
+    `)
+
+    const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
+
+    const objLength = (items) ? items.nodes.length : 0
 
     return (
 
-        <section className={`sectionFeedCarousel pt-5 pb-5 ${props.className}`} id={props.id}>
+        <section className={`sectionFeedCarouselVod ${className}`} id={id}>
             <Container fluid>
-                <h4 className="h-color-six-shade-three mb-3">{props.title}</h4>
+                {
+                    (title) ? 
+                        <h4 className="h-color-six-shade-three mb-5">{title}</h4>
+                    : 
+                        undefined
+                }
                 <Carousel 
                     swipeable={true}
                     draggable={true}
                     showDots={false}
-                    infinite={false}
-                    responsive={responsive}
-                    itemClass="carousel-item-padding-40-px"
+                    infinite={true}
+                    partialVisible={true}
+                    responsive={ (itemsVisible) ? responsive[itemsVisible] : responsive[defaultVisible] }
+                    itemClass="item"
                     containerClass="carousel-container"
                 >
                     {
-                        props.data.allWpVideoOnDemand.nodes.map( (obj, index) => (
-                            <BlurbVerticalDark 
+                        items.nodes.map( (item, index) => (
+                            <BlurbVerticalDarkVod 
                                 key={index}
-                                featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
-                                noImage={ (props.noImage) ? props.noImage : null }
-                                link={ (obj.slug) ? `/message/${obj.slug}` : null }
-                                title={ (obj.VodVideo.serie) ? (obj.title + "<span>  |  " + obj.VodVideo.serie.title + "</span>") : (obj.title) }
-                                subtitle={ (obj.VodVideo.speaker) ? (obj.VodVideo.speaker) : null }
-                                excerpt={ (obj.excerpt) ? obj.excerpt : null }
-                                iconImage={ (props.iconCarousel) ? props.iconCarousel : null }
+                                className={ (objLength === index + 1) ? 'last' : undefined }
+                                featuredImage={ (item.featuredImage) ? item.featuredImage.node.localFile.childImageSharp.fluid : undefined }
+                                noImage={noImage}
+                                link={ (item.slug) ? `${config.watchMessageDetailsSlug}/${item.slug}` : null }
+                                title={ `${ (count === true) ? '<span>' + (index + 1) + ' |</span> ' : '' }  ${item.title}` }
+                                serieTitle={(item.videoDetails.serie) ? item.videoDetails.serie.title : null}
+                                serieLink={(item.videoDetails.serie) ? `${config.watchSerieDetailsSlug}/${item.videoDetails.serie.slug}` : null}
+                                subtitle={ (item.videoDetails.speaker) ? (item.videoDetails.speaker) : null }
+                                excerpt={ (item.excerpt) ? item.excerpt : null }
+                                iconImage={ (iconCarousel) ? iconCarousel : null }
                             />
                         ))
                     }

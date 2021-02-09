@@ -7,48 +7,68 @@ import TextTruncate from 'react-text-truncate'
 // Components
 import './blurbVerticalDark.scss'
 
-export default function BlurbVerticalDark (props) {
+export default function BlurbVerticalDark ( { title, excerpt, className, link, featuredImage, noImage, target, linkType, variant, iconImage } ) {
 
     return (
         
-            <div className={`card card--video user-select-none ${props.className}`}>
-                <Link to={props.link}>
-                    <div className="card-img-container">
-                        <div className="card-icon">
-                            <img src={props.iconImage} alt=""/>
+            <div className={`card card--video user-select-none  ${ (className) ? className : ''} ${(variant) ? variant : 'dark'}`}>
+            {
+                (linkType === 'external') ?
+                    <a href={link} target={ (target) ? target : '_self' }>
+                        <div className="card-img-container">
+                            {
+                                (iconImage) ?
+                                    <div className="card-icon">
+                                        <img src={iconImage} alt=""/>
+                                    </div>
+                                :
+                                    undefined
+                            }
+                            { 
+                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
+                                : <Img className="card-img-top" fluid={noImage} alt="" />
+                            }
                         </div>
-                        { 
-                            (props.featuredImage) ? <Img className="card-img-top" fluid={props.featuredImage} alt="" />
-                            : <Img className="card-img-top" fluid={props.noImage} alt="" />
-                        }
-                    </div>
-                    <div className="card-body">
-                        {
-                            (props.title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: props.title}}></h5>
-                            : null
-                        }
-                        
-                        {/* {
-                            (props.subtitle) ? 
-                                <h4 className="mb-1"> 
-                                    {props.subtitle.map( ( sub, index ) => (
-                                                <>
-                                                    { (index) ? ', ': '' } <span key={index}> {sub.title} </span>
-                                                </>
-                                            )
-                                        )
-                                    }
-                                </h4>
-                            : undefined
-                        } */}
-                        
-                        {
-                            (props.excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={props.excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
-                            : <></>
-                        }
-                        
-                    </div>
-                </Link>
+                        <div className="card-body">
+                            {
+                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
+                                : null
+                            }
+                            {
+                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                                : <></>
+                            }
+                        </div>
+                    </a>
+                :
+                    <Link to={link}>
+                        <div className="card-img-container">
+                            {
+                                (iconImage) ?
+                                    <div className="card-icon">
+                                        <img src={iconImage} alt=""/>
+                                    </div>
+                                :
+                                    undefined
+                            }
+                            { 
+                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
+                                : <Img className="card-img-top" fluid={noImage} alt="" />
+                            }
+                        </div>
+                        <div className="card-body">
+                            {
+                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
+                                : null
+                            }
+                            {
+                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                                : <></>
+                            }
+                        </div>
+                    </Link>
+            }
+
             </div>
     )
 }

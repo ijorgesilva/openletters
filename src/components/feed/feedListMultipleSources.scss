@@ -1,0 +1,14 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.feedListMultipleSources {
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 1rem;
+
+}
+
+@include media("<desktop") {}
+@include media("<=tablet") {}
+@include media("<=phone") {}

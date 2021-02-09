@@ -1,0 +1,35 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.toolbarDetails {
+    margin-top: 1rem;
+    .mobile {
+        display: none;
+    }
+    .desktop {
+        display: block;
+    }
+}
+
+
+@include media("<desktop") {
+    
+}
+
+@include media("<=tablet") {
+    .toolbarDetails{
+        margin-top: 0px;
+        background-color: rgba(var(--color-six-dark-shade-three),1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        .mobile {
+            display: block;
+        }
+        .desktop {
+            display: none;
+        }
+    }
+}
+
+@include media("<=phone") {
+
+}

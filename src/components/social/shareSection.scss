@@ -1,0 +1,147 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.shareSection {
+    overflow-x: hidden;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem 3rem;
+        .title{
+            color: var(--color-five);
+        }
+        .subtitle {
+            font-weight: 400;
+        }
+        p {
+            margin-top: 1rem;
+        }
+        .buttons{
+            text-align: left;
+            .react-share__ShareButton {
+                img {
+                    width: 70px;
+                }
+            }
+        }
+    }
+    .photo {
+        min-height: 520px;
+        padding-top: 56.25%; 
+        clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 15% 100%);
+    }
+
+    &.light{
+        .content {
+            .title{
+                color: rgba(var(--color-white),1);
+            }
+            .subtitle{
+                color: rgba(var(--color-white),1);
+            }
+            p{
+                color: rgba(var(--color-white),1);
+                opacity: 0.7;
+            }
+        }
+    }
+}
+
+@include media("<tablet") {
+    .shareSection {
+        .content {
+            padding: 3rem 3rem 2rem 3rem;
+            .title {
+                text-align: center;
+            }
+            .subtitle {
+                text-align: center;
+            }
+            .buttons {
+                text-align: center;
+            }
+        }
+        .photo {
+            display: none;
+        }
+    }
+}
+
+
+// .shareSection {
+//     overflow-x: hidden;
+
+//     .buttons {
+//         position: relative;
+//         .button {
+//             display: inline-block;
+//             width: 40px;
+//             height: 40px;
+//             margin-left: 10px;
+//             border-style: solid;
+//             border-width: 1px;
+//             border-radius: 100px;
+//             -webkit-transition: all 200ms ease;
+//             transition: all 200ms ease;
+//             cursor: pointer;
+//             &.button--white {
+//                 border-color: hsla(0, 0%, 100%, 0.01);
+//                 &:hover {
+//                     border: 1px solid rgba(var(--color-white),1);
+//                 }
+//             }
+            
+//         }
+//     }
+//     .grid {
+//         display: grid;
+//         grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+//         align-items: center;
+//         min-height: 500px;
+//         .content {
+//             position: relative;
+//             padding: 30px;
+//             overflow: visible;
+//             height: 100%;
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: center;
+//         }
+//         .background {
+//             position: absolute;
+//             background-color: var(--color-one);
+//             width: 100%;
+//             height: 100%;
+//             top: 0;
+//             clip-path: polygon(709px -5px, 100% 0px, 100% 100%, 60% 105%);
+//         }
+//     }
+//     .background {
+//         background-color: var(--color-one);
+//         background-position: bottom right;
+//         background-size: contain;
+//         background-repeat: no-repeat;
+//         overflow: hidden;
+//     }
+// }
+
+
+// .c-form__socials {
+//     margin-left: 20px;
+// }
+
+
+// .c-form__social:hover {
+//     border-radius: 100px;
+// }
+
+// /* Hover colors */
+
+// .c-form__social--six {
+//     border-color: hsla(0, 0%, 100%, 0.01);
+// }
+
+// .c-form__social--six:hover {
+//     border: 1px solid var(--color-six);
+// }

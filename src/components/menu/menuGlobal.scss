@@ -1,32 +1,39 @@
 @import "../../../node_modules/include-media/dist/_include-media.scss";
-.navglobal {
+.menuGlobal {
+
+    border-bottom: 1px solid var(--color-six);
     position: relative;
-    z-index: 5;
-    height: 60px;
-    
-    .dropdown-menu {
-        padding: 1rem o;
-    }
-    .dropdown {
-        .nav-link {
-            color: var(--color-white);
-        }
-    }
-    .navbar {
+    z-index: 10;
+
+    .navglobal {
+        position: relative;
+        z-index: 5;
         height: 60px;
-    }
-    .dropdown-divider {
-        border-top: 1px solid rgba(255,255,255,0.2);
-        padding: 0px;
-    }
-    @include media("≥phone", "<850px") {
-        .navbar-toggler {
-            display: none;
+        
+        .dropdown-menu {
+            padding: 1rem o;
         }
-        &.navbar {
-            padding: unset;
-            display: flex;
-            justify-content: flex-end;
+        .dropdown {
+            .nav-link {
+                color: rgba(var(--color-white),1);
+            }
+        }
+        .navbar {
+            height: 60px;
+        }
+        .dropdown-divider {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding: 0px;
+        }
+        @include media("≥phone", "<850px") {
+            .navbar-toggler {
+                display: none;
+            }
+            &.navbar {
+                padding: unset;
+                display: flex;
+                justify-content: space-between;
+            }
         }
     }
 }

@@ -1,0 +1,58 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.shareSimpleIcon{
+    .btn {
+        margin: 0px;
+        padding: 0px;
+        border: unset;
+        border-radius: unset;
+        &:after {
+            display: none;
+        }
+        &.btn-light {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+        
+    }
+
+}
+@include media("<desktop") {
+
+}
+
+@include media("<=tablet") {
+
+    .shareSimpleIcon{
+
+        .btn-light.focus, 
+        .btn-light:focus {
+            background-color: var(--color-one-shade-one);
+        }
+
+        .btn-light:not(:disabled):not(.disabled).active, 
+        .btn-light:not(:disabled):not(.disabled):active, 
+        .show > .btn-light.dropdown-toggle {
+            background-color: var(--color-one-shade-one);
+        }
+
+        .btn-light:hover{
+            background-color: var(--color-one-shade-one);
+        }
+
+        &.show {
+             > .btn-light {
+                 &.dropdown-toggle{
+                    background-color: var(--color-one);
+                }
+            }
+        }
+        
+    }
+
+}
+
+@include media("<=phone") {
+
+}

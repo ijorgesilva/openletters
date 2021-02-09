@@ -1,26 +1,32 @@
+// Dependencies
 import React from 'react'
 import {Container} from 'react-bootstrap'
 
-export default function SectionSteps(props) {
+// Components
+import './sectionSteps.scss'
+
+export default function SectionSteps( { title, steps, text, children, link, linkText, className, id, ...props} ) {
     return (
 
-        <section id="steps" className="c-steps section">
-            {/* <div className="g-circlewords " style="top: -70px; left: 30px;"></div> */}
-            <Container>
-                <div className="c-steps__content mx-auto text-center">
+        <section id={id} className={`sectionSteps ${className}`}>
 
-                    <h2 className="h-color-six display-4" dangerouslySetInnerHTML={{__html: props.title}}></h2>
+            {/* <div className="g-circlewords " style="top: -70px; left: 30px;"></div> */}
+
+            <Container>
+                <div className="content mx-auto text-center">
+
+                    <h2 className="h-color-six display-4" dangerouslySetInnerHTML={{__html: title}}></h2>
                     <p className="mt-5 paragraph--first">
-                        {props.text}
+                        {text}
                     </p>
 
                 </div>
-                <div className="c-steps__container mt-5">
-                    <div className="c-steps__grid">
+                <div className="mt-5">
+                    <div className="steps">
                         {
-                            props.steps.map((step, index) => (
-                                <div key={step.id} className="c-steps__step card position-relative user-select-none">
-                                    <span className="c-steps__number font-weight-bolder h1">{step.id}</span>
+                            steps.map((step, index) => (
+                                <div key={index} className="step card position-relative user-select-none">
+                                    <span className="number font-weight-bolder h1">{index + 1}</span>
                                     <img className="card-img-top" src={step.photo} alt="" />
                                     <div className="card-body text-center">
                                         <h3 className="card-title h-color-one mt-3">{step.title}</h3>
@@ -32,11 +38,11 @@ export default function SectionSteps(props) {
                             ))
                         }
                     </div>
-                    {props.children}
+                    {children}
                     {
-                        (props.link && props.linkText) ?
+                        (link && linkText) ?
                             <div className="text-center">
-                                <a href={props.link} className="btn btn--animation btn--three-outline mt-5">{props.linkText}</a>
+                                <a href={link} className="btn btn--animation btn--three-outline mt-5">{linkText}</a>
                             </div>
                         : <div></div>
                     }

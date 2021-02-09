@@ -1,8 +1,8 @@
 import React from "react"
 import { Dropdown } from "react-bootstrap"
 
-import { faYoutube, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faYoutube, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 
 import AppLinks from "../widget/appLinks"

@@ -1,0 +1,24 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.feedListEven {
+    
+    .list {
+        display: grid;
+        grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+        grid-gap: 30px;
+    }
+
+}
+
+@include media("<desktop") {
+
+}
+@include media("<=tablet") {
+
+}
+@include media("<=desktop", "portrait", "retina3x", "retina2x") {
+
+}
+@include media("<=phone") {
+
+}

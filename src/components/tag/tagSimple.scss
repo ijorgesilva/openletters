@@ -1,0 +1,26 @@
+.tagSimple {
+    display: block;
+    padding: 2rem 0rem;
+
+    span {
+        font-weight: 100;
+        padding: 0.4rem 1rem;
+        margin-left: 1rem;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--color-gray-five);
+        color: var(--color-gray-five);
+        opacity: 0.5;
+        transition: var(--transition-fast);
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    &.light {
+        span {
+            border-color: var(--color-gray-one);
+            color: var(--color-gray-one);
+        }
+    }
+}

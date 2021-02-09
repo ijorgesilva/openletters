@@ -1,17 +1,4 @@
-
-.c-faq{
-
-    .c-faq__questions {
-        display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
-    }
-
-    .c-faq__question {
-        margin-top: 20px;
-    }
+.sectionFaqSimple {
+    padding: var(--section-padding);
     
-    .container {
-        max-width: 550px;
-    }
 }

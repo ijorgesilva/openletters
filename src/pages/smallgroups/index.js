@@ -1,54 +1,37 @@
-import React, { useState } from "react"
-import { Helmet } from "react-helmet"
+// Dependencies
+import React from "react"
 import { graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
-import { Tab, Nav, Container, Button, Accordion, Card } from 'react-bootstrap'
-import * as queryString from "query-string";
-import SEO from '../../components/seo/seo'
-import config from '../../../data/SiteConfig'
+import { Tab, Nav, Container, Button } from 'react-bootstrap'
+import 'react-toastify/dist/ReactToastify.min.css'
 
-import HeroBasic from "../../components/hero/heroBasic"
+// Components
+import HeaderPage from '../../components/headerPage'
+import HeroBasic from '../../components/hero/heroBasic'
+import BlurbHorizontalDarkFeatured from '../../components/blurb/blurbHorizontalDarkFeatured'
+import SectionEmpty from '../../components/content/sectionEmpty'
 import SectionTextBasic from "../../components/content/sectionTextBasic"
 import MenuSticky from "../../components/menu/menuSticky"
 import SectionPhotoText from "../../components/content/sectionPhotoText"
 import TestimonialCarousel from "../../components/testimonial/testimonialCarousel"
 import ShareSection from "../../components/social/shareSection"
-import SectionVideoPlayerSimple from "../../components/content/sectionVideoPlayerSimple"
-import SectionSteps from "../../components/content/sectionSteps"
-import SectionEmpty from "../../components/content/sectionEmpty"
-import BlurbHorizontal from "../../components/blurb/blurbHorizontal"
-import SectionPhotoFormText from "../../components/form/sectionPhotoFormText"
-import SectionFaqSimple from "../../components/content/sectionFaqSimple"
-import AlertDismissibleBar from "../../components/alert/alertDismissibleBar"
+import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
+import AlertEmptyState from '../../components/alert/alertEmptyState'
+import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
+import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
+import './index.scss'
+import config from '../../../data/SiteConfig'
 
-export default function SmallGroupsPage( { data, websiteTitle, location } ) {
+export default function SmallGroupsPage( { data, location } ) {
 
   /* Standard fields */
   const { t } = useTranslation()
-  const url = location.href ? location.href : ''
   
-  let pageNode = {
-    excerpt: '',
-    frontmatter: {
-      title: 'Small Groups',
-      date: '',
-      cover: '/logos/logo-1024.png',
-      description: t('smallgroups.meta-description'),
-    }
-  }
-
   /* Page specific content */
   const stickyMenuJoin = (t) => [
     {id: 1, linkText: t('smallgroups.tab-join-sticky-about'), link: "#about"},
     {id: 2, linkText: t('smallgroups.tab-join-sticky-grouptypes'), link: "#types"},
     {id: 3, linkText: t('smallgroups.tab-join-sticky-testimonials'), link: "#testimonials"}
-  ]
-
-  const stickyMenuLead = (t) => [
-    {id: 1, linkText: t('smallgroups.tab-host-sticky-about'), link: "#about_lead"},
-    {id: 2, linkText: t('smallgroups.tab-host-sticky-steps'), link: "#steps"},
-    {id: 3, linkText: t('smallgroups.tab-host-sticky-application'), link: "#application"},
-    {id: 4, linkText: t('smallgroups.tab-host-sticky-faq'), link: "#faq"}
   ]
 
   const smallGroupsTypes = (t) => [
@@ -105,314 +88,178 @@ export default function SmallGroupsPage( { data, websiteTitle, location } ) {
       {name: "Meaghan Kelley", subtitle: t('smallgroups.tab-join-testimonial-subtitle'), photo: data.testimonialPhotoMeaghan.publicURL, quote: t("smallgroups.tab-join-testimonial-twelve-quote"), class: "h-background-six"},
       
   ]
-
-  const playerPlaylist = (t) => [
-    {
-      src: t('smallgroups.tab-host-section-video-link'),
-      poster: t('smallgroups.tab-host-section-video-poster'),
-      skipTo: '40'
-    }
-  ]
   
-  const leadSteps = (t) => [
-    {id: 1, 
-      title: t('smallgroups.tab-host-section-steps-one-title') , 
-      text: t('smallgroups.tab-host-section-steps-one-text') , 
-      photo: data.leadStepOnePhoto.publicURL},
-    {id: 2, 
-      title: t('smallgroups.tab-host-section-steps-two-title') , 
-      text: t('smallgroups.tab-host-section-steps-two-text'), 
-      photo: data.leadStepTwoPhoto.publicURL},
-    {id: 3, 
-      title: t('smallgroups.tab-host-section-steps-three-title'), 
-      text: t('smallgroups.tab-host-section-steps-three-text'), 
-      photo: data.leadStepThreePhoto.publicURL}
-  ]
+  const itemsLenght = data.news.nodes.length + data.events.nodes.length
 
-  const joinNews = [
-    {
-      title: t('smallgroups.tab-join-section-news-one-title'), 
-      content: t('smallgroups.tab-join-section-news-one-content'), 
-      tags: ["<img src='"+data.leadEventIcon.publicURL+"'>Upcoming Event"], 
-      link: t('smallgroups.tab-join-section-news-one-link'),
-      linkText: t('smallgroups.tab-join-section-news-one-link-text'), 
-      target: "_blank",
-      photo: data.joinNewsPhoto.publicURL,
-    }
-  ]
+  // const latestUpdate = ( data.news && data.events ) ? 
+  //                         ( data.news.nodes[0].date > data.events.nodes[0].date ) ?
+  //                           data.news.nodes[0]
+  //                         :
+  //                           data.events.nodes[0]
+  //                       : 
+  //                         ( data.news || data.events ) ?
+  //                             ( data.news ) ?
+  //                               data.news.nodes[0]
+  //                             :
+  //                               data.events.nodes[0]
+  //                         :
+  //                           undefined
 
-  const leadNews = [
-    {id:1, 
-      title: t('smallgroups.tab-host-section-news-one-title'), 
-      content: t('smallgroups.tab-host-section-news-one-content'), 
-      tags: ["<img src='"+data.leadNewsIcon.publicURL+"'>News"], 
-      photo: data.leadNewsPhoto.publicURL}
-  ]
-
-  const leadFaq = (t) => [
-    {id: 0, title: "", content: "", class: "d-none"},
-    {id: 1, 
-      title: t('smallgroups.tab-host-section-faq-one-title') , 
-      content: t('smallgroups.tab-host-section-faq-one-content'),
-    },
-    {id: 2, title: t('smallgroups.tab-host-section-faq-two-title'), 
-    content: t('smallgroups.tab-host-section-faq-two-content')},
-    
-    {id: 3, title: t('smallgroups.tab-host-section-faq-three-title'), 
-    content: t('smallgroups.tab-host-section-faq-three-content')},
-    
-    {id: 4, title: t('smallgroups.tab-host-section-faq-four-title'), 
-    content: t('smallgroups.tab-host-section-faq-four-content')},
-  ]
-  
-  const [key, setKey] = useState( (location.hash.replace('#', '') === "lead") ? location.hash.replace('#', '') : 'join' )
-
-  function changeTab(tab){
-    setKey(tab);
-  }
-  
   return (
     <>
 
-      <Helmet>
-          <title> {t('smallgroups.title')} {config.separator} {config.siteTitle} </title>
-      </Helmet>
-      <SEO postPath={url} postNode={pageNode} postSEO />
-
-      {/* <AlertDismissibleBar 
-        className={''}
-        title={t('smallgroups.alertbar-title')}
-        content={t('smallgroups.alertbar-content')}
-        link={t('smallgroups.alertbar-link')} 
-        handler={() => changeTab("join")}
-        linkUrl="https://victoryatl.zoom.us/meeting/register/tJ0kce6rqTwtE9aSz7LUL6SqG_68lA6hikAd"
-        linkTarget="_blank"
-      /> */}
+      <HeaderPage 
+          title={t('smallgroups.title')} 
+          location={location} 
+          cover={data.heroImage.publicURL}
+          description={t('smallgroups.meta-description')}
+          article={true}
+      />
+      
+      <HorizontalScrollingMenu
+            menuBrand={smallGroupBrand}
+            menu={smallGroupMenu}
+        />
 
       <HeroBasic
         title={t('smallgroups.hero')}
         subtitle={t('smallgroups.hero-subtitle')}
         backgroundPhoto={data.heroImage.publicURL}
         className={"c-hero position-relative z-index-1"}
-        >
-          <Button className="btn btn--animation btn--three ml-3" variant="none" href="https://my.victoryatl.com/default.aspx?page=4364" target="_blank" >
+      >
+          <Button className="btn btn--animation btn--three" variant="none" href="https://my.victoryatl.com/default.aspx?page=4364" target="_blank" >
             {t('smallgroups.find-a-group')}
           </Button>
-          <Button className="btn btn--animation btn--light-outline ml-3" variant="none" onClick={() => changeTab("lead")}  href="#application" target="_self">
-              {t('smallgroups.host-a-group')}
-          </Button>
-          <Button className="btn btn--animation btn--light-outline ml-3" variant="none" href="https://my.victoryatl.com/default.aspx?page=4236" target="_self">
-              {t('smallgroups.leader-login')}
-          </Button>
+          <BlurbHorizontalDarkFeatured 
+            title={'Latest Event lorem'}// (latestUpdate.title) ? latestUpdate.title : undefined
+            subtitle={'Check out our lorem ipsum'}
+            featuredImage={data.noImage.childImageSharp.fluid.src}
+            className={''}
+            link={'/events'}
+            excerpt={'Lorem ipsum dolor sit amet. Salvatore'}
+          />
       </HeroBasic>
-
+      
       <div className="p-0 position-relative z-index-2">
 
-        <Tab.Container defaultActiveKey={key} onSelect={k => setKey(k)} activeKey={key}>
+        <SectionTextBasic id={'intro'} 
+          link={'https://my.victoryatl.com/default.aspx?page=4364'} 
+          linkText={t('smallgroups.find-a-group')}
+          title={t('smallgroups.tab-join-intro-title')} 
+          target="_blank"
+        >
+          {t('smallgroups.tab-join-intro-content')}
+        </SectionTextBasic>
 
-              <Nav className="c-tabs user-select-none">
-                <Nav.Item className="c-tabs__item">
-                  <Nav.Link className="c-tabs__link" eventKey="join">{t('smallgroups.tab-join')}</Nav.Link>
-                </Nav.Item>
-                <Nav.Item className="c-tabs__item">
-                  <Nav.Link className="c-tabs__link" eventKey="lead">{t('smallgroups.tab-host')}</Nav.Link>
-                </Nav.Item>
-              </Nav>
+        <hr/>
 
-              <Tab.Content>
+        {
+          ( data.news || data.events ) ? 
+            ( itemsLenght > 0 ) ?
+              <SectionFeedCarouselMultipleSources
+                title = {t('smallgroups.tab-host-section-news-title')}
+                id="news"
+                className="h-background-gray-one"
+                itemsNews = { (data.news) ? data.news : undefined}
+                itemsEvents = { (data.events) ? data.events : undefined}
+                slugOne = { (data.news) ? `${config.newsPostListSlug}/` : undefined}
+                slugTwo = { (data.events) ? `${config.eventsPostListSlug}/` : undefined}
+                itemsVisible = {3}
+              />
+            : 
+              <SectionEmpty 
+                className="h-background-gray-one" 
+                title = {t('smallgroups.tab-host-section-news-title')} 
+                id="news"
+              >
+                <AlertEmptyState variant="transparent" className="mt-5" content="" />
+              </SectionEmpty>
+          : undefined
+        }
+        
+        <MenuSticky 
+          link={"https://my.victoryatl.com/default.aspx?page=4364"} 
+          linkText={t('smallgroups.find-a-group')} 
+          menuLinks={stickyMenuJoin(t)} 
+        />
 
-                {/* Join an Small Group */}
-                <Tab.Pane eventKey={"join"} id="join">
+        <SectionPhotoText 
+          className="h-background-six-shade-three"
+          id={'about'} 
+          photo={data.aboutPhoto.childImageSharp.fluid.src}
+          title={t('smallgroups.tab-join-section-phototext-title')}
+          text={t('smallgroups.tab-join-section-phototext-content')}
+        />
 
-                  <SectionTextBasic id={'intro'} 
-                    link={'https://my.victoryatl.com/default.aspx?page=4364'} 
-                    linkText={t('smallgroups.find-a-group')}
-                    title={t('smallgroups.tab-join-intro-title')} 
-                    target="_blank"
-                    >
-                    {t('smallgroups.tab-join-intro-content')}
-                  </SectionTextBasic>
+        {/* Group Types */}
+        <section className="c-groups overflow-hidden" id="types">
+            <div className="g-circlewords g-circlewords--pillar-two" style={decorCircleWords}></div>
 
-                  <hr/>
+            <Container>
+              <div className="c-groups__introduction">
+                  <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: t('smallgroups.tab-join-section-grouptypes-title')}}></h2>
+                  <p className="mt-5">{t('smallgroups.tab-join-section-grouptypes-content')}</p>
+              </div>
 
-                  <SectionEmpty id={"news"}>
-                    <Container className="c-news">
-                        <h3 class='card-title h-color-one mt-3' dangerouslySetInnerHTML={{__html: t('smallgroups.tab-host-section-news-title')}}></h3>
-                        <div className="c-news__list mt-5">
-                          { joinNews.map((news, index) => (
-                              <BlurbHorizontal 
-                                key={index} 
-                                title={news.title}
-                                tags={news.tags}
-                                photo={news.photo}
-                                link={news.link}
-                                linkText={news.linkText}
-                                target={news.target}
-                                >
-                                {news.content}
-                              </BlurbHorizontal>
-                            )) }
+              <Tab.Container className="mt-5 tabbable" defaultActiveKey="1">
+
+                <Nav className="c-tabs--simple mt-5 user-select-none">
+                  {smallGroupsTypes(t).map( (smallGroupTypeTab, index) => (
+                        <Nav.Item key={index}>
+                          <Nav.Link eventKey={smallGroupTypeTab.id}> {smallGroupTypeTab.tabTitle} </Nav.Link>
+                        </Nav.Item>
+                      )
+                    )}
+                </Nav>
+
+                <Tab.Content>
+                  {smallGroupsTypes(t).map((smallGroupTypePane, index) => (
+                      <Tab.Pane key={index} eventKey={smallGroupTypePane.id}>
+                        <div className="c-groups__panel">
+                            <div className="c-groups__content">
+                              <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: smallGroupTypePane.title}}></h2>
+                              <div className="c-groups__overview mt-5" dangerouslySetInnerHTML={{__html: smallGroupTypePane.content}}></div>
+                              {
+                                (smallGroupTypePane.link && smallGroupTypePane.linkText) ?
+                                <Button className="btn btn--animation btn--dark-outline mt-5" href={smallGroupTypePane.link} target="_blank" rel="noreferrer">
+                                  {smallGroupTypePane.linkText}
+                                </Button>
+                                : <div></div>
+                              }
+                            </div>
+                            <div className="c-groups__photo user-select-none" dangerouslySetInnerHTML={{__html: smallGroupTypePane.sideContent}}></div>
                         </div>
-                    </Container>
-                  </SectionEmpty>
-                  
-                  <MenuSticky 
-                    link={"https://my.victoryatl.com/default.aspx?page=4364"} 
-                    linkText={t('smallgroups.find-a-group')} menuLinks={stickyMenuJoin(t)} />
+                      </Tab.Pane>
+                    )
+                  )}
+                </Tab.Content>
 
-                  <SectionPhotoText id={'about'} title={t('smallgroups.tab-join-section-phototext-title')}>
-                    {t('smallgroups.tab-join-section-phototext-content')}
-                  </SectionPhotoText>
+              </Tab.Container>
+              
+            </Container>
+        </section>
+        {/*. Group Types */}
 
-                  {/* Group Types */}
-                  <section className="c-groups overflow-hidden" id="types">
-                      <div className="g-circlewords g-circlewords--pillar-two" style={decorCircleWords}></div>
+        {/* <TestimonialWall 
+          testimonials={leadTestimonials(t)} 
+          id="testimonials" 
+          title={t('smallgroups.testimonials-title')} /> */}
 
-                      <Container>
-                        <div className="c-groups__introduction">
-                            <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: t('smallgroups.tab-join-section-grouptypes-title')}}></h2>
-                            <p className="mt-5">{t('smallgroups.tab-join-section-grouptypes-content')}</p>
-                        </div>
-                        <Tab.Container className="mt-5 tabbable" defaultActiveKey="1">
-
-                          <Nav className="c-tabs--simple mt-5 user-select-none">
-                            {smallGroupsTypes(t).map( (smallGroupTypeTab, index) => (
-                                  <Nav.Item key={index}>
-                                    <Nav.Link eventKey={smallGroupTypeTab.id}> {smallGroupTypeTab.tabTitle} </Nav.Link>
-                                  </Nav.Item>
-                                )
-                              )}
-                          </Nav>
-
-                          <Tab.Content>
-                            {smallGroupsTypes(t).map((smallGroupTypePane) => (
-                                <Tab.Pane key={smallGroupTypePane.id} eventKey={smallGroupTypePane.id}>
-                                  <div className="c-groups__panel">
-                                      <div className="c-groups__content">
-                                        <h2 className="h-color-six" dangerouslySetInnerHTML={{__html: smallGroupTypePane.title}}></h2>
-                                        <div className="c-groups__overview mt-5" dangerouslySetInnerHTML={{__html: smallGroupTypePane.content}}></div>
-                                        {
-                                          (smallGroupTypePane.link && smallGroupTypePane.linkText) ?
-                                          <Button className="btn btn--animation btn--dark-outline mt-5" href={smallGroupTypePane.link} target="_blank" rel="noreferrer">
-                                            {smallGroupTypePane.linkText}
-                                          </Button>
-                                          : <div></div>
-                                        }
-                                      </div>
-                                      <div className="c-groups__photo user-select-none" dangerouslySetInnerHTML={{__html: smallGroupTypePane.sideContent}}></div>
-                                  </div>
-                                </Tab.Pane>
-                              )
-                            )}
-                          </Tab.Content>
-
-                        </Tab.Container>
-                      </Container>
-                  </section>
-                  {/*. Group Types */}
-
-                  {/* <TestimonialWall 
-                    testimonials={leadTestimonials(t)} 
-                    id="testimonials" 
-                    title={t('smallgroups.testimonials-title')} /> */}
-
-                    <TestimonialCarousel 
-                      testimonials={leadTestimonials(t)} 
-                      id="testimonials" 
-                      title={t('smallgroups.testimonials-title')}
-                    />
-
-                </Tab.Pane>
-                {/*. Join an Small Group */}
-
-                {/* Lead an Small Group */}
-                <Tab.Pane eventKey={"lead"} id="lead">
-
-                  <SectionTextBasic id={'leaders-intro'} title={t('smallgroups.tab-host-section-intro-title')}>
-                    {t('smallgroups.tab-host-section-intro-content')}
-                  </SectionTextBasic>
-
-                  <hr/>
-
-                  <SectionEmpty id={"news"}>
-                    <Container className="c-news">
-                        <h3 class='card-title h-color-one mt-3' dangerouslySetInnerHTML={{__html: t('smallgroups.tab-host-section-news-title')}}></h3>
-                        <div className="c-news__list mt-5">
-                          { leadNews.map((news, index) => (
-                              <BlurbHorizontal 
-                                key={index} 
-                                title={news.title}
-                                tags={news.tags}
-                                photo={news.photo}
-                                link={news.link}
-                                linkText={news.linkText}
-                                target={news.target}
-                              >
-                                {news.content}
-                              </BlurbHorizontal>
-                            )) }
-                        </div>
-                    </Container>
-                  </SectionEmpty>
-
-                  <MenuSticky link={"#application"} linkText={t('smallgroups.apply-now')} menuLinks={stickyMenuLead(t)}></MenuSticky>
-                  
-                  <SectionVideoPlayerSimple 
-                      id="about_lead" 
-                      title={t('smallgroups.tab-host-section-player-title')}
-                      playerId={"smallgrouplead"}
-                      playerPlaylist={playerPlaylist(t)}
-                  />
-
-                  <SectionSteps 
-                    title={t('smallgroups.tab-host-section-steps-title')}
-                    text={t('smallgroups.tab-host-section-steps-content')}
-                    steps={leadSteps(t)}
-                    link="#application"
-                    linkText={t('smallgroups.apply-now')}>
-                    <Accordion className="c-accordion mt-5" defaultActiveKey="0">
-                      <Card>
-                        <Card.Header className="accordion-header font-weight-bolder h-cursor-pointer h5">
-                          <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            {t('smallgroups.tab-host-section-steps-faq-title')}
-                          </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                          <Card.Body dangerouslySetInnerHTML={{__html: t('smallgroups.tab-host-section-steps-faq-content')}}></Card.Body>
-                        </Accordion.Collapse>
-                      </Card>
-                    </Accordion>
-                  </SectionSteps>     
-
-                  <SectionPhotoFormText
-                    id={"application"}
-                    formTitle={t('smallgroups.tab-host-section-form-title')}
-                    formContent={t('smallgroups.tab-host-section-form-content')}
-                    formIframeUrl={t('smallgroups.tab-host-section-form-iframe')}
-                    photoClassName={"h-background-one"}
-                    photoImageBackground={data.applicationFormPhoto.publicURL}
-                    photoContentTitle={t('smallgroups.tab-host-section-form-content-title')}
-                    photoContentText={t('smallgroups.tab-host-section-form-content-text')}
-                    backgroundClassName={"h-background-six"}
-                  />
-
-                  <SectionFaqSimple
-                    id={"faq"}
-                    title={t('smallgroups.tab-host-section-faq-title')}
-                    data={leadFaq(t)}
-                    defaultActiveKey={0}
-                  ></SectionFaqSimple>
-
-                </Tab.Pane>
-                {/*. Lead an Small Group */}
-
-              </Tab.Content>
-
-        </Tab.Container>
-
+        <TestimonialCarousel 
+          testimonials={leadTestimonials(t)} 
+          id="testimonials" 
+          title={t('smallgroups.testimonials-title')}
+        />
+        
         <ShareSection 
+          className="h-background-one"
+          id="share"
           title={t('smallgroups.share-title')}
-          subtitle={t('smallgroups.share-content')} />
+          subtitle={t('smallgroups.share-content')} 
+          photo={data.backgroundShare.childImageSharp.fluid}
+          variant="light"
+          location={location}
+        />
 
       </div>
 
@@ -420,9 +267,98 @@ export default function SmallGroupsPage( { data, websiteTitle, location } ) {
   )
 }
 
-
 export const query = graphql`
   query{
+
+      noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
+            childImageSharp {
+                fluid {
+                    src
+                }
+            }
+      }  
+
+      backgroundShare: file(relativePath: {eq: "img/smallgroups/share_background.jpg"}) {  
+        childImageSharp {
+          fluid {
+            src
+          }
+        }            
+      }
+        
+      alertbar: allWpAlertbar(filter: {alertbarTags: {nodes: {elemMatch: {slug: {in: "page-small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 1) {
+        nodes {
+          alertBar {
+            alertbarTitle
+            alertbarContent
+            alertbarLink {
+              alertbarLinkText
+              alertbarLinkType
+              alertbarLinkUrl
+              alertbarLinkTarget
+            }
+          }
+        }
+      }
+
+      news: allWpNewspost(filter: {newsTags: {nodes: {elemMatch: {slug: {in: "small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
+        nodes {
+          title
+          excerpt
+          slug
+          date(formatString: "YYYYMMDD")
+          featuredImage {
+              node {
+                  localFile {
+                    childImageSharp {
+                      fluid {
+                        src
+                      }
+                    }
+                  }
+              }
+          }
+        }
+      }
+
+      events: allWpEvent(filter: {eventTags: {nodes: {elemMatch: {slug: {in: "small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
+        nodes {
+          title
+          excerpt
+          slug
+          date(formatString: "YYYYMMDD")
+          eventDetails {
+              eventAddress
+              eventCampus {
+                  ... on WpCampus {
+                      id
+                      title
+                      slug
+                  }
+              }
+              eventDates {
+                  eventDate
+                  eventTime
+              }
+              eventLink {
+                  eventLinkText
+                  eventLinkUrl
+              }
+          }
+          featuredImage {
+              node {
+                  localFile {
+                    childImageSharp {
+                      fluid {
+                        src
+                      }
+                    }
+                  }
+              }
+          }
+        }
+      }
+
       heroImage: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             childImageSharp {
                 fluid {
@@ -488,6 +424,14 @@ export const query = graphql`
           publicURL
       }
       joinNewsPhoto: file(relativePath: {eq: "img/smallgroups/photo_news_join_01_v2@2x.jpg"}) {
+          childImageSharp {
+              fluid {
+                  src
+              }
+          }
+          publicURL
+      }
+      aboutPhoto: file(relativePath: {eq: "img/smallgroups/Video@2x.jpg"}) {
           childImageSharp {
               fluid {
                   src
@@ -562,27 +506,3 @@ export const query = graphql`
       }
   }
 `
-
-/* Photos and Graphics */
-// import heroImage from "../assets/img/smallgroups/Background.jpg";
-// import leadStepOnePhoto from "../assets/img/smallgroups/step_01_v2@2x.jpg"
-// import leadStepTwoPhoto from "../assets/img/smallgroups/step_02_v2@2x.jpg"
-// import leadStepThreePhoto from "../assets/img/smallgroups/step_03_v2@2x.jpg"
-// import groupOnePhoto from "../assets/img/smallgroups/groups-photo-online-groups.jpg"
-// import groupTwoPhoto from "../assets/img/smallgroups/groups-photo-single-groups.jpg"
-// import groupThreePhoto from "../assets/img/smallgroups/groups-photo-care-groups.jpg"
-// import leadNewsPhoto from "../assets/img/smallgroups/photo_news_01_v2@2x.jpg"
-// import joinNewsPhoto from "../assets/img/smallgroups/photo_news_join_01_v2@2x.jpg"
-// import leadNewsIcon from "../assets/img/global/icon-news-white.svg"
-// import leadEventIcon from "../assets/img/global/icon-calendar-white.svg"
-// import applicationFormPhoto from "../assets/img/smallgroups/photo_03@2x.jpg"
-// import iconCheckboxWhite from "../assets/img/global/icon-checkbox-white.svg"
-
-/* Testimonial Photos */
-// import testimonialPhotoAdele from "../assets/img/smallgroups/Adele.jpg"
-// import testimonialPhotoConsuela from "../assets/img/smallgroups/Consuela.jpg"
-// import testimonialPhotoDeweyHom from "../assets/img/smallgroups/DeweyHom.jpg"
-// import testimonialPhotoJanise from "../assets/img/smallgroups/Janise.jpg"
-// import testimonialPhotoMeaghan from "../assets/img/smallgroups/Meaghan.jpg"
-// import testimonialPhotoRagine from "../assets/img/smallgroups/Ragine.jpg"
-// import testimonialPhotoTodd from "../assets/img/smallgroups/Todd.jpg"

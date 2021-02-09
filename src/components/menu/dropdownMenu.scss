@@ -1,6 +1,8 @@
 .dropdownmenu {
 
-    &.dropdown {
+    &.dropdown,
+    &.dropleft,
+    &.dropright {
         > button {
 
             margin: 0px;
@@ -26,16 +28,18 @@
             }
             &:hover,
             &.btn-primary:hover {
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
                 background-color: var(--color-one);
             }
             &[aria-expanded="true"]{
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
                 background-color: var(--color-one);
             }
         }
         .dropdown-menu {
             background-color: var(--color-one);
+            left: unset;
+            right: 0px;
             p{
                 color: var(--color-one-shade-three);
                 padding: .5rem 2rem;
@@ -57,13 +61,13 @@
                 font-weight: 900;
             }
             .dropdown-item {
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
                 font-size: 1rem;
                 font-weight: 400;
                 letter-spacing: 1px;
                 padding: .5rem 2rem;
                 &:hover {
-                    color: var(--color-white);
+                    color: rgba(var(--color-white),1);
                     background-color: var(--color-one-dark-shade-one);
                 }
                 &:focus {

@@ -3,7 +3,12 @@
     &.flag-select{
         padding-bottom: 0px;
     }
-
+    .flag-select__options.to--left {
+        right: 0px;
+    }
+    .flag-select__btn::before {
+        display: none;
+    }
     button {
         margin: 0px;
         padding: 12px 12px 8px 12px;
@@ -21,11 +26,11 @@
             border-top: 5px solid var(--color-six-shade-three);
         }
         &[aria-expanded="true"]{
-            color: var(--color-white);
+            color: rgba(var(--color-white),1);
             background-color: var(--color-one);
 
             &::after {
-                border-bottom: 5px solid  var(--color-white);
+                border-bottom: 5px solid rgba(var(--color-white),1);
             }
         }
         .flag-select__option__icon {
@@ -34,7 +39,7 @@
     }
 
     .flag-select__options {
-        color: var(--color-white);
+        color: rgba(var(--color-white),1);
         margin: unset;
         border-radius: unset;
         border: unset;
@@ -55,11 +60,11 @@
             transition: all 300ms ease;
             &:hover {
                 background-color: var(--color-one-dark-shade-one);
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
             }
             &:focus {
                 background-color: var(--color-one-dark-shade-two);
-                color: var(--color-white);
+                color: rgba(var(--color-white),1);
             }
         }
     }

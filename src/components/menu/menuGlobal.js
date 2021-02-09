@@ -8,26 +8,54 @@ import FollowDropdown from './followDropdown'
 import DropdownMenu from './dropdownMenu'
 import CampusSelector from './CampusSelector'
 import "./menuGlobal.scss"
+import { config } from '@fortawesome/fontawesome-svg-core'
+import siteConfig from '../../../data/SiteConfig'
 
-export default function MenuGlobal( props ){
+export default function MenuGlobal( { helpMenu, giveMenu, menuCampusSelector, mailChimpUrl, className, ...props } ){
 
     return (
-        <>
-            {/* <!-- Global Navigation --> */}
-            <div className="h-background-six-shade-three">
-                <Navbar className="navglobal container" bg="bg-transparent" expand="lg">
-                    <CampusSelector menuCampusSelector={props.menuCampusSelector} />
-                    <Navbar.Toggle aria-controls="global-navbar-nav" />
-                    <Navbar.Collapse className="c-global__top p-0 justify-content-end" id="global-navbar-nav">
-                        <Nav className="">
-                            <FollowDropdown mailchimpUrl={"https://victoryatl.us6.list-manage.com/subscribe/post?u=3b7891d118a85a8202d7cead5&id=8a2be25566"} />
-                            <DropdownMenu data={props.helpMenu} title={"Need help?"}></DropdownMenu>
-                            <DropdownMenu data={props.giveMenu} title={"Give"}></DropdownMenu>
-                        </Nav>
-                    </Navbar.Collapse>
-                    <LanguageSelector className={`langselector`} />
-                </Navbar>
-            </div>
-        </>
+        
+        <div className={`menuGlobal ${(className) ? className : ''}`}>
+
+            <Navbar className="navglobal container-fluid" bg="bg-transparent" expand="lg">
+                {
+                    (siteConfig.menuCampusSelector === true) ?
+                        (menuCampusSelector) ?
+                            <CampusSelector 
+                                campuses={menuCampusSelector} 
+                            />
+                        : undefined
+                    : undefined
+                }
+
+                <Navbar.Toggle aria-controls="global-navbar-nav" />
+
+                <Navbar.Collapse className="c-global__top p-0 justify-content-end" id="global-navbar-nav">
+                    <Nav className="">
+                        <FollowDropdown mailchimpUrl={config.mailChimpUrl} />
+                        
+                        {
+                            (helpMenu) ?
+                                <DropdownMenu data={helpMenu} title={"Need help?"}></DropdownMenu>
+                            : undefined
+                        }
+                        {
+                            (giveMenu) ?
+                                <DropdownMenu data={giveMenu} title={"Give"}></DropdownMenu>
+                            : undefined
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+
+                {
+                    (siteConfig.menuLanguageSelector === true) ?
+                        <LanguageSelector className={`langselector`} />
+                    : undefined
+                }
+                
+
+            </Navbar>
+
+        </div>
     )
 }

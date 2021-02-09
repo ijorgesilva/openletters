@@ -5,7 +5,7 @@
         margin-bottom: 0px;
         padding: 30px;
         border-radius: unset;
-        background-color: var(--color-six-dark-shade-three);
+        background-color: rgba(var(--color-six-dark-shade-three),1);
         color: var(--color-four);
         border: unset;
 
@@ -18,7 +18,7 @@
         }
 
         .close {
-            color: var(--color-white);
+            color: rgba(var(--color-white),1);
             top: 17px;
             right: 17px;
             margin: auto;

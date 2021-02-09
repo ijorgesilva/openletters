@@ -1,0 +1,35 @@
+.sectionPhotoFormText{
+    padding: var(--section-padding);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .form {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        .photo {
+            display: flex;
+            align-items: flex-end;
+        }
+        .content {
+            padding: 30px 60px;
+        }
+        .image {
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+        .text {
+            width: 100%;
+            padding: 70px 40px;
+        }
+    }
+
+}
+

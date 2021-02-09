@@ -1,0 +1,178 @@
+/* *****************************************************
+ * Small Groups page
+ ***************************************************** */
+
+.c-tabs {
+    display: flex;
+}
+.c-tabs a {
+    padding: 20px 20px;
+}
+.c-tabs__item {
+    flex-grow: 1;
+}
+.c-tabs__link {
+    text-align: center;
+    font-weight: 700;
+}
+.c-tabs a.c-tabs__link.nav-link {
+    border-top: 3px solid transparent;
+    color: var(--color-gray-five);
+    background-color: var(--color-gray-one);
+    border: 1px solid  var(--color-gray-three);
+}
+.c-tabs a.active.c-tabs__link.nav-link {
+    border-top: 3px solid var(--color-five);
+    background-color: rgba(var(--color-white),1);
+    border-bottom: unset;
+    color: rgba(var(--color-black),1);
+    border-left: unset !important;
+    border-right: unset !important;
+}
+.c-tabs .nav-tabs .nav-link {
+    border: 0px;
+}
+section {
+    position: relative;
+}
+// .section {
+//     padding: 150px 0;
+// }
+p.paragraph--first {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+}
+
+
+.c-groups {
+    min-height: 600px;
+    margin: 150px 0px 150px 0px;
+    position: relative;
+}
+
+.c-groups__introduction {
+    position: relative;
+    max-width: 700px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.c-tabs--simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+}
+
+.c-tabs--simple div {
+    text-align: center;
+}
+
+.c-tabs--simple div a {
+    padding: 18px;
+    font-size: 18px;
+    line-height: 26px;
+    background-color: var(--color-gray-one);
+    color: var(--color-gray-five);
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0px;
+}
+
+.nav-tabs,
+.nav-tabs .nav-link,
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+    border: none;
+    border-radius: unset;
+}
+
+.c-tabs--simple .nav-link:hover {
+    color: var(--color-five-dark-shade-one);
+    background-color: var(--color-five-shade-three);
+}
+
+.c-tabs--simple a.nav-link.active {
+    background-color: var(--color-five);
+    color: rgba(var(--color-white),1);
+    border: none;
+    border-radius: unset;
+}
+
+.c-groups__panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    align-items: center;
+    grid-gap: 30px;
+    padding: 100px 0px 0px 0px;
+}
+
+.c-groups__panel .c-groups__overview p:first-of-type {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+}
+
+.c-groups__photo {
+    position: relative;
+    display: block;
+    overflow: visible;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.g-brandpattern {
+    width: 100%;
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    right: -20%;
+    background-repeat: no-repeat;
+}
+
+.g-brandpattern--blue {
+    background-image: url('../../assets/img/smallgroups/g-brandpatter--blue.svg');
+}
+
+.g-brandpattern--red {
+    background-image: url('../../assets/img/smallgroups/g-brandpatter--red.svg');
+}
+
+.g-brandpattern--purple {
+    background-image: url('../../assets/img/smallgroups/g-brandpatter--purple.svg');
+}
+
+.c-groups__image {
+    z-index: 1;
+    position: absolute;
+}
+
+.g-circlewords {
+    position: absolute;
+    background-position: center center;
+    background-size: contain;
+    z-index: 0;
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/img/global/pillar-circle-words-transforming-communities.svg');
+}
+
+.g-circlewords.g-circlewords--pillar-one {
+    background-image: url('../../assets/img/global/pillar-circle-words-building-families.svg');
+}
+.g-circlewords.g-circlewords--pillar-two {
+    background-image: url('../../assets/img/global/pillar-circle-words-transforming-communities.svg');
+}
+/* .g-circlewords.g-circlewords--pillar-three {
+    background-image: url('../img/global/pillar-circle-words-reconciling-cultures.svg');
+} */
+/* .g-circlewords.g-circlewords--pillar-four {
+    background-image: url('../img/global/pillar-circle-words-impacting-nations.svg');
+} */
+
+.c-groups__content {
+    position: relative;
+}

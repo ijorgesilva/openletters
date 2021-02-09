@@ -16,15 +16,16 @@ function CustomToggle({ children, eventKey, handleClick, title }) {
   );
 }
 
-export default function AccordionIndicator(props) {
+export default function AccordionIndicator({ data, className, defaultActiveKey, ...props }) {
+
   const [activeKey, setActiveKey] = useState(0);
 
-  const defaultActiveKey = props.defaultActiveKey ? props.defaultActiveKey : 0
+  const defaultActive = defaultActiveKey ? defaultActiveKey : 0
 
   return (
     <div>
-      <Accordion className={props.className} defaultActiveKey={defaultActiveKey} activeKey={activeKey}>
-        {props.data.map((item, index) => (
+      <Accordion className={`accordionIndicator ${className}`} defaultActiveKey={defaultActive} activeKey={activeKey}>
+        {data.map((item, index) => (
           <Card key={index} className={item.class}>
               
             <CustomToggle

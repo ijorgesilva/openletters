@@ -1,0 +1,10 @@
+.page-watch {
+    &.messages{
+        body {
+            background-color: var(--color-gray-one);
+            .navlocal {
+                position: relative;
+            }
+        }
+    }
+}

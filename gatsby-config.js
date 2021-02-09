@@ -7,12 +7,24 @@ const urljoin = require("url-join");
 const path = require("path");
 const config = require("./data/SiteConfig");
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV || 'development'}`
+})
+
 module.exports = {
   
   pathPrefix: config.pathPrefix === "" ? "/" : config.pathPrefix,
 
   siteMetadata: {
     siteUrl: urljoin(config.siteUrl, config.pathPrefix),
+
+    title: config.siteTitle,
+    titleTemplate: "%s"+' '+config.separator+' '+config.siteTitle,
+    description: config.siteDescription,
+    url: config.siteUrl,
+    image: config.siteLogo,
+    twitterUsername: config.twitterUsername,
+
     rssMetadata: {
       site_url: urljoin(config.siteUrl, config.pathPrefix),
       feed_url: urljoin(config.siteUrl, config.pathPrefix, config.siteRss),
@@ -34,7 +46,7 @@ module.exports = {
         {
           resolve: `gatsby-plugin-layout`,
           options: {
-            component: `${__dirname}/src/components/layout.js`
+            component: `${__dirname}/src/components/layouts/index.js`
           }
         },    
         {
@@ -49,7 +61,7 @@ module.exports = {
           options: {
             url:
               process.env.WPGRAPHQL_URL ||
-              `https://cms.victorychur.ch/graphql`,
+              config.wordpressUri,
             verbose: true,
             develop: {
               hardCacheMediaFiles: true,
@@ -57,6 +69,7 @@ module.exports = {
             debug: {
               graphql: {
                 writeQueriesToDisk: true,
+                showQueryVarsOnError: true,
               },
             },
             type: {
@@ -66,7 +79,7 @@ module.exports = {
                     ? // Lets just pull 50 posts in development to make it easy on ourselves.
                       10
                     : // and we don't actually need more than 5000 in production for this particular site
-                      400,
+                      5000,
               },
             },
           },
@@ -110,7 +123,7 @@ module.exports = {
               anonymize: true
             },
             facebookPixel: {
-              pixelId: 'Y'
+              pixelId: config.facebookPixel,
             },
             environments: ['production', 'development']
           },
@@ -124,5 +137,19 @@ module.exports = {
             defaultQuality: 75,
           },
         },
+        {
+          resolve: `gatsby-plugin-canonical-urls`,
+          options: {
+            siteUrl: config.siteUrl,
+            stripQueryString: true,
+          },
+        },
+        {
+          resolve: `gatsby-plugin-s3`,
+          options: {
+            bucketName: process.env.S3_BUCKET_NAME
+          }
+        },
+        `gatsby-plugin-meta-redirect` // make sure to put last in the array
   ],
 }

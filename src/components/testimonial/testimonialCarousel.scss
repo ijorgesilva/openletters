@@ -1,39 +1,40 @@
 @import "../../../node_modules/include-media/dist/_include-media.scss";
-
-.carousel-background {
-    height: 100%; 
-    background: linear-gradient(90deg, #fff 50%, var(--color-gray-four) 50%);
-    padding: 100px 0px;
-}
-.react-multi-carousel-track {
-    .react-multi-carousel-item {
-        .card {
-            min-height: 430px;
-            .card-background {
-                height: 7px;
-                overflow: hidden;
-                border-top-left-radius: .25rem;
-                border-top-right-radius: .25rem;
+.testimonialCarousel{
+    .carousel-background {
+        height: 100%; 
+        background: linear-gradient(90deg, #fff 50%, var(--color-gray-four) 50%);
+        padding: 100px 0px;
+    }
+    .react-multi-carousel-track {
+        .react-multi-carousel-item {
+            .card {
+                min-height: 430px;
+                .card-background {
+                    height: 7px;
+                    overflow: hidden;
+                    border-top-left-radius: .25rem;
+                    border-top-right-radius: .25rem;
+                }
+            }
+            &.testimonial-card {
+                    .avatar {
+                        border-radius: 300px;
+                        height: 150px;
+                        img {
+                            height: 140px;
+                        }
+                    }
             }
         }
-        &.testimonial-card {
-                .avatar {
-                    border-radius: 300px;
-                    height: 150px;
-                    img {
-                        height: 140px;
-                    }
-                }
+        @include media("<=phone") {
+            .react-multi-carousel-item {
+                margin: 0px;
+            }
         }
-    }
-    @include media("<=phone") {
-        .react-multi-carousel-item {
-            margin: 0px;
-        }
-    }
-    @include media(">=812px") {
-        .react-multi-carousel-item {
-            margin: 20px;
+        @include media(">=812px") {
+            .react-multi-carousel-item {
+                margin: 20px;
+            }
         }
     }
 }

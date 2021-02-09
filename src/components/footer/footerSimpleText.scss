@@ -1,7 +1,7 @@
 .c-footer {
     position: relative;
-    background-color: var(--color-six-dark-shade-three);
-    border-top: 0.5px solid var(--color-six-shade-one);
+    background-color: rgba(var(--color-six-dark-shade-three),1);
+    border-top: 0.5px solid var(--color-six);
 
     .c-footer__copyright {
         padding: 20px;
