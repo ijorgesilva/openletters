@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
 
 // Components
-import './BlurbHorizontalVod.scss'
+import './blurbHorizontalVod.scss'
 
 export default function BlurbHorizontalVod( { className, title, subtitle, featuredImage, link, excerpt, ...props } ) {
 

@@ -6,7 +6,7 @@ import { Nav, Navbar } from 'react-bootstrap'
 import LanguageSelector from './languageSelector'
 import FollowDropdown from './followDropdown'
 import DropdownMenu from './dropdownMenu'
-import CampusSelector from './CampusSelector'
+import CampusSelector from './campusSelector'
 import "./menuGlobal.scss"
 import { config } from '@fortawesome/fontawesome-svg-core'
 import siteConfig from '../../../data/SiteConfig'

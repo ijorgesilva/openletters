@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Accordion, Card, useAccordionToggle } from "react-bootstrap";
 
-import "./AccordionIndicator.scss"
+import "./accordionIndicator.scss"
 
 function CustomToggle({ children, eventKey, handleClick, title }) {
   const decoratedOnClick = useAccordionToggle(eventKey, () => {

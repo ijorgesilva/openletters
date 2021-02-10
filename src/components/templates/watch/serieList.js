@@ -10,7 +10,7 @@ import BlurbHorizontal from '../../blurb/blurbHorizontal'
 import HeaderPage from '../../headerPage'
 import { watchBrand, watchMenu } from '../../../../data/menues'
 import config from '../../../../data/SiteConfig'
-import './SerieList.scss'
+import './serieList.scss'
 
 export default function SerieList ( { location, data, pageContext } ) {
 
