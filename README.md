@@ -9,17 +9,8 @@ All the dates received and query with graphql are YYYYMMDD. This helps to correc
 
 ## Responsiveness and breakpoints with include-media
 https://www.npmjs.com/package/include-media
-
 ## Run Storybook
 `$ npm run storybook`
-
-## Deploy to S3
-`$ npm run build && npm run deploy`
-
-S3 credentials and bucket name can be found on .env.production
-- Gatsby plugin: https://www.gatsbyjs.com/plugins/gatsby-plugin-s3/
-- Recipe: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/with-dotenv.md
-
 ### Deploy pre-requisites
 - Install AWS CLI (https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - Install AWS Credentials

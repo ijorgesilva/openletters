@@ -6,7 +6,6 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "GATSBY_ENV=production npx -n \"-r dotenv/config\" gatsby-plugin-s3 deploy --yes",
     "develop": "GATSBY_ENV=development gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",

@@ -144,12 +144,6 @@ module.exports = {
             stripQueryString: true,
           },
         },
-        {
-          resolve: `gatsby-plugin-s3`,
-          options: {
-            bucketName: process.env.S3_BUCKET_NAME
-          }
-        },
         `gatsby-plugin-meta-redirect` // make sure to put last in the array
   ],
 }
