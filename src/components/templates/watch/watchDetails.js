@@ -61,8 +61,20 @@ export default function WatchDetails( { pageContext, location, className, data, 
     }
     /*. Scrolled Player */
 
+    const background = 
+        (videoDetails.serie) ?
+            (videoDetails.serie.serieGraphics) ?
+                (videoDetails.serie.serieGraphics.background) ?
+                    videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src
+                :
+                    'none'
+            :
+                'none'
+        : undefined
+
+
     const styleBackgroundHero = {
-        backgroundImage: (videoDetails.serie.serieGraphics.background) ? "url(" + videoDetails.serie.serieGraphics.background.localFile.childImageSharp.fluid.src + ")" : "none"
+        backgroundImage:  "url(" + background + ")"
     }
 
     return (
