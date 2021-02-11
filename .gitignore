@@ -79,3 +79,7 @@ get-pip.py
 
 # Sensible Information
 *.pub
+
+# Backup files
+*.backup
+*.bak

@@ -3,6 +3,8 @@ version: 0.2
 env:
   variables:
     NODE_ENV: "production"
+    DeployBucket: "new.victoryatl.com"
+    CloudFrontDistribution: "E3624BQ39R114B"
 
 phases:
   install:
@@ -13,22 +15,36 @@ phases:
 
   pre_build:
     commands:
-      - echo Installing source NPM dependencies...
       - npm install
 
   build:
     commands:
-      - Building Gatsby website...
       - gatsby build
 
   post_build:
     commands:
-      - echo Build completed on `date`
-      
+      # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
+      - aws s3 cp --recursive --acl public-read ./public s3://new.victoryatl.com/ 
+
+      # set the cache-control headers for index.html to prevent browser caching | Use ${DeployBucket} with CloudFormation
+      # - >
+      #   aws s3 cp --acl public-read 
+      #   --cache-control="max-age=0, no-cache, no-store, must-revalidate" 
+      #   ./public/index.html s3://new.victoryatl.com/
+        
+      # invalidate the CloudFront cache for /public | Use ${CloudFrontDistribution} with CloudFormation
+      - >
+        aws cloudfront create-invalidation --distribution-id E3624BQ39R114B 
+        --paths /
+
 cache:
   paths:
     - './node_modules/**/*'
+    - './.cache/**/*'
+    - './.wordpress-cache/**/*'
+    - './WordPress/**/*'
 
 artifacts:
   files:
     - '**/*'
+  base-directory: public
