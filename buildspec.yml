@@ -21,4 +21,12 @@ phases:
 
 cache:
   paths:
-    - './node_modules/**/*'
+    - '.cache/**/*'
+    - '.wordpress-cache/**/*'
+    - 'node_modules/**/*'
+    - 'WordPress/**/*'
+
+artifacts:
+  files:
+    - 'public/**/*'
+  base-directory: public
