@@ -37,12 +37,12 @@ phases:
         aws cloudfront create-invalidation --distribution-id ${CloudFrontDistribution} 
         --paths /
 
-# cache:
-#   paths:
-#     - '.cache/**/*'
-#     - '.wordpress-cache/**/*'
-#     - 'node_modules/**/*'
-#     - 'WordPress/**/*'
+cache:
+  paths:
+    - './node_modules/**/*'
+    - './.cache/**/*'
+    - './.wordpress-cache/**/*'
+    - './WordPress/**/*'
 
 artifacts:
   files:
