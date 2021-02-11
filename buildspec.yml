@@ -13,12 +13,22 @@ phases:
 
   pre_build:
     commands:
+      - echo Installing source NPM dependencies...
       - npm install
 
   build:
     commands:
+      - Building Gatsby website...
       - gatsby build
 
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      
 cache:
   paths:
     - './node_modules/**/*'
+
+artifacts:
+  files:
+    - '**/*'
