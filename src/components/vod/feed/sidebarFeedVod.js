@@ -1,33 +1,35 @@
 import React from 'react'
-import {Card} from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { Card } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import CustomScroll from 'react-custom-scroll'
 import TextTruncate from 'react-text-truncate'
 import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 // Components
 import BlurbHorizontalVod from '../blurb/blurbHorizontalVod'
 import config from '../../../../data/SiteConfig'
 import './sidebarFeedVod.scss'
 
-export default function SidebarFeedVod( { items, serieSlug, title, background, className, id, ...props } ){
+export default function SidebarFeedVod( { items, serieSlug, title, background, className, id, campus } ){
 
     /* Standard fields */
     const { t } = useTranslation()
-    
-    const backgroundImage = {
-        backgroundImage: "url("+ background +")"
-    }
 
     return (
-        <section className={`sidebarFeedVod ${className}`}id={id}>
+        <section className={`sidebarFeedVod ${className}`} id={`${ (id) ? id :''}`}>
             {
                 (title) ?
-                    <Card className="header bg-dark text-white">
-                        <div className={'card-img'} style={backgroundImage} aria-hidden="true"></div>
+                    <Card className="header text-white">
+                        <div className={'card-img'} aria-hidden="true">
+                            <GatsbyImage
+                                image={background}
+                                alt=''
+                            />
+                        </div>
                         <Card.ImgOverlay>
                             <Card.Title>
-                                <Link to={`${config.watchSerieDetailsSlug}/${ (serieSlug) ? serieSlug : '' }`}>
+                                <Link to={`${ (campus) ? '/' + campus : '' }/${config.watchSeriesDetailsSlug}/${ (serieSlug) ? serieSlug : '' }`}>
                                     <TextTruncate line={1} truncateText="…" text={title} />
                                 </Link>
                             </Card.Title>
@@ -35,19 +37,20 @@ export default function SidebarFeedVod( { items, serieSlug, title, background, c
                             </Card.Text>
                         </Card.ImgOverlay>
                     </Card>
-                : undefined
+                : 
+                    undefined
             }
             <CustomScroll>
-                <div className="list"  style={{maxHeight: "420px"}} >
+                <div className="list">
                 {
-                    items.nodes.map( (obj, index) => (
+                    items.map( (obj, index) => (
                         <BlurbHorizontalVod 
-                            key={index}
-                            className={(obj.active) ? 'active' : ''}
-                            title={ (obj.videoDetails.serie) ? obj.title : null }
-                            featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
-                            link={ (obj.slug) ? `${config.watchMessageDetailsSlug}/${obj.slug}` : null }
-                            excerpt={ (obj.excerpt) ? obj.excerpt : null }
+                            key             =   { index }
+                            className       =   { ( obj.active ) ? 'active' : ''}
+                            title           =   { ( obj.videoDetails.videoSeries ) ? obj.title : null }
+                            featuredImage   =   { ( obj.featuredImage?.node?.localFile ) ? obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
+                            link            =   { `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${obj.slug}` }
+                            excerpt         =   { ( obj.excerpt ) ? obj.excerpt : null }
                         />
                     ))
                 }

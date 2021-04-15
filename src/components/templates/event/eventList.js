@@ -16,7 +16,7 @@ import './eventList.scss'
 export default function PostList ( { location, data, pageContext } ) {
 
     const noImage = (data.noImage.childImageSharp) ? data.noImage.childImageSharp.fluid.src : undefined
-
+                        
     return (
         <>
 

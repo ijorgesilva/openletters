@@ -1,13 +1,13 @@
 // Dependencies
 import React from 'react'
+import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
 import TextTruncate from 'react-text-truncate'
 
 // Components
 import './blurbVerticalDark.scss'
 
-export default function BlurbVerticalDark ( { title, excerpt, className, link, featuredImage, noImage, target, linkType, variant, iconImage } ) {
+export default function BlurbVerticalDark ( { title, excerpt, className, link, featuredImage, noImage, target, linkType, variant, iconImage, path } ) {
 
     return (
         
@@ -25,23 +25,45 @@ export default function BlurbVerticalDark ( { title, excerpt, className, link, f
                                     undefined
                             }
                             { 
-                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
-                                : <Img className="card-img-top" fluid={noImage} alt="" />
+                                (featuredImage) ? 
+                                    <GatsbyImage 
+                                        image={featuredImage} 
+                                        className="card-img-top"
+                                        alt=""
+                                    />
+                                : 
+                                    (noImage) ?
+                                        <GatsbyImage 
+                                            image={noImage} 
+                                            className="card-img-top"
+                                            alt=""
+                                        />
+                                    :
+                                        <StaticImage
+                                            src="../../assets/img/global/noImage.jpg"
+                                            alt=""
+                                            layout="fixed"
+                                            className="photo"
+                                        />
                             }
                         </div>
                         <div className="card-body">
                             {
-                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
-                                : null
+                                (title) ? 
+                                    <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
+                                : 
+                                    undefined
                             }
                             {
-                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
-                                : <></>
+                                (excerpt) ? 
+                                    <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                                : 
+                                    undefined
                             }
                         </div>
                     </a>
                 :
-                    <Link to={link}>
+                    <Link to={`${ ('') ? path : ''}${link}`}>
                         <div className="card-img-container">
                             {
                                 (iconImage) ?
@@ -52,18 +74,45 @@ export default function BlurbVerticalDark ( { title, excerpt, className, link, f
                                     undefined
                             }
                             { 
-                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
-                                : <Img className="card-img-top" fluid={noImage} alt="" />
+                                (featuredImage) ? 
+                                    <GatsbyImage 
+                                        image={featuredImage} 
+                                        className="card-img-top"
+                                        alt=""
+                                    />
+                                : 
+                                    (noImage) ?
+                                        <GatsbyImage 
+                                            image={noImage} 
+                                            className="card-img-top"
+                                            alt=""
+                                        />
+                                    :
+                                        <StaticImage
+                                            src="../../assets/img/global/noImage.jpg"
+                                            alt=""
+                                            layout="fixed"
+                                            className="photo"
+                                        />
                             }
                         </div>
                         <div className="card-body">
                             {
-                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
-                                : null
+                                (title) ? 
+                                    <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
+                                : 
+                                    undefined
                             }
                             {
-                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
-                                : <></>
+                                (excerpt) ? 
+                                    <TextTruncate 
+                                        line={2} 
+                                        element="p" 
+                                        truncateText="…" 
+                                        text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} 
+                                    /> 
+                                : 
+                                    undefined
                             }
                         </div>
                     </Link>

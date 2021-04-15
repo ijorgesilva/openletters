@@ -10,7 +10,7 @@ import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
-import { eventsBrand, eventsMenu } from '../../../../data/menues'
+import config from '../../../../data/SiteConfig'
 import './eventDetails.scss'
 
 export default function EventDetails( { pageContext, location } ){
@@ -18,34 +18,60 @@ export default function EventDetails( { pageContext, location } ){
     /* Standard fields */
     const { t } = useTranslation()
 
-    const { title, node: {excerpt, date, modified, featuredImage, content, terms, eventDetails} } = pageContext
+    const { title, excerpt, date, modified, featuredImage, content, eventTags, eventDetails, breadcrumbs } = pageContext
 
-    const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
+    const htmlDate = ( modified ) ? 
+                        getDate(modified,2,'us','yyyy-MM-dd' ) 
+                    : 
+                        getDate(date,2,'us','yyyy-MM-dd' )
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
     const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
+
+    let eventDate, eventDateHtml
     
+    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+                        featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
+                    :
+                        undefined
+    
+
+    console.log( eventDetails )
+
     return (
         <>
-
             <HeaderPage 
-                title={title} 
-                location={location} 
-                cover={featuredImage.node.localFile.childImageSharp.fluid.src}
-                description={excerpt}
-                article={true}
+                title       = { title + ' | ' + t('global.events.title') }
+                location    = { location } 
+                cover       = { cover }
+                description = { ( excerpt ) ? excerpt : excerpt}
+                article     = { true }
             />
             
             <HorizontalScrollingMenu
-                menuBrand={eventsBrand}
-                menu={eventsMenu}
+                menuBrand   =   { 
+                                    {
+                                        'name': t('global.events.title'),
+                                        'link': '/' + breadcrumbs.campus + '/' + config.eventPostDetailsSlug,
+                                    }
+                                } 
+                menu        =   { 
+                                    [
+                                        
+                                    ]
+                                }
             />
 
             <article className="contentMain mb-5">
 
                 <HeroPost 
-                    title={title}
-                    backgroundPhoto={featuredImage.node.localFile.childImageSharp.fluid.src}
-                    className="z-index-0"
+                    title           = { title }
+                    backgroundPhoto =   {
+                                            ( featuredImage ) ? 
+                                                featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                            : 
+                                                undefined
+                                        }
+                    className       = "z-index-0"
                 />
 
                 <Container className="mt-5">
@@ -55,25 +81,56 @@ export default function EventDetails( { pageContext, location } ){
                         <Col>
                             <div className="watchLeft sticky">
                                 {
-                                    (eventDetails.eventAddress) ?
-                                        <span>{eventDetails.eventAddress}</span>
-                                    : undefined
-                                }
-                                {
-                                    (eventDetails.eventDates) ?
-                                        <>
-                                            <span>{eventDetails.eventDates.eventDate} {eventDetails.eventDates.eventTime}</span>
-                                        </>
-                                    : undefined
-                                }
-                                {
                                     ( eventDetails.eventLink.eventLinkText && eventDetails.eventLink.eventLinkUrl ) ?
                                         <div>
                                             <Button className="btn btn--animation btn--dark-outline" variant="none" href={eventDetails.eventLink.eventLinkUrl} target="_blank">
                                                 {eventDetails.eventLink.eventLinkText}
                                             </Button>
                                         </div>
-                                    : undefined
+                                    : 
+                                    undefined
+                                }
+                                {
+                                    ( eventDetails.eventDates.length > 0 ) ?
+                                        <div className="mb-3">
+                                            <h6>{t('global.events.date-time')}</h6>
+                                                {
+                                                    eventDetails.eventDates.map( (date, index) => (
+                                                        <span key={index}>
+                                                            <time datetime={getDate(date.eventDate,2,'us','yyyy-MM-dd' )}> 
+                                                                {getDate(date.eventDate,2,'us','LLLL d, yyyy' )} | 
+                                                                {date.eventTime}
+                                                            </time> 
+                                                        </span>
+                                                    ))
+                                                }
+                                        </div>
+                                    : 
+                                        undefined
+                                }
+                                {
+                                    ( eventDetails.eventAddress ) ?
+                                        <div className="mb-3">
+                                            <h6>{t('global.events.location')}</h6>
+                                            <span>{eventDetails.eventAddress}</span>
+                                        </div>
+                                    :
+                                        undefined
+                                }
+                                {
+                                    (eventDetails.eventCampus) ? 
+                                        <div className="mb-3">
+                                            <h6>{t('global.events.organized-by')}</h6>
+                                            {
+                                                eventDetails.eventCampus.map ( (campus, index) => (
+                                                    <span key={index} className="user-select-none d-block">
+                                                        {campus.title}
+                                                    </span>
+                                                ))
+                                            }
+                                        </div> 
+                                    : 
+                                        undefined
                                 }
                                 <hr />
                                 <ToolbarDetails location={location} />
@@ -83,16 +140,27 @@ export default function EventDetails( { pageContext, location } ){
                         <Col className="" xs={12} md={7}>
                             <div dangerouslySetInnerHTML={{__html: content}}>
                             </div>
-                            <TagSimple terms={terms} />
+                            
+                            {
+                                ( eventTags ) ?
+                                    <TagSimple terms={eventTags} />
+                                :
+                                    undefined
+                            }
 
-                            <div className="createdDate user-select-none">
-                                {
-                                    (modifiedDate) ? 
-                                        <time datetime={htmlDate}> {modifiedDate} </time> 
-                                    : 
-                                        <time datetime={htmlDate}> {createdDate} </time>
-                                }
-                            </div>
+                            {
+                                ( config.blogShowDates ) ?
+                                    <div className="createdDate user-select-none">
+                                        { 
+                                            (modifiedDate) ? 
+                                                <time datetime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                            : 
+                                                <time datetime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                        }
+                                    </div>
+                                :
+                                    undefined
+                            }
                             
                         </Col>
 

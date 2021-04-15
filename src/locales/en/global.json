@@ -1,11 +1,4 @@
 {
-	"blog": {
-		"created-date": "Created on ",
-		"description": "Check our latest post and articles",
-		"meta-description": "",
-		"modified-date": "Modified on ",
-		"title": "Blog"
-	},
 	"components": {
 		"button": {
 			"netSimple-connect": "Get connect",
@@ -28,28 +21,48 @@
 		"404-description": "Ooops! The page you are looking for has been removed or relocated.",
 		"404-go-back": "Go back",
 		"404-title": "Page not found",
-		"about-serie": "About the Series",
 		"accept": "Accept",
 		"article": "Post",
+		"blog": {
+			"created-date": "Created on ",
+			"description": "Check our latest post and articles",
+			"meta-description": "",
+			"modified-date": "Modified on ",
+			"title": "Blog"
+		},
+		"campus": "Campus",
 		"close": "Close",
 		"cookie-consent": "This website uses cookies to enhance the user experience.",
+		"created-on": "Created on",
 		"empty": {
 			"text-not-available": "No description available"
 		},
-		"event": "Event",
+		"events": {
+			"date-time": "Date And Time",
+			"description": "Check out our events",
+			"location": "Location",
+			"organized-by": "Organized by",
+			"title": "Events"
+		},
 		"footer-copyright": "© Copyright. Victory Church. All Rights Reserved.",
-		"news": "News",
-		"news-description": "Read the latest news and updates from us",
-		"news-title": "News",
+		"modified-on": "Modified on",
+		"news": {
+			"description": "Read the latest news and updates from us",
+			"title": "News"
+		},
 		"no-records": "Nothing to show!",
 		"notes": "Notes",
 		"related-resources": "Resources",
 		"transcripts": "Transcripts",
 		"watch": {
+			"about-series": "About the Series",
 			"content-empty": "No notes available",
+			"meta-description": "",
 			"more-info": "More info",
 			"seasons": "Seasons",
 			"section-latest-title": "Latest Messages",
+			"series": "Series",
+			"title": "Watch",
 			"transcript-empty": "No transcripts available",
 			"videos": "Videos",
 			"watch-now": "Watch now"
@@ -152,8 +165,5 @@
 		"tab-join-testimonial-two-quote": "Joining this small group has been such a blessing. Such a loving and supportive group of Christian women who are so transparent about their lives.",
 		"testimonials-title": "<h2 class='h-color-six'>What our awesome<br/>Community is saying…</h2>",
 		"title": "Small Groups"
-	},
-	"vod": {
-		"title": "Messages"
 	}
 }

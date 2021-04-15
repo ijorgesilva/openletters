@@ -7,6 +7,7 @@ import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShar
 import { faTwitter, faFacebook, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from '@fortawesome/fontawesome-free-solid'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 // Components
 import './shareSimpleIcon.scss'

@@ -1,3 +1,4 @@
+// Dependencies
 import React, { useState, useEffect } from 'react'
 import i18n from 'i18next'
 import { useTranslation } from "react-i18next"
@@ -5,8 +6,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Cookies from 'universal-cookie';
 import ReactFlagsSelect from 'react-flags-select';
 
-// Assets
-import 'react-flags-select/css/react-flags-select.css';
+// Components
 import './languageSelector.scss'
 
 i18n.use(LanguageDetector).init({

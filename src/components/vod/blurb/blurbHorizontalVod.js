@@ -1,38 +1,25 @@
 // Dependencies
 import React from "react"
 import { Link } from 'gatsby'
-import { useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import TextTruncate from 'react-text-truncate'
 
 // Components
 import './blurbHorizontalVod.scss'
 
-export default function BlurbHorizontalVod( { className, title, subtitle, featuredImage, link, excerpt, ...props } ) {
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
-            }
-        }
-    `)
-    
-    const image = (featuredImage) ? featuredImage.src : (data.noImage.childImageSharp.fluid.src) ? data.noImage.childImageSharp.fluid.src : undefined
-
-    const styleCardPhoto = {
-        backgroundImage: "url("+ image +")"
-    }
+export default function BlurbHorizontalVod( { className, title, subtitle, featuredImage, link, excerpt } ) {
 
     return (
         <div className={`card blurbHorizontalVod ${(className) ? className : ''}`} title={(title) ? title : ''}>
             
             <Link to={link}>
 
-                <div className="card-img position-relative" style={styleCardPhoto}></div>
+                <div className="card-img position-relative">
+                    <GatsbyImage
+                        image={featuredImage}
+                        alt=''
+                    />
+                </div>
                 
                 <div className="card-body">
                     {

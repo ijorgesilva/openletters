@@ -1,23 +1,20 @@
 // Dependencies
 import React from 'react'
 import { Link } from 'gatsby'
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 import { Jumbotron } from 'react-bootstrap'
 import TextTruncate from 'react-text-truncate'
-import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfo, faPlay } from '@fortawesome/fontawesome-free-solid'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 // Components
 import './heroSimple.scss'
 
-export default function HeroSimple( { backgroundImage, className, id, iconSerie, iconSerieLink, iconSerieTitle, playUrl, title, serieLinkText, description, playText, iconPlay } ) {
-
-    const styleBackground = {
-        backgroundImage: "url(" + backgroundImage + ")"
-    }
-
+export default function HeroSimple( { backgroundImage, className, id, iconSerie, iconSerieLink, iconSerieTitle, playUrl, title, serieLinkText, description, playText, iconPlay, iconPlayFlag } ) {
+    
     return (
-        <section className={`heroSimple${ (className) ? ' ' + className : '' }`} id={id}>
+        <section className={`heroSimple ${ (className) ? ' ' + className : '' }`} id={id}>
             <Jumbotron className="">
 
                 <div className="content-container fluid">
@@ -27,7 +24,7 @@ export default function HeroSimple( { backgroundImage, className, id, iconSerie,
                             (iconSerie && iconSerieLink) ?
                                 <Link to={`${iconSerieLink}`}>
                                     <div className="position-relative z-index-2 iconSerie mb-4">
-                                        <Img fluid={iconSerie} objectFit="contain" objectPosition="left center" alt={iconSerieTitle}/>
+                                        <GatsbyImage image={iconSerie} alt={iconSerieTitle}/>
                                     </div>
                                 </Link>
                             : 
@@ -53,12 +50,22 @@ export default function HeroSimple( { backgroundImage, className, id, iconSerie,
 
                         <div className="buttons">
                             <Link to={playUrl} className="btn btn--animation btn--light-outline z-index-2" >
-                                <FontAwesomeIcon icon={faPlay} size="lg" /> {playText}
+                                <FontAwesomeIcon 
+                                    icon={faPlay} 
+                                    size="md"
+                                    className="mr-2"
+                                /> 
+                                {playText}
                             </Link>
                             {
                                 (iconSerieLink) ?
                                     <Link to={iconSerieLink} className="btn btn--animation btn--light-outline z-index-2" >
-                                        <FontAwesomeIcon icon={faInfo} className="mr-2"/>{serieLinkText}
+                                        <FontAwesomeIcon 
+                                            icon={faInfo} 
+                                            size="md"
+                                            className="mr-2"
+                                        />
+                                        {serieLinkText}
                                     </Link>
                                 : undefined
                             }
@@ -68,17 +75,43 @@ export default function HeroSimple( { backgroundImage, className, id, iconSerie,
                         
                 </div>
                 
-                <div className="z-index-1 heroBackground" style={styleBackground}>
-                    {
-                        (iconPlay) ?
-                            <div className="z-index-2 heroBackgroundIcon">
-                                <Link className="" to={playUrl}>
-                                        <img src={iconPlay} alt=""/>
-                                </Link>
-                            </div>
-                        : 
-                            undefined
-                    }
+                <div className="z-index-1 heroBackground">
+                    <div className="z-index-2 heroBackgroundIcon">
+                        {
+                            (iconPlayFlag) ?
+                                (iconPlay) ?
+                                    
+                                        <Link className="" to={playUrl}>
+                                                <GatsbyImage image={iconPlay} alt=""/>
+                                        </Link>
+                                : 
+                                        <Link className="" to={playUrl}>
+                                            <StaticImage
+                                                src="../../../assets/img/global/button__play-white.svg"
+                                                alt=""
+                                                layout="fixed"
+                                                className="photo"
+                                            />
+                                        </Link>
+                            :
+                                undefined
+                        }
+                    </div>
+                    <div className="z-index-2 backgroundImage">
+                        {
+                            (backgroundImage) ?
+                                <GatsbyImage 
+                                    image={backgroundImage} 
+                                    alt=""
+                                />
+                            : 
+                                <StaticImage
+                                    src="../../../assets/img/global/noImage.jpg"
+                                    className="photo"
+                                    alt=""
+                                />
+                        }
+                    </div>
                 </div>
                 
             </Jumbotron>

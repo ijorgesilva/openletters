@@ -7,8 +7,8 @@ export function isEmpty(obj) {
 
 export function getHeroDescription(data) {
     let heroDescription
-    if( data.videoDetails.oneLiner != null ){
-        heroDescription = data.videoDetails.oneLiner
+    if( data.videoDetails.videoOneLiner != null ){
+        heroDescription = data.videoDetails.videoOneLiner
     }
     else if( data.excerpt != null ){
         heroDescription = data.excerpt
@@ -21,8 +21,8 @@ export function getHeroDescription(data) {
 
 export function getSerieLink(data){
     let serieLink
-    if(data.videoDetails.serie  != null ) {
-        serieLink = data.videoDetails.serie.slug 
+    if(data.videoDetails.videoSeries  != null ) {
+        serieLink = data.videoDetails.videoSeries.slug 
     }
     else {
         return undefined
@@ -36,8 +36,8 @@ export function getHeroBackground(data, noImage) {
     if(data.featuredImage.node.localFile.childImageSharp) {
         heroImage = data.featuredImage.node.localFile.childImageSharp.fluid.src
     }
-    else if(data.videoDetails.serie.serieGraphics.poster) {
-        heroImage = data.videoDetails.serie.serieGraphics.poster.localFile.childImageSharp.fluid.src
+    else if(data.videoDetails.videoSeries.serieGraphics.poster) {
+        heroImage = data.videoDetails.videoSeries.serieGraphics.poster.localFile.childImageSharp.fluid.src
     }
     else {
         heroImage = noImage.fluid.src

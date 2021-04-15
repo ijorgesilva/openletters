@@ -1,11 +1,4 @@
 {
-	"blog": {
-		"created-date": "Creado el ",
-		"description": "Consulte nuestras últimas publicaciones y artículos",
-		"meta-description": "",
-		"modified-date": "Modificado el",
-		"title": "Blog"
-	},
 	"components": {
 		"button": {
 			"netSimple-connect": "Conéctate",
@@ -28,28 +21,48 @@
 		"404-description": "¡Vaya! La página que está buscando ha sido eliminada o reubicada.",
 		"404-go-back": "Volver al inicio",
 		"404-title": "Página no encontrada",
-		"about-serie": "Acerca de la Serie",
 		"accept": "Aceptar",
 		"article": "Artículo",
+		"blog": {
+			"created-date": "Creado el ",
+			"description": "Consulte nuestras últimas publicaciones y artículos",
+			"meta-description": "",
+			"modified-date": "Modificado el",
+			"title": "Blog"
+		},
+		"campus": "Campus",
 		"close": "Cerrar",
 		"cookie-consent": "Este sitio web utiliza cookies para mejorar la experiencia del usuario.",
+		"created-on": "Creado el",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
 		},
-		"event": "Evento",
+		"events": {
+			"date-time": "Fecha y Hora",
+			"description": "Mira nuestros eventos",
+			"location": "Dirección",
+			"organized-by": "Organizado por",
+			"title": "Eventos"
+		},
 		"footer-copyright": "© Copyright. Victory Church. Todos los derechos reservados.",
-		"news": "Noticias",
-		"news-description": "Revisa las últimas noticias",
-		"news-title": "Noticias",
+		"modified-on": "Modificado el",
+		"news": {
+			"description": "Revisa las últimas noticias",
+			"title": "Noticias"
+		},
 		"no-records": "Nada que mostrar!",
 		"notes": "Notas",
 		"related-resources": "Recursos",
 		"transcripts": "Transcripciones",
 		"watch": {
+			"about-series": "Acerca de la Serie",
 			"content-empty": "No hay notas disponibles",
+			"meta-description": "",
 			"more-info": "Más información",
 			"seasons": "Temporadas",
 			"section-latest-title": "Últimos mensajes",
+			"series": "Serie",
+			"title": "Mensajes",
 			"transcript-empty": "No hay transcripciones disponibles",
 			"videos": "Videos",
 			"watch-now": "Reproducir ahora"
@@ -152,8 +165,5 @@
 		"tab-join-testimonial-two-quote": "Unirse a este pequeño grupo ha sido una gran bendición. Un grupo de mujeres cristianas tan amorosas y comprensivas que son tan transparentes con sus vidas.",
 		"testimonials-title": "<h2 class='h-color-six'>Lo que dice<br/>nuestra increíble comunidad…</h2>",
 		"title": "Grupos Pequeños"
-	},
-	"vod": {
-		"title": "Prédicas"
 	}
 }

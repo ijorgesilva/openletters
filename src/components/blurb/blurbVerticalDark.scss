@@ -72,9 +72,8 @@
         }
     }
     .card-img-top {
-        min-height: 180px;
-        padding-top: 56.25%; 
         border-radius: 5px;
+        max-height: 144px;
     }
     
 }

@@ -285,21 +285,6 @@ export const query = graphql`
           }
         }            
       }
-        
-      alertbar: allWpAlertbar(filter: {alertbarTags: {nodes: {elemMatch: {slug: {in: "page-small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 1) {
-        nodes {
-          alertBar {
-            alertbarTitle
-            alertbarContent
-            alertbarLink {
-              alertbarLinkText
-              alertbarLinkType
-              alertbarLinkUrl
-              alertbarLinkTarget
-            }
-          }
-        }
-      }
 
       news: allWpNewspost(filter: {newsTags: {nodes: {elemMatch: {slug: {in: "small-groups-join"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 3) {
         nodes {

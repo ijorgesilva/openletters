@@ -1,9 +1,7 @@
 // Dependencies
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Container, Row, Col } from 'react-bootstrap'
-import Img from 'gatsby-image'
 
 // Components
 import { getDate } from '../../utils/utils'
@@ -11,13 +9,13 @@ import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
-import './postDetails.scss'
-import { blogMenu, blogMenuBrand } from '../../../../data/menues'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
+import config from '../../../../data/SiteConfig'
+import './postDetails.scss'
 
-export default function PostDetails( { pageContext, location } ){
+export default function PostDetails( { location, pageContext } ){
     
-    const { title, node: {excerpt, date, modified, featuredImage, content, terms, postDetails} } = pageContext
+    const { title, excerpt, date, modified, featuredImage, content, terms, postDetails, breadcrumbs } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -26,28 +24,51 @@ export default function PostDetails( { pageContext, location } ){
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
     const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
 
+    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+                        featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
+                    :
+                        undefined
     return (
         <>
 
             <HeaderPage 
-                title={(title) ? title : undefined} 
-                location={location} 
-                cover={(featuredImage) ? featuredImage.node.localFile.childImageSharp.fluid.src : undefined}
-                description={(excerpt) ? excerpt : excerpt}
-                article={true}
+                title       = { title + ' | ' + t('global.blog.title') }
+                location    = { location } 
+                cover       = { cover }
+                description = { ( excerpt ) ? excerpt : excerpt}
+                article     = { true }
             />
             
             <HorizontalScrollingMenu
-                menuBrand={blogMenuBrand}
-                menu={blogMenu}
+                menuBrand   =   { 
+                                    {
+                                        'link': breadcrumbs.rootApp,
+                                        'name': t('global.blog.title')
+                                    }
+                                }
+                menu        =   { 
+                                    [
+                                        {
+                                            name: "News", 
+                                            link: '/' + breadcrumbs.campus + '/' + config.newsPostDetailsSlug, 
+                                            as: "", 
+                                            target: ""
+                                        }
+                                    ]
+                                }
             />
 
             <article className="contentMain mb-5">
 
                 <HeroPost 
-                    title={title}
-                    backgroundPhoto={(featuredImage) ? featuredImage.node.localFile.childImageSharp.fluid.src : undefined}
-                    className="z-index-0"
+                    title           = { title }
+                    backgroundPhoto =   {
+                                            ( featuredImage ) ? 
+                                                featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                            : 
+                                                undefined
+                                        }
+                    className       = "z-index-0"
                 />
                 
                 <Container className="mt-5">
@@ -63,36 +84,49 @@ export default function PostDetails( { pageContext, location } ){
 
                         <Col className="" xs={12} md={8}>
 
-                            <div dangerouslySetInnerHTML={{__html: content}}>
-                            </div>
+                            <div dangerouslySetInnerHTML={{__html: content}}></div>
+                            {
+                                ( terms ) ?
+                                    <TagSimple terms={terms} />
+                                :
+                                    undefined
+                            }
 
-                            <TagSimple terms={terms} />
-
-                            <div className="createdDate user-select-none">
-                                {
-                                    (modifiedDate) ? 
-                                        <time datetime={htmlDate}> {modifiedDate} </time> 
-                                    : 
-                                        <time datetime={htmlDate}> {createdDate} </time>
-                                }
-                            </div>
+                            {
+                                ( config.blogShowDates ) ?
+                                    <div className="createdDate user-select-none">
+                                        { 
+                                            (modifiedDate) ? 
+                                                <time datetime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                            : 
+                                                <time datetime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                        }
+                                    </div>
+                                :
+                                    undefined
+                            }
+                            
 
                             <div className="authors">
-                            {   
-                                (postDetails.blogPostSpeaker) ?
-                                    postDetails.blogPostSpeaker.map( (author, index) => (
-                                        <>
-                                            <div className="author">
-                                                {
-                                                    (author.featuredImage) ? <Img className="photo" fluid={author.featuredImage.node.localFile.childImageSharp.fluid} alt={author.title} />
-                                                    : undefined
-                                                }
-                                                <address className="author" key={index}>{author.title}</address>
-                                            </div>
-                                        </>
-                                    ))
-                                : undefined
-                            }
+                                {   
+                                    (postDetails.postAuthor) ?
+                                        postDetails.postAuthor.map( (author, index) => (
+                                            <>
+                                                <div className="author">
+                                                    {
+                                                        (author.featuredImage) ? 
+                                                            <></>
+                                                            // <Img className="photo" fluid={author.featuredImage.node.localFile.childImageSharp.fluid} alt={author.title} />
+                                                        : 
+                                                            undefined
+                                                    }
+                                                    <address className="author" key={index}>{author.title}</address>
+                                                </div>
+                                            </>
+                                        ))
+                                    : 
+                                        undefined
+                                }
                             </div>
                             
                         </Col>
@@ -103,6 +137,7 @@ export default function PostDetails( { pageContext, location } ){
                 </Container>
 
             </article>
+
         </>
     )
 }

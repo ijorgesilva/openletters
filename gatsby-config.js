@@ -12,7 +12,11 @@ require('dotenv').config({
 })
 
 module.exports = {
-  
+
+  flags: {
+    DEV_SSR: true
+  },
+
   pathPrefix: config.pathPrefix === "" ? "/" : config.pathPrefix,
 
   siteMetadata: {
@@ -57,14 +61,17 @@ module.exports = {
           },
         },
         {
-          resolve: `gatsby-source-wordpress-experimental`,
+          resolve: `gatsby-source-wordpress`,
           options: {
-            url:
-              process.env.WPGRAPHQL_URL ||
-              config.wordpressUri,
+            url: process.env.WPGRAPHQL_URL || config.wordpressUri,
             verbose: true,
-            develop: {
-              hardCacheMediaFiles: true,
+            // develop: {
+            //   hardCacheMediaFiles: true,
+            // },
+            schema: {
+              // perPage: 20, // currently set to 100
+              requestConcurrency: 100, // currently set to 5
+              previewRequestConcurrency: 100, // currently set to 2
             },
             debug: {
               graphql: {
@@ -82,6 +89,7 @@ module.exports = {
                       5000,
               },
             },
+            
           },
         },
         {
@@ -128,13 +136,16 @@ module.exports = {
             environments: ['production', 'development']
           },
         },
+        `gatsby-plugin-image`,
         `gatsby-transformer-sharp`,
         {
           resolve: `gatsby-plugin-sharp`,
           options: {
-            useMozJpeg: false,
+            defaults: {},// Defaults used for gatsbyImageData and StaticImage
+            failOnError: true, // Set to false to allow builds to continue on image errors
             stripMetadata: true,
-            defaultQuality: 75,
+            defaultQuality: 60,
+            // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
           },
         },
         {

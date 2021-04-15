@@ -1,0 +1,153 @@
+@import "../../../../node_modules/include-media/dist/_include-media.scss";
+
+.heroSeries {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+
+
+    .serieName {
+        color: rgba(var(--color-white),1);
+        position: relative;
+        z-index: 2;
+        margin: 0px auto 3rem auto;
+        min-width: 300px;
+    }
+
+    >.jumbotron {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 'about trailer';
+        align-items: center;
+        width: 100%;
+        padding: 0px;
+        z-index: 1;
+        border: 1px solid rgba(var(--color-white),0.1);
+        overflow: hidden;
+
+        .about {
+            padding: 2.5rem;
+            grid-area: about;
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color:rgba(var(--color-white),1);
+            }
+            p {
+                margin-bottom: 1rem;
+                color:rgba(var(--color-white),0.4);
+            }
+        }
+        .trailer {
+            grid-area: trailer;
+            position: relative;
+            .player-wrapper {
+                height: 100%;
+            }
+            .trailerContainer {
+                .noTrailer {
+                    min-height: 420px;
+                }
+            }
+            .playButton {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                > a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: rgba(var(--color-white),1);
+                    width: 100%;
+                    height: 100%;
+                    transition: var(--transition-fast);
+                    opacity: 0;
+                    &:hover {
+                        transform: scale(1.1);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .content-container {
+        position: relative;
+        z-index: 1;
+        &.jumbotron {
+            background-color: rgba(var(--color-six-dark-shade-three),1);
+        }
+    }
+
+    .background {
+        position: absolute;
+        top: 0px;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+
+        &:after{
+            content: '';
+            // background: linear-gradient(to bottom, rgba(0, 15, 255, 0) 0%, rgba(0, 15, 251, 0) 1%, rgba(10, 12, 109, 0) 39%, rgba(15, 10, 27, 0.36) 61%, #0f0a1b 100%);
+            background: linear-gradient(180deg, rgba(var(--color-six-dark-shade-three),0) 0%, rgba(var(--color-six-dark-shade-three),0.5) 50%, rgba(var(--color-six-dark-shade-three),1) 100%);
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            bottom: 0;
+            z-index: 3;
+        }
+
+        > .overlay {
+            background: rgba(var(--color-six-dark-shade-three),0.7);
+            position: absolute;
+            z-index: 4;
+            width: 100%;
+            height: 100%;
+        }
+
+        > .background-image {
+            position: absolute !important;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+        }
+        
+    }
+}
+
+
+@include media("<desktop") {
+
+}
+
+@include media("<=tablet") {
+
+    .heroSeries {
+        > .jumbotron {
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+                'trailer' 
+                'about';
+
+            .trailer {
+                .trailerContainer {
+                    .noTrailer {
+                        min-height: 220px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+@include media("<=phone") {
+}

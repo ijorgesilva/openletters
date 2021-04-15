@@ -3,7 +3,8 @@
 ## Develop command
 [Source](https://github.com/gatsbyjs/gatsby/issues/5801#issuecomment-395786936)
 `$ gatsby develop -H $HOSTNAME -p 8000`
-
+Start only the GraphQL playgorund
+`$ GATSBY_GRAPHQL_IDE=playground gatsby develop`
 ## Incoming date format
 All the dates received and query with graphql are YYYYMMDD. This helps to correctly order and posterior formating with getDate function (utils.js) and moment.js.
 

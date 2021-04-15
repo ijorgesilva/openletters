@@ -40,10 +40,10 @@ export default function SerieList ( { location, data, pageContext } ) {
                                     <BlurbHorizontal 
                                         key={index}
                                         className={'mb-4'}
-                                        featuredImage={ (obj.node.serieDetails.trailerPoster) ? obj.node.serieDetails.trailerPoster.localFile.childImageSharp.fluid.src : noImage  }
+                                        featuredImage={ (obj.node.seriesDetails.seriesTrailerPoster) ? obj.node.seriesDetails.seriesTrailerPoster.localFile.childImageSharp.fluid.src : noImage  }
                                         title={obj.node.title}
                                         subtitle=""
-                                        link={`${config.watchSerieDetailsSlug}/${obj.node.slug}`}
+                                        link={`${config.watchSeriesDetailsSlug}/${obj.node.slug}`}
                                         linkText={obj.node.title}
                                         excerpt={obj.node.excerpt}
                                     />
@@ -62,49 +62,46 @@ export const query = graphql`
     query serieListQuery ( $skip: Int!, $limit: Int! ){
 
         series: allWpSerie (filter: {status: {eq: "publish"}}, skip: $skip, limit: $limit, sort: {fields: modified, order: DESC}) {
-            edges{
-                node {
-                    id
-                    title
-                    slug
-                    content
-                    serieDetails {
-                        trailer
-                        trailerPoster {
-                            localFile {
-                                childImageSharp {
-                                    fluid {
-                                        src 
-                                    }
+            nodes{
+                id
+                title
+                slug
+                seriesDetails {
+                    seriesTrailer
+                    seriesTrailerPoster {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src 
                                 }
                             }
                         }
                     }
-                    serieGraphics {
-                        logo {
-                            localFile {
-                                childImageSharp {
-                                    fluid {
-                                        src
-                                    }
-                                }
-                            }
-                        }
-                        background {
-                            localFile {
-                                childImageSharp {
-                                    fluid {
-                                        src
-                                    }
+                }
+                seriesGraphics {
+                    logo {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
                                 }
                             }
                         }
                     }
-                    videoOnDemandTags {
-                        nodes {
-                            slug
-                            name
+                    background {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
+                                }
+                            }
                         }
+                    }
+                }
+                videoOnDemandTags {
+                    nodes {
+                        slug
+                        name
                     }
                 }
             }

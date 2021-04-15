@@ -1,15 +1,12 @@
 // Dependencies
 import React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Container } from "react-bootstrap"
 
 // Components
 import "./heroPost.scss"
 
 export default function HeroPost ( { title, className, backgroundPhoto, children } ) {
-
-    const styleBackground = {
-        backgroundImage: "url(" + backgroundPhoto + ")"
-    }
 
     return (
         <div className={`heroPost position-relative ${className}`}>
@@ -31,7 +28,13 @@ export default function HeroPost ( { title, className, backgroundPhoto, children
                     }
                 </div>
             </Container>
-            <div className="background z-index-1" style={styleBackground}></div>
+            <div className="background z-index-1">
+                <GatsbyImage 
+                    image={backgroundPhoto} 
+                    className="card-img-top"
+                    alt=""
+                />
+            </div>
         </div>
     )
 

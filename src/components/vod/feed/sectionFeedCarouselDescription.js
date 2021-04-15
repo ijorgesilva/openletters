@@ -29,7 +29,7 @@ export default function SectionFeedCarouselDescription( { title, description, it
 
     const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
 
-    const objLength = items.nodes.length
+    const objLength = items.length
 
     return (
 
@@ -62,16 +62,16 @@ export default function SectionFeedCarouselDescription( { title, description, it
                             containerClass="carousel-container"
                         >
                             {
-                                items.nodes.map( (obj, index) => (
+                                items.map( (obj, index) => (
                                     <BlurbVerticalDarkVod 
                                         key={index}
                                         className={ (objLength === index + 1) ? 'last' : undefined }
                                         featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
                                         noImage={ (noImage) ? noImage : null }
                                         link={ (obj.slug) ? `/watch/message/${obj.slug}` : null }
-                                        title={ (obj.videoDetails.serie) ? obj.title : null }
-                                        serieTitle={(obj.videoDetails.serie.title) ? obj.videoDetails.serie.title : null}
-                                        serieLink={(obj.videoDetails.serie.slug) ? `/watch/serie/${obj.videoDetails.serie.slug}` : null}
+                                        title={ (obj.videoDetails.videoSeries) ? obj.title : null }
+                                        serieTitle={(obj.videoDetails.videoSeries.title) ? obj.videoDetails.videoSeries.title : null}
+                                        serieLink={(obj.videoDetails.videoSeries.slug) ? `/watch/serie/${obj.videoDetails.videoSeries.slug}` : null}
                                         subtitle={ (obj.videoDetails.speaker) ? (obj.videoDetails.speaker) : null }
                                         excerpt={ (obj.excerpt) ? obj.excerpt : null }
                                         // iconImage={ (props.iconCarousel) ? props.iconCarousel : null }

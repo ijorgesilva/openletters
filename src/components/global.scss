@@ -2,11 +2,13 @@
 :root {
     --color-black: 31, 31, 31;
     --color-white: 255, 255, 255;
+
     --color-gray-one: #f8f8f8;
     --color-gray-two: #e6e6e6;
     --color-gray-three: #d8d8d8;
     --color-gray-four: #e6f3f5;
     --color-gray-five: #909090;
+
     --color-one: #0C8DA0;
     --color-one-shade-one: #3DA4B3;
     --color-one-shade-two: #6DBBC6;
@@ -14,6 +16,7 @@
     --color-one-dark-shade-one: #0A7180;
     --color-one-dark-shade-two: #075560;
     --color-one-dark-shade-three: #053840;
+
     --color-two: #D1DC4C;
     --color-two-shade-one: #DAE370;
     --color-two-shade-two: #E4EA94;
@@ -21,6 +24,7 @@
     --color-two-dark-shade-one: #A7B03D;
     --color-two-dark-shade-two: #7E842E;
     --color-two-dark-shade-three: #53581E;
+
     --color-three: #EE484B;
     --color-three-shade-one: #F26D6F;
     --color-three-shade-two: #F59193;
@@ -28,6 +32,7 @@
     --color-three-dark-shade-one: #BF3A3C;
     --color-three-dark-shade-two: #8F2B2D;
     --color-three-dark-shade-three: #5F1D1E;
+
     --color-four: #31AEB4;
     --color-four-shade-one: #5ABEC3;
     --color-four-shade-two: #83CFD2;
@@ -35,6 +40,7 @@
     --color-four-dark-shade-one: #278B90;
     --color-four-dark-shade-two: #1D696C;
     --color-four-dark-shade-three: #144548;
+
     --color-five: #DEA933;
     --color-five-shade-one: #E5BA5C;
     --color-five-shade-two: #ECCC85;
@@ -42,6 +48,7 @@
     --color-five-dark-shade-one: #B28729;
     --color-five-dark-shade-two: #86661F;
     --color-five-dark-shade-three: #584314;
+
     --color-six: #311348;
     --color-six-shade-one: 	101, 66, 109; //#5a426D
     --color-six-shade-two: #837191;
@@ -49,6 +56,7 @@
     --color-six-dark-shade-one: #270F3A;
     --color-six-dark-shade-two: #1D0B2B;
     --color-six-dark-shade-three: 15, 10, 27; //#0F0A1B;
+    
     --transition-regular: all 400ms ease;
     --transition-fast: all 100ms ease;
     --font-weight-display: 900;

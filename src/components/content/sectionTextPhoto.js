@@ -1,22 +1,13 @@
 // Dependencies
 import React from 'react'
 import { Link } from 'gatsby'
-import { useStaticQuery, graphql } from 'gatsby'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Container, Row, Col } from 'react-bootstrap'
-import Img from 'gatsby-image'
 
 // Components
 import './sectionTextPhoto.scss'
 
 export default function SectionTextPhoto( { title, subtitle, className, photo, content, variant, link, linkType, linkText, buttonLink, buttonType, buttonText, id, ...props } ) {
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                publicURL
-            }
-        }
-    `)
 
     const variantClass = (variant) ? variant : "dark"
 
@@ -68,7 +59,17 @@ export default function SectionTextPhoto( { title, subtitle, className, photo, c
                         </div>
                     </Col>
                     <Col xs={12} md={6} lg={6}>
-                        <Img className="photo" fluid={(photo) ? photo : data.noImage.publicURL } alt="" />
+                        {
+                            (photo) ?
+                                <GatsbyImage image={photo} className="photo"/>
+                            :
+                                <StaticImage
+                                        src="../../assets/img/global/noImage.jpg"
+                                        alt=""
+                                        layout="fixed"
+                                        className="photo"
+                                    />
+                        }
                     </Col>
                 </Row>
             </Container>

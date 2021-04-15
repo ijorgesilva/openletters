@@ -35,14 +35,14 @@ export default function MessageList ( { location, data, pageContext } ) {
                 <Container className="mt-5 mb-5">
                     <Row>
                         <Col xs={12} md={8}>
-                            {data.videos.edges.map( (obj, index) => (
+                            {data.videosOnSerie.nodes.map( (obj, index) => (
                                 <>
                                     <BlurbHorizontal 
                                         key={index}
                                         className={'mb-4'}
                                         featuredImage={ (obj.node.featuredImage) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage  }
                                         title={obj.node.title}
-                                        subtitle={ (obj.node.videoDetails.serie) ? obj.node.videoDetails.serie.title : undefined }
+                                        subtitle={ (obj.node.videoDetails.videoSeries) ? obj.node.videoDetails.videoSeries.title : undefined }
                                         link={`/watch/message/${obj.node.slug}`}
                                         linkText={obj.node.title}
                                         excerpt={obj.node.excerpt}
@@ -61,58 +61,55 @@ export default function MessageList ( { location, data, pageContext } ) {
 export const query = graphql`
     query watchListQuery ( $skip: Int!, $limit: Int! ){
 
-        videos: allWpVideoOnDemand (filter: {status: {eq: "publish"}}, skip: $skip, limit: $limit, sort: {fields: modified, order: DESC}) {
-            edges{
-                node {
-                    id
-                    title
-                    slug
-                    content
-                    excerpt
-                    modified(formatString: "YYYYMMDD")
-                    videoOnDemandTags {
-                        nodes {
-                            slug
-                            name
-                        }
+        videosOnSerie: allWpVideoOnDemand (filter: {status: {eq: "publish"}}, skip: $skip, limit: $limit, sort: {fields: modified, order: DESC}) {
+            nodes{
+                id
+                title
+                slug
+                content
+                excerpt
+                modified(formatString: "YYYYMMDD")
+                videoOnDemandTags {
+                    nodes {
+                        slug
+                        name
                     }
-                    featuredImage {
-                        node {
-                            localFile {
-                                childImageSharp {
-                                    fluid {
-                                        src
-                                    }
+                }
+                featuredImage {
+                    node {
+                        localFile {
+                            childImageSharp {
+                                fluid {
+                                    src
                                 }
                             }
                         }
                     }
-                    videoDetails {
-                        oneLiner
-                        videoTranscript
-                        dayDate
-                        videoEmbed
-                        url
-                        videoCampus {
-                            ... on WpCampus {
-                                id
-                                title
-                                slug
-                            }
+                }
+                videoDetails {
+                    videoOneLiner
+                    videoTranscript
+                    videoDayDate
+                    videoUrl
+                    videoCampus {
+                        ... on WpCampus {
+                            id
+                            title
+                            slug
                         }
-                        serie {
-                            ... on WpSerie {
-                                id
-                                title
-                                slug
-                            }
+                    }
+                    videoSeries {
+                        ... on WpSerie {
+                            id
+                            title
+                            slug
                         }
-                        speaker {
-                            ... on WpSpeaker {
-                                id
-                                title
-                                uri
-                            }
+                    }
+                    videoSpeaker {
+                        ... on WpSpeaker {
+                            id
+                            title
+                            uri
                         }
                     }
                 }

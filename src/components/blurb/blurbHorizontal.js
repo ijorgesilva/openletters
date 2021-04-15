@@ -1,5 +1,6 @@
 // Dependencies
-import React from "react"
+import React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
 
@@ -23,14 +24,23 @@ export default function BlurbHorizontal( { title, subtitle, keyIndex, featuredIm
             
             <Link to={link}>
 
-                <div className="card-img position-relative" style={styleCardPhoto}></div>
+                <div className="card-img position-relative">
+                    <GatsbyImage 
+                        image={featuredImage} 
+                        className="card-img-top"
+                        height='100%'
+                        alt=""
+                    />
+                </div>
                 
                 <div className="card-body">
 
                     <div>
                         {
                             (subtitle) ? 
-                                <h6 className="card-subtitle">{subtitle}</h6> 
+                                <h6 className="card-subtitle">
+                                    {subtitle}
+                                </h6> 
                             : 
                                 undefined
                         }

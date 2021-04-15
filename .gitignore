@@ -83,3 +83,6 @@ get-pip.py
 # Backup files
 *.backup
 *.bak
+
+# Visual Studio Configurations
+.vscode

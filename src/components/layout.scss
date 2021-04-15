@@ -1,17 +1,5 @@
 @import "../../node_modules/include-media/dist/_include-media.scss";
 
-/** 
- Page Specific 
- **/
-.page-watch {
-    .navlocal{
-        position: absolute;
-    }
-    .menuGlobal {
-        border-bottom: unset;
-    }
-}
-
 /* 
 REFACTOR 
 */
@@ -36,7 +24,6 @@ REFACTOR
 .badge-image img {
     padding-right: 5px;
 }
-
 
 @media (max-width: 1200px) {
     legend {
@@ -182,8 +169,6 @@ iframe {
     width: 1px;
     min-width: 100%;
 }
-
-
 
 /***/
 .c-follow__social {
