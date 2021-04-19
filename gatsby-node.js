@@ -5,8 +5,8 @@
  */
 
 // You can delete this file if you're not using it
-const path = require('path')
-const config = require('./data/SiteConfig')
+const path      = require('path')
+const config    = require('./data/SiteConfig')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig(
@@ -48,98 +48,99 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
     /*******************
      * Campus Pages creation 
      *******************/
-    
-    result.data.campuses.nodes.forEach( campus => {
+    if ( result.data.campuses?.nodes?.length > 0 ) {
+        result.data.campuses.nodes.forEach( campus => {
 
-        /* Watch Page per Campus */
-        if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
-            createWatch = true
-            actions.createPage({
-                path: `/${campus.slug}/${config.watchSlug}`,
-                component: path.resolve(`./src/components/templates/watch/watchCampus.js`),
-                context: {
-                    ...campus,
-                    title: campus.title,
-                    slug: campus.slug,
-                    id: campus.id,
-                    campusId: '/' + campus.databaseId.toString() + '/',
-                    breadcrumbs: {
-                        'campus': campus.slug,
-                        'rootApp': `/${campus.slug}/${config.watchSlug}`,
-                        'back':   `/${campus.slug}/${config.watchSlug}`,
-                        'current': `/${campus.slug}/${config.watchSlug}`
+            /* Watch Page per Campus */
+            if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
+                createWatch = true
+                actions.createPage({
+                    path: `/${campus.slug}/${config.watchSlug}`,
+                    component: path.resolve(`./src/components/templates/watch/watchCampus.js`),
+                    context: {
+                        ...campus,
+                        title: campus.title,
+                        slug: campus.slug,
+                        id: campus.id,
+                        campusId: '/' + campus.databaseId.toString() + '/',
+                        breadcrumbs: {
+                            'campus': campus.slug,
+                            'rootApp': `/${campus.slug}/${config.watchSlug}`,
+                            'back':   `/${campus.slug}/${config.watchSlug}`,
+                            'current': `/${campus.slug}/${config.watchSlug}`
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
 
-        /* Blog Page per Campus */
-        if( campus.campusDetails.campusBlog.campusBlogPage === true ) {
-            createBlog = true
-            actions.createPage({
-                path: `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                component: path.resolve(`./src/components/templates/post/blogCampus.js`),
-                context: {
-                    ...campus,
-                    title: campus.title,
-                    slug: campus.slug,
-                    id: campus.id,
-                    campusId: '/' + campus.databaseId.toString() + '/',
-                    breadcrumbs: {
-                        'campus': campus.slug,
-                        'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                        'back':   `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                        'current': `/${campus.slug}/${config.blogPostDetailsSlug}`
+            /* Blog Page per Campus */
+            if( campus.campusDetails.campusBlog.campusBlogPage === true ) {
+                createBlog = true
+                actions.createPage({
+                    path: `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                    component: path.resolve(`./src/components/templates/post/blogCampus.js`),
+                    context: {
+                        ...campus,
+                        title: campus.title,
+                        slug: campus.slug,
+                        id: campus.id,
+                        campusId: '/' + campus.databaseId.toString() + '/',
+                        breadcrumbs: {
+                            'campus': campus.slug,
+                            'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                            'back':   `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                            'current': `/${campus.slug}/${config.blogPostDetailsSlug}`
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
 
-        /* News Page per Campus */
-        if( campus.campusDetails.campusNews.campusNewsPage === true ) {
-            createNews = true
-            actions.createPage({
-                path: `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                component: path.resolve(`./src/components/templates/news/newsCampus.js`),
-                context: {
-                    ...campus,
-                    title: campus.title,
-                    slug: campus.slug,
-                    id: campus.id,
-                    campusId: '/' + campus.databaseId.toString() + '/',
-                    breadcrumbs: {
-                        'campus': campus.slug,
-                        'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                        'back':   `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                        'current': `/${campus.slug}/${config.newsPostDetailsSlug}`
+            /* News Page per Campus */
+            if( campus.campusDetails.campusNews.campusNewsPage === true ) {
+                createNews = true
+                actions.createPage({
+                    path: `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                    component: path.resolve(`./src/components/templates/news/newsCampus.js`),
+                    context: {
+                        ...campus,
+                        title: campus.title,
+                        slug: campus.slug,
+                        id: campus.id,
+                        campusId: '/' + campus.databaseId.toString() + '/',
+                        breadcrumbs: {
+                            'campus': campus.slug,
+                            'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                            'back':   `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                            'current': `/${campus.slug}/${config.newsPostDetailsSlug}`
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
 
-        /* Events Page per Campus */
-        if( campus.campusDetails.campusEvents.campusEventsPage === true ) {
-            createEvents = true
-            actions.createPage({
-                path: `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                component: path.resolve(`./src/components/templates/event/eventCampus.js`),
-                context: {
-                    ...campus,
-                    title: campus.title,
-                    slug: campus.slug,
-                    id: campus.id,
-                    campusId: '/' + campus.databaseId.toString() + '/',
-                    breadcrumbs: {
-                        'campus': campus.slug,
-                        'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                        'back':   `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                        'current': `/${campus.slug}/${config.eventPostDetailsSlug}`
+            /* Events Page per Campus */
+            if( campus.campusDetails.campusEvents.campusEventsPage === true ) {
+                createEvents = true
+                actions.createPage({
+                    path: `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                    component: path.resolve(`./src/components/templates/event/eventCampus.js`),
+                    context: {
+                        ...campus,
+                        title: campus.title,
+                        slug: campus.slug,
+                        id: campus.id,
+                        campusId: '/' + campus.databaseId.toString() + '/',
+                        breadcrumbs: {
+                            'campus': campus.slug,
+                            'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                            'back':   `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                            'current': `/${campus.slug}/${config.eventPostDetailsSlug}`
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
 
-    })
+        })
+    }
 
     /*******************
      * Video Pages creation 
@@ -212,108 +213,282 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
     }
 
     /*******************
-     * Post Pages creation 
+     * Pages creation 
      *******************/
-    if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
-        result.data.posts.nodes.forEach( post => {
-            if( post.postDetails.postCampus?.length > 0 ) {
-                post.postDetails.postCampus.forEach ( campus => {
+     if ( result.data.pages?.nodes?.length > 0 ) {
+        result.data.pages.nodes.forEach( page => {
+            if( page.pageDetails.pageCampus?.length > 0 ) {
+                page.pageDetails.pageCampus.forEach ( campus => {
                     actions.createPage({
-                        path: `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
-                        component: path.resolve(`./src/components/templates/post/postDetails.js`),
+                        path: `/${campus.slug}/${config.pagesSlug}/${ (page.wpParent?.node?.slug) ? page.wpParent.node.slug + '/' : '' }${page.slug}`,
+                        component: path.resolve(`./src/components/templates/page/pageDetails.js`),
                         context: {
-                            ...post,
-                            title: post.title,
-                            slug: post.slug,
-                            id: post.id,
-                            layout: "postDetails",
+                            ...page,
+                            title: page.title,
+                            slug: page.slug,
+                            id: page.id,
+                            layout: "pageDetails",
                             campusId: `/${campus.databaseId}/`,
                             breadcrumbs: {
                                             'campus': campus.slug,
-                                            'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                                            'back': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                                            'current': `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                                            'rootApp': `/${campus.slug}/${config.pagesSlug}`,
+                                            'back': `/${campus.slug}/${config.pagesSlug}`,
+                                            'current': `/${campus.slug}/${config.pagesSlug}/${page.slug}`,
                                         },
                         }
                     })
                 })
             }
         })
+    }
+
+    /*******************
+     * Post Pages creation 
+     *******************/
+    if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
+        if ( result.data.posts?.nodes?.length > 0 ){
+            result.data.posts.nodes.forEach( post => {
+                if( post.postDetails.postCampus?.length > 0 ) {
+                    post.postDetails.postCampus.forEach ( campus => {
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                            component: path.resolve(`./src/components/templates/post/postDetails.js`),
+                            context: {
+                                ...post,
+                                title: post.title,
+                                slug: post.slug,
+                                id: post.id,
+                                layout: "postDetails",
+                                campusId: `/${campus.databaseId}/`,
+                                breadcrumbs: {
+                                                'campus': campus.slug,
+                                                'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                                'back': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                                'current': `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                                            },
+                            }
+                        })
+                    })
+                }
+            })
+        } 
     }
 
     /*******************
      * News Pages creation 
      *******************/
     if ( createNews && result.data.news?.nodes?.length > 0 ) {
-        result.data.news.nodes.forEach( news => {
-            if( news.newsDetails.newsCampus?.length > 0 ) {
-                news.newsDetails.newsCampus.forEach ( campus => {
-                    actions.createPage({
-                        path: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
-                        component: path.resolve(`./src/components/templates/news/newsDetails.js`),
-                        context: {
-                            ...news,
-                            limit: config.postsPerPage,
-                            title: news.title,
-                            slug: news.slug,
-                            id: news.id,
-                            layout: "newsDetails",
-                            campusId: `/${campus.databaseId}/`,
-                            breadcrumbs: {
-                                            'campus': campus.slug,
-                                            'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                                            'back': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                                            'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
-                                        },
-                        }
+        if ( result.data.news?.nodes?.length > 0 ) {
+            result.data.news.nodes.forEach( news => {
+                if( news.newsDetails.newsCampus?.length > 0 ) {
+                    news.newsDetails.newsCampus.forEach ( campus => {
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                            component: path.resolve(`./src/components/templates/news/newsDetails.js`),
+                            context: {
+                                ...news,
+                                limit: config.postsPerPage,
+                                title: news.title,
+                                slug: news.slug,
+                                id: news.id,
+                                layout: "newsDetails",
+                                campusId: `/${campus.databaseId}/`,
+                                breadcrumbs: {
+                                                'campus': campus.slug,
+                                                'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                                'back': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                                'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                                            },
+                            }
+                        })
                     })
-                })
-            }
-        })
+                }
+            })
+        }
     }
     
     /*******************
      * Events Pages creation 
      *******************/
     if ( createEvents && result.data.events?.nodes?.length > 0 ) {
-        result.data.events.nodes.forEach( event => {
-            if( event.eventDetails.eventCampus?.length > 0 ) {
-                event.eventDetails.eventCampus.forEach ( campus => {
-                    actions.createPage({
-                        path: `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                        component: path.resolve(`./src/components/templates/event/eventDetails.js`),
-                        context: {
-                            ...event,
-                            title: event.title,
-                            slug: event.slug,
-                            id: event.id,
-                            layout: "eventDetails",
-                            campusId: `/${campus.databaseId}/`,
-                            breadcrumbs: {
-                                            'campus': campus.slug,
-                                            'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                                            'back': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                                            'current': `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                                        },
-                        }
+        if ( result.data.events?.nodes?.length > 0 ) {
+            result.data.events.nodes.forEach( event => {
+                if( event.eventDetails.eventCampus?.length > 0 ) {
+                    event.eventDetails.eventCampus.forEach ( campus => {
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
+                            component: path.resolve(`./src/components/templates/event/eventDetails.js`),
+                            context: {
+                                ...event,
+                                title: event.title,
+                                slug: event.slug,
+                                id: event.id,
+                                layout: "eventDetails",
+                                campusId: `/${campus.databaseId}/`,
+                                breadcrumbs: {
+                                                'campus': campus.slug,
+                                                'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                                'back': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                                'current': `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
+                                            },
+                            }
+                        })
                     })
-                })
-            }
-        })
+                }
+            })
+        }
     }
 
     /******************* 
      * Redirects creation 
      *******************/
-     result.data.allWpRedirect.nodes.forEach( _ => {
-        actions.createRedirect({ 
-            fromPath: _.redirect.redirectFrompath, 
-            toPath: _.redirect.redirectTopath, 
-            isPermanent: _.redirect.redirectIspermanent
+    if ( result.data.redirects?.nodes?.length > 0 ) {
+        result.data.redirects.nodes.forEach( _ => {
+            actions.createRedirect({ 
+                fromPath: _.redirect.redirectFrompath, 
+                toPath: _.redirect.redirectTopath, 
+                isPermanent: _.redirect.redirectIspermanent
+            })
         })
-    })
+    }
 
 }
+
+
+/************************* 
+ * Fragments 
+ *************************/
+
+const language = `
+    language {
+        code
+        locale
+        name
+    }
+`
+
+const wpParent = `
+    wpParent {
+        node {
+            id
+            slug
+            status
+        }
+    }
+`
+
+const customMenues = `
+    ... on WpCustomMenu {
+        id
+        status
+        menuDetails {
+            menuCustomTitle
+            menuLocation
+            menuCampusMenu {
+                menuCampusMenuItems {
+                    menuCampusMenuItem {
+                        menuCampusMenuItemTitle
+                        menuCampusMenuItemType
+                        menuCampusMenuItemWatch
+                        menuCampusMenuItemBlog {
+                            fieldGroupName
+                        }
+                        menuCampusMenuItemCustom {
+                            menuCampusMenuItemCustomUrl
+                            menuCampusMenuItemCustomTitle
+                            menuCampusMenuItemCustomTarget
+                            menuCampusMenuItemCustomLinkType
+                        }
+                        menuCampusMenuItemDropdown {
+                            menuCampusMenuItemDropdownMegamenu
+                            menuCampusMenuItemDropdownItems {
+                                menuItemGroupDropdownItemTitle
+                                menuItemGroupDropdownItemType
+                                menuItemGroupDropdownItemGroupWatch
+                                menuItemGroupDropdownItemGroupNews {
+                                    fieldGroupName
+                                }
+                                menuItemGroupDropdownItemGroupEvents {
+                                    fieldGroupName
+                                }
+                                menuItemGroupDropdownItemGroupCustom {
+                                    menuItemGroupDropdownItemGroupCustomTitle
+                                    menuItemGroupDropdownItemGroupCustomUrl
+                                    menuItemGroupDropdownItemGroupCustomTarget
+                                    menuItemGroupDropdownItemGroupCustomLinkType
+                                }
+                                menuItemGroupDropdownItemGroupBlog {
+                                    fieldGroupName
+                                }
+                            }
+                        }
+                        menuCampusMenuItemEvents {
+                            fieldGroupName
+                        }
+                        menuCampusMenuItemNews {
+                            fieldGroupName
+                        }
+                        menuCampusMenuItemPage {
+                            menuCampusMenuItemPageTitle
+                            menuCampusMenuItemPagePage {
+                                ... on WpPage {
+                                    id
+                                    slug
+                                    status
+                                    pageDetails {
+                                        pageCampus {
+                                            ... on WpCampus {
+                                                id
+                                                slug
+                                            }
+                                        }
+                                    }
+                                    ${wpParent}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            menuPagesMenu {
+                menuPageMenuItems {
+                    menuPageMenuItem {
+                        menuPageMenuItemType
+                        menuPageMenuItemPage {
+                            menuPageMenuItemPageTitle
+                            menuPageMenuItemPagePage {
+                                ... on WpPage {
+                                    id
+                                    slug
+                                    status
+                                    pageDetails {
+                                        pageCampus {
+                                            ... on WpCampus {
+                                                id
+                                                slug
+                                            }
+                                        }
+                                    }
+                                    ${wpParent}
+                                }
+                            }
+                        }
+                        menuPageMenuItemCustom {
+                            menuPageMenuItemCustomLinkType
+                            menuPageMenuItemCustomTarget
+                            menuPageMenuItemCustomTitle
+                            menuPageMenuItemCustomUrl
+                        }
+                    }
+                }
+                menuPagesMenuBase {
+                    menuPagesMenuBaseUrl
+                    menuPagesMenuBaseTitle
+                }
+            }
+        }
+    }
+`
 
 const localFile = `
     localFile {
@@ -430,417 +605,447 @@ const sections = `
     }
 `
 
-const query = `
-    query {
-
-        ########
-        # Campuses
-        ########
-        campuses: allWpCampus(filter: {status: {eq: "publish"}}) {
-            nodes {
-                id
-                title
-                slug
-                status
-                databaseId
-                ${featuredImageFields}
-                campusDetails {
-                    campusWatch {
-                        campusWatchPage
-                        campusWatchSections {
-                            ... on WpContentSection {
-                                id
-                                slug
-                                databaseId
-                                sectionDetails {
-                                    ${sections}
-                                }
-                            }
-                        }
-                    }
-                    campusBlog {
-                        campusBlogPage
-                    }
-                    campusNews {
-                        campusNewsPage
-                    }
-                    campusEvents {
-                        campusEventsPage
-                    }
-                    campusHome {
-                        campusHomeUrl
-                        campusHomeType
-                    }
-                }
-            }
+/*************************
+ * Pages & Posts
+ *************************/
+/* Custom Post Types */
+const allWpCampus = `
+    ########
+    # Campuses
+    ########
+    campuses: allWpCampus(
+        filter: {
+            status: {eq: "publish"}
         }
-
-        ########
-        # Videos on Demand
-        ########
-        videos: allWpVideoOnDemand (
-                filter: {
-                    status: {eq: "publish"}
-                }  
-            ) {
-            nodes {
-                id
-                title
-                slug
-                content
-                excerpt
-                modified
-                ${seoFields}
-                ${featuredImageFields}
-                videoDetails {
-                    videoOneLiner
-                    videoTranscript
-                    videoDayDate
-                    videoUrl
-                    videoRelatedPosts {
-                        ... on WpPost {
-                            id
-                            slug
-                            title
-                            excerpt
-                            status
-                            ${featuredImageFields}
-                        }
-                    }
-                    videoRelatedLinks {
-                        ... on WpLinkitem {
-                            id
-                            title
-                            excerpt
-                            status
-                            ${featuredImageFields}
-                            linkDetails {
-                                linkLink {
-                                    linkLinkTarget
-                                    linkLinkType
-                                    linkLinkUrl
-                                }
-                            }
-                        }
-                    }
-                    videoAttachments {
-                        ... on WpDocument {
-                            id
-                            title
-                            status
-                            attachment {
-                                attachmentFile {
-                                    id
-                                    title
-                                    localFile {
-                                        publicURL
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    videoCampusId
-                    videoCampus {
-                        ... on WpCampus {
-                            id
-                            title
-                            slug
-                            databaseId
-                            ${featuredImageFields}
-                            campusDetails {
-                                campusWatch {
-                                    campusWatchPage
-                                }
-                                campusHome {
-                                    campusHomeUrl
-                                    campusHomeType
-                                }
-                            }
-                        }
-                    }
-                    videoSerieId
-                    videoSeries {
-                        ... on WpSerie {
-                            id
-                            databaseId
-                            title
-                            slug
-                            excerpt
-                            seriesDetails {
-                                seriesTrailer
-                                seriesTrailerPoster {
-                                    ${localFile}
-                                }
-                                seriesSeasonsActive
-                                seriesRelatedPosts{
-                                    ... on WpPost {
-                                        id
-                                        slug
-                                        title
-                                        excerpt
-                                        status
-                                        postDetails {
-                                            postCampus {
-                                                ... on WpCampus {
-                                                    id
-                                                    slug
-                                                }
-                                            }
-                                        }
-                                        ${featuredImageFields}
-                                    }
-                                }
-                                seriesSections {
-                                    ... on WpContentSection {
-                                        id
-                                        slug
-                                        databaseId
-                                        sectionDetails {
-                                            ${sections}
-                                        }
-                                    }
-                                }
-                            }
-                            seriesGraphics {
-                                poster {
-                                    ${localFile}
-                                }
-                                logo {
-                                    ${localFile}
-                                }
-                                background {
-                                    ${localFile}
-                                }
-                            }
-                            videoOnDemandTags {
-                                nodes {
-                                    slug
-                                    name
-                                }
-                            }
-                        }
-                    }
-                    videoSpeaker {
-                        ... on WpSpeaker {
-                            id
-                            title
-                            uri
-                            ${featuredImageFields}
-                        }
-                    }
-                }
-                videoOnDemandTags {
-                    nodes {
-                        slug
-                        name
-                    }
-                }
-            }
-        }
-
-        ########
-        # Series 
-        ########
-        series: allWpSerie (filter: {status: {eq: "publish"}}) {
-            nodes{
-                id
-                title
-                slug
-                databaseId
-                excerpt
-                ${seoFields}
-                seriesDetails {
-                    seriesTrailer
-                    seriesSeasonsActive
-                    seriesTrailerPoster {
-                        ${localFile}
-                    }
-                    seriesRelatedPosts{
-                        ... on WpPost {
-                            id
-                            slug
-                            title
-                            excerpt
-                            status
-                            ${featuredImageFields}
-                        }
-                    }
-                    seriesRelatedLinks{
-                        ... on WpLinkitem {
-                            id
-                            title
-                            excerpt
-                            status
-                            ${featuredImageFields}
-                            linkDetails {
-                                linkLink {
-                                    linkLinkTarget
-                                    linkLinkType
-                                    linkLinkUrl
-                                }
-                            }
-                        }
-                    }
-                }
-                seriesGraphics {
-                    poster {
-                        ${localFile}
-                    }
-                    logo {
-                        ${localFile}
-                    }
-                    background {
-                        ${localFile}
-                    }
-                }
-                videoOnDemandTags {
-                    nodes {
-                        slug
-                        name
-                    }
-                }
-            }
-        }
-
-        ########
-        # Posts 
-        ########
-        posts: allWpPost(filter: {status: {eq: "publish"}})  {
-            nodes{
-                id
-                title
-                excerpt
-                slug
-                content
-                date(formatString: "YYYYMMDD")
-                modified(formatString: "YYYYMMDD")
-                ${featuredImageFields}
-                ${seoFields}
-                postDetails {
-                    postCampus {
-                        ... on WpCampus {
-                            id
-                            title
-                            slug
-                            databaseId
-                            ${featuredImageFields}
-                        }
-                    }
-                    postAuthor {
-                        ... on WpSpeaker {
-                            id
-                            title
-                            slug
-                            ${featuredImageFields}
-                        }
-                    }
-                    postFooterSection {
-                      ... on WpContentSection {
+    ) {
+        nodes {
+            id
+            title
+            slug
+            status
+            databaseId
+            ${featuredImageFields}
+            ${seoFields}
+            campusDetails {
+                campusWatch {
+                    campusWatchPage
+                    campusWatchSections {
+                        ... on WpContentSection {
                             id
                             slug
                             databaseId
                             sectionDetails {
                                 ${sections}
                             }
-                      }
+                        }
                     }
                 }
-                tags {
-                    nodes {
-                        slug
-                        name
+                campusBlog {
+                    campusBlogPage
+                }
+                campusNews {
+                    campusNewsPage
+                }
+                campusEvents {
+                    campusEventsPage
+                }
+                campusBrand {
+                    campusBrandOverwrite
+                    campusBrandUrl
+                    campusBrandLogo {
+                        ${localFile}
+                    }
+                }
+                campusSelector {
+                    campusSelectorOverwrite
+                    campusSelectorHome {
+                        campusHomeUrl
+                        campusHomeType
                     }
                 }
             }
         }
+    }
+`
 
-        ########
-        # News 
-        ########
-        news: allWpNewspost (filter: {status: {eq: "publish"}})  {
-            nodes{
-                id
-                title
-                excerpt
-                slug
-                content
-                date(formatString: "YYYYMMDD")
-                modified(formatString: "YYYYMMDD")
-                ${featuredImageFields}
-                ${seoFields}
-                newsDetails {
-                    newsCampus {
-                        ... on WpCampus {
+const allWpVideo = `
+    ########
+    # Videos on Demand
+    ########
+    videos: allWpVideoOnDemand (
+            filter: {
+                status: {eq: "publish"}
+            }  
+        ) {
+        nodes {
+            id
+            title
+            slug
+            content
+            excerpt
+            modified
+            ${seoFields}
+            ${featuredImageFields}
+            videoDetails {
+                videoOneLiner
+                videoTranscript
+                videoDayDate
+                videoUrl
+                videoAttachments {
+                    ... on WpDocument {
+                        id
+                        title
+                        status
+                        attachment {
+                            attachmentFile {
+                                id
+                                title
+                                localFile {
+                                    publicURL
+                                }
+                            }
+                        }
+                    }
+                }
+                videoCampusId
+                videoCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        ${featuredImageFields}
+                        campusDetails {
+                            campusWatch {
+                                campusWatchPage
+                            }
+                        }
+                    }
+                }
+                videoSerieId
+                videoSeries {
+                    ... on WpSerie {
+                        id
+                        databaseId
+                        title
+                        slug
+                        excerpt
+                        seriesDetails {
+                            seriesTrailer
+                            seriesTrailerPoster {
+                                ${localFile}
+                            }
+                            seriesSeasonsActive
+                            seriesSections {
+                                ... on WpContentSection {
+                                    id
+                                    slug
+                                    databaseId
+                                    sectionDetails {
+                                        ${sections}
+                                    }
+                                }
+                            }
+                        }
+                        seriesGraphics {
+                            poster {
+                                ${localFile}
+                            }
+                            logo {
+                                ${localFile}
+                            }
+                            background {
+                                ${localFile}
+                            }
+                        }
+                        videoOnDemandTags {
+                            nodes {
+                                slug
+                                name
+                            }
+                        }
+                    }
+                }
+                videoSpeaker {
+                    ... on WpSpeaker {
+                        id
+                        title
+                        uri
+                        ${featuredImageFields}
+                    }
+                }
+            }
+            videoOnDemandTags {
+                nodes {
+                    slug
+                    name
+                }
+            }
+        }
+    }
+`
+
+const allWpSeries = `
+    ########
+    # Series 
+    ########
+    series: allWpSerie (
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes{
+            id
+            title
+            slug
+            databaseId
+            excerpt
+            ${seoFields}
+            seriesDetails {
+                seriesTrailer
+                seriesSeasonsActive
+                seriesTrailerPoster {
+                    ${localFile}
+                }
+            }
+            seriesGraphics {
+                poster {
+                    ${localFile}
+                }
+                logo {
+                    ${localFile}
+                }
+                background {
+                    ${localFile}
+                }
+            }
+            videoOnDemandTags {
+                nodes {
+                    slug
+                    name
+                }
+            }
+        }
+    }
+`
+
+const allWpNews = `
+    ########
+    # News 
+    ########
+    news: allWpNewspost (
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes{
+            id
+            title
+            excerpt
+            slug
+            content
+            date(formatString: "YYYYMMDD")
+            modified(formatString: "YYYYMMDD")
+            ${featuredImageFields}
+            ${seoFields}
+            newsDetails {
+                newsCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                    }
+                }
+            }
+            newsTags {
+                nodes {
+                    slug
+                    name
+                }
+            }
+        }
+    }
+`
+
+const allWpEvents = `
+    ########
+    # Events 
+    ########
+    events: allWpEvent(
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes{
+            id
+            title
+            excerpt
+            slug
+            content
+            date(formatString: "YYYYMMDD")
+            modified(formatString: "YYYYMMDD")
+            ${featuredImageFields}
+            ${seoFields}
+            eventDetails {
+                eventAddress
+                eventCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                    }
+                }
+                eventDates {
+                    eventDate
+                    eventTime
+                }
+                eventLink {
+                    eventLinkText
+                    eventLinkUrl
+                }
+            }
+            eventTags {
+                nodes {
+                    slug
+                    name
+                }
+            }
+        }
+    }
+`
+
+const allWpRedirect = `
+    ########
+    # Redirects 
+    ########
+    redirects: allWpRedirect {
+        nodes {
+            redirect {
+                redirectFrompath
+                redirectIspermanent
+                redirectTopath
+            }
+        }
+    }
+`
+
+/* Standard Post Types */
+const allWpPage = `
+    ########
+    # Pages
+    ########
+    pages: allWpPage(
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes {
+            id
+            title
+            slug
+            status
+            content
+            date(formatString: "YYYYMMDD")
+            modified(formatString: "YYYYMMDD")
+            isFrontPage
+            ${seoFields}
+            ${featuredImageFields}
+            pageDetails {
+                pageCampus {
+                    ... on WpCampus {
+                        id
+                        slug
+                    }
+                }
+                pageMenues {
+                    ${customMenues}
+                }
+            }
+            ${wpParent}
+        }
+    }
+`
+
+const allWpPosts = `
+    ########
+    # Posts 
+    ########
+    posts: allWpPost(
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes{
+            id
+            title
+            excerpt
+            slug
+            content
+            date(formatString: "YYYYMMDD")
+            modified(formatString: "YYYYMMDD")
+            ${featuredImageFields}
+            ${seoFields}
+            postDetails {
+                postCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        ${featuredImageFields}
+                    }
+                }
+                postAuthor {
+                    ... on WpSpeaker {
+                        id
+                        title
+                        slug
+                        ${featuredImageFields}
+                    }
+                }
+                postFooterSection {
+                    ... on WpContentSection {
                             id
-                            title
                             slug
                             databaseId
-                        }
-                    }
-                }
-                newsTags {
-                    nodes {
-                        slug
-                        name
+                            sectionDetails {
+                                ${sections}
+                            }
                     }
                 }
             }
-        }
-
-        ########
-        # Events 
-        ########
-        events: allWpEvent(filter: {status: {eq: "publish"}}) {
-            nodes{
-                id
-                title
-                excerpt
-                slug
-                content
-                date(formatString: "YYYYMMDD")
-                modified(formatString: "YYYYMMDD")
-                ${featuredImageFields}
-                ${seoFields}
-                eventDetails {
-                    eventAddress
-                    eventCampus {
-                        ... on WpCampus {
-                            id
-                            title
-                            slug
-                        }
-                    }
-                    eventDates {
-                        eventDate
-                        eventTime
-                    }
-                    eventLink {
-                        eventLinkText
-                        eventLinkUrl
-                    }
-                }
-                eventTags {
-                    nodes {
-                        slug
-                        name
-                    }
+            tags {
+                nodes {
+                    slug
+                    name
                 }
             }
         }
+    }
+`
 
+/* 
+ * Main Query 
+ */
+const query = `
+    query {
 
-        ########
-        # Redirects 
-        ########
-        allWpRedirect {
-            nodes {
-                redirect {
-                    redirectFrompath
-                    redirectIspermanent
-                    redirectTopath
-                }
-            }
-        }
+        ${allWpCampus}
+
+        ${allWpRedirect}
+
+        ${allWpPage}
+        
+        ${allWpPosts}
+
+        ${allWpNews}
+
+        ${allWpEvents}
+
+        ${allWpSeries}
+
+        ${allWpVideo}
 
     }
 `

@@ -19,11 +19,7 @@ export default function NetSimple( { className, drop, variant, ...props} ) {
                 publicURL
             }
             noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
+                publicURL
             }
             knowjesus: file(relativePath: {eq: "img/global/icon-cross-white.svg"}) {
                 publicURL

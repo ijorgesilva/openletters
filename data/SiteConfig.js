@@ -23,38 +23,46 @@ const config = {
   userLocation: "", // User location to display in the author segment.
   twitterUsername: "@victorychurch", // Optionally renders "Follow Me" in the UserInfo segment.
   
-  copyright: "Copyright © Victory Church", // Copyright string for the footer of the website and RSS feed.
-  themeColor: "#0F0A1B", // Used for setting manifest and progress theme colors.
-  backgroundColor: "#f8f8f8", // Used for setting manifest background color.
+  /* Theming */
+    copyright: "Copyright © Victory Church", // Copyright string for the footer of the website and RSS feed.
+    themeColor: "#0F0A1B", // Used for setting manifest and progress theme colors.
+    backgroundColor: "#f8f8f8", // Used for setting manifest background color.
 
-  /* List view */
-  watchMessageListSlug: "/watch/messages/list",
-  watchSerieListSlug: "/watch/series/list",
-  blogPostListSlug: "/blog",
-  newsPostListSlug: "/news",
-  eventsPostListSlug: "/events",
+    /* Layout Configuration */
+    watchDetailsViewSidebarBackground: false,
+    watchDetailsViewHeroBackground: true,
+    
+  /* Gatsby Permalinks */
+    /* List view */
+    watchMessageListSlug: "/watch/messages/list",
+    watchSerieListSlug: "/watch/series/list",
+    blogPostListSlug: "/blog",
+    newsPostListSlug: "/news",
+    eventsPostListSlug: "/events",
 
-  /* Details view */
-  watchSlug: "watch",
-  watchMessageDetailsSlug: "message",
-  watchSeriesDetailsSlug: "series",
-  blogPostDetailsSlug: "blog",
-  newsPostDetailsSlug: "news",
-  eventPostDetailsSlug: "events",
+    /* Details view */
+    watchSlug: "watch",
+    watchMessageDetailsSlug: "message",
+    watchSeriesDetailsSlug: "series",
+    blogPostDetailsSlug: "blog",
+    newsPostDetailsSlug: "news",
+    eventPostDetailsSlug: "events",
 
-  /* Menu subscribe */
-  mailChimpUrl: "https://victoryatl.us6.list-manage.com/subscribe/post?u=3b7891d118a85a8202d7cead5&id=8a2be25566",
+    /* Pages */
+    pagesSlug: 'page',
 
-  /* Features Flags */
-  menuCampusSelector: true,
-  menuLanguageSelector: false,
+  /* Social */
+    /* Menu subscribe */
+    mailChimpUrl: "https://victoryatl.us6.list-manage.com/subscribe/post?u=3b7891d118a85a8202d7cead5&id=8a2be25566",
 
-  /* Layout Configuration */
-  watchDetailsViewSidebarBackground: false,
-  watchDetailsViewHeroBackground: true,
 
-  /* Post Configuration */
-  blogShowDates: true,
+  /* Features */
+    /* Features Flags */
+    menuCampusSelector: true,
+    menuLanguageSelector: false,
+
+    /* Post Configuration */
+    blogShowDates: true,
   
 };
 

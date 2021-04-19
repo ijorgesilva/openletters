@@ -10,7 +10,8 @@ import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
-import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
+import MenuPage from '../../menu/menuPage'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './eventDetails.scss'
 
@@ -27,8 +28,6 @@ export default function EventDetails( { pageContext, location } ){
                         getDate(date,2,'us','yyyy-MM-dd' )
     const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
     const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
-
-    let eventDate, eventDateHtml
     
     const cover = ( featuredImage?.node?.localFile?.localFile ) ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -54,7 +53,7 @@ export default function EventDetails( { pageContext, location } ){
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand   =   { 
                                     {
                                         'name': t('global.events.title'),
@@ -177,6 +176,8 @@ export default function EventDetails( { pageContext, location } ){
                 </Container>
 
             </article>
+
+            <FooterSimpleText campus={ breadcrumbs.campus } />
         </>
     )
 }

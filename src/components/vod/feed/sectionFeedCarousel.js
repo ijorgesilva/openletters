@@ -8,16 +8,16 @@ import 'react-multi-carousel/lib/styles.css'
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
-import './sectionFeedCarouselVod.scss'
+import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, path } ){
+export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, campus, styles } ){
 
     const defaultVisible = 5
     const objLength = (items) ? items.length : 0
 
     return (
 
-        <section className={`sectionFeedCarouselVod ${className}`} id={id}>
+        <section className={`sectionFeedCarousel ${className}`} id={id} style={styles}>
             <Container fluid>
                 {
                     (title) ? 
@@ -44,12 +44,12 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
                                         className={ ( objLength === index + 1 ) ? 'last' : undefined }
                                         featuredImage={ ( item.featuredImage.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
                                         link={  ( item.slug ) ? 
-                                                    `${ (path) ? path : '' }${config.watchMessageDetailsSlug}/${item.slug}` 
+                                                    `${ (campus) ? campus : '' }${config.watchMessageDetailsSlug}/${item.slug}` 
                                                 : 
                                                     undefined 
                                             }
                                         serieLink={ ( item.videoDetails.videoSeries ) ? 
-                                                        `${ (path) ? path : '' }${config.watchSeriesDetailsSlug}/${item.videoDetails.videoSeries.slug}` 
+                                                        `${ (campus) ? campus : '' }${config.watchSeriesDetailsSlug}/${item.videoDetails.videoSeries.slug}` 
                                                     :
                                                         undefined
                                                 }

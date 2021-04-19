@@ -38,9 +38,11 @@
         }
         .card-img{
             margin-left: 5px;
-            width: 120px;
-            height: 67px;
-            background-color: rgba(255,255,255,0.5);
+            width: 100%;
+            min-height: 66px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background-color: rgba(var(--color-six-shade-one),0.2);
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -57,10 +59,10 @@
             color: var(--color-gray-five);
         }
         .card-title {
-            font-weight: bold;
+            font-weight: 400;
             letter-spacing: 0.5px;
-            font-size: 1.2rem;
-            line-height: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.1rem;
             margin-bottom: 5px;
             margin-top: 0px;
         }

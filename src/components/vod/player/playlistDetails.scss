@@ -1,6 +1,6 @@
 @import "../../../../node_modules/include-media/dist/_include-media.scss";
 
-.watchPlayer {
+.playlistDetails {
     border-top: 1px solid rgba(var(--color-white),0.1);
     padding: 1rem 0;
     position: relative;
@@ -57,13 +57,13 @@
 
 }
 
-@include media("<desktop") {
+@include media(">tablet", "<desktop") {
 
-    .watchPlayer {
+    .playlistDetails {
 
         .content-container{
             max-height: unset;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
 
             div[data-vjs-player],
             .video-js {
@@ -77,19 +77,20 @@
 
 }
 
-@include media("<=tablet") {
+@include media(">phone", "<=tablet") {
 
-    .watchPlayer {
-
+    .playlistDetails {
+        padding: 0px;
         .content-container {
             max-height: unset;
-            grid-template-columns: 1fr;
-            margin-bottom: 0px;
+            grid-template-columns: 1fr !important;
+            margin-bottom: 0px !important;
+            padding: 0px !important;
 
             div[data-vjs-player],
             .video-js {
                 padding-top: 56.25%;
-                height: 240px;
+                height: 200px;
             }
 
             .player {
@@ -99,13 +100,23 @@
                     left: 0;
                     width: 100%;
                     z-index: 10;
-                    height: 240px;
+                    height: 200px;
                 }
             }
 
         }
-
     }
 }
 
-@include media("<=phone") {}
+@include media("<=phone") {
+    .playlistDetails {
+        padding: 0px !important;
+        .content-container{
+            max-height: unset;
+            padding: 0px !important;
+            grid-template-columns: 1fr !important;
+            margin-bottom: 0px !important;
+        }
+    }
+
+}

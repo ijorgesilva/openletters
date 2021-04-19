@@ -27,8 +27,8 @@ export default function CampusSelector( { location } ) {
                 {
                     "value": campus.slug, 
                     "label": campus.title, 
-                    "link": ( campus.campusDetails.campusHome ) ? 
-                                campus.campusDetails.campusHome.campusHomeUrl 
+                    "link": ( campus.campusDetails.campusSelector ) ? 
+                                campus.campusDetails.campusSelector.campusSelectorHome.campusHomeUrl 
                             : 
                                 '/' + campus.slug,
                     "visibility": campus.campusDetails.campusConfiguration.campusConfigurationVisibility,
@@ -55,7 +55,6 @@ export default function CampusSelector( { location } ) {
     function setInitialCampus( location, defaultCampus ) {
         
         let currentCampus
-        let campusExist
         let currentUrl          =  location.pathname.split( '/' )
         let currentCampusState  = ( contextData?.data?.currentCampus ) ? contextData.data.currentCampus : undefined
         let currentCampusCookie = ( campuses.find( x => x.value === cookies.get('campus') ) ) ? true : false
@@ -87,12 +86,14 @@ export default function CampusSelector( { location } ) {
         }
 
         // Current Campus State Setter
-        if ( currentCampus.slug != currentCampusState ) {
-            contextData.set({currentCampus: currentCampus.value})
-        }
-        else {
-            contextData.set({currentCampus: defaultCampus.slug})
-        }
+        // if( currentCampusState === undefined || currentCampusState === '' ) {
+        //     if ( currentCampus.slug != currentCampusState ) {
+        //         contextData.set({currentCampus: currentCampus.value})
+        //     }
+        //     else {
+        //         contextData.set({currentCampus: defaultCampus.slug})
+        //     }
+        // }
 
         // Current Campus Cookie creation
         if( cookies.get( 'campus' ) === undefined && campuses.find( x => x.value === currentUrl[1] ) ){
@@ -110,7 +111,7 @@ export default function CampusSelector( { location } ) {
     function handleChange(option){
         setOption( option )
         
-        contextData.set({currentCampus: option.value})
+        // contextData.set({currentCampus: option.value})
 
         if(option.link) { 
             navigate( option.link, { state: {option} }) 

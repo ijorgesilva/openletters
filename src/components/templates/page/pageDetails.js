@@ -8,16 +8,15 @@ import { getDate } from '../../utils/utils'
 import Navigation from '../../menu/navigation'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
-import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
-import './postDetails.scss'
+import './pageDetails.scss'
 
-export default function PostDetails( { location, pageContext } ){
+export default function PageDetails( { location, pageContext } ){
     
-    const { title, excerpt, date, modified, featuredImage, content, terms, postDetails, breadcrumbs } = pageContext
+    const { title, seo, date, modified, featuredImage, content, pageDetails, breadcrumbs } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -30,14 +29,15 @@ export default function PostDetails( { location, pageContext } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
+    
     return (
         <>
 
             <HeaderPage 
-                title       = { title + ' | ' + t('global.blog.title') }
+                title       = { title }
                 location    = { location } 
                 cover       = { cover }
-                description = { ( excerpt ) ? excerpt : excerpt}
+                description = { seo.metaDesc }
                 article     = { true }
             />
             
@@ -47,25 +47,16 @@ export default function PostDetails( { location, pageContext } ){
                 menuGlobal
                 menuLocal
             />
-            
-            <MenuPage
-                menuBrand   =   { 
-                                    {
-                                        'link': breadcrumbs.rootApp,
-                                        'name': t('global.blog.title')
-                                    }
-                                }
-                menu        =   { 
-                                    [
-                                        {
-                                            name: "News", 
-                                            link: '/' + breadcrumbs.campus + '/' + config.newsPostDetailsSlug, 
-                                            as: "", 
-                                            target: ""
-                                        }
-                                    ]
-                                }
-            />
+            {
+                (pageDetails.pageMenues) ?
+                    <MenuPage
+                        menues      = { pageDetails.pageMenues }
+                        campus      = { breadcrumbs.campus }
+                        location    = { location }
+                    />
+                :
+                    undefined
+            }
 
             <article className="contentMain mb-5">
 
@@ -93,13 +84,9 @@ export default function PostDetails( { location, pageContext } ){
 
                         <Col className="" xs={12} md={8}>
 
-                            <div dangerouslySetInnerHTML={{__html: content}}></div>
-                            {
-                                ( terms ) ?
-                                    <TagSimple terms={terms} />
-                                :
-                                    undefined
-                            }
+                            <div 
+                                dangerouslySetInnerHTML={{__html: content}}
+                            ></div>
 
                             {
                                 ( config.blogShowDates ) ?
@@ -115,28 +102,6 @@ export default function PostDetails( { location, pageContext } ){
                                     undefined
                             }
                             
-
-                            <div className="authors">
-                                {   
-                                    (postDetails.postAuthor) ?
-                                        postDetails.postAuthor.map( (author, index) => (
-                                            <>
-                                                <div className="author">
-                                                    {
-                                                        (author.featuredImage) ? 
-                                                            <></>
-                                                            // <Img className="photo" fluid={author.featuredImage.node.localFile.childImageSharp.fluid} alt={author.title} />
-                                                        : 
-                                                            undefined
-                                                    }
-                                                    <address className="author" key={index}>{author.title}</address>
-                                                </div>
-                                            </>
-                                        ))
-                                    : 
-                                        undefined
-                                }
-                            </div>
                             
                         </Col>
 

@@ -6,8 +6,8 @@ import SectionTextPhoto from '../components/content/sectionTextPhoto'
 import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
 import SectionPodcast from '../components/content/sectionPodcast'
 
-export default function RenderSection ( { section, filter, path } ) {
-
+export default function RenderSection ( { section, filter, campus } ) {
+    console.log(section)
     const sectionType = section.sectionDetails.sectionType.split(":")[0];
     const sectionTitle = (section.sectionDetails.sectionTitle) ? section.sectionDetails.sectionTitle : undefined
     const sectionContent = (section.sectionDetails.sectionContent) ? section.sectionDetails.sectionContent : undefined
@@ -92,7 +92,7 @@ export default function RenderSection ( { section, filter, path } ) {
                                 id           = { section.slug }
                                 className    = "h-background-six-shade-three"
                                 title        = { videoItems.name }
-                                path         = { path }
+                                campus         = { campus }
                                 items        = { filteredVideos.sort(sortByDate)  }
                                 itemsVisible = { 5 }
                             />

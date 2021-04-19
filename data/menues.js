@@ -1,8 +1,3 @@
-import React, { useContext } from 'react'
-import ContextConsumer from '../src/provider/context'
-
-
-
 export const watchBrand =  {name: "Watch", link: `/watch`, as: "link"}
 export const watchMenu = [
     {name: "Messages List", link: "/watch/messages/list", as: "link", target: ""},
@@ -137,13 +132,6 @@ export const menuGive = [
     {title: "Mail your gift?", content: "5905 Brook Hollow Parkway, Norcross GA 30071 | Specify campus / designation in the memo portion of the check."},
     {divider: true},
     {name: "View all options", link: "https://victoryatl.com/give"}
-]
-
-export const footerLinks = [
-    {
-        link: "#", 
-        linkText:"Privacy Policy"
-    }
 ]
 
 

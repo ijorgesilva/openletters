@@ -9,8 +9,9 @@ import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
 import BlurbHorizontal from '../../blurb/blurbHorizontal'
-import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
+import MenuPage from '../../menu/menuPage'
 import HeaderPage from '../../headerPage'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './blogCampus.scss'
 
@@ -43,7 +44,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand   =   { 
                                     {
                                         'name': t('global.blog.title'),
@@ -99,6 +100,8 @@ export default function BlogCampus ( { data, location, pageContext } ){
                 </Container>
             </section>
 
+            <FooterSimpleText campus={ breadcrumbs.campus } />
+            
         </>
     )
 }

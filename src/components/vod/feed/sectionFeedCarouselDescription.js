@@ -9,7 +9,7 @@ import TextTruncate from 'react-text-truncate'
 // Components
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
-import './sectionFeedCarouselVod.scss'
+import './sectionFeedCarousel.scss'
 
 export default function SectionFeedCarouselDescription( { title, description, items, className, itemsVisible, id, iconCarousel, ...props} ){
     
@@ -33,7 +33,7 @@ export default function SectionFeedCarouselDescription( { title, description, it
 
     return (
 
-        <section className={`sectionFeedCarouselVod withDescription ${className}`} id={id}>
+        <section className={`sectionFeedCarousel withDescription ${className}`} id={id}>
             <Container fluid>
                 <h4 className="h-color-six-shade-three mb-5">{title}</h4>
                 <Row>

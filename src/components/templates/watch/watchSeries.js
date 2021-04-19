@@ -15,6 +15,8 @@ import TagSimple from '../../tag/tagSimple'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import { watchDetailsMenu } from '../../../../data/menues'
 import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
+import RenderSection from '../../renderSection.js'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import TabSeasons from '../../vod/tab/tabSeasons'
 import './watchSeries.scss'
 
@@ -32,7 +34,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             seriesGraphics.background.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                         : 
                             undefined
-    
+    const sections =    ( data.series.seriesDetails.seriesSections?.length > 0 ) ?
+                            data.series.seriesDetails.seriesSections
+                        :
+                            undefined
     
     return (
         <>
@@ -41,7 +46,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location    = { location }
                 cover       = { cover }
                 description = { excerpt }
-                article     = { true }
+                article
             />
 
             <Navigation
@@ -61,6 +66,12 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 menu        = { watchDetailsMenu } 
                 close       = { breadcrumbs.back }
                 className   = "transparent"
+                styles      =   {
+                                    { 
+                                        position: 'absolute', 
+                                        marginTop: '50px' 
+                                    }
+                                }
             />
 
             <div className="watchSeries">
@@ -129,8 +140,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 title=""
                                                 items={data.VideosOnSerie.nodes}
                                                 itemsVisible={5}
-                                                path={`/${campus}/`}
-                                                // iconCarousel={data.playButton.publicURL}
+                                                campus={`/${campus}/`}
                                                 serie={slug}
                                                 count
                                             />
@@ -148,12 +158,13 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                 }
                             </Tab>
                             {
-                                ( seriesDetails.seriesRelatedPosts ) ?
+                                ( data.series.seriesDetails.seriesResources?.length > 0 ) ?
                                     <Tab eventKey="1" title={t('global.related-resources')}>
                                         <FeedListEven
                                             className   = "h-background-six-shade-three"
-                                            items       = { seriesDetails.seriesRelatedPosts} 
+                                            items       = { data.series.seriesDetails.seriesResources} 
                                             variant     = 'light'
+                                            campus      = { breadcrumbs.campus }
                                         />
                                     </Tab>
                                 :
@@ -177,13 +188,184 @@ export default function WatchSeries( { pageContext, location, data } ) {
 
             </div>
 
+            {
+                (sections) ?
+                    sections.map( ( section, index ) => (
+                        <RenderSection 
+                            index   = {index}
+                            section = {section}
+                            campus    = {`/${campus}/`}
+                            filter  = { {campus: campus } }
+                        />
+                    ))
+                :
+                    undefined
+            }
+            
+            <FooterSimpleText campus={ breadcrumbs.campus } />
+            
         </>
     )
 
 }
 
 export const query = graphql`
-    query getSeriesDetails( $serieId: String!, $campusId: String! ){
+    query getSeriesDetails( $serieId: String!, $campusId: String!, $slug: String! ){
+
+        ########
+        # Series
+        ########
+        series: wpSerie(
+            slug: {eq: $slug}
+        ) {
+            slug
+            seriesDetails{
+                seriesResources{
+                    ... on WpPost {
+                        id
+                        slug
+                        title
+                        excerpt
+                        status
+                        featuredImage {
+                            node {
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData(layout: FULL_WIDTH)
+                                    }
+                                }
+                            }
+                        }
+                        postDetails {
+                            postCampus {
+                                ... on WpCampus {
+                                    id
+                                    slug
+                                }
+                            }
+                        }
+                    }
+                    ... on WpLinkitem {
+                        id
+                        title
+                        excerpt
+                        status
+                        featuredImage {
+                            node {
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData(layout: FULL_WIDTH)
+                                    }
+                                }
+                            }
+                        }
+                        linkDetails {
+                            linkLink {
+                                linkLinkTarget
+                                linkLinkType
+                                linkLinkUrl
+                            }
+                        }
+                    }
+                }
+                seriesSections{
+                    ... on WpContentSection {
+                        id
+                        slug
+                        databaseId
+                        sectionDetails {
+                            sectionContent
+                            sectionTitle
+                            sectionType
+
+                            ## Call To Actions
+                            sectionCta {
+                                sectionCtaSubtitle
+                                sectionCtaVariant
+                                sectionCtaClassname
+                                sectionCtaLink {
+                                    sectionLinkText
+                                    sectionLinkType
+                                    sectionLinkUrl
+                                }
+                                sectionCtaButton {
+                                    sectionButtonUrl
+                                    sectionButtonType
+                                    sectionButtonText
+                                }
+                                sectionCtaPhoto {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH)
+                                        }
+                                    }
+                                }
+                            }
+
+                            ## Podcast
+                            sectionPodcast {
+                                sectionPodcastSubtitle
+                                sectionPodcastItunesUrl
+                                sectionPodcastSpotifyUrl
+                                sectionPodcastSoundcloudUrl
+                                sectionPodcastGraphic {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH)
+                                        }
+                                    }
+                                }
+                            }
+
+                            ## VOD by Tag
+                            sectionVodTags {
+                                sectionVodTag {
+                                    slug
+                                    databaseId
+                                    description
+                                    name
+                                    videosOnDemand {
+                                        nodes {
+                                            title
+                                            slug
+                                            excerpt
+                                            status
+                                            featuredImage {
+                                                node {
+                                                    localFile {
+                                                        childImageSharp {
+                                                            gatsbyImageData(layout: FULL_WIDTH)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            videoDetails {
+                                                videoOneLiner
+                                                videoDayDate
+                                                videoUrl
+                                                videoSeries {
+                                                    ... on WpSerie {
+                                                        id
+                                                        title
+                                                        slug
+                                                    }
+                                                }
+                                                videoCampus {
+                                                    ... on WpCampus {
+                                                        id
+                                                        slug
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         ########
         # Videos on Series 

@@ -28,12 +28,10 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
     if( scrolledPlayer ) {
         playerClasses.push('scrolled')
     }
-    /*. Scrolled Player */
-
 
     return (
 
-            <div className={`watchPlayer h-background-six-shade-three ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
+            <div className={`playlistDetails h-background-six-shade-three ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
 
                 <div className={`content-container ${ (videos?.length > 0) ? 'playlist-grid' : ''}`}>
                     
@@ -41,16 +39,18 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                         {
                             (videoDetails.videoUrl) ?
                                 <VideoReactPlayer
-                                    src={videoDetails.videoUrl}
-                                    height={ ( videos?.length > 0  ) ? undefined : '680px' }
-                                    config={{
-                                        file: {
-                                            attributes: {
-                                                poster: poster,
-                                                autoplay: true,
-                                            }
-                                        }
-                                    }}
+                                    src     = { videoDetails.videoUrl}
+                                    height  = { ( videos?.length > 0  ) ? undefined : '680px' }
+                                    config  =   {
+                                                    {
+                                                        file: {
+                                                            attributes: {
+                                                                poster: poster,
+                                                                autoplay: true,
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                 />
                             : 
                                 undefined

@@ -8,6 +8,26 @@ export const useWebsiteConfiguration = () => {
                                         websiteSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
+                                                
+                                                settingsLegalPage {
+                                                    ... on WpPage {
+                                                        id
+                                                        slug
+                                                        title
+                                                        pageDetails {
+                                                            pageCampus {
+                                                                ... on WpCampus {
+                                                                    id
+                                                                    slug
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                settingsFooter {
+                                                    settingsFooterDisclaimer
+                                                }
                                                 settingsMenus {
                                                     settingsMenuCampusSelector
                                                 }
@@ -15,8 +35,9 @@ export const useWebsiteConfiguration = () => {
                                                     settingsLogo {
                                                         localFile {
                                                             childImageSharp {
-                                                                gatsbyImageData
+                                                                gatsbyImageData(layout: FULL_WIDTH)
                                                             }
+                                                            publicURL
                                                         }
                                                     }
                                                 }

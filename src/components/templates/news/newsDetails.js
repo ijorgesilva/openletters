@@ -10,7 +10,8 @@ import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
-import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
+import MenuPage from '../../menu/menuPage'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './newsDetails.scss'
 
@@ -48,7 +49,7 @@ export default function NewsDetails( { pageContext, location } ){
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand   =   { 
                     {
                         'name': t('global.blog.title'),
@@ -124,6 +125,9 @@ export default function NewsDetails( { pageContext, location } ){
                 </Container>
 
             </article>
+
+            <FooterSimpleText campus={ breadcrumbs.campus } />
+            
         </>
     )
 }

@@ -16,9 +16,9 @@ function CustomToggle({ children, eventKey, handleClick, title }) {
   );
 }
 
-export default function AccordionIndicator({ data, className, defaultActiveKey, ...props }) {
+export default function AccordionIndicator({ data, className, defaultActiveKey }) {
 
-  const [activeKey, setActiveKey] = useState(0);
+  const [activeKey, setActiveKey] = useState(0)
 
   const defaultActive = defaultActiveKey ? defaultActiveKey : 0
 
@@ -51,5 +51,5 @@ export default function AccordionIndicator({ data, className, defaultActiveKey, 
         ))}
       </Accordion>
     </div>
-  );
-};
+  )
+}
