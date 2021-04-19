@@ -4,12 +4,12 @@ import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 
 // Components
-import PaginationBasic from '../../pagination/paginationBasic'
-import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
-import BlurbHorizontal from '../../blurb/blurbHorizontal'
-import HeaderPage from '../../headerPage'
-import { watchBrand, watchMenu } from '../../../../data/menues'
-import config from '../../../../data/SiteConfig'
+import PaginationBasic from '../../../pagination/paginationBasic'
+import HorizontalScrollingMenu from '../../../menu/horizontalScrollingMenu'
+import BlurbHorizontal from '../../../blurb/blurbHorizontal'
+import HeaderPage from '../../../headerPage'
+import { watchBrand, watchMenu } from '../../../../../data/menues'
+import config from '../../../../../data/SiteConfig'
 import './messageList.scss'
 
 export default function MessageList ( { location, data, pageContext } ) {

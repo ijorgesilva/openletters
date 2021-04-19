@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react"
+import React from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import { Tab, Nav, Container, Button } from 'react-bootstrap'
@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 
 // Components
 import HeaderPage from '../../components/headerPage'
+import Navigation from '../../components/menu/navigation'
 import HeroBasic from '../../components/hero/heroBasic'
 import BlurbHorizontalDarkFeatured from '../../components/blurb/blurbHorizontalDarkFeatured'
 import SectionEmpty from '../../components/content/sectionEmpty'
@@ -26,7 +27,7 @@ export default function SmallGroupsPage( { data, location } ) {
 
   /* Standard fields */
   const { t } = useTranslation()
-  
+
   /* Page specific content */
   const stickyMenuJoin = (t) => [
     {id: 1, linkText: t('smallgroups.tab-join-sticky-about'), link: "#about"},
@@ -115,7 +116,13 @@ export default function SmallGroupsPage( { data, location } ) {
           description={t('smallgroups.meta-description')}
           article={true}
       />
-      
+
+      <Navigation
+        location    = { location }
+        menuGlobal
+        menuLocal
+      />
+
       <HorizontalScrollingMenu
             menuBrand={smallGroupBrand}
             menu={smallGroupMenu}
@@ -130,14 +137,14 @@ export default function SmallGroupsPage( { data, location } ) {
           <Button className="btn btn--animation btn--three" variant="none" href="https://my.victoryatl.com/default.aspx?page=4364" target="_blank" >
             {t('smallgroups.find-a-group')}
           </Button>
-          <BlurbHorizontalDarkFeatured 
+          {/* <BlurbHorizontalDarkFeatured 
             title={'Latest Event lorem'}// (latestUpdate.title) ? latestUpdate.title : undefined
             subtitle={'Check out our lorem ipsum'}
-            featuredImage={data.noImage.childImageSharp.fluid.src}
+            featuredImage={data.noImage.childImageSharp.gatsbyImageData}
             className={''}
             link={'/events'}
             excerpt={'Lorem ipsum dolor sit amet. Salvatore'}
-          />
+          /> */}
       </HeroBasic>
       
       <div className="p-0 position-relative z-index-2">
@@ -153,7 +160,7 @@ export default function SmallGroupsPage( { data, location } ) {
 
         <hr/>
 
-        {
+        {/* {
           ( data.news || data.events ) ? 
             ( itemsLenght > 0 ) ?
               <SectionFeedCarouselMultipleSources
@@ -175,7 +182,7 @@ export default function SmallGroupsPage( { data, location } ) {
                 <AlertEmptyState variant="transparent" className="mt-5" content="" />
               </SectionEmpty>
           : undefined
-        }
+        } */}
         
         <MenuSticky 
           link={"https://my.victoryatl.com/default.aspx?page=4364"} 
@@ -186,7 +193,7 @@ export default function SmallGroupsPage( { data, location } ) {
         <SectionPhotoText 
           className="h-background-six-shade-three"
           id={'about'} 
-          photo={data.aboutPhoto.childImageSharp.fluid.src}
+          photo={data.aboutPhoto.childImageSharp.gatsbyImageData}
           title={t('smallgroups.tab-join-section-phototext-title')}
           text={t('smallgroups.tab-join-section-phototext-content')}
         />
@@ -256,7 +263,7 @@ export default function SmallGroupsPage( { data, location } ) {
           id="share"
           title={t('smallgroups.share-title')}
           subtitle={t('smallgroups.share-content')} 
-          photo={data.backgroundShare.childImageSharp.fluid}
+          photo={data.backgroundShare.childImageSharp.gatsbyImageData}
           variant="light"
           location={location}
         />
@@ -271,18 +278,14 @@ export const query = graphql`
   query{
 
       noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
       }  
 
       backgroundShare: file(relativePath: {eq: "img/smallgroups/share_background.jpg"}) {  
         childImageSharp {
-          fluid {
-            src
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }            
       }
 
@@ -293,15 +296,13 @@ export const query = graphql`
           slug
           date(formatString: "YYYYMMDD")
           featuredImage {
-              node {
-                  localFile {
-                    childImageSharp {
-                      fluid {
-                        src
-                      }
-                    }
-                  }
+            node {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(layout: FULL_WIDTH)
+                }
               }
+            }
           }
         }
       }
@@ -331,106 +332,84 @@ export const query = graphql`
               }
           }
           featuredImage {
-              node {
-                  localFile {
-                    childImageSharp {
-                      fluid {
-                        src
-                      }
-                    }
-                  }
+            node {
+              localFile {
+                childImageSharp {
+                    gatsbyImageData(layout: FULL_WIDTH)
+                }
               }
+            }
           }
         }
       }
 
       heroImage: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepOnePhoto: file(relativePath: {eq: "img/smallgroups/step_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepTwoPhoto: file(relativePath: {eq: "img/smallgroups/step_02_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
+        childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
           }
           publicURL
       }
       groupOnePhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-online-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepThreePhoto: file(relativePath: {eq: "img/smallgroups/step_03_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       groupTwoPhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-single-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       groupThreePhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-care-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadNewsPhoto: file(relativePath: {eq: "img/smallgroups/photo_news_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            fluid {
+                src
+            }
+        }
+        publicURL
       }
       joinNewsPhoto: file(relativePath: {eq: "img/smallgroups/photo_news_join_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       aboutPhoto: file(relativePath: {eq: "img/smallgroups/Video@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       applicationFormPhoto: file(relativePath: {eq: "img/smallgroups/photo_03@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadNewsIcon: file(relativePath: {eq: "img/global/icon-news-white.svg"}) {
         publicURL
@@ -442,52 +421,40 @@ export const query = graphql`
         publicURL
       }
       testimonialPhotoAdele: file(relativePath: {eq: "img/smallgroups/Adele.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoConsuela: file(relativePath: {eq: "img/smallgroups/Consuela.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoDeweyHom: file(relativePath: {eq: "img/smallgroups/DeweyHom.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoJanise: file(relativePath: {eq: "img/smallgroups/Janise.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoMeaghan: file(relativePath: {eq: "img/smallgroups/Meaghan.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoTodd: file(relativePath: {eq: "img/smallgroups/Todd.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
   }
 `

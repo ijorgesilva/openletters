@@ -1,35 +1,20 @@
 // Dependencies
 import React from 'react'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { useTranslation } from "react-i18next"
-import { useStaticQuery, graphql } from 'gatsby'
 import { Container, Col, Row } from 'react-bootstrap'
-import Img from 'gatsby-image'
 import {FacebookShareButton, TwitterShareButton} from 'react-share'
 
 // Components
 import './shareSection.scss'
 import config from '../../../data/SiteConfig'
 
-export default function ShareSection( { title, id, subtitle, className, variant, photo, location, ...props } ) {
+export default function ShareSection( { title, id, subtitle, className, variant, photo, location } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
 
     const canonicalUrl = config.siteUrl + location.pathname
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                publicURL
-            }
-            facebook: file(relativePath: {eq: "img/global/icon_social_share_facebook_white.svg"}) {
-                publicURL
-            }
-            twitter: file(relativePath: {eq: "img/global/icon_social_share_twitter_white.svg"}) {
-                publicURL
-            }
-        }
-    `)
 
     const variantClass = (variant) ? variant : "dark"
 
@@ -56,18 +41,30 @@ export default function ShareSection( { title, id, subtitle, className, variant,
                         <div className="buttons z-index-2">
                             <FacebookShareButton className="button button--white user-select-none"
                             quote="" hashtag="" url={canonicalUrl} >
-                                <img src={data.facebook.publicURL} alt="Share on Twitter"/>
+                                <StaticImage
+                                    src="../../assets/img/global/icon_social_share_facebook_white.svg"
+                                    alt="Share on Twitter"
+                                    className="photo"
+                                />
                             </FacebookShareButton>
 
                             <TwitterShareButton className="button button--white user-select-none"
                                 url={canonicalUrl} title="">
-                                <img src={data.twitter.publicURL} alt="Share on Facebook"/>
+                                <StaticImage
+                                    src="../../assets/img/global/icon_social_share_twitter_white.svg"
+                                    alt="Share on Facebook"
+                                    className="photo"
+                                />
                             </TwitterShareButton>
                         </div>
                     </Col>
 
                     <Col xs={12} md={6} lg={6}>
-                        <Img className="photo" fluid={ (photo) ? photo : data.noImage.publicURL } alt="" />
+                        <GatsbyImage 
+                            className="photo"
+                            image={photo} 
+                            alt=""
+                        />
                     </Col>
                     
                 </Row>

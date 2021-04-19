@@ -1,4 +1,26 @@
+import React, { useContext } from 'react'
+import ContextConsumer from '../src/provider/context'
 
+
+
+export const watchBrand =  {name: "Watch", link: `/watch`, as: "link"}
+export const watchMenu = [
+    {name: "Messages List", link: "/watch/messages/list", as: "link", target: ""},
+    {name: "Series List", link: "/watch/series/list", as: "link", target: ""},
+]
+
+/*
+ * Watch Menu
+ */
+export const watchDetailsBrand = {name: "Watch", link: `/watch`}
+export const watchDetailsMenu = [
+    // {name: "News", link: "/news", as: "", target: ""},
+]
+
+
+/*
+ * Main Menu
+ */
 export const menuLocal = [
     
     {name: "About", link: "#", megamenu: true,
@@ -29,7 +51,7 @@ export const menuLocal = [
         ]
     },
 
-    {name: "Watch", link: "/watch"},
+    {name: "Watch", link: '/watch'},
 
     {name: "Grow", link:"", megamenu: true,
         submenu: [
@@ -82,6 +104,7 @@ export const menuLocal = [
             },
         ]
     },
+
     {name: "Need Prayer?", link: "#", class: "mobileonly",
         submenu: [
             {name: "Need Prayer?", link: "https://victoryatl.com/prayer"},
@@ -90,9 +113,12 @@ export const menuLocal = [
             {name: "Say Something", link: "https://victoryatl.com/saysomething"},
         ]
     },
+
     {name: "Give", link: "https://victoryatl.com/give", class: "mobileonly"},
+
     {name: "Connect", link: "https://www.connecttovictory.com/", type:"button", target:"_blank"}
 ]
+
 export const menuHelp = [
     {name: "Need Prayer?", link: "https://victoryatl.com/prayer"},
     {name: "Healed Sessions", link: "https://victoryatl.com/healed/"},
@@ -101,6 +127,7 @@ export const menuHelp = [
     {divider: true},
     {name: "How to Help?", link: "https://victoryatl.com/howtohelp"},
 ]
+
 export const menuGive = [
     {name: "Norcross", link: "https://pushpay.com/g/victorynorcross?utm_source=pushpay&utm_medium=email&utm_content=link6&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
     {name: "Hamilton Mill", link: "https://pushpay.com/g/victoryhamiltonmill?utm_source=pushpay&utm_medium=email&utm_content=link4&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
@@ -111,6 +138,7 @@ export const menuGive = [
     {divider: true},
     {name: "View all options", link: "https://victoryatl.com/give"}
 ]
+
 export const footerLinks = [
     {
         link: "#", 
@@ -118,13 +146,6 @@ export const footerLinks = [
     }
 ]
 
-/*
- * Watch Menu
- */
-export const watchDetailsBrand = {name: "Watch", link: "/watch"}
-export const watchDetailsMenu = [
-    // {name: "News", link: "/news", as: "", target: ""},
-]
 
 /*
  * Section Menues
@@ -148,9 +169,4 @@ export const eventsMenu = [
     // {name: "Events", link: "/events", as: "", target: ""},
 ]
 
-export const watchBrand =  {name: "Watch", link: "/watch", as: "link"}
-export const watchMenu = [
-    {name: "Messages List", link: "/watch/messages/list", as: "link", target: ""},
-    {name: "Series List", link: "/watch/series/list", as: "link", target: ""},
-]
 

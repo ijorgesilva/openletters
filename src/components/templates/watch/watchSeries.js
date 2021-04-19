@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import sanitizeHtml from 'sanitize-html'
 
 // Components
-import config from '../../../../data/SiteConfig'
+import Navigation from '../../menu/navigation'
 import HeroSeries from '../../vod/hero/heroSeries'
 import FeedListEven from '../../feed/feedListEven'
 import HeaderPage from '../../headerPage'
@@ -21,7 +21,7 @@ import './watchSeries.scss'
 export default function WatchSeries( { pageContext, location, data } ) {
 
     const { title, slug, excerpt, seriesDetails, campus, seriesGraphics, videoOnDemandTags, breadcrumbs } = pageContext
-
+    
     /* Standard fields */
     const { t } = useTranslation()
     
@@ -42,6 +42,12 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 cover       = { cover }
                 description = { excerpt }
                 article     = { true }
+            />
+
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
             />
 
             <MenuWatchDetails 

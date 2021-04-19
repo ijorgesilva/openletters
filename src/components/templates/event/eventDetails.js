@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 
 // Components
 import { getDate } from '../../utils/utils'
+import Navigation from '../../menu/navigation'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
@@ -35,7 +36,6 @@ export default function EventDetails( { pageContext, location } ){
                         undefined
     
 
-    console.log( eventDetails )
 
     return (
         <>
@@ -45,6 +45,13 @@ export default function EventDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
+            />
+            
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
+                menuLocal
             />
             
             <HorizontalScrollingMenu

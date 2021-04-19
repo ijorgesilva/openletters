@@ -28,30 +28,32 @@ const responsive = {
     }
   };
 
-export default function TestimonialCarousel(props){
+export default function TestimonialCarousel( { testimonials, title, id } ){
     return (
-        <section className={`testimonialCarousel $props.class`} id={props.id}>
+        <section className={`testimonialCarousel $props.class`} id={id}>
             <Container fluid>
-                <div dangerouslySetInnerHTML={{__html:props.title}}></div>
+                <div dangerouslySetInnerHTML={{__html:title}}></div>
             </Container>
             <Container fluid className={`carousel-background`}>
                 <Carousel 
-                    swipeable={false}
-                    draggable={false}
-                    showDots={false}
-                    infinite={true}
-                    responsive={responsive}
-                    itemClass="carousel-item-padding-40-px"
-                    containerClass="carousel-container"
+                    swipeable           = {false}
+                    draggable           = {false}
+                    showDots            = {false}
+                    infinite            = {true}
+                    responsive          = {responsive}
+                    itemClass           = "carousel-item-padding-40-px"
+                    containerClass      = "carousel-container"
                 >
                     {
-                        props.testimonials.map( (testimonial, index) => (
+                        testimonials.map( (testimonial, index) => (
                             <div key={index} className="card testimonial-card user-select-none">
                                 <div className={`card-background ${testimonial.class}`}></div>
                                 <div className="avatar mx-auto white">
                                     { 
-                                        (testimonial.photo) ? <img src={testimonial.photo} className="rounded-circle" alt="" />
-                                        : <img src={noPhoto} className="rounded-circle" alt="" />
+                                        (testimonial.photo) ? 
+                                            <img src={testimonial.photo} className="rounded-circle" alt="" />
+                                        : 
+                                            <img src={noPhoto} className="rounded-circle" alt="" />
                                     }
                                 </div>
                                 <div className="card-body">

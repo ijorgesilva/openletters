@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next"
 
 // Components
 import AlertEmptyState from '../../components/alert/alertEmptyState'
+import Navigation from '../../components/menu/navigation'
 import { getDate } from '../../components/utils/utils'
 import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
 import BlurbHorizontal from '../../components/blurb/blurbHorizontal'
@@ -19,8 +20,6 @@ export default function SmallGroupEventPage ( { data, location } ) {
     /* Standard fields */
     const { t } = useTranslation()
 
-    const noImage = (data.noImage.childImageSharp) ? data.noImage.childImageSharp.fluid.src : undefined
-
     return (
         <>
 
@@ -29,6 +28,12 @@ export default function SmallGroupEventPage ( { data, location } ) {
                 location={location} 
                 cover={data.eventPoster.publicURL}
                 description="Small Group's Blog"
+            />
+            
+            <Navigation
+                location    = { location }
+                menuGlobal
+                menuLocal
             />
             
             <HorizontalScrollingMenu
@@ -53,7 +58,11 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                         <BlurbHorizontal 
                                             key={index}
                                             className={'mb-4'}
-                                            featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : noImage  }
+                                            featuredImage=  { (obj.featuredImage?.node?.localFile) ? 
+                                                obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                            : 
+                                                undefined  
+                                            }
                                             
                                             title={obj.title}
                                             subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
@@ -74,7 +83,11 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                         <BlurbHorizontal 
                                             key={index}
                                             className={'mb-4'}
-                                            featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : noImage  }
+                                            featuredImage=  { (obj.featuredImage?.node?.localFile) ? 
+                                                obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                            : 
+                                                undefined  
+                                            }
                                             
                                             title={obj.title}
                                             subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
@@ -111,9 +124,7 @@ export const query = graphql`
                     node {
                         localFile {
                             childImageSharp {
-                                fluid {
-                                    src
-                                }
+                                gatsbyImageData(layout: FULL_WIDTH)
                             }
                         }
                     }
@@ -132,9 +143,7 @@ export const query = graphql`
                     node {
                         localFile {
                             childImageSharp {
-                                fluid {
-                                    src
-                                }
+                                gatsbyImageData(layout: FULL_WIDTH)
                             }
                         }
                     }
@@ -142,18 +151,9 @@ export const query = graphql`
             }
         }
 
-        noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-        }
-
         eventPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             publicURL
         }
-
 
     }
 `

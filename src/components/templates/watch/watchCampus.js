@@ -5,6 +5,7 @@ import { graphql } from 'gatsby'
 
 // Components
 import HeaderPage from '../../headerPage'
+import Navigation from '../../menu/navigation'
 import { getHeroDescription } from '../../utils/utils'
 import HeroSimple from '../../vod/hero/heroSimple'
 import SectionFeedCarousel from '../../../components/vod/feed/sectionFeedCarousel'
@@ -42,6 +43,13 @@ export default function WatchPage( { pageContext, data, location } ) {
                 description={ t('global.watch.meta-description') }
             />
 
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
+                menuLocal
+            />
+            
             <HeroSimple 
                 id="hero"
                 iconSerie={ ( hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ) ? 

@@ -30,7 +30,6 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
     }
     /*. Scrolled Player */
 
-    console.log(poster)
 
     return (
 

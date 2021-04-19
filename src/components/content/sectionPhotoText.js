@@ -1,30 +1,12 @@
 // Dependencies
 import React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useStaticQuery, graphql } from 'gatsby'
 
 // Components
 import './sectionPhotoText.scss'
 
-export default function SectionPhotoText( { title, photo, text, className, id, ...props}) {
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
-            }
-        }
-    `)
-
-    const image = photo ? photo : data.noImage.childImageSharp.fluid.src
-
-    const style = {
-        backgroundImage: "url("+ image +")"
-    }
+export default function SectionPhotoText ( { title, photo, text, className, id } ) {
 
     return (
 
@@ -32,7 +14,12 @@ export default function SectionPhotoText( { title, photo, text, className, id, .
             <Container fluid>
                 <Row>
                     <Col className="p-0">
-                        <div className="photo" style={style}></div>
+                        <div className="photo">
+                             <GatsbyImage 
+                                image={photo} 
+                                alt=""
+                            />
+                        </div>
                     </Col>
                     <Col className="content">
                         <div>

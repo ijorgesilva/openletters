@@ -6,6 +6,7 @@ import { Button, Accordion, Card } from 'react-bootstrap'
 
 // Components
 import HeaderPage from '../../components/headerPage'
+import Navigation from '../../components/menu/navigation'
 import HeroBasic from "../../components/hero/heroBasic"
 import SectionTextBasic from "../../components/content/sectionTextBasic"
 import SectionEmpty from '../../components/content/sectionEmpty'
@@ -95,6 +96,12 @@ export default function SmallGroupsPage( { data, location } ) {
           article={true}
       />
 
+      <Navigation
+        location    = { location }
+        menuGlobal
+        menuLocal
+      />
+
       <HorizontalScrollingMenu
           menuBrand={smallGroupBrand}
           menu={smallGroupMenu}
@@ -113,93 +120,93 @@ export default function SmallGroupsPage( { data, location } ) {
 
       <div className="p-0 position-relative z-index-2">
 
-                  <SectionTextBasic id={'leaders-intro'} title={t('smallgroups.tab-host-section-intro-title')}>
-                    {t('smallgroups.tab-host-section-intro-content')}
-                  </SectionTextBasic>
+        <SectionTextBasic id={'leaders-intro'} title={t('smallgroups.tab-host-section-intro-title')}>
+          {t('smallgroups.tab-host-section-intro-content')}
+        </SectionTextBasic>
 
-                  <hr/>
+        <hr/>
 
-                  {
-                    (data.news || data.events) ?
-                      ( itemsLenght > 0 ) ?
-                        <SectionFeedCarouselMultipleSources
-                          title = {t('smallgroups.tab-host-section-news-title')}
-                          id="news"
-                          className="h-background-gray-one"
-                          itemsNews = { (data.news) ? data.news : undefined}
-                          itemsEvents = { (data.events) ? data.news : undefined}
-                          slugOne = { (data.news) ? "/news/" : undefined}
-                          slugTwo = { (data.events) ? "/events/" : undefined}
-                          itemsVisible = {3}
-                        />
-                      : 
-                        <SectionEmpty 
-                          className="h-background-gray-one" 
-                          title = {t('smallgroups.tab-host-section-news-title')} 
-                          id="news"
-                        >
-                          <AlertEmptyState variant="transparent" className="mt-5" content="" />
-                        </SectionEmpty>
-                    : undefined
-                  }
+        {/* {
+          (data.news || data.events) ?
+            ( itemsLenght > 0 ) ?
+              <SectionFeedCarouselMultipleSources
+                title = {t('smallgroups.tab-host-section-news-title')}
+                id="news"
+                className="h-background-gray-one"
+                itemsNews = { (data.news) ? data.news : undefined}
+                itemsEvents = { (data.events) ? data.news : undefined}
+                slugOne = { (data.news) ? "/news/" : undefined}
+                slugTwo = { (data.events) ? "/events/" : undefined}
+                itemsVisible = {3}
+              />
+            : 
+              <SectionEmpty 
+                className="h-background-gray-one" 
+                title = {t('smallgroups.tab-host-section-news-title')} 
+                id="news"
+              >
+                <AlertEmptyState variant="transparent" className="mt-5" content="" />
+              </SectionEmpty>
+          : undefined
+        } */}
 
-                  <MenuSticky link={"#application"} linkText={t('smallgroups.apply-now')} menuLinks={stickyMenuLead(t)}></MenuSticky>
-                  
-                  <SectionVideoPlayerSimple 
-                      id="about_lead" 
-                      title={t('smallgroups.tab-host-section-player-title')}
-                      src={t('smallgroups.tab-host-section-video-link')}
-                      poster={t('smallgroups.tab-host-section-video-poster')}
-                      controls
-                      pip
-                  />
+        <MenuSticky link={"#application"} linkText={t('smallgroups.apply-now')} menuLinks={stickyMenuLead(t)}></MenuSticky>
+        
+        <SectionVideoPlayerSimple 
+            id="about_lead" 
+            title={t('smallgroups.tab-host-section-player-title')}
+            src={t('smallgroups.tab-host-section-video-link')}
+            poster={t('smallgroups.tab-host-section-video-poster')}
+            controls
+            pip
+        />
 
-                  <SectionSteps 
-                    title={t('smallgroups.tab-host-section-steps-title')}
-                    text={t('smallgroups.tab-host-section-steps-content')}
-                    steps={leadSteps(t)}
-                    id={'steps'}
-                    link="#application"
-                    linkText={t('smallgroups.apply-now')}>
-                      <Accordion className="accordionIndicator mt-5" defaultActiveKey="0">
-                        <Card>
-                          <Card.Header className="accordion-header font-weight-bolder h-cursor-pointer h5">
-                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                              {t('smallgroups.tab-host-section-steps-faq-title')}
-                            </Accordion.Toggle>
-                          </Card.Header>
-                          <Accordion.Collapse eventKey="0">
-                            <Card.Body dangerouslySetInnerHTML={{__html: t('smallgroups.tab-host-section-steps-faq-content')}}></Card.Body>
-                          </Accordion.Collapse>
-                        </Card>
-                      </Accordion>
-                  </SectionSteps>     
+        <SectionSteps 
+          title={t('smallgroups.tab-host-section-steps-title')}
+          text={t('smallgroups.tab-host-section-steps-content')}
+          steps={leadSteps(t)}
+          id={'steps'}
+          link="#application"
+          linkText={t('smallgroups.apply-now')}>
+            <Accordion className="accordionIndicator mt-5" defaultActiveKey="0">
+              <Card>
+                <Card.Header className="accordion-header font-weight-bolder h-cursor-pointer h5">
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    {t('smallgroups.tab-host-section-steps-faq-title')}
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body dangerouslySetInnerHTML={{__html: t('smallgroups.tab-host-section-steps-faq-content')}}></Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+        </SectionSteps>     
 
-                  <SectionPhotoFormText
-                    id={"application"}
-                    formTitle={t('smallgroups.tab-host-section-form-title')}
-                    formContent={t('smallgroups.tab-host-section-form-content')}
-                    formIframeUrl={t('smallgroups.tab-host-section-form-iframe')}
-                    photoClassName={"h-background-one"}
-                    photoImageBackground={data.applicationFormPhoto.publicURL}
-                    photoContentTitle={t('smallgroups.tab-host-section-form-content-title')}
-                    photoContentText={t('smallgroups.tab-host-section-form-content-text')}
-                    backgroundClassName={"h-background-six"}
-                  />
+        <SectionPhotoFormText
+          id={"application"}
+          formTitle={t('smallgroups.tab-host-section-form-title')}
+          formContent={t('smallgroups.tab-host-section-form-content')}
+          formIframeUrl={t('smallgroups.tab-host-section-form-iframe')}
+          photoClassName={"h-background-one"}
+          photoImageBackground={data.applicationFormPhoto.publicURL}
+          photoContentTitle={t('smallgroups.tab-host-section-form-content-title')}
+          photoContentText={t('smallgroups.tab-host-section-form-content-text')}
+          backgroundClassName={"h-background-six"}
+        />
 
-                  <SectionFaqSimple
-                    id={"faq"}
-                    title={t('smallgroups.tab-host-section-faq-title')}
-                    data={leadFaq(t)}
-                    defaultActiveKey={0}
-                  ></SectionFaqSimple>
+        <SectionFaqSimple
+          id={"faq"}
+          title={t('smallgroups.tab-host-section-faq-title')}
+          data={leadFaq(t)}
+          defaultActiveKey={0}
+        />
 
         <ShareSection 
           className="h-background-one"
           id="share"
           title={t('smallgroups.share-title')}
           subtitle={t('smallgroups.share-content')} 
-          photo={data.backgroundShare.childImageSharp.fluid}
+          photo={data.backgroundShare.childImageSharp.gatsbyImageData}
           variant="light"
           location={location}
         />
@@ -214,11 +221,10 @@ export default function SmallGroupsPage( { data, location } ) {
 export const query = graphql`
   query{
 
+
     backgroundShare: file(relativePath: {eq: "img/smallgroups/share_background.jpg"}) {  
       childImageSharp {
-        fluid {
-          src
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
       }            
     }
 
@@ -229,15 +235,13 @@ export const query = graphql`
         slug
         date(formatString: "YYYYMMDD")
         featuredImage {
-            node {
-                localFile {
-                  childImageSharp {
-                    fluid {
-                      src
-                    }
-                  }
-                }
+          node {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
             }
+          }
         }
       }
     }
@@ -267,98 +271,76 @@ export const query = graphql`
             }
         }
         featuredImage {
-            node {
-                localFile {
-                  childImageSharp {
-                    fluid {
-                      src
-                    }
-                  }
-                }
+          node {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
             }
+          }
         }
       }
     }
 
       heroImage: file(relativePath: {eq: "img/smallgroups/hero-host-group.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepOnePhoto: file(relativePath: {eq: "img/smallgroups/step_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepTwoPhoto: file(relativePath: {eq: "img/smallgroups/step_02_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       groupOnePhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-online-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadStepThreePhoto: file(relativePath: {eq: "img/smallgroups/step_03_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       groupTwoPhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-single-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       groupThreePhoto: file(relativePath: {eq: "img/smallgroups/groups-photo-care-groups.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadNewsPhoto: file(relativePath: {eq: "img/smallgroups/photo_news_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       joinNewsPhoto: file(relativePath: {eq: "img/smallgroups/photo_news_join_01_v2@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       applicationFormPhoto: file(relativePath: {eq: "img/smallgroups/photo_03@2x.jpg"}) {
-          childImageSharp {
-              fluid {
-                  src
-              }
-          }
-          publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       leadNewsIcon: file(relativePath: {eq: "img/global/icon-news-white.svg"}) {
         publicURL
@@ -370,52 +352,40 @@ export const query = graphql`
         publicURL
       }
       testimonialPhotoAdele: file(relativePath: {eq: "img/smallgroups/Adele.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoConsuela: file(relativePath: {eq: "img/smallgroups/Consuela.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoDeweyHom: file(relativePath: {eq: "img/smallgroups/DeweyHom.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoJanise: file(relativePath: {eq: "img/smallgroups/Janise.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoMeaghan: file(relativePath: {eq: "img/smallgroups/Meaghan.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
       testimonialPhotoTodd: file(relativePath: {eq: "img/smallgroups/Todd.jpg"}) {
-            childImageSharp {
-                fluid {
-                    src
-                }
-            }
-            publicURL
+        childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+        }
+        publicURL
       }
   }
 `

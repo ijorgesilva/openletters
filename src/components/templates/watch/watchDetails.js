@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { graphql } from 'gatsby'
 
 // Components
+import Navigation from '../../menu/navigation'
 import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
 import WatchDetailsContent from '../../vod/content/watchDetailsContent'
 import PlaylistDetails from '../../vod/player/playlistDetails'
@@ -15,7 +16,7 @@ import './watchDetails.scss'
 export default function WatchDetails( { pageContext, location, data } ) {
     
     const { title, slug, excerpt, content, featuredImage, videoDetails, videoOnDemandTags, breadcrumbs } = pageContext
-
+    
     /* Standard fields */
     const { t } = useTranslation()
     let videos = { nodes: [] }
@@ -32,7 +33,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
     const poster = ( featuredImage?.node?.localFile ) ? 
                         featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
-                        (videoDetails.videoSeries?.seriesGraphics) ?
+                        ( videoDetails.videoSeries?.seriesGraphics?.background?.localFile ) ?
                             videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                         :
                             undefined
@@ -51,6 +52,12 @@ export default function WatchDetails( { pageContext, location, data } ) {
                 cover       = { poster }
                 description = { excerpt }
                 article     = { true }
+            />
+
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
             />
 
             <MenuWatchDetails 

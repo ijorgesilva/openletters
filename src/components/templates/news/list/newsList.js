@@ -5,14 +5,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from "react-i18next"
 
 // Components
-import PaginationBasic from '../../pagination/paginationBasic'
-import { getDate } from '../../../components/utils/utils'
-import HorizontalScrollingMenu from '../../../components/menu/horizontalScrollingMenu'
-import BlurbHorizontal from '../../../components/blurb/blurbHorizontal'
-import HeaderPage from '../../../components/headerPage'
-import { blogMenu, blogMenuBrand } from '../../../../data/menues'
-import config from '../../../../data/SiteConfig'
-import './postList.scss'
+import PaginationBasic from '../../../pagination/paginationBasic'
+import { getDate } from '../../../utils/utils'
+import HorizontalScrollingMenu from '../../../menu/horizontalScrollingMenu'
+import BlurbHorizontal from '../../../blurb/blurbHorizontal'
+import HeaderPage from '../../../headerPage'
+import { blogMenu, blogMenuBrand } from '../../../../../data/menues'
+import config from '../../../../../data/SiteConfig'
+import './newsList.scss'
 
 export default function PostList ( { location, data, pageContext } ) {
 
@@ -25,10 +25,10 @@ export default function PostList ( { location, data, pageContext } ) {
         <>
 
             <HeaderPage 
-                title={t('blog.title')}
+                title={t('global.news-title')}
                 location={location} 
-                cover={ (data.blogPoster) ? data.blogPoster.publicURL : undefined }
-                description={t('blog.description')}
+                cover={ (data.newsPoster) ? data.newsPoster.publicURL : undefined }
+                description={t('global.news-description')}
             />
             
             <HorizontalScrollingMenu
@@ -40,24 +40,25 @@ export default function PostList ( { location, data, pageContext } ) {
                 <Container className="mt-5 mb-5">
                     <Row>
                         <Col xs={12} md={8}>
-                            {data.posts.edges.map( (obj, index) => (
+                            {data.news.edges.map( (obj, index) => (
                                 <>
                                     <BlurbHorizontal 
                                         key={index}
                                         className={'mb-4'}
-                                        featuredImage={ ( obj.node.featuredImage != null ) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage }
-                                        title={obj.node.title}
-                                        subtitle={ getDate(obj.node.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
 
-                                        tags={ ( obj.node.tags.nodes ) ? obj.node.tags : undefined }
-                                        
-                                        link={`${config.blogPostDetailsSlug}/${obj.node.slug}`}
+                                        featuredImage={ ( obj.node.featuredImage.node != null ) ? obj.node.featuredImage.node.localFile.childImageSharp.fluid.src : noImage }
+                                        title={obj.node.title}
+                                        subtitle={getDate(obj.node.modified.toString(),2,'us','LLLL d, yyyy' )}
+
+                                        tags={ ( obj.node.newTags ) ? obj.node.newTags : undefined }
+
+                                        link={`${config.newsPostDetailsSlug}/${obj.node.slug}`}
                                         linkText={obj.node.title}
                                         excerpt={obj.node.excerpt}
                                     />
                                 </>
                             ))}
-                            <PaginationBasic pages={pageContext} slug={config.blogPostListSlug}/>
+                            <PaginationBasic pages={pageContext} slug={config.newsPostListSlug} />
                         </Col>
                     </Row>
                 </Container>
@@ -67,9 +68,9 @@ export default function PostList ( { location, data, pageContext } ) {
 }
 
 export const query = graphql`
-    query blogListQuery ( $skip: Int!, $limit: Int! ){
+    query newsListQuery ( $skip: Int!, $limit: Int! ){
 
-        posts: allWpPost(filter: {status: {eq: "publish"}}, skip: $skip, limit: $limit, sort: {fields: modified, order: DESC}) {
+        news: allWpNewspost(filter: {status: {eq: "publish"}}, skip: $skip, limit: $limit, sort: {fields: modified, order: DESC}) {
             edges{
                 node{
                     title
@@ -80,15 +81,15 @@ export const query = graphql`
                     featuredImage {
                         node {
                             localFile {
-                                childImageSharp {
-                                    fluid {
-                                        src
-                                    }
+                            childImageSharp {
+                                fluid {
+                                src
                                 }
+                            }
                             }
                         }
                     }
-                    tags {
+                    newsTags {
                         nodes {
                             slug
                             name
@@ -106,7 +107,7 @@ export const query = graphql`
             }
         }
 
-        blogPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
+        newsPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             publicURL
         }
 

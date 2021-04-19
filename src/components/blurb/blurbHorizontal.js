@@ -10,10 +10,6 @@ import './blurbHorizontal.scss'
 export default function BlurbHorizontal( { title, subtitle, keyIndex, featuredImage, className, noImage, link, tag, tags, tagClassName, excerpt, ...props } ) {
 
     const image = (featuredImage) ? featuredImage : (noImage) ? noImage : undefined
-    
-    const styleCardPhoto = {
-        backgroundImage: "url("+ image +")"
-    }
 
     const tagClass = (tagClassName) ? tagClassName : ""
 

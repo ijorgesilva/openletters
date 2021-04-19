@@ -1,41 +1,24 @@
 // Dependencies
 import React from 'react'
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from 'gatsby'
+import PropTypes from 'prop-types'
 import { withTrans } from '../../i18n/withTrans'
 import CookieConsent from 'react-cookie-consent'
+import { ContextProviderComponent } from '../../provider/context'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Components
-import {menuLocal, menuHelp, menuGive, footerLinks } from '../../../data/menues'
-import Navigation from "../menu/navigation"
-import MenuGlobal from "../menu/menuGlobal"
-import FooterSimpleText from "../footer/footerSimpleText"
-import "../global.scss"
-import "../layout.scss"
+import { footerLinks } from '../../../data/menues'
+import FooterSimpleText from '../footer/footerSimpleText'
+import '../global.scss'
+import '../layout.scss'
 
 const Layout = ( { children, pageContext, t, i18n, location } ) => {
-
-    const data = useStaticQuery(graphql`
-        query{
-            logo: file(relativePath: {eq: "img/global/logo_white.svg"}) {
-                publicURL
-            }
-        }
-    `)
 
     switch(pageContext.layout){
         case 'serieDetails':
         case 'watchDetails':
             return (
-                <>
-
-                    <MenuGlobal 
-                        className   = { "h-background-six-shade-three" }
-                        helpMenu    = { menuHelp } 
-                        giveMenu    = { menuGive } 
-                        location    = { location }
-                    />
+                <ContextProviderComponent>
 
                     <main>
                         {children}
@@ -57,22 +40,13 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         {t('global.cookie-consent')}
                     </CookieConsent>
 
-                </>
+                </ContextProviderComponent>
             )
             break
         default:
             return (
-                <>
+                <ContextProviderComponent>
                     
-                    <Navigation 
-                        menuLocal       = { menuLocal }
-                        logo            = { data.logo.publicURL }
-                        as              = { "link" }
-                        menuGlobalGive  = { menuGive }
-                        menuGlobalHelp  = { menuHelp }
-                        location        = { location }
-                    />
-    
                     <main>
                         {children}
                     </main>
@@ -93,7 +67,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         {t('global.cookie-consent')}
                     </CookieConsent>
 
-                </>
+                </ContextProviderComponent>
             )
 
     }

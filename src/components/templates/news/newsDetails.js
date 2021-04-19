@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 
 // Components
 import { getDate } from '../../utils/utils'
+import Navigation from '../../menu/navigation'
 import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import TagSimple from '../../tag/tagSimple'
@@ -38,6 +39,13 @@ export default function NewsDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
+            />
+            
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
+                menuLocal
             />
             
             <HorizontalScrollingMenu

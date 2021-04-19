@@ -6,6 +6,7 @@ import { graphql } from 'gatsby'
 
 // Components
 import AlertEmptyState from '../../alert/alertEmptyState'
+import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
 import BlurbHorizontal from '../../blurb/blurbHorizontal'
 import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
@@ -33,6 +34,13 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                     undefined 
                                 }
                 description = { t('global.events.description') }
+            />
+            
+            <Navigation
+                location    = { location }
+                campus      = { breadcrumbs.campus }
+                menuGlobal
+                menuLocal
             />
             
             <HorizontalScrollingMenu
