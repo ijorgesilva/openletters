@@ -55,7 +55,6 @@ export default function CampusSelector( { location } ) {
     function setInitialCampus( location, defaultCampus ) {
         
         let currentCampus
-        let campusExist
         let currentUrl          =  location.pathname.split( '/' )
         let currentCampusState  = ( contextData?.data?.currentCampus ) ? contextData.data.currentCampus : undefined
         let currentCampusCookie = ( campuses.find( x => x.value === cookies.get('campus') ) ) ? true : false
@@ -87,11 +86,13 @@ export default function CampusSelector( { location } ) {
         }
 
         // Current Campus State Setter
-        if ( currentCampus.slug != currentCampusState ) {
-            contextData.set({currentCampus: currentCampus.value})
-        }
-        else {
-            contextData.set({currentCampus: defaultCampus.slug})
+        if( currentCampusState === undefined ) {
+            if ( currentCampus.slug != currentCampusState ) {
+                contextData.set({currentCampus: currentCampus.value})
+            }
+            else {
+                contextData.set({currentCampus: defaultCampus.slug})
+            }
         }
 
         // Current Campus Cookie creation

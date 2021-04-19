@@ -33,8 +33,10 @@
     "gatsby-plugin-react-helmet": "^4.0.0",
     "gatsby-plugin-sass": "^4.0.2",
     "gatsby-plugin-sharp": "^3.0.0",
+    "gatsby-plugin-sitemap": "^3.3.0",
     "gatsby-plugin-utils": "^1.0.0",
     "gatsby-source-filesystem": "^3.0.0",
+    "gatsby-source-wordpress": "^5.1.0",
     "gatsby-transformer-sharp": "^3.0.0",
     "i18next": "^19.6.3",
     "i18next-browser-languagedetector": "^6.0.1",
@@ -66,8 +68,7 @@
     "universal-cookie": "^4.0.3",
     "url-join": "^4.0.1",
     "use-query-params": "^1.1.6",
-    "webpack": "^5.24.4",
-    "gatsby-source-wordpress": "^5.1.0"
+    "webpack": "^5.24.4"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
