@@ -118,12 +118,6 @@ module.exports = {
           }
         },
         {
-          resolve: `gatsby-plugin-offline`,
-          options: {
-            precachePages: [`/`], // Add here the pages that will be working offline
-          },
-        },
-        {
           resolve: `gatsby-plugin-gdpr-cookies`,
           options: {
             googleAnalytics: {
