@@ -29,7 +29,7 @@ export default function PageDetails( { location, pageContext } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
-
+    
     return (
         <>
 
@@ -47,12 +47,16 @@ export default function PageDetails( { location, pageContext } ){
                 menuGlobal
                 menuLocal
             />
-            
-            <MenuPage
-                menues      = { pageDetails.pageMenues }
-                campus      = { breadcrumbs.campus }
-                location    = { location }
-            />
+            {
+                (pageDetails.pageMenues) ?
+                    <MenuPage
+                        menues      = { pageDetails.pageMenues }
+                        campus      = { breadcrumbs.campus }
+                        location    = { location }
+                    />
+                :
+                    undefined
+            }
 
             <article className="contentMain mb-5">
 
