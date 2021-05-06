@@ -95,7 +95,7 @@ export default function HeroSeries ( { title, logo, campus, seriesGraphics, seri
                                     }}
                                 />
                             :
-                                (featuredVideo.featuredImage?.node?.localFile) ?
+                                (featuredVideo?.featuredImage?.node?.localFile) ?
                                     <GatsbyImage 
                                         className="noTrailer" 
                                         image={featuredVideo.featuredImage.node.localFile.childImageSharp.gatsbyImageData}
