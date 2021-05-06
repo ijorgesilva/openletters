@@ -7,11 +7,11 @@ import TextTruncate from 'react-text-truncate'
 // Components
 import './blurbVerticalDark.scss'
 
-export default function BlurbVerticalDark ( { title, excerpt, className, link, featuredImage, noImage, target, linkType, variant, iconImage, path } ) {
+export default function BlurbVerticalDark ( { title, excerpt, className, link, featuredImage, noImage, target, linkType, variant, iconImage } ) {
 
     return (
         
-            <div className={`card card--video user-select-none  ${ (className) ? className : ''} ${(variant) ? variant : 'dark'}`}>
+            <div className={`card card--video user-select-none ${ ( variant ) ? variant : 'dark'} ${ ( className ) ? className : '' }`}>
             {
                 (linkType === 'external') ?
                     <a href={link} target={ (target) ? target : '_self' }>
@@ -63,7 +63,7 @@ export default function BlurbVerticalDark ( { title, excerpt, className, link, f
                         </div>
                     </a>
                 :
-                    <Link to={`${ ('') ? path : ''}${link}`}>
+                    <Link to={link}>
                         <div className="card-img-container">
                             {
                                 (iconImage) ?

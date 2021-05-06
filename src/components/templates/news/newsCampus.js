@@ -9,14 +9,15 @@ import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
 import BlurbHorizontal from '../../blurb/blurbHorizontal'
-import HorizontalScrollingMenu from '../../menu/horizontalScrollingMenu'
+import MenuPage from '../../menu/menuPage'
 import HeaderPage from '../../headerPage'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './newsCampus.scss'
 
 export default function NewsCampus ( { data, location, pageContext } ){
 
-    const { title, slug, featuredImage, breadcrumbs } = pageContext
+    const { title, featuredImage, breadcrumbs } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -43,10 +44,10 @@ export default function NewsCampus ( { data, location, pageContext } ){
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand   =   { 
                                     {
-                                        'name': t('global.news.title'),
+                                        'name': t('global.blog.title'),
                                         'link': '/' + breadcrumbs.campus + '/' + config.blogPostDetailsSlug,
                                     }
                                 } 
@@ -98,6 +99,8 @@ export default function NewsCampus ( { data, location, pageContext } ){
                     </Row>
                 </Container>
             </section>
+            
+            <FooterSimpleText campus={ breadcrumbs.campus } />
 
         </>
     )

@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export const useCampuses = () => {
+export const useCampuses = ( campus ) => {
     const { allWpCampus } = useStaticQuery( 
                         graphql`
                             {
@@ -17,7 +17,7 @@ export const useCampuses = () => {
                                             node {
                                                 localFile {
                                                     childImageSharp {
-                                                        gatsbyImageData
+                                                        gatsbyImageData(layout: FULL_WIDTH)
                                                     }
                                                 }
                                             }
@@ -26,9 +26,23 @@ export const useCampuses = () => {
                                             campusConfiguration {
                                                 campusConfigurationVisibility
                                             }
-                                            campusHome {
-                                                campusHomeUrl
-                                                campusHomeType
+                                            campusBrand {
+                                                campusBrandOverwrite
+                                                campusBrandUrl
+                                                campusBrandLogo {
+                                                    localFile {
+                                                        childImageSharp {
+                                                            gatsbyImageData(layout: FULL_WIDTH)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            campusSelector {
+                                                campusSelectorOverwrite
+                                                campusSelectorHome {
+                                                    campusHomeUrl
+                                                    campusHomeType
+                                                }
                                             }
                                             campusWatch {
                                                 campusWatchPage
@@ -39,5 +53,12 @@ export const useCampuses = () => {
                             }
                         `
                     )
-    return allWpCampus.nodes
+
+    if(campus){
+        return allWpCampus.nodes.filter( item => (item.slug === campus) )[0]
+    }
+    else {
+        return allWpCampus.nodes
+    }
+    
 }

@@ -9,19 +9,15 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import HeaderPage from '../../components/headerPage'
 import Navigation from '../../components/menu/navigation'
 import HeroBasic from '../../components/hero/heroBasic'
-import BlurbHorizontalDarkFeatured from '../../components/blurb/blurbHorizontalDarkFeatured'
-import SectionEmpty from '../../components/content/sectionEmpty'
 import SectionTextBasic from "../../components/content/sectionTextBasic"
 import MenuSticky from "../../components/menu/menuSticky"
 import SectionPhotoText from "../../components/content/sectionPhotoText"
 import TestimonialCarousel from "../../components/testimonial/testimonialCarousel"
 import ShareSection from "../../components/social/shareSection"
-import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
-import AlertEmptyState from '../../components/alert/alertEmptyState'
+import MenuPage from '../../components/menu/menuPage'
 import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
-import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
+import FooterSimpleText from '../../components/footer/footerSimpleText'
 import './index.scss'
-import config from '../../../data/SiteConfig'
 
 export default function SmallGroupsPage( { data, location } ) {
 
@@ -90,22 +86,6 @@ export default function SmallGroupsPage( { data, location } ) {
       
   ]
   
-  const itemsLenght = data.news.nodes.length + data.events.nodes.length
-
-  // const latestUpdate = ( data.news && data.events ) ? 
-  //                         ( data.news.nodes[0].date > data.events.nodes[0].date ) ?
-  //                           data.news.nodes[0]
-  //                         :
-  //                           data.events.nodes[0]
-  //                       : 
-  //                         ( data.news || data.events ) ?
-  //                             ( data.news ) ?
-  //                               data.news.nodes[0]
-  //                             :
-  //                               data.events.nodes[0]
-  //                         :
-  //                           undefined
-
   return (
     <>
 
@@ -123,9 +103,10 @@ export default function SmallGroupsPage( { data, location } ) {
         menuLocal
       />
 
-      <HorizontalScrollingMenu
+      <MenuPage
             menuBrand={smallGroupBrand}
             menu={smallGroupMenu}
+            location={location}
         />
 
       <HeroBasic
@@ -270,6 +251,8 @@ export default function SmallGroupsPage( { data, location } ) {
 
       </div>
 
+      <FooterSimpleText />
+      
     </>
   )
 }

@@ -12,7 +12,7 @@ import config from '../../../../data/SiteConfig'
 import './heroSeries.scss'
 
 
-export default function HeroSeries ( { title, logo, path, seriesGraphics, seriesDetails, featuredVideo } ) {
+export default function HeroSeries ( { title, logo, campus, seriesGraphics, seriesDetails, featuredVideo } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -21,7 +21,7 @@ export default function HeroSeries ( { title, logo, path, seriesGraphics, series
                             seriesDetails.seriesTrailerPoster.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
                         undefined
-
+    
     return (
         <section className="heroSeries h-background-six-shade-three">
 
@@ -40,33 +40,44 @@ export default function HeroSeries ( { title, logo, path, seriesGraphics, series
             <div className="jumbotron content-container h-background-six-shade-three">
 
                 <div className="about">
-                    <h2>{featuredVideo.title}</h2>
-                    <p>
-                        { 
-                            (featuredVideo.excerpt) ? 
-                                featuredVideo.excerpt.replace(/<p>/, '').replace(/<\/p>/, '') 
-                            : 
-                                t('global.empty.text-not-available') 
-                        }
-                    </p>
-                    <Link to={`${(path) ? path : ''}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
-                        className="btn btn--animation btn--light-outline z-index-2" 
-                    >
-                        <FontAwesomeIcon icon={faPlay} size="lg" /> {t('global.watch.watch-now')}
-                    </Link>
+                    {
+                        (featuredVideo) ? 
+                            <>
+                                <h2>{featuredVideo.title}</h2>
+                                <p>
+                                    { 
+                                        (featuredVideo.excerpt) ? 
+                                            featuredVideo.excerpt.replace(/<p>/, '').replace(/<\/p>/, '') 
+                                        : 
+                                            t('global.empty.text-not-available') 
+                                    }
+                                </p>
+                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
+                                    className="btn btn--animation btn--light-outline z-index-2" 
+                                >
+                                    <FontAwesomeIcon icon={faPlay} size="lg" /> {t('global.watch.watch-now')}
+                                </Link>
+                            </>
+                        :
+                            undefined
+                    }
                 </div>
 
                 <div className="trailer">
-
-                    <div className="playButton z-index-2">
-                        <Link to={`${(path) ? path : ''}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
-                            <StaticImage
-                                src="../../../assets/img/global/button__play-white.svg"
-                                width="120"
-                                alt=""
-                            />
-                        </Link>
-                    </div>
+                    {
+                        (featuredVideo) ? 
+                            <div className="playButton z-index-2">
+                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
+                                    <StaticImage
+                                        src="../../../assets/img/global/button__play-white.svg"
+                                        width="120"
+                                        alt=""
+                                    />
+                                </Link>
+                            </div>
+                        :
+                            undefined
+                    }    
 
                     <div className="trailerContainer z-index-1">
                         {

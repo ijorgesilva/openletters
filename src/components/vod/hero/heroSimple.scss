@@ -44,6 +44,7 @@
             > .gatsby-image-wrapper {
                 display: block;
                 width: 100%;
+                max-width: 520px;
                 height: 100px;
             }
         }
@@ -66,10 +67,9 @@
                 z-index: 10;
             }
             &::after {
-                background: linear-gradient(to bottom, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%);
-            }
-            &::before {
-                background: linear-gradient(to left, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%);
+                background: linear-gradient(to bottom, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%),
+                            linear-gradient(to left, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%),
+                            linear-gradient(to top, rgba(15,10,27,0) 75%, rgba(15,10,27,0.7) 100%);
             }
             .heroBackgroundIcon {
                 display: flex;
@@ -86,9 +86,17 @@
                 }
             }
             .backgroundImage {
-                width: 100%;
                 position: absolute;
-                top: 0;
+                width: 100%;
+                height: 100%;
+                .background {
+                    background-position: center top;
+                    background-size: cover;
+                    background-attachment: cover;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
         .gatsby-image-wrapper {

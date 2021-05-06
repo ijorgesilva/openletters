@@ -1,36 +1,26 @@
 // Dependencies
 import React from 'react'
-import { useContext } from 'react'
-import { Navbar, Nav } from "react-bootstrap"
-import { useStaticQuery, graphql } from 'gatsby'
+import { Navbar, Nav } from 'react-bootstrap'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { useTranslation } from 'react-i18next'
 
 // Components
 import MegaMenu from './menuLocal/megaMenu'
 import RegularMenu from './menuLocal/regularMenu'
 import MenuLink from './menuLocal/menuLink'
-import ContextConsumer from '../../provider/context'
-
-// Data
-import config from '../../../data/SiteConfig'
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+import { useCampuses } from '../../hooks/useCampuses' 
 
 // Style
 import './menuLocal.scss'
 
 export default function MenuLocal ( { location, campus } ) {
 
-    let contextData = useContext(ContextConsumer)
-    const data = useStaticQuery(graphql`
-        query{
-            logo: file(relativePath: {eq: "img/global/logo_white.svg"}) {
-                publicURL
-            }
-        }
-    `)
+    const { t } = useTranslation()
 
-    const brandLogo = {
-        backgroundImage: "url("+ data.logo.publicURL +")",
-    }
-
+    const  currentCampus    = useCampuses( campus )
+    const siteSettings      = useWebsiteConfiguration()
+    
     let menuLocalData = [
         
         {name: "About", link: "#", megamenu: true,
@@ -129,18 +119,41 @@ export default function MenuLocal ( { location, campus } ) {
         {name: "Connect", link: "https://www.connecttovictory.com/", type:"button", target:"_blank"}
     ]
 
+    const campusLogoUrl =   ( currentCampus.campusDetails?.campusBrand?.campusBrandUrl ) ?
+                                currentCampus.campusDetails.campusBrand.campusBrandUrl    
+                            :
+                                '/' + campus
+
+    const campusLogo    =   ( siteSettings.settingsGraphics.settingsLogo?.localFile?.childImageSharp?.gatsbyImageData ) ?
+                                siteSettings.settingsGraphics.settingsLogo.localFile.childImageSharp.gatsbyImageData
+                            :
+                                ( siteSettings.settingsGraphics.settingsLogo?.localFile?.publicURL ) ?
+                                    siteSettings.settingsGraphics.settingsLogo.localFile.publicURL
+                                :
+                                    ( currentCampus.campusDetails.campusBrand.campusBrandLogo?.localFile?.childImageSharp?.gatsbyImageData ) ?
+                                        currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.childImageSharp.gatsbyImageData
+                                    :
+                                        ( currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile?.publicURL ) ?
+                                            currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.publicURL
+                                        :
+                                            undefined
+
+    const campusLogoStyle = {
+        backgroundImage: "url("+ campusLogo +")",
+    }
+
     return (
         <Navbar className={`navlocal container-fluid navbar z-index-3`} bg="transparent" expand="lg" >
 
             <Navbar.Brand
-                rel="home" 
-                to="/" 
-                href="/"
-                title='Frontpage' 
-                className={`text-hide navbar-brand font-weight-bold d-block m-2 navbrand`} 
-                style={brandLogo}
+                rel         = 'home'
+                to          = {campusLogoUrl}
+                href        = {campusLogoUrl}
+                title       = { currentCampus.title + ' ' + t('global.home-page')}
+                className   = {`${( campusLogo === undefined ) ? '' : 'text-hide' } navbar-brand font-weight-bold d-block m-2 navbrand`} 
+                style       = {campusLogoStyle}
             >
-                { config.siteTitle }
+                { currentCampus.title }
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -153,31 +166,31 @@ export default function MenuLocal ( { location, campus } ) {
                                 (menu.submenu) ?
                                     (menu.megamenu === true) ?
                                         <MegaMenu 
-                                            class={`${menu.class}`} 
-                                            key={index} 
-                                            content={menu.submenu} 
-                                            title={menu.name} 
-                                            index={menu.index}
+                                            class   = {`${menu.class}`} 
+                                            key     = {index} 
+                                            content = {menu.submenu} 
+                                            title   = {menu.name} 
+                                            index   = {menu.index}
                                         />
                                     : 
                                         <RegularMenu 
-                                            class={`${menu.class}`} 
-                                            key={index} 
-                                            content={menu.submenu} 
-                                            title={menu.name} 
-                                            index={menu.index}
+                                            class   = {`${menu.class}`} 
+                                            key     = {index} 
+                                            content = {menu.submenu} 
+                                            title   = {menu.name} 
+                                            index   = {menu.index}
                                         />
                                 : 
                                     <MenuLink 
-                                        key={index} 
-                                        class={`${menu.class}`} 
-                                        content={menu.submenu} 
-                                        name={menu.name} 
-                                        type={menu.type} 
-                                        link={menu.link} 
-                                        target={menu.target}
-                                        iframe={menu.iframe} 
-                                        iframeTitle={menu.iframeTitle} 
+                                        key         = {index} 
+                                        class       = {`${menu.class}`} 
+                                        content     = {menu.submenu} 
+                                        name        = {menu.name} 
+                                        type        = {menu.type} 
+                                        link        = {menu.link} 
+                                        target      = {menu.target}
+                                        iframe      = {menu.iframe} 
+                                        iframeTitle = {menu.iframeTitle} 
                                     />
                             )
                         )

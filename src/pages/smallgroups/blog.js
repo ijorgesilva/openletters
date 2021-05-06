@@ -2,15 +2,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
 // Components
 import AlertEmptyState from '../../components/alert/alertEmptyState'
 import Navigation from '../../components/menu/navigation'
 import { getDate } from '../../components/utils/utils'
-import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
+import MenuPage from '../../components/menu/menuPage'
 import BlurbHorizontal from '../../components/blurb/blurbHorizontal'
 import HeaderPage from '../../components/headerPage'
+import FooterSimpleText from '../../components/footer/footerSimpleText'
 import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
 import config from '../../../data/SiteConfig'
 import './blog.scss'
@@ -19,7 +20,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
-
+    
     return (
         <>
 
@@ -36,7 +37,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand={smallGroupBrand}
                 menu={smallGroupMenu}
             />
@@ -46,14 +47,14 @@ export default function SmallGroupEventPage ( { data, location } ) {
                     <Row>
                         <Col xs={12} md={8}>
                             {
-                                (data.news.nodes.length === 0 && data.post.nodes.length === 0) ?
+                                (data.news.nodes.length === 0 && data.posts.nodes.length === 0) ?
                                     <AlertEmptyState variant="transparent" className="mt-5" content="" />
                                 : 
                                     undefined
                             }
                             
                             {
-                                (data.posts.nodes.length > 0) ?
+                                (data.posts?.nodes?.length > 0) ?
                                     data.posts.nodes.map( (obj, index) => (
                                         <BlurbHorizontal 
                                             key={index}
@@ -78,7 +79,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
                             }
 
                             {
-                                (data.news.nodes.length > 0) ?
+                                (data.news?.nodes?.length > 0) ?
                                     data.news.nodes.map( (obj, index) => (
                                         <BlurbHorizontal 
                                             key={index}
@@ -106,6 +107,8 @@ export default function SmallGroupEventPage ( { data, location } ) {
                     </Row>
                 </Container>
             </section>
+            
+            <FooterSimpleText />
         </>
     )
 }

@@ -17,6 +17,7 @@ export default function BlurbHorizontalVod( { className, title, subtitle, featur
                 <div className="card-img position-relative">
                     <GatsbyImage
                         image={featuredImage}
+                        layout="fullWidth"
                         alt=''
                     />
                 </div>

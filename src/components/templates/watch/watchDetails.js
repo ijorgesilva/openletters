@@ -10,6 +10,7 @@ import WatchDetailsContent from '../../vod/content/watchDetailsContent'
 import PlaylistDetails from '../../vod/player/playlistDetails'
 import { watchDetailsMenu } from '../../../../data/menues'
 import HeaderPage from '../../headerPage'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import './watchDetails.scss'
 
@@ -18,8 +19,9 @@ export default function WatchDetails( { pageContext, location, data } ) {
     const { title, slug, excerpt, content, featuredImage, videoDetails, videoOnDemandTags, breadcrumbs } = pageContext
     
     /* Standard fields */
-    const { t } = useTranslation()
-    let videos = { nodes: [] }
+    const { t }     = useTranslation()
+    let videos      = { nodes: [] }
+    let resources   = data.resources.videoDetails.videoResources
 
     if ( data?.videos?.nodes?.length > 0 ) {
         data.videos.nodes.map( video => (
@@ -29,7 +31,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
                 videos.nodes.push( video )
         ))
     }
-
+    
     const poster = ( featuredImage?.node?.localFile ) ? 
                         featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
@@ -94,19 +96,23 @@ export default function WatchDetails( { pageContext, location, data } ) {
                         content         = { content }
                         tags            = { videoOnDemandTags }
                         videoDetails    = { videoDetails }
+                        resources       = { resources }
                         backUrl         = { breadcrumbs.back }
+                        campus          = { breadcrumbs.campus }
                     />
 
                 </div>
             </main>
 
+            <FooterSimpleText campus={ breadcrumbs.campus } />
+            
         </div>
     )
 
 }
 
 export const query = graphql`
-    query getAllVideosOnSerie( $serieId: String!, $campusId: String! ){
+    query getAllVideosOnSerie( $serieId: String!, $campusId: String!, $slug: String! ){
         
         ########
         # Videos on Series 
@@ -150,6 +156,67 @@ export const query = graphql`
                     }
                 }
 
+            }
+        }
+
+
+        ########
+        # Related Resources
+        ########
+        resources: wpVideoOnDemand (
+            slug: {eq: $slug}
+        ) {
+            slug
+            id
+            videoDetails {
+                videoResources {
+                    ... on WpPost {
+                        id
+                        slug
+                        title
+                        excerpt
+                        status
+                        featuredImage {
+                            node {
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData(layout: FULL_WIDTH)
+                                    }
+                                }
+                            }
+                        }
+                        postDetails {
+                            postCampus {
+                                ... on WpCampus {
+                                    id
+                                    slug
+                                }
+                            }
+                        }
+                    }
+                    ... on WpLinkitem {
+                        id
+                        title
+                        excerpt
+                        status
+                        featuredImage {
+                            node {
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData(layout: FULL_WIDTH)
+                                    }
+                                }
+                            }
+                        }
+                        linkDetails {
+                            linkLink {
+                                linkLinkTarget
+                                linkLinkType
+                                linkLinkUrl
+                            }
+                        }
+                    }
+                }
             }
         }
 

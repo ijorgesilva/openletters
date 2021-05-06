@@ -1,45 +1,30 @@
-.c-footer {
+.footerSimpleText {
     position: relative;
     background-color: rgba(var(--color-six-dark-shade-three),1);
-    border-top: 0.5px solid var(--color-six);
-
-    .c-footer__copyright {
+    border-top: 0.5px solid var(--color-six);    
+    
+    .copyright {
         padding: 20px;
         color: hsla(0, 0%, 100%, 0.3);
         font-size: 12px;
         text-align: center;
+        display: flex;
+        justify-content: center;
     }
-    .c-footer__copyright--link {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        color: hsla(0, 0%, 100%, 0.4);
-        text-align: center;
+    .links {
+        > .link {
+            padding: 0 10px;
+            color: hsla(0, 0%, 100%, 0.4);
+            text-align: center;
+        }
     }
-    .c-footer__logo {
-        position: relative;
-        top: -50px;
-        width: 100px;
-        height: 100px;
-        margin-right: auto;
-        margin-bottom: -50px;
-        margin-left: auto;
-        padding: 20px;
-        background-image: url('../../assets/img/global/logo_circle.svg');
-        background-position: 50% 50%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        color: hsla(0, 0%, 100%, 0.6);
-        font-size: 12px;
-        text-align: center;
-    }
-    .c-footer__background {
+    .background {
         position: absolute;
         left: 0%;
         top: 0%;
         right: 0%;
         bottom: 0%;
         z-index: 0;
-        /* background-image: url('../img/global/logo-pattern-one.svg'); */
         background-position: 50% 5%;
         background-size: 600px;
         opacity: 0.05;

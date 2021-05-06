@@ -8,16 +8,16 @@ import 'react-multi-carousel/lib/styles.css'
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
-import './sectionFeedCarouselVod.scss'
+import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, path } ){
+export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, path, styles } ){
 
     const defaultVisible = 5
     const objLength = (items) ? items.length : 0
 
     return (
 
-        <section className={`sectionFeedCarouselVod ${className}`} id={id}>
+        <section className={`sectionFeedCarousel ${className}`} id={id} style={styles}>
             <Container fluid>
                 {
                     (title) ? 

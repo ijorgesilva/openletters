@@ -14,6 +14,7 @@
 			"title": "Podcasts?"
 		},
 		"social": {
+			"share-on": "Compartir en",
 			"sharesimpleicon-title": "Compartir en"
 		}
 	},
@@ -32,7 +33,10 @@
 		},
 		"campus": "Campus",
 		"close": "Cerrar",
-		"cookie-consent": "Este sitio web utiliza cookies para mejorar la experiencia del usuario.",
+		"cookie-consent": {
+			"decline": "Declinar",
+			"description": "Este sitio web utiliza cookies para mejorar la experiencia del usuario."
+		},
 		"created-on": "Creado el",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
@@ -40,11 +44,22 @@
 		"events": {
 			"date-time": "Fecha y Hora",
 			"description": "Mira nuestros eventos",
+			"expired": "Expirado",
 			"location": "Dirección",
 			"organized-by": "Organizado por",
 			"title": "Eventos"
 		},
-		"footer-copyright": "© Copyright. Victory Church. Todos los derechos reservados.",
+		"give": {
+			"title": "Dar ahora"
+		},
+		"help": {
+			"need-help": "Necesita ayuda?",
+			"title": "Ayuda"
+		},
+		"home-page": "Página Principal",
+		"legal": {
+			"disclaimer": "© Todos los Derechos Reservados."
+		},
 		"modified-on": "Modificado el",
 		"news": {
 			"description": "Revisa las últimas noticias",

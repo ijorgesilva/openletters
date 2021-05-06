@@ -13,6 +13,11 @@ import './heroSimple.scss'
 
 export default function HeroSimple( { backgroundImage, className, id, iconSerie, iconSerieLink, iconSerieTitle, playUrl, title, serieLinkText, description, playText, iconPlay, iconPlayFlag } ) {
     
+    const backgroundImageUrl = (backgroundImage?.images?.fallback?.src) ? backgroundImage.images.fallback.src : ''
+    const styleBackground = {
+        backgroundImage: "url(" + backgroundImageUrl + ")"
+    }
+
     return (
         <section className={`heroSimple ${ (className) ? ' ' + className : '' }`} id={id}>
             <Jumbotron className="">
@@ -100,10 +105,7 @@ export default function HeroSimple( { backgroundImage, className, id, iconSerie,
                     <div className="z-index-2 backgroundImage">
                         {
                             (backgroundImage) ?
-                                <GatsbyImage 
-                                    image={backgroundImage} 
-                                    alt=""
-                                />
+                                <div className="background" style={styleBackground}></div>
                             : 
                                 <StaticImage
                                     src="../../../assets/img/global/noImage.jpg"

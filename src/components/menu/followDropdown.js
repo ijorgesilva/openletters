@@ -20,10 +20,18 @@ export default function FollowDropdown (props){
             <Dropdown.Menu>
 
                 <div className={`socialicons`}>
-                    <a href="https://www.instagram.com/victoryatl/" title="Instagram" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram} size="lg" /></a>
-                    <a href="https://www.facebook.com/victoryatl/" title="Facebook" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faFacebook} size="lg" /></a>
-                    <a href="https://www.twitter.com/victoryatl/" title="Twitter" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faTwitter} size="lg" /></a>
-                    <a href="https://www.youtube.com/channel/UCNeMhrj2GTacigCwMLIPAyA" title="Youtube" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faYoutube} size="lg" /></a>
+                    <a href="https://www.instagram.com/victoryatl/" title="Instagram" aria-label="Instagram" target="_blank" rel="noreferrer">
+                        <FontAwesomeIcon icon={faInstagram} size="lg" />
+                    </a>
+                    <a href="https://www.facebook.com/victoryatl/" title="Facebook" aria-label="Facebook" target="_blank" rel="noreferrer">
+                        <FontAwesomeIcon icon={faFacebook} size="lg" />
+                    </a>
+                    <a href="https://www.twitter.com/victoryatl/" title="Twitter" aria-label="Twitter" target="_blank" rel="noreferrer">
+                        <FontAwesomeIcon icon={faTwitter} size="lg" />
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCNeMhrj2GTacigCwMLIPAyA" title="Youtube" aria-label="Youtube" target="_blank" rel="noreferrer">
+                        <FontAwesomeIcon icon={faYoutube} size="lg" />
+                    </a>
                 </div>
                 <Dropdown.Divider />
 
@@ -54,7 +62,8 @@ export default function FollowDropdown (props){
 
 
 const CustomForm = ({status, message, onValidated }) => {
-    let email, name;
+    let email
+    // let name
     const submit = () =>
       email &&
     //   name &&

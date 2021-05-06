@@ -39,23 +39,35 @@ export default function ShareSection( { title, id, subtitle, className, variant,
                             : undefined
                         }
                         <div className="buttons z-index-2">
-                            <FacebookShareButton className="button button--white user-select-none"
-                            quote="" hashtag="" url={canonicalUrl} >
+                            
+                            <FacebookShareButton 
+                                className="button button--white user-select-none"
+                                quote="" 
+                                hashtag="" 
+                                url={canonicalUrl} 
+                            >
                                 <StaticImage
                                     src="../../assets/img/global/icon_social_share_facebook_white.svg"
-                                    alt="Share on Twitter"
-                                    className="photo"
+                                    layout='fixed'
+                                    placeholder='none'
+                                    title={t('components.social.share-on') + ' Facebook'}
+                                    alt=''
                                 />
                             </FacebookShareButton>
 
-                            <TwitterShareButton className="button button--white user-select-none"
-                                url={canonicalUrl} title="">
+                            <TwitterShareButton 
+                                className="button button--white user-select-none"
+                                url={canonicalUrl} 
+                            >
                                 <StaticImage
                                     src="../../assets/img/global/icon_social_share_twitter_white.svg"
-                                    alt="Share on Facebook"
-                                    className="photo"
+                                    layout='fixed'
+                                    placeholder='none'
+                                    title={t('components.social.share-on') + ' Twitter'}
+                                    alt=''
                                 />
                             </TwitterShareButton>
+
                         </div>
                     </Col>
 

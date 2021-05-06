@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next"
 // Components
 import AlertEmptyState from '../../components/alert/alertEmptyState'
 import Navigation from '../../components/menu/navigation'
-import { getDate } from '../../components/utils/utils'
-import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
+import MenuPage from '../../components/menu/menuPage'
 import BlurbHorizontal from '../../components/blurb/blurbHorizontal'
 import HeaderPage from '../../components/headerPage'
+import FooterSimpleText from '../../components/footer/footerSimpleText'
 import { smallGroupBrand, smallGroupMenu } from '../../../data/menues'
 import config from '../../../data/SiteConfig'
 import './events.scss'
@@ -36,7 +36,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
                 menuLocal
             />
             
-            <HorizontalScrollingMenu
+            <MenuPage
                 menuBrand={smallGroupBrand}
                 menu={smallGroupMenu}
             />
@@ -48,43 +48,37 @@ export default function SmallGroupEventPage ( { data, location } ) {
                             {
                                 (data.events.nodes.length > 0) ?
                                     data.events.nodes.map( (obj, index) => (
-                                        <>
-                                            <BlurbHorizontal 
-                                                key={index}
-                                                className={'mb-4'}
-                                                featuredImage=  { (obj.featuredImage?.node?.localFile) ? 
-                                                                    obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                                                : 
-                                                                    undefined  
-                                                                }
-                                                
-                                                title={obj.title}
-                                                subtitle={
-                                                            (obj.eventDetails.eventDates[0].eventDate && obj.eventDetails.eventDates[0].eventTime) ? 
-                                                                    getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' ) + ' | ' + obj.eventDetails.eventDates[0].eventTime
+                                        <BlurbHorizontal 
+                                            key             = {index}
+                                            className       = {'mb-4'}
+                                            featuredImage   =  { (obj.featuredImage?.node?.localFile) ? 
+                                                                obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                                             : 
-                                                                (obj.eventDetails.eventDates[0].eventDate) ? 
-                                                                    getDate(obj.eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' )
-                                                                :
-                                                                    undefined
-                                                        }
-                                                excerpt={obj.excerpt}
-                                                tag={t('global.event')}
-
-                                                // linkType={obj.eventRegistrationType}
-                                                link={`${config.eventPostDetailsSlug}/${obj.slug}`}
-                                                linkText={obj.title}
-                                            />
-                                        </>
+                                                                undefined  
+                                                            }
+                                            title           = {obj.title}
+                                            eventDate       = {obj.eventDetails.eventDates}
+                                            tags            =  { 
+                                                                    ( obj.eventTags?.nodes ) ? 
+                                                                        obj.eventTags 
+                                                                    : 
+                                                                        undefined  
+                                                                }
+                                            excerpt         = {obj.excerpt}
+                                            type            = 'event'
+                                            link            = {`/${obj.eventDetails.eventCampus[0].slug}/${config.eventPostDetailsSlug}/${obj.slug}`}
+                                            linkText        = {obj.title}
+                                        />
                                     ))
                                 :
                                     <AlertEmptyState variant="transparent" className="mt-5" content="" />
                             }
-                            
                         </Col>
                     </Row>
                 </Container>
             </section>
+
+            <FooterSimpleText />
         </>
     )
 }
@@ -92,14 +86,29 @@ export default function SmallGroupEventPage ( { data, location } ) {
 export const query = graphql`
     query{
 
-        events: allWpEvent(filter: {eventTags: {nodes: {elemMatch: {slug: {in: "small-groups"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 10) {
-            
+        events: allWpEvent(
+            filter: {
+                eventTags: {
+                    nodes: {
+                        elemMatch: {
+                            slug: {in: "small-groups"}
+                        }
+                    }
+                }, 
+                status: {
+                    eq: "publish"
+                }
+            }, 
+            sort: {
+                fields: date, 
+                order: DESC
+            }, 
+            limit: 10
+        ) {
             nodes {
                 title
                 excerpt
                 slug
-
-
                 featuredImage {
                     node {
                         localFile {
@@ -109,19 +118,17 @@ export const query = graphql`
                         }
                     }
                 }
-
                 eventDetails {
+                    eventRegistrationType
                     eventAddress
                     eventDates {
                         eventDate
                         eventTime
                     }
-
-                    eventRegistrationType
                     eventCampus {
                         ... on WpCampus {
                             id
-                            title
+                            slug
                         }
                     }
                     eventLink {
@@ -129,9 +136,7 @@ export const query = graphql`
                         eventLinkText
                     }
                 }
-
             }
-            
         }
 
         eventPoster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {

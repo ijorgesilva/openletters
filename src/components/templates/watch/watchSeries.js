@@ -15,6 +15,7 @@ import TagSimple from '../../tag/tagSimple'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import { watchDetailsMenu } from '../../../../data/menues'
 import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import TabSeasons from '../../vod/tab/tabSeasons'
 import './watchSeries.scss'
 
@@ -41,7 +42,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location    = { location }
                 cover       = { cover }
                 description = { excerpt }
-                article     = { true }
+                article
             />
 
             <Navigation
@@ -61,6 +62,12 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 menu        = { watchDetailsMenu } 
                 close       = { breadcrumbs.back }
                 className   = "transparent"
+                styles      =   {
+                                    { 
+                                        position: 'absolute', 
+                                        marginTop: '50px' 
+                                    }
+                                }
             />
 
             <div className="watchSeries">
@@ -129,7 +136,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 title=""
                                                 items={data.VideosOnSerie.nodes}
                                                 itemsVisible={5}
-                                                path={`/${campus}/`}
+                                                campus={`/${campus}/`}
                                                 // iconCarousel={data.playButton.publicURL}
                                                 serie={slug}
                                                 count
@@ -154,6 +161,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             className   = "h-background-six-shade-three"
                                             items       = { seriesDetails.seriesRelatedPosts} 
                                             variant     = 'light'
+                                            campus      = { breadcrumbs.campus }
                                         />
                                     </Tab>
                                 :
@@ -177,6 +185,8 @@ export default function WatchSeries( { pageContext, location, data } ) {
 
             </div>
 
+            <FooterSimpleText campus={ breadcrumbs.campus } />
+            
         </>
     )
 

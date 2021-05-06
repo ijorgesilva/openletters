@@ -1,7 +1,7 @@
 // Dependencies
 import React from 'react'
 import { graphql } from 'gatsby'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 import { Button, Accordion, Card } from 'react-bootstrap'
 
 // Components
@@ -9,16 +9,14 @@ import HeaderPage from '../../components/headerPage'
 import Navigation from '../../components/menu/navigation'
 import HeroBasic from "../../components/hero/heroBasic"
 import SectionTextBasic from "../../components/content/sectionTextBasic"
-import SectionEmpty from '../../components/content/sectionEmpty'
-import AlertEmptyState from '../../components/alert/alertEmptyState'
 import MenuSticky from "../../components/menu/menuSticky"
 import ShareSection from "../../components/social/shareSection"
 import SectionVideoPlayerSimple from "../../components/content/sectionVideoPlayerSimple"
 import SectionSteps from "../../components/content/sectionSteps"
 import SectionPhotoFormText from "../../components/form/sectionPhotoFormText"
 import SectionFaqSimple from "../../components/content/sectionFaqSimple"
-import HorizontalScrollingMenu from '../../components/menu/horizontalScrollingMenu'
-import SectionFeedCarouselMultipleSources from '../../components/feed/sectionFeedCarouselMultipleSources'
+import MenuPage from '../../components/menu/menuPage'
+import FooterSimpleText from '../../components/footer/footerSimpleText'
 import {smallGroupBrand, smallGroupMenu} from '../../../data/menues'
 import './index.scss'
 
@@ -81,9 +79,6 @@ export default function SmallGroupsPage( { data, location } ) {
       content: t('smallgroups.tab-host-section-faq-four-content')
     },
   ]
-  
-
-  const itemsLenght = data.news.nodes.length + data.events.nodes.length
 
   return (
     <>
@@ -102,7 +97,7 @@ export default function SmallGroupsPage( { data, location } ) {
         menuLocal
       />
 
-      <HorizontalScrollingMenu
+      <MenuPage
           menuBrand={smallGroupBrand}
           menu={smallGroupMenu}
       />
@@ -125,30 +120,6 @@ export default function SmallGroupsPage( { data, location } ) {
         </SectionTextBasic>
 
         <hr/>
-
-        {/* {
-          (data.news || data.events) ?
-            ( itemsLenght > 0 ) ?
-              <SectionFeedCarouselMultipleSources
-                title = {t('smallgroups.tab-host-section-news-title')}
-                id="news"
-                className="h-background-gray-one"
-                itemsNews = { (data.news) ? data.news : undefined}
-                itemsEvents = { (data.events) ? data.news : undefined}
-                slugOne = { (data.news) ? "/news/" : undefined}
-                slugTwo = { (data.events) ? "/events/" : undefined}
-                itemsVisible = {3}
-              />
-            : 
-              <SectionEmpty 
-                className="h-background-gray-one" 
-                title = {t('smallgroups.tab-host-section-news-title')} 
-                id="news"
-              >
-                <AlertEmptyState variant="transparent" className="mt-5" content="" />
-              </SectionEmpty>
-          : undefined
-        } */}
 
         <MenuSticky link={"#application"} linkText={t('smallgroups.apply-now')} menuLinks={stickyMenuLead(t)}></MenuSticky>
         
@@ -213,6 +184,8 @@ export default function SmallGroupsPage( { data, location } ) {
 
       </div>
 
+      <FooterSimpleText />
+      
     </>
   )
 }

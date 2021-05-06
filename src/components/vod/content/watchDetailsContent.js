@@ -10,7 +10,7 @@ import config from '../../../../data/SiteConfig'
 import FeedListEven from '../../feed/feedListEven'
 import TagSimple from '../../tag/tagSimple'
 
-export default function WatchDetailsContent ( { title, videoDetails, excerpt, content, tags, backUrl } ) {
+export default function WatchDetailsContent ( { title, videoDetails, excerpt, content, tags, resources, campus, backUrl } ) {
     
     /* Standard fields */
     const { t } = useTranslation()
@@ -19,7 +19,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                             videoDetails.videoSeries.seriesGraphics.poster.localFile.childImageSharp.gatsbyImageData 
                         :
                             undefined
-                            
+
     return (
 
         <div className="watchDetailsContent content" id="content">
@@ -79,7 +79,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
             </div>
             {   
                 (videoDetails.videoAttachments) ? 
-                    <div className="attachments" id="resources">
+                    <div className="attachments" id="attachments">
                         {
                             videoDetails.videoAttachments.map( (attachment, index) => (
                                 (attachment.attachment.attachmentFile && attachment.status === 'publish') ?
@@ -109,7 +109,10 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                 
                 {
                     (content) ? 
-                        <Tab eventKey="notes" title={t('global.notes')}>
+                        <Tab 
+                            eventKey="notes" 
+                            title={t('global.notes')}
+                        >
                             <article dangerouslySetInnerHTML={{__html: content }}></article> 
                         </Tab>
                     : 
@@ -120,7 +123,10 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                 
                 {
                     (videoDetails.videoTranscript) ? 
-                        <Tab eventKey="transcript" title={t('global.transcripts')}>
+                        <Tab 
+                            eventKey="transcript" 
+                            title={t('global.transcripts')}
+                        >
                             {videoDetails.videoTranscript}
                         </Tab>
                     :
@@ -128,15 +134,16 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                 }
 
                 {
-                    (videoDetails.videoRelatedPosts) ?
-                        <Tab eventKey="resources" title={t('global.related-resources')}>
+                    (resources) ?
+                        <Tab 
+                            eventKey="resources" 
+                            title={t('global.related-resources')}
+                        >
                             <div className="resources"></div>
                             <FeedListEven
-                                className=""
-                                items={videoDetails.videoRelatedPosts}
-                                slug={config.blogPostDetailsSlug}
-                                excerpt={false}
-                                variant=''
+                                items   = { resources }
+                                slug    = { config.blogPostDetailsSlug }
+                                campus  = { campus }
                             />
                         </Tab>
                     : 

@@ -73,5 +73,21 @@
             color: var(--color-gray-five);
         }
     }
+
+    &.expired {
+        .card-img {
+            .card-img-top {
+                img {
+                    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+                    filter: grayscale(100%);
+                }
+            }
+        }
+        .card-body {
+            .card-title {
+                color: gray;
+            }
+        }
+    }
     
 }

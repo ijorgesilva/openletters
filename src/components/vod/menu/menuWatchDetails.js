@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 // Components
 import './menuWatchDetails.scss'
 
-export default function MenuWatchDetails ( { menu, menuBrand, variant, className, activeKey, id, close, ...props} ) {
+export default function MenuWatchDetails ( { menu, menuBrand, variant, className, activeKey, id, close, styles } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -15,7 +15,13 @@ export default function MenuWatchDetails ( { menu, menuBrand, variant, className
     const variantName = (variant) ? variant : "dark"
 
     return (
-        <Navbar className={`menuWatchDetails ${(className) ? className : ''}`} bg={variantName} activeKey={activeKey} id={id}>
+        <Navbar 
+            className   = {`menuWatchDetails ${(className) ? className : ''}`} 
+            bg          = { variantName } 
+            activeKey   = { activeKey } 
+            style       = { (styles) ? styles : {}}
+            id          = { id }
+        >
 
             <Nav className="mr-auto">
 
