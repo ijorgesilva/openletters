@@ -736,16 +736,6 @@ const allWpVideo = `
                                 ${localFile}
                             }
                             seriesSeasonsActive
-                            seriesSections {
-                                ... on WpContentSection {
-                                    id
-                                    slug
-                                    databaseId
-                                    sectionDetails {
-                                        ${sections}
-                                    }
-                                }
-                            }
                         }
                         seriesGraphics {
                             poster {
@@ -1046,6 +1036,6 @@ const query = `
         ${allWpSeries}
 
         ${allWpVideo}
-
+        
     }
 `
