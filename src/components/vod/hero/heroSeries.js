@@ -52,7 +52,7 @@ export default function HeroSeries ( { title, logo, campus, seriesGraphics, seri
                                             t('global.empty.text-not-available') 
                                     }
                                 </p>
-                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
+                                <Link to={`${ ( campus ) ? '/' + campus : ''}/${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
                                     className="btn btn--animation btn--light-outline z-index-2" 
                                 >
                                     <FontAwesomeIcon icon={faPlay} size="lg" /> {t('global.watch.watch-now')}
@@ -67,7 +67,7 @@ export default function HeroSeries ( { title, logo, campus, seriesGraphics, seri
                     {
                         (featuredVideo) ? 
                             <div className="playButton z-index-2">
-                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
+                                <Link to={`${(campus) ? '/' + campus : ''}/${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
                                     <StaticImage
                                         src="../../../assets/img/global/button__play-white.svg"
                                         width="120"
