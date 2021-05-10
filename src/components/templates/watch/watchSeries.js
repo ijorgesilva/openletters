@@ -84,7 +84,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             undefined
                                         }
                     items           = { data.VideosOnSerie.nodes }
-                    path            = { `/${campus}/` }
+                    campus          = { campus }
                     seriesDetails   = { seriesDetails }
                     seriesGraphics  = { seriesGraphics }
                     featuredVideo   = { data.VideosOnSerie.nodes[0] }
@@ -128,7 +128,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             id="episodes" 
                                             title=""
                                             items={data.VideosOnSerie.nodes}
-                                            path={`/${campus}/`}
+                                            campus={ campus }
                                             itemsVisible={5}
                                             iconCarousel={data.playButton.publicURL}
                                         />
@@ -140,7 +140,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 title=""
                                                 items={data.VideosOnSerie.nodes}
                                                 itemsVisible={5}
-                                                campus={`/${campus}/`}
+                                                campus={ campus }
                                                 serie={slug}
                                                 count
                                             />
@@ -150,7 +150,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 id="episodes" 
                                                 title=""
                                                 items={data.VideosOnSerie.nodes}
-                                                path={`/${campus}/`}
+                                                campus ={ campus }
                                                 itemsVisible={4}
                                                 iconCarousel={data.playButton.publicURL}
                                                 count

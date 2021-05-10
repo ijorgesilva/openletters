@@ -29,7 +29,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                                 : 
                                     undefined
 
-    const sections =    ( campusDetails.campusWatch.campusWatchSections?.lenght > 0 ) ? 
+    const sections =    ( campusDetails.campusWatch.campusWatchSections?.length > 0 ) ? 
                             campusDetails.campusWatch.campusWatchSections 
                         : 
                             undefined
@@ -83,8 +83,8 @@ export default function WatchPage( { pageContext, data, location } ) {
                         className       = "h-background-six-shade-three" 
                         id              = "latest"
                         title           = {t('global.watch.section-latest-title')}
-                        items           = {data.latest.nodes}
-                        path            = {`/${slug}/`}
+                        items           = { data.latest.nodes }
+                        campus          = { slug }
                         blurbType       = "vertical-dark"
                         itemsVisible    = { 5 }
                     />
@@ -94,12 +94,12 @@ export default function WatchPage( { pageContext, data, location } ) {
             }
             
             {
-                (sections) ?
+                ( sections ) ?
                     sections.map( ( section, index ) => (
                         <RenderSection 
-                            index   = {index}
-                            section = {section}
-                            path    = {`/${slug}/`}
+                            index   = { index }
+                            section = { section }
+                            campus  = { slug }
                             filter  = { {campus: slug } }
                         />
                     ))

@@ -68,7 +68,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                             title={obj.title}
                                             subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
                                             excerpt={ (obj.excerpt) ? obj.excerpt : undefined }
-                                            tag={t('global.article')}
+                                            tag={t('global.blog.title')}
 
                                             link={`${config.blogPostDetailsSlug}/${obj.slug}`}
                                             linkText={obj.title}
@@ -93,7 +93,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                             title={obj.title}
                                             subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
                                             excerpt={ (obj.excerpt) ? obj.excerpt : undefined }
-                                            tag={t('global.news')}
+                                            tag={t('global.news.title')}
 
                                             link={`${config.newsPostListSlug}/${obj.slug}`}
                                             linkText={obj.title}

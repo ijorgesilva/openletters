@@ -17,23 +17,23 @@ export default function RenderSection ( { section, filter, campus } ) {
             const ctaItem = section.sectionDetails.sectionCta
             return (
                 <SectionTextPhoto 
-                    id=        { section.slug }
-                    title=     { sectionTitle }
-                    content=   { sectionContent }
-                    className= { (ctaItem.sectionCtaClassname) ? ctaItem.sectionCtaClassname : undefined }
-                    subtitle=  { (ctaItem.sectionCtaSubtitle) ? ctaItem.sectionCtaSubtitle : undefined }
-                    variant=   { (ctaItem.sectionCtaVariant) ? ctaItem.sectionCtaVariant : undefined }
-                    buttonText={ (ctaItem.sectionCtaButton.sectionButtonText) ? ctaItem.sectionCtaButton.sectionButtonText : undefined }
-                    buttonType={ (ctaItem.sectionCtaButton.sectionButtonType) ? ctaItem.sectionCtaButton.sectionButtonType : undefined }
-                    buttonLink={ (ctaItem.sectionCtaButton.sectionButtonUrl) ?  ctaItem.sectionCtaButton.sectionButtonUrl : undefined }
-                    linkText=  { (ctaItem.sectionCtaLink.sectionLinkText) ? ctaItem.sectionCtaLink.sectionLinkText : undefined }
-                    linkType=  { (ctaItem.sectionCtaLink.sectionLinkType) ? ctaItem.sectionCtaLink.sectionLinkType : undefined }
-                    link=      { (ctaItem.sectionCtaLink.sectionLinkUrl) ?  ctaItem.sectionCtaLink.sectionLinkUrl : undefined }
-                    photo=     { (ctaItem.sectionCtaPhoto) ? 
-                                    ctaItem.sectionCtaPhoto.localFile.childImageSharp.gatsbyImageData 
-                                  : 
-                                    undefined 
-                                }
+                    id          = { section.slug }
+                    title       = { sectionTitle }
+                    content     = { sectionContent }
+                    className   = { (ctaItem.sectionCtaClassname) ? ctaItem.sectionCtaClassname : undefined }
+                    subtitle    = { (ctaItem.sectionCtaSubtitle) ? ctaItem.sectionCtaSubtitle : undefined }
+                    variant     = { (ctaItem.sectionCtaVariant) ? ctaItem.sectionCtaVariant : undefined }
+                    buttonText  = { (ctaItem.sectionCtaButton.sectionButtonText) ? ctaItem.sectionCtaButton.sectionButtonText : undefined }
+                    buttonType  = { (ctaItem.sectionCtaButton.sectionButtonType) ? ctaItem.sectionCtaButton.sectionButtonType : undefined }
+                    buttonLink  = { (ctaItem.sectionCtaButton.sectionButtonUrl) ?  ctaItem.sectionCtaButton.sectionButtonUrl : undefined }
+                    linkText    = { (ctaItem.sectionCtaLink.sectionLinkText) ? ctaItem.sectionCtaLink.sectionLinkText : undefined }
+                    linkType    = { (ctaItem.sectionCtaLink.sectionLinkType) ? ctaItem.sectionCtaLink.sectionLinkType : undefined }
+                    link        = { (ctaItem.sectionCtaLink.sectionLinkUrl) ?  ctaItem.sectionCtaLink.sectionLinkUrl : undefined }
+                    photo       = { (ctaItem.sectionCtaPhoto) ? 
+                                        ctaItem.sectionCtaPhoto.localFile.childImageSharp.gatsbyImageData 
+                                    : 
+                                        undefined 
+                                    }
                 />
             )
             break
@@ -92,7 +92,7 @@ export default function RenderSection ( { section, filter, campus } ) {
                                 id           = { section.slug }
                                 className    = "h-background-six-shade-three"
                                 title        = { videoItems.name }
-                                campus         = { campus }
+                                campus       = { campus }
                                 items        = { filteredVideos.sort(sortByDate)  }
                                 itemsVisible = { 5 }
                             />

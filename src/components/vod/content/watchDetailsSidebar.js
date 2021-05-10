@@ -5,7 +5,7 @@ import React from 'react'
 import { getDate } from '../../utils/utils'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 
-export default function WatchDetailsSidebar ( {videoDetails, location} ) {
+export default function WatchDetailsSidebar ( { videoDetails, location, hasCampus } ) {
 
     const vodDate = (videoDetails.videoDayDate) ? 
                         getDate(videoDetails.videoDayDate,2,'us','LLLL d, yyyy') 
@@ -17,7 +17,7 @@ export default function WatchDetailsSidebar ( {videoDetails, location} ) {
             <div className="sticky">
                 <div className="details">
                     {
-                        (videoDetails.videoCampus) ? 
+                        (hasCampus && videoDetails.videoCampus) ? 
                             <div className="watchCampus mb-3">
                                 {
                                     videoDetails.videoCampus.map ( (campus, index) => (

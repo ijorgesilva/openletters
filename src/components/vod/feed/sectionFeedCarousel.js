@@ -44,12 +44,12 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
                                         className={ ( objLength === index + 1 ) ? 'last' : undefined }
                                         featuredImage={ ( item.featuredImage.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
                                         link={  ( item.slug ) ? 
-                                                    `${ (campus) ? campus : '' }${config.watchMessageDetailsSlug}/${item.slug}` 
+                                                    `${ ( campus ) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` 
                                                 : 
                                                     undefined 
                                             }
                                         serieLink={ ( item.videoDetails.videoSeries ) ? 
-                                                        `${ (campus) ? campus : '' }${config.watchSeriesDetailsSlug}/${item.videoDetails.videoSeries.slug}` 
+                                                        `${ ( campus ) ? '/' + campus : '' }/${config.watchSeriesDetailsSlug}/${item.videoDetails.videoSeries.slug}` 
                                                     :
                                                         undefined
                                                 }

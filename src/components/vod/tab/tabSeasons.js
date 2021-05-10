@@ -7,7 +7,7 @@ import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import config from '../../../../data/SiteConfig'
 import './tabSeasons.scss'
 
-export default function TabSeasons ( { className, id, title, serie, items, itemsVisible, iconCarousel, count, path } ) {
+export default function TabSeasons ( { className, id, title, serie, items, itemsVisible, iconCarousel, count, campus } ) {
 
     const objLength = (items?.length) ? items.length : 0
 
@@ -100,10 +100,10 @@ export default function TabSeasons ( { className, id, title, serie, items, items
                                                                                     : 
                                                                                         undefined 
                                                                                     }
-                                                                    link={ (item.slug) ? `${ (path) ? path : undefined}${config.watchMessageDetailsSlug}/${item.slug}` : null }
+                                                                    link={ (item.slug) ? `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` : undefined }
                                                                     title={ `${item.title}` }
-                                                                    subtitle={ (item.videoDetails.speaker) ? (item.videoDetails.speaker) : null }
-                                                                    excerpt={ (item.excerpt) ? item.excerpt : null }
+                                                                    subtitle={ (item.videoDetails.speaker) ? (item.videoDetails.speaker) : undefined }
+                                                                    excerpt={ (item.excerpt) ? item.excerpt : undefined }
                                                                 />
                                                             : undefined
                                                         : undefined
