@@ -71,7 +71,7 @@ export default function RenderSection ( { section, filter, campus } ) {
                                         ))
                                     :
                                         {}
-
+            console.log(filteredVideos)
             function sortByDate(a, b) {
                 const dateA = parseInt(a.videoDetails.videoDayDate, 10)
                 const dateB = parseInt(b.videoDetails.videoDayDate, 10)
@@ -87,7 +87,7 @@ export default function RenderSection ( { section, filter, campus } ) {
             return (
                 <>
                     {
-                        (filteredVideos) ?
+                        (filteredVideos.length > 0) ?
                             <SectionFeedCarousel 
                                 id           = { section.slug }
                                 className    = "h-background-six-shade-three"
