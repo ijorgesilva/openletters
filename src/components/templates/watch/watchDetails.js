@@ -45,6 +45,8 @@ export default function WatchDetails( { pageContext, location, data } ) {
                         : 
                             undefined
 
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <div className={"watchDetails"}>
             
@@ -57,8 +59,9 @@ export default function WatchDetails( { pageContext, location, data } ) {
             />
 
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
             />
 

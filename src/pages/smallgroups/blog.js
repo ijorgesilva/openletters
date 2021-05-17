@@ -21,6 +21,8 @@ export default function SmallGroupEventPage ( { data, location } ) {
     /* Standard fields */
     const { t } = useTranslation()
     
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <>
 
@@ -33,6 +35,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
             
             <Navigation
                 location    = { location }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />
@@ -57,21 +60,20 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                 (data.posts?.nodes?.length > 0) ?
                                     data.posts.nodes.map( (obj, index) => (
                                         <BlurbHorizontal 
-                                            key={index}
-                                            className={'mb-4'}
-                                            featuredImage=  { (obj.featuredImage?.node?.localFile) ? 
-                                                obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                            : 
-                                                undefined  
-                                            }
+                                            key             = {index}
+                                            className       = {'mb-4'}
+                                            featuredImage   =   { (obj.featuredImage?.node?.localFile) ? 
+                                                                    obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                                                : 
+                                                                    undefined  
+                                                                }
                                             
                                             title={obj.title}
-                                            subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
-                                            excerpt={ (obj.excerpt) ? obj.excerpt : undefined }
-                                            tag={t('global.blog.title')}
-
-                                            link={`${config.blogPostDetailsSlug}/${obj.slug}`}
-                                            linkText={obj.title}
+                                            subtitle        = { getDate(obj.modified,2,'us','LLLL d, yyyy' )}
+                                            excerpt         = { (obj.excerpt) ? obj.excerpt : undefined }
+                                            tag             = {t('global.blog.title')}
+                                            link            = {`/${obj.postDetails.postCampus[0].slug}/${config.blogPostDetailsSlug}/${obj.slug}`}
+                                            linkText        = {obj.title}
                                         />
                                     ))
                                 :
@@ -82,21 +84,20 @@ export default function SmallGroupEventPage ( { data, location } ) {
                                 (data.news?.nodes?.length > 0) ?
                                     data.news.nodes.map( (obj, index) => (
                                         <BlurbHorizontal 
-                                            key={index}
-                                            className={'mb-4'}
-                                            featuredImage=  { (obj.featuredImage?.node?.localFile) ? 
-                                                obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                            : 
-                                                undefined  
-                                            }
+                                            key             = {index}
+                                            className       = {'mb-4'}
+                                            featuredImage   =   { (obj.featuredImage?.node?.localFile) ? 
+                                                                    obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+                                                                : 
+                                                                    undefined  
+                                                                }
                                             
-                                            title={obj.title}
-                                            subtitle={ getDate(obj.modified,2,'us','LLLL d, yyyy' )}
-                                            excerpt={ (obj.excerpt) ? obj.excerpt : undefined }
-                                            tag={t('global.news.title')}
-
-                                            link={`${config.newsPostListSlug}/${obj.slug}`}
-                                            linkText={obj.title}
+                                            title           = {obj.title}
+                                            subtitle        = { getDate(obj.modified,2,'us','LLLL d, yyyy' )}
+                                            excerpt         = { (obj.excerpt) ? obj.excerpt : undefined }
+                                            tag             = {t('global.news.title')}
+                                            link            = {`/${obj.newsDetails.newsCampus[0].slug}/${config.newsPostDetailsSlug}/${obj.slug}`}
+                                            linkText        = {obj.title}
                                         />
                                     ))
                                 :
@@ -116,7 +117,26 @@ export default function SmallGroupEventPage ( { data, location } ) {
 export const query = graphql`
     query{
 
-        posts: allWpPost(filter: {tags: {nodes: {elemMatch: {slug: {in: "small-groups"}}}}, status: {eq: "publish"}}, sort: {fields: date, order: DESC}, limit: 10) {
+        posts: allWpPost(
+            filter: {
+                tags: {
+                    nodes: {
+                        elemMatch: {
+                            slug: {
+                                in: "small-groups"
+                            }
+                        }
+                    }
+                }, 
+                status: {
+                    eq: "publish"
+                }
+            }, 
+            sort: {
+                fields: date, order: DESC
+            }, 
+            limit: 10
+        ) {
             nodes{
                 title
                 excerpt
@@ -132,10 +152,39 @@ export const query = graphql`
                         }
                     }
                 }
+                postDetails {
+                    postCampus {
+                        ... on WpCampus {
+                            id
+                            title
+                            slug
+                        }
+                    }
+                }
             }
         }
 
-        news: allWpNewspost(filter: {newsTags: {nodes: {elemMatch: {slug: {in: "small-groups"}}}}, status: {eq: "publish"}}, limit: 10, sort: {fields: modified, order: DESC}) {
+        news: allWpNewspost(
+            filter: {
+                newsTags: {
+                    nodes: {
+                        elemMatch: {
+                            slug: {
+                                in: "small-groups"
+                            }
+                        }
+                    }
+                }, 
+                status: {
+                        eq: "publish"
+                }
+            },
+            sort: {
+                fields: modified, 
+                order: DESC
+            }, 
+            limit: 10
+        ) {
             nodes{
                 title
                 excerpt
@@ -148,6 +197,15 @@ export const query = graphql`
                             childImageSharp {
                                 gatsbyImageData(layout: FULL_WIDTH)
                             }
+                        }
+                    }
+                }
+                newsDetails {
+                    newsCampus {
+                        ... on WpCampus {
+                            id
+                            title
+                            slug
                         }
                     }
                 }

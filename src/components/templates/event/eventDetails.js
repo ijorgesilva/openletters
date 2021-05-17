@@ -33,9 +33,9 @@ export default function EventDetails( { pageContext, location } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
+
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
-
-
     return (
         <>
             <HeaderPage 
@@ -47,8 +47,9 @@ export default function EventDetails( { pageContext, location } ){
             />
             
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

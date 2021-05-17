@@ -22,6 +22,8 @@ export default function EventsCampus ( { data, location, pageContext } ) {
     /* Standard fields */
     const { t } = useTranslation()
 
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <>
 
@@ -38,8 +40,9 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             />
             
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />
@@ -75,6 +78,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                                                         undefined    
                                                                 }
                                             title           = { event.title }
+                                            eventDate       = { event.eventDetails.eventDates }
                                             subtitle        = { getDate(event.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
                                             tags            =   { 
                                                                     ( event.eventTags?.nodes ) ? 
@@ -82,9 +86,10 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                                                     : 
                                                                         undefined  
                                                                 }
+                                            excerpt         = { event.excerpt }
+                                            type            = 'event'
                                             link            = { `/${breadcrumbs.campus}/${config.eventPostDetailsSlug}/${event.slug}` }
                                             linkText        = { event.title }
-                                            excerpt         = { event.excerpt }
                                         />
                                     ))
                                 :

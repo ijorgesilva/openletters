@@ -22,6 +22,8 @@ export default function NewsCampus ( { data, location, pageContext } ){
     /* Standard fields */
     const { t } = useTranslation()
 
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <>
 
@@ -38,8 +40,9 @@ export default function NewsCampus ( { data, location, pageContext } ){
             />
             
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

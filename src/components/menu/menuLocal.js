@@ -22,7 +22,6 @@ export default function MenuLocal ( { location, campus } ) {
     const siteSettings      = useWebsiteConfiguration()
     
     let menuLocalData = [
-        
         {name: "About", link: "#", megamenu: true,
             submenu: [
                 {name: "About us", link:"#", header: true,
@@ -50,9 +49,7 @@ export default function MenuLocal ( { location, campus } ) {
                 }
             ]
         },
-    
-        {name: "Watch", link: '/'+ campus +'/watch'},
-    
+        {name: "Watch", link: '/' + campus + '/watch' },
         {name: "Grow", link:"", megamenu: true,
             submenu: [
                 {name: "Classes", link:"#", header: true,
@@ -68,10 +65,10 @@ export default function MenuLocal ( { location, campus } ) {
                 },
                 {name: "Ministries", link:"#", header: true,
                     submenu: [
-                        {name: "Children", link: "https://victoryatl.com/vickids/"},
+                        {name: "Children", link: "https://victoryatl.com/VictoryKids/"},
                         {name: "Special Needs", link: "https://victoryatl.com/specialneeds/"},
-                        {name: "Middle School", link: "https://victoryatl.com/thecity/"},
-                        {name: "High School", link: "https://victoryatl.com/thecapitol/"},
+                        {name: "Middle School", link: "https://victoryatl.com/middleschool/"},
+                        {name: "High School", link: "https://victoryatl.com/highschool/"},
                         {name: "Young Adults", link: "https://victoryatl.com/fusion/"},
                         {name: "Women", link: "https://victoryatl.com/true/"},
                         {name: "Men", link: "https://victoryatl.com/menunited/"},
@@ -85,8 +82,8 @@ export default function MenuLocal ( { location, campus } ) {
                 {name: "Small Groups", link:"#", header: true,
                     submenu: [
                         {name: "About Groups", link: "/smallgroups/"},
-                        {name: "Find a Group", link: "https://victoryatl.com/default.aspx?page=4364"},
-                        {name: "Host a Group", link: "/smallgroups/host"},
+                        {name: "Find a Group", link: "https://my.victoryatl.com/default.aspx?page=4364", target: "_blank"},
+                        {name: "Host a Group", link: "/smallgroups/host", target: "_blank"},
                         {name: "Leader Login", link: "https://my.victoryatl.com/default.aspx?page=4236", target: "_blank"},
                     ]
                 },
@@ -104,19 +101,17 @@ export default function MenuLocal ( { location, campus } ) {
                 },
             ]
         },
-    
         {name: "Need Prayer?", link: "#", class: "mobileonly",
             submenu: [
-                {name: "Need Prayer?", link: "https://victoryatl.com/prayer"},
-                {name: "Healed Sessions", link: "https://victoryatl.com/healed/"},
-                {name: "Care / Financial", link: "https://victoryatl.com/care"},
-                {name: "Say Something", link: "https://victoryatl.com/saysomething"},
+                {name: "Need Prayer?", link: "https://victoryatl.com/prayer", target: "_blank"},
+                {name: "Healed Sessions", link: "https://victoryatl.com/healed/", target: "_blank"},
+                {name: "Care / Financial", link: "https://victoryatl.com/care", target: "_blank"},
+                {name: "Say Something", link: "https://victoryatl.com/saysomething", target: "_blank"},
             ]
         },
-    
         {name: "Give", link: "https://victoryatl.com/give", class: "mobileonly"},
-    
         {name: "Connect", link: "https://www.connecttovictory.com/", type:"button", target:"_blank"}
+    
     ]
 
     const campusLogoUrl =   ( currentCampus.campusDetails?.campusBrand?.campusBrandUrl ) ?

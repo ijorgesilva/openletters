@@ -13,7 +13,7 @@ import { menuHelp, menuGive } from '../../../data/menues'
 // Styles
 import './navigation.scss'
 
-export default function Navigation( { menuLocal, menuGlobal, location, campus } ){
+export default function Navigation( { menuLocal, menuGlobal, location, campus, searchIndices } ){
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -30,11 +30,12 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus } 
             {
                 ( menuGlobal ) ?
                     <MenuGlobal 
-                        className   = 'h-background-six-shade-three'
-                        helpMenu    = { menuHelp } 
-                        giveMenu    = { menuGive } 
-                        location    = { location }
-                        campus      = { campus }
+                        className       = 'h-background-six-shade-three'
+                        helpMenu        = { menuHelp } 
+                        giveMenu        = { menuGive } 
+                        location        = { location }
+                        campus          = { campus }
+                        searchIndices   = { searchIndices }
                     />
                 :
                     undefined
@@ -42,8 +43,8 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus } 
             {
                 ( menuLocal ) ?
                     <MenuLocal 
-                        location    = { location }
-                        campus      = { campus }
+                        location        = { location }
+                        campus          = { campus }
                     />
                 :
                     undefined

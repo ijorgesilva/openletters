@@ -8,10 +8,15 @@ import LanguageSelector from './languageSelector'
 import FollowDropdown from './followDropdown'
 import DropdownMenu from './dropdownMenu'
 import CampusSelector from './campusSelector'
+import Search from "../search"
+
+// Utils
 import config from '../../../data/SiteConfig'
+
+// Styles
 import './menuGlobal.scss'
 
-export default function MenuGlobal( { helpMenu, giveMenu, className, location } ){
+export default function MenuGlobal( { helpMenu, giveMenu, className, location, searchIndices } ){
 
     const { t } = useTranslation()
 
@@ -19,18 +24,20 @@ export default function MenuGlobal( { helpMenu, giveMenu, className, location } 
         
         <div className={`menuGlobal ${(className) ? className : ''}`}>
 
-            <Navbar className="navglobal container-fluid" bg="transparent" expand="lg">
+            <Navbar className="navglobal container-fluid" variant="dark" expand="lg">
                 {
                     (config.menuCampusSelector === true) ?
                         <CampusSelector 
                             location={ location }
+                            className='mr-auto'
                         />
                     : undefined
                 }
+                
+                <Navbar.Toggle className="menu-collapsed" aria-controls="global-navbar-nav" />
 
-                <Navbar.Toggle aria-controls="global-navbar-nav" />
+                <Navbar.Collapse className="menu" id="global-navbar-nav">
 
-                <Navbar.Collapse className="c-global__top p-0 justify-content-end" id="global-navbar-nav">
                     <Nav>
                         <FollowDropdown mailchimpUrl={config.mailChimpUrl} />
                         
@@ -53,10 +60,11 @@ export default function MenuGlobal( { helpMenu, giveMenu, className, location } 
                                 undefined
                         }
                     </Nav>
+
                 </Navbar.Collapse>
 
                 {
-                    ( config.menuLanguageSelector === true ) ?
+                    ( config.menuLanguageSelector ) ?
                         <LanguageSelector 
                             className={`langselector`} 
                         />
@@ -64,6 +72,14 @@ export default function MenuGlobal( { helpMenu, giveMenu, className, location } 
                         undefined
                 }
                 
+                {
+                    ( searchIndices?.length > 0 && config.hasSearch ) ? 
+                        <div className='search'>
+                            <Search indices={searchIndices} />
+                        </div>
+                    :
+                        undefined
+                }
 
             </Navbar>
 

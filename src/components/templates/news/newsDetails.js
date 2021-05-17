@@ -31,6 +31,8 @@ export default function NewsDetails( { pageContext, location } ){
                     :
                         undefined
 
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <>
 
@@ -43,8 +45,9 @@ export default function NewsDetails( { pageContext, location } ){
             />
             
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

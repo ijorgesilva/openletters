@@ -44,7 +44,7 @@
 		"events": {
 			"date-time": "Date And Time",
 			"description": "Check out our events",
-			"expired": "Event Expired",
+			"expired": "Event ended",
 			"location": "Location",
 			"organized-by": "Organized by",
 			"title": "Events"
@@ -67,7 +67,13 @@
 		},
 		"no-records": "Nothing to show!",
 		"notes": "Notes",
+		"pages": {
+			"name": "Page"
+		},
 		"related-resources": "Resources",
+		"search": {
+			"placeholder": "Search..."
+		},
 		"transcripts": "Transcripts",
 		"watch": {
 			"about-series": "About the Series",

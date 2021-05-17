@@ -29,19 +29,18 @@ export default function BlurbHorizontal( {
     switch(type){
 
         case 'event':
-            console.log(eventDate)
-            let eventExpired  = false
+            
+            let eventExpired    = false
             const firstDate     =   (eventDate[0].eventDate ) ? 
                                             getDate(eventDate[0].eventDate,2,'us','LLLL d, yyyy' ) 
                                     : 
                                         undefined
             const firstTime     =   eventDate[0].eventTime
-            let today         = new Date();
+            let today           = new Date();
                                         
             if( today > eventDate[0].eventDate ) {
                 eventExpired = true
             }
-            console.log('Event Expired? ' + eventExpired)
 
             return (
                 <div 
@@ -65,7 +64,7 @@ export default function BlurbHorizontal( {
                                 {
                                     (firstDate) ? 
                                         <time className="card-subtitle date" datetime={firstDate}>
-                                            { (eventExpired) ? '(' + t('global.events.expired') + ') ' : '' } 
+                                            <strong>{ (eventExpired) ? '' + t('global.events.expired') + ' | ' : '' }</strong>
                                             { firstDate } 
                                             { (firstTime) ? ' | ' + firstTime : '' }
                                         </time>

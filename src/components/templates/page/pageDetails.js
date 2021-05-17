@@ -29,6 +29,8 @@ export default function PageDetails( { location, pageContext } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
+
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <>
@@ -42,8 +44,9 @@ export default function PageDetails( { location, pageContext } ){
             />
             
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

@@ -20,6 +20,8 @@ export default function SmallGroupEventPage ( { data, location } ) {
     /* Standard fields */
     const { t } = useTranslation()
 
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+    
     return (
         <>
 
@@ -32,6 +34,7 @@ export default function SmallGroupEventPage ( { data, location } ) {
             
             <Navigation
                 location    = { location }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

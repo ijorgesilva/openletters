@@ -33,7 +33,9 @@ export default function WatchPage( { pageContext, data, location } ) {
                             campusDetails.campusWatch.campusWatchSections 
                         : 
                             undefined
-    
+
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+        
     return (
         <>
         
@@ -45,8 +47,9 @@ export default function WatchPage( { pageContext, data, location } ) {
             />
 
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
                 menuLocal
             />

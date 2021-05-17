@@ -4,12 +4,33 @@
     border-bottom: 1px solid var(--color-six);
     position: relative;
     z-index: 10;
-
+    .search {
+        position: relative;
+        width: 30px;
+        height: 44px;
+        padding: 5px 0;
+        margin: 0 5px;
+        order: 100;
+    }
     .navglobal {
         position: relative;
         z-index: 5;
         height: 60px;
-        
+        .menu {
+            flex-grow: unset;
+            &.show,
+            &.collapsing {
+                display: flex;
+                order: 10;
+                max-width: 100%;
+            }
+            .navbar-nav {
+                width: 100%;
+                .dropdown > button {
+                    width: 100%;
+                }
+            }
+        }
         .dropdown-menu {
             padding: 1rem o;
         }
@@ -25,14 +46,21 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             padding: 0px;
         }
-        @include media("≥phone", "<850px") {
-            .navbar-toggler {
-                display: none;
+    }
+}
+// @include media("≥phone", "<850px") {
+@include media("<desktop") {
+    .menuGlobal {
+        .search {
+            order: 5;
+        }
+        .navglobal {
+            .menu-collapsed {
+                order: 10;
             }
-            &.navbar {
-                padding: unset;
-                display: flex;
-                justify-content: space-between;
+            .menu {
+                background-color: rgba(var(--color-six-dark-shade-three), 1);
+                border-bottom: 1px solid var(--color-six);
             }
         }
     }

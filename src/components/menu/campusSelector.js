@@ -11,7 +11,7 @@ import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import './campusSelector.scss'
 
-export default function CampusSelector( { location } ) {
+export default function CampusSelector( { className, location } ) {
 
     let initialCampus
     const cookies = new Cookies()
@@ -149,7 +149,7 @@ export default function CampusSelector( { location } ) {
     return(
         <>
             <Select 
-                className       = "campusSelector"
+                className       = {`campusSelector ${ (className) ? className : '' }`}
                 classNamePrefix = "item"
                 value           = { selectedOption }
                 defaultValue    = { defaultCampus.value }

@@ -1,3 +1,4 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
 .followdropdown{
 
     &.dropdown {
@@ -94,7 +95,19 @@
         padding: .5rem 2rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        justify-items: center;
         grid-gap: 20px;
     }
 
 }
+
+
+@include media("<desktop") {
+    .followdropdown {
+        .applinks{
+            grid-template-columns: 1fr;
+        }
+    }
+}
+@include media("<=tablet") {}
+@include media("<=phone") {}

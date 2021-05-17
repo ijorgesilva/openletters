@@ -60,6 +60,7 @@ const config = {
     /* Features Flags */
     menuCampusSelector: true,
     menuLanguageSelector: false,
+    hasSearch: true,
 
     /* Post Configuration */
     blogShowDates: true,

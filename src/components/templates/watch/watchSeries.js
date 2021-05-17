@@ -18,6 +18,7 @@ import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 import RenderSection from '../../renderSection.js'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import TabSeasons from '../../vod/tab/tabSeasons'
+
 import './watchSeries.scss'
 
 export default function WatchSeries( { pageContext, location, data } ) {
@@ -38,7 +39,9 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             data.series.seriesDetails.seriesSections
                         :
                             undefined
-    
+
+    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+
     return (
         <>
             <HeaderPage 
@@ -50,8 +53,9 @@ export default function WatchSeries( { pageContext, location, data } ) {
             />
 
             <Navigation
-                location    = { location }
-                campus      = { breadcrumbs.campus }
+                location        = { location }
+                campus          = { breadcrumbs.campus }
+                searchIndices   = { searchIndices }
                 menuGlobal
             />
 
@@ -96,13 +100,13 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             <ShareSimpleIcon location={location} variant="light" />
                         </div>
                         {
-                            (excerpt) ?
+                            ( excerpt ) ?
                                 <>
                                     <div className="title h-color-six-shade-three">
-                                        <h4>{t('global.watch.about-series')}</h4> 
+                                        <h4>{ t('global.watch.about-series') }</h4> 
                                     </div>
                                     <p>
-                                        {sanitizeHtml(excerpt).replace( /(<([^>]+)>)/ig, '')}
+                                        { sanitizeHtml(excerpt).replace( /(<([^>]+)>)/ig, '') }
                                     </p>
                                 </>
                             :

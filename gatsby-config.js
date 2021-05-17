@@ -7,10 +7,8 @@
  const path = require("path");
  const config = require("./data/SiteConfig");
  
- require('dotenv').config({
-   path: `.env.${process.env.NODE_ENV || 'development'}`
- })
- 
+ require('dotenv').config()
+
  module.exports = {
  
    flags: {
@@ -45,6 +43,11 @@
  
    /* Your site config here */
    plugins: [
+
+        /*
+         * Functions
+         */
+        `gatsby-plugin-styled-components`, // REMOVE
          "gatsby-plugin-react-helmet", 
          "node-sass", 
          "gatsby-plugin-sass", 
@@ -53,14 +56,36 @@
            options: {
              component: `${__dirname}/src/components/layouts/index.js`
            }
-         },    
-         {
-           resolve: `gatsby-source-filesystem`,
-           options: {
-             name: `images`,
-             path: path.join(__dirname, `src`, `assets`),
-           },
          },
+         {
+          resolve: "gatsby-plugin-manifest",
+          options: {
+            name: config.siteTitle,
+            short_name: config.siteTitleShort,
+            description: config.siteDescription,
+            start_url: config.pathPrefix,
+            background_color: config.backgroundColor,
+            theme_color: config.themeColor,
+            display: "standalone", //minimal-ui
+            icon: `src/assets/img/logo.png`,
+            icons: [
+              {
+                src: "/logos/logo-192.png",
+                sizes: "192x192",
+                type: "image/png"
+              },
+              {
+                src: "/logos/logo-512.png",
+                sizes: "512x512",
+                type: "image/png"
+              }
+            ]
+          }
+        },
+
+         /*
+          * Sources & Assets
+          */
          {
            resolve: `gatsby-source-wordpress`,
            options: {
@@ -82,42 +107,23 @@
              },
              type: {
                Post: {
-                 limit:
-                   process.env.NODE_ENV === `development`
-                     ? // Lets just pull 50 posts in development to make it easy on ourselves.
-                       10
-                     : // and we don't actually need more than 5000 in production for this particular site
-                       5000,
+                 limit: 5000,
                },
              },
-             
            },
          },
+
          {
-           resolve: "gatsby-plugin-manifest",
+           resolve: `gatsby-source-filesystem`,
            options: {
-             name: config.siteTitle,
-             short_name: config.siteTitleShort,
-             description: config.siteDescription,
-             start_url: config.pathPrefix,
-             background_color: config.backgroundColor,
-             theme_color: config.themeColor,
-             display: "standalone", //minimal-ui
-             icon: `src/assets/img/logo.png`,
-             icons: [
-               {
-                 src: "/logos/logo-192.png",
-                 sizes: "192x192",
-                 type: "image/png"
-               },
-               {
-                 src: "/logos/logo-512.png",
-                 sizes: "512x512",
-                 type: "image/png"
-               }
-             ]
-           }
+             name: `images`,
+             path: path.join(__dirname, `src`, `assets`),
+           },
          },
+
+         /*
+          * Analytics
+          */
          {
            resolve: `gatsby-plugin-gdpr-cookies`,
            options: {
@@ -131,6 +137,10 @@
              environments: ['production', 'development']
            },
          },
+
+         /*
+          * Image Processing
+          */
          `gatsby-plugin-image`,
          `gatsby-transformer-sharp`,
          {
@@ -143,6 +153,10 @@
              // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
            },
          },
+
+         /*
+          * SEO related
+          */
          {
            resolve: `gatsby-plugin-canonical-urls`,
            options: {
@@ -160,7 +174,29 @@
            }
          },
          `gatsby-plugin-sitemap`,
-         `gatsby-plugin-meta-redirect` // make sure to put last in the array
+
+         /*
+          * Search: Algolia
+          */
+         // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+         {
+            resolve: `gatsby-plugin-algolia`,
+            options: {
+              appId: process.env.GATSBY_ALGOLIA_APP_ID,
+              apiKey: process.env.ALGOLIA_ADMIN_KEY,
+              queries: require("./src/utils/algolia-queries"),
+              matchFields: ['slug', 'modified'],
+              // enablePartialUpdates: true,
+              chunkSize: 10000,
+            },
+        },
+
+         /*
+          * Redirect
+          * Must be the last in the array
+          */
+        `gatsby-plugin-meta-redirect`,
+          
    ],
  }
  

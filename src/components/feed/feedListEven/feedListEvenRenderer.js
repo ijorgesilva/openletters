@@ -10,7 +10,6 @@ import config from '../../../../data/SiteConfig'
 
 export default function FeedListEvenRenderer ( { items, variant, hasExcerpt, campus } ) {
 
-    // console.log(items)
     const defaultCampusSlug = useWebsiteConfiguration().settingsDefaultCampus.slug
     let findPageCampus 
     let findPageCampusSlug

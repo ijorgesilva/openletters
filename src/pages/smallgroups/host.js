@@ -80,6 +80,8 @@ export default function SmallGroupsPage( { data, location } ) {
     },
   ]
 
+  const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
+  
   return (
     <>
 
@@ -93,6 +95,7 @@ export default function SmallGroupsPage( { data, location } ) {
 
       <Navigation
         location    = { location }
+        searchIndices   = { searchIndices }
         menuGlobal
         menuLocal
       />

@@ -5,12 +5,16 @@ import { Button } from 'react-bootstrap'
 import { graphql } from 'gatsby'
 
 // Components
+import Navigation from '../components/menu/navigation'
 import HeaderPage from '../components/headerPage'
 import HeroBasic from "../components/hero/heroBasic"
+import FooterSimpleText from '../components/footer/footerSimpleText'
 
-export default function Home( { data, location, ...props } ) {
+export default function Home( { data, location } ) {
 
   const { t } = useTranslation()
+
+  const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
 
   return (
 
@@ -23,7 +27,14 @@ export default function Home( { data, location, ...props } ) {
         description={t('global.404-description')}
       />
             
-
+      <Navigation
+          location        = { location }
+          campus          = { 'global' }
+          searchIndices   = { searchIndices }
+          menuGlobal
+          menuLocal
+      />
+      
       <HeroBasic
         title={t('global.404-title')}
         subtitle={t('global.404-description')}
@@ -35,6 +46,8 @@ export default function Home( { data, location, ...props } ) {
           </Button>
       </HeroBasic>
 
+      <FooterSimpleText campus={ 'global' } />
+      
     </>
 
   )
