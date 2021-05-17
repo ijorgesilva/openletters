@@ -35,7 +35,7 @@ phases:
       # invalidate the CloudFront cache for /public | Use ${CloudFrontDistribution} with CloudFormation
       - >
         aws cloudfront create-invalidation --distribution-id E3624BQ39R114B 
-        --paths /
+        --paths /*
 
 cache:
   paths:
