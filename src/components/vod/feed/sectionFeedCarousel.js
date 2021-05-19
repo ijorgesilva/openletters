@@ -10,7 +10,7 @@ import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
 import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, campus, styles } ){
+export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, campus, styles, infinite } ){
 
     const defaultVisible = 5
     const objLength = (items) ? items.length : 0
@@ -31,7 +31,7 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
                             swipeable={true}
                             draggable={true}
                             showDots={false}
-                            infinite={true}
+                            infinite={ (infinite) ? infinite : false }
                             partialVisible={true}
                             responsive={ (itemsVisible) ? responsive[itemsVisible] : responsive[defaultVisible] }
                             itemClass="item"

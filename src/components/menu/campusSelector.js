@@ -36,6 +36,7 @@ export default function CampusSelector( { className, location } ) {
                                 campus.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
                             : 
                                 '',
+                    "target": campus.campusDetails.campusSelector.campusSelectorHome.campusHomeTarget,
                     "style": (campus.slug === defaultCampus.slug) ? 
                                 {} 
                             : 
@@ -114,7 +115,11 @@ export default function CampusSelector( { className, location } ) {
         // contextData.set({currentCampus: option.value})
 
         if(option.link) { 
-            navigate( option.link, { state: {option} }) 
+            if ( option.target === '_blank') {
+                window.open( option.link , "_blank")
+            } else {
+                navigate( option.link, { state: {option} })
+            }
             cookies.set( 'campus' , option.value, { path: '/' } )
         }
         if( option.link === undefined) {

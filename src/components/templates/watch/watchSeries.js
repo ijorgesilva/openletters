@@ -41,7 +41,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             undefined
 
     const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
-
+    
     return (
         <>
             <HeaderPage 
@@ -134,6 +134,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             items={data.VideosOnSerie.nodes}
                                             campus={ campus }
                                             itemsVisible={5}
+                                            infinite
                                             iconCarousel={data.playButton.publicURL}
                                         />
                                     :
@@ -156,7 +157,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 items={data.VideosOnSerie.nodes}
                                                 campus ={ campus }
                                                 itemsVisible={4}
-                                                iconCarousel={data.playButton.publicURL}
+                                                infinite
                                                 count
                                             />
                                 }

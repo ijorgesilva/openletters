@@ -73,7 +73,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                                     }
                 title           = { hero.title }
                 description     = { getHeroDescription(hero) }
-                playText        =  {t('global.watch.watch-now') }
+                playText        = { t('global.watch.watch-now') }
                 serieLinkText   = { t('global.watch.more-info') }
                 playUrl         = { (hero.slug) ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
                 seriesUrl       = { (hero.videoDetails.videoSeries) ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
@@ -85,10 +85,9 @@ export default function WatchPage( { pageContext, data, location } ) {
                     <SectionFeedCarousel
                         className       = "h-background-six-shade-three" 
                         id              = "latest"
-                        title           = {t('global.watch.section-latest-title')}
+                        title           = { t('global.watch.section-latest-title') }
                         items           = { data.latest.nodes }
                         campus          = { slug }
-                        blurbType       = "vertical-dark"
                         itemsVisible    = { 5 }
                     />
                 : 

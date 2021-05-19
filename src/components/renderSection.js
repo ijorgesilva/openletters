@@ -87,7 +87,7 @@ export default function RenderSection ( { section, filter, campus } ) {
             return (
                 <>
                     {
-                        (filteredVideos) ?
+                        (filteredVideos.length > 0) ?
                             <SectionFeedCarousel 
                                 id           = { section.slug }
                                 className    = "h-background-six-shade-three"

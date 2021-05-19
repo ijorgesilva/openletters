@@ -42,6 +42,7 @@ export const useCampuses = ( campus ) => {
                                                 campusSelectorHome {
                                                     campusHomeUrl
                                                     campusHomeType
+                                                    campusHomeTarget
                                                 }
                                             }
                                             campusWatch {
