@@ -7,17 +7,21 @@ import { ContextProviderComponent } from '../../provider/context'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Components
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+
 import '../global.scss'
 import '../layout.scss'
 
 const Layout = ( { children, pageContext, t, i18n, location } ) => {
+
+    const customCode = useWebsiteConfiguration().settingsCode
 
     switch(pageContext.layout){
         case 'serieDetails':
         case 'watchDetails':
             return (
                 <ContextProviderComponent>
-
+                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
                     <main>
                         {children}
                     </main>
@@ -39,7 +43,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
         default:
             return (
                 <ContextProviderComponent>
-                    
+                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
                     <main>
                         {children}
                     </main>

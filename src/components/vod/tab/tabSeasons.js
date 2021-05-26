@@ -77,7 +77,7 @@ export default function TabSeasons ( { className, id, title, serie, items, items
                                         </Nav.Item>
                                     ))
                                 }
-                            </Nav>w
+                            </Nav>
                         </Col>
 
                         <Col xs={12} sm={8} md={9} lg={10}>

@@ -8,7 +8,7 @@ export const useWebsiteConfiguration = () => {
                                         websiteSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
-                                                
+                                                settingsCode
                                                 settingsLegalPage {
                                                     ... on WpPage {
                                                         id
