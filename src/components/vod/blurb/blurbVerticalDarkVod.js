@@ -7,7 +7,7 @@ import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 // Components
 import './blurbVerticalDarkVod.scss'
 
-export default function BlurbVerticalDarkVod ( { className, link, iconImage, featuredImage, noImage, title, serieTitle, serieLink, excerpt } ) {
+export default function BlurbVerticalDarkVod ( { className, link, iconImage, featuredImage, title, serieTitle, serieLink, excerpt } ) {
 
     return (
         
@@ -20,7 +20,8 @@ export default function BlurbVerticalDarkVod ( { className, link, iconImage, fea
                                     <div className="card-icon">
                                         <img src={iconImage} alt=""/>
                                     </div>
-                                : undefined
+                                : 
+                                    undefined
                             }
                             { 
                                 (featuredImage) ? 

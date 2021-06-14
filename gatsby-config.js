@@ -7,7 +7,10 @@
  const path = require("path");
  const config = require("./data/SiteConfig");
  
- require('dotenv').config()
+//  require('dotenv').config()
+ require('dotenv').config({
+  path: `.env${ (process.env.NODE_ENV === 'development' ) ? '.development' : (process.env.NODE_ENV) ? '.'+process.env.NODE_ENV : ''}`
+})
 
  module.exports = {
  
@@ -95,7 +98,7 @@
              //   hardCacheMediaFiles: true,
              // },
              schema: {
-               // perPage: 20, // currently set to 100
+               perPage: 100, // currently set to 100
                requestConcurrency: 100, // currently set to 5
                previewRequestConcurrency: 100, // currently set to 2
              },
@@ -160,7 +163,7 @@
          {
            resolve: `gatsby-plugin-canonical-urls`,
            options: {
-             siteUrl: config.siteUrl,
+             siteUrl: config.canonicalUrl,
              stripQueryString: true,
            },
          },

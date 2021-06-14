@@ -60,13 +60,13 @@ export default function SidebarFeedVod( { items, serieSlug, title, background, c
             
             <div className="list-mobile">
                 <SectionFeedCarousel 
-                    className="h-background-six-shade-three" 
-                    id="related" 
-                    title=""
-                    items={items}
-                    path={`/${campus}/`}
-                    itemsVisible={4}
-                    styles={{maxWidth: '100vw'}}
+                    className       = "h-background-six-shade-three" 
+                    id              = "related" 
+                    title           = ""
+                    items           = {items}
+                    campus          = {campus}
+                    itemsVisible    = {4}
+                    styles          = {{maxWidth: '100vw'}}
                     count
                 />
             </div>
