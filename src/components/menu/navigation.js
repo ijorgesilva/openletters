@@ -8,7 +8,7 @@ import MenuGlobal from "../menu/menuGlobal"
 import MenuLocal from "../menu/menuLocal"
 
 // Data
-import { menuHelp, menuGive } from '../../../data/menues'
+import { menuHelp, menuGive, followOptions } from '../../../data/menues'
 
 // Styles
 import './navigation.scss'
@@ -31,6 +31,7 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
                 ( menuGlobal ) ?
                     <MenuGlobal 
                         className       = 'h-background-six-shade-three'
+                        followOptions   = { followOptions }
                         helpMenu        = { menuHelp } 
                         giveMenu        = { menuGive } 
                         location        = { location }

@@ -5,15 +5,16 @@ import { Row, Col, NavDropdown } from "react-bootstrap"
 // Components
 import SubMenu from './subMenu'
 
-export default function MegaMenu(props){
+export default function MegaMenu( { index, className, title, content } ){
     return (
         <NavDropdown 
-            key={props.index} 
-            className={`megamenu navitems ${props.class}`}
-            title={props.title} id={`dropdown-${props.index}`}
+            id          = {`dropdown-${index}`}
+            key         = {index} 
+            className   = {`megamenu navitems ${ className ? className : ''}`}
+            title       = {title} 
         >
             <Row>
-                {props.content.map( (menu, index) => (
+                {content.map( (menu, index) => (
                     <Col key={index} className="navcontent" xs={12} md lg> 
                         
                             { (menu.header) ? <h6 dangerouslySetInnerHTML={{__html: menu.name}}></h6> : <></> }

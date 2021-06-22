@@ -4,27 +4,44 @@ import { Link } from "gatsby"
 
 import "./dropdownMenu.scss"
 
-export default function DropdownMenu(props){
+export default function DropdownMenu( { className, title, data, as } ){
     return (
-        <Dropdown className={`dropdownmenu ${props.className}`}>
+        <Dropdown className={`dropdownmenu ${ className ? className : '' }`}>
             <Dropdown.Toggle variant="transparent">
-                {props.title}
+                {title}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
                 {
-                    props.data.map((menu, index) => (
+                    data.map((menu, index) => (
                         (menu.name && menu.link) ?
-                            <Dropdown.Item key={index} as={ (props.as === "link") ? Link : undefined } to={menu.link} href={menu.link}>{menu.name}</Dropdown.Item>
-                        : (
-                            menu.divider === true ? 
-                                <div key={index} class="dropdown-divider"></div>
-                            : (
-                                (menu.content || menu.title) ?
-                                    <div key={index}><h6 className={"text-center"}>{menu.title}</h6> <p>{menu.content}</p></div>
-                                : <></>
+                            <Dropdown.Item 
+                                key     = {index} 
+                                as      = { (as === "link") ? Link : undefined } 
+                                to      = {menu.link} href={menu.link}
+                                target  = {menu.target}
+                            >
+                                {menu.name}
+                            </Dropdown.Item>
+                        :   
+                            (
+                                menu.divider === true ? 
+                                    <div key={index} class="dropdown-divider"></div>
+                                : 
+                                    (
+                                        (menu.content || menu.title) ?
+                                            <div key={index}>
+                                                <h6 className={"text-center"}>
+                                                    {menu.title}
+                                                </h6> 
+                                                <p>
+                                                    {menu.content}
+                                                </p>
+                                            </div>
+                                        : 
+                                            undefined
+                                    )
                             )
-                        )
                     ))
                 }
             </Dropdown.Menu>

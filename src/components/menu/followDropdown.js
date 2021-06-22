@@ -9,7 +9,7 @@ import AppLinks from "../widget/appLinks"
 
 import "./followDropdown.scss"
  
-export default function FollowDropdown (props){
+export default function FollowDropdown ( { instagramUrl, facebookUrl, twitterUrl, youtubeUrl, appStoreUrl, playStoreUrl, mailchimpUrl } ) {
 
     return (
         <Dropdown className={`followdropdown`}>
@@ -19,41 +19,82 @@ export default function FollowDropdown (props){
         
             <Dropdown.Menu>
 
-                <div className={`socialicons`}>
-                    <a href="https://www.instagram.com/victoryatl/" title="Instagram" aria-label="Instagram" target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={faInstagram} size="lg" />
-                    </a>
-                    <a href="https://www.facebook.com/victoryatl/" title="Facebook" aria-label="Facebook" target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={faFacebook} size="lg" />
-                    </a>
-                    <a href="https://www.twitter.com/victoryatl/" title="Twitter" aria-label="Twitter" target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={faTwitter} size="lg" />
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCNeMhrj2GTacigCwMLIPAyA" title="Youtube" aria-label="Youtube" target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={faYoutube} size="lg" />
-                    </a>
-                </div>
-                <Dropdown.Divider />
+                {
+                    ( instagramUrl || facebookUrl || twitterUrl || youtubeUrl ) ?
+                        <>
+                            <div className={`socialicons`}>
+                                {
+                                    ( instagramUrl ) ?
+                                        <a href={instagramUrl} title="Instagram" aria-label="Instagram" target="_blank" rel="noreferrer">
+                                            <FontAwesomeIcon icon={faInstagram} size="lg" />
+                                        </a>
+                                    :
+                                        undefined
+                                }
+                                {
 
-                <MailchimpSubscribe
-                    url={props.mailchimpUrl}
-                    render={({ subscribe, status, message }) => (
-                    <div>
-                        <CustomForm
-                            status={status}
-                            message={message}
-                            onValidated={formData => subscribe(formData)}
+                                    ( facebookUrl ) ?
+                                        <a href={facebookUrl} title="Facebook" aria-label="Facebook" target="_blank" rel="noreferrer">
+                                            <FontAwesomeIcon icon={faFacebook} size="lg" />
+                                        </a>
+                                    :
+                                        undefined
+                                }
+                                {
+                                    ( twitterUrl ) ?
+                                        <a href={twitterUrl} title="Twitter" aria-label="Twitter" target="_blank" rel="noreferrer">
+                                            <FontAwesomeIcon icon={faTwitter} size="lg" />
+                                        </a>
+                                    :
+                                        undefined
+                                }
+                                {
+                                    ( youtubeUrl ) ?
+                                        <a href={youtubeUrl} title="Youtube" aria-label="Youtube" target="_blank" rel="noreferrer">
+                                            <FontAwesomeIcon icon={faYoutube} size="lg" />
+                                        </a>
+                                    :
+                                        undefined
+
+                                }
+                            </div>
+
+                            <Dropdown.Divider />
+                        </>
+                    :
+                        undefined
+                }
+
+                {
+                    ( mailchimpUrl ) ?
+                        <MailchimpSubscribe
+                            url={ mailchimpUrl }
+                            render={({ subscribe, status, message }) => (
+                            <div>
+                                <CustomForm
+                                    status={status}
+                                    message={message}
+                                    onValidated={formData => subscribe(formData)}
+                                />
+                            </div>
+                            )}
                         />
-                    </div>
-                    )}
-                />
+                    :
+                        undefined
+                }
 
-                <Dropdown.Divider />
-                <AppLinks 
-                    className={'applinks'} 
-                    appStoreUrl={"https://itunes.apple.com/us/app/victory-world-church/id921775740?mt=8"}
-                    playStoreUrl={"https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_86PZ97"}
-                />
+                {
+                    ( appStoreUrl || playStoreUrl ) ?
+                        <>
+                            <Dropdown.Divider />
+                            <AppLinks 
+                                appStoreUrl     = { ( appStoreUrl ) ? appStoreUrl : undefined }
+                                playStoreUrl    = { ( playStoreUrl ) ? playStoreUrl : undefined }
+                            />
+                        </>
+                    :
+                        undefined
+                }
 
             </Dropdown.Menu>
         </Dropdown>

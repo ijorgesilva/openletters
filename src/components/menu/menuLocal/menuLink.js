@@ -6,7 +6,7 @@ import {  Nav, Modal } from "react-bootstrap"
 
 // Components
 
-export default function MenuLink(props){
+export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, as } ){
     
     const [show, setShow] = useState(false);
 
@@ -16,20 +16,20 @@ export default function MenuLink(props){
     return (
         <>
             {(function(){
-                switch (props.type){
+                switch ( type ) {
                     case 'button':
                         return (
                             <>
                                 <div className={`menubutton`}>
                                     <Nav.Link
-                                        className={`btn btn--animation btn--light-outline ${ (props.class) ? props.class : '' }`}  
-                                        as={ (props.as === "link") ? Link : undefined }
-                                        to={props.link}
-                                        href={props.link}
-                                        target={props.target}
-                                        key={props.index} 
-                                        dangerouslySetInnerHTML={{__html: props.name}} 
-                                        activeClassName="active"
+                                        className               = {`btn btn--animation btn--light-outline ${ (className) ? className : '' }`}
+                                        as                      = { (as === "link") ? Link : undefined }
+                                        to                      = {link}
+                                        href                    = {link}
+                                        target                  = {target}
+                                        key                     = {index} 
+                                        dangerouslySetInnerHTML = {{__html: name}} 
+                                        activeClassName         = "active"
                                     />
                                 </div>
                             </>
@@ -39,23 +39,28 @@ export default function MenuLink(props){
                                 <>
                                     <div className={`menucta`}>
                                         <Nav.Link
-                                            as={ (props.as === "link") ? Link : undefined }
-                                            className={`btn btn--animation btn--light-outline ${ (props.class) ? props.class : '' }`}  
-                                            key={props.index} 
-                                            onClick={handleShow} 
-                                            target={props.target} 
-                                            dangerouslySetInnerHTML={{__html: props.name}} 
-                                            activeClassName="active"
+                                            as                      = { ( as === "link") ? Link : undefined }
+                                            className               = {`btn btn--animation btn--light-outline ${ ( className ) ? className : '' }`}  
+                                            key                     = { index} 
+                                            onClick                 = { handleShow } 
+                                            target                  = { target } 
+                                            dangerouslySetInnerHTML = {{__html: name}} 
+                                            activeClassName         = "active"
                                         />
                                     </div>
                                     {
-                                        (props.iframe) ?
+                                        (iframe) ?
                                             <Modal show={show} onHide={handleClose} animation={false}>
                                                 <Modal.Header closeButton>
-                                                <Modal.Title>{props.iframeTitle}</Modal.Title>
+                                                <Modal.Title>{iframeTitle}</Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
-                                                    <IframeResizer src={props.iframe} style={{minHeight: "600px", minWidth: '100%', width: '1px'}} frameborder="0"></IframeResizer>
+                                                    <IframeResizer 
+                                                        src={iframe} 
+                                                        style={{minHeight: "600px", minWidth: '100%', width: '1px'}} 
+                                                        frameborder="0"
+                                                    >
+                                                    </IframeResizer>
                                                 </Modal.Body>
                                             </Modal>
                                         : <></>
@@ -65,11 +70,11 @@ export default function MenuLink(props){
                     default:
                         return (
                                 <Nav.Link 
-                                    as={ (props.as === "link") ? Link : undefined } 
-                                    key={props.index} target={props.target} 
-                                    className={`navitems navmain ${ (props.class) ? props.class : '' }`} 
-                                    to={props.link} dangerouslySetInnerHTML={{__html: props.name}} 
-                                    href={props.link} 
+                                    as          = { (as === "link") ? Link : undefined } 
+                                    key         = {index} target={target} 
+                                    className   = {`navitems navmain ${ (className) ? className : '' }`} 
+                                    to          = {link} dangerouslySetInnerHTML={{__html: name}} 
+                                    href        = {link} 
                                 />
                             )
                 }

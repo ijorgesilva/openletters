@@ -52,11 +52,6 @@ const config = {
     /* Pages */
     pagesSlug: 'page',
 
-  /* Social */
-    /* Menu subscribe */
-    mailChimpUrl: "https://victoryatl.us6.list-manage.com/subscribe/post?u=3b7891d118a85a8202d7cead5&id=8a2be25566",
-
-
   /* Features */
     /* Features Flags */
     menuCampusSelector: true,

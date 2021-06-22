@@ -101,15 +101,36 @@ export default function MenuLocal ( { location, campus } ) {
                 },
             ]
         },
-        {name: "Need Prayer?", link: "#", class: "mobileonly",
+        {name: "Follow us", link: "#", class: "mobileonly",
             submenu: [
-                {name: "Need Prayer?", link: "https://victoryatl.com/prayer", target: "_blank"},
-                {name: "Healed Sessions", link: "https://victoryatl.com/healed/", target: "_blank"},
-                {name: "Care / Financial", link: "https://victoryatl.com/care", target: "_blank"},
-                {name: "Say Something", link: "https://victoryatl.com/saysomething", target: "_blank"},
+                {name: "Instagram", link: "https://www.instagram.com/victoryatl/"},
+                {name: "Facebook", link: "https://www.facebook.com/victoryatl/"},
+                {name: "Twitter", link: "https://www.twitter.com/victoryatl/"},
+                {name: "Youtube", link: "https://www.youtube.com/channel/UCNeMhrj2GTacigCwMLIPAyA"},
+                {name: "App Store", link: "https://itunes.apple.com/us/app/victory-world-church/id921775740?mt=8"},
+                {name: "Play Store", link: "https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_86PZ97"},
             ]
         },
-        {name: "Give", link: "https://victoryatl.com/give", class: "mobileonly"},
+        {name: "Need Help?", link: "#", class: "mobileonly",
+            submenu: [
+                {name: "Need Prayer?", link: "https://victoryatl.com/prayer"},
+                {name: "Healed Sessions", link: "https://victoryatl.com/healed/"},
+                {name: "Care / Financial", link: "https://victoryatl.com/care"},
+                {name: "Say Something", link: "https://victoryatl.com/saysomething"},
+                {name: "How to Help?", link: "https://victoryatl.com/howtohelp"},
+                {name: "Technical Support", link: "https://supportatvictory.atlassian.net/servicedesk/customer/portal/1", target: "_blank"}
+            ]
+        },
+        {name: "Give", link: "https://victoryatl.com/give", class: "mobileonly",
+            submenu: [
+                {name: "Norcross", link: "https://pushpay.com/g/victorynorcross?utm_source=pushpay&utm_medium=email&utm_content=link6&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
+                {name: "Hamilton Mill", link: "https://pushpay.com/g/victoryhamiltonmill?utm_source=pushpay&utm_medium=email&utm_content=link4&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
+                {name: "Midtown", link: "https://pushpay.com/g/victorymidtown?utm_source=pushpay&utm_medium=email&utm_content=link5&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
+                {name: "Online", link: "https://pushpay.com/g/victoryonline?utm_source=pushpay&utm_medium=email&utm_content=link7&utm_campaign=AdminInviteAndGivingLink&src=hpp"},
+                {title: "Mail your gift?", content: "5905 Brook Hollow Parkway, Norcross GA 30071 | Specify campus / designation in the memo portion of the check."},
+                {name: "View all options", link: "https://victoryatl.com/give"}
+            ]
+        },
         {name: "Connect", link: "https://www.connecttovictory.com/", type:"button", target:"_blank"}
     
     ]
@@ -161,24 +182,24 @@ export default function MenuLocal ( { location, campus } ) {
                                 (menu.submenu) ?
                                     (menu.megamenu === true) ?
                                         <MegaMenu 
-                                            class   = {`${menu.class}`} 
-                                            key     = {index} 
-                                            content = {menu.submenu} 
-                                            title   = {menu.name} 
-                                            index   = {menu.index}
+                                            className   = {`${menu.class}`} 
+                                            key         = {index} 
+                                            content     = {menu.submenu} 
+                                            title       = {menu.name} 
+                                            index       = {menu.index}
                                         />
                                     : 
                                         <RegularMenu 
-                                            class   = {`${menu.class}`} 
-                                            key     = {index} 
-                                            content = {menu.submenu} 
-                                            title   = {menu.name} 
-                                            index   = {menu.index}
+                                            className   = {`${menu.class}`} 
+                                            key         = {index} 
+                                            content     = {menu.submenu} 
+                                            title       = {menu.name} 
+                                            index       = {menu.index}
                                         />
                                 : 
                                     <MenuLink 
                                         key         = {index} 
-                                        class       = {`${menu.class}`} 
+                                        className   = {`${menu.class}`} 
                                         content     = {menu.submenu} 
                                         name        = {menu.name} 
                                         type        = {menu.type} 

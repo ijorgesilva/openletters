@@ -5,17 +5,18 @@ import { NavDropdown } from "react-bootstrap"
 
 // Components
 
-export default function RegularMenu(props){
+export default function RegularMenu( { className, index, title, content } ){
     return (
         <NavDropdown
-            className={`regularmenu navitems ${props.class}`}
-            key={props.index}
-            title={props.title} id={`dropdown-${props.index}`}
+            id          = {`dropdown-${index}`}
+            className   = {`regularmenu navitems ${ ( className ) ? className : '' }`}
+            key         = {index}
+            title       = {title} 
         >
-            {props.content.map( (submenu, index) => (
+            {content.map( (submenu, index) => (
                 <NavDropdown.Item 
                     as={ (submenu.as === "link") ? Link : undefined }
-                    className={`submenu-item text-wrap ${submenu.class}`}
+                    className={`submenu-item text-wrap ${ ( submenu.class ) ? submenu.class : ''}`}
                     key={index} 
                     to={submenu.link} 
                     href={submenu.link} 

@@ -16,10 +16,12 @@ import config from '../../../data/SiteConfig'
 // Styles
 import './menuGlobal.scss'
 
-export default function MenuGlobal( { helpMenu, giveMenu, className, location, searchIndices } ){
+export default function MenuGlobal( { followOptions, helpMenu, giveMenu, className, location, searchIndices } ){
 
     const { t } = useTranslation()
 
+    const globalNavbarCollapse = false
+    
     return (
         
         <div className={`menuGlobal ${(className) ? className : ''}`}>
@@ -33,13 +35,24 @@ export default function MenuGlobal( { helpMenu, giveMenu, className, location, s
                         />
                     : undefined
                 }
-                
-                <Navbar.Toggle className="menu-collapsed" aria-controls="global-navbar-nav" />
-
+                {
+                    ( globalNavbarCollapse ) ?
+                        <Navbar.Toggle className="menu-collapsed" aria-controls="global-navbar-nav" />
+                    :
+                        undefined
+                }
                 <Navbar.Collapse className="menu" id="global-navbar-nav">
 
                     <Nav>
-                        <FollowDropdown mailchimpUrl={config.mailChimpUrl} />
+                        <FollowDropdown 
+                            instagramUrl    = { followOptions.instagramUrl }
+                            facebookUrl     = { followOptions.facebookUrl }
+                            twitterUrl      = { followOptions.twitterUrl }
+                            youtubeUrl      = { followOptions.youtubeUrl }
+                            appStoreUrl     = { followOptions.appStoreUrl }
+                            playStoreUrl    = { followOptions.playStoreUrl }
+                            mailchimpUrl    = { followOptions.mailChimpUrl }
+                        />
                         
                         {
                             ( helpMenu ) ?
