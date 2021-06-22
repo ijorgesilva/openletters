@@ -93,7 +93,7 @@ const posts = `
         }
     ) {
         nodes{
-            objectID: id
+            id
             date
             modified
             title
@@ -123,7 +123,7 @@ const news = `
         }
     ) {
         nodes{
-            objectID: id
+            id
             date
             modified
             title
@@ -153,7 +153,7 @@ const events = `
         }
     ) {
         nodes{
-            objectID: id
+            id
             date
             modified
             title

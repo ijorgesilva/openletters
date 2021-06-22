@@ -10,6 +10,8 @@ import RegularMenu from './menuLocal/regularMenu'
 import MenuLink from './menuLocal/menuLink'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import { useCampuses } from '../../hooks/useCampuses' 
+import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // Style
 import './menuLocal.scss'
@@ -40,7 +42,7 @@ export default function MenuLocal ( { location, campus } ) {
                 {name: "Connect", link:"#", header: true,
                     submenu: [
                         {name: "My.Victory", link: "https://my.victoryatl.com/"},
-                        {name: "Small Groups", link: "/smallgroups/", as: "link"},
+                        {name: "Small Groups", link: "/smallgroups/" },
                         {name: "Serve", link: "https://victoryatl.com/serve/"},
                         {name: "Events", link: "https://victoryatl.com/events/", as: 'link'},
                         {name: "Download App", link: "https://victoryatl.com/app/"},
@@ -72,7 +74,7 @@ export default function MenuLocal ( { location, campus } ) {
                         {name: "Young Adults", link: "https://victoryatl.com/fusion/"},
                         {name: "Women", link: "https://victoryatl.com/true/"},
                         {name: "Men", link: "https://victoryatl.com/menunited/"},
-                        {name: "Small Groups", link: "https://victoryatl.com/smallgroups/", as: "Link"},
+                        {name: "Small Groups", link: "/smallgroups/" },
                         {name: "Adults (50+)", link: "https://victoryatl.com/050-2/"},
                         {name: "Vida", link: "https://victoryatl.com/victoryvida/"},
                         {name: "Missions", link: "https://victoryatl.com/missions/"},
@@ -172,7 +174,9 @@ export default function MenuLocal ( { location, campus } ) {
                 { currentCampus.title }
             </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-dark">
+                <FontAwesomeIcon icon={faBars} size="md" />
+            </Navbar.Toggle>
 
             <Navbar.Collapse className={`mainnav`} id="responsive-navbar-nav">
                 <Nav className={`navbarmenu`}>

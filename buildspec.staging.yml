@@ -22,8 +22,10 @@ phases:
 
   post_build:
     commands:
+      - echo "User-agent:*" > ./public/robots.txt
+      - echo "Disallow:/" >> ./public/robots.txt
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
-      - aws s3 cp --recursive --acl public-read ./public s3://staging.victorychur.ch/ 
+      - aws s3 cp --recursive --acl public-read ./public s3://staging.victorychur.ch/
 
 cache:
   paths:
