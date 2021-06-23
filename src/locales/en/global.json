@@ -24,6 +24,9 @@
 		"404-title": "Page not found",
 		"accept": "Accept",
 		"article": "Post",
+		"bible": {
+			"title": "BIble"
+		},
 		"blog": {
 			"created-date": "Created on ",
 			"description": "Check our latest post and articles",

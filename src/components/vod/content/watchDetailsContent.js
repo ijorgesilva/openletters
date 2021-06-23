@@ -9,8 +9,9 @@ import { useTranslation } from "react-i18next"
 import config from '../../../../data/SiteConfig'
 import FeedListEven from '../../feed/feedListEven'
 import TagSimple from '../../tag/tagSimple'
+import YouVersion from '../../bible/youVersion'
 
-export default function WatchDetailsContent ( { title, videoDetails, excerpt, content, tags, resources, campus, backUrl } ) {
+export default function WatchDetailsContent ( { title, videoDetails, excerpt, content, tags, resources, campus, backUrl, bibleUrl, bible } ) {
     
     /* Standard fields */
     const { t } = useTranslation()
@@ -112,6 +113,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                         <Tab 
                             eventKey="notes" 
                             title={t('global.notes')}
+                            className="mt-5"
                         >
                             <article dangerouslySetInnerHTML={{__html: content }}></article> 
                         </Tab>
@@ -120,12 +122,27 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                             {t('global.watch.content-empty')}
                         </Alert>
                 }
+
+                {
+                    (bible) ?
+                        <Tab 
+                            eventKey="bible" 
+                            title={t('global.bible.title')}
+                        >
+                            <YouVersion 
+                                bibleUrl = {bibleUrl}
+                            />
+                        </Tab>
+                    :
+                        undefined
+                }
                 
                 {
                     (videoDetails.videoTranscript) ? 
                         <Tab 
                             eventKey="transcript" 
                             title={t('global.transcripts')}
+                            className="mt-5"
                         >
                             {videoDetails.videoTranscript}
                         </Tab>
@@ -144,6 +161,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                                 items   = { resources }
                                 slug    = { config.blogPostDetailsSlug }
                                 campus  = { campus }
+                                className="mt-5"
                             />
                         </Tab>
                     : 

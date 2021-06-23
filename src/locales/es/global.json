@@ -24,6 +24,9 @@
 		"404-title": "Página no encontrada",
 		"accept": "Aceptar",
 		"article": "Artículo",
+		"bible": {
+			"title": "Biblia"
+		},
 		"blog": {
 			"created-date": "Creado el ",
 			"description": "Consulte nuestras últimas publicaciones y artículos",

@@ -5,6 +5,9 @@
     padding: 1rem 0;
     position: relative;
 
+    .player {
+      background-color: rgba(var(--color-six-dark-shade-three), 1);
+    }
     .content-container {
         max-width: unset;
         margin: 0px auto;

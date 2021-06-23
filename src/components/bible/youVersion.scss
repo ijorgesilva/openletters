@@ -1,0 +1,21 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.youversion {
+    iframe {
+        height: 620px;
+    }
+}
+
+@include media("<desktop") {
+    .youversion {
+        iframe {
+            height: 480px;
+        }
+    }
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<=phone") {
+}

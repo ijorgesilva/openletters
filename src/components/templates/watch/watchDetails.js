@@ -107,6 +107,8 @@ export default function WatchDetails( { pageContext, location, data } ) {
                         resources       = { resources }
                         backUrl         = { breadcrumbs.back }
                         campus          = { breadcrumbs.campus }
+                        bibleUrl        = {undefined}
+                        bible           
                     />
 
                 </div>
