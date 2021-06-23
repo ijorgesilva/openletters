@@ -2,6 +2,7 @@
 import React from 'react'
 import { useTranslation } from "react-i18next"
 import { graphql } from 'gatsby'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 
 // Components
 import Navigation from '../../menu/navigation'
@@ -83,6 +84,10 @@ export default function WatchDetails( { pageContext, location, data } ) {
                 videoDetails    = { videoDetails }
                 videos          = { ( videos?.nodes?.length > 0 ) ? videos.nodes : undefined }
                 campus          = { breadcrumbs.campus }
+            />
+            
+            <ToolbarDetails 
+                location={location} 
             />
 
             <main className="main">

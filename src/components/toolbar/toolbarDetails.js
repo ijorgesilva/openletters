@@ -5,22 +5,15 @@ import React from 'react'
 import './toolbarDetails.scss'
 import ShareSimpleIcon from '../social/shareSimpleIcon'
 
-export default function ToolbarDetails ( {location, className, id, ...props} ) {
+export default function ToolbarDetails ( { location, className, id } ) {
     return (
         <div className={`toolbarDetails ${(className) ? className : ''}`} id={id}>
-            <div className="mobile">
+            <div className="toolbarContainer">
                 <ShareSimpleIcon 
                     location={location} 
                     variant="light"
                 />
             </div>
-            <div className="desktop">
-                <ShareSimpleIcon 
-                    location={location} 
-                    variant=""
-                />
-            </div>
-            
         </div>
     )
 }

@@ -3,7 +3,6 @@ import React from 'react'
 
 // Components
 import { getDate } from '../../utils/utils'
-import ToolbarDetails from '../../toolbar/toolbarDetails'
 
 export default function WatchDetailsSidebar ( { videoDetails, location, hasCampus } ) {
 
@@ -59,9 +58,6 @@ export default function WatchDetailsSidebar ( { videoDetails, location, hasCampu
                             undefined
                     }
                 </div>
-                <ToolbarDetails 
-                    location={location} 
-                />
             </div>
         </div>
     )
