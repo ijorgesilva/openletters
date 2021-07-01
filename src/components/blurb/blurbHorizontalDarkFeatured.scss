@@ -13,12 +13,13 @@
         min-height: 200px;
         border: solid 2px rgba(255,255,255,0);
         transition: var(--transition-regular);
-        .card-img{
+
+        .card-img {
             height: 100%;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 5px 0 0 5px !important;
+            .card-img-left{
+                height: 100%;
+                border-radius: var(--border-radius);
+            }
         }
         .card-body {
             .card-subtitle {

@@ -2,12 +2,22 @@
 
 .toolbarDetails{
     margin-top: 0px;
-    background-color: rgba(var(--color-six-dark-shade-three),1);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+
     > .toolbarContainer {
         max-width: var(--max-layout-width);
         margin: 0px auto;
+    }
+
+    &.light {
+        background-color: white;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    &.dark {
+        background-color: rgba(var(--color-six-dark-shade-three),1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 }
 

@@ -97,7 +97,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 <section className="content h-background-six-shade-three">
                     <div className="content-container">
                         <div className="bartools">
-                            <ShareSimpleIcon location={location} variant="light" />
+                            <ShareSimpleIcon 
+                                location = {location} 
+                                variant  = "dark" 
+                            />
                         </div>
                         {
                             ( excerpt ) ?

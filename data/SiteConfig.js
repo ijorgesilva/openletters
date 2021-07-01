@@ -50,7 +50,7 @@ const config = {
     eventPostDetailsSlug: "events",
 
     /* Pages */
-    pagesSlug: 'page',
+    pagesSlug: 'p',
 
   /* Features */
     /* Features Flags */

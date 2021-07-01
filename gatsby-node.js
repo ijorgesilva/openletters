@@ -228,6 +228,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                             slug: page.slug,
                             id: page.id,
                             layout: "pageDetails",
+                            campus: campus.slug,
                             campusId: `/${campus.databaseId}/`,
                             breadcrumbs: {
                                             'campus': campus.slug,
@@ -603,6 +604,89 @@ const sections = `
             }
         }
     }
+
+    ## Hero
+    sectionHero {
+        sectionHeroButtons {
+            sectionHeroButton {
+                sectionHeroButtonType
+                sectionHeroButtonTarget
+                sectionHeroButtonText
+                sectionHeroButtonUrl
+                sectionHeroButtonLink
+            }
+        }
+        sectionHeroBackground {
+            ${localFile}
+        }
+        sectionHeroRelated {
+            ... on WpPost {
+                id
+                title
+                slug
+                excerpt
+                modified(formatString: "YYYYMMDD")
+                status
+                nodeType
+                ${featuredImageFields}
+                ${language}
+                postDetails {
+                    postCampus {
+                        ... on WpCampus {
+                            id
+                            status
+                            slug
+                        }
+                    }
+                }
+            }
+            ... on WpNewspost {
+                id
+                title
+                slug
+                excerpt
+                date(formatString: "YYYYMMDD")
+                modified(formatString: "YYYYMMDD")
+                status
+                nodeType
+                ${featuredImageFields}
+                ${language}
+                newsDetails {
+                    newsCampusId
+                    newsCampus {
+                        ... on WpCampus {
+                            id
+                            slug
+                        }
+                    }
+                }
+            }
+            ... on WpEvent {
+                id
+                title
+                slug
+                excerpt
+                modified(formatString: "YYYYMMDD")
+                status
+                nodeType
+                ${featuredImageFields}
+                ${language}
+                eventDetails {
+                eventDates {
+                    eventDate
+                    eventTime
+                }
+                eventCampus {
+                    ... on WpCampus {
+                            id
+                            slug
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 `
 
 /*************************
@@ -951,6 +1035,15 @@ const allWpPage = `
                 pageMenues {
                     ${customMenues}
                 }
+                pageSections {
+                    ... on WpContentSection {
+                        sectionDetails {
+                            ${sections}
+                        }
+                    }
+                }
+                pageHideContent
+                pageHideShare
             }
             ${wpParent}
         }

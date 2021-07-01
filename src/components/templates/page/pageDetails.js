@@ -1,29 +1,25 @@
 // Dependencies
 import React from 'react'
 import { useTranslation } from "react-i18next"
-import { Container, Row, Col } from 'react-bootstrap'
 
 // Components
-import { getDate } from '../../utils/utils'
+import MainContent from '../../content/mainContent'
 import Navigation from '../../menu/navigation'
-import HeroPost from '../../../components/hero/heroPost'
 import HeaderPage from '../../headerPage'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import config from '../../../../data/SiteConfig'
+import RenderSection from '../../renderSection'
+
+// Style
 import './pageDetails.scss'
 
 export default function PageDetails( { location, pageContext } ){
     
-    const { title, seo, date, modified, featuredImage, content, pageDetails, breadcrumbs } = pageContext
+    const { title, seo, date, modified, featuredImage, content, pageDetails, breadcrumbs, campus } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
-    
-    const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
-    const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
-    const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
 
     const cover = ( featuredImage?.node?.localFile?.localFile ) ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -32,6 +28,11 @@ export default function PageDetails( { location, pageContext } ){
 
     const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
+    const sections =    ( pageDetails.pageSections?.length > 0 ) ? 
+                            pageDetails.pageSections
+                        : 
+                            undefined
+
     return (
         <>
 
@@ -50,6 +51,7 @@ export default function PageDetails( { location, pageContext } ){
                 menuGlobal
                 menuLocal
             />
+
             {
                 (pageDetails.pageMenues) ?
                     <MenuPage
@@ -61,59 +63,41 @@ export default function PageDetails( { location, pageContext } ){
                     undefined
             }
 
-            <article className="contentMain mb-5">
+            {
+                ( sections ) ?
+                    sections.map( ( section, index ) => (
+                        <RenderSection 
+                            index   = { index }
+                            section = { section }
+                            campus  = { campus }
+                            filter  = { { campus: campus } }
+                            location= { location }
+                        />
+                    ))
+                :
+                    undefined
+            }
 
-                <HeroPost 
-                    title           = { title }
-                    backgroundPhoto =   {
-                                            ( featuredImage?.node?.localFile ) ? 
-                                                featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                            : 
-                                                undefined
-                                        }
-                    className       = "z-index-0"
-                />
-                
-                <Container className="mt-5">
-                    
-                    <Row>
+            {
+                ( !pageDetails.pageHideShare ) ?
+                    <ToolbarDetails 
+                        location = {location} 
+                        variant  = 'light'
+                    />
+                :
+                    undefined
+            }
 
-                        <Col>
-                            <div className="watchLeft sticky">
-                                <hr />
-                                <ToolbarDetails location={location} />
-                            </div>
-                        </Col>
-
-                        <Col className="" xs={12} md={8}>
-
-                            <div 
-                                dangerouslySetInnerHTML={{__html: content}}
-                            ></div>
-
-                            {
-                                ( config.blogShowDates ) ?
-                                    <div className="createdDate user-select-none">
-                                        { 
-                                            (modifiedDate) ? 
-                                                <time datetime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
-                                            : 
-                                                <time datetime={htmlDate}> {t('global.created-on')} {createdDate} </time>
-                                        }
-                                    </div>
-                                :
-                                    undefined
-                            }
-                            
-                            
-                        </Col>
-
-                        <Col>
-                        </Col>
-                    </Row>
-                </Container>
-
-            </article>
+            {
+                ( !pageDetails.pageHideContent ) ?
+                    <MainContent 
+                        date        = {date}
+                        modified    = {modified}
+                        content     = {content}
+                    />
+                :
+                    undefined
+            }
 
             <FooterSimpleText campus={ breadcrumbs.campus } />
             

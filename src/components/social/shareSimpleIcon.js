@@ -30,17 +30,17 @@ export default function ShareSimpleIcon( { location, variant, className } ){
             }
         }
     `)
-    const variantColor = (variant) ? variant : 'none'
+    const variantColor = (variant) ? variant : 'light'
 
     return (
         <Dropdown className={`shareSimpleIcon ${(className) ? className : ''}`} drop='up'>
 
             <Dropdown.Toggle id="Share" variant={variantColor} >
                 {
-                    (variant === "light") ?
+                    ( variant === "dark" ) ?
                         <img src={data.shareIconLight.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
                     :
-                    <img src={data.shareIconDark.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
+                        <img src={data.shareIconDark.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
                 }
             </Dropdown.Toggle>
 
