@@ -57,6 +57,9 @@ export default function WatchDetails( { pageContext, location, data } ) {
                 cover       = { poster }
                 description = { excerpt }
                 article     = { true }
+                metaTags    =   {{
+                                    noIndex: ( videoDetails.videoHide.videoHideSearchResults ) ? true : false,
+                                }}
             />
 
             <Navigation
@@ -108,8 +111,18 @@ export default function WatchDetails( { pageContext, location, data } ) {
                         resources       = { resources }
                         backUrl         = { breadcrumbs.back }
                         campus          = { breadcrumbs.campus }
-                        bibleUrl        = {undefined}
-                        bible           
+                        bible           =   { 
+                                                ( data.resources.videoDetails.videoBible?.videoBibleActive === true) ? 
+                                                    data.resources.videoDetails.videoBible.videoBibleActive 
+                                                : 
+                                                    true 
+                                            }
+                        bibleUrl        =   { 
+                                                ( data.resources.videoDetails.videoBible?.videoBibleUrl ) ? 
+                                                    data.resources.videoDetails.videoBible.videoBibleUrl
+                                                :
+                                                    undefined
+                                            }
                     />
 
                 </div>
@@ -180,6 +193,10 @@ export const query = graphql`
             slug
             id
             videoDetails {
+                videoBible {
+                    videoBibleActive
+                    videoBibleUrl
+                }
                 videoResources {
                     ... on WpPost {
                         id

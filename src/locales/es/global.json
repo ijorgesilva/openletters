@@ -25,7 +25,8 @@
 		"accept": "Aceptar",
 		"article": "Artículo",
 		"bible": {
-			"title": "Biblia"
+			"title": "Biblia",
+			"youversion-default": "https://chop.bible.com/es-ES/bible/149/GEN.1.rvr1960"
 		},
 		"blog": {
 			"created-date": "Creado el ",

@@ -50,6 +50,9 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 cover       = { cover }
                 description = { excerpt }
                 article
+                metaTags    =   {{
+                                    noIndex: ( seriesDetails.seriesHide.seriesHideSearchResults ) ? true : false,
+                                }}
             />
 
             <Navigation

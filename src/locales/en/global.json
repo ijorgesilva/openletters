@@ -25,7 +25,8 @@
 		"accept": "Accept",
 		"article": "Post",
 		"bible": {
-			"title": "BIble"
+			"title": "BIble",
+			"youversion-default": "https://chop.bible.com/bible/1/GEN.1.kjv"
 		},
 		"blog": {
 			"created-date": "Created on ",

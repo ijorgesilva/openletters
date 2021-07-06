@@ -848,6 +848,9 @@ const allWpVideo = `
                         ${featuredImageFields}
                     }
                 }
+                videoHide {
+                  videoHideSearchEngines
+                }
             }
             videoOnDemandTags {
                 nodes {
@@ -880,6 +883,9 @@ const allWpSeries = `
                 seriesSeasonsActive
                 seriesTrailerPoster {
                     ${localFile}
+                }
+                seriesHide {
+                    seriesHideSearchEngines
                 }
             }
             seriesGraphics {
@@ -931,6 +937,9 @@ const allWpNews = `
                         databaseId
                     }
                 }
+                newsHide {
+                  newsHideSearchEngines
+                }
             }
             newsTags {
                 nodes {
@@ -977,6 +986,9 @@ const allWpEvents = `
                 eventLink {
                     eventLinkText
                     eventLinkUrl
+                }
+                eventHide {
+                    eventHideSearchEngines
                 }
             }
             eventTags {
@@ -1042,8 +1054,9 @@ const allWpPage = `
                         }
                     }
                 }
-                pageHideContent
-                pageHideShare
+                pageHide {
+                  pageHideSearchResults
+                }
             }
             ${wpParent}
         }
@@ -1096,6 +1109,9 @@ const allWpPosts = `
                                 ${sections}
                             }
                     }
+                }
+                postHide {
+                  postHideSearchResults
                 }
             }
             tags {

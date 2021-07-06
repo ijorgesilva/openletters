@@ -42,6 +42,9 @@ export default function PageDetails( { location, pageContext } ){
                 cover       = { cover }
                 description = { seo.metaDesc }
                 article     = { true }
+                metaTags    =   {{
+                                    noIndex: ( pageDetails.pageHide.pageHideSearchResults ) ? true : false,
+                                }}
             />
             
             <Navigation

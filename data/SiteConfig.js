@@ -34,13 +34,7 @@ const config = {
     watchDetailsViewHeroBackground: true,
     
   /* Gatsby Permalinks */
-    /* List view */
-    watchMessageListSlug: "/watch/messages/list",
-    watchSerieListSlug: "/watch/series/list",
-    blogPostListSlug: "/blog",
-    newsPostListSlug: "/news",
-    eventsPostListSlug: "/events",
-
+  
     /* Details view */
     watchSlug: "watch",
     watchMessageDetailsSlug: "message",

@@ -41,7 +41,15 @@ const video = `
                         excerpt
                         date
                         modified
+                        seriesDetails {
+                            seriesHide {
+                                seriesHideSearchResults
+                            }
+                        }
                     }
+                }
+                videoHide {
+                  videoHideSearchResults
                 }
             }
         }
@@ -63,7 +71,6 @@ const pages = `
             title
             slug
             pageDetails {
-                pageSearch
                 pageCampus {
                     ... on WpCampus {
                         id
@@ -71,6 +78,9 @@ const pages = `
                         slug
                         status
                     }
+                }
+                pageHide {
+                  pageHideSearchResults
                 }
             }
             wpParent {
@@ -100,7 +110,6 @@ const posts = `
             slug
             excerpt
             postDetails {
-                postSearch
                 postCampus {
                     ... on WpCampus {
                         id
@@ -108,6 +117,9 @@ const posts = `
                         slug
                         status
                     }
+                }
+                postHide {
+                  postHideSearchResults
                 }
             }
         }
@@ -130,7 +142,6 @@ const news = `
             slug
             excerpt
             newsDetails {
-                newsSearch
                 newsCampus {
                     ... on WpCampus {
                         id
@@ -138,6 +149,9 @@ const news = `
                         slug
                         status
                     }
+                }
+                newsHide {
+                  newsHideSearchResults
                 }
             }
         }
@@ -160,7 +174,6 @@ const events = `
             slug
             excerpt
             eventDetails {
-                eventSearch
                 eventCampus {
                     ... on WpCampus {
                         id
@@ -168,6 +181,9 @@ const events = `
                         slug
                         status
                     }
+                }
+                eventHide {
+                    eventHideSearchResults
                 }
             }
         }
@@ -202,31 +218,35 @@ const queries = [
                 video.videoDetails.videoCampus.forEach ( campus => {
                     if ( campus.status === 'publish' && campus.campusDetails.campusWatch.campusWatchPage ){
                         // Create Videos
-                        videoList.push({
-                            objectID: video.id,
-                            title: video.title,
-                            type: 'vod',
-                            campus: campus.slug,
-                            campusTitle: campus.title,
-                            excerpt: video.excerpt,
-                            slug: video.slug,
-                            language: 'en',
-                            link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
-                            linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
-                            series: video.videoDetails.videoSeries?.title,
-                            seriesLink: (video.videoDetails.videoSeries?.title) ?
-                                            `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
-                                        : 
-                                            '',
-                            seriesLinkProduction:   (video.videoDetails.videoSeries?.title) ?
-                                                        `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
-                                                    : 
-                                                        '',
-                            streamingDate: video.videoDetails.videoDayDate,
-                            ...video
-                        })
+                        if( !video.videoDetails.videoHide.videoHideSearchResults ){
+                            videoList.push({
+                                objectID: video.id,
+                                title: video.title,
+                                type: 'vod',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                excerpt: video.excerpt,
+                                slug: video.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
+                                series: video.videoDetails.videoSeries?.title,
+                                seriesLink: (video.videoDetails.videoSeries?.title) ?
+                                                `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
+                                            : 
+                                                '',
+                                seriesLinkProduction:   (video.videoDetails.videoSeries?.title) ?
+                                                            `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
+                                                        : 
+                                                            '',
+                                streamingDate: video.videoDetails.videoDayDate,
+                                ...video
+                            })
+                        }
                         // Create Series
-                        if ( video.videoDetails.videoSeries?.id ) {
+                        if ( video.videoDetails.videoSeries?.id && 
+                             !video.videoDetails.videoSeries?.seriesDetails.seriesHide.seriesHideSearchResults 
+                            ) {
                             videoList.push({
                                 objectID: video.videoDetails.videoSeries.id,
                                 title: video.videoDetails.videoSeries.title,
@@ -257,7 +277,7 @@ const queries = [
         // Create Pages
         data.pages.nodes.forEach( page => {
             if ( page.pageDetails.pageCampus?.length > 0 ) {
-                if ( !page.pageDetails.pageSearch ){
+                if ( !page.pageDetails.pageHide.pageHideSearchResults ){
                     page.pageDetails.pageCampus.forEach( campus => {
                         if ( campus.status === 'publish' ) {
                             pagesList.push({
@@ -280,7 +300,7 @@ const queries = [
         // Create posts
         data.posts.nodes.forEach( post => {
             if ( post.postDetails.postCampus?.length > 0 ) {
-                if ( !post.postDetails.postSearch ){
+                if ( !post.postDetails.postHide.postHideSearchResults ){
                     post.postDetails.postCampus.forEach( campus => {
                         if ( campus.status === 'publish' ) {
                             pagesList.push({
@@ -303,7 +323,7 @@ const queries = [
         // Create News
         data.news.nodes.forEach( news => {
             if ( news.newsDetails.postCampus?.length > 0 ) {
-                if ( !news.postDetails.newsSearch ){
+                if ( !news.postDetails.newsHide.newsHideSearchResults ){
                     news.newsDetails.newsCampus.forEach( campus => {
                         if ( campus.status === 'publish' ) {
                             pagesList.push({
@@ -326,7 +346,7 @@ const queries = [
         // Create Events
         data.events.nodes.forEach( event => {
             if ( event.eventDetails.eventCampus?.length > 0 ) {
-                if ( !event.eventDetails.eventSearch ){
+                if ( !event.eventDetails.eventHide.eventHideSearchResults ){
                     event.eventDetails.eventCampus.forEach( campus => {
                         if ( campus.status === 'publish' ) {
                             pagesList.push({
