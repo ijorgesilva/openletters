@@ -24,6 +24,10 @@
 		"404-title": "Page not found",
 		"accept": "Accept",
 		"article": "Post",
+		"authentication": {
+			"sign-in": "Sign In",
+			"sign-out": "Sign out"
+		},
 		"bible": {
 			"title": "BIble",
 			"youversion-default": "https://chop.bible.com/bible/1/GEN.1.kjv"

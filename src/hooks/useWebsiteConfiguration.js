@@ -48,6 +48,14 @@ export const useWebsiteConfiguration = () => {
                                                         slug
                                                     }
                                                 }
+                                                settingsAuthentication {
+                                                    settingsAuthenticationActive
+                                                    settingsAuthenticationType
+                                                    settingsAuthenticationTypeExternal {
+                                                        settingsAuthenticationTypeExternalTarget
+                                                        settingsAuthenticationTypeExternalUrl
+                                                    }
+                                                }
                                             }
                                         }
                                     }

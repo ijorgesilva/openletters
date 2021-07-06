@@ -130,8 +130,6 @@ export default function RenderSection ( { section, filter, campus, location } ) 
                                         :
                                             ''
             const postType = postValidContext[0]?.nodeType 
-            console.log('postValidContext:')
-            console.log(postValidContext)
 
             switch( postType ) {
 

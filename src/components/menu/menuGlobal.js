@@ -8,6 +8,7 @@ import LanguageSelector from './languageSelector'
 import FollowDropdown from './followDropdown'
 import DropdownMenu from './dropdownMenu'
 import CampusSelector from './campusSelector'
+import MenuAuth from './menuAuth'
 import Search from "../search"
 
 // Utils
@@ -93,6 +94,8 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
                     :
                         undefined
                 }
+
+                <MenuAuth />
 
             </Navbar>
 

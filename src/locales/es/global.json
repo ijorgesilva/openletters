@@ -24,6 +24,10 @@
 		"404-title": "Página no encontrada",
 		"accept": "Aceptar",
 		"article": "Artículo",
+		"authentication": {
+			"sign-in": "Iniciar sesión",
+			"sign-out": "Cerrar sesión"
+		},
 		"bible": {
 			"title": "Biblia",
 			"youversion-default": "https://chop.bible.com/es-ES/bible/149/GEN.1.rvr1960"
