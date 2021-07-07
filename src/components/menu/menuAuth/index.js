@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // Components
@@ -30,7 +30,7 @@ export default function MenuAuth ( {} ) {
                             title   = { t('global.authentication.sign-in') }
                         >
                             <FontAwesomeIcon 
-                                icon={faSignInAlt}
+                                icon={faUserCircle}
                                 size="lg" 
                                 className="loginIcon"
                             />
@@ -40,8 +40,18 @@ export default function MenuAuth ( {} ) {
                 break
             case 'internal':
                 return(
-                    <>
-                    </>
+                    <div className="menuAuth">
+                        <Link 
+                            to      = ""
+                            title   = { t('global.authentication.sign-in') }
+                        >
+                            <FontAwesomeIcon 
+                                icon={faUserCircle}
+                                size="lg" 
+                                className="loginIcon"
+                            />
+                        </Link>
+                    </div>
                 )
             default:
                 return(<></>)
