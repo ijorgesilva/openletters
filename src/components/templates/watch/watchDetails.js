@@ -58,7 +58,8 @@ export default function WatchDetails( { pageContext, location, data } ) {
                 description = { excerpt }
                 article     = { true }
                 metaTags    =   {{
-                                    noIndex: ( videoDetails.videoHide.videoHideSearchResults ) ? true : false,
+                                    noIndex: ( typeof videoDetails.videoHide?.videoHideSearchEngines === 'undefined' ) ? 
+                                                    false : (videoDetails.videoHide?.videoHideSearchEngines === true ) ? true : false,
                                 }}
             />
 

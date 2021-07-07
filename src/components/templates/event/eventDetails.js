@@ -44,6 +44,10 @@ export default function EventDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
+                // metaTags    =   {{
+                //                     noIndex: ( typeof eventDetails.eventHide?.eventHideSearchEngines === 'undefined' ) ? 
+                //                                     false : (eventDetails.eventHide?.eventHideSearchEngines === true ) ? true : false,
+                //                 }}
             />
             
             <Navigation

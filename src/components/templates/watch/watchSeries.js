@@ -51,7 +51,8 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 description = { excerpt }
                 article
                 metaTags    =   {{
-                                    noIndex: ( seriesDetails.seriesHide.seriesHideSearchResults ) ? true : false,
+                                    noIndex: ( typeof seriesDetails.seriesHide?.seriesHideSearchEngines === 'undefined' ) ? 
+                                                false : (seriesDetails.seriesHide?.seriesHideSearchEngines === true ) ? true : false,
                                 }}
             />
 
