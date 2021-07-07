@@ -42,10 +42,6 @@ export default function NewsDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
-                // metaTags    =   {{
-                //                     noIndex: ( typeof newsDetails.newsHide?.newsHideSearchEngines === 'undefined' ) ? 
-                //                                     false : (newsDetails.newsHide?.newsHideSearchEngines === true ) ? true : false,
-                //                 }}
             />
             
             <Navigation

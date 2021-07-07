@@ -42,10 +42,10 @@ export default function PostDetails( { location, pageContext } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
-                // metaTags    =   {{
-                //                     noIndex: ( typeof postDetails.postHide?.postHideSearchEngines === 'undefined' ) ? 
-                //                                     false : (postDetails.postHide?.postHideSearchEngines === true ) ? true : false,
-                //                 }}
+                metaTags    =   {{
+                                    noIndex: ( typeof postDetails.postHide?.postHideSearchEngines === 'undefined' ) ? 
+                                                    false : (postDetails.postHide?.postHideSearchEngines === true ) ? true : false,
+                                }}
             />
             
             <Navigation

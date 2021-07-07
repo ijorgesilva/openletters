@@ -1055,7 +1055,7 @@ const allWpPage = `
                     }
                 }
                 pageHide {
-                  pageHideSearchResults
+                  pageHideSearchEngines
                 }
             }
             ${wpParent}
@@ -1111,7 +1111,7 @@ const allWpPosts = `
                     }
                 }
                 postHide {
-                  postHideSearchResults
+                  postHideSearchEngines
                 }
             }
             tags {
