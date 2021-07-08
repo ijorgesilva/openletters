@@ -5,8 +5,8 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { Dropdown } from 'react-bootstrap'
 import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShareButton } from 'react-share'
 import { faTwitter, faFacebook, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
+import { faEnvelope, faShareSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEnvelope } from '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 // Components
@@ -20,28 +20,25 @@ export default function ShareSimpleIcon( { location, variant, className } ){
 
     const canonicalUrl = config.siteUrl + location.pathname
 
-    const data = useStaticQuery(graphql`
-        query{
-            shareIconDark: file(relativePath: {eq: "img/global/icon-share.svg"}) {
-                publicURL
-            }
-            shareIconLight: file(relativePath: {eq: "img/global/icon-share-light.svg"}) {
-                publicURL
-            }
-        }
-    `)
     const variantColor = (variant) ? variant : 'light'
 
     return (
         <Dropdown className={`shareSimpleIcon ${(className) ? className : ''}`} drop='up'>
 
-            <Dropdown.Toggle id="Share" variant={variantColor} >
-                {
+            <Dropdown.Toggle 
+                id      = "Share" 
+                variant = { variantColor } 
+                alt     = { t('components.social.sharesimpleicon-title') }
+            >
+                <FontAwesomeIcon icon={faShareSquare} size="lg"/>
+                <span>Share</span>
+                {/* {
                     ( variant === "dark" ) ?
-                        <img src={data.shareIconLight.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
+                        
+                        // <img src={data.shareIconLight.publicURL} ></img>
                     :
                         <img src={data.shareIconDark.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
-                }
+                } */}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="super-colors">

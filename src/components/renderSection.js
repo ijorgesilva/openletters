@@ -14,7 +14,7 @@ export default function RenderSection ( { section, filter, campus, location } ) 
     /* Standard fields */
     const { t } = useTranslation()
 
-    const sectionType = section.sectionDetails.sectionType.split(":")[0];
+    const sectionType = section.sectionDetails.sectionType.split(":")[0]
     const sectionTitle = (section.sectionDetails.sectionTitle) ? section.sectionDetails.sectionTitle : undefined
     const sectionContent = (section.sectionDetails.sectionContent) ? section.sectionDetails.sectionContent : undefined
 

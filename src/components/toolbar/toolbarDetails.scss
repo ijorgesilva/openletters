@@ -6,6 +6,9 @@
     > .toolbarContainer {
         max-width: var(--max-layout-width);
         margin: 0px auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     &.light {

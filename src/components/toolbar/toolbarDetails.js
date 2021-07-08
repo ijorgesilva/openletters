@@ -2,10 +2,13 @@
 import React from 'react'
 
 // Components
-import './toolbarDetails.scss'
 import ShareSimpleIcon from '../social/shareSimpleIcon'
+import RaiseHand from '../participation/raiseHand'
 
-export default function ToolbarDetails ( { location, className, id, variant } ) {
+// Style
+import './toolbarDetails.scss'
+
+export default function ToolbarDetails ( { location, className, id, variant, raiseHand } ) {
     
     let variantColor = ( variant === 'dark' ) ? 'dark' : 'light'
 
@@ -16,6 +19,14 @@ export default function ToolbarDetails ( { location, className, id, variant } ) 
                     location    = {location} 
                     variant     = {variantColor}
                 />
+                {
+                    ( raiseHand )  ?
+                        <RaiseHand 
+                            variant='dark'
+                        />
+                    :
+                        undefined
+                }
             </div>
         </div>
     )

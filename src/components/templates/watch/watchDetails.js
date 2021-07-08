@@ -93,6 +93,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
             <ToolbarDetails 
                 location = {location}
                 variant  = 'dark'
+                raiseHand
             />
 
             <main className="main">
