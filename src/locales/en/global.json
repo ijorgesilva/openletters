@@ -1,13 +1,5 @@
 {
 	"components": {
-		"button": {
-			"netSimple-connect": "Get connect",
-			"netSimple-know-jesus": "Know Jesus",
-			"netSimple-praise-report": "Praise report",
-			"netSimple-pray-request": "Pray request",
-			"netSimple-serve": "Serve",
-			"netSimple-title": "Interact"
-		},
 		"podcast": {
 			"subtitle": "Are you a",
 			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -77,6 +69,12 @@
 		"notes": "Notes",
 		"pages": {
 			"name": "Page"
+		},
+		"participation": {
+			"raisehand": {
+				"dropdown-text": "I want to...",
+				"title": "Raise Hand"
+			}
 		},
 		"related-resources": "Resources",
 		"search": {

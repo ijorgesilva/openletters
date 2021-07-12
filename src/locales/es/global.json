@@ -1,13 +1,5 @@
 {
 	"components": {
-		"button": {
-			"netSimple-connect": "Conéctate",
-			"netSimple-know-jesus": "Conoce a Jesucristo",
-			"netSimple-praise-report": "Informe de alabanza",
-			"netSimple-pray-request": "Solicitar oración",
-			"netSimple-serve": "Servir",
-			"netSimple-title": "Interactuar"
-		},
 		"podcast": {
 			"subtitle": "Escuchas",
 			"text": "Spanish ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -77,6 +69,12 @@
 		"notes": "Notas",
 		"pages": {
 			"name": "Página"
+		},
+		"participation": {
+			"raisehand": {
+				"dropdown-text": "Yo quiero...",
+				"title": "Levantar Mano"
+			}
 		},
 		"related-resources": "Recursos",
 		"search": {

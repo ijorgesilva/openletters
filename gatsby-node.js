@@ -166,6 +166,7 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
                                         : 
                                             '',
                                 campusId: `/${campus.databaseId}/`,
+                                participationCampus: campus.participation,
                                 breadcrumbs: {
                                                 'campus': campus.slug,
                                                 'rootApp': `/${campus.slug}/${config.watchSlug}`,
@@ -802,6 +803,29 @@ const allWpVideo = `
                         campusDetails {
                             campusWatch {
                                 campusWatchPage
+                            }
+                        }
+                        participation {
+                            participationRaisehand {
+                                participationRaisehandBehavior
+                                participationRaisehandCustom {
+                                    participationRaisehandCustomType
+                                    participationRaisehandCustomTitle
+                                    participationRaisehandCustomUrl
+                                    participationRaisehandCustomTarget
+                                    participationRaisehandCustomClass
+                                    participationRaisehandCustomIcon {
+                                        localFile {
+                                            childImageSharp {
+                                                gatsbyImageData(
+                                                    layout: FIXED
+                                                    width: 32
+                                                    height: 32
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

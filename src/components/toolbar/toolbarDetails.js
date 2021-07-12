@@ -8,7 +8,7 @@ import RaiseHand from '../participation/raiseHand'
 // Style
 import './toolbarDetails.scss'
 
-export default function ToolbarDetails ( { location, className, id, variant, raiseHand } ) {
+export default function ToolbarDetails ( { location, className, id, variant, participation } ) {
     
     let variantColor = ( variant === 'dark' ) ? 'dark' : 'light'
 
@@ -18,11 +18,13 @@ export default function ToolbarDetails ( { location, className, id, variant, rai
                 <ShareSimpleIcon 
                     location    = {location} 
                     variant     = {variantColor}
+                    label
                 />
                 {
-                    ( raiseHand )  ?
+                    ( participation.raiseHandList?.length > 0 ) ?
                         <RaiseHand 
-                            variant='dark'
+                            variant = 'dark'
+                            options = { participation.raiseHandList }
                         />
                     :
                         undefined

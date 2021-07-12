@@ -16,7 +16,7 @@ export default function MenuAuth ( {} ) {
     const { t } = useTranslation()
 
     const  settings = useWebsiteConfiguration().settingsAuthentication
-    const settingsAuthType = settings.settingsAuthenticationType?.split(":")[0];
+    const settingsAuthType = settings.settingsAuthenticationType?.split(":")[0]
 
     if( settings.settingsAuthenticationActive ) {
         switch( settingsAuthType ) {

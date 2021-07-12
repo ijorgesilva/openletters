@@ -13,7 +13,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import './shareSimpleIcon.scss'
 import config from '../../../data/SiteConfig'
 
-export default function ShareSimpleIcon( { location, variant, className } ){
+export default function ShareSimpleIcon( { location, variant, className, label } ){
 
     /* Standard fields */
     const { t } = useTranslation()
@@ -30,15 +30,13 @@ export default function ShareSimpleIcon( { location, variant, className } ){
                 variant = { variantColor } 
                 alt     = { t('components.social.sharesimpleicon-title') }
             >
-                <FontAwesomeIcon icon={faShareSquare} size="lg"/>
-                <span>Share</span>
-                {/* {
-                    ( variant === "dark" ) ?
-                        
-                        // <img src={data.shareIconLight.publicURL} ></img>
+                <FontAwesomeIcon className="icon" icon={faShareSquare} size="lg"/>
+                {
+                    ( label ) ?
+                        <span>Share</span>
                     :
-                        <img src={data.shareIconDark.publicURL} alt={t('components.social.sharesimpleicon-title')}></img>
-                } */}
+                        undefined
+                }
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="super-colors">

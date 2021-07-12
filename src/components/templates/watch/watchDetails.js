@@ -13,17 +13,25 @@ import { watchDetailsMenu } from '../../../../data/menues'
 import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
+
+// Hooks
+import { useParticipation } from '../../../hooks/useParticipation'
+
+// Style
 import './watchDetails.scss'
 
 export default function WatchDetails( { pageContext, location, data } ) {
     
-    const { title, slug, excerpt, content, featuredImage, videoDetails, videoOnDemandTags, breadcrumbs } = pageContext
+    const { title, slug, excerpt, content, featuredImage, videoDetails, participationCampus, videoOnDemandTags, breadcrumbs } = pageContext
     
     /* Standard fields */
     const { t }     = useTranslation()
     let videos      = { nodes: [] }
     let resources   = data.resources.videoDetails.videoResources
 
+    /* Participation Options */
+    const participationCombined = useParticipation( participationCampus, data.resources.participation )
+    
     if ( data?.videos?.nodes?.length > 0 ) {
         data.videos.nodes.map( video => (
             ( video.slug === slug ) ? 
@@ -91,9 +99,11 @@ export default function WatchDetails( { pageContext, location, data } ) {
             />
             
             <ToolbarDetails 
-                location = {location}
-                variant  = 'dark'
-                raiseHand
+                location            = { location }
+                variant             = 'dark'
+                participation       =  {{
+                                            raiseHandList: ( participationCombined.raiseHandList?.length > 0 ) ? participationCombined.raiseHandList : undefined,
+                                        }}
             />
 
             <main className="main">
@@ -243,6 +253,29 @@ export const query = graphql`
                                 linkLinkTarget
                                 linkLinkType
                                 linkLinkUrl
+                            }
+                        }
+                    }
+                }
+            }
+            participation {
+                participationRaisehand {
+                    participationRaisehandBehavior
+                    participationRaisehandCustom {
+                        participationRaisehandCustomUrl
+                        participationRaisehandCustomType
+                        participationRaisehandCustomTitle
+                        participationRaisehandCustomTarget
+                        participationRaisehandCustomClass
+                        participationRaisehandCustomIcon {
+                            localFile {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        layout: FIXED
+                                        width: 32
+                                        height: 32
+                                    )
+                                }
                             }
                         }
                     }

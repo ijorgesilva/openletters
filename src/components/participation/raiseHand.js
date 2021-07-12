@@ -1,20 +1,16 @@
 // Dependencies
 import React from 'react'
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { Link } from "gatsby"
 import { Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-// Components
-import { useParticipation } from '../../hooks/useParticipation'
-
 // Styles
 import './raiseHand.scss'
 
-export default function RaiseHand ( { className, dropDirection, variant } ) {
-
-    const options = useParticipation().participationRaisehand.participationRaisehandCustom
+export default function RaiseHand ( { className, dropDirection, variant, options } ) {
     
     /* Standard fields */
     const { t } = useTranslation()
@@ -22,43 +18,66 @@ export default function RaiseHand ( { className, dropDirection, variant } ) {
     const drop          = ( dropDirection ) ? dropDirection : 'up'
     const variantClass  = ( variant ) ? variant : 'dark'
     
-    return (
+    if ( options ) {
+        return (
 
-        <Dropdown 
-            className={`netSimple ${ ( className ) ? className : ''} ${ ( variantClass ) ? variantClass : ''}`} 
-            drop={drop}
-        >
+            <Dropdown 
+                className={`raiseHand ${ ( className ) ? className : ''} ${ ( variantClass ) ? variantClass : ''}`} 
+                drop={drop}
+            >
 
-            <Dropdown.Toggle className='toggler' id="Share" variant="none" >
-                <FontAwesomeIcon icon={faHandSparkles} size="lg" />
-                <span>Raise Hand</span>
-                {/* <img src={data.handraise.publicURL} alt={t('components.button.netSimple-title')} /> */}
-            </Dropdown.Toggle>
+                <Dropdown.Toggle className='toggler' id="Share" variant="none" >
+                    <FontAwesomeIcon 
+                        className="icon" 
+                        icon={faHandSparkles} 
+                        size="lg" 
+                    />
+                    <span>{t('global:global.participation.raisehand.title')}</span>
+                </Dropdown.Toggle>
 
-            <Dropdown.Menu className="">
-                <Dropdown.ItemText className="user-select-none">
-                    <strong>I want to</strong>
-                </Dropdown.ItemText>
-                {
-                    options.map( (option, index) => (
-                        ( option.participationRaisehandCustomType.split(":")[0] === 'internal' ) ?
-                            undefined
-                        :
-                            ( option.participationRaisehandCustomType.split(":")[0] === 'external' ) ?
-                                <Dropdown.Item 
-                                    href        = {option.participationRaisehandCustomUrl} 
-                                    eventKey    = {index} 
-                                    key         = {index}
-                                >
-                                    {option.participationRaisehandCustomTitle}
-                                </Dropdown.Item>
-                            :
-                                undefined
-                    ))
-                }
-            </Dropdown.Menu>
+                <Dropdown.Menu className="">
+                    <Dropdown.ItemText className="user-select-none">
+                        <strong>{t('global:global.participation.raisehand.dropdown-text')}</strong>
+                    </Dropdown.ItemText>
+                    {
+                        options.map( (option, index) => (
+                            <Dropdown.Item 
+                                as          =   {
+                                                    ( option.participationRaisehandCustomType.split(":")[0] === 'internal' ) ?
+                                                        Link
+                                                    :
+                                                        'a'
+                                                }
+                                to          = { option.participationRaisehandCustomUrl }
+                                href        = { option.participationRaisehandCustomUrl }
+                                target      = { option.participationRaisehandCustomTarget.split(":")[0] }
+                                eventKey    = { index } 
+                                key         = { index }
+                                className   = { ( option.participationRaisehandCustomClass ) ? option.participationRaisehandCustomClass : '' }
+                            >
+                                {
+                                    ( option.participationRaisehandCustomIcon?.localFile ) ?
+                                        <GatsbyImage 
+                                            image           = {option.participationRaisehandCustomIcon.localFile.childImageSharp.gatsbyImageData}
+                                            className       = 'item-icon'
+                                            width           = { 32 }
+                                            height          = { 32 }
+                                            alt             = ''
+                                        />
+                                    :
+                                        <div className = 'item-icon'></div>
+                                }
+                                <span>{option.participationRaisehandCustomTitle}</span>
+                            </Dropdown.Item>
+                        ))
+                    }
+                </Dropdown.Menu>
 
-        </Dropdown>
-    
-    )
+            </Dropdown>
+        
+        )
+    }
+    else {
+        return <></>
+    }
 }

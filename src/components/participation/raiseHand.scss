@@ -1,15 +1,14 @@
-.netSimple {
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.raiseHand {
     height: 42px;
 
     .toggler{
-
         display: flex;
         align-items: center;
-
-
     }
 
-    button {
+    .btn {
         color: white;
         background-color: transparent;
         text-transform: uppercase;
@@ -19,13 +18,17 @@
         letter-spacing: 0px;
         font-weight: 600;
         padding: 0px 10px;
-        img{
-            width: 45px;
-            height: 45px;
+        transition: var(--transition-fast);
+        opacity: 0.7;
+        .icon {
+            margin-right: 10px;
         }
-        &:hover,
+        &:hover {
+            background-color: unset;
+            opacity: 1;
+        }
         &[aria-expanded="true"] {
-            background-color: var(--color-three-dark-shade-one);
+            background-color: transparent;
         }
     }
     
@@ -34,35 +37,34 @@
         .dropdown-item{
             letter-spacing: 1px;
             padding: .5rem 2rem .5rem 1.5rem;
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            align-items: center;
+            gap: 5px;
         }
     }
-    // .dropdown-toggle {
-    //     &::after{
-    //         display: none;
-    //     }
-    // }
-    // .dropdown-menu {
-    //     background-color: var(--color-one);
-    //     padding: .2rem 0 .2rem 0px;
-    //     .dropdown-item{
-    //         color: rgba(var(--color-white),1);
-    //         border-bottom: 1px solid var(--color-one-shade-one);
-    //         font-size: 0.9rem;
-    //         letter-spacing: 1px;
-    //         padding: .2rem 2rem .2rem 1.5rem;
-    //     }
-    //     .dropdown-item:focus {
-    //         background-color: var(--color-one-dark-shade-two);
-    //     }
-    //     .dropdown-item:hover {
-    //         color: rgba(var(--color-white),1);
-    //         background-color: var(--color-one-dark-shade-one);
-    //     }
-    // }
-    // &.floating-left{
-    //     position: fixed;
-    //     bottom: 70px;
-    //     right: 70px;
-    //     z-index: 2;
-    // }
+}
+
+
+@include media("<desktop") {
+
+}
+
+@include media("<=tablet") {
+    .raiseHand {
+        .dropdown-toggle {
+            &.btn {
+                .icon {
+                    margin-right: 0px;
+                }
+                span {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@include media("<=phone") {
+
 }

@@ -2,20 +2,33 @@
 
 .shareSimpleIcon{
     height: 42px;
-    .btn {
-        margin: 0px;
-        padding: 0px;
-        border: unset;
-        border-radius: unset;
-        &:after {
-            display: none;
-        }
-        &.btn-light {
+    .dropdown-toggle {
+        &.btn {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            border: unset;
+            border-radius: unset;
+            transition: var(--transition-fast);
+            opacity: 0.7;
+
+            .icon {
+                margin-right: 10px;
+            }
+
             &:hover {
-                background-color: transparent;
+                background-color: unset;
+                opacity: 1;
+            }
+            &:after {
+                display: none;
+            }
+            &.btn-light {
+                &:hover {
+                    background-color: transparent;
+                }
             }
         }
-        
     }
 
 }
@@ -26,6 +39,16 @@
 @include media("<=tablet") {
 
     .shareSimpleIcon{
+        .dropdown-toggle {
+            &.btn {
+                .icon {
+                    margin-right: 0px;
+                }
+                span {
+                    display: none;
+                }
+            }
+        }
 
         .btn-light.focus, 
         .btn-light:focus {
