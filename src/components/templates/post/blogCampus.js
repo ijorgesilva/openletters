@@ -15,14 +15,15 @@ import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './blogCampus.scss'
 
+// Hooks
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+
 export default function BlogCampus ( { data, location, pageContext } ){
 
     const { title, slug, featuredImage, breadcrumbs } = pageContext
 
     /* Standard fields */
     const { t } = useTranslation()
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <>
@@ -42,7 +43,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />

@@ -16,8 +16,9 @@ import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 
 // Hooks
 import { useParticipation } from '../../../hooks/useParticipation'
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Style
+// Styles
 import './watchDetails.scss'
 
 export default function WatchDetails( { pageContext, location, data } ) {
@@ -53,8 +54,6 @@ export default function WatchDetails( { pageContext, location, data } ) {
                             videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                         : 
                             undefined
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <div className={"watchDetails"}>
@@ -74,7 +73,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
             />
 

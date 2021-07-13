@@ -30,8 +30,8 @@ function ShowPageType ( { type } ) {
   const { t } = useTranslation()
 
   switch(type){
-    case 'vod':
-      return <Badge variant="primary">{t('global.watch.videos')}</Badge>
+    case 'video':
+      return <Badge variant="primary">{t('global.watch.video')}</Badge>
       break
     case 'series':
       return <Badge variant="dark">{t('global.watch.series')}</Badge>
@@ -39,11 +39,18 @@ function ShowPageType ( { type } ) {
     case 'page':
       return <Badge variant="info">{t('global.pages.name')}</Badge>
       break
-    case 'events':
-      return <Badge variant="info">{t('global.events.title')}</Badge>
+    case 'event':
+      return <Badge variant="info">{t('global.events.event')}</Badge>
+      break
+    case 'post':
+      return <Badge variant="info">{t('global.blog.post')}</Badge>
       break
     case 'news':
       return <Badge variant="info">{t('global.news.title')}</Badge>
+      break
+    case 'attachment':
+    case 'document':
+      return <Badge variant="light">{t('global.attachments.title')}</Badge>
       break
     default:
       return ''

@@ -46,6 +46,9 @@ const config = {
     /* Pages */
     pagesSlug: 'p',
 
+    /* Attachments */
+    attachmentSlug: 'document',
+
   /* Features */
     /* Features Flags */
     menuCampusSelector: true,

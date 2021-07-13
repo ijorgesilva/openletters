@@ -21,7 +21,7 @@ export default function ToolbarDetails ( { location, className, id, variant, par
                     label
                 />
                 {
-                    ( participation.raiseHandList?.length > 0 ) ?
+                    ( participation?.raiseHandList?.length > 0 ) ?
                         <RaiseHand 
                             variant = 'dark'
                             options = { participation.raiseHandList }

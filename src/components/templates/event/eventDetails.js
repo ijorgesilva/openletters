@@ -44,6 +44,7 @@ export default function EventDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
+                // TODO: Incoporate meta tags into header
                 // metaTags    =   {{
                 //                     noIndex: ( typeof eventDetails.eventHide?.eventHideSearchEngines === 'undefined' ) ? 
                 //                                     false : (eventDetails.eventHide?.eventHideSearchEngines === true ) ? true : false,

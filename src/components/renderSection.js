@@ -119,7 +119,15 @@ export default function RenderSection ( { section, filter, campus, location } ) 
                 </>
             )
             break
-        
+
+        case 'latestseries':
+            return (
+                <>
+                    
+                </>
+            )
+            break
+            
         case 'hero':
             
             let relatedPost = null

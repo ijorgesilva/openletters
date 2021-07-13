@@ -16,6 +16,12 @@
 		"404-title": "Página no encontrada",
 		"accept": "Aceptar",
 		"article": "Artículo",
+		"attachments": {
+			"download": "Descargar",
+			"title": "Adjuntos",
+			"title-alt": "Documentos",
+			"title-singular": "Adjunto"
+		},
 		"authentication": {
 			"sign-in": "Iniciar sesión",
 			"sign-out": "Cerrar sesión"
@@ -29,6 +35,7 @@
 			"description": "Consulte nuestras últimas publicaciones y artículos",
 			"meta-description": "",
 			"modified-date": "Modificado el",
+			"post": "Post",
 			"title": "Blog"
 		},
 		"campus": "Campus",
@@ -44,6 +51,7 @@
 		"events": {
 			"date-time": "Fecha y Hora",
 			"description": "Mira nuestros eventos",
+			"event": "Evento",
 			"expired": "Evento Terminado",
 			"location": "Dirección",
 			"organized-by": "Organizado por",
@@ -89,8 +97,10 @@
 			"seasons": "Temporadas",
 			"section-latest-title": "Últimos mensajes",
 			"series": "Serie",
+			"series-plural": "Series",
 			"title": "Mensajes",
 			"transcript-empty": "No hay transcripciones disponibles",
+			"video": "Video",
 			"videos": "Videos",
 			"watch-now": "Reproducir ahora"
 		}

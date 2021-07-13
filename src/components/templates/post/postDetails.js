@@ -13,6 +13,11 @@ import ToolbarDetails from '../../toolbar/toolbarDetails'
 import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
+
+// Hooks
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+
+// Styles
 import './postDetails.scss'
 
 export default function PostDetails( { location, pageContext } ){
@@ -30,8 +35,6 @@ export default function PostDetails( { location, pageContext } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <>
@@ -51,7 +54,7 @@ export default function PostDetails( { location, pageContext } ){
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />

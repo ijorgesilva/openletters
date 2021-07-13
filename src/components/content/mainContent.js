@@ -25,7 +25,7 @@ export default function MainContent ( { date, modified, content } ) {
 
                     <Col>
                         <div className="watchLeft sticky">
-                            <hr />
+                            
                         </div>
                     </Col>
 

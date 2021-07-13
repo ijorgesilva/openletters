@@ -180,8 +180,8 @@
 
          /*
           * Search: Algolia
+          * Description: This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
           */
-         // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
          {
             resolve: `gatsby-plugin-algolia`,
             options: {
@@ -189,7 +189,7 @@
               apiKey: process.env.ALGOLIA_ADMIN_KEY,
               queries: require("./src/utils/algolia-queries"),
               matchFields: ['slug', 'modified'],
-              enablePartialUpdates: true,
+              enablePartialUpdates: false,
               chunkSize: 10000,
             },
         },

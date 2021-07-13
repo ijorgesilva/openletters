@@ -11,7 +11,10 @@ import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import RenderSection from '../../renderSection'
 
-// Style
+// Hooks
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+
+// Styles
 import './pageDetails.scss'
 
 export default function PageDetails( { location, pageContext } ){
@@ -25,8 +28,6 @@ export default function PageDetails( { location, pageContext } ){
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     const sections =    ( pageDetails.pageSections?.length > 0 ) ? 
                             pageDetails.pageSections
@@ -51,7 +52,7 @@ export default function PageDetails( { location, pageContext } ){
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />

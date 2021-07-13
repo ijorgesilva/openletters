@@ -13,6 +13,11 @@ import MenuPage from '../../menu/menuPage'
 import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
+
+// Hooks
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+
+// Styles
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {
@@ -21,8 +26,6 @@ export default function EventsCampus ( { data, location, pageContext } ) {
 
     /* Standard fields */
     const { t } = useTranslation()
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <>
@@ -42,7 +45,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />

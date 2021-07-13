@@ -341,6 +341,37 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
         }
     }
 
+
+    /*******************
+     * Attachment Pages creation 
+    *******************/
+    if( result.data.attachments?.nodes?.length > 0 ) {
+        result.data.attachments.nodes.forEach( _ => {
+            if( _.attachment.attachmentCampus?.length > 0 ) {
+                _.attachment.attachmentCampus.forEach ( campus => {
+                    actions.createPage({
+                        path: `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                        component: path.resolve(`./src/components/templates/document/attachmentDetails.js`),
+                        context: {
+                            ..._,
+                            title: _.title,
+                            slug: _.slug,
+                            id: _.id,
+                            campusId: `/${campus.databaseId}/`,
+                            attachmentDetails: _.attachment,
+                            breadcrumbs: {
+                                            'campus': campus.slug,
+                                            'rootApp': `/${campus.slug}/${config.attachmentSlug}`,
+                                            'back': `/${campus.slug}/${config.attachmentSlug}`,
+                                            'current': `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                                        },
+                        }
+                    })
+                })
+            }
+        })
+    }
+
     /******************* 
      * Redirects creation 
      *******************/
@@ -1148,6 +1179,44 @@ const allWpPosts = `
     }
 `
 
+const allWpResources = `
+    ########
+    # Attachments
+    ########
+    attachments: allWpDocument (
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes {
+            id
+            title
+            slug
+            excerpt
+            attachment {
+                attachmentCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                    }
+                }
+                attachmentFile {
+                    id
+                    title
+                    localFile {
+                        publicURL
+                    }
+                }
+                attachmentHide {
+                    attachmentHideSearchEngines
+                }
+            }
+        }
+    }
+`
+
 /* 
  * Main Query 
  */
@@ -1169,6 +1238,8 @@ const query = `
         ${allWpSeries}
 
         ${allWpVideo}
+
+        ${allWpResources}
         
     }
 `

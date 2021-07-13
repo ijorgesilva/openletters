@@ -49,8 +49,14 @@ export const useParticipation = ( campusData, videoData ) => {
                                     videoData.participationRaisehand.participationRaisehandCustom : []
 
     /* Behavior of Data */
-    const campusRaiseHandBehavior   = campusData?.participationRaisehand.participationRaisehandBehavior.split(':')[0]
-    const videoRaiseHandBehavior    = videoData?.participationRaisehand.participationRaisehandBehavior.split(':')[0]
+    const campusRaiseHandBehavior   =   ( campusData?.participationRaisehand.participationRaisehandBehavior ) ? 
+                                            campusData?.participationRaisehand.participationRaisehandBehavior.split(':')[0]
+                                        :
+                                            'add'
+    const videoRaiseHandBehavior    =   ( videoData?.participationRaisehand.participationRaisehandBehavior ) ? 
+                                            videoData?.participationRaisehand.participationRaisehandBehavior.split(':')[0]
+                                        :
+                                            'add'
 
     /* Downstream Logic */
     let raiseHandCase

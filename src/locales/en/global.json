@@ -16,6 +16,12 @@
 		"404-title": "Page not found",
 		"accept": "Accept",
 		"article": "Post",
+		"attachments": {
+			"download": "Download",
+			"title": "Attachments",
+			"title-alt": "Documents",
+			"title-singular": "Attachment"
+		},
 		"authentication": {
 			"sign-in": "Sign In",
 			"sign-out": "Sign out"
@@ -29,6 +35,7 @@
 			"description": "Check our latest post and articles",
 			"meta-description": "",
 			"modified-date": "Modified on ",
+			"post": "Post",
 			"title": "Blog"
 		},
 		"campus": "Campus",
@@ -44,6 +51,7 @@
 		"events": {
 			"date-time": "Date And Time",
 			"description": "Check out our events",
+			"event": "Event",
 			"expired": "Event ended",
 			"location": "Location",
 			"organized-by": "Organized by",
@@ -89,8 +97,10 @@
 			"seasons": "Seasons",
 			"section-latest-title": "Latest Messages",
 			"series": "Series",
+			"series-plural": "Series",
 			"title": "Watch",
 			"transcript-empty": "No transcripts available",
+			"video": "Video",
 			"videos": "Videos",
 			"watch-now": "Watch now"
 		}

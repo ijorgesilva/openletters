@@ -19,6 +19,10 @@ import RenderSection from '../../renderSection.js'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import TabSeasons from '../../vod/tab/tabSeasons'
 
+// Hooks
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+
+// Styles
 import './watchSeries.scss'
 
 export default function WatchSeries( { pageContext, location, data } ) {
@@ -39,8 +43,6 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             data.series.seriesDetails.seriesSections
                         :
                             undefined
-
-    const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
     return (
         <>
@@ -59,7 +61,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                searchIndices   = { searchIndices }
+                searchIndices   = { useGlobalIndeces() }
                 menuGlobal
             />
 

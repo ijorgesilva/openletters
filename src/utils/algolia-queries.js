@@ -1,7 +1,8 @@
 const config    = require('../../data/SiteConfig')
 
-// CPT & PT Queries
-const video = `
+// Post Types Queries
+const videosAndSeries = `
+{
     ########
     # Videos on Demand
     ########
@@ -54,8 +55,10 @@ const video = `
             }
         }
     }
+}
 `
 const pages = `
+{
     ########
     # Pages
     ########
@@ -92,8 +95,10 @@ const pages = `
             }
         }
     }
+}
 `
 const posts = `
+{
     ########
     # Posts 
     ########
@@ -124,8 +129,10 @@ const posts = `
             }
         }
     }
+}
 `
 const news = `
+{
     ########
     # News 
     ########
@@ -156,8 +163,10 @@ const news = `
             }
         }
     }
+}
 `
 const events = `
+{
     ########
     # Events 
     ########
@@ -188,188 +197,297 @@ const events = `
             }
         }
     }
-`
-// Main Queries
-const videoOnDemandQuery = `
-    {
-        ${video}
-    }
-`
-const pagesQuery = `
-{
-    ${pages}
-
-    ${posts}
-
-    ${news}
-
-    ${events}
 }
-
+`
+const attachments = `
+{
+    ########
+    # Attachments
+    ########
+    attachments: allWpDocument (
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes {
+            id
+            title
+            slug
+            excerpt
+            modified
+            attachment {
+                attachmentCampus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        status
+                        databaseId
+                    }
+                }
+                attachmentHide {
+                    attachmentHideSearchResults
+                }
+            }
+        }
+    }
+}
 `
 
 const queries = [
+
+  /* Videos Index */
   {
-    query: videoOnDemandQuery,
+    query: videosAndSeries,
     transformer: ({ data }) => {
         let videoList = []
-        data.videos.nodes.forEach( video => {
-            if( video.videoDetails.videoCampus?.length > 0 ) {
-                video.videoDetails.videoCampus.forEach ( campus => {
+
+        data.videos.nodes.forEach( _ => {
+            if( _.videoDetails.videoCampus?.length > 0 ) {
+                _.videoDetails.videoCampus.forEach ( campus => {
                     if ( campus.status === 'publish' && campus.campusDetails.campusWatch.campusWatchPage ){
-                        // Create Videos
-                        if( !video.videoDetails.videoHide.videoHideSearchResults ){
+                        
+                        if( !_.videoDetails.videoHide.videoHideSearchResults ){
                             videoList.push({
-                                objectID: video.id,
-                                title: video.title,
-                                type: 'vod',
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'video',
                                 campus: campus.slug,
                                 campusTitle: campus.title,
-                                excerpt: video.excerpt,
-                                slug: video.slug,
+                                excerpt: _.excerpt,
+                                slug: _.slug,
                                 language: 'en',
-                                link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
-                                series: video.videoDetails.videoSeries?.title,
-                                seriesLink: (video.videoDetails.videoSeries?.title) ?
-                                                `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
+                                link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
+                                series: _.videoDetails.videoSeries?.title,
+                                seriesLink: (_.videoDetails.videoSeries?.title) ?
+                                                `/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
                                             : 
                                                 '',
-                                seriesLinkProduction:   (video.videoDetails.videoSeries?.title) ?
-                                                            `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}` 
+                                seriesLinkProduction:   (_.videoDetails.videoSeries?.title) ?
+                                                            `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
                                                         : 
                                                             '',
-                                streamingDate: video.videoDetails.videoDayDate,
-                                ...video
+                                streamingDate: _.videoDetails.videoDayDate,
+                                ..._
                             })
                         }
-                        // Create Series
-                        if ( video.videoDetails.videoSeries?.id && 
-                             !video.videoDetails.videoSeries?.seriesDetails.seriesHide.seriesHideSearchResults 
-                            ) {
-                            videoList.push({
-                                objectID: video.videoDetails.videoSeries.id,
-                                title: video.videoDetails.videoSeries.title,
-                                type: 'series',
-                                campus: campus.slug,
-                                campusTitle: campus.title,
-                                excerpt: video.videoDetails.videoSeries.excerpt,
-                                slug: video.videoDetails.videoSeries.slug,
-                                language: 'en',
-                                link: `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
-                            })
-                        }
+
                     }
                 })
             }
         })
+
         return videoList
     },
-    indexName: `vod`,
+    indexName: `videos`,
     settings: { attributesToSnippet: [`excerpt:20`,`campus`] },
   },
+
+  /* Series Index */
   {
-    query: pagesQuery,
+    query: videosAndSeries,
+    transformer: ({ data }) => {
+        let seriesList = []
+        data.videos.nodes.forEach( _ => {
+            if( _.videoDetails.videoCampus?.length > 0 ) {
+                _.videoDetails.videoCampus.forEach ( campus => {
+                    if ( campus.status === 'publish' && campus.campusDetails.campusWatch.campusWatchPage ){
+                        
+                        if ( _.videoDetails.videoSeries?.id && 
+                             !_.videoDetails.videoSeries?.seriesDetails.seriesHide.seriesHideSearchResults 
+                        ) {
+                            seriesList.push({
+                                objectID: _.videoDetails.videoSeries.id,
+                                title: _.videoDetails.videoSeries.title,
+                                type: 'series',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                excerpt: _.videoDetails.videoSeries.excerpt,
+                                slug: _.videoDetails.videoSeries.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}`,
+                            })
+                        }
+
+                    }
+                })
+            }
+        })
+        return seriesList
+    },
+    indexName: `series`,
+    settings: { attributesToSnippet: [`excerpt:20`,`campus`] },
+  },
+
+  /* Pages Index */
+  {
+    query: pages,
     transformer: ({ data }) => {
         let pagesList = []
 
-        // Create Pages
-        data.pages.nodes.forEach( page => {
-            if ( page.pageDetails.pageCampus?.length > 0 ) {
-                if ( !page.pageDetails.pageHide.pageHideSearchResults ){
-                    page.pageDetails.pageCampus.forEach( campus => {
+        data.pages.nodes.forEach( _ => {
+            if ( _.pageDetails.pageCampus?.length > 0 ) {
+                if ( !_.pageDetails.pageHide.pageHideSearchResults ){
+                    _.pageDetails.pageCampus.forEach( campus => {
                         if ( campus.status === 'publish' ) {
                             pagesList.push({
-                                objectID: page.id,
-                                title: page.title,
+                                objectID: _.id,
+                                title: _.title,
                                 type: 'page',
                                 campus: campus.slug,
                                 campusTitle: campus.title,
-                                slug: page.slug,
+                                slug: _.slug,
                                 language: 'en',
-                                link: `/${campus.slug}/${config.pagesSlug}/${ (page.wpParent?.node?.slug) ? page.wpParent.node.slug + '/' : '' }${page.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.pagesSlug}/${ (page.wpParent?.node?.slug) ? page.wpParent.node.slug + '/' : '' }${page.slug}`,
+                                link: `/${campus.slug}/${config.pagesSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.pagesSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
                             })
                         }
                     })
                 }
             }
         })
-
-        // Create posts
-        data.posts.nodes.forEach( post => {
-            if ( post.postDetails.postCampus?.length > 0 ) {
-                if ( !post.postDetails.postHide.postHideSearchResults ){
-                    post.postDetails.postCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
-                            pagesList.push({
-                                objectID: post.id,
-                                title: post.title,
-                                type: 'post',
-                                campus: campus.slug,
-                                campusTitle: campus.title,
-                                slug: post.slug,
-                                language: 'en',
-                                link: `/${campus.slug}/${config.blogPostDetailsSlug}/${ (post.wpParent?.node?.slug) ? post.wpParent.node.slug + '/' : '' }${post.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
-                            })
-                        }
-                    })
-                }
-            }
-        })
-
-        // Create News
-        data.news.nodes.forEach( news => {
-            if ( news.newsDetails.postCampus?.length > 0 ) {
-                if ( !news.postDetails.newsHide.newsHideSearchResults ){
-                    news.newsDetails.newsCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
-                            pagesList.push({
-                                objectID: news.id,
-                                title: news.title,
-                                type: 'news',
-                                campus: campus.slug,
-                                campusTitle: campus.title,
-                                slug: news.slug,
-                                language: 'en',
-                                link: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
-                            })
-                        }
-                    })
-                }
-            }
-        })
-
-        // Create Events
-        data.events.nodes.forEach( event => {
-            if ( event.eventDetails.eventCampus?.length > 0 ) {
-                if ( !event.eventDetails.eventHide.eventHideSearchResults ){
-                    event.eventDetails.eventCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
-                            pagesList.push({
-                                objectID: event.id,
-                                title: event.title,
-                                type: 'event',
-                                campus: campus.slug,
-                                campusTitle: campus.title,
-                                slug: event.slug,
-                                language: 'en',
-                                link: `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                            })
-                        }
-                    })
-                }
-            }
-        })
-
-        // Compiled List
+        
         return pagesList
     },
     indexName: `pages`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Posts Index */
+  {
+    query: posts,
+    transformer: ({ data }) => {
+        let postsList = []
+
+        data.posts.nodes.forEach( _ => {
+            if ( _.postDetails.postCampus?.length > 0 ) {
+                if ( !_.postDetails.postHide.postHideSearchResults ){
+                    _.postDetails.postCampus.forEach( campus => {
+                        if ( campus.status === 'publish' ) {
+                            postsList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'post',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.blogPostDetailsSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.blogPostDetailsSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return postsList
+    },
+    indexName: `posts`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Events Index */
+  {
+    query: events,
+    transformer: ({ data }) => {
+        let eventsList = []
+        
+        data.events.nodes.forEach( _ => {
+            if ( _.eventDetails.eventCampus?.length > 0 ) {
+                if ( !_.eventDetails.eventHide.eventHideSearchResults ){
+                    _.eventDetails.eventCampus.forEach( campus => {
+                        if ( campus.status === 'publish' ) {
+                            eventsList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'event',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.eventPostDetailsSlug}/${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.eventPostDetailsSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return eventsList
+    },
+    indexName: `events`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* News Index */
+  {
+    query: news,
+    transformer: ({ data }) => {
+        let newsList = []
+
+        data.news.nodes.forEach( _ => {
+            if ( _.newsDetails.postCampus?.length > 0 ) {
+                if ( !_.postDetails.newsHide.newsHideSearchResults ){
+                    _.newsDetails.newsCampus.forEach( campus => {
+                        if ( campus.status === 'publish' ) {
+                            newsList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'news',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+
+        return newsList
+    },
+    indexName: `news`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Attachment Index */
+  {
+    query: attachments,
+    transformer: ({ data }) => {
+        let attachmentList = []
+
+        data.attachments.nodes.forEach( _ => {
+            if ( _.attachment.attachmentCampus?.length > 0 ) {
+                if ( !_.attachment.attachmentHide.attachmentHideSearchResults ) {
+                    _.attachment.attachmentCampus.forEach( campus => {
+                        if ( campus.status === 'publish' ) {
+                            attachmentList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'attachment',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return attachmentList
+    },
+    indexName: `attachments`,
     settings: { attributesToSnippet: [ `campus` ] }
   },
 
