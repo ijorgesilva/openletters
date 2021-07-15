@@ -1,0 +1,99 @@
+@import "../../../../node_modules/include-media/dist/_include-media.scss";
+
+.blurbVerticalSeries {
+    
+    border: unset;
+    background-color: unset;
+    text-decoration: unset;
+    
+
+    &:hover{
+        .card-img-container {
+            border: 1px solid rgba(var(--color-white),1);
+        }
+    }
+
+    .card-img-container {
+
+        position: relative;
+        transition: all 300ms ease;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius);
+        background-color: rgba(255,255,255,0.05);
+        overflow: hidden;
+
+        .card-img-top {
+            aspect-ratio: 9 / 16; 
+            position: relative;
+        }
+
+        .card-img-caption {
+
+            > .logo {
+                position: absolute;
+                width: 100%;
+                z-index: 1;
+                padding: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+            .card-img-top {
+                z-index: 0;
+            }
+            .card-text{
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                position: absolute;
+                padding: 20px;
+                h5 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    font-size: 2em;
+                    letter-spacing: 2px;
+                    color: rgba(255,255,255,0.7);
+                    transition: var(--transition-fast);
+                    &:hover{
+                        color: rgba(255,255,255,1);
+                    }
+                }
+            }
+            &::after{
+                content: '';
+                background-color: rgba(15,10,27,0.4);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            transition: all 300ms ease;
+            &:hover{
+                opacity: 1;
+            }
+            img {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+    }
+}

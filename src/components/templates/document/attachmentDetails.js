@@ -66,11 +66,11 @@ export default function AttachmentDetails ( { location, pageContext } ) {
                             >
                                 <h6>
                                     <FontAwesomeIcon icon={faCloudDownloadAlt} size="lg" />
-                                    <div>t{'global.attachments.download'}</div>
+                                    <div>{t('global.attachments.download')}</div>
                                 </h6>
                             </a>
                         :
-                            <>t{'global.no-records'}</>
+                            <>{t('global.no-records')}</>
                     }
                 </HeroPost>
 

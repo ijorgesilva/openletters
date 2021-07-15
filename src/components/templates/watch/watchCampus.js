@@ -91,7 +91,10 @@ export default function WatchPage( { pageContext, data, location } ) {
                         title           = { t('global.watch.section-latest-title') }
                         items           = { data.latest.nodes }
                         campus          = { slug }
-                        itemsVisible    = { 5 }
+                        configLayout    =   {{
+                                                excerpt: false,
+                                                itemsVisible: 5,
+                                            }}
                     />
                 : 
                     undefined

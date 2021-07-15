@@ -7,6 +7,9 @@ import SectionTextPhoto from '../components/content/sectionTextPhoto'
 import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
 import SectionPodcast from '../components/content/sectionPodcast'
 import HeroDynamic from '../components/hero/heroDynamic'
+import SectionLatestSeries from './vod/feed/sectionLatestSeries'
+
+// Utils
 import config from '../../data/SiteConfig'
 
 export default function RenderSection ( { section, filter, campus, location } ) {
@@ -19,6 +22,11 @@ export default function RenderSection ( { section, filter, campus, location } ) 
     const sectionContent = (section.sectionDetails.sectionContent) ? section.sectionDetails.sectionContent : undefined
 
     switch(sectionType){
+
+
+        /*
+         * Call To Action
+         */
         case 'cta':
             const ctaItem = section.sectionDetails.sectionCta
             return (
@@ -44,6 +52,9 @@ export default function RenderSection ( { section, filter, campus, location } ) 
             )
             break
 
+        /*
+         * Podcast
+         */
         case 'podcast':
             const podcastItem = section.sectionDetails.sectionPodcast
             return (
@@ -66,6 +77,9 @@ export default function RenderSection ( { section, filter, campus, location } ) 
             )
             break
 
+        /*
+         * Videos by Tags
+         */
         case 'vodtags':
             const videoItems = (section.sectionDetails.sectionVodTags.sectionVodTag) ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
@@ -100,7 +114,10 @@ export default function RenderSection ( { section, filter, campus, location } ) 
                                 title        = { videoItems.name }
                                 campus       = { campus }
                                 items        = { filteredVideos.sort(sortByDate)  }
-                                itemsVisible = { 5 }
+                                configLayout =  {{
+                                                    excerpt: false,
+                                                    itemsVisible: 5,
+                                                }}
                             />
                         :
                             undefined
@@ -109,25 +126,40 @@ export default function RenderSection ( { section, filter, campus, location } ) 
             )
             break
 
+        /*
+         * Videos on Series
+         */
         case 'vodseries':
             // const seriesSlug = section.sectionVodSeries.sectionVodSeriesList.slug
             // const seriesTitle = section.sectionVodSeries.sectionVodSeriesList.title
             // const seriesVideoItems = section.sectionVodSeries.sectionVodSeriesList
             return (
-                <>
-
-                </>
+                <></>
             )
             break
 
+        /*
+         * Latest Series
+         */
         case 'latestseries':
+            
             return (
-                <>
-                    
-                </>
+                <SectionLatestSeries 
+                    id              = { section.slug }
+                    className       = "h-background-six-shade-three"
+                    title           = { sectionTitle }
+                    campus          = { campus }
+                    configLayout    =  {{
+                                            excerpt: false,
+                                            itemsVisible: 5,
+                                       }}
+                />
             )
             break
-            
+
+        /*
+         * Hero
+         */      
         case 'hero':
             
             let relatedPost = null
@@ -226,6 +258,9 @@ export default function RenderSection ( { section, filter, campus, location } ) 
             )
             break
 
+        /*
+         * Default
+         */
         default:
             return (
                 <></>

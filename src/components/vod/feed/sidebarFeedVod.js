@@ -8,7 +8,6 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 // Components
 import BlurbHorizontalVod from '../blurb/blurbHorizontalVod'
 import config from '../../../../data/SiteConfig'
-import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 
 // Styling
 import './sidebarFeedVod.scss'

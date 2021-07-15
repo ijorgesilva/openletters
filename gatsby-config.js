@@ -189,7 +189,7 @@
               apiKey: process.env.ALGOLIA_ADMIN_KEY,
               queries: require("./src/utils/algolia-queries"),
               matchFields: ['slug', 'modified'],
-              enablePartialUpdates: false,
+              enablePartialUpdates: true,
               chunkSize: 10000,
             },
         },

@@ -10,10 +10,16 @@ import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
 import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarousel( { title, items, className, itemsVisible, id, iconCarousel, count, campus, styles, infinite } ){
+export default function SectionFeedCarousel( { title, items, className, id, iconCarousel, count, campus, styles, infinite, configLayout } ){
 
-    const defaultVisible = 5
     const objLength = (items) ? items.length : 0
+    let defaultConfig = ( configLayout ) ?
+                            configLayout
+                        :
+                            {
+                                excerpt: true,
+                                itemsVisible: 5,
+                            }
 
     return (
 
@@ -21,19 +27,19 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
             <Container fluid>
                 {
                     (title) ? 
-                        <h4 className="h-color-six-shade-three mb-5">{title}</h4>
+                        <h4 className="title">{title}</h4>
                     : 
                         undefined
                 }
                 {
-                    ( items?.length ) ?
+                    ( items?.length > 0 ) ?
                         <Carousel 
                             swipeable={true}
                             draggable={true}
                             showDots={false}
                             infinite={ (infinite) ? infinite : false }
                             partialVisible={true}
-                            responsive={ (itemsVisible) ? responsive[itemsVisible] : responsive[defaultVisible] }
+                            responsive={ responsive[defaultConfig.itemsVisible] }
                             itemClass="item"
                             containerClass="carousel-container"
                         >
@@ -60,7 +66,7 @@ export default function SectionFeedCarousel( { title, items, className, itemsVis
                                                                 undefined
                                                             }
                                         subtitle        = { (item.videoDetails.videoSpeaker) ? (item.videoDetails.videoSpeaker) : undefined }
-                                        excerpt         = { (item.excerpt) ? item.excerpt : undefined }
+                                        excerpt         = { ( item.excerpt && defaultConfig.excerpt === true ) ? item.excerpt : undefined }
                                         iconImage       = { (iconCarousel) ? iconCarousel : undefined }
                                     />
                                 ))

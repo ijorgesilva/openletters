@@ -142,7 +142,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             title=""
                                             items={data.VideosOnSerie.nodes}
                                             campus={ campus }
-                                            itemsVisible={5}
+                                            configLayout    =   {{
+                                                excerpt: true,
+                                                itemsVisible: 5,
+                                            }}
                                             infinite
                                             iconCarousel={data.playButton.publicURL}
                                         />
@@ -165,7 +168,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                                 title=""
                                                 items={data.VideosOnSerie.nodes}
                                                 campus ={ campus }
-                                                itemsVisible={4}
+                                                configLayout    =   {{
+                                                    excerpt: true,
+                                                    itemsVisible: 4,
+                                                }}
                                                 infinite
                                                 count
                                             />
