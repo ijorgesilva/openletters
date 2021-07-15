@@ -43,7 +43,7 @@ export default function BlurbVerticalDarkVod ( { className, link, iconImage, fea
                         <h5 className="card-title mb-1">
                             {
                                 ( title && link ) ? 
-                                    <Link to={link}> {title} </Link>
+                                    <Link to={link} dangerouslySetInnerHTML={{ __html: title }}></Link>
                                 : 
                                     undefined
                             }
