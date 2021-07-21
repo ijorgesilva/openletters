@@ -56,10 +56,10 @@
                     align-items: center;
                     word-break: break-all;
                     height: 100%;
-                    font-size: 1rem;
-                    line-height: 1rem;
-                    letter-spacing: 2px;
-                    color: rgba(255,255,255,0.7);
+                    font-size: 24px;
+                    line-height: 24px;
+                    letter-spacing: 1px;
+                    color: white;
                     transition: var(--transition-fast);
                     &:hover{
                         color: rgba(255,255,255,1);
