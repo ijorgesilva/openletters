@@ -98,6 +98,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
             />
             
             <ToolbarDetails 
+                className           = {'sticky-mobile'}
                 location            = { location }
                 variant             = 'dark'
                 participation       =  {{

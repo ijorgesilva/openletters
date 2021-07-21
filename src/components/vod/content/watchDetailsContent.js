@@ -27,7 +27,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
             <div className="overview">
                 {
                     ( videoDetails.videoSeries?.slug && seriesIcon ) ?
-                        <div className="introCard introCardGrid mb-5">
+                        <div className="introCard introCardGrid">
                             <Link className="serieGraphic" to={ backUrl }>
                                 {
                                     ( seriesIcon ) ?
@@ -57,7 +57,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                             </div>
                         </div>
                     : 
-                        <div className="introCard mb-5">
+                        <div className="introCard">
                             <div>
                                 <h1 className="">{title}</h1>
                                 {

@@ -4,6 +4,7 @@
     margin-top: 0px;
     padding-left: 20px;
     padding-right: 20px;
+    z-index: 1;
 
     > .toolbarContainer {
         max-width: var(--max-layout-width);
@@ -24,14 +25,19 @@
         border-top: 1px solid rgba(255,255,255,0.1);
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
+
 }
 
 @include media("<desktop") {
-    
 }
 
 @include media("<=tablet") {
-
+    .toolbarDetails{
+        &.sticky-mobile {
+            position: sticky;
+            top: 219px;
+        }
+    }
 }
 
 @include media("<=phone") {

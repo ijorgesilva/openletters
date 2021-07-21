@@ -94,6 +94,7 @@
 			"content-empty": "No notes available",
 			"meta-description": "",
 			"more-info": "More info",
+			"playlist": "Series playlist",
 			"seasons": "Seasons",
 			"section-latest-title": "Latest Messages",
 			"series": "Series",
@@ -102,6 +103,7 @@
 			"transcript-empty": "No transcripts available",
 			"video": "Video",
 			"videos": "Videos",
+			"view-playlist": "View playlist",
 			"watch-now": "Watch now"
 		}
 	},

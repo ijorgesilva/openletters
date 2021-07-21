@@ -19,28 +19,29 @@ export default function SidebarFeedVod( { items, serieSlug, title, background, c
 
     return (
         <section className={`sidebarFeedVod ${className}`} id={`${ (id) ? id :''}`}>
-            {
-                (title) ?
-                    <Card className="header text-white" >
-                        <div className={'card-img'} aria-hidden="true">
-                            <GatsbyImage
-                                image={background}
-                                alt=''
-                            />
-                        </div>
-                        <Card.ImgOverlay>
-                            <Card.Title>
+
+            <Card className="header text-white" >
+                <div className={'card-img'} aria-hidden="true">
+                    <GatsbyImage
+                        image={background}
+                        alt=''
+                    />
+                </div>
+                <Card.ImgOverlay>
+                    <Card.Title>
+                        {
+                            ( title ) ?
                                 <Link to={`${ (campus) ? '/' + campus : '' }/${config.watchSeriesDetailsSlug}/${ (serieSlug) ? serieSlug : '' }`}>
                                     <TextTruncate line={1} truncateText="…" text={title} />
                                 </Link>
-                            </Card.Title>
-                            <Card.Text>
-                            </Card.Text>
-                        </Card.ImgOverlay>
-                    </Card>
-                : 
-                    undefined
-            }
+                            :
+                                <TextTruncate line={1} truncateText="…" text={t('global.watch.playlist')} />
+                        }       
+                    </Card.Title>
+                    <Card.Text>
+                    </Card.Text>
+                </Card.ImgOverlay>
+            </Card>
 
             <div className="list">
             {

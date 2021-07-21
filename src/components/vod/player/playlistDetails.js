@@ -5,6 +5,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 // Components
 import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
+import ModalPlaylist from '../feed/modalPlaylist'
 import config from '../../../../data/SiteConfig'
 import './playlistDetails.scss'
 
@@ -14,7 +15,7 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
     const [ scrolledPlayer, setScrolledPlayer ] = React.useState(false)
     const handleScroll=() => {
         const offset=window.scrollY
-        if(offset > 700 ){
+        if(offset > 125 ){
             setScrolledPlayer(true)
         }
         else{
@@ -62,19 +63,35 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                         ( videos?.length > 0  ) ?
                             <div className="playlist">
                                 <SidebarFeedVod 
-                                    title       = { ( videoDetails.videoSeries?.title ) ? videoDetails.videoSeries.title : undefined}
+                                    // title       = { ( videoDetails.videoSeries?.title ) ? videoDetails.videoSeries.title : undefined}
                                     background  = { 
                                                     ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
                                                         videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                                                     : 
                                                         undefined
                                                     }
-                                    className   = "h-background-six-shade-three" 
+                                    className   = "h-background-six-shade-three hide-mobile" 
                                     serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
                                     id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
                                     items       = { videos }
                                     campus      = { campus }
                                 />
+                                <ModalPlaylist className='mobile-only'>
+                                    <SidebarFeedVod 
+                                        // title       = { ( videoDetails.videoSeries?.title ) ? videoDetails.videoSeries.title : undefined}
+                                        background  = { 
+                                                        ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
+                                                            videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
+                                                        : 
+                                                            undefined
+                                                        }
+                                        className   = "h-background-six-shade-three" 
+                                        serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
+                                        id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
+                                        items       = { videos }
+                                        campus      = { campus }
+                                    />
+                                </ModalPlaylist>
                             </div>
                         :
                             undefined

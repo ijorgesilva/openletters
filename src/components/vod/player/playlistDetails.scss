@@ -6,7 +6,13 @@
     position: relative;
 
     .player {
+      display: flex;
+      justify-content: center;
       background-color: rgba(var(--color-six-dark-shade-three), 1);
+      min-height: 200px;
+      .player-wrapper{
+          width: 100%;
+      }
     }
     .content-container {
         max-width: unset;
@@ -93,7 +99,7 @@
             div[data-vjs-player],
             .video-js {
                 padding-top: 56.25%;
-                height: 200px;
+                height: 220px;
             }
 
             .player {
@@ -103,7 +109,7 @@
                     left: 0;
                     width: 100%;
                     z-index: 10;
-                    height: 200px;
+                    height: 220px;
                 }
             }
 

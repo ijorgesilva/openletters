@@ -1,3 +1,5 @@
+@import "../../node_modules/include-media/dist/_include-media.scss";
+
 /* * */
 :root {
     --color-black: 31, 31, 31;
@@ -932,4 +934,61 @@ hr {
 
 .btn--three-outline {
     border: 3px solid var(--color-three);
+}
+
+/* Color One: Outline Transparent Light */
+.btn--light-no-outline {
+    color: rgba(var(--color-white),1);
+}
+.btn--light-no-outline:not(:disabled):not(.disabled):active {
+    color: rgba(var(--color-black),1);
+    background-color: rgba(var(--color-white),1);
+    border-color: rgba(var(--color-white),1);
+}
+
+.btn--light-no-outline:hover {
+    color: rgba(var(--color-six-dark-shade-three),1);
+    border-color: rgba(var(--color-white),1);
+}
+
+.btn--light-no-outline::before,
+.btn--light-no-outline::after {
+    background: rgba(var(--color-white),1);
+}
+
+.btn--light-no-outline {
+    border: 0px solid rgba(var(--color-white),1);
+}
+.btn--light-no-outline:not(:disabled):not(.disabled).active:focus, 
+.btn--light-no-outline:not(:disabled):not(.disabled):active:focus, 
+.show > .btn--light-no-outline.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+.btn--light-no-outline:not(:disabled):not(.disabled).active, 
+.btn--light-no-outline:not(:disabled):not(.disabled):active, 
+.show > .btn--light-no-outline.dropdown-toggle {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* Mobile */
+.mobile-only {
+    display: none;
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+    .mobile-only {
+        display: block;
+    }
+    .hide-mobile {
+        display: none;
+    }
+}
+
+@include media("<=phone") {
+
 }

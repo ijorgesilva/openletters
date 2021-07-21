@@ -1,5 +1,62 @@
 @import "../../../../node_modules/include-media/dist/_include-media.scss";
 
 .modalPlaylist {
-    
+    &.modal {
+        max-height: calc(100vh - 332px);
+        margin-top: 332px;
+        > .modal-dialog {
+            margin: 0;
+            bottom: 0;
+            height: 100%;
+
+            .modal-content {
+                background-color: transparent;
+                border-radius: 0;
+                border: unset;
+                height: 100%;
+                .modal-header{
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    border: unset;
+                    z-index: 1;
+                    .close{
+                        color: white;
+                    }
+                }
+                .modal-body {
+                    padding: 0px;
+                    > section,
+                    > div {
+                        height: 100%;
+                        border-radius: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.playlist {
+    a, button {
+        &.btn {
+            margin: 0px;
+            width: 100%;
+            padding: 11px 20px;
+            border-radius: unset;
+            border: unset;
+            text-align: left;
+            text-transform: unset;
+        }
+    }
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<=phone") {
+
 }

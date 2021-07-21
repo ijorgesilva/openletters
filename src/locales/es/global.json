@@ -94,6 +94,7 @@
 			"content-empty": "No hay notas disponibles",
 			"meta-description": "",
 			"more-info": "Más información",
+			"playlist": "Listas de reproducción de series",
 			"seasons": "Temporadas",
 			"section-latest-title": "Últimos mensajes",
 			"series": "Serie",
@@ -102,6 +103,7 @@
 			"transcript-empty": "No hay transcripciones disponibles",
 			"video": "Video",
 			"videos": "Videos",
+			"view-playlist": "Ver lista de mensajes",
 			"watch-now": "Reproducir ahora"
 		}
 	},

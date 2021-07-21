@@ -1,11 +1,17 @@
 // Dependencies
 import React, { useState } from 'react'
 import { Modal, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next"
+import { faList } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // Styles
 import './modalPlaylist.scss'
 
-export default function ModalPlaylist ( {} ) {
+export default function ModalPlaylist ( { children, className } ) {
+
+    /* Standard fields */
+    const { t } = useTranslation()
 
     const [show, setShow] = useState(false);
 
@@ -13,29 +19,33 @@ export default function ModalPlaylist ( {} ) {
     const handleShow = () => setShow(true);
 
     return(
-        <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
+        <div className={`${ (className) ? className : ''}`}>
 
-            <Modal show={show} onHide={handleClose}>
-                
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+            <a 
+                className='btn btn--animation btn--light-no-outline'
+                onClick={handleShow}
+            >
+                <FontAwesomeIcon icon={faList} size="md" /> {t('global.watch.playlist')} 
+            </a>
+
+            <Modal 
+                className={'modalPlaylist'}
+                show={show} 
+                onHide={handleClose}
+                backdrop={false}
+            >
+
+                <Modal.Header 
+                    closeButton
+                    closeLabel={t('global.close')} 
+                >
                 </Modal.Header>
 
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    {children}
+                </Modal.Body>
 
             </Modal>
-        </>
+        </div>
     )
 }
