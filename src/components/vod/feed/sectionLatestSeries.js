@@ -40,14 +40,14 @@ export default function SectionLatestSeries ( { title, className, id, campus, st
                 {
                     ( latestSeries?.length > 0 ) ?
                         <Carousel 
-                            swipeable       ={true}
-                            draggable       ={true}
-                            showDots        ={false}
-                            infinite        ={ (infinite) ? infinite : false }
-                            partialVisible  ={true}
-                            responsive      ={ responsive[defaultConfig.itemsVisible] }
-                            itemClass       ="item"
-                            containerClass  ="carousel-container"
+                            swipeable       = { true }
+                            draggable       = { true }
+                            showDots        = { false }
+                            infinite        = { (infinite) ? infinite : false }
+                            partialVisible  = { true }
+                            responsive      = { responsive[defaultConfig.itemsVisible] }
+                            itemClass       = "item"
+                            containerClass  = "carousel-container"
                         >
                             {
                                 latestSeries.map ( ( _, index ) => (
