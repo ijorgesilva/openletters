@@ -54,8 +54,10 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    word-break: break-all;
                     height: 100%;
-                    font-size: 2em;
+                    font-size: 1rem;
+                    line-height: 1rem;
                     letter-spacing: 2px;
                     color: rgba(255,255,255,0.7);
                     transition: var(--transition-fast);
@@ -64,15 +66,17 @@
                     }
                 }
             }
-            &::after{
-                content: '';
-                background-color: rgba(15,10,27,0.4);
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                z-index: 0;
+            &.background {
+                &::after{
+                    content: '';
+                    background-color: rgba(15,10,27,0.4);
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                }
             }
         }
 
