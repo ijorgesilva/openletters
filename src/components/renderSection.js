@@ -57,6 +57,7 @@ export default function RenderSection ( { section, filter, campus, location } ) 
          */
         case 'podcast':
             const podcastItem = section.sectionDetails.sectionPodcast
+            console.log(section.sectionDetails.sectionPodcast)
             return (
                 <>
                     <SectionPodcast 
