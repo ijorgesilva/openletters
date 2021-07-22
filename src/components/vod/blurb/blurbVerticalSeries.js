@@ -8,7 +8,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import './blurbVerticalSeries.scss'
 
 export default function BlurbVerticalSeries ( { title, className, link, iconImage, poster, background, logo } ) {
-    console.log(poster)
+    
     return (
         
             <div className={`blurbVerticalSeries card user-select-none ${ ( className ) ? className : ''}`}>
