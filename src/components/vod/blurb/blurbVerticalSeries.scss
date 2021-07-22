@@ -23,7 +23,9 @@
         overflow: hidden;
 
         .card-img-top {
-            aspect-ratio: 9 / 16; 
+            width: 100%;
+            padding-top: 177%;
+            max-height: 300px;
             position: relative;
         }
 

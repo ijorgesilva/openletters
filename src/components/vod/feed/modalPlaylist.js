@@ -22,7 +22,7 @@ export default function ModalPlaylist ( { children, className } ) {
         <div className={`${ (className) ? className : ''}`}>
 
             <a 
-                className='btn btn--animation btn--light-no-outline'
+                className='btn btn--light-no-outline'
                 onClick={handleShow}
             >
                 <FontAwesomeIcon icon={faList} size="md" /> {t('global.watch.playlist')} 
@@ -33,6 +33,7 @@ export default function ModalPlaylist ( { children, className } ) {
                 show={show} 
                 onHide={handleClose}
                 backdrop={false}
+                animation={false}
             >
 
                 <Modal.Header 

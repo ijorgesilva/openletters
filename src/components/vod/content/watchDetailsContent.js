@@ -4,6 +4,7 @@ import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Tabs, Tab, Alert } from 'react-bootstrap'
 import { Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
+import TextTruncate from 'react-text-truncate'
 
 // Components
 import config from '../../../../data/SiteConfig'
@@ -96,7 +97,12 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                                             src ='../../../assets/img/global/attachment-dark.svg'
                                             alt =""
                                         />
-                                        <div>{attachment.title}</div>
+                                        <TextTruncate 
+                                            element="div" 
+                                            line={1} 
+                                            truncateText="…" 
+                                            text={attachment.title} 
+                                        />
                                     </a>
                                 : undefined
                             ))

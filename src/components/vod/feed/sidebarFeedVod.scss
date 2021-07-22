@@ -54,6 +54,11 @@
         display: grid;
         grid-row-gap: 20px;
         padding: 0 1rem 1rem;
+
+        &::after {
+            content: '';
+            height: 80px;
+        }
     }
 
     .list-mobile {

@@ -63,7 +63,6 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                         ( videos?.length > 0  ) ?
                             <div className="playlist">
                                 <SidebarFeedVod 
-                                    // title       = { ( videoDetails.videoSeries?.title ) ? videoDetails.videoSeries.title : undefined}
                                     background  = { 
                                                     ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
                                                         videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
@@ -78,7 +77,6 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                                 />
                                 <ModalPlaylist className='mobile-only'>
                                     <SidebarFeedVod 
-                                        // title       = { ( videoDetails.videoSeries?.title ) ? videoDetails.videoSeries.title : undefined}
                                         background  = { 
                                                         ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
                                                             videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
