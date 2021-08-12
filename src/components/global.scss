@@ -2,7 +2,7 @@
 
 /* * */
 :root {
-    --color-black: 31, 31, 31;
+    --color-black: 15, 10, 27;
     --color-white: 255, 255, 255;
 
     --color-gray-one: #f8f8f8;
@@ -65,7 +65,7 @@
     --border-radius: 5px;
     --section-padding: 5rem 0rem;
     --section-padding-compact: 2rem 0rem;
-    --container-padding: 15px;
+    --container-padding: 5rem 2rem;
     --max-layout-width: 1200px;
 }
 
@@ -660,59 +660,59 @@ a {
 }
 
 .h-background-black {
-    background-color: rgba(var(--color-black),1);
+    background-color: rgba(var(--color-black),1) !important;
 }
 
 .h-background-white {
-    background-color: rgba(var(--color-white),1);
+    background-color: rgba(var(--color-white),1) !important;
 }
 
 .h-background-one {
-    background-color: var(--color-one);
+    background-color: var(--color-one) !important;
 }
 
 .h-background-two {
-    background-color: var(--color-two);
+    background-color: var(--color-two) !important;
 }
 
 .h-background-three {
-    background-color: var(--color-three);
+    background-color: var(--color-three) !important;
 }
 
 .h-background-four {
-    background-color: var(--color-four);
+    background-color: var(--color-four) !important;
 }
 
 .h-background-five {
-    background-color: var(--color-five);
+    background-color: var(--color-five) !important;
 }
 
 .h-background-six {
-    background-color: var(--color-six);
+    background-color: var(--color-six) !important;
 }
 
 .h-background-six-shade-three {
-    background-color: rgba(var(--color-six-dark-shade-three),1);
+    background-color: rgba(var(--color-six-dark-shade-three),1) !important;
 }
 
 .h-background-gray-one {
-    background-color: var(--color-gray-one);
+    background-color: var(--color-gray-one) !important;
 }
 
 .h-background-gray-two {
-    background-color: var(--color-gray-two);
+    background-color: var(--color-gray-two) !important;
 }
 
 .h-background-gray-three {
-    background-color: var(--color-gray-three);
+    background-color: var(--color-gray-three) !important;
 }
 
 .h-background-gray-four {
-    background-color: var(--color-gray-four);
+    background-color: var(--color-gray-four) !important;
 }
 
 .h-background-gray-five {
-    background-color: var(--color-gray-five);
+    background-color: var(--color-gray-five) !important;
 }
 
 ul.h-nobullets {
@@ -781,6 +781,43 @@ hr {
         border-top: 1px solid rgba(var(--color-six-shade-one),0.2);
         background-color: rgba(var(--color-six-dark-shade-three),1);
         padding-bottom: 0rem;
+    }
+}
+
+/**
+ Light/Dark mode
+ **/
+section {
+    &.light {
+        background-color: rgba(var(--color-white),1);
+        &.nested {
+            background-color: transparent;
+        }
+        .container, .fullwidth {
+            color: rgba(var(--color-black),1);
+        }
+    }
+    &.dark {
+        background-color: rgba(var(--color-black),1);
+        &.nested {
+            background-color: transparent;
+        }
+        .container, .fullwidth {
+            color: rgba(var(--color-white),1);
+        }
+    }
+    > .columns {
+        z-index: 1;
+        position: relative
+    }
+    > .background {
+        z-index: 0;
+    }
+    > .columns {
+        > .container {
+            max-width: 720px;
+            padding: var(--container-padding);
+        }
     }
 }
 
@@ -972,6 +1009,32 @@ hr {
     border-color: transparent;
 }
 
+/* Aspect Ratio */
+.aspect-ratio-16_9 {
+    padding-top: 56.9%;
+    position: relative;
+    width: 100%;
+    height: 0px;
+}
+.aspect-ratio-4_9 {
+    padding-top: 44.44%;
+    position: relative;
+    width: 100%;
+    height: 0px;
+}
+.aspect-ratio-1_1 {
+    position: relative;
+    width: 50vw;
+    height: 50vw;
+
+}
+.aspect-ratio-9_16 {
+    padding-top: 177%;
+    position: relative;
+    width: 100%;
+    height: 0px;
+}
+
 /* Mobile */
 .mobile-only {
     display: none;
@@ -991,4 +1054,9 @@ hr {
 
 @include media("<=phone") {
 
+}
+
+/* Bootstrap Rewrite */
+.bg-dark {
+    background-color: rgba(var(--color-six-dark-shade-three),1) !important;
 }

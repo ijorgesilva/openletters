@@ -1,0 +1,57 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.sectionShare {
+    overflow-x: hidden;
+    > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "left right";
+        .container, .fullwidth {
+            max-width: 720px;
+            padding: var(--container-padding);
+        }
+
+        .media {
+            &.left {
+                grid-area: left;
+            }
+            &.right {
+                grid-area: right;
+            }
+            .gatsby-image-wrapper{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .container, .fullwidth {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0px auto;
+        min-height: 520px;
+        max-width: 720px;
+        padding: var(--section-padding);
+    }
+
+    .shareButtons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .btn {
+        border: none;
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+        border-radius: 100%;
+        &:hover {
+            border-radius: 100%;
+        }
+    }
+
+}
+
+@include media("<tablet") {
+}

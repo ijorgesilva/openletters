@@ -9,9 +9,9 @@ import './sectionTextPhoto.scss'
 
 export default function SectionTextPhoto( { title, subtitle, className, photo, content, variant, link, linkType, linkText, buttonLink, buttonType, buttonText, id, ...props } ) {
 
-    const variantClass = (variant) ? variant : "dark"
+    const variantClass = (variant) ? variant : 'light'
 
-    const buttonClasses = "btn btn--animation z-index-2 btn--"+variantClass+"-outline"
+    const buttonClasses = "btn btn--animation z-index-2 btn--"+variant+"-outline"
 
     return (
 

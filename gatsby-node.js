@@ -417,6 +417,9 @@ const customMenues = `
         menuDetails {
             menuCustomTitle
             menuLocation
+            menuCss
+            menuId
+            menuColorScheme
             menuCampusMenu {
                 menuCampusMenuItems {
                     menuCampusMenuItem {
@@ -505,22 +508,36 @@ const customMenues = `
                                     ${wpParent}
                                 }
                             }
+                            menuPageMenuItemPageCss
+                            menuPageMenuItemPageRemoveDefault
                         }
                         menuPageMenuItemCustom {
                             menuPageMenuItemCustomLinkType
                             menuPageMenuItemCustomTarget
                             menuPageMenuItemCustomTitle
                             menuPageMenuItemCustomUrl
+                            menuPageMenuItemCustomCss
+                            removeDefaultCssClasses
                         }
                     }
                 }
                 menuPagesMenuBase {
+                    menuPagesMenuHideBase
                     menuPagesMenuBaseUrl
                     menuPagesMenuBaseTitle
                 }
             }
         }
     }
+`
+const buttons = `
+    buttonLink
+    buttonTarget
+    buttonText
+    buttonType
+    buttonUrl
+    buttonCss
+    buttonCssRemoveDefault
 `
 
 const localFile = `
@@ -564,68 +581,191 @@ const seoFields = `
     }
 `
 
+const blurb = `
+    itemImage {
+        ${localFile}
+    }
+    itemTitle
+    itemSubtitle
+    itemContent
+    itemCss
+    itemCssRemoveDefault
+    itemButtons {
+        itemButtonsButton {
+            ${buttons}
+        }
+    }
+`
+
 const sections = `
-    sectionContent
-    sectionTitle
     sectionType
+    
+    # General
+    sectionTitle
+    sectionContent
 
-    ## Call To Actions
-    sectionCta {
-        sectionCtaSubtitle
-        sectionCtaVariant
-        sectionCtaClassname
-        sectionCtaLink {
-            sectionLinkText
-            sectionLinkType
-            sectionLinkUrl
-        }
-        sectionCtaButton {
-            sectionButtonUrl
-            sectionButtonType
-            sectionButtonText
-        }
-        sectionCtaPhoto {
-            ${localFile}
+    # Configuration: Style, Background, etc.
+    sectionConfiguration {
+        sectionConfigurationClassname
+        sectionConfigurationId
+        sectionConfigurationColorScheme
+        sectionConfigurationContainerWidth
+
+        sectionConfigurationBackground {
+            sectionConfigurationBackgroundLayer {
+                sectionConfigurationBackgroundLayerType
+                sectionConfigurationBackgroundLayerColor {
+                    sectionConfigurationBackgroundLayerColorColor
+                    sectionConfigurationBackgroundLayerColorOpacity
+                }
+                sectionConfigurationBackgroundLayerImage {
+                    sectionConfigurationBackgroundLayerImageImage {
+                        localFile {
+                            publicURL
+                        }
+                    }
+                    sectionConfigurationBackgroundLayerImageOpacity
+                    sectionConfigurationBackgroundLayerImagePosition
+                    sectionConfigurationBackgroundLayerImageRepeat
+                    sectionConfigurationBackgroundLayerImageSize
+                    sectionConfigurationBackgroundLayerImageSizeCustom
+                    sectionConfigurationBackgroundLayerImageFixed
+                }
+                sectionConfigurationBackgroundLayerGradient {
+                    sectionConfigurationBackgroundLayerGradientType
+                    sectionConfigurationBackgroundLayerGradientAngle
+                    sectionConfigurationBackgroundLayerGradientOpacity
+                    sectionConfigurationBackgroundLayerGradientSteps {
+                        step {
+                            color
+                            stop
+                        }
+                    }
+                }
+                sectionConfigurationBackgroundLayerText {
+                    sectionConfigurationBackgroundLayerTextOpacity
+                    sectionConfigurationBackgroundLayerTextText
+                }
+            }
         }
     }
-
-    ## Podcast
-    sectionPodcast {
-        sectionPodcastSubtitle
-        sectionPodcastItunesUrl
-        sectionPodcastSpotifyUrl
-        sectionPodcastSoundcloudUrl
-        sectionPodcastGraphic {
-            ${localFile}
+    
+    # Sections
+        ## Call To Actions
+        sectionCta {
+            sectionCtaSubtitle
+            sectionCtaLink {
+                sectionLinkText
+                sectionLinkType
+                sectionLinkUrl
+            }
+            sectionCtaButton {
+                sectionButtonUrl
+                sectionButtonType
+                sectionButtonText
+            }
+            sectionCtaPhoto {
+                ${localFile}
+            }
         }
-    }
 
-    ## VOD by Tag
-    sectionVodTags {
-        sectionVodTag {
-            slug
-            databaseId
-            description
-            name
-            videosOnDemand {
-                nodes {
+        ## Podcast
+        sectionPodcast {
+            sectionPodcastSubtitle
+            sectionPodcastItunesUrl
+            sectionPodcastSpotifyUrl
+            sectionPodcastSoundcloudUrl
+            sectionPodcastGraphic {
+                ${localFile}
+            }
+        }
+
+        ## VOD by Tag
+        sectionVodTags {
+            sectionVodTag {
+                slug
+                databaseId
+                description
+                name
+                videosOnDemand {
+                    nodes {
+                        title
+                        slug
+                        excerpt
+                        status
+                        ${featuredImageFields}
+                        videoDetails {
+                            videoOneLiner
+                            videoDayDate
+                            videoUrl
+                            videoSeries {
+                                ... on WpSerie {
+                                    id
+                                    title
+                                    slug
+                                }
+                            }
+                            videoCampus {
+                                ... on WpCampus {
+                                    id
+                                    slug
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        ## Hero
+        sectionHero {
+            sectionHeroButtons {
+                sectionHeroButton {
+                    sectionHeroButtonType
+                    sectionHeroButtonTarget
+                    sectionHeroButtonText
+                    sectionHeroButtonUrl
+                    sectionHeroButtonLink
+                }
+            }
+            sectionHeroBackground {
+                ${localFile}
+            }
+            sectionHeroRelated {
+                ... on WpPost {
+                    id
                     title
                     slug
                     excerpt
+                    modified(formatString: "YYYYMMDD")
                     status
+                    nodeType
                     ${featuredImageFields}
-                    videoDetails {
-                        videoOneLiner
-                        videoDayDate
-                        videoUrl
-                        videoSeries {
-                            ... on WpSerie {
+                    ${language}
+                    postDetails {
+                        postCampus {
+                            ... on WpCampus {
                                 id
-                                title
+                                status
                                 slug
                             }
                         }
-                        videoCampus {
+                    }
+                }
+                ... on WpNewspost {
+                    id
+                    title
+                    slug
+                    excerpt
+                    date(formatString: "YYYYMMDD")
+                    modified(formatString: "YYYYMMDD")
+                    status
+                    nodeType
+                    ${featuredImageFields}
+                    ${language}
+                    newsDetails {
+                        newsCampusId
+                        newsCampus {
                             ... on WpCampus {
                                 id
                                 slug
@@ -633,91 +773,215 @@ const sections = `
                         }
                     }
                 }
+                ... on WpEvent {
+                    id
+                    title
+                    slug
+                    excerpt
+                    modified(formatString: "YYYYMMDD")
+                    status
+                    nodeType
+                    ${featuredImageFields}
+                    ${language}
+                    eventDetails {
+                    eventDates {
+                        eventDate
+                        eventTime
+                    }
+                    eventCampus {
+                        ... on WpCampus {
+                                id
+                                slug
+                            }
+                        }
+                    }
+                }
             }
         }
-    }
 
-    ## Hero
-    sectionHero {
-        sectionHeroButtons {
-            sectionHeroButton {
-                sectionHeroButtonType
-                sectionHeroButtonTarget
-                sectionHeroButtonText
-                sectionHeroButtonUrl
-                sectionHeroButtonLink
+        ## Page Menu
+        sectionPagemenu {
+            sectionSticky
+            sectionPagemenuMenu{
+                ${customMenues}
             }
         }
-        sectionHeroBackground {
-            ${localFile}
+
+        ## Text
+        ### Because Text section contain nested elements is also under allWpPage.
+        ### Object Fields / Relashionship elements has been removed below.
+        sectionText {
+            sectionTextButtons {
+                sectionTextButton {
+                    ${buttons}
+                }
+            }
+            sectionTextMedia {
+                sectionTextbasicMediaType
+                sectionTextbasicMediaAlignment
+                sectionTextbasicMediaPhoto {
+                    ${localFile}
+                }
+            }
+            ## Don't loads nested elements
         }
-        sectionHeroRelated {
-            ... on WpPost {
-                id
-                title
-                slug
-                excerpt
-                modified(formatString: "YYYYMMDD")
-                status
-                nodeType
-                ${featuredImageFields}
-                ${language}
-                postDetails {
-                    postCampus {
-                        ... on WpCampus {
-                            id
-                            status
-                            slug
-                        }
+
+        ## Tabs
+        ### Because Tab section contain nested elements is also under allWpPage. 
+        ### Object Fields / Relashionship elements has been removed below.
+        sectionTabs {
+            sectionTabsTab {
+                sectionTabsTabType
+                sectionTabsTabName
+                sectionTabsTabContent
+            }
+        }
+
+        ## Carousel
+        sectionCarousel {
+            sectionCarouselItem {
+                ${blurb}
+            }
+            sectionCarouselConfiguration {
+                sectionCarouselConfigurationItemType
+                sectionCarouselConfigurationSwipe
+                sectionCarouselConfigurationDraggable
+                sectionCarouselConfigurationInfinite
+                sectionCarouselConfigurationPartiallyVisible
+                sectionCarouselConfigurationDots
+                sectionCarouselConfigurationDotsClass
+                sectionCarouselConfigurationAutoplay
+                sectionCarouselConfigurationAutoplayInterval
+                sectionCarouselConfigurationGap
+                sectionCarouselConfigurationClass
+                sectionCarouselConfigurationTruncate
+                sectionCarouselConfigurationTruncateLines
+                sectionCarouselConfigurationImageAspect
+                sectionCarouselConfigurationResponsive {
+                    responsiveXl {
+                        responsiveXlCustom
+                        responsiveXlItems
+                        responsiveXlMax
+                        responsiveXlMin
+                    }
+                    responsiveL {
+                        responsiveLCustom
+                        responsiveLItems
+                        responsiveLMax
+                        responsiveLMin
+                    }
+                    responsiveS {
+                        responsiveSCustom
+                        responsiveSItems
+                        responsiveSMax
+                        responsiveSMin
+                    }
+                    responsiveXs {
+                        responsiveXsCustom
+                        responsiveXsItems
+                        responsiveXsMax
+                        responsiveXsMin
                     }
                 }
             }
-            ... on WpNewspost {
-                id
-                title
-                slug
-                excerpt
-                date(formatString: "YYYYMMDD")
-                modified(formatString: "YYYYMMDD")
-                status
-                nodeType
-                ${featuredImageFields}
-                ${language}
-                newsDetails {
-                    newsCampusId
-                    newsCampus {
-                        ... on WpCampus {
-                            id
-                            slug
-                        }
-                    }
+        }
+
+        ## Share
+        sectionShare {
+            sectionShareNetworks {
+                sectionShareNetworksType
+                sectionShareNetworksEmail {
+                    sectionShareNetworksEmailBody
+                    sectionShareNetworksEmailCustomUrl
+                    sectionShareNetworksEmailCustomUrlUrl
+                    sectionShareNetworksEmailSubject
+                }
+                sectionShareNetworksFacebook {
+                    sectionShareNetworksFacebookCustomUrl
+                    sectionShareNetworksFacebookCustomUrlUrl
+                    sectionShareNetworksFacebookHashtags
+                    sectionShareNetworksFacebookQuote
+                }
+                sectionShareNetworksPocket {
+                    sectionShareNetworksPocketCustomUrl
+                    sectionShareNetworksPocketCustomUrlUrl
+                    sectionShareNetworksPocketTitle
+                }
+                sectionShareNetworksTelegram {
+                    sectionShareNetworksTelegramCustomUrl
+                    sectionShareNetworksTelegramCustomUrlUrl
+                    sectionShareNetworksTelegramTitle
+                }
+                sectionShareNetworksTwitter {
+                    sectionShareNetworksTwitterCustomUrl
+                    sectionShareNetworksTwitterCustomUrlUrl
+                    sectionShareNetworksTwitterHashtags
+                    sectionShareNetworksTwitterRelated
+                    sectionShareNetworksTwitterTitle
+                    sectionShareNetworksTwitterVia
+                }
+                sectionShareNetworksWhatsapp {
+                    sectionShareNetworksWhatsappCustomUrl
+                    sectionShareNetworksWhatsappCustomUrlUrl
+                    sectionShareNetworksWhatsappTitle
                 }
             }
-            ... on WpEvent {
-                id
-                title
-                slug
-                excerpt
-                modified(formatString: "YYYYMMDD")
-                status
-                nodeType
-                ${featuredImageFields}
-                ${language}
-                eventDetails {
-                eventDates {
-                    eventDate
-                    eventTime
+            sectionShareImage {
+              sectionShareImageAlignment
+              sectionShareImageImage {
+                ${localFile}
+              }
+            }
+            sectionShareItemClass
+        }
+
+        ## Video
+        sectionVideo {
+            sectionVideoUrl
+            sectionVideoThumbnail {
+                localFile {
+                    publicURL
                 }
-                eventCampus {
-                    ... on WpCampus {
-                            id
-                            slug
-                        }
-                    }
-                }
+            }
+            sectionVideoConfiguration {
+                sectionVideoConfigurationControls
+                sectionVideoConfigurationHeight
+                sectionVideoConfigurationLight
+                sectionVideoConfigurationLoop
+                sectionVideoConfigurationMuted
+                sectionVideoConfigurationPip
+                sectionVideoConfigurationVolume
+                sectionVideoConfigurationWidth
+                sectionVideoConfigurationAutoplay
             }
         }
-    }
+
+        ## Blurb
+        sectionBlurbs {
+            sectionBlurbsItem {
+                ${blurb}
+            }
+            sectionBlurbsConfiguration {
+                sectionBlurbsConfigurationDirection
+                sectionBlurbsConfigurationItemType
+                sectionBlurbsConfigurationClass
+                sectionBlurbsConfigurationGap
+                sectionBlurbsConfigurationImageAspect
+                sectionBlurbsConfigurationJustification
+                sectionBlurbsConfigurationStretch
+                sectionBlurbsConfigurationTruncate
+                sectionBlurbsConfigurationTruncateLines
+            }
+        }
+
+        ## IFrame
+        sectionIframe {
+            sectionIframeType
+            sectionIframeCustom
+            sectionIframeOembed
+        }
+        
+    # End Sections
 
 `
 
@@ -750,6 +1014,7 @@ const allWpCampus = `
                             id
                             slug
                             databaseId
+                            status
                             sectionDetails {
                                 ${sections}
                             }
@@ -1102,10 +1367,59 @@ const allWpPage = `
                 pageMenues {
                     ${customMenues}
                 }
+                pageHideContent
+                pageHideShare
                 pageSections {
                     ... on WpContentSection {
+                        status
                         sectionDetails {
+
                             ${sections}
+                            
+                            ## Tabs
+                            sectionTabs {
+                                sectionTabsTab {
+                                    sectionTabsTabType
+                                    sectionTabsTabName
+                                    sectionTabsTabContent
+                                    sectionTabsTabSection {
+                                        ... on WpContentSection {
+                                            status
+                                            sectionDetails {
+                                                ${sections}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            ## Text, Media and Buttons
+                            sectionText {
+                                sectionTextButtons {
+                                    sectionTextButton {
+                                        ${buttons}
+                                    }
+                                }
+                                sectionTextMedia {
+                                    sectionTextbasicMediaType
+                                    sectionTextbasicMediaAlignment
+                                    sectionTextbasicMediaPhoto {
+                                        ${localFile}
+                                    }
+                                }
+                                sectionTextSections {
+                                    ... on WpContentSection {
+                                        id
+                                        slug
+                                        databaseId
+                                        status
+                                        sectionDetails {
+                                            ${sections}
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }
@@ -1160,6 +1474,7 @@ const allWpPosts = `
                             id
                             slug
                             databaseId
+                            status
                             sectionDetails {
                                 ${sections}
                             }

@@ -63,6 +63,10 @@ export default function PageDetails( { location, pageContext } ){
                         menues      = { pageDetails.pageMenues }
                         campus      = { breadcrumbs.campus }
                         location    = { location }
+                        className   = { pageDetails.pageMenues.menuDetails.menuCss }
+                        id          = { pageDetails.pageMenues.menuDetails.menuId }
+                        bg          = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
+                        variant     = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
                     />
                 :
                     undefined
@@ -70,10 +74,10 @@ export default function PageDetails( { location, pageContext } ){
 
             {
                 ( sections ) ?
-                    sections.map( ( section, index ) => (
+                    sections.map( ( _, index ) => (
                         <RenderSection 
                             index   = { index }
-                            section = { section }
+                            section = { _ }
                             campus  = { campus }
                             filter  = { { campus: campus } }
                             location= { location }

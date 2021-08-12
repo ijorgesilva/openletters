@@ -41,7 +41,7 @@ export default function MenuPageItem ( { item, campus } ) {
             return (
                 <Link 
                     to                  = { fullPageUrl } 
-                    className           = "nav-link" 
+                    className           = {`${ ( item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageRemoveDefault ) ? '' : 'nav-link' } ${ ( item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageCss ) ? item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageCss : '' }`}
                     title               = { item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageTitle } 
                     activeClassName     = "active"
                 >
@@ -57,7 +57,7 @@ export default function MenuPageItem ( { item, campus } ) {
                 return (
                     <Link 
                         to              = {customItem.menuPageMenuItemCustomUrl} 
-                        className       = "nav-link" 
+                        className       = {`${ ( customItem.removeDefaultCssClasses ) ? '' : 'nav-link' } ${ ( customItem.menuPageMenuItemCustomCss ) ? customItem.menuPageMenuItemCustomCss : '' }`}
                         title           = {customItem.menuPageMenuItemCustomTitle} 
                         activeClassName = "active"
                     >
@@ -67,13 +67,14 @@ export default function MenuPageItem ( { item, campus } ) {
             }
             else if ( customItem.menuPageMenuItemCustomLinkType === 'external' ) {
                 return (
-                    <Nav.Link 
-                        href    = {customItem.menuPageMenuItemCustomUrl} 
-                        title   = {customItem.menuPageMenuItemCustomTitle} 
-                        target  = {customItem.menuPageMenuItemCustomTarget}
+                    <a 
+                        href        = { customItem.menuPageMenuItemCustomUrl } 
+                        className   = {`${ ( customItem.removeDefaultCssClasses ) ? '' : 'nav-link' }  ${ ( customItem.menuPageMenuItemCustomCss ) ? customItem.menuPageMenuItemCustomCss : '' }`}
+                        title       = { customItem.menuPageMenuItemCustomTitle } 
+                        target      = { customItem.menuPageMenuItemCustomTarget.split(':')[0] }
                     >
                         {customItem.menuPageMenuItemCustomTitle}
-                    </Nav.Link>
+                    </a>
                 )       
             }
             break

@@ -1,0 +1,93 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.sectionText {
+    > div {
+
+        &.two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: "left right";
+
+            .container, .fullwidth {
+                max-width: 720px;
+                padding: var(--container-padding);
+            }
+
+            .media {
+                &.left {
+                    grid-area: left;
+                }
+                &.right {
+                    grid-area: right;
+                }
+                .gatsby-image-wrapper{
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+
+        &.one-column {
+            .container, .fullwidth {
+                max-width: 720px;
+                padding: var(--container-padding);
+            }
+        }
+
+        .container, .fullwidth {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0px auto;
+            min-height: 600px;
+            max-width: 720px;
+            padding: var(--section-padding);
+            .content {
+                margin-top: 3rem;
+                .title {}
+                .links {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;
+                    gap: 10px;
+                }
+            }
+        }
+
+        .media {}
+
+    }
+
+}
+
+@include media("<desktop") {}
+@include media("<=tablet") {
+    .sectionText {
+
+        > div {
+            &.two-columns {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+                grid-template-areas:    "left"
+                                        "right";
+                .media {
+                    min-height: 320px;
+                    &.left {
+                        grid-area: left;
+                    }
+                    &.right {
+                        grid-area: right;
+                    }
+                    .gatsby-image-wrapper{
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+@include media("<=phone") {
+}

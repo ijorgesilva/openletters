@@ -18,5 +18,10 @@ Handle by Algolia. Requires an account and the API keys to be added to .env
 When changing the data structure on algolia-queries.js, change the `enablePartialUpdates` to false, to allow the index to be reconstructed.
 `enablePartialUpdates: false`
 
-## Notes
+## Component Development Check list:
+- Implement sectionId, sectionClassname and sectionContainerWidth
+- Light/Dark mode (sectionColorScheme)
+- Background component
+
+## Additional Notes
 *Date formats*: All dates are YYYYMMDD.

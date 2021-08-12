@@ -46,6 +46,9 @@
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
+            .gatsby-image-wrapper {
+                height: 66px;
+            }
         }
         &:hover {
             text-decoration: none;

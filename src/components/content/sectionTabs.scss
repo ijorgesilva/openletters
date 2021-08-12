@@ -1,0 +1,49 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.sectionTabs {
+
+    .container, .fullwidth {
+        padding: var(--container-padding);
+        .title {
+
+        }
+        .content {
+            margin-top: 3rem;
+        }
+
+        .style-one {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+            > div {
+                text-align: center;
+                a {
+                    padding: 18px;
+                    font-size: 18px;
+                    line-height: 26px;
+                    background-color: var(--color-gray-one);
+                    color: var(--color-gray-five);
+                    text-transform: uppercase;
+                    font-weight: 900;
+                    letter-spacing: 0px;
+                    &.nav-link{
+                        &.active {
+                            background-color: var(--color-five);
+                            color: rgba(var(--color-white),1);
+                            border: none;
+                            border-radius: unset;
+                        }
+                    }
+                }
+            }
+            .nav-link:hover {
+                color: var(--color-five-dark-shade-one);
+                background-color: var(--color-five-shade-three);
+            }
+        }
+    }
+    
+}
+
+@include media("<desktop") {}
+@include media("<=tablet") {}
+@include media("<=phone") {}

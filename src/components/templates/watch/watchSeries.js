@@ -301,8 +301,6 @@ export const query = graphql`
                             ## Call To Actions
                             sectionCta {
                                 sectionCtaSubtitle
-                                sectionCtaVariant
-                                sectionCtaClassname
                                 sectionCtaLink {
                                     sectionLinkText
                                     sectionLinkType

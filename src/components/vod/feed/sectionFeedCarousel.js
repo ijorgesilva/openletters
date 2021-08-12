@@ -23,7 +23,7 @@ export default function SectionFeedCarousel( { title, items, className, id, icon
 
     return (
 
-        <section className={`sectionFeedCarousel ${className}`} id={id} style={styles}>
+        <section className={`sectionFeedCarousel ${ ( className ) ? className : '' }`} id={id} style={styles}>
             <Container fluid>
                 {
                     (title) ? 

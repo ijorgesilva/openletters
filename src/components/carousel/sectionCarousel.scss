@@ -1,0 +1,14 @@
+@import "../../../node_modules/include-media/dist/_include-media.scss";
+
+.sectionCarousel {
+    padding: var(--section-padding);
+    .content {
+        margin-top: 1rem;
+        max-width: 720px;
+    }
+
+    .container, 
+    .fullwidth {
+        padding: var(--container-padding);
+    }
+}

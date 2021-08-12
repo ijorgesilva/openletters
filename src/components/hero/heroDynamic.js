@@ -8,11 +8,11 @@ import { Link } from 'gatsby'
 import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
 import "./heroDynamic.scss"
 
-export default function HeroDynamic ( { title, subtitle, backgroundPhoto, className, buttons, children, related, location } ) {
+export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, className, buttons, children, related, location } ) {
 
     return (
 
-        <div className={`heroDynamic ${className}`}>
+        <div id={id} className={`heroDynamic ${className}`}>
 
             <Container className={"z-index-2"}>
                 <div className="content align-items-center">

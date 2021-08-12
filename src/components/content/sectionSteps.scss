@@ -1,9 +1,5 @@
 .sectionSteps {
-    padding: var(--section-padding);
 
-    .content {
-        max-width: 860px;
-    }
     .steps {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -25,4 +21,5 @@
             }
         }
     }
+    
 }

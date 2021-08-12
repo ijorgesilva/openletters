@@ -1,74 +1,62 @@
 // Dependencies
 import React from 'react'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { Card } from 'react-bootstrap'
 import TextTruncate from 'react-text-truncate'
 
 // Components
+import Buttons from '../buttons/buttons'
+
+// Styles
 import './blurbVertical.scss'
 
-export default function BlurbVertical ( {title, excerpt, className, featuredImage, noImage, iconImage, link, target, linkType, variant, ...props} ) {
+export default function BlurbVertical ( {
+    image,
+    title,
+    subtitle,
+    content,
+    truncate,
+    truncateLines,
+    className,
+    removeDefaultCss,
+    buttons,
+    aspectRatio,
+    }) {
+
     return (
+        <Card 
+            className = {`blurbVertical ${ ( removeDefaultCss ) ? '' : 'blurbVertical' } ${ ( className ) ? className : ''}`}
+        >
 
-        <div className={`BlurbVertical card user-select-none ${ (className) ? className : ''} ${(variant) ? variant : 'dark'}`}>
-            {
-                (linkType === 'external') ?
-                    <a href={link} target={ (target) ? target : '_self' }>
-                        <div className="card-img-container">
-                            {
-                                (iconImage) ? 
-                                    <div className="card-icon">
-                                        <img src={iconImage} alt=""/>
-                                    </div>
-                                :
-                                    undefined
-                            }
-                            { 
-                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
-                                : <Img className="card-img-top" fluid={noImage} alt="" />
-                            }
-                        </div>
-                        <div className="card-body">
-                            {
-                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
-                                : null
-                            }
-                            {
-                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
-                                : <></>
-                            }
-                        </div>
-                    </a>
-                :
-                    <Link to={link}>
-                        <div className="card-img-container">
-                            {
-                                (iconImage) ? 
-                                    <div className="card-icon">
-                                        <img src={iconImage} alt=""/>
-                                    </div>
-                                :
-                                    undefined
-                            }
-                            { 
-                                (featuredImage) ? <Img className="card-img-top" fluid={featuredImage} alt="" />
-                                : <Img className="card-img-top" fluid={noImage} alt="" />
-                            }
-                        </div>
-                        <div className="card-body">
-                            {
-                                (title) ? <h5 className="card-title mb-1" dangerouslySetInnerHTML={{__html: title}}></h5>
-                                : null
-                            }
-                            {
-                                (excerpt) ? <TextTruncate line={2} element="p" truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
-                                : <></>
-                            }
-                        </div>
-                    </Link>
-            }
+            <div className={`card-img ${ ( !image ) ? ( aspectRatio ) ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' : '' }`} aria-hidden="true">
+                <GatsbyImage
+                    className   = {`card-img-top ${ ( aspectRatio ) ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' }`}
+                    image       = { image }
+                    alt         = ''
+                />
+            </div>
 
-        </div>
+            <Card.Body>
+                <Card.Title as='h3' dangerouslySetInnerHTML={{__html: title}}></Card.Title>
+                <Card.Title as='h4' dangerouslySetInnerHTML={{__html: subtitle}}></Card.Title>
+                {
+                    ( truncate ) ?
+                        <TextTruncate line = { ( truncateLines ) ? truncateLines : 3 } element="p" truncateText="…" text={content.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                    :
+                        <Card.Text  dangerouslySetInnerHTML={{__html: content}}></Card.Text>    
+                }
+                {
+                    ( buttons?.length > 0 ) ?
+                        <Buttons 
+                            buttons = {buttons}
+                        />
+                    :
+                        undefined
+                }
+            </Card.Body>
+
+        </Card>
 
     )
 }
