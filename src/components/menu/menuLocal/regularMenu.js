@@ -1,9 +1,9 @@
-// Dependencies
+
 import React from "react"
 import { Link } from "gatsby"
 import { NavDropdown } from "react-bootstrap"
 
-// Components
+
 
 export default function RegularMenu( { className, index, title, content } ){
     return (

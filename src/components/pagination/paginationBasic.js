@@ -1,8 +1,8 @@
-// Dependencies
+
 import React from 'react'
 import { Link } from 'gatsby'
 
-// Components
+
 import './paginationBasic.scss'
 
 export default function paginationBasic( {className, pages, slug} ) {

@@ -1,15 +1,28 @@
-// Dependencies
+
 import React, {useEffect} from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { Container } from 'react-bootstrap'
 
-// Components
+
 import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
 import ModalPlaylist from '../feed/modalPlaylist'
 import config from '../../../../data/SiteConfig'
 import './playlistDetails.scss'
 
-export default function PlaylistDetails( { videoDetails, poster, backgroundHero, videos, campus } ) {
+export default function PlaylistDetails( 
+    { 
+        videoDetails, 
+        poster, 
+        backgroundHero, 
+        videos, 
+        campus, 
+        width,
+        mode,
+        order,
+        count,
+    } 
+    ) {
 
     /* Scrolled Player */
     const [ scrolledPlayer, setScrolledPlayer ] = React.useState(false)
@@ -32,10 +45,12 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
 
     return (
 
-            <div className={`playlistDetails h-background-six-shade-three ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
+            <div className={`playlistDetails ${ mode ? mode : 'light' } ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
 
-                <div className={`content-container ${ (videos?.length > 0) ? 'playlist-grid' : ''}`}>
-                    
+                <Container 
+                    fluid = { width === 'container' ? false : true }
+                    className={`${ (videos?.length > 0) ? 'playlist-grid' : ''}`}
+                >
                     <div className={playerClasses.join(" ")}>
                         {
                             (videoDetails.videoUrl) ?
@@ -61,7 +76,7 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
 
                     {
                         ( videos?.length > 0  ) ?
-                            <div className="playlist">
+                            <div className = 'playlist'>
                                 <SidebarFeedVod 
                                     background  = { 
                                                     ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
@@ -69,13 +84,19 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                                                     : 
                                                         undefined
                                                     }
-                                    className   = "h-background-six-shade-three hide-mobile" 
+                                    className   = 'hide-mobile'
                                     serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
                                     id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
                                     items       = { videos }
                                     campus      = { campus }
+                                    mode        = { mode }
+                                    order       = { order }
+                                    count       = { count ? true : false}
                                 />
-                                <ModalPlaylist className='mobile-only'>
+                                <ModalPlaylist 
+                                    className   = 'mobile-only'
+                                    mode        = { mode }
+                                >
                                     <SidebarFeedVod 
                                         background  = { 
                                                         ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
@@ -83,19 +104,21 @@ export default function PlaylistDetails( { videoDetails, poster, backgroundHero,
                                                         : 
                                                             undefined
                                                         }
-                                        className   = "h-background-six-shade-three" 
+                                        className   = ''
                                         serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
                                         id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
                                         items       = { videos }
                                         campus      = { campus }
+                                        mode        = { mode }
+                                        order       = { order }
+                                        count       = { count ? true : false}
                                     />
                                 </ModalPlaylist>
                             </div>
                         :
                             undefined
                     }
-                    
-                </div>
+                </Container>
 
                 <div className="background">
                     <div className="overlay"></div>

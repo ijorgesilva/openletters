@@ -1,25 +1,16 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .watchSeries{
 
-    .content {
-        padding-bottom: 3rem;
-        .title {
-            h4 {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 0px;
-            }
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
+    &.light {
+        body {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         }
-        p {
-            color: rgba(var(--color-white),0.4);
-            max-width: 720px;
-            font-size: 1rem;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+    }
+
+    &.dark {
+        body {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         }
     }
 
@@ -30,22 +21,9 @@
 }
 
 @include media("<desktop") {
-
 }
 
 @include media("<=tablet") {
-
-    .watchSeries {
-        .hero {
-            > .jumbotron {
-                grid-template-columns: 1fr;
-                grid-template-areas: 
-                    'trailer' 
-                    'about';
-            }
-        }
-    }
-    
 }
 
 @include media("<=phone") {

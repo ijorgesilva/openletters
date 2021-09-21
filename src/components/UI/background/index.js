@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from 'react'
 
-// Components
+
 import Layer from './layer'
 
-// Style
+
 import './background.scss'
 
 export default function Background ( { className, layers } ) {

@@ -1,0 +1,34 @@
+.formSelector {
+    margin-top: var(--padding-top);
+
+    &.light {
+    }
+
+    &.dark {
+        &.jumbotron {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+        
+    }
+
+    &.jumbotron {
+        overflow: hidden;
+    }
+    .primary-column, 
+    .secondary-column {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .secondary-column {
+        .support-text {
+            z-index: 1;
+            position: relative;
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+}

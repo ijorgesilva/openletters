@@ -1,6 +1,48 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .heroSimple {
+    position: relative;
+
+    &.light {
+        .jumbotron {
+            .content {
+                h1, h1 > a {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+                p {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                }
+            }
+            .heroBackground {
+                &::after {
+                    background: linear-gradient(to bottom, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 1%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 39%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.35) 61%, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 100%),
+                                linear-gradient(to left, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 1%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 39%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.35) 61%, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 100%),
+                                linear-gradient(to top, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 75%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.7) 100%);        
+                }
+            }
+        }
+    }
+
+    &.dark {
+        .jumbotron {
+            .content {
+                h1, h1 > a {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+                p {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                }
+            }
+            .heroBackground {
+                &::after {
+                    background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.35) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%),
+                                linear-gradient(to left, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.35) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%),
+                                linear-gradient(to top, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 75%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7) 100%);        
+                }
+            }
+        }
+    }
+
     .jumbotron {
         
         display: flex;
@@ -13,34 +55,36 @@
         .content {
             p {
                 max-width: 520px;
+                font-size: 1.2rem;
             }
-        }
-        h1,
-        h1 > a {
-            color: rgba(var(--color-white),1);
-            font-size: 2rem;
-            line-height: 2rem;
-            letter-spacing: 1px;
-            text-decoration: none;
-            &:hover {
+            h1,
+            h1 > a {
+                font-size: 2rem;
+                line-height: 2rem;
+                letter-spacing: 1px;
                 text-decoration: none;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            a {
+                h1.display-1 {
+                    font-size: 4rem;
+                    line-height: 3.2rem;
+                    text-transform: uppercase;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .buttons {
+                position: relative;
+                display: inline-flex;
+                gap: 20px;
             }
         }
-        a {
-            h1.display-1 {
-                font-size: 4rem;
-                line-height: 3.2rem;
-                text-transform: uppercase;
-            }
-            &:hover {
-                text-decoration: none;
-            }
-        }
-        p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1.2rem;
-        }
-        .iconSerie {
+        
+        .iconSeries {
             > .gatsby-image-wrapper {
                 display: block;
                 width: 100%;
@@ -48,6 +92,7 @@
                 height: 100px;
             }
         }
+
         .heroBackground {
             position: absolute;
             display: flex;
@@ -65,11 +110,6 @@
                 height: 100%;
                 top: 0;
                 z-index: 10;
-            }
-            &::after {
-                background: linear-gradient(to bottom, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%),
-                            linear-gradient(to left, rgba(0,15,255,0) 0%,rgba(0,15,251,0) 1%,rgba(10,12,109,0) 39%,rgba(15,10,27,0.36) 61%,rgba(15,10,27,1) 100%),
-                            linear-gradient(to top, rgba(15,10,27,0) 75%, rgba(15,10,27,0.7) 100%);
             }
             .heroBackgroundIcon {
                 display: flex;
@@ -104,10 +144,6 @@
                 object-fit: contain !important;
                 object-position: left center !important;
             }
-        }
-        .buttons {
-            display: inline-flex;
-            gap: 20px;
         }
         
     }

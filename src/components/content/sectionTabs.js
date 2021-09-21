@@ -1,76 +1,109 @@
-// Dependencies
+
 import React from 'react'
 import { Tab, Nav } from 'react-bootstrap'
 
-// Components
+
 import RenderSection from '../renderSection'
 
-// Style
+
 import './sectionTabs.scss'
 
-export default function SectionTabs ( { id, className, campus, location, variant, content, title, tabs, containerWidth } ) {
+export default function SectionTabs ( 
+    { 
+        id, 
+        className, 
+        campus, 
+        location, 
+        mode, 
+        content, 
+        title, 
+        tabs, 
+        containerWidth,
+        size,
+    } 
+    ) {
     
     return (
         <section
             id          = {id}
-            className   = {`sectionTabs ${ ( className ) ? className : ''} ${ ( variant ) ? variant : 'light' } `}
+            className   = {`sectionTabs ${ className ? className : ''} ${ size ? size : ''} ${ mode ? mode : 'light' } `}
         >
             <div className={`${ ( containerWidth ) ? containerWidth : 'container' }`}>
                 
-                <h2 className="title" dangerouslySetInnerHTML={{__html:title}}></h2>
-                <div className="content" dangerouslySetInnerHTML={{__html:content}}></div>
-            
-                { 
-                    (tabs?.length > 0) ?
-                        <Tab.Container className="mt-5 tabbable" defaultActiveKey="1">
-                                <Nav className="style-one mt-5 user-select-none">
-
-                                    {
-                                        tabs.map( ( _ , index ) => (
-                                            <Nav.Item key={index}>
-                                                <Nav.Link eventKey={index}> 
-                                                    {_.sectionTabsTabName} 
-                                                </Nav.Link>
-                                            </Nav.Item>
-                                        ))
-                                    }
-
-                                </Nav>
-                                <Tab.Content>
-
-                                    {
-                                        tabs.map( ( _ , index ) => (
-                                            <Tab.Pane key={index} eventKey={index}>
-                                                {
-                                                    ( _.sectionTabsTabType.split(':')[0] === 'content' ) ?
-                                                        <div  dangerouslySetInnerHTML={{__html:_.sectionTabsTabContent}}></div>
-                                                    :
-                                                        undefined
-                                                }
-                                                {
-                                                    ( _.sectionTabsTabType.split(':')[0] === 'nestedsection' ) ?
-                                                        <RenderSection 
-                                                            index       = { index }
-                                                            section     = { _.sectionTabsTabSection }
-                                                            campus      = { campus }
-                                                            filter      = { { campus: campus } }
-                                                            location    = { location }
-                                                            className   = { 'nested' }
-                                                        />
-                                                    :
-                                                        undefined
-
-                                                }
-                                            </Tab.Pane>
-                                        ))
-                                    }
-
-                                </Tab.Content>
-
-                        </Tab.Container>
+                {
+                    ( title || content ) ?
+                        <div className='general'>
+                            {
+                                ( title ) ?
+                                    <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
+                                :
+                                    undefined
+                            }
+        
+                            { 
+                                ( content ) ?
+                                    <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                :
+                                    undefined
+                            }
+                        </div>
                     :
                         undefined
                 }
+            
+                <div className='tabs'>
+                    { 
+                        (tabs?.length > 0) ?
+                            <Tab.Container className='mt-5 tabbable' defaultActiveKey='1'>
+
+                                    <Nav className='tab-menu style-one mt-5 user-select-none'>
+                                        {
+                                            tabs.map( ( _ , index ) => (
+                                                <Nav.Item key={index}>
+                                                    <Nav.Link eventKey={index}> 
+                                                        {_.sectionTabsTabName} 
+                                                    </Nav.Link>
+                                                </Nav.Item>
+                                            ))
+                                        }
+                                    </Nav>
+
+                                    <Tab.Content>
+                                        {
+                                            tabs.map( ( _ , index ) => (
+                                                <Tab.Pane key={index} eventKey={index}>
+                                                    {
+                                                        ( _.sectionTabsTabType.split(':')[0] === 'content' ) ?
+                                                            <div  dangerouslySetInnerHTML={{__html:_.sectionTabsTabContent}}></div>
+                                                        :
+                                                            undefined
+                                                    }
+                                                    {
+                                                        ( _.sectionTabsTabType.split(':')[0] === 'nestedsection' ) ?
+                                                            <RenderSection 
+                                                                index       = { index }
+                                                                mode        = { mode }
+                                                                size        = { size }
+                                                                section     = { _.sectionTabsTabSection }
+                                                                campus      = { campus }
+                                                                filter      = { { campus: campus } }
+                                                                location    = { location }
+                                                                className   = { 'nested' }
+                                                            />
+                                                        :
+                                                            undefined
+
+                                                    }
+                                                </Tab.Pane>
+                                            ))
+                                        }
+                                    </Tab.Content>
+
+                            </Tab.Container>
+                        :
+                            undefined
+                    }
+                </div>
 
             </div>
 

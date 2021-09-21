@@ -1,14 +1,14 @@
-// Dependencies
+
 import React from 'react'
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connectSearchBox } from 'react-instantsearch-dom'
 
 export default connectSearchBox(
-  ({ refine, currentRefinement, className, onFocus, placeholder }) => (
-    <form className={className}>
+  ({ refine, currentRefinement, className, onFocus, placeholder, mode }) => (
+    <form className={`${ ( className ) ? className : ''}`}>
       <input
-        className     = "SearchInput"
+        className     = {`SearchInput ${ ( mode ) ? mode : 'light'}`}
         type          = "text"
         placeholder   = {placeholder}
         aria-label    = {placeholder}
@@ -17,9 +17,9 @@ export default connectSearchBox(
         onFocus       = {onFocus}
       />
       <FontAwesomeIcon 
-        icon={faSearch} 
-        size="lg" 
-        className="SearchIcon"
+        icon      = {faSearch} 
+        size      = 'lg'
+        className = {`SearchIcon ${ ( mode ) ? mode : 'light'}`}
       />
     </form>
   )

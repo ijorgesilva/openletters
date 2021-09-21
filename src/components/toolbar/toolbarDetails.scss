@@ -1,29 +1,26 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .toolbarDetails{
     margin-top: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+    position: relative;
     z-index: 1;
-
-    > .toolbarContainer {
-        max-width: var(--max-layout-width);
-        margin: 0px auto;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
+    
     &.light {
-        background-color: white;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
     }
 
     &.dark {
-        background-color: rgba(var(--color-six-dark-shade-three),1);
-        border-top: 1px solid rgba(255,255,255,0.1);
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+        border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+    }
+
+    >.buttons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
 }

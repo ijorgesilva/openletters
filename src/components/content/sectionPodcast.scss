@@ -1,18 +1,57 @@
-.SectionPodcast{
+
+@import "~include-media/dist/_include-media.scss";
+
+.sectionPodcast{
     padding: 3rem 0px;
 
-    span {
-        color: var(--color-six-shade-three);
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        h2{
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+        span {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.9);
+        }
+        p {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+        }
     }
-    h2{
-        color: var(--color-five);
+
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        h2{
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+        span {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.9);
+        }
+        p {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+        }
     }
-    p {
-        color: rgba(255,255,255,0.3);
-    }
+    
     .links {
         display: flex;
         grid-gap: 15px;
         flex-wrap: wrap;
     }
+
+    .graphic {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+    .sectionPodcast{
+        .graphic {
+            justify-content: center;
+        }
+    }
+}
+
+@include media("<=phone") {
 }

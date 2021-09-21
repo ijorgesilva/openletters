@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from "react-i18next"
 import { graphql } from 'gatsby'
-import ToolbarDetails from '../../toolbar/toolbarDetails'
+import { Container } from 'react-bootstrap'
 
-// Components
+
 import Navigation from '../../menu/navigation'
 import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
 import WatchDetailsContent from '../../vod/content/watchDetailsContent'
@@ -13,22 +13,35 @@ import { watchDetailsMenu } from '../../../../data/menues'
 import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 
-// Hooks
+
 import { useParticipation } from '../../../hooks/useParticipation'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './watchDetails.scss'
 
 export default function WatchDetails( { pageContext, location, data } ) {
     
-    const { title, slug, excerpt, content, featuredImage, videoDetails, participationCampus, videoOnDemandTags, breadcrumbs } = pageContext
+    const { 
+            title, 
+            slug, 
+            excerpt, 
+            content, 
+            featuredImage, 
+            videoDetails, 
+            participationCampus, 
+            videoOnDemandTags, 
+            breadcrumbs 
+        } = pageContext
     
-    /* Standard fields */
     const { t }     = useTranslation()
-    let videos      = { nodes: [] }
-    let resources   = data.resources.videoDetails.videoResources
+
+    let videos          = { nodes: [] }
+    let resources       = data.resources.videoDetails.videoResources
+    const mode          = 'dark'
+    const modeContent   = 'light'
 
     /* Participation Options */
     const participationCombined = useParticipation( participationCampus, data.resources.participation )
@@ -56,91 +69,110 @@ export default function WatchDetails( { pageContext, location, data } ) {
                             undefined
     
     return (
-        <div className={"watchDetails"}>
+        <div className={`watchDetails bg-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ mode ? mode : 'light' }`}>
             
-            <HeaderPage
-                title       = { title + ' | ' + t('global.watch.videos') } 
-                location    = { location } 
-                cover       = { poster }
-                description = { excerpt }
-                article     = { true }
-                metaTags    =   {{
-                                    noIndex: ( typeof videoDetails.videoHide?.videoHideSearchEngines === 'undefined' ) ? 
-                                                    false : (videoDetails.videoHide?.videoHideSearchEngines === true ) ? true : false,
-                                }}
-            />
+            <div className={`player ${ mode ? mode : 'light'}`}>
+                <HeaderPage
+                    title       = { title + ' | ' + t('global.watch.videos') } 
+                    location    = { location } 
+                    cover       = { poster }
+                    description = { excerpt }
+                    mode        = { mode }
+                    article     = { true }
+                    metaTags    =   {{
+                                        noIndex: ( typeof videoDetails.videoHide?.videoHideSearchEngines === 'undefined' ) ? 
+                                                        false : (videoDetails.videoHide?.videoHideSearchEngines === true ) ? true : false,
+                                    }}
+                />
 
-            <Navigation
-                location        = { location }
-                campus          = { breadcrumbs.campus }
-                searchIndices   = { useGlobalIndeces() }
-                menuGlobal
-            />
+                <Navigation
+                    location        = { location }
+                    campus          = { breadcrumbs.campus }
+                    searchIndices   = { useGlobalIndeces() }
+                    mode            = { mode }
+                    menuGlobal
+                />
 
-            <MenuWatchDetails 
-                menuBrand   = 
-                                { 
-                                    {
-                                        'link': breadcrumbs.rootApp,
-                                        'name': t('global.watch.title')
-                                    }
-                                } 
-                menu        = { watchDetailsMenu } 
-                close       = { breadcrumbs.back }
-            />
+                <MenuWatchDetails 
+                    menuBrand   = 
+                                    { 
+                                        {
+                                            'link': breadcrumbs.rootApp,
+                                            'name': t('global.watch.title')
+                                        }
+                                    } 
+                    menu        = { watchDetailsMenu } 
+                    close       = { breadcrumbs.back }
+                    mode        = { mode }
+                />
 
-            <PlaylistDetails 
-                poster          = { poster }
-                backgroundHero  = { background }
-                videoDetails    = { videoDetails }
-                videos          = { ( videos?.nodes?.length > 0 ) ? videos.nodes : undefined }
-                campus          = { breadcrumbs.campus }
-            />
-            
+                <PlaylistDetails 
+                    poster          = { poster }
+                    backgroundHero  = { background }
+                    videoDetails    = { videoDetails }
+                    videos          = { ( videos?.nodes?.length > 0 ) ? videos.nodes : undefined }
+                    campus          = { breadcrumbs.campus }
+                    width           = 'fullwidth'
+                    mode            = { mode }
+                    order           = 'desc'
+                    count
+                />
+                
+            </div>
+
             <ToolbarDetails 
                 className           = {'sticky-mobile'}
                 location            = { location }
-                variant             = 'dark'
+                mode                = { mode }
                 participation       =  {{
                                             raiseHandList: ( participationCombined.raiseHandList?.length > 0 ) ? participationCombined.raiseHandList : undefined,
                                         }}
             />
 
-            <main className="main">
-                <div className="columns">
+            <div className={`content ${ modeContent ? modeContent : 'light'}`}>
+                <Container>
+                    <div className='columns'>
 
-                    <WatchDetailsSidebar 
-                        location        = { location }
-                        videoDetails    = { videoDetails }
-                    />
+                        <WatchDetailsSidebar 
+                            videoDetails    = { videoDetails }
+                            mode            = { modeContent }
+                            position        = 'left'
+                            sticky
+                        />
 
-                    <WatchDetailsContent 
-                        title           = { title }
-                        excerpt         = { excerpt } 
-                        content         = { content }
-                        tags            = { videoOnDemandTags }
-                        videoDetails    = { videoDetails }
-                        resources       = { resources }
-                        backUrl         = { breadcrumbs.back }
-                        campus          = { breadcrumbs.campus }
-                        bible           =   { 
-                                                ( data.resources.videoDetails.videoBible?.videoBibleActive === true) ? 
-                                                    data.resources.videoDetails.videoBible.videoBibleActive 
-                                                : 
-                                                    true 
-                                            }
-                        bibleUrl        =   { 
-                                                ( data.resources.videoDetails.videoBible?.videoBibleUrl ) ? 
-                                                    data.resources.videoDetails.videoBible.videoBibleUrl
-                                                :
-                                                    undefined
-                                            }
-                    />
+                        <WatchDetailsContent 
+                            id              = 'content'
+                            title           = { title }
+                            excerpt         = { excerpt } 
+                            content         = { content }
+                            tags            = { videoOnDemandTags }
+                            mode            = { modeContent }
+                            videoDetails    = { videoDetails }
+                            resources       = { resources }
+                            backUrl         = { breadcrumbs.back }
+                            campus          = { breadcrumbs.campus }
+                            bible           =   { 
+                                                    ( data.resources.videoDetails.videoBible?.videoBibleActive === true) ? 
+                                                        data.resources.videoDetails.videoBible.videoBibleActive 
+                                                    : 
+                                                        true 
+                                                }
+                            bibleUrl        =   { 
+                                                    ( data.resources.videoDetails.videoBible?.videoBibleUrl ) ? 
+                                                        data.resources.videoDetails.videoBible.videoBibleUrl
+                                                    :
+                                                        undefined
+                                                }
+                        />
 
-                </div>
-            </main>
+                    </div>
+                </Container>
+            </div>
 
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus  = { breadcrumbs.campus } 
+                mode    = { modeContent }
+            />
             
         </div>
     )

@@ -1,0 +1,73 @@
+@import "~include-media/dist/_include-media.scss";
+
+.sectionAccordion {
+    
+    &.light {
+        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .general {
+            .title {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            .content {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            }
+        }
+        .accordion {
+            > .card {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                .card-header {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.9);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.02);
+                    transition: var(--transition-fast);
+                    &:hover {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+                    }
+                }
+                .card-body {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.0025);
+                }
+            }
+        }
+    }
+
+    &.dark {
+        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .general {
+            .title {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            .content {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+        }
+        .accordion {
+            > .card {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                .card-header {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.9);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    transition: var(--transition-fast);
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
+                        border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    }
+                }
+                .card-body {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.025);
+                }
+                &:last-child {
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                }
+            }
+        }
+    }
+    .accordion {
+        margin-top: 2rem;
+    }
+
+}

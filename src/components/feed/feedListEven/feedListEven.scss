@@ -1,7 +1,15 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .feedListEven {
     
+    &.light {
+
+    }
+
+    &.dark {
+        
+    }
+
     .list {
         display: grid;
         grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );

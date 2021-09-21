@@ -1,11 +1,12 @@
-// Dependencies
+
 import React from 'react'
 import { Link } from 'gatsby'
 
-// Styles
+
 import './buttons.scss'
 
 export default function Buttons ( {
+    stretchedlink,
     buttons
 } ) {
     
@@ -16,7 +17,7 @@ export default function Buttons ( {
                     ( _.buttonType.split(":")[0] === 'internal' ) ?
                         <Link 
                             key         = {index}
-                            className   = {`${ ( _.buttonCssRemoveDefault ) ? '' : 'link btn btn--animation btn--dark-outline'} ${ ( _.buttonCss ) ? _.buttonCss : ''} ${ ( index === 0) ? 'f' : ( buttons.length === index + 1 ) ? 'l' : 'm'}`}
+                            className   = {`${ ( _.buttonCssRemoveDefault ) ? '' : 'link btn btn-outline-secondary'} ${ ( index === 0 && stretchedlink ) ? 'stretched-link' : '' } ${ ( _.buttonCss ) ? _.buttonCss : ''} ${ ( index === 0) ? 'first' : ( buttons.length === index + 1 ) ? 'last' : 'middle'}`}
                             href        = {_.buttonLink} 
                             target      = {_.buttonTarget.split(":")[0]} 
                             rel         = "noreferrer"
@@ -27,7 +28,7 @@ export default function Buttons ( {
                         ( _.buttonType.split(":")[0] === 'external' ) ?
                             <a    
                                 key         = {index}
-                                className   = {`${ ( _.buttonCssRemoveDefault ) ? '' : 'link btn btn--animation btn--dark-outline'} ${ ( _.buttonCss ) ? _.buttonCss : ''} ${ ( index === 0) ? 'f' : ( buttons.length === index + 1 ) ? 'l' : 'm'}`}
+                                className   = {`${ ( _.buttonCssRemoveDefault ) ? '' : 'link btn btn-outline-secondary'} ${ ( index === 0 && stretchedlink ) ? 'stretched-link' : '' }  ${ ( _.buttonCss ) ? _.buttonCss : ''} ${ ( index === 0) ? 'first' : ( buttons.length === index + 1 ) ? 'last' : 'middle'}`}
                                 href        = {_.buttonUrl} 
                                 target      = {_.buttonTarget.split(":")[0]} 
                                 rel         = "noreferrer"

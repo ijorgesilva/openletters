@@ -1,5 +1,4 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { partition } from 'lodash-es'
 
 export const useParticipation = ( campusData, videoData ) => {
     

@@ -2,10 +2,17 @@
  Page Specific 
  **/
  .watch {
-    .navlocal{
-        position: absolute;
-    }
-    .menuGlobal {
-        border-bottom: unset;
-    }
+
+     &.light {
+        .navlocal{
+        }
+     }
+
+     &.dark {
+        .navlocal{
+            position: absolute;
+            background-color: transparent !important;
+        }
+     }
+
 }

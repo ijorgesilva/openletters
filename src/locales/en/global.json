@@ -6,6 +6,9 @@
 			"title": "Podcast Listener?"
 		},
 		"social": {
+			"check-this": "Check this out",
+			"follow-us": "Follow us",
+			"share": "Share",
 			"share-on": "Share on",
 			"sharesimpleicon-title": "Share on"
 		}
@@ -44,6 +47,8 @@
 			"decline": "Decline",
 			"description": "This website uses cookies to enhance the user experience."
 		},
+		"copied": "Copied!",
+		"copied-failed": "Failed to copy!",
 		"created-on": "Created on",
 		"empty": {
 			"text-not-available": "No description available"
@@ -56,6 +61,10 @@
 			"location": "Location",
 			"organized-by": "Organized by",
 			"title": "Events"
+		},
+		"forms": {
+			"sending": "Sending...",
+			"submit": "Submit"
 		},
 		"give": {
 			"title": "Give"
@@ -72,6 +81,12 @@
 		"news": {
 			"description": "Read the latest news and updates from us",
 			"title": "News"
+		},
+		"newsletter": {
+			"description": "Sign up to receive our weekly eNews and updates about what's next.",
+			"subscribe": "Subscribe",
+			"your-email": "Your email",
+			"your-name": "Your name"
 		},
 		"no-records": "Nothing to show!",
 		"notes": "Notes",

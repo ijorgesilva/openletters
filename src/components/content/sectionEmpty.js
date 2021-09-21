@@ -1,9 +1,9 @@
 
-// Dependencies
+
 import React from "react"
 import { Container } from 'react-bootstrap'
 
-// Components
+
 import "./sectionEmpty.scss"
 
 export default function SectionEmpty( { title, id, className, children, ...props } ) {

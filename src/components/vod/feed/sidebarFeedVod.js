@@ -5,22 +5,48 @@ import TextTruncate from 'react-text-truncate'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-// Components
+
 import BlurbHorizontalVod from '../blurb/blurbHorizontalVod'
 import config from '../../../../data/SiteConfig'
 
 // Styling
 import './sidebarFeedVod.scss'
 
-export default function SidebarFeedVod( { items, serieSlug, title, background, className, id, campus } ){
+export default function SidebarFeedVod( 
+    { 
+        items, 
+        serieSlug, 
+        title, 
+        background, 
+        className, 
+        id, 
+        campus,
+        mode,
+        order,
+        count,
+    } 
+    ){
 
-    /* Standard fields */
     const { t } = useTranslation()
+    let sortedItems = []
+    let countStarts
+
+    switch ( order ) {
+        case 'asc':
+            sortedItems = items.sort().reverse()
+            break
+        case 'desc':
+        default:
+            sortedItems = items
+            break
+    }
 
     return (
-        <section className={`sidebarFeedVod ${className}`} id={`${ (id) ? id :''}`}>
-
-            <Card className="header text-white" >
+        <section 
+            className   = {`sidebarFeedVod ${ mode ? mode : 'light' } ${ className ? className : '' }`} 
+            id          = {`${ id ? id :' '}`}
+        >
+            <Card className='header' >
                 <div className={'card-img'} aria-hidden="true">
                     <GatsbyImage
                         image={background}
@@ -45,14 +71,15 @@ export default function SidebarFeedVod( { items, serieSlug, title, background, c
 
             <div className="list">
             {
-                items.map( (obj, index) => (
+                sortedItems.map( (obj, index) => (
                     <BlurbHorizontalVod 
-                        key             =   { index }
-                        className       =   { ( obj.active ) ? 'active' : ''}
-                        title           =   { ( obj.videoDetails.videoSeries ) ? obj.title : null }
-                        featuredImage   =   { ( obj.featuredImage?.node?.localFile ) ? obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
-                        link            =   { `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${obj.slug}` }
-                        excerpt         =   { ( obj.excerpt ) ? obj.excerpt : null }
+                        key             = { index }
+                        className       = { ( obj.active ) ? 'active' : ''}
+                        title           = { `${ ( count === true ) ? ( order === 'asc' ) ? '<span>' + (index + 1) + ' |</span> ' : ( order === 'desc' ) ? '<span>' + Math.abs( index - sortedItems.length ) + ' |</span> ' : '' : ''}  ${obj.title}` }
+                        featuredImage   = { ( obj.featuredImage?.node?.localFile ) ? obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
+                        link            = { `${ campus ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${obj.slug}` }
+                        excerpt         = { ( obj.excerpt ) ? obj.excerpt : undefined }
+                        mode            = { mode }
                     />
                 ))
             }

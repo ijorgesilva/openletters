@@ -1,21 +1,21 @@
-// Dependencies
+
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-// Components
+
 import BlurbVerticalSeries from '../blurb/blurbVerticalSeries'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
 
-// Hooks
+
 import { useLatestSeries } from '../../../hooks/useLatestSeries'
 
-// Styles
+
 import './sectionLatestSeries.scss'
 
-export default function SectionLatestSeries ( { title, className, id, campus, styles, infinite, configLayout  } ) {
+export default function SectionLatestSeries ( { title, className, id, campus, styles, infinite, configLayout, mode, width  } ) {
     
     const latestSeries = useLatestSeries( campus )
     const objLength = ( latestSeries ) ? latestSeries.length : 0
@@ -29,8 +29,12 @@ export default function SectionLatestSeries ( { title, className, id, campus, st
     
 
     return (
-        <section className={`sectionLatestSeries ${className}`} id={id} style={styles}>
-            <Container fluid>
+        <section 
+            className   = {`sectionLatestSeries pt-4 pb-4 ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`} 
+            id          = {id} 
+            style       = {styles}
+        >
+            <Container fluid = { width === 'container' ? true : false }>
                 {
                     (title) ? 
                         <h4 className="title">{title}</h4>
@@ -54,6 +58,7 @@ export default function SectionLatestSeries ( { title, className, id, campus, st
                                     <BlurbVerticalSeries 
                                         key             = { index }
                                         className       = { ( objLength === index + 1 ) ? 'last' : undefined }
+                                        mode            = { mode }
                                         title           = { _.title }
                                         link            = {  ( _.slug ) ? 
                                                                 `${ ( campus ) ? '/' + campus : '' }/${config.watchSeriesDetailsSlug}/${_.slug}` 

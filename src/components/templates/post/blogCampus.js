@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
 
-// Components
+
 import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
@@ -15,15 +15,16 @@ import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 import './blogCampus.scss'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
 export default function BlogCampus ( { data, location, pageContext } ){
 
     const { title, slug, featuredImage, breadcrumbs } = pageContext
 
-    /* Standard fields */
     const { t } = useTranslation()
+    const mode          = 'dark'
+    const contentMode   = 'light'
     
     return (
         <>
@@ -31,6 +32,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
             <HeaderPage 
                 title       = { t('global.blog.title') + ' | ' + title }
                 location    = { location } 
+                mode        = { contentMode }
                 cover       = { 
                                 (featuredImage?.node?.localFile) ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -44,11 +46,13 @@ export default function BlogCampus ( { data, location, pageContext } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
+                mode            = { mode }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
+                mode        = { mode }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.blog.title'),
@@ -60,15 +64,15 @@ export default function BlogCampus ( { data, location, pageContext } ){
                                         {
                                             name: t('global.news.title'), 
                                             link: '/' + breadcrumbs.campus + '/' + config.newsPostDetailsSlug, 
-                                            as: "", 
-                                            target: ""
+                                            as: '', 
+                                            target: ''
                                         }
                                     ]
                                 }
             />
 
-            <section className="">
-                <Container className="mt-5 mb-5">
+            <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
+                <Container className='mt-5 mb-5'>
                     <Row>
                         <Col xs={12} md={8}>
                             {
@@ -83,6 +87,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
                                                                     : 
                                                                         undefined    
                                                                 }
+                                            mode            = { contentMode }
                                             title           = { post.title }
                                             subtitle        = { getDate(post.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
                                             tags            =   { 
@@ -97,14 +102,17 @@ export default function BlogCampus ( { data, location, pageContext } ){
                                         />
                                     ))
                                 :
-                                    <AlertEmptyState variant="transparent" className="mt-5" content="" />
+                                    <AlertEmptyState mode = { mode } className='mt-5' content='' />
                             }
                         </Col>
                     </Row>
                 </Container>
             </section>
 
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText
+                mode    = { contentMode }
+                campus  = { breadcrumbs.campus } 
+            />
             
         </>
     )

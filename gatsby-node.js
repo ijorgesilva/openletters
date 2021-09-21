@@ -6,6 +6,7 @@
 
 // You can delete this file if you're not using it
 const path      = require('path')
+
 const config    = require('./data/SiteConfig')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
@@ -399,6 +400,11 @@ const language = `
         name
     }
 `
+const tag = `
+    id
+    slug
+    name
+`
 
 const wpParent = `
     wpParent {
@@ -591,8 +597,107 @@ const blurb = `
     itemCss
     itemCssRemoveDefault
     itemButtons {
+        itemButtonsStretchedlink
         itemButtonsButton {
             ${buttons}
+        }
+    }
+`
+
+const feed = `
+    feedType
+    feedVideos {
+        feedVideosCategory {
+            ${tag}
+        }
+        feedVideosTag {
+            ${tag}
+        }
+    }
+    feedSeries {
+        feedSeriesCategory {
+            ${tag}
+        }
+        feedSeriesTags {
+            ${tag}
+        }
+    }
+    feedPosts {
+        feedPostsCategory {
+            ${tag}
+        }
+        feedPostsTags {
+            ${tag}
+        }
+    }
+    feedNews {
+        feedNewsCategory {
+            ${tag}
+        }
+        feedNewsTags {
+            ${tag}
+        }
+    }
+    feedGrouptypes {
+        feedGrouptypesCategory {
+            ${tag}
+        }
+        feedGrouptypesTags {
+            ${tag}
+        }
+    }
+    feedGroups {
+        feedGroupsCategory {
+            ${tag}
+        }
+        feedGroupsTags {
+            ${tag}
+        }
+    }
+    feedEvents {
+        feedEventsCategory {
+            ${tag}
+        }
+        feedEventsTags {
+            ${tag}
+        }
+    }
+`
+
+const backgroundLayer = `
+    backgroundLayer {
+        backgroundLayerType
+        backgroundLayerColor {
+            backgroundLayerColorColor
+            backgroundLayerColorOpacity
+        }
+        backgroundLayerImage {
+            backgroundLayerImageImage {
+                localFile {
+                    publicURL
+                }
+            }
+            backgroundLayerImageOpacity
+            backgroundLayerImagePosition
+            backgroundLayerImageRepeat
+            backgroundLayerImageSize
+            backgroundLayerImageSizeCustom
+            backgroundLayerImageFixed
+        }
+        backgroundLayerGradient {
+            backgroundLayerGradientType
+            backgroundLayerGradientAngle
+            backgroundLayerGradientOpacity
+            backgroundLayerGradientSteps {
+                step {
+                    color
+                    stop
+                }
+            }
+        }
+        backgroundLayerText {
+            backgroundLayerTextOpacity
+            backgroundLayerTextText
         }
     }
 `
@@ -610,43 +715,10 @@ const sections = `
         sectionConfigurationId
         sectionConfigurationColorScheme
         sectionConfigurationContainerWidth
+        sectionConfigurationSize
 
         sectionConfigurationBackground {
-            sectionConfigurationBackgroundLayer {
-                sectionConfigurationBackgroundLayerType
-                sectionConfigurationBackgroundLayerColor {
-                    sectionConfigurationBackgroundLayerColorColor
-                    sectionConfigurationBackgroundLayerColorOpacity
-                }
-                sectionConfigurationBackgroundLayerImage {
-                    sectionConfigurationBackgroundLayerImageImage {
-                        localFile {
-                            publicURL
-                        }
-                    }
-                    sectionConfigurationBackgroundLayerImageOpacity
-                    sectionConfigurationBackgroundLayerImagePosition
-                    sectionConfigurationBackgroundLayerImageRepeat
-                    sectionConfigurationBackgroundLayerImageSize
-                    sectionConfigurationBackgroundLayerImageSizeCustom
-                    sectionConfigurationBackgroundLayerImageFixed
-                }
-                sectionConfigurationBackgroundLayerGradient {
-                    sectionConfigurationBackgroundLayerGradientType
-                    sectionConfigurationBackgroundLayerGradientAngle
-                    sectionConfigurationBackgroundLayerGradientOpacity
-                    sectionConfigurationBackgroundLayerGradientSteps {
-                        step {
-                            color
-                            stop
-                        }
-                    }
-                }
-                sectionConfigurationBackgroundLayerText {
-                    sectionConfigurationBackgroundLayerTextOpacity
-                    sectionConfigurationBackgroundLayerTextText
-                }
-            }
+            ${backgroundLayer}
         }
     }
     
@@ -797,6 +869,9 @@ const sections = `
                     }
                 }
             }
+            sectionHeroConfiguration {
+              sectionHeroConfigurationOverlay
+            }
         }
 
         ## Page Menu
@@ -828,7 +903,7 @@ const sections = `
 
         ## Tabs
         ### Because Tab section contain nested elements is also under allWpPage. 
-        ### Object Fields / Relashionship elements has been removed below.
+        ### Object Fields / Relationship elements has been removed below.
         sectionTabs {
             sectionTabsTab {
                 sectionTabsTabType
@@ -839,7 +914,11 @@ const sections = `
 
         ## Carousel
         sectionCarousel {
-            sectionCarouselItem {
+            sectionCarouselType
+            sectionCarouselFeed {
+                ${feed}
+            }
+            sectionCarouselItems {
                 ${blurb}
             }
             sectionCarouselConfiguration {
@@ -958,12 +1037,17 @@ const sections = `
 
         ## Blurb
         sectionBlurbs {
-            sectionBlurbsItem {
+            sectionBlurbsType
+            sectionBlurbsFeed {
+                ${feed}
+            }
+            sectionBlurbsItems {
                 ${blurb}
             }
             sectionBlurbsConfiguration {
+                sectionBlurbsConfigurationOrientation
+                sectionBlurbsConfigurationType
                 sectionBlurbsConfigurationDirection
-                sectionBlurbsConfigurationItemType
                 sectionBlurbsConfigurationClass
                 sectionBlurbsConfigurationGap
                 sectionBlurbsConfigurationImageAspect
@@ -981,6 +1065,55 @@ const sections = `
             sectionIframeOembed
         }
         
+        ## Accordion
+        sectionAccordion {
+            sectionAccordionItem {
+              itemTitle
+              itemContent
+              itemCss
+              itemCssRemoveDefault
+            }
+            sectionAccordionConfiguration {
+                sectionAccordionConfigurationClass
+                sectionAccordionConfigurationAccordionClass
+            }
+        }
+
+        ## Form
+        sectionForm {
+            sectionFormType
+            sectionFormIframe
+            sectionFormForm {
+                ... on WpForm {
+                    id
+                    title
+                    uri
+                    status
+                    formDetails {
+                        formGeneral {
+                            formGeneralTitle
+                            formGeneralContent
+                        }
+                    }
+                }
+            }
+            sectionFormColumns {
+                sectionFormColumnsText
+                sectionFormColumnsAlignment
+                sectionFormColumnsBackground {
+                    ${backgroundLayer}
+                }
+            }
+            sectionFormConfiguration {
+                sectionFormConfigurationClass
+                sectionFormConfigurationJumbotron
+                sectionFormConfigurationJumbotronMode
+                sectionFormConfigurationJumbotronPadding
+                sectionFormConfigurationJumbotronFluid
+                sectionFormConfigurationQuerystring
+            }
+        }
+
     # End Sections
 
 `
@@ -1154,8 +1287,7 @@ const allWpVideo = `
                         }
                         videoOnDemandTags {
                             nodes {
-                                slug
-                                name
+                                ${tag}
                             }
                         }
                     }
@@ -1174,8 +1306,7 @@ const allWpVideo = `
             }
             videoOnDemandTags {
                 nodes {
-                    slug
-                    name
+                    ${tag}
                 }
             }
         }
@@ -1221,8 +1352,7 @@ const allWpSeries = `
             }
             videoOnDemandTags {
                 nodes {
-                    slug
-                    name
+                    ${tag}
                 }
             }
         }
@@ -1261,10 +1391,9 @@ const allWpNews = `
                   newsHideSearchEngines
                 }
             }
-            newsTags {
+            tags {
                 nodes {
-                    slug
-                    name
+                    ${tag}
                 }
             }
         }
@@ -1311,10 +1440,9 @@ const allWpEvents = `
                     eventHideSearchEngines
                 }
             }
-            eventTags {
+            tags {
                 nodes {
-                    slug
-                    name
+                    ${tag}
                 }
             }
         }
@@ -1481,13 +1609,12 @@ const allWpPosts = `
                     }
                 }
                 postHide {
-                  postHideSearchEngines
+                    postHideSearchEngines
                 }
             }
             tags {
                 nodes {
-                    slug
-                    name
+                    ${tag}
                 }
             }
         }

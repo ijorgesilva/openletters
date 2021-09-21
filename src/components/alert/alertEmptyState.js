@@ -1,18 +1,18 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Alert } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
-// Components
 
-export default function AlertEmptyState ( {variant, className, content} ) {
 
-    /* Standard fields */
+export default function AlertEmptyState ( { mode, className, content } ) {
+
+    
     const { t } = useTranslation()
 
     return (
         <Container fluid>
-            <Alert variant={ (variant) ? variant : 'dark' } className={`${className}`}>
+            <Alert variant={ mode ? mode : 'transparent' } className={`${className}`}>
                 {
                     (content) ?
                         <>{content}</>

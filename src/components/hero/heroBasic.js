@@ -1,8 +1,8 @@
-// Dependencies
+
 import React from "react"
 import { Container } from "react-bootstrap"
 
-// Components
+
 import "./heroBasic.scss"
 
 export default function HeroBasic( {title, subtitle, backgroundPhoto, className, children} ){

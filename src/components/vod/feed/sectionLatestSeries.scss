@@ -1,9 +1,20 @@
 .sectionLatestSeries{
 
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .title {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+        }
+    }
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .title {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+        }
+    }
     .title {
-        font-weight: 500;
-        font-size: 1.4em;
-        color: rgba(255,255,255,0.4);
+        font-weight: 600;
+        font-size: 1.2em;
         margin-bottom: 15px;
     }
 

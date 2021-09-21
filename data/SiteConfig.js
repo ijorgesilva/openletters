@@ -1,4 +1,5 @@
 const config = {
+  wordpressRootUri: 'https://cms.victorychur.ch', // Don't using trailing slash at the end
   wordpressUri: 'https://cms.victorychur.ch/graphql',
   siteTitle: "Victory Church", // Site title.
   separator: "|",
@@ -35,12 +36,16 @@ const config = {
     
   /* Gatsby Permalinks */
   
-    /* Details view */
+    /* Watch */
     watchSlug: "watch",
     watchMessageDetailsSlug: "message",
     watchSeriesDetailsSlug: "series",
     blogPostDetailsSlug: "blog",
+
+    /* News */
     newsPostDetailsSlug: "news",
+
+    /* Events */
     eventPostDetailsSlug: "events",
 
     /* Pages */
@@ -48,6 +53,20 @@ const config = {
 
     /* Attachments */
     attachmentSlug: 'document',
+
+    /* Groups */
+    groupTypeSlug: "gt",
+    groupSlug: "g",
+
+    /* Ministry */
+    ministrySlug: "m",
+
+    /* Classes */
+    classesSlug: "c",
+    lessonSlug: "l",
+
+    /* Serve */
+    serveSlug: "s",
 
   /* Features */
     /* Features Flags */

@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Nav, Navbar } from 'react-bootstrap'
 
-// Components
+
 import LanguageSelector from './languageSelector'
 import FollowDropdown from './followDropdown'
 import DropdownMenu from './dropdownMenu'
@@ -11,13 +11,13 @@ import CampusSelector from './campusSelector'
 import MenuAuth from './menuAuth'
 import Search from "../search"
 
-// Utils
+
 import config from '../../../data/SiteConfig'
 
-// Styles
+
 import './menuGlobal.scss'
 
-export default function MenuGlobal( { followOptions, helpMenu, giveMenu, className, location, searchIndices } ){
+export default function MenuGlobal( { followOptions, helpMenu, giveMenu, className, location, searchIndices, mode } ){
 
     const { t } = useTranslation()
 
@@ -27,14 +27,21 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
         
         <div className={`menuGlobal ${(className) ? className : ''}`}>
 
-            <Navbar className="navglobal container-fluid" variant="dark" expand="lg">
+            <Navbar 
+                className   = "navglobal container-fluid" 
+                bg          = { ( mode ) ? mode : 'light' } 
+                variant     = { ( mode ) ? mode : 'light' } 
+                expand      = "lg"
+            >
                 {
                     (config.menuCampusSelector === true) ?
                         <CampusSelector 
-                            location={ location }
-                            className='mr-auto'
+                            location    = { location }
+                            className   = 'mr-auto'
+                            mode        = { mode }
                         />
-                    : undefined
+                    : 
+                        undefined
                 }
                 {
                     ( globalNavbarCollapse ) ?
@@ -53,13 +60,15 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
                             appStoreUrl     = { followOptions.appStoreUrl }
                             playStoreUrl    = { followOptions.playStoreUrl }
                             mailchimpUrl    = { followOptions.mailChimpUrl }
+                            mode            = { mode }
                         />
                         
                         {
                             ( helpMenu ) ?
                                 <DropdownMenu 
-                                    data={helpMenu} 
-                                    title={t('global.help.need-help')} 
+                                    data    = {helpMenu} 
+                                    title   = {t('global.help.need-help')} 
+                                    mode    = { mode }
                                 />
                             : 
                                 undefined
@@ -67,8 +76,9 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
                         {
                             ( giveMenu ) ?
                                 <DropdownMenu 
-                                    data={giveMenu} 
-                                    title={t('global.give.title')} 
+                                    data    = {giveMenu} 
+                                    title   = {t('global.give.title')}
+                                    mode    = { mode }
                                 />
                             : 
                                 undefined
@@ -80,7 +90,7 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
                 {
                     ( config.menuLanguageSelector ) ?
                         <LanguageSelector 
-                            className={`langselector`} 
+                            className ={`langselector`}
                         />
                     : 
                         undefined
@@ -89,13 +99,18 @@ export default function MenuGlobal( { followOptions, helpMenu, giveMenu, classNa
                 {
                     ( searchIndices?.length > 0 && config.hasSearch ) ? 
                         <div className='search'>
-                            <Search indices={searchIndices} />
+                            <Search 
+                                indices = {searchIndices} 
+                                mode    = { mode }
+                            />
                         </div>
                     :
                         undefined
                 }
 
-                <MenuAuth />
+                <MenuAuth 
+                    mode    = { mode }
+                />
 
             </Navbar>
 

@@ -1,7 +1,7 @@
-// Dependencies
+
 import React from 'react'
 
-// Components
+
 import BlurbVertical from '../blurb/blurbVertical'
 import config from '../../../data/SiteConfig'
 import './feedListMultipleSources.scss'

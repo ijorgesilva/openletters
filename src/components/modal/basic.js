@@ -1,8 +1,8 @@
-// Dependencies
+
 import React, { Children } from "react"
 import { Modal } from 'react-bootstrap'
 
-// Components
+
 
 export default function ModalBasic( {title, children, btnText, btnClassName, center, className, ...props} ){
     

@@ -1,16 +1,16 @@
-// Components
+
 import React from 'react'
 
 export default function Layer ( { params, zindex, className } ) {
 
-    const layerType = ( params ) ? params.sectionConfigurationBackgroundLayerType.split(':')[0] : ''
+    const layerType = ( params ) ? params.backgroundLayerType.split(':')[0] : ''
     
     switch( layerType ){
 
         case 'color':
             const layerColor = {
-                color: params.sectionConfigurationBackgroundLayerColor.sectionConfigurationBackgroundLayerColorColor,
-                opacity: params.sectionConfigurationBackgroundLayerColor.sectionConfigurationBackgroundLayerColorOpacity,
+                color: params.backgroundLayerColor.backgroundLayerColorColor,
+                opacity: params.backgroundLayerColor.backgroundLayerColorOpacity,
             }
             return (
                 <div
@@ -27,13 +27,13 @@ export default function Layer ( { params, zindex, className } ) {
 
         case 'image':
             const layerImage = {
-                imageFile: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageImage?.localFile.publicURL,
-                position: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImagePosition.replace('-',' '),
-                repeat: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageRepeat,
-                size: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageSize?.split(':')[0],
-                sizeCustom: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageSizeCustom,
-                opacity: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageOpacity,
-                fixed: params.sectionConfigurationBackgroundLayerImage.sectionConfigurationBackgroundLayerImageFixed,
+                imageFile: params.backgroundLayerImage.backgroundLayerImageImage?.localFile.publicURL,
+                position: params.backgroundLayerImage.backgroundLayerImagePosition.replace('-',' '),
+                repeat: params.backgroundLayerImage.backgroundLayerImageRepeat,
+                size: params.backgroundLayerImage.backgroundLayerImageSize?.split(':')[0],
+                sizeCustom: params.backgroundLayerImage.backgroundLayerImageSizeCustom,
+                opacity: params.backgroundLayerImage.backgroundLayerImageOpacity,
+                fixed: params.backgroundLayerImage.backgroundLayerImageFixed,
             }
             
             return (
@@ -57,10 +57,10 @@ export default function Layer ( { params, zindex, className } ) {
         case 'gradient':
 
             let steps = ''
-            const layerGradient = params.sectionConfigurationBackgroundLayerGradient
-            const layerGradientSteps = params.sectionConfigurationBackgroundLayerGradient.sectionConfigurationBackgroundLayerGradientSteps
-            const angle =   ( layerGradient.sectionConfigurationBackgroundLayerGradientAngle ) ? 
-                                layerGradient.sectionConfigurationBackgroundLayerGradientAngle + 'deg' + ','
+            const layerGradient = params.backgroundLayerGradient
+            const layerGradientSteps = params.backgroundLayerGradient.backgroundLayerGradientSteps
+            const angle =   ( layerGradient.backgroundLayerGradientAngle ) ? 
+                                layerGradient.backgroundLayerGradientAngle + 'deg' + ','
                             : 
                                 '90deg'  + ','
 
@@ -69,7 +69,7 @@ export default function Layer ( { params, zindex, className } ) {
                     steps += `${_.step.color} ${( _.step.stop ) ? _.step.stop + '%' : '0%'}${ ( layerGradientSteps.length === i+1 ) ? '' : ', ' }`
                 })
             }
-            const layerGradientStyle = layerGradient.sectionConfigurationBackgroundLayerGradientType + '-gradient(' + angle +' '+ steps + ')'
+            const layerGradientStyle = layerGradient.backgroundLayerGradientType + '-gradient(' + angle +' '+ steps + ')'
 
             return (
                 <div
@@ -86,8 +86,8 @@ export default function Layer ( { params, zindex, className } ) {
 
         case 'text':
             const layerText = {
-                content: params.sectionConfigurationBackgroundLayerText.sectionConfigurationBackgroundLayerTextText,
-                opacity: params.sectionConfigurationBackgroundLayerText.sectionConfigurationBackgroundLayerTextOpacity
+                content: params.backgroundLayerText.backgroundLayerTextText,
+                opacity: params.backgroundLayerText.backgroundLayerTextOpacity
             }
             return (
                 <div

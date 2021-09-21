@@ -1,11 +1,11 @@
-// Dependencies
+
 import { createRef, default as React, useState, useMemo } from 'react'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch-dom'
 import { ThemeProvider } from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
-// Styles
+
 import StyledSearchBox from './styled-search-box'
 import StyledSearchResult from './styled-search-result'
 import StyledSearchRoot from './styled-search-root'
@@ -18,9 +18,9 @@ const theme = {
   faded: '#888',
 }
 
-export default function Search ( { indices } ) {
+export default function Search ( { indices, mode } ) {
 
-  /* Standard fields */
+  
   const { t } = useTranslation()
 
   const rootRef = createRef()
@@ -52,6 +52,7 @@ export default function Search ( { indices } ) {
             onFocus       = { () => setFocus(true) } 
             hasFocus      = {hasFocus} 
             placeholder   = { t('global.search.placeholder') }
+            mode          = { mode }
           />
 
           <StyledSearchResult

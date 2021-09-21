@@ -1,0 +1,241 @@
+@import "~include-media/dist/_include-media.scss";
+
+.watchDetailsContent {
+
+    &.light {
+        .overview {
+            h1 {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            h2, a h2 {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            }
+            .extract {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
+        .attachments {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        }
+        .nav-tabs {
+            border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            .nav-link {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.9);
+                &.active {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.025);
+                    border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    border-right: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                }
+                &:hover {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+                    border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    border-right: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                }
+            }
+        }
+        .tab-content {
+            color: hsla(var(--dark-h), var(--light-s), var(--dark-l), 1);
+        }
+
+    }
+
+    &.dark {
+        .overview {
+            h1 {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            h2, a h2 {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+            .extract {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+        .attachments {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+        }
+        .nav-tabs {
+            border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            .nav-link {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.9);
+                &.active {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                }
+                &:hover {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                }
+            }
+        }
+        .tab-content {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+    }
+
+    .overview {
+        padding: 0 15px;
+        .introCard {
+            margin-bottom: 2rem;
+            &.introCardGrid {
+                display: grid;
+                grid-gap: 20px;
+                grid-template-columns: 120px 1fr;
+                align-items: center;
+            }
+            h1 {
+                font-size: 3rem;
+                line-height: 3rem;
+                margin-bottom: 0px;
+            }
+            h2,
+            a h2 {
+                font-size: 2rem;
+                line-height: 2rem;
+                font-weight: 300;
+                margin-bottom: 0px;
+                text-decoration: none;
+            }
+            a{
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .serieGraphic {
+                .graphic {
+                    height: 120px;
+                    width: 120px;
+                    img {
+                        border-radius: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .attachments {
+        border-radius: 7px;
+        margin: 2rem 0;
+        padding: 1rem;
+        > a {
+            &.item {
+                display: flex;
+                margin: 5px 0px;
+            }
+        }
+    }
+
+    .nav-tabs {
+        .nav-link {
+            padding: 1rem 2rem 1rem 2rem;
+            font-weight: 100;
+            &.active{
+                font-weight: 900;
+            }
+        }
+        &.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0px;
+        }
+    }
+
+    .tab-content {
+        .notes,
+        .bible,
+        .transcript,
+        .resources {
+            padding: 0 15px;
+        }
+    }
+
+}
+
+
+
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+    .watchDetailsContent {
+        .overview {
+            .introCard {
+                h1 {
+                    font-size: 1.3rem;
+                    line-height: 1.3rem;
+                }
+                h2, a h2 {
+                    font-size: 1.2rem;
+                    line-height: 1.2rem;
+                }
+                &.introCardGrid {
+                    align-items: start;
+                    grid-template-columns: 1fr;
+                }
+                .serieGraphic {
+                    .graphic {
+                        height: 80px;
+                        width: 80px;
+                        display: none;
+                    }
+                }
+            }
+            .extract {
+                display: none;
+            }
+        }
+        .attachments {
+            margin: 0px 20px;
+        }
+        .nav-tabs {
+            &.sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 260px;
+            }
+        }
+    }
+}
+
+@include media("<=phone") {
+    .watchDetailsContent {
+        .overview {
+            .introCard {
+                h1 {
+                    font-size: 1.3rem;
+                    line-height: 1.3rem;
+                }
+                h2, a h2 {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                }
+                &.introCardGrid {
+                    display: flex;
+                }
+                .serieGraphic {
+                    display: none;
+                }
+            }
+            .extract {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,11 +1,22 @@
 .footerSimpleText {
+
     position: relative;
-    background-color: rgba(var(--color-six-dark-shade-three),1);
-    border-top: 0.5px solid var(--color-six);    
     
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .copyright {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+    }
+    &.dark { 
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .copyright {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+     }
+
     .copyright {
         padding: 20px;
-        color: hsla(0, 0%, 100%, 0.3);
         font-size: 12px;
         text-align: center;
         display: flex;
@@ -14,20 +25,8 @@
     .links {
         > .link {
             padding: 0 10px;
-            color: hsla(0, 0%, 100%, 0.4);
             text-align: center;
         }
-    }
-    .background {
-        position: absolute;
-        left: 0%;
-        top: 0%;
-        right: 0%;
-        bottom: 0%;
-        z-index: 0;
-        background-position: 50% 5%;
-        background-size: 600px;
-        opacity: 0.05;
     }
 
 }

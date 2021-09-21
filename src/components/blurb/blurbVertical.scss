@@ -1,11 +1,57 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .blurbVertical {
 
 
+    &.light {
+        &.card {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+            .card-img {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+            }
+            .card-body {
+                .card-title {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+                .card-text {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                }
+            }
+        }
+        .number {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+    }
+
+    &.dark {
+        &.card {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.15);
+            .card-img {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.05);
+            }
+            .card-body {
+                .card-title {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+                .card-text {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                }
+            }
+        }
+        .number {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+    }
+
     &.card {
         .card-img {
-            background-color: var(--color-gray-one);
+            position: relative;
         }
         .card-body {
             h3 {
@@ -15,10 +61,45 @@
             }
             h4 {
                 font-size: 14px;
-                opacity: 0.7;
                 font-weight: 400;
             }
         }
+        &.horizontal {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: minmax(150px, 0.6fr) 1fr;
+            grid-template-rows: 1fr;
+            align-items: center;
+            min-height: 200px;
+            transition: var(--transition-regular);
+            text-align: left;
+            .card-img {
+                height: 100%;
+                .gatsby-image-wrapper {
+                    padding-top: unset;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    /*
+     * Blurb Types
+     */
+    .number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        margin-top: -30px;
+        margin-left: auto; 
+        margin-right: auto; 
+        left: 0; 
+        right: 0; 
+        z-index: 1;
     }
 
 }

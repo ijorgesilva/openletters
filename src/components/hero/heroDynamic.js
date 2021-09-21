@@ -1,34 +1,50 @@
-// Dependencies
-import React from "react"
-import { Container } from "react-bootstrap"
+
+import React from 'react'
+import { Container } from 'react-bootstrap'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 
-// Components
-import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
-import "./heroDynamic.scss"
 
-export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, className, buttons, children, related, location } ) {
+import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
+import './heroDynamic.scss'
+
+export default function HeroDynamic ( 
+    { 
+        title, 
+        subtitle, 
+        backgroundPhoto, 
+        id, 
+        className, 
+        buttons, 
+        children, 
+        related, 
+        location, 
+        mode, 
+        width,
+        size,
+        overlay,
+    } 
+    ) {
 
     return (
 
-        <div id={id} className={`heroDynamic ${className}`}>
+        <div id={id} className={`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
 
-            <Container className={"z-index-2"}>
-                <div className="content align-items-center">
+            <Container className={'z-index-2'} fluid = { width === 'container' ? true : false }>
+                <div className='content align-items-center'>
                     <div>
-                        <h1 className="display-1 text-uppercase text-white" dangerouslySetInnerHTML={{__html: title}}></h1>
-                        <h5 className="text-white mt-4 mb-3" dangerouslySetInnerHTML={{__html: subtitle}}></h5>
+                        <h1 className='display-1 text-uppercase text-white' dangerouslySetInnerHTML={{__html: title}}></h1>
+                        <h5 className='text-white mt-4 mb-3' dangerouslySetInnerHTML={{__html: subtitle}}></h5>
                         
                         {
                             ( buttons ) ?
-                                <div className="buttons mt-3">
+                                <div className='buttons mt-3'>
                                     {
                                         buttons.map( (button, index) => (
                                             ( button.sectionHeroButtonType === 'internal' && button.sectionHeroButtonLink) ?
                                                     <Link 
                                                         index       = {index}
-                                                        className   = "btn btn--animation btn--three" 
+                                                        className   = 'btn btn-primary btn-lg' 
                                                         to          = {button.sectionHeroButtonLink} 
                                                         target      = {button.sectionHeroButtonTarget}
                                                     >
@@ -37,7 +53,7 @@ export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, cl
                                                 :
                                                     <a 
                                                         index       = {index}
-                                                        className   = "btn btn--animation btn--three" 
+                                                        className   = 'btn btn-primary btn-lg' 
                                                         href        = {button.sectionHeroButtonUrl} 
                                                         target      = {button.sectionHeroButtonTarget}
                                                     >
@@ -53,7 +69,7 @@ export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, cl
 
                         {
                             ( related ) ? 
-                                <div className="related">
+                                <div className='related'>
                                     <BlurbHorizontalDarkFeatured 
                                         type            = { related.type }
                                         title           = { related.title }
@@ -73,7 +89,7 @@ export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, cl
 
                         {
                             ( children ) ?
-                                <div className="children">
+                                <div className='children'>
                                     {children}
                                 </div>
                             :
@@ -84,10 +100,11 @@ export default function HeroDynamic ( { title, subtitle, backgroundPhoto, id, cl
                 </div>
             </Container>
 
-            <div className="background noselect z-index-1">
+            <div className={`background noselect z-index-1 ${ overlay ? 'overlay' : ''}`}>
                 <GatsbyImage 
-                    image           = {backgroundPhoto}
-                    height          = '100%'
+                    image     = {backgroundPhoto}
+                    className = 'card-img-top'
+                    height    = '100%'
                 />
             </div>
 

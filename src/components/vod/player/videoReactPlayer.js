@@ -1,8 +1,8 @@
-// Dependencies
+
 import React from 'react'
 import ReactPlayer from 'react-player'
 
-// Components
+
 import './videoReactPlayer.scss'
 
 export default function VideoReactPlayer ( {src, className, config, pip, controls, muted, height, width } ) {

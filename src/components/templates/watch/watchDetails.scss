@@ -1,255 +1,57 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .watchDetails {
-
-
-    main {
-        max-width: var(--max-layout-width);
-        margin: 70px auto 100px auto;
-
-        .columns {
-            display: grid;
-            grid-template-columns: 0.3fr 1fr 0.3fr;
-            grid-gap: 3rem;
-
-            .sidebar-left {
-                padding-left: 20px;
-
-                .sticky {
-                    position: -webkit-sticky; /* Safari */
-                    position: sticky;
-                    top: 40px;
-                }
-                .details {
-                    border-bottom: 1px solid var(--color-gray-two);
-                    padding-bottom: 1rem;
-
-                    .watchCampus {
-                        color: rgba(var(--color-six-dark-shade-three),1);
-                        font-weight: 600;
-                    }
-                    .watchAuthor {
-                        color: rgba(var(--color-six-dark-shade-three),1);
-                        font-weight: 500;
-                        opacity: 0.7;
-                        margin-bottom: 0rem;
-                    }
-                    .watchDate {
-                        font-weight: 100;
-                        font-size: 0.8rem;
-                    }
-
-                }
-            }
-            
-            .content {
-                
-                .overview {
-                    .introCard {
-                        margin-bottom: 2rem;
-
-                        &.introCardGrid {
-                            display: grid;
-                            grid-gap: 20px;
-                            grid-template-columns: 120px 1fr;
-                            align-items: center;
-                        }
-
-                        h1 {
-                            font-size: 3rem;
-                            line-height: 3rem;
-                            margin-bottom: 0px;
-                        }
-                        h2,
-                        a h2 {
-                            font-size: 2rem;
-                            line-height: 2rem;
-                            font-weight: 300;
-                            margin-bottom: 0px;
-                            text-decoration: none;
-                            color: rgba(var(--color-black),1);
-                        }
-                        a{
-                            &:hover {
-                                text-decoration: none;
-                            }
-                        }
-                        .serieGraphic {
-                            .graphic {
-                                height: 120px;
-                                width: 120px;
-                                img {
-                                    border-radius: 100%;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-            
-            .sidebar-right {
-                padding-right: 20px;
-                margin-bottom: 20px;
-                .sticky {
-                    position: -webkit-sticky; /* Safari */
-                    position: sticky;
-                    top: 40px;
-                }
-                .resources {
-                    > h5{
-                        margin-bottom: 2rem;
-                    }
-                }
-            }
+    
+    .player, .content {
+        &.light {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         }
-        
-        .nav-tabs {
-            border-bottom: 2px solid #EAEAEA;
-            background-color: rgba(var(--color-white),1);
-            
-            .nav-link {
-                color: var(--color-gray-five);
-                padding: 1rem 2rem 1rem 2rem;
-                font-weight: 100;
-                &.active{
-                    color: rgba(var(--color-black),1);
-                    font-weight: 900;
-                    border-bottom: 3px solid var(--color-four);
-                }
-                &:hover {
-                    color: rgba(var(--color-black),1);
-                }
-            }
-            &.sticky {
-                position: -webkit-sticky; /* Safari */
-                position: sticky;
-                top: 0px;
-            }
-
+    
+        &.dark {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         }
 
-        .attachments {
-            background-color: #E6F3F5;
-            border-radius: 7px;
-            margin: 2rem 0;
-            padding: 1rem;
+    }
 
-            > a {
-                &.item {
-                    display: flex;
-                    margin: 5px 0px;
-                }
+    .content {
+        .container, .container-fluid {
+            margin: 0 auto;
+            padding-top: 70px;
+            padding-bottom: 100px;
+            .columns {
+                display: grid;
+                grid-template-columns: 0.3fr 1fr 0.3fr;
+                grid-gap: 3rem;
             }
         }
-
     }
 }
 
 @include media("<desktop") {
     .watchDetails {
-
-        main {
-            margin-top: 0px;
+        .content {
+            .container, .container-fluid {
+                padding-top: 0px;
+                padding-bottom: 100px;
+            }
         }
-
     }
 }
 
 @include media("<=tablet") {
     .watchDetails {
-
-        main {
-            .columns{
-                grid-template-columns: 1fr;
-                grid-gap: 2rem;
-
-                .sidebar-left {
-                    padding: 0px;
-                    .details {
-                        display: none;
-                    }
+        .content {
+            .container, .container-fluid {
+                padding-left: 0px;
+                padding-right: 0px;
+                .columns{
+                    grid-template-columns: 1fr;
+                    grid-gap: 2rem;
                 }
-
-                .content {
-                    padding: 0px;
-                    .tab-content {
-                        padding: 0px 20px;
-                    }
-                    .overview {
-                        padding: 0px 20px;
-                        .introCard {
-                            h1 {
-                                font-size: 2rem;
-                                line-height: 2rem;
-                            }
-                            h2 {
-                                font-size: 1.4rem;
-                                line-height: 1.4rem;
-                            }
-                            
-                            &.introCardGrid {
-                                align-items: start;
-                                grid-template-columns: 1fr;
-                            }
-                            .serieGraphic {
-                                .graphic {
-                                    height: 80px;
-                                    width: 80px;
-                                    display: none;
-                                }
-                            }
-                        }
-                        .extract {
-                            display: none;
-                        }
-                    }
-                    .attachments {
-                        margin: 0px 20px;
-                    }
-                }
-
-                .sidebar-right {
-                    padding: 0px;
-                    margin: 0px 20px;
-                }
-
-                .nav-tabs {
-                    &.sticky {
-                        position: -webkit-sticky; /* Safari */
-                        position: sticky;
-                        top: 260px;
-                    }
-                }
-
             }
         }
-
     }
 }
 
 @include media("<=phone") {
-    .watchDetails {
-
-        main {
-            .columns{
-                .content {
-                    .overview {
-                        .introCard {
-                            &.introCardGrid {
-                                display: flex;
-                            }
-                            .serieGraphic {
-                                display: none;
-                            }
-                        }
-                        .extract {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-
-    }
 }

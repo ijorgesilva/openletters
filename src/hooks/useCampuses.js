@@ -31,9 +31,7 @@ export const useCampuses = ( campus ) => {
                                                 campusBrandUrl
                                                 campusBrandLogo {
                                                     localFile {
-                                                        childImageSharp {
-                                                            gatsbyImageData(layout: FULL_WIDTH)
-                                                        }
+                                                        publicURL
                                                     }
                                                 }
                                             }

@@ -1,0 +1,91 @@
+.eventDetails {
+
+    &.light {
+        body {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+        main {
+            .content {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            .details {
+                border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                > div {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                    &:hover {
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.025);
+                    }
+                    h6 {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.2);
+                    }
+                }
+            }
+            .createdDate {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            }
+        }
+    }
+
+    &.dark {
+        body {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+        main {
+            .content {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            .details {
+                border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                > div {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                    &:hover {
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    }
+                    h6 {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
+                    }
+                }
+            }
+            .createdDate {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            }
+        }
+    }
+    
+    main {
+        .details {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            > div {
+                z-index: 0;
+                position: relative;
+                transition: var(--transition-fast);
+                padding-top: 0.7rem;
+                padding-bottom: 0.7rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                h6 {
+                    font-weight: 600;
+                    font-size: 1rem;
+                    margin-bottom: 0px;
+                }
+                .copy {
+                    z-index: 1;
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                }
+            }
+        }
+        .createdDate {
+            padding-top: 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+}

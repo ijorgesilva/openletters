@@ -1,15 +1,14 @@
-// Dependencies
-import React from "react"
-import { Link } from 'gatsby'
+
+import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-// Components
+
 import Background from '../UI/background'
-import Buttons from "../buttons/buttons"
+import Buttons from '../buttons/buttons'
 import RenderSection from '../renderSection'
 
-// Styles
-import "./sectionText.scss"
+
+import './sectionText.scss'
 
 export default function SectionText ( { 
     title, 
@@ -17,7 +16,8 @@ export default function SectionText ( {
     id, 
     content, 
     containerWidth, 
-    variant,
+    size,
+    mode,
     campus,
     location,
     buttons, 
@@ -27,36 +27,37 @@ export default function SectionText ( {
 } ) {
     
     return (
-        <section 
-            id          = {id}
-            className   = {`sectionText ${ (className) ? className : ''} ${ (variant) ? variant : 'light' }`}
-        >
+        <section  id = {id} className = {`sectionText ${ size ? size : 'md' } ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
+
             <div className={`columns ${ ( media?.sectionTextbasicMediaType ) ? 'two-columns' : 'one-column' }`}>
                 <div className={`${ ( containerWidth ) ? containerWidth : 'container' }`}>
 
                     {
-                        ( title ) ?
-                            <h2 className='title'
-                                dangerouslySetInnerHTML={{__html: title}}
-                            ></h2>
-                        :
-                            undefined
-                    }
-                    
-                    {
-                        ( content ) ?
-                            <div className='content'
-                                dangerouslySetInnerHTML={{__html: content}}
-                            ></div>
-                        :
-                            undefined
-                    }
+                        ( title || content || buttons?.length > 0 ) ?
+                            <div className='general'>
+                                {
+                                    ( title ) ?
+                                        <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
+                                    :
+                                        undefined
+                                }
+            
+                                { 
+                                    ( content ) ?
+                                        <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                    :
+                                        undefined
+                                }
 
-                    {
-                        ( buttons?.length > 0 ) ?
-                            <Buttons 
-                                buttons   = { buttons }
-                            />
+                                {
+                                    ( buttons?.length > 0 ) ?
+                                        <Buttons 
+                                            buttons   = { buttons }
+                                        />
+                                    :
+                                        undefined
+                                }
+                            </div>
                         :
                             undefined
                     }
@@ -68,6 +69,7 @@ export default function SectionText ( {
                                     key         = { index }
                                     section     = { section }
                                     campus      = { campus }
+                                    mode        = { mode }
                                     filter      = { { campus: campus } }
                                     location    = { location }
                                     className   = { 'nested' }
@@ -82,7 +84,7 @@ export default function SectionText ( {
                 {
                     ( media?.sectionTextbasicMediaType ) ? 
                         ( media?.sectionTextbasicMediaPhoto?.localFile ) ?
-                            <div className={`media ${ ( media.sectionTextbasicMediaAlignment?.split(":")[0] ) ? media.sectionTextbasicMediaAlignment.split(":")[0] : '' }`}>
+                            <div className={`media ${ ( media.sectionTextbasicMediaAlignment?.split(':')[0] ) ? media.sectionTextbasicMediaAlignment.split(':')[0] : '' }`}>
                                 <GatsbyImage 
                                     image           = { media.sectionTextbasicMediaPhoto.localFile.childImageSharp.gatsbyImageData }
                                     height          = '100%'

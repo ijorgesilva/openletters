@@ -1,8 +1,7 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
-// Components
 import SectionTextPhoto from '../components/content/sectionTextPhoto'
 import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
 import SectionPodcast from '../components/content/sectionPodcast'
@@ -14,14 +13,25 @@ import SectionTabs from '../components/content/sectionTabs'
 import SectionCarousel from '../components/carousel/sectionCarousel'
 import SectionShare from '../components/social/sectionShare'
 import SectionVideo from './content/sectionVideo'
-import SectionSteps from './content/sectionSteps'
+import SectionBlurbs from './content/sectionBlurbs'
+import SectionAccordion from './accordion/sectionAccordion'
+import SectionForm from './form/sectionForm'
 
-// Utils
 import config from '../../data/SiteConfig'
 
-export default function RenderSection ( { section, filter, campus, location, className } ) {
+export default function RenderSection ( 
+    { 
+        section, 
+        filter, 
+        campus, 
+        location, 
+        className,
+        mode,
+        size,
+    }
+    ) {
     
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     // General
@@ -30,26 +40,33 @@ export default function RenderSection ( { section, filter, campus, location, cla
     const sectionTitle      = ( section.sectionDetails.sectionTitle ) ? section.sectionDetails.sectionTitle : undefined
     const sectionContent    = ( section.sectionDetails.sectionContent ) ? section.sectionDetails.sectionContent : undefined
 
-    // Style
+    
     const sectionId             =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationId ) ? 
                                         section.sectionDetails.sectionConfiguration.sectionConfigurationId 
                                     : section.slug
     const sectionClassname      =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationClassname ) ? 
                                         `${section.sectionDetails.sectionConfiguration.sectionConfigurationClassname} ${ ( className ) ? className : ''}`
                                     : `${ ( className ) ? className : ''}`
-    const sectionColorScheme    =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme ) ? 
-                                        section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0] 
+    const sectionColorScheme    =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0]  ) ? 
+                                        section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0] === 'inherit' ?
+                                            mode
+                                        :
+                                            section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0]
                                     : 'light'
     const sectionContainerWidth =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationContainerWidth ) ? 
                                         section.sectionDetails.sectionConfiguration.sectionConfigurationContainerWidth.split(':')[0] 
                                     : 'container'
-    const sectionBackground     =   section.sectionDetails.sectionConfiguration.sectionConfigurationBackground.sectionConfigurationBackgroundLayer
+    const sectionBackground     =   section.sectionDetails.sectionConfiguration.sectionConfigurationBackground.backgroundLayer
+    const sectionSize           =   section.sectionDetails.sectionConfiguration.sectionConfigurationSize ?
+                                        section.sectionDetails.sectionConfiguration.sectionConfigurationSize.split(':')[0]
+                                    : size ? size : 'md'
 
     switch( true ){
 
         /*
          * Call To Action
          */
+        // TODO: Move buttons to Buttons component on frontend and backend
         case ( sectionType === 'cta' && sectionStatus ):
             const ctaItem = section.sectionDetails.sectionCta
             return (
@@ -57,8 +74,9 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     id          = { sectionId }
                     title       = { sectionTitle }
                     content     = { sectionContent }
-                    className   = { `${ (sectionClassname) ? sectionClassname : '' }` }
-                    variant     = { sectionColorScheme }
+                    className   = { `${ sectionClassname ? sectionClassname : '' }` }
+                    mode        = { sectionColorScheme }
+                    width       = { sectionContainerWidth }
                     subtitle    = { (ctaItem.sectionCtaSubtitle) ? ctaItem.sectionCtaSubtitle : undefined }
                     buttonText  = { (ctaItem.sectionCtaButton.sectionButtonText) ? ctaItem.sectionCtaButton.sectionButtonText : undefined }
                     buttonType  = { (ctaItem.sectionCtaButton.sectionButtonType) ? ctaItem.sectionCtaButton.sectionButtonType : undefined }
@@ -80,18 +98,20 @@ export default function RenderSection ( { section, filter, campus, location, cla
          */
         case ( sectionType === 'podcast' && sectionStatus ):
             const podcastItem = section.sectionDetails.sectionPodcast
-            // TODO: Light/Dark mode
             return (
                 <>
                     <SectionPodcast 
-                        id         = { sectionId }
-                        title      = { sectionTitle }
-                        content    = { sectionContent }
-                        subtitle   = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
-                        Spotify    = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
-                        Soundcloud = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
-                        iTunes     = { (podcastItem.sectionPodcastItunesUrl) ? podcastItem.sectionPodcastItunesUrl : undefined }
-                        graphic    = { (podcastItem.sectionPodcastGraphic) ? 
+                        id          = { sectionId }
+                        title       = { sectionTitle }
+                        content     = { sectionContent }
+                        mode        = { sectionColorScheme }
+                        className   = { sectionClassname }
+                        width       = { sectionContainerWidth }
+                        subtitle    = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
+                        Spotify     = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
+                        Soundcloud  = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
+                        iTunes      = { (podcastItem.sectionPodcastItunesUrl) ? podcastItem.sectionPodcastItunesUrl : undefined }
+                        graphic     = { (podcastItem.sectionPodcastGraphic) ? 
                                                 podcastItem.sectionPodcastGraphic.localFile.childImageSharp.gatsbyImageData 
                                         : 
                                             undefined 
@@ -104,6 +124,7 @@ export default function RenderSection ( { section, filter, campus, location, cla
         /*
          * Videos by Tags
          */
+        // TODO: Get order and Count variables from CMS. Both params should be active by default.
         case ( sectionType === 'vodtags' && sectionStatus ):
             const videoItems = (section.sectionDetails.sectionVodTags.sectionVodTag) ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
@@ -127,17 +148,20 @@ export default function RenderSection ( { section, filter, campus, location, cla
                 }
                 return comparison
             }
-            // TODO: Dark/Light mode
             return (
                 <>
                     {
                         (filteredVideos.length > 0) ?
                             <SectionFeedCarousel 
                                 id           = { sectionId }
-                                className    = {`${ (sectionClassname) ? sectionClassname : 'h-background-six-shade-three'}`}
+                                className    = { sectionClassname }
                                 title        = { videoItems.name }
-                                campus       = { campus }
                                 items        = { filteredVideos.sort(sortByDate)  }
+                                mode         = { sectionColorScheme }
+                                width        = { sectionContainerWidth }
+                                campus       = { campus }
+                                order        = 'asc'
+                                count
                                 configLayout =  {{
                                                     excerpt: false,
                                                     itemsVisible: 5,
@@ -164,13 +188,14 @@ export default function RenderSection ( { section, filter, campus, location, cla
          * Latest Series
          */
         case ( sectionType === 'latestseries' ):
-           // TODO: Dark/light mode 
             return (
                 <SectionLatestSeries 
                     id              = { sectionId }
-                    className       = {`${ (sectionClassname) ? sectionClassname : 'h-background-six-shade-three'}`}
+                    className       = { sectionClassname }
                     title           = { sectionTitle }
                     campus          = { campus }
+                    mode            = { sectionColorScheme }
+                    width           = { sectionContainerWidth }
                     configLayout    =  {{
                                             excerpt: false,
                                             itemsVisible: 5,
@@ -183,7 +208,6 @@ export default function RenderSection ( { section, filter, campus, location, cla
          * Hero
          */      
         case ( sectionType === 'hero' && sectionStatus ):
-            // TODO: Dark/light mode
             let relatedPost = null
             let postFilterByCampus
             const postValidContext =    (section.sectionDetails.sectionHero.sectionHeroRelated?.length > 0 ) ?
@@ -270,11 +294,15 @@ export default function RenderSection ( { section, filter, campus, location, cla
             return (
                 <HeroDynamic
                     id              = { sectionId }
-                    className       = {`${ (sectionClassname) ? sectionClassname : ''}`}
+                    className       = { sectionClassname }
+                    mode            = { sectionColorScheme }
+                    width           = { sectionContainerWidth }
                     title           = { sectionTitle }
                     subtitle        = { sectionContent }
+                    size            = { sectionSize }
                     backgroundPhoto = { section.sectionDetails.sectionHero.sectionHeroBackground?.localFile.childImageSharp.gatsbyImageData }
                     buttons         = { section.sectionDetails.sectionHero.sectionHeroButtons?.sectionHeroButton }
+                    overlay         = { section.sectionDetails.sectionHero.sectionHeroConfiguration.sectionHeroConfigurationOverlay }
                     related         = { ( relatedPost ) ? relatedPost : undefined }
                     location        = { location }
                 />
@@ -294,16 +322,17 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     content          = { sectionContent }
                     className        = { sectionClassname }
                     containerWidth   = { sectionContainerWidth }
+                    size             = { sectionSize }
+                    mode             = { sectionColorScheme }
+                    backgroundLayers = { sectionBackground }
                     buttons          = { section.sectionDetails.sectionText?.sectionTextButtons?.sectionTextButton }
                     media            = { section.sectionDetails.sectionText?.sectionTextMedia }
-                    variant          = { sectionColorScheme }
-                    backgroundLayers = { sectionBackground }
                     sections         = { section.sectionDetails.sectionText?.sectionTextSections }
                     campus           = { campus }
                     location         = { location }
                 />
             )
-           break
+            break
 
         /*
         * Page Menu
@@ -318,12 +347,12 @@ export default function RenderSection ( { section, filter, campus, location, cla
                 <>
                     <MenuPage
                         menues      = { pageMenu }
-                        id          = { ( section.sectionDetails.sectionId ) ? section.sectionDetails.sectionId : menuId }
+                        mode        = { sectionColorScheme }
+                        id          = { section.sectionDetails.sectionId ? section.sectionDetails.sectionId : menuId }
                         campus      = { campus }
                         location    = { location }
-                        className   = { `${ ( sectionClassname ) ? sectionClassname : ''} ${ (menuCss) ? menuCss : '' }`}
+                        className   = { `${ sectionClassname ? sectionClassname : ''} ${ menuCss ? menuCss : '' }`}
                         sticky      = { section.sectionDetails.sectionPagemenu.sectionSticky }
-                        variant     = { sectionColorScheme }
                     />
                 </>
             )
@@ -337,11 +366,11 @@ export default function RenderSection ( { section, filter, campus, location, cla
             return(
                 <hr 
                     id          = { sectionId }
-                    className   = {`${ (sectionClassname) ? sectionClassname : ''}`}
+                    className   = {`${ sectionClassname ? sectionClassname : ''}`}
                     style       = {{ width: '100%' }}
                 />
             )
-                break
+            break
 
         /*
         * Tabs
@@ -356,22 +385,22 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     title           = { sectionTitle }
                     content         = { sectionContent }
                     className       = { sectionClassname }
+                    containerWidth  = { sectionContainerWidth }
+                    mode            = { sectionColorScheme }
+                    size            = { sectionSize }
                     campus          = { campus }
                     location        = { location }
                     tabs            = { tabs }
-                    containerWidth  = { sectionContainerWidth }
-                    variant         = { sectionColorScheme }
-                    bg              = { sectionColorScheme }
                 />
             )
-                break
+            break
 
         /*
         * Carousel
         */
         case ( sectionType === 'carousel' && sectionStatus ):
             const carouselConfiguration     = section.sectionDetails.sectionCarousel.sectionCarouselConfiguration
-            const carouselItems             = ( section.sectionDetails.sectionCarousel.sectionCarouselItem?.length > 0 ) ? section.sectionDetails.sectionCarousel.sectionCarouselItem : []
+            const carouselItems = ( section.sectionDetails.sectionCarousel.sectionCarouselItems?.length > 0 ) ? section.sectionDetails.sectionCarousel.sectionCarouselItems : []
 
             return(
                 <>
@@ -383,6 +412,8 @@ export default function RenderSection ( { section, filter, campus, location, cla
                                 title           = { sectionTitle }
                                 content         = { sectionContent }
                                 className       = { sectionClassname }
+                                mode            = { sectionColorScheme }
+                                size            = { sectionSize }
                                 swipeable       = { carouselConfiguration.sectionCarouselConfigurationSwipe }
                                 draggable       = { carouselConfiguration.sectionCarouselConfigurationDraggable }
                                 infinite        = { carouselConfiguration.sectionCarouselConfigurationInfinite }
@@ -396,11 +427,9 @@ export default function RenderSection ( { section, filter, campus, location, cla
                                 gap             = { carouselConfiguration.sectionCarouselConfigurationGap }
                                 itemClass       = { carouselConfiguration.sectionCarouselConfigurationClass }
                                 truncate        = { carouselConfiguration.sectionCarouselConfigurationTruncate }
-                                trucanteLines   = { carouselConfiguration.sectionCarouselConfigurationTruncateLines }
+                                truncateLines   = { carouselConfiguration.sectionCarouselConfigurationTruncateLines }
                                 aspectRatio     = { carouselConfiguration.sectionCarouselConfigurationImageAspect }
                                 containerWidth  = { sectionContainerWidth }
-                                variant         = { sectionColorScheme }
-                                bg              = { sectionColorScheme }
                                 items           = { carouselItems }
                                 responsive      = { carouselConfiguration.sectionCarouselConfigurationResponsive }
                             />
@@ -409,7 +438,7 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     }
                 </>
             )
-                break
+            break
 
         /*
         * Social
@@ -424,8 +453,9 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     id                  = { sectionId }
                     content             = { sectionContent }
                     className           = { sectionClassname }
-                    variant             = { sectionColorScheme }
                     containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme }
+                    size                = { sectionSize }
                     location            = { location }
                     image               = { shareImage.sectionShareImageImage.localFile.childImageSharp.gatsbyImageData }
                     imageAlignment      = { shareImage.sectionShareImageAlignment.split(':')[0] }
@@ -433,7 +463,7 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     itemClass           = { section.sectionDetails.sectionShare.sectionShareItemClass }
                 />
             )
-                break
+            break
 
         /*
         * Video
@@ -476,35 +506,40 @@ export default function RenderSection ( { section, filter, campus, location, cla
                     autoplay        = { videoParams.autoplay }
                 />
             )
-                break
+            break
 
         /*
         * Blurbs
         */
-        case ( sectionType === 'blurb' && sectionStatus ):
-            
+        case ( sectionType === 'blurbs' && sectionStatus ):
+            const blurbsDataType          = section.sectionDetails.sectionBlurbs.sectionBlurbsType
             const blurbsConfiguration     = section.sectionDetails.sectionBlurbs.sectionBlurbsConfiguration
-            const blurbsItems             = ( section.sectionDetails.sectionBlurbs.sectionBlurbsItem?.length > 0 ) ? section.sectionDetails.sectionBlurbs.sectionBlurbsItem : []
-            console.log(blurbsConfiguration)
-            
+            const blurbsItems             = ( section.sectionDetails.sectionBlurbs.sectionBlurbsItems?.length > 0 ) ? section.sectionDetails.sectionBlurbs.sectionBlurbsItems : []
+
             return(
-                <SectionSteps
-                    itemType        = { blurbsConfiguration.sectionBlurbsConfigurationItemType }
+                <SectionBlurbs
                     title           = { sectionTitle }
                     id              = { sectionId }
                     content         = { sectionContent }
                     className       = { sectionClassname }
-                    variant         = { sectionColorScheme }
+                    mode            = { sectionColorScheme }
                     containerWidth  = { sectionContainerWidth }
+                    size            = { sectionSize }
                     items           = { blurbsItems }
-                    // gap
-                    // itemClass
-                    // truncate
-                    // trucanteLines
-                    // aspectRatio
+                    dataType        = { blurbsDataType }
+                    blurbType       = { blurbsConfiguration.sectionBlurbsConfigurationType?.split(':')[0] }
+                    orientation     = { blurbsConfiguration.sectionBlurbsConfigurationOrientation?.split(':')[0] }
+                    direction       = { blurbsConfiguration.sectionBlurbsConfigurationDirection }
+                    itemClass       = { blurbsConfiguration.sectionBlurbsConfigurationClass }
+                    gap             = { blurbsConfiguration.sectionBlurbsConfigurationGap?.split(':')[0] }
+                    imageAspect     = { blurbsConfiguration.sectionBlurbsConfigurationImageAspect }
+                    justification   = { blurbsConfiguration.sectionBlurbsConfigurationJustification?.split(':')[0] }
+                    stretch         = { blurbsConfiguration.sectionBlurbsConfigurationStretch }
+                    truncate        = { blurbsConfiguration.sectionBlurbsConfigurationTruncate }
+                    truncateLines   = { blurbsConfiguration.sectionBlurbsConfigurationTruncateLines }
                 />
             )
-                break
+            break
 
         /*
         * iframe
@@ -514,8 +549,69 @@ export default function RenderSection ( { section, filter, campus, location, cla
             return(
                 <></>
             )
-                break
+            break
         
+        /*
+        * Accordion
+        */
+        case ( sectionType === 'accordion' && sectionStatus ):
+            const accordionItems = ( section.sectionDetails.sectionAccordion.sectionAccordionItem?.length > 0 ) ? section.sectionDetails.sectionAccordion.sectionAccordionItem : []
+            const accordionItemClass = section.sectionDetails.sectionAccordion.sectionAccordionConfiguration.sectionAccordionConfigurationClass
+            const accordionContainerClass = section.sectionDetails.sectionAccordion.sectionAccordionConfiguration.sectionAccordionConfigurationAccordionClass
+
+            return(
+                <SectionAccordion 
+                    id               = { sectionId }
+                    className        = { sectionClassname }
+                    title            = { sectionTitle }
+                    content          = { sectionContent }
+                    containerWidth   = { sectionContainerWidth }
+                    mode             = { sectionColorScheme } 
+                    size             = { sectionSize }
+                    items            = { accordionItems }
+                    itemClass        = { accordionItemClass }
+                    containerClass   = { accordionContainerClass }
+                />
+            )
+            break
+
+        /*
+        * Form
+        */
+        case ( sectionType === 'form' && sectionStatus ):
+            const formConfiguration = section.sectionDetails.sectionForm.sectionFormConfiguration
+            const formType      = section.sectionDetails.sectionForm.sectionFormType.split(':')[0]
+            const formIframe    = section.sectionDetails.sectionForm.sectionFormIframe
+            const form          = section.sectionDetails.sectionForm.sectionFormForm
+            const secondaryColumn = section.sectionDetails.sectionForm.sectionFormColumns
+
+            return(
+                 <SectionForm 
+                    id                  = { sectionId }
+                    className           = { sectionClassname }
+                    title               = { sectionTitle }
+                    content             = { sectionContent }
+                    containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme } 
+                    size                = { sectionSize }
+                    sectionBackground   = { sectionBackground }
+                    type                = { formType }
+                    formIframe          = { formIframe }
+                    form                = { form }
+                    containerClass      = { formConfiguration.sectionFormConfigurationClass }
+                    jumbotron           = { formConfiguration.sectionFormConfigurationJumbotron }
+                    jumbotronMode       = { formConfiguration.sectionFormConfigurationJumbotronMode.split(':')[0] }
+                    jumbotronPadding    = { formConfiguration.sectionFormConfigurationJumbotronPadding.split(':')[0]}
+                    jumbotronFluid      = { formConfiguration.sectionFormConfigurationJumbotronFluid }
+                    iframeQueryStrings  = { formConfiguration.sectionFormConfigurationQuerystring }
+                    secondaryColumnText       = { secondaryColumn.sectionFormColumnsText }
+                    secondaryColumnAlignment  = { secondaryColumn.sectionFormColumnsAlignment.split(':')[0] }
+                    secondaryColumnBackground = { secondaryColumn.sectionFormColumnsBackground?.backgroundLayer?.reverse() }
+                    location            = { location }
+                 />
+            )
+            break
+
         /*
          * Default
          */
@@ -523,6 +619,7 @@ export default function RenderSection ( { section, filter, campus, location, cla
             return (
                 <></>
             )
+            break
     }
 }
 

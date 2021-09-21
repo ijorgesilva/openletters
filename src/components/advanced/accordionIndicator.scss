@@ -5,7 +5,7 @@
             span {
                 padding: 10px;
                 border-radius: 100px;
-                background-color: var(--color-five-shade-two);
+                background-color: var(--bs-dark);
                 display: flex;
                 color: rgba(var(--color-white),1);
                 position: absolute;
@@ -44,9 +44,9 @@
             }
         }
     }
-    .btn {
+    .button {
         padding: 0px;
-        color: rgba(var(--color-black),1);
+        color: rgba(var(--bs-dark),1);
         letter-spacing: 1px;
         text-transform: initial;
         font-weight: 900;
@@ -80,18 +80,18 @@
     padding: 10px 20px;
     border-radius: 5px;
 }
-.accordion.c-accordion--arrow .accordion-header .btn {
+.accordion.c-accordion--arrow .accordion-header .button {
     padding: 0px;
     margin: 0px;
     text-decoration: none;
     width: 90%;
     text-align: left;
     font-weight: 900;
-    color: rgba(var(--color-black),1);
+    color: rgba(var(--bs-dark),1);
     text-transform: initial;
     letter-spacing: 1px;
 }
-.accordion.c-accordion--arrow .accordion-header .btn:hover{
+.accordion.c-accordion--arrow .accordion-header .button:hover{
     box-shadow: none;
 }
 .accordion.c-accordion--arrow .accordion-header:after {

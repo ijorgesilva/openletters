@@ -1,7 +1,7 @@
-// Dependencies 
+ 
 import React from 'react'
 
-// Components
+
 import BlurbHorizontal from '../blurb/blurbHorizontal'
 import noImage from '../../assets/img/global/noimage.jpg'
 

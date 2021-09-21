@@ -1,4 +1,4 @@
-// Dependencies
+
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -6,7 +6,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import TextTruncate from 'react-text-truncate'
 
-// Components
+
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'

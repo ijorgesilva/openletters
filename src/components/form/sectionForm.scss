@@ -1,0 +1,50 @@
+@import "~include-media/dist/_include-media.scss";
+
+.sectionForm {
+    
+    &.light {
+        .general {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            .title {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            .content {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            }
+        }
+    }
+
+    &.dark {
+        .general {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            .title {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            .content {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+        }
+    }
+
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+    .sectionForm {
+        .container,
+        .container-fluid {
+            .row {
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+@include media("<=phone") {
+}
+

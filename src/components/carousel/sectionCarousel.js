@@ -1,35 +1,43 @@
-// Dependencies
+
 import React from 'react'
 import Carousel from 'react-multi-carousel'
+import { Container } from 'react-bootstrap'
 
-// Components
+
 import { responsive as breakpoints } from '../../../data/feedConfiguration'
 import ItemSelector from './itemSelector'
 
-// Style
+
 import 'react-multi-carousel/lib/styles.css'
 import './sectionCarousel.scss'
 
 export default function SectionCarousel ( { 
-    id, className, title, content, items, containerWidth, variant, campus,
-    itemType,
-    swipeable, 
-    draggable, 
-    showDots, 
-    infinite,
-    partialVisible, 
-    autoplay,
-    interval,
-    dots,
-    dotsClass,
-    gap,
-    itemClass,
-    truncate,
-    trucanteLines,
-    aspectRatio,
-    responsive
+        id, 
+        className, 
+        title, 
+        content, 
+        items, 
+        containerWidth, 
+        mode, 
+        size, 
+        campus,
+        itemType,
+        swipeable, 
+        draggable, 
+        infinite,
+        partialVisible, 
+        autoplay,
+        interval,
+        dots,
+        dotsClass,
+        gap,
+        itemClass,
+        truncate,
+        truncateLines,
+        aspectRatio,
+        responsive,
     } ) {
-        
+
     // TODO: Convert into external hook
     const responsiveConf = {
         largeDesktop: {
@@ -64,29 +72,35 @@ export default function SectionCarousel ( {
     
     return (
 
-        <section 
-            id={id} 
-            className={`sectionCarousel ${ (className) ? className : ''} ${ ( variant ) ? variant.split(':')[0] : 'light' }`}
-        >
-            <div className={`${ ( containerWidth ) ? containerWidth.split(':')[0] : 'container' }`}>
+        <section id = {id} className = {`sectionCarousel ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
 
-                    <h2 
-                        className='title'
-                        dangerouslySetInnerHTML={{__html: title}}
-                    >    
-                    </h2>
-
-                    <div 
-                        className='content'
-                        dangerouslySetInnerHTML={{__html: content}}
-                    ></div>
-
+            <Container fluid = { containerWidth === 'container' ? false : true }>
+                {
+                    ( title || content ) ?
+                        <div className='general'>
+                            {
+                                ( title ) ?
+                                    <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
+                                :
+                                    undefined
+                            }
+        
+                            { 
+                                ( content ) ?
+                                    <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                :
+                                    undefined
+                            }
+                        </div>
+                    :
+                        undefined
+                }
+                <div className='carousel'>
                     {
                         ( items?.length > 0 ) ?
                             <Carousel 
                                 swipeable       = { ( swipeable ) ? swipeable : true }
                                 draggable       = { ( draggable ) ? draggable : true }
-                                showDots        = { ( showDots ) ? showDots : false }
                                 infinite        = { ( infinite ) ? infinite : false }
                                 partialVisible  = { ( partialVisible ) ? partialVisible : false }
                                 autoPlay        = { ( autoplay ) ? autoplay : false }
@@ -107,7 +121,8 @@ export default function SectionCarousel ( {
                                             subtitle         = { _.itemSubtitle }
                                             content          = { _.itemContent }
                                             truncate         = { truncate }
-                                            truncateLines    = { trucanteLines }
+                                            mode             = { mode }
+                                            truncateLines    = { truncateLines }
                                             className        = { `${ 'item-'+index } ${_.itemCss} ${ ( itemClass ) ? itemClass : '' }` }
                                             removeDefaultCss = { _.itemCssRemoveDefault }
                                             buttons          = { _.itemButtons?.sectionCarouselItemButtonsButton }
@@ -120,8 +135,9 @@ export default function SectionCarousel ( {
                         :
                             undefined
                     }
+                </div>
+            </Container>
 
-            </div>
         </section>
         
     )

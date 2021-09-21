@@ -1,42 +1,48 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-// Components
+
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import MenuGlobal from "../menu/menuGlobal"
 import MenuLocal from "../menu/menuLocal"
 
+
+import { useTheme } from '../../hooks/useTheme'
+
 // Data
 import { menuHelp, menuGive, followOptions } from '../../../data/menues'
 
-// Styles
+
 import './navigation.scss'
 
-export default function Navigation( { menuLocal, menuGlobal, location, campus, searchIndices } ){
+export default function Navigation( { menuLocal, menuGlobal, location, campus, searchIndices, mode } ){
 
-    /* Standard fields */
-    const { t } = useTranslation()
-    const defaultCampus = useWebsiteConfiguration().settingsDefaultCampus?.slug
     
+    const { t } = useTranslation()
+    const theme = useTheme()
+
+    const defaultCampus = useWebsiteConfiguration().settingsDefaultCampus?.slug
+
     // TODO: Temp fix. Needs better logic. Use states instead.
     if( campus === undefined ) {
         campus = defaultCampus
     }
-     
+    
     return (
-        <header className='c-nav h-background-six-shade-three'>
+        <header className='navigation'>
 
             {
                 ( menuGlobal ) ?
                     <MenuGlobal 
-                        className       = 'h-background-six-shade-three'
+                        className       = ''
                         followOptions   = { followOptions }
                         helpMenu        = { menuHelp } 
                         giveMenu        = { menuGive } 
                         location        = { location }
                         campus          = { campus }
                         searchIndices   = { searchIndices }
+                        mode            = { ( mode ) ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                     />
                 :
                     undefined
@@ -46,6 +52,7 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
                     <MenuLocal 
                         location        = { location }
                         campus          = { campus }
+                        mode            = { ( mode ) ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                     />
                 :
                     undefined

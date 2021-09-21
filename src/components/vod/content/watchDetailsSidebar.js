@@ -1,10 +1,20 @@
-// Dependencies
 import React from 'react'
 
-// Components
 import { getDate } from '../../utils/utils'
 
-export default function WatchDetailsSidebar ( { videoDetails, location, hasCampus } ) {
+import './watchDetailsSidebar.scss'
+
+export default function WatchDetailsSidebar ( 
+    { 
+        id,
+        className,
+        videoDetails, 
+        hasCampus,
+        mode,
+        position,
+        sticky,
+    } 
+    ) {
 
     const vodDate = (videoDetails.videoDayDate) ? 
                         getDate(videoDetails.videoDayDate,2,'us','LLLL d, yyyy') 
@@ -12,8 +22,8 @@ export default function WatchDetailsSidebar ( { videoDetails, location, hasCampu
                         undefined
 
     return (
-        <div className="watchDetailsSidebar sidebar-left" id="left">
-            <div className="sticky">
+        <div className={`watchDetailsSidebar sidebar-${ position ? position : 'left' } ${ mode ? mode : 'light' } ${ className ? className : ''}`} id = {id}>
+            <div className={`${ sticky ? 'sticky' : ''}`}>
                 <div className="details">
                     {
                         (hasCampus && videoDetails.videoCampus) ? 

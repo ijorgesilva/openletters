@@ -1,7 +1,6 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from "react-i18next"
-import { useStaticQuery, graphql } from 'gatsby'
 import { Dropdown } from 'react-bootstrap'
 import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShareButton } from 'react-share'
 import { faTwitter, faFacebook, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
@@ -9,37 +8,33 @@ import { faEnvelope, faShareSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
-// Components
-import './shareSimpleIcon.scss'
+
 import config from '../../../data/SiteConfig'
+import './shareSimpleIcon.scss'
 
-export default function ShareSimpleIcon( { location, variant, className, label } ){
+export default function ShareSimpleIcon( { location, className, label, mode } ){
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     const canonicalUrl = config.siteUrl + location.pathname
 
-    const variantColor = (variant) ? variant : 'light'
-
     return (
-        <Dropdown className={`shareSimpleIcon ${(className) ? className : ''}`} drop='up'>
+        <Dropdown className={`shareSimpleIcon ${ mode ? mode : ''} ${ className ? className : ''}`} drop='up'>
 
-            <Dropdown.Toggle 
-                id      = "Share" 
-                variant = { variantColor } 
+            <Dropdown.Toggle
                 alt     = { t('components.social.sharesimpleicon-title') }
             >
                 <FontAwesomeIcon className="icon" icon={faShareSquare} size="lg"/>
                 {
                     ( label ) ?
-                        <span>Share</span>
+                        <span>{t('components.social.share')}</span>
                     :
                         undefined
                 }
             </Dropdown.Toggle>
 
-            <Dropdown.Menu className="super-colors">
+            <Dropdown.Menu variant = { mode ? mode : 'light' } >
                 <Dropdown.ItemText className="user-select-none">
                     <strong>{t('components.social.sharesimpleicon-title')}</strong>
                 </Dropdown.ItemText>
@@ -56,7 +51,7 @@ export default function ShareSimpleIcon( { location, variant, className, label }
                 <Dropdown.Item eventKey="2">
                     <WhatsappShareButton 
                         className="user-select-none"
-                        title="Check this out"
+                        title={t('components.social.check-this')}
                         url={canonicalUrl} 
                     >
                          <FontAwesomeIcon icon={faWhatsapp} size="lg" /> Whatsapp
@@ -74,7 +69,7 @@ export default function ShareSimpleIcon( { location, variant, className, label }
                 <Dropdown.Item eventKey="4">
                     <EmailShareButton 
                         className="user-select-none"
-                        title="Check this out"
+                        title={t('components.social.check-this')}
                     >
                          <FontAwesomeIcon icon={faEnvelope} size="lg" /> Email
                     </EmailShareButton>

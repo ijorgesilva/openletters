@@ -1,14 +1,14 @@
-// Dependencies
+
 import React from "react"
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import TextTruncate from 'react-text-truncate'
 import { useTranslation } from 'react-i18next'
 
-// Utils
+
 import { getDate } from '../../components/utils/utils'
 
-// Style
+
 import './blurbHorizontalDarkFeatured.scss'
 
 export default function BlurbHorizontalDarkFeatured( 
@@ -17,7 +17,7 @@ export default function BlurbHorizontalDarkFeatured(
         eventDates
     } ) {
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     const tagClass = (tagClassName) ? tagClassName : ""

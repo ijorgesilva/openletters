@@ -1,4 +1,4 @@
-// Dependencies
+
 import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from "gatsby"
@@ -7,26 +7,32 @@ import { useTranslation } from 'react-i18next'
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-// Styles
+
 import './raiseHand.scss'
 
-export default function RaiseHand ( { className, dropDirection, variant, options } ) {
+export default function RaiseHand ( 
+    { 
+        className, 
+        dropDirection, 
+        mode, 
+        options 
+    } 
+    ) {
     
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
-    const drop          = ( dropDirection ) ? dropDirection : 'up'
-    const variantClass  = ( variant ) ? variant : 'dark'
+    const drop = ( dropDirection ) ? dropDirection : 'up'
     
     if ( options ) {
         return (
 
             <Dropdown 
-                className={`raiseHand ${ ( className ) ? className : ''} ${ ( variantClass ) ? variantClass : ''}`} 
+                className={`raiseHand ${ mode ? mode : 'light' } ${ className ? className : ''}`} 
                 drop={drop}
             >
 
-                <Dropdown.Toggle className='toggler' id="Share" variant="none" >
+                <Dropdown.Toggle className = 'toggler' id = "Share" variant = { mode } >
                     <FontAwesomeIcon 
                         className="icon" 
                         icon={faHandSparkles} 

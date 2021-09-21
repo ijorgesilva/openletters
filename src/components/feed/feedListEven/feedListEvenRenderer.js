@@ -1,27 +1,36 @@
-// Dependencies
+
 import React from 'react'
 
-// Components
+
 import BlurbVerticalDark from '../../blurb/blurbVerticalDark'
 
 // Tools
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
 import config from '../../../../data/SiteConfig'
 
-export default function FeedListEvenRenderer ( { items, variant, hasExcerpt, campus } ) {
+export default function FeedListEvenRenderer ( 
+    { 
+        items, 
+        hasExcerpt, 
+        campus, 
+        mode 
+    } 
+    ) {
 
     const defaultCampusSlug = useWebsiteConfiguration().settingsDefaultCampus.slug
+
     let findPageCampus 
     let findPageCampusSlug
     let bestCampusSlug
     let components = []
 
-    items.map( (item, index ) => {
+    // TODO: Refactor
+    items.map( ( item, index ) => {
         if ( item.linkDetails ) {
             components.push(<BlurbVerticalDark 
                     key             = { index }
                     className       = 'link'
-                    title           = {item.title}
+                    title           = { item.title }
                     link            =   { ( item.linkDetails.linkLink.linkLinkUrl ) ? 
                                                 item.linkDetails.linkLink.linkLinkUrl 
                                             : 
@@ -35,12 +44,12 @@ export default function FeedListEvenRenderer ( { items, variant, hasExcerpt, cam
                                             undefined 
                                         }
                     excerpt         = { ( item.excerpt && hasExcerpt === true ) ? item.excerpt : undefined }
-                    variant         = { ( variant ) ? variant : undefined }
+                    mode            = { mode }
                 />)
         }
         else if ( item.postDetails ) {
             findPageCampus      = item.postDetails.postCampus.find( x => x.slug === campus )
-            findPageCampusSlug  = (findPageCampus?.slug) ? findPageCampus.slug : undefined
+            findPageCampusSlug  = findPageCampus?.slug ? findPageCampus.slug : undefined
             bestCampusSlug =    ( findPageCampus ) ?
                                     ( findPageCampusSlug === campus ) ?
                                         campus
@@ -63,7 +72,7 @@ export default function FeedListEvenRenderer ( { items, variant, hasExcerpt, cam
                                             undefined
                                         }
                     excerpt         = { ( item.excerpt && hasExcerpt === true ) ? item.excerpt : undefined }
-                    variant         = { ( variant ) ? variant : undefined }
+                    mode            = { mode }
                 />)
         }
     })

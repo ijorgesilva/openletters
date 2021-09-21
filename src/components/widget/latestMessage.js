@@ -9,7 +9,7 @@ export default function LatestMessage(props) {
         backgroundSize: "cover"
     }
     return (
-        <a class="col-lg-5 col-xl-4 px-0 d-none d-lg-block" href={props.href} title={props.name}> 
+        <a className="col-lg-5 col-xl-4 px-0 d-none d-lg-block" href={props.href} title={props.name}> 
             <div style={style}></div> 
         </a>
     )

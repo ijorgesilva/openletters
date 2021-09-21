@@ -1,16 +1,49 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .modalPlaylist {
+
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        &.modal {
+            > .modal-dialog {
+                .modal-content {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    .modal-header{
+                        .close{
+                            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        &.modal {
+            > .modal-dialog {
+                .modal-content {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    .modal-header{
+                        .close{
+                            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     &.modal {
         max-height: calc(100vh - 332px);
         margin-top: 332px;
+        overflow: hidden;
         > .modal-dialog {
             margin: 0;
             bottom: 0;
             height: 100%;
 
             .modal-content {
-                background-color: transparent;
                 border-radius: 0;
                 border: unset;
                 height: 100%;
@@ -20,9 +53,6 @@
                     right: 5px;
                     border: unset;
                     z-index: 1;
-                    .close{
-                        color: white;
-                    }
                 }
                 .modal-body {
                     padding: 0px;
@@ -39,7 +69,7 @@
 
 .playlist {
     a, button {
-        &.btn {
+        &.button {
             margin: 0px;
             width: 100%;
             padding: 11px 20px;

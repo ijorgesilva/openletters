@@ -3,8 +3,10 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
- const urljoin = require("url-join");
  const path = require("path");
+
+ const urljoin = require("url-join");
+
  const config = require("./data/SiteConfig");
  
 //  require('dotenv').config()

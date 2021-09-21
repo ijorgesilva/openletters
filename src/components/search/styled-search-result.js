@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
-import SearchResult from "./search-result"
+
 import { device } from '../../../data/mediaQueries'
+import SearchResult from "./search-result"
 
 const Popover = css`
   max-height: 80vh;

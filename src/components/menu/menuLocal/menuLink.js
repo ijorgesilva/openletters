@@ -1,12 +1,12 @@
-// Dependencies
+
 import React, {useState} from "react"
 import { Link } from "gatsby"
 import IframeResizer from "iframe-resizer-react"
 import {  Nav, Modal } from "react-bootstrap"
 
-// Components
 
-export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, as } ){
+
+export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, as, mode } ){
     
     const [show, setShow] = useState(false);
 
@@ -22,7 +22,7 @@ export default function MenuLink( { type, className, link, target, index, name, 
                             <>
                                 <div className={`menubutton`}>
                                     <Nav.Link
-                                        className               = {`btn btn--animation btn--light-outline ${ (className) ? className : '' }`}
+                                        className               = {`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ className ? className : '' }`}
                                         as                      = { (as === "link") ? Link : undefined }
                                         to                      = {link}
                                         href                    = {link}
@@ -40,7 +40,7 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                     <div className={`menucta`}>
                                         <Nav.Link
                                             as                      = { ( as === "link") ? Link : undefined }
-                                            className               = {`btn btn--animation btn--light-outline ${ ( className ) ? className : '' }`}  
+                                            className               = {`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ className ? className : '' }`}  
                                             key                     = { index} 
                                             onClick                 = { handleShow } 
                                             target                  = { target } 
@@ -70,11 +70,12 @@ export default function MenuLink( { type, className, link, target, index, name, 
                     default:
                         return (
                                 <Nav.Link 
-                                    as          = { (as === "link") ? Link : undefined } 
-                                    key         = {index} target={target} 
-                                    className   = {`navitems navmain ${ (className) ? className : '' }`} 
-                                    to          = {link} dangerouslySetInnerHTML={{__html: name}} 
-                                    href        = {link} 
+                                    as                      = { (as === "link") ? Link : undefined } 
+                                    key                     = {index} target={target} 
+                                    className               = {`navitems navmain ${ ( className ) ? className : '' }`} 
+                                    to                      = {link} 
+                                    dangerouslySetInnerHTML = {{__html: name}} 
+                                    href                    = {link} 
                                 />
                             )
                 }

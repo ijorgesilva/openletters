@@ -1,22 +1,24 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Row, Col } from "react-bootstrap"
 import { StaticImage, GatsbyImage } from "gatsby-plugin-image"
 import { useTranslation } from "react-i18next"
 
-// Components
+
 import './sectionPodcast.scss'
 
-export default function SectionPodcast ( { id, title, subtitle, content, Spotify, Soundcloud, iTunes, graphic  } ){
+export default function SectionPodcast ( 
+    { className, id, title, subtitle, content, Spotify, Soundcloud, iTunes, graphic, mode, width } 
+    ){
         
     const { t } = useTranslation()
     
     return(
-        <section className="SectionPodcast h-background-six-shade-three" id={id}>
-            <Container>
+        <section className={`sectionPodcast ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id}>
+            <Container fluid = { width === 'container' ? false : true }>
                 <Row>
 
-                    <Col xs={12} md={4}>
+                    <Col xs={12} md={4} className="graphic">
                         {
                             (graphic) ? 
                                 <GatsbyImage 

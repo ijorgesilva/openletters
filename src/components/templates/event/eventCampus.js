@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
 
-// Components
+
 import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
@@ -14,18 +14,19 @@ import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {
 
     const { title, featuredImage, breadcrumbs } = pageContext
-
-    /* Standard fields */
+    
     const { t } = useTranslation()
+    const mode          = 'dark'
+    const contentMode   = 'light'
     
     return (
         <>
@@ -33,6 +34,8 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             <HeaderPage
                 title       = { t('global.events.title') + ' | ' + title }
                 location    = { location } 
+                className   = 'eventCampus'
+                mode        = { contentMode }
                 cover       = { 
                                 (featuredImage?.node?.localFile) ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -44,6 +47,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             
             <Navigation
                 location        = { location }
+                mode            = { mode }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
                 menuGlobal
@@ -51,6 +55,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             />
             
             <MenuPage
+                mode        = { mode }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.events.title'),
@@ -64,8 +69,8 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                 }
             />
 
-            <section className="">
-                <Container className="mt-5 mb-5">
+            <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
+                <Container className='mt-5 mb-5'>
                     <Row>
                         <Col xs={12} md={8}>
                             {
@@ -80,12 +85,13 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                                                     : 
                                                                         undefined    
                                                                 }
+                                            mode            = { contentMode }
                                             title           = { event.title }
                                             eventDate       = { event.eventDetails.eventDates }
                                             subtitle        = { getDate(event.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
                                             tags            =   { 
-                                                                    ( event.eventTags?.nodes ) ? 
-                                                                        event.eventTags 
+                                                                    ( event.tags?.nodes ) ? 
+                                                                        event.tags 
                                                                     : 
                                                                         undefined  
                                                                 }
@@ -96,15 +102,17 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                         />
                                     ))
                                 :
-                                    <AlertEmptyState variant="transparent" className="mt-5" content="" />
+                                    <AlertEmptyState mode = { mode } className='mt-5' content='' />
                             }
                         </Col>
                     </Row>
                 </Container>
             </section>
 
-
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus = { breadcrumbs.campus } 
+                mode   = { contentMode }
+            />
 
         </>
     )
@@ -154,7 +162,7 @@ export const query = graphql`
                         eventLinkUrl
                     }
                 }
-                eventTags {
+                tags {
                     nodes {
                         slug
                         name

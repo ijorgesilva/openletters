@@ -1,9 +1,9 @@
-// Dependencies
-import React from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
 
-// Components
+import React, { useState } from 'react'
+import { Container, Row, Col, Button, Tooltip } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+
+
 import { getDate } from '../../utils/utils'
 import Navigation from '../../menu/navigation'
 import HeroPost from '../../../components/hero/heroPost'
@@ -17,10 +17,31 @@ import './eventDetails.scss'
 
 export default function EventDetails( { pageContext, location } ){
     
-    /* Standard fields */
-    const { t } = useTranslation()
+    const { title, excerpt, date, modified, featuredImage, content, tags, eventDetails, breadcrumbs } = pageContext
 
-    const { title, excerpt, date, modified, featuredImage, content, eventTags, eventDetails, breadcrumbs } = pageContext
+    const { t } = useTranslation()
+    const mode          = 'dark'
+    const contentMode   = 'light'
+
+    const [copySuccessTime, setCopySuccessTime] = useState('')
+    const copyToClipBoardTime = async copyMe => {
+        try {
+          await navigator.clipboard.writeText(copyMe)
+          setCopySuccessTime('Copied!')
+        } catch (err) {
+            setCopySuccessTime('Failed to copy!')
+        }
+    }
+
+    const [copySuccess, setCopySuccess] = useState('')
+    const copyToClipBoard = async copyMe => {
+        try {
+          await navigator.clipboard.writeText(copyMe)
+          setCopySuccess(t('global.copied'))
+        } catch (err) {
+          setCopySuccess(t('global.copied-failed'))
+        }
+    }
 
     const htmlDate = ( modified ) ? 
                         getDate(modified,2,'us','yyyy-MM-dd' ) 
@@ -40,11 +61,13 @@ export default function EventDetails( { pageContext, location } ){
         <>
             <HeaderPage 
                 title       = { title + ' | ' + t('global.events.title') }
-                location    = { location } 
+                location    = { location }
+                className   = 'eventDetails'
+                mode        = { contentMode }
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
-                // TODO: Incoporate meta tags into header
+                // TODO: Incorporate meta tags into header
                 // metaTags    =   {{
                 //                     noIndex: ( typeof eventDetails.eventHide?.eventHideSearchEngines === 'undefined' ) ? 
                 //                                     false : (eventDetails.eventHide?.eventHideSearchEngines === true ) ? true : false,
@@ -55,11 +78,14 @@ export default function EventDetails( { pageContext, location } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { searchIndices }
+                mode            = { mode }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
+                mode        = { mode }
+                close       = { '/' + breadcrumbs.campus + '/' +  config.eventPostDetailsSlug }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.events.title'),
@@ -72,10 +98,11 @@ export default function EventDetails( { pageContext, location } ){
                                     ]
                                 }
             />
-
-            <article className="contentMain mb-5">
+            
+            <main className=''>
 
                 <HeroPost 
+                    mode            = { contentMode }
                     title           = { title }
                     backgroundPhoto =   {
                                             ( featuredImage ) ? 
@@ -83,107 +110,126 @@ export default function EventDetails( { pageContext, location } ){
                                             : 
                                                 undefined
                                         }
-                    className       = "z-index-0"
+                    className       = 'z-index-0'
+                    size            = 'sm'
                 />
 
-                <Container className="mt-5">
-                    
-                    <Row>
+                <ToolbarDetails 
+                    location    = { location } 
+                    mode        = { contentMode } 
+                /> 
 
+                <Container className='mt-5'>
+                    <Row>
                         <Col>
-                            <div className="watchLeft sticky">
+                            <div className='watchLeft sticky'>
                                 {
                                     ( eventDetails.eventLink.eventLinkText && eventDetails.eventLink.eventLinkUrl ) ?
-                                        <div>
-                                            <Button className="btn btn--animation btn--dark-outline" variant="none" href={eventDetails.eventLink.eventLinkUrl} target="_blank">
+                                        <div className = 'register'>
+                                            <Button 
+                                                className   = {`btn btn-${ mode === 'light' ? 'outline-primary' : mode === 'dark' ? 'outline-primary' : mode } btn-lg`}
+                                                variant = { 'transparent' }
+                                                href={eventDetails.eventLink.eventLinkUrl} 
+                                                target='_blank'
+                                            >
                                                 {eventDetails.eventLink.eventLinkText}
                                             </Button>
                                         </div>
                                     : 
-                                    undefined
+                                        undefined
                                 }
-                                {
-                                    ( eventDetails.eventDates.length > 0 ) ?
-                                        <div className="mb-3">
-                                            <h6>{t('global.events.date-time')}</h6>
+                                <div className = 'details'>
+                                    {
+                                        ( eventDetails.eventDates.length > 0 ) ?
+                                            <div  onClick={() => copyToClipBoardTime( getDate(eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' ) + '. ' + eventDetails.eventDates[0].eventTime )}>
+                                                <h6>{t('global.events.date-time')}</h6>
                                                 {
                                                     eventDetails.eventDates.map( (date, index) => (
                                                         <span key={index}>
-                                                            <time datetime={getDate(date.eventDate,2,'us','yyyy-MM-dd' )}> 
-                                                                {getDate(date.eventDate,2,'us','LLLL d, yyyy' )} | 
-                                                                {date.eventTime}
+                                                            <time dateTime={getDate(date.eventDate,2,'us','yyyy-MM-dd' )}> 
+                                                                {getDate(date.eventDate,2,'us','LLLL d, yyyy' )} {date.eventTime}
                                                             </time> 
                                                         </span>
                                                     ))
                                                 }
-                                        </div>
-                                    : 
-                                        undefined
-                                }
+                                                {  
+                                                    copySuccessTime ? 
+                                                        <span className = 'badge badge-pill badge-secondary ml-2 copy'>{copySuccessTime}</span>
+                                                    : undefined
+                                                }
+                                            </div>
+                                        : 
+                                            undefined
+                                    }
+                                    {
+                                        ( eventDetails.eventAddress ) ?
+                                            <div onClick={() => copyToClipBoard(eventDetails.eventAddress)}>
+                                                <h6>
+                                                    {t('global.events.location')} 
+                                                </h6>
+                                                <span>{eventDetails.eventAddress}</span>
+                                                {  
+                                                    copySuccess ? 
+                                                        <span className = 'badge badge-pill badge-secondary ml-2 copy '>{copySuccess}</span>
+                                                    : undefined
+                                                }
+                                            </div>
+                                        :
+                                            undefined
+                                    }
+                                    {
+                                        (eventDetails.eventCampus) ? 
+                                            <div>
+                                                <h6>{t('global.events.organized-by')}</h6>
+                                                {
+                                                    eventDetails.eventCampus.map ( (campus, index) => (
+                                                        <span key={index} className='user-select-none d-block'>
+                                                            {campus.title}
+                                                        </span>
+                                                    ))
+                                                }
+                                            </div> 
+                                        : 
+                                            undefined
+                                    }
+                                </div>
                                 {
-                                    ( eventDetails.eventAddress ) ?
-                                        <div className="mb-3">
-                                            <h6>{t('global.events.location')}</h6>
-                                            <span>{eventDetails.eventAddress}</span>
+                                    ( config.blogShowDates ) ?
+                                        <div className='createdDate user-select-none'>
+                                            { 
+                                                (modifiedDate) ? 
+                                                    <time dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                                : 
+                                                    <time dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                            }
                                         </div>
                                     :
                                         undefined
                                 }
-                                {
-                                    (eventDetails.eventCampus) ? 
-                                        <div className="mb-3">
-                                            <h6>{t('global.events.organized-by')}</h6>
-                                            {
-                                                eventDetails.eventCampus.map ( (campus, index) => (
-                                                    <span key={index} className="user-select-none d-block">
-                                                        {campus.title}
-                                                    </span>
-                                                ))
-                                            }
-                                        </div> 
-                                    : 
-                                        undefined
-                                }
-                                <hr />
-                                <ToolbarDetails location={location} />
                             </div>
                         </Col>
 
-                        <Col className="" xs={12} md={7}>
+                        <Col className='content' xs={12} md={7}>
                             <div dangerouslySetInnerHTML={{__html: content}}>
                             </div>
                             
-                            {
-                                ( eventTags ) ?
-                                    <TagSimple terms={eventTags} />
-                                :
-                                    undefined
-                            }
-
-                            {
-                                ( config.blogShowDates ) ?
-                                    <div className="createdDate user-select-none">
-                                        { 
-                                            (modifiedDate) ? 
-                                                <time datetime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
-                                            : 
-                                                <time datetime={htmlDate}> {t('global.created-on')} {createdDate} </time>
-                                        }
-                                    </div>
-                                :
-                                    undefined
-                            }
+                            <TagSimple 
+                                terms   = { tags }
+                                mode    = { contentMode }
+                            />
                             
                         </Col>
-
                         <Col>
                         </Col>
                     </Row>
                 </Container>
 
-            </article>
+            </main>
 
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus  = { breadcrumbs.campus } 
+                mode    = { contentMode }
+                />
         </>
     )
 }

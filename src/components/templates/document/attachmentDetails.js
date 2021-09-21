@@ -1,26 +1,26 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
 
-// Components
+
 import Navigation from '../../menu/navigation'
 import HeaderPage from '../../headerPage'
 import HeroPost from '../../../components/hero/heroPost'
 import FooterSimpleText from '../../footer/footerSimpleText'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './attachmentDetails.scss'
 
 export default function AttachmentDetails ( { location, pageContext } ) {
     
     const { title, slug, excerpt, breadcrumbs, attachmentDetails } = pageContext
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     return (
@@ -58,7 +58,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
                     {
                         ( attachmentDetails.attachmentFile?.localFile ) ?
                             <a 
-                                className   = "btn btn--animation btn--three btn btn-none" 
+                                className   = "button button--animation button--three button button-none" 
                                 href        = { attachmentDetails.attachmentFile.localFile.publicURL } 
                                 title       = { title } 
                                 rel         = "noreferrer" 

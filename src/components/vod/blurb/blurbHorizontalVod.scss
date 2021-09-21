@@ -4,16 +4,70 @@
     border-radius: var(--border-radius);
     overflow: hidden;
 
+    &.light {
+        &.card {
+            border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+            .card-body {
+                .card-title {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+                .card-subtitle {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                }
+                .card-text {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                }
+            }
+            &.active{
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            }
+        }
+        a {
+            border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+            .card-img{
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.2);
+            }
+            &:hover {
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            }
+        }
+    }
+
+    &.dark {
+        &.card {
+            border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+            .card-body {
+                .card-title {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+                .card-subtitle {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                }
+                .card-text {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                }
+            }
+            &.active{
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            }
+        }
+        a {
+            border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+            .card-img{
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
+            }
+            &:hover {
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+        }
+    }
+
     &.card{
         background-color: transparent;
         .card-body {
             padding: 1rem;
-            .card-title {
-                color: rgba(var(--color-white),1);
-            }
-        }
-        &.active{
-            background-color: rgba(255,255,255,0.1);
         }
     }
 
@@ -24,7 +78,6 @@
         grid-template-rows: 1fr;
         align-items: center;
         height: 80px;
-        border: solid 2px rgba(255,255,255,0);
         transition: var(--transition-regular);
         .card-body {
             .tags{
@@ -42,7 +95,6 @@
             min-height: 66px;
             border-radius: var(--border-radius);
             overflow: hidden;
-            background-color: rgba(var(--color-six-shade-one),0.2);
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -52,16 +104,16 @@
         }
         &:hover {
             text-decoration: none;
-            border: solid 2px var(--color-six-shade-three);
             border-radius: var(--border-radius);
         }
         .card-subtitle {
             font-weight: 100;
             font-size: 0.7rem;
             line-height: 0.7rem;
-            color: var(--color-gray-five);
         }
         .card-title {
+            white-space: nowrap;
+            overflow: hidden;
             font-weight: 400;
             letter-spacing: 0.5px;
             font-size: 1.1rem;
@@ -73,7 +125,6 @@
             font-weight: 300;
             font-size: 0.9rem;
             line-height: 1rem;
-            color: var(--color-gray-five);
         }
     }
     

@@ -1,63 +1,108 @@
-.contentMain {
-    .sticky {
-        position: -webkit-sticky; /* Safari */
-        position: sticky;
-        top: 40px;
+@import "~include-media/dist/_include-media.scss";
+
+.pageDetails {
+
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .contentMain {
+            .createdDate {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            }
+            article {
+                .mainTitle { 
+                }
+                blockquote {
+                    cite {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                    }
+                }
+                pre {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                }
+            }
+        }
     }
-    .createdDate {        
-        font-weight: 100;
-        font-size: 0.8rem;
-        color: rgba(var(--color-black), 0.7);
+
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .contentMain {
+            .createdDate {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+            article {
+                .mainTitle { 
+                }
+                blockquote {
+                    cite {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    }
+                }
+                pre {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                }
+            }
+        }
     }
-    article {
-        .mainTitle { 
-            h1 {
-                font-weight: var(--font-weight-display);
-                font-size: 3rem;
-                line-height: 3rem;
+
+    .contentMain {
+        .sticky {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 40px;
+        }
+        .createdDate {        
+            font-weight: 100;
+            font-size: 0.8rem;
+        }
+        article {
+            .mainTitle { 
+                h1 {
+                    font-weight: var(--font-weight-display);
+                    font-size: 3rem;
+                    line-height: 3rem;
+                }
             }
-        }
-        p, h1, h2, h3, h4, h5, h6 {
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-        blockquote {
-            margin: 2rem auto;
-            max-width: 600px;
-            > p {
-                margin: 2rem auto 0px auto;
+            p, h1, h2, h3, h4, h5, h6 {
+                margin: 2rem auto;
+                max-width: 600px;
             }
-            cite {
-                color: #6c7781;
-                font-weight: 100;
+            blockquote {
+                margin: 2rem auto;
+                max-width: 600px;
+                > p {
+                    margin: 2rem auto 0px auto;
+                }
+                cite {
+                    font-weight: 100;
+                }
             }
-        }
-        figure {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        pre {
-            background-color: #eee;
-            padding: 1.6em;
-        }
-        .authors {
-            display: flex;
-            align-items: center;
-            .author {
+            figure {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            pre {
+                padding: 1.6em;
+            }
+            .authors {
                 display: flex;
                 align-items: center;
-                margin-left: 1rem;
-                .photo {
-                    height: 45px;
-                    width: 45px;
-                    border-radius: 100%;
-                }
-                address {
-                    margin-bottom: unset;
-                    margin-left: 0.7rem;
+                .author {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 1rem;
+                    .photo {
+                        height: 45px;
+                        width: 45px;
+                        border-radius: 100%;
+                    }
+                    address {
+                        margin-bottom: unset;
+                        margin-left: 0.7rem;
+                    }
                 }
             }
         }
     }
+
 }

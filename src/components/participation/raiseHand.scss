@@ -1,34 +1,140 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .raiseHand {
     height: 42px;
-
-    .toggler{
-        display: flex;
-        align-items: center;
+    display: flex;
+    align-items: center;
+    
+    &.light {
+        .dropdown-toggle {
+            &.btn{
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                background-color: transparent;
+                &:hover {
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
+                }
+                &[aria-expanded="true"]{
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
+                }
+            }
+        }
+        .dropdown-menu {
+            border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+            p {
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            }
+            h6 {
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            }
+            span {
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            }
+            .dropdown-header {
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            }
+            .dropdown-item {
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.7);
+                &:hover {
+                    color: hsla(var(--ligdarkhdarkt-h),var(--dark-s),var(--dark-l),1);
+                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.1);
+                }
+                &:focus {
+                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.2);
+                }
+                &:active {
+                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                }
+            }
+        }
     }
 
-    .btn {
-        color: white;
-        background-color: transparent;
-        text-transform: uppercase;
-        border-radius: unset;
-        height: 100%;
-        margin: 0px;
-        letter-spacing: 0px;
-        font-weight: 600;
-        padding: 0px 10px;
-        transition: var(--transition-fast);
-        opacity: 0.7;
-        .icon {
-            margin-right: 10px;
+    &.dark {
+        .dropdown-toggle {
+            &.btn{
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                background-color: transparent;
+                &:hover {
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
+                }
+                &[aria-expanded="true"]{
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
+                }
+            }
         }
-        &:hover {
-            background-color: unset;
-            opacity: 1;
+        .dropdown-menu {
+            border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            p {
+                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+            }
+            h6 {
+                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+            }
+            span {
+                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+            }
+            .dropdown-header {
+                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+            }
+            .dropdown-item {
+                color: hsla(var(--light-h),var(--light-s),var(--light-l),0.7);
+                &:hover {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
+                }
+                &:focus {
+                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
+                }
+                &:active {
+                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                }
+            }
         }
-        &[aria-expanded="true"] {
-            background-color: transparent;
+    }
+
+    .dropdown-toggle {
+        border: unset;
+        &.btn {
+            display: flex;
+            gap: 10px;
+            margin: 0px;
+            padding: 10px;
+            height: 100%;
+            transition: var(--transition-fast);
+            &:hover {
+                background-color: unset;
+            }
+            &:focus {
+                box-shadow: unset;
+            }
+            &:active {
+                border: unset;
+                &:focus {
+                    box-shadow: unset;
+                }
+            }
+        }
+        &::after {
+            display: none;
+        }
+    }
+
+    &.show {
+        .dropdown-toggle {
+            &:focus {
+                box-shadow: unset;
+            }
         }
     }
     
@@ -54,9 +160,6 @@
     .raiseHand {
         .dropdown-toggle {
             &.btn {
-                .icon {
-                    margin-right: 0px;
-                }
                 span {
                     display: none;
                 }

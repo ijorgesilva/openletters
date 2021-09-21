@@ -1,9 +1,9 @@
-// Dependencies
+
 import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Container, Row, Col } from 'react-bootstrap'
 
-// Components
+
 import './sectionPhotoText.scss'
 
 export default function SectionPhotoText ( { title, photo, text, className, id } ) {

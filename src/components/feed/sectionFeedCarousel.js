@@ -1,11 +1,11 @@
-// Dependencies
+
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-// Components
+
 import BlurbHorizonal from '../blurb/blurbHorizontal'
 import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'

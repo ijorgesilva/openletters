@@ -1,44 +1,148 @@
-// Dependencies
 import React from 'react'
 
-// Components
 import BlurbVertical from '../blurb/blurbVertical'
 
 export default function ItemSelector ( {
-    type,
+    dataType,
+    blurbType,
+    orientation,
+    counter,
     image,
     title,
     subtitle,
     content,
+    buttons,
+    mode,
+    stretchedlink,
     truncate,
     truncateLines,
-    buttons,
     className,
     removeDefaultCss,
-    aspectRatio,
+    imageAspect,
     campus,
     } ) {
-    
-    switch ( type ){
-        case 'default':
+        
+    switch ( true ){
+
+        /*
+        * Videos
+        */
+        case dataType === 'videos':
+            return (
+                <>
+                </>
+            )
+            break
+
+        /*
+        * Series
+        */
+        case dataType === 'series':
+            return (
+                <>
+                </>
+            )
+            break
+            
+        /*
+        * Events
+        */
+        case dataType === 'events':
+            return (
+                <>
+                </>
+            )
+            break
+            
+        /*
+        * Posts
+        */
+        case dataType === 'posts':
+            return (
+                <>
+                </>
+            )
+            break
+            
+        /*
+        * News
+        */
+        case dataType === 'news':
+            return (
+                <>
+                </>
+            )
+            break
+            
+        /*
+        * Groups
+        */
+        case dataType === 'groups':
+            return (
+                <>
+                </>
+            )
+            break
+            
+        /*
+        * Group Types
+        */
+        case dataType === 'grouptypes':
+            return (
+                <>
+                </>
+            )
+            break
+                
+        /*
+        * Custom
+        */
+        case dataType === 'custom':
+            
             return (
                 <BlurbVertical
+                    type                = { blurbType }
+                    counter             = { counter }
+                    orientation         = { orientation }
+                    mode                = { mode }
                     image               = { image }
                     title               = { title }
                     subtitle            = { subtitle }
                     content             = { content }
                     truncate            = { truncate }
                     truncateLines       = { truncateLines }
+                    stretchedlink       = { stretchedlink }
                     buttons             = { buttons }
                     className           = { className }
                     removeDefaultCss    = { removeDefaultCss }
-                    aspectRatio         = { aspectRatio }
+                    aspectRatio         = { imageAspect }
                 />
             )
             break
-
+   
+        /*
+        * Default
+        */
         default:
-            return <></>
+            
+            return (
+                <BlurbVertical
+                    type                = { blurbType }
+                    counter             = { counter }
+                    orientation         = { orientation }
+                    image               = { image }
+                    title               = { title }
+                    subtitle            = { subtitle }
+                    mode                = { mode }
+                    content             = { content }
+                    truncate            = { truncate }
+                    truncateLines       = { truncateLines }
+                    buttons             = { buttons }
+                    className           = { className }
+                    removeDefaultCss    = { removeDefaultCss }
+                    aspectRatio         = { imageAspect }
+                />
+            )
             break
     }
 

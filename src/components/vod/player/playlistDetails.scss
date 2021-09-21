@@ -1,20 +1,62 @@
-@import "../../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .playlistDetails {
-    border-top: 1px solid rgba(var(--color-white),0.1);
     padding: 1rem 0;
     position: relative;
+
+    &.light {
+        border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+        .container,
+        .container-fluid {
+            .player {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            .vjs-poster {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+        .background {
+            &:after{
+                background: linear-gradient(180deg, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.5) 50%, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 100%);
+            }
+            > .overlay {
+                background: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
+        }
+    }
+
+    &.dark {
+        border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+        .container,
+        .container-fluid {
+            .player {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            .vjs-poster {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
+        .background {
+            &:after{
+                background: linear-gradient(180deg, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.5) 50%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
+            }
+            > .overlay {
+                background: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            }
+        }
+    }
 
     .player {
       display: flex;
       justify-content: center;
-      background-color: rgba(var(--color-six-dark-shade-three), 1);
       min-height: 200px;
       .player-wrapper{
           width: 100%;
       }
     }
-    .content-container {
+
+    .container,
+    .container-fluid {
         max-width: unset;
         margin: 0px auto;
         position: relative;
@@ -26,11 +68,7 @@
             grid-template-rows: auto;
             
         }
-        .vjs-poster {
-            background-color: var(--color-six-dark-shade-three);
-        }
     }
-
     .background {
         position: absolute;
         top: 0px;
@@ -40,7 +78,6 @@
 
         &:after{
             content: '';
-            background: linear-gradient(180deg, rgba(var(--color-six-dark-shade-three),0) 0%, rgba(var(--color-six-dark-shade-three),0.5) 50%, rgba(var(--color-six-dark-shade-three),1) 100%);
             position: absolute;
             width: 100%;
             height: 30%;
@@ -48,7 +85,6 @@
         }
 
         > .overlay {
-            background: rgba(var(--color-six-dark-shade-three),0.7);
             position: absolute;
             z-index: 1;
             width: 100%;
@@ -70,7 +106,8 @@
 
     .playlistDetails {
 
-        .content-container{
+        .container,
+        .container-fluid {
             max-height: unset;
             grid-template-columns: 1fr !important;
 
@@ -90,18 +127,17 @@
 
     .playlistDetails {
         padding: 0px;
-        .content-container {
+        .container,
+        .container-fluid {
             max-height: unset;
             grid-template-columns: 1fr !important;
             margin-bottom: 0px !important;
             padding: 0px !important;
-
             div[data-vjs-player],
             .video-js {
                 padding-top: 56.25%;
                 height: 220px;
             }
-
             .player {
                 &.scrolled{
                     position: fixed;
@@ -120,12 +156,12 @@
 @include media("<=phone") {
     .playlistDetails {
         padding: 0px !important;
-        .content-container{
+        .container,
+        .container-fluid {
             max-height: unset;
             padding: 0px !important;
             grid-template-columns: 1fr !important;
             margin-bottom: 0px !important;
         }
     }
-
 }

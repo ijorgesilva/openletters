@@ -1,35 +1,31 @@
-// Dependencies
+
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Tabs, Tab } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import sanitizeHtml from 'sanitize-html'
 
-// Components
+
 import Navigation from '../../menu/navigation'
 import HeroSeries from '../../vod/hero/heroSeries'
-import FeedListEven from '../../feed/feedListEven'
 import HeaderPage from '../../headerPage'
-import ShareSimpleIcon from '../../social/shareSimpleIcon'
-import TagSimple from '../../tag/tagSimple'
+import SectionTags from '../../tag/sectionTags'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
+import SectionSeriesDescription from '../../vod/content/sectionSeriesDescription'
+import SectionSeriesTabs from '../../vod/content/sectionSeriesTabs'
 import { watchDetailsMenu } from '../../../../data/menues'
-import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 import RenderSection from '../../renderSection.js'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import TabSeasons from '../../vod/tab/tabSeasons'
+import ShareSimpleIcon from '../../social/shareSimpleIcon'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './watchSeries.scss'
 
 export default function WatchSeries( { pageContext, location, data } ) {
 
     const { title, slug, excerpt, seriesDetails, campus, seriesGraphics, videoOnDemandTags, breadcrumbs } = pageContext
     
-    /* Standard fields */
     const { t } = useTranslation()
     
     const cover = ( seriesDetails?.seriesTrailerPoster?.localFile ) ? 
@@ -39,11 +35,13 @@ export default function WatchSeries( { pageContext, location, data } ) {
                             seriesGraphics.background.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                         : 
                             undefined
-    const sections =    ( data.series.seriesDetails.seriesSections?.length > 0 ) ?
-                            data.series.seriesDetails.seriesSections
-                        :
-                            undefined
-    
+    const sections = ( data.series.seriesDetails.seriesSections?.length > 0 ) ?  
+                        data.series.seriesDetails.seriesSections 
+                    : 
+                        undefined
+
+    const mode  = 'dark'
+
     return (
         <>
             <HeaderPage 
@@ -51,6 +49,8 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location    = { location }
                 cover       = { cover }
                 description = { excerpt }
+                mode        = { mode }
+                className   = 'watchSeries'
                 article
                 metaTags    =   {{
                                     noIndex: ( typeof seriesDetails.seriesHide?.seriesHideSearchEngines === 'undefined' ) ? 
@@ -62,6 +62,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
+                mode            = { mode }
                 menuGlobal
             />
 
@@ -75,136 +76,62 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                 } 
                 menu        = { watchDetailsMenu } 
                 close       = { breadcrumbs.back }
-                className   = "transparent"
-                styles      =   {
-                                    { 
-                                        position: 'absolute', 
-                                        marginTop: '50px' 
-                                    }
-                                }
+                mode        = { mode }
+                className   = 'transparent'
             />
 
-            <div className="watchSeries">
+            <div className={`watchSeries bg-${ mode ? mode : 'light' }`}>
 
                 <HeroSeries 
-                    title           = { title}
+                    title           = { title }
                     logo            = { ( seriesGraphics?.logo?.localFile ) ? 
                                             seriesGraphics.logo.localFile.childImageSharp.gatsbyImageData
                                         :
                                             undefined
                                         }
-                    items           = { data.VideosOnSerie.nodes }
                     campus          = { campus }
+                    mode            = { mode }
+                    width           = 'container'
                     seriesDetails   = { seriesDetails }
                     seriesGraphics  = { seriesGraphics }
                     featuredVideo   = { data.VideosOnSerie.nodes[0] }
                 />
 
-                <section className="content h-background-six-shade-three">
-                    <div className="content-container">
-                        <div className="bartools">
-                            <ShareSimpleIcon 
-                                location = {location} 
-                                variant  = "dark" 
-                            />
-                        </div>
-                        {
-                            ( excerpt ) ?
-                                <>
-                                    <div className="title h-color-six-shade-three">
-                                        <h4>{ t('global.watch.about-series') }</h4> 
-                                    </div>
-                                    <p>
-                                        { sanitizeHtml(excerpt).replace( /(<([^>]+)>)/ig, '') }
-                                    </p>
-                                </>
-                            :
-                                undefined
-                        }
-                    </div>
-                </section>
+                <div className={`container bartools ${ mode ? mode : 'light' }`}>
+                    <ShareSimpleIcon 
+                        location = {location} 
+                        mode     = { mode }
+                    />
+                </div>
 
-                <section className="h-background-six-shade-three">
-                    <div className="content-container">
-                        <Tabs defaultActiveKey="0" className="light" id="">
+                <SectionSeriesDescription 
+                    id          = 'description'
+                    width       = 'container'
+                    excerpt     = { excerpt }
+                    mode        = { mode }
+                />
 
-                            <Tab eventKey="0" title={ 
-                                    ( data.VideosOnSerie && seriesDetails.seriesSeasonsActive === false ) ? 
-                                        t('global.watch.videos') 
-                                    : 
-                                        t('global.watch.videos')  
-                            }>
-                                {
-                                    ( data.VideosOnSerie?.nodes && seriesDetails.seriesSeasonsActive === false ) ?
-                                        <SectionFeedCarousel 
-                                            className="h-background-six-shade-three" 
-                                            id="episodes" 
-                                            title=""
-                                            items={data.VideosOnSerie.nodes}
-                                            campus={ campus }
-                                            configLayout    =   {{
-                                                excerpt: true,
-                                                itemsVisible: 5,
-                                            }}
-                                            infinite
-                                            iconCarousel={data.playButton.publicURL}
-                                        />
-                                    :
-                                        (data.VideosOnSerie && seriesDetails.seriesSeasonsActive === true) ?
-                                            <TabSeasons
-                                                className="h-background-six-shade-three" 
-                                                id="episodes" 
-                                                title=""
-                                                items={data.VideosOnSerie.nodes}
-                                                itemsVisible={5}
-                                                campus={ campus }
-                                                serie={slug}
-                                                count
-                                            />
-                                        :
-                                            <SectionFeedCarousel 
-                                                className="h-background-six-shade-three" 
-                                                id="episodes" 
-                                                title=""
-                                                items={data.VideosOnSerie.nodes}
-                                                campus ={ campus }
-                                                configLayout    =   {{
-                                                    excerpt: true,
-                                                    itemsVisible: 4,
-                                                }}
-                                                infinite
-                                                count
-                                            />
-                                }
-                            </Tab>
-                            {
-                                ( data.series.seriesDetails.seriesResources?.length > 0 ) ?
-                                    <Tab eventKey="1" title={t('global.related-resources')}>
-                                        <FeedListEven
-                                            className   = "h-background-six-shade-three"
-                                            items       = { data.series.seriesDetails.seriesResources} 
-                                            variant     = 'light'
-                                            campus      = { breadcrumbs.campus }
-                                        />
-                                    </Tab>
-                                :
-                                    undefined
-                            }
-                        </Tabs>
-                    </div>
-                </section>
-
-
-                {
-                    (videoOnDemandTags?.nodes?.length > 0) ?
-                        <section className={'pb-5 h-background-six-shade-three'}>
-                            <div className="content-container">
-                                <TagSimple terms={videoOnDemandTags} variant="" />
-                            </div>
-                        </section>
-                    :
-                        undefined
-                }
+                <SectionSeriesTabs 
+                    id              = 'videos'
+                    width           = 'container'
+                    mode            = { mode }
+                    campus          = { campus }
+                    videos          = { data.VideosOnSerie?.nodes }
+                    seasons         = { seriesDetails.seriesSeasonsActive ? true : false }
+                    playButtonIcon  = { data.playButton?.publicURL }
+                    slugSeries      = { slug }
+                    resources       = { data.series.seriesDetails.seriesResources }
+                    breadcrumbs     = { breadcrumbs }
+                    order           = 'asc'
+                    hasExcerpt
+                    count
+                />
+                
+                <SectionTags
+                    id   = 'tags'
+                    tags = { videoOnDemandTags?.nodes }
+                    mode = { mode }
+                />
 
             </div>
 
@@ -212,9 +139,9 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 (sections) ?
                     sections.map( ( section, index ) => (
                         <RenderSection 
-                            index   = {index}
+                            key     = {index}
                             section = {section}
-                            campus    = {`/${campus}/`}
+                            campus  = {`/${campus}/`}
                             filter  = { {campus: campus } }
                         />
                     ))
@@ -222,7 +149,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                     undefined
             }
             
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus = { breadcrumbs.campus } 
+                mode = { mode }
+            />
             
         </>
     )

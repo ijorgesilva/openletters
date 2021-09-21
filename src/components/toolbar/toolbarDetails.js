@@ -1,35 +1,42 @@
-// Dependencies
-import React from 'react'
 
-// Components
+import React from 'react'
+import { Container } from 'react-bootstrap'
+
+
 import ShareSimpleIcon from '../social/shareSimpleIcon'
 import RaiseHand from '../participation/raiseHand'
 
-// Style
+
 import './toolbarDetails.scss'
 
-export default function ToolbarDetails ( { location, className, id, variant, participation } ) {
+export default function ToolbarDetails ( 
+    { 
+        location, 
+        className, 
+        id, 
+        participation, 
+        mode
+    }
+    ) {
     
-    let variantColor = ( variant === 'dark' ) ? 'dark' : 'light'
-
     return (
-        <div className={`toolbarDetails ${variantColor} ${(className) ? className : ''} `} id={id}>
-            <div className="toolbarContainer">
+        <div className = {`toolbarDetails ${ mode ? mode : 'light' } ${ className ? className : ''}`} id = {id} >
+            <Container className='buttons'>
                 <ShareSimpleIcon 
-                    location    = {location} 
-                    variant     = {variantColor}
+                    location    = { location } 
+                    mode        = { mode ? mode : 'light' }
                     label
                 />
                 {
                     ( participation?.raiseHandList?.length > 0 ) ?
                         <RaiseHand 
-                            variant = 'dark'
-                            options = { participation.raiseHandList }
+                            mode     = { mode ? mode : 'light' }
+                            options  = { participation.raiseHandList }
                         />
                     :
                         undefined
                 }
-            </div>
+            </Container>
         </div>
     )
 }

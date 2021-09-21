@@ -1,8 +1,8 @@
-// Dependencies
+
 import React from 'react'
 import ReactPlayer from 'react-player'
 
-// Styles
+
 import './sectionVideo.scss'
 
 export default function SectionVideo ( {

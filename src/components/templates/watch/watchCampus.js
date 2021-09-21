@@ -1,9 +1,9 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
 
-// Components
+
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
 import { getHeroDescription } from '../../utils/utils'
@@ -13,10 +13,10 @@ import RenderSection from '../../renderSection'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './watchCampus.scss'
 
 export default function WatchPage( { pageContext, data, location } ) {
@@ -38,6 +38,10 @@ export default function WatchPage( { pageContext, data, location } ) {
                             campusDetails.campusWatch.campusWatchSections 
                         : 
                             undefined
+    // TODO: Force mode on page with mode override? Is that even needed?
+    // TODO: Add secondary mode for content contentMode
+    const mode          = 'dark'
+    const contentMode   = 'dark'
         
     return (
         <>
@@ -45,6 +49,8 @@ export default function WatchPage( { pageContext, data, location } ) {
             <HeaderPage 
                 title       = { t('global.watch.title') + ' | ' + title  }
                 location    = { location } 
+                mode        = { contentMode }
+                className   = 'watchCampus'
                 cover       = { ( backgroundImage?.images ) ? backgroundImage.images.fallback.src : undefined }
                 description = { t('global.watch.meta-description') }
             />
@@ -53,23 +59,26 @@ export default function WatchPage( { pageContext, data, location } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
+                mode            = { mode }
                 menuGlobal
                 menuLocal
             />
             
             <HeroSimple 
-                id              = "hero"
-                iconSerie       =   { ( hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ) ? 
+                id              = 'latest'
+                className       = 'z-index-1'
+                mode            = { contentMode }
+                iconSeries       =   { ( hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ) ? 
                                         hero.videoDetails.videoSeries.seriesGraphics.logo.localFile.childImageSharp.gatsbyImageData 
                                     : 
                                         undefined 
                                     }
-                iconSerieTitle  =   { ( hero.videoDetails?.videoSeries?.title ) ? 
+                iconSeriesTitle  =   { ( hero.videoDetails?.videoSeries?.title ) ? 
                                         hero.videoDetails.videoSeries.title 
                                     : 
                                         undefined 
                                     }
-                iconSerieLink   =   { ( hero.videoDetails?.videoSeries?.slug ) ? 
+                iconSeriesLink   =   { ( hero.videoDetails?.videoSeries?.slug ) ? 
                                         `/${slug}/${config.watchSeriesDetailsSlug}/`+ hero.videoDetails.videoSeries.slug 
                                     : 
                                         undefined 
@@ -77,7 +86,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                 title           = { hero.title }
                 description     = { getHeroDescription(hero) }
                 playText        = { t('global.watch.watch-now') }
-                serieLinkText   = { t('global.watch.more-info') }
+                seriesLinkText   = { t('global.watch.more-info') }
                 playUrl         = { (hero.slug) ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
                 seriesUrl       = { (hero.videoDetails.videoSeries) ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
                 backgroundImage = { backgroundImage }
@@ -86,10 +95,11 @@ export default function WatchPage( { pageContext, data, location } ) {
             {
                 ( data.latest.nodes.length > 0 ) ?
                     <SectionFeedCarousel
-                        className       = "h-background-six-shade-three" 
-                        id              = "latest"
+                        className       = 'z-index-2' 
+                        id              = 'recent'
                         title           = { t('global.watch.section-latest-title') }
                         items           = { data.latest.nodes }
+                        mode            = { contentMode }
                         campus          = { slug }
                         configLayout    =   {{
                                                 excerpt: false,
@@ -98,14 +108,13 @@ export default function WatchPage( { pageContext, data, location } ) {
                     />
                 : 
                     undefined
-                    
             }
             
             {
                 ( sections ) ?
                     sections.map( ( section, index ) => (
                         <RenderSection 
-                            index   = { index }
+                            key     = { index }
                             section = { section }
                             campus  = { slug }
                             filter  = { {campus: slug } }
@@ -115,7 +124,10 @@ export default function WatchPage( { pageContext, data, location } ) {
                     undefined
             }
 
-            <FooterSimpleText campus = { breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus = { breadcrumbs.campus } 
+                mode   = { contentMode }
+            />
             
         </>
     )

@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import { Alert, Container,  } from "react-bootstrap"
-
-import "./alertdismissiblebar.scss"
+import { Alert, Container } from "react-bootstrap"
 
 export default function AlertDismissibleBar(props) {
     const [show, setShow] = useState(true);

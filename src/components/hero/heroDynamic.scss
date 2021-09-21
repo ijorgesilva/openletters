@@ -1,8 +1,7 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .heroDynamic {
     height: auto;
-    min-height: 800px;
     align-items: center;
     display: flex;
     overflow: hidden;
@@ -10,27 +9,46 @@
     z-index: 2;
     position: relative;
 
+    &.light {
+        > .background {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+    }
+
+    &.dark {
+        > .background {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            &.overlay {
+                &:after {
+                    background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%,hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.35) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%),
+                    linear-gradient(to left, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.35) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%),
+                    linear-gradient(to top, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 75%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7) 100%);
+                }
+            }
+        }
+    }
+
     > .background {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         position: absolute;
-        background-color: rgba(var(--color-six-dark-shade-three),1);
         width: 100%;
         height: 100%;
         top: 0;
         .gatsby-image-wrapper {
             height: 100%;
         }
-    }
-    
-    h1 {
-        font-weight: 900;
-    }
-    h2, h3, h4, h5 {
-        max-width: 550px;
-        font-weight: 500;
-        letter-spacing: 1px;
+        &.overlay {
+            &:after {
+                content: " ";
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+            }
+        }
     }
     
     .content {
@@ -39,6 +57,14 @@
         grid-template-rows: 1fr;
         grid-template-areas: 'content .';
         position: relative;
+        h1 {
+            font-weight: 900;
+        }
+        h2, h3, h4, h5 {
+            max-width: 550px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
         .buttons {
             display: flex;
             flex-direction: column;
@@ -52,11 +78,10 @@
         }
     }
 
-    @include media("≥phone", "<850px") {
-        h1, h2, h3, h4, h5 {
-            text-align: center;
-            max-width: unset;
-        }
-    }
+}
 
+@include media("≥phone", "<850px") {
+    h1, h2, h3, h4, h5 {
+        max-width: unset;
+    }
 }

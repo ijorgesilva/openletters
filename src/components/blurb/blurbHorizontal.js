@@ -1,29 +1,42 @@
-// Dependencies
+
 import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
-// Components
 
-// Utils
+
+
 import { getDate } from '../../components/utils/utils'
 
-// Styles
+
 import './blurbHorizontal.scss'
 
-export default function BlurbHorizontal( { 
+export default function BlurbHorizontal( 
+    { 
         type,
-        title, subtitle, keyIndex, featuredImage, className, noImage, link, tag, tags, tagClassName, excerpt,
-        eventDate } 
+        title, 
+        subtitle, 
+        keyIndex, 
+        featuredImage, 
+        className, 
+        noImage, 
+        link, 
+        tag, 
+        tags, 
+        tagClassName, 
+        excerpt,
+        eventDate,
+        mode,
+    } 
     ) {
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     const image = (featuredImage) ? featuredImage : (noImage) ? noImage : undefined
-    const tagClass = (tagClassName) ? tagClassName : ""
+    const tagClass = (tagClassName) ? tagClassName : ''
     const tagsCounter = (tags) ? tags.nodes.length : 0
 
     switch(type){
@@ -44,13 +57,13 @@ export default function BlurbHorizontal( {
 
             return (
                 <div 
-                    key={(keyIndex) ? keyIndex : undefined} 
-                    className={`card blurbHorizontal ${(className) ? className : ''} ${ (eventExpired) ? 'expired' : '' }`} 
-                    title={title}
+                    key         = {(keyIndex) ? keyIndex : undefined} 
+                    className   = {`card blurbHorizontal ${ mode ? mode : 'light' } ${ className ? className : '' } ${ eventExpired ? 'expired' : '' }`} 
+                    title       = {title}
                 >
-                    <Link to={link}>
+                    <Link to = { link }>
         
-                        <div className="card-img position-relative">
+                        <div className='card-img position-relative'>
                             <GatsbyImage 
                                 image           = {image}
                                 className       = 'card-img-top' 
@@ -59,11 +72,14 @@ export default function BlurbHorizontal( {
                             />
                         </div>
 
-                        <div className="card-body">
+                        <div className='card-body'>
                             <div>
                                 {
                                     (firstDate) ? 
-                                        <time className="card-subtitle date" datetime={firstDate}>
+                                        <time 
+                                            className   = 'card-subtitle date' 
+                                            dateTime    = {firstDate}
+                                        >
                                             <strong>{ (eventExpired) ? '' + t('global.events.expired') + ' | ' : '' }</strong>
                                             { firstDate } 
                                             { (firstTime) ? ' | ' + firstTime : '' }
@@ -71,13 +87,13 @@ export default function BlurbHorizontal( {
                                     : 
                                         undefined
                                 }
-                                <h5 className="card-title h-color-one mt-2">
+                                <h5 className='card-title mt-2'>
                                     {title}
                                 </h5>
-                                <p className="card-text">
+                                <p className='card-text'>
                                     {
                                         (excerpt) ? 
-                                            <TextTruncate line={1} truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                                            <TextTruncate line={1} truncateText='…' text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                                         : 
                                             undefined
                                     }
@@ -85,7 +101,7 @@ export default function BlurbHorizontal( {
                             </div>
                             {
                                 ( tagsCounter > 0 || tag ) ?
-                                    <div className="tags">
+                                    <div className='tags'>
                                         {
                                             ( tag ) ?
                                                 <div className={`badge badge-pill badge-image ${tagClass}`} dangerouslySetInnerHTML={{__html: tag}}></div>
@@ -118,40 +134,40 @@ export default function BlurbHorizontal( {
         default:
             return (
                 <div 
-                    key={(keyIndex) ? keyIndex : undefined} 
-                    className={`card blurbHorizontal ${(className) ? className : ''}`} 
-                    title={title}
+                    key         = { keyIndex ? keyIndex : undefined} 
+                    className   = {`card blurbHorizontal ${ mode ? mode : 'light' } ${ className ? className : '' }`} 
+                    title       = {title}
                 >
                     
                     <Link to={link}>
         
-                        <div className="card-img position-relative">
+                        <div className='card-img position-relative'>
                             <GatsbyImage 
                                 image={image}
                                 className='card-img-top'
                                 height='100%'
-                                alt=""
+                                alt=''
                             />
                         </div>
                         
-                        <div className="card-body">
+                        <div className='card-body'>
         
                             <div>
                                 {
                                     (subtitle) ? 
-                                        <h6 className="card-subtitle">
+                                        <h6 className='card-subtitle'>
                                             {subtitle}
                                         </h6> 
                                     : 
                                         undefined
                                 }
-                                <h5 className="card-title h-color-one mt-2">
+                                <h5 className='card-title mt-2'>
                                     {title}
                                 </h5>
-                                <p className="card-text">
+                                <p className='card-text'>
                                     {
                                         (excerpt) ? 
-                                            <TextTruncate line={1} truncateText="…" text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                                            <TextTruncate line={1} truncateText='…' text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                                         : 
                                             undefined
                                     }
@@ -160,7 +176,7 @@ export default function BlurbHorizontal( {
         
                             {
                                 ( tagsCounter > 0 || tag ) ?
-                                    <div className="tags">
+                                    <div className='tags'>
                                         {
                                             ( tag ) ?
                                                 <div className={`badge badge-pill badge-image ${tagClass}`} dangerouslySetInnerHTML={{__html: tag}}></div>

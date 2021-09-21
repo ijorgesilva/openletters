@@ -1,4 +1,4 @@
-// Dependencies
+
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { useTranslation } from "react-i18next"
@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-// Components
+
 import BlurbHorizonal from '../blurb/blurbHorizontal'
 import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'
@@ -14,7 +14,7 @@ import { getDate } from '../../components/utils/utils'
 
 export default function SectionFeedCarouselMultipleSources ( { title, itemsNews, itemsEvents, slugOne, slugTwo, itemsVisible, date, className, id, ...props } ) {
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
     
     const defaultVisible = 4

@@ -1,14 +1,14 @@
-// Dependencies
+
 import React from 'react'
 import './tagSimple.scss'
 
-export default function TagSimple( { terms, variant } ) {
+export default function TagSimple( { terms, mode, className } ) {
     return (
-        <div className={(variant) ? `tagSimple ${variant}` : 'tagSimple dark'}>
+        <div className={`tagSimple ${ mode ? mode : 'light' } ${ className ? className : '' }`}>
             {
-                (terms) ?
-                    terms.nodes.map( (term, index) => (
-                        <span className="user-select-none" key={index}>
+                terms?.length > 0 ?
+                    terms.map( (term, index) => (
+                        <span  key={index} className={`user-select-none ${ className ? className : ''}`}>
                             {term.name}
                         </span>
                     ))

@@ -4,9 +4,9 @@ import { Link } from "gatsby"
 
 import "./dropdownMenu.scss"
 
-export default function DropdownMenu( { className, title, data, as } ){
+export default function DropdownMenu( { className, title, data, as, mode } ){
     return (
-        <Dropdown className={`dropdownmenu ${ className ? className : '' }`}>
+        <Dropdown className={`dropdownmenu ${ ( mode ) ? mode : 'light' }${ className ? className : '' }`}>
             <Dropdown.Toggle variant="transparent">
                 {title}
             </Dropdown.Toggle>
@@ -26,7 +26,7 @@ export default function DropdownMenu( { className, title, data, as } ){
                         :   
                             (
                                 menu.divider === true ? 
-                                    <div key={index} class="dropdown-divider"></div>
+                                    <div key={index} className="dropdown-divider"></div>
                                 : 
                                     (
                                         (menu.content || menu.title) ?

@@ -1,17 +1,21 @@
-// Dependencies
+
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { navigate } from 'gatsby'
 import Select from 'react-select'
 import Cookies from 'universal-cookie'
 
-// Components
+// Context
 import ContextConsumer from '../../provider/context'
+
+
 import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+
+
 import './campusSelector.scss'
 
-export default function CampusSelector( { className, location } ) {
+export default function CampusSelector( { className, location, mode } ) {
 
     let initialCampus
     const cookies = new Cookies()
@@ -42,8 +46,8 @@ export default function CampusSelector( { className, location } ) {
                             : 
                                 {
                                     'fontWeight': 'bolder',
-                                    'backgroundColor': 'var(--color-white)',
-                                    'color': 'var(--color-white)',
+                                    'backgroundColor': 'white',
+                                    'color': 'white',
                                 },
                 }
             )
@@ -154,7 +158,7 @@ export default function CampusSelector( { className, location } ) {
     return(
         <>
             <Select 
-                className       = {`campusSelector ${ (className) ? className : '' }`}
+                className       = {`campusSelector ${ (className) ? className : '' } ${ ( mode ) ? mode : 'light' }`}
                 classNamePrefix = "item"
                 value           = { selectedOption }
                 defaultValue    = { defaultCampus.value }

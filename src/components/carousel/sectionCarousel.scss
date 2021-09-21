@@ -1,14 +1,29 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .sectionCarousel {
-    padding: var(--section-padding);
-    .content {
-        margin-top: 1rem;
-        max-width: 720px;
+
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        > div {
+            .general {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
     }
 
-    .container, 
-    .fullwidth {
-        padding: var(--container-padding);
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        > div {
+            .general {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
     }
+
+    > div {
+        .general {
+            margin-bottom: 3rem;
+        }
+    }
+
 }

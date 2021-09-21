@@ -1,0 +1,30 @@
+@import "~include-media/dist/_include-media.scss";
+
+.sectionBlurbs {
+    .items {
+        margin-top: var(--padding-top);
+        flex-direction: row;
+        > div {
+            flex: 1;
+        }
+    }
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+    .sectionBlurbs {
+        .items {
+            flex-direction: column !important;
+            gap: 3rem !important;
+        }
+    }
+}
+
+@include media("<=phone") {
+}
+

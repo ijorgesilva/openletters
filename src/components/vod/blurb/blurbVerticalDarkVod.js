@@ -1,17 +1,19 @@
-// Dependencies
+
 import React from 'react'
 import { Link } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 
-// Components
+
 import './blurbVerticalDarkVod.scss'
 
-export default function BlurbVerticalDarkVod ( { className, link, iconImage, featuredImage, title, serieTitle, serieLink, excerpt } ) {
+export default function BlurbVerticalDarkVod ( 
+    { className, link, iconImage, featuredImage, title, serieTitle, serieLink, excerpt, mode } 
+    ) {
 
     return (
         
-            <div className={`card BlurbVerticalDarkVod user-select-none ${ ( className ) ? className : ''}`}>
+            <div className={`BlurbVerticalDarkVod card user-select-none ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`}>
                 
                     <div className="card-img-container">
                         <Link to={link}>

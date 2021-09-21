@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+
 import SearchBox from "./search-box"
 
 const open = css`
@@ -27,7 +28,12 @@ export default styled( SearchBox )`
 
   .SearchInput {
     outline: none;
-    border: ${({ hasFocus }) => (hasFocus ? "2px solid #0C8DA0" : "none")};
+    &.light {
+      border: ${({ hasFocus }) => ( hasFocus ? "2px solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7)" : "none")};
+    }
+    &.dark {
+      border: ${({ hasFocus }) => ( hasFocus ? "2px solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.7)" : "none")};
+    }
     font-size: 1em;
     transition: 100ms;
     border-radius: 5px;
@@ -41,9 +47,13 @@ export default styled( SearchBox )`
   .SearchIcon {
     width: 1em;
     margin: 0.3em;
-    color: ${({ hasFocus }) => (hasFocus ? "black" : "#ADA1b6")};
     pointer-events: none;
+    &.light {
+      color: ${({ hasFocus }) => ( hasFocus ? "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7)" : "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7)")};
+    }
+    &.dark {
+      color: ${({ hasFocus }) => ( hasFocus ? "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7)" : "hsla(var(--light-h), var(--light-s), var(--light-l), 0.7)")};
+    }
   }
   
-
 `

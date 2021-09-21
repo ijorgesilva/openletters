@@ -1,42 +1,111 @@
 .menuPage {
     padding: 0px;
     overflow: hidden;
-    &.navbar-dark {
-        background-color: rgba(var(--color-white),1);
+    position: relative;
+    z-index: 1;
+    height: 45px;
+    
+    &.light {
+        border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         .navbar-brand {
             a {
-                color: rgba(var(--color-white),1);
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                &[aria-current="page"] {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+                &:hover {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
             }
         }
-        .navbar-nav{ 
-            .nav-link {
-                color: rgba(var(--color-white),0.7);
+        .navbar-nav { 
+            a {
+                &.nav-link {
+                    color:  hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                    &.active {
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.05);
+                        color:  hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-bottom: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                        border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
+                }
+            }
+        }
+        .close {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            &:hover {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             }
         }
         &::after{
-            background: linear-gradient(270deg, rgba(var(--color-six-dark-shade-three),1) 0%, rgba(var(--color-six-dark-shade-three),0) 100%);
+            background: linear-gradient(270deg, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 100%);
         }
     }
-    &.navbar-light {
-        background-color: rgba(var(--color-black),1);
+
+    &.dark {
+        border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+        border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         .navbar-brand {
             a {
-                color: rgba(var(--color-black),1);
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                &[aria-current="page"] {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+                &:hover {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
             }
         }
-        .navbar-nav{ 
-            .nav-link {
-                color: rgba(var(--color-black),0.7);
+        .navbar-nav { 
+            a {
+                &.nav-link {
+                    color:  hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                    &.active {
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                        color:  hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                        border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+            }
+        }
+        .close {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            &:hover {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
             }
         }
         &::after{
-            background: linear-gradient(270deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(270deg, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 100%);
         }
     }
+
     .navbar-nav {
         display: flex;
         width: 100%;
     }
+
     &::after{
         content: '';
         height: 100px;
@@ -45,15 +114,21 @@
         position: absolute;
         right: 0;
     }
+    
     .navbar-brand {
+        margin-right: 0px;
         a {
             font-weight: 400;
             padding: .5rem 1rem;
             &:hover {
                 text-decoration: none;
             }
+            &[aria-current="page"] {
+                position: relative;
+            }
         }
     }
+
     .navbar-nav {
         overflow: auto;
         white-space: nowrap;
@@ -67,13 +142,15 @@
                 align-items: center;
                 &.active {
                     font-weight: 600;
-                    border-bottom: solid 3px rgba(var(--color-black),1);
                 }
             }
             &:last-child{
                 padding-right: 5rem;
             }
         }
+    }
+    .close {
+        font-weight: 100;
     }
 
     &.sticky {

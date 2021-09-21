@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Button } from 'react-bootstrap'
 import { graphql } from 'gatsby'
 
-// Components
+
 import Navigation from '../components/menu/navigation'
 import HeaderPage from '../components/headerPage'
 import HeroBasic from "../components/hero/heroBasic"
@@ -41,7 +41,7 @@ export default function Home( { data, location } ) {
         backgroundPhoto={ ( data.poster != null ) ? data.poster.publicURL : undefined }
         className={"c-hero position-relative z-index-1"}
         >
-          <Button className="btn btn--animation btn--light-outline ml-3" variant="none" href="/" target="_self">
+          <Button className="button button--animation bbuttontbuttonn--light-outline ml-3" variant="none" href="/" target="_self">
             {t('global.404-go-back')}
           </Button>
       </HeroBasic>

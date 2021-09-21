@@ -1,25 +1,26 @@
-// Dependencies
+
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
 
-// Components
+
 import './menuWatchDetails.scss'
 
-export default function MenuWatchDetails ( { menu, menuBrand, variant, className, activeKey, id, close, styles } ) {
+export default function MenuWatchDetails ( 
+    { menu, menuBrand, className, activeKey, id, close, styles, mode } 
+    ) {
 
-    /* Standard fields */
-    const { t } = useTranslation()
     
-    const variantName = (variant) ? variant : "dark"
+    const { t } = useTranslation()
 
     return (
         <Navbar 
-            className   = {`menuWatchDetails ${(className) ? className : ''}`} 
-            bg          = { variantName } 
+            className   = {`menuWatchDetails ${ mode ? mode : 'light' } ${(className) ? className : ''}`} 
+            bg          = { mode } 
+            variant     = { mode }
             activeKey   = { activeKey } 
-            style       = { (styles) ? styles : {}}
+            style       = { ( styles ) ? styles : {}}
             id          = { id }
         >
 
@@ -43,7 +44,8 @@ export default function MenuWatchDetails ( { menu, menuBrand, variant, className
                                 {
                                     (item.target) ? 
                                         <Nav.Link href={item.link} title={item.name} target={item.target}>{item.name}</Nav.Link>
-                                    :   <Link to={item.link} className="nav-link" title={item.name} activeClassName="active">{item.name}</Link>  
+                                    :   
+                                        <Link to={item.link} className="nav-link" title={item.name} activeClassName="active">{item.name}</Link>  
                                 }
                             </Nav.Item>
                         ))
@@ -53,14 +55,15 @@ export default function MenuWatchDetails ( { menu, menuBrand, variant, className
             </Nav>
 
             { 
-                (close) ?
+                ( close ) ?
                     <Nav className="mr-0">
                         <Link title="Close" to={close} className="close nav-link">    
                             <span aria-hidden="true">×</span>
                             <span className="sr-only">{t('global.close')}</span>
                         </Link>
                     </Nav>
-                : undefined
+                : 
+                    undefined
             }
 
         </Navbar>

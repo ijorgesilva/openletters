@@ -1,20 +1,22 @@
-// Dependencies
+
 import React from 'react'
-import { StaticImage, GatsbyImage } from "gatsby-plugin-image"
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
-import { faPlay } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Container } from 'react-bootstrap'
 
-// Components
+
 import VideoReactPlayer from '../player/videoReactPlayer'
 import config from '../../../../data/SiteConfig'
 import './heroSeries.scss'
 
+export default function HeroSeries ( 
+    { title, logo, campus, seriesGraphics, seriesDetails, featuredVideo, className, mode, width } 
+    ) {
 
-export default function HeroSeries ( { title, logo, campus, seriesGraphics, seriesDetails, featuredVideo } ) {
-
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     const thumbnail = ( seriesDetails.seriesTrailerPoster?.localFile ) ? 
@@ -23,113 +25,114 @@ export default function HeroSeries ( { title, logo, campus, seriesGraphics, seri
                         undefined
     
     return (
-        <section className="heroSeries h-background-six-shade-three">
+        <section className={`heroSeries ${ mode ? mode : '' } ${ className ? className : '' }`} >
 
-            <div className={`serieName`}>
-                {
-                    (logo) ?
-                        <GatsbyImage 
-                            image={logo} 
-                            alt={title}
-                        />
-                    :
-                        <h1 className="display-1">{title}</h1>
-                }
-            </div>
+            <Container fluid = { width === 'container' ? false : true }>
 
-            <div className="jumbotron content-container h-background-six-shade-three">
-
-                <div className="about">
+                <div className={`serieName`}>
                     {
-                        (featuredVideo) ? 
-                            <>
-                                <h2>{featuredVideo.title}</h2>
-                                <p>
-                                    { 
-                                        (featuredVideo.excerpt) ? 
-                                            featuredVideo.excerpt.replace(/<p>/, '').replace(/<\/p>/, '') 
-                                        : 
-                                            t('global.empty.text-not-available') 
-                                    }
-                                </p>
-                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
-                                    className="btn btn--animation btn--light-outline z-index-2" 
-                                >
-                                    <FontAwesomeIcon icon={faPlay} size="lg" /> {t('global.watch.watch-now')}
-                                </Link>
-                            </>
+                        (logo) ?
+                            <GatsbyImage 
+                                image={logo} 
+                                alt={title}
+                            />
                         :
-                            undefined
+                            <h1 className='display-1'>{title}</h1>
                     }
                 </div>
 
-                <div className="trailer">
-                    {
-                        (featuredVideo) ? 
-                            <div className="playButton z-index-2">
-                                <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
-                                    <StaticImage
-                                        src="../../../assets/img/global/button__play-white.svg"
-                                        width="120"
-                                        alt=""
-                                    />
-                                </Link>
-                            </div>
-                        :
-                            undefined
-                    }    
-
-                    <div className="trailerContainer z-index-1">
+                <div className='jumbotron content-container'>
+                    <div className='about'>
                         {
-                            ( seriesDetails?.seriesTrailer ) ?
-                                <VideoReactPlayer
-                                    src={ seriesDetails.seriesTrailer }
-                                    controls={false}
-                                    config={{
-                                        file: {
-                                            attributes: {
-                                                poster: thumbnail,
-                                                autoplay: true,
-                                            }
+                            (featuredVideo) ? 
+                                <>
+                                    <h2>{featuredVideo.title}</h2>
+                                    <p>
+                                        { 
+                                            (featuredVideo.excerpt) ? 
+                                                featuredVideo.excerpt.replace(/<p>/, '').replace(/<\/p>/, '') 
+                                            : 
+                                                t('global.empty.text-not-available') 
                                         }
-                                    }}
-                                />
+                                    </p>
+                                    <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`} 
+                                        className={`btn btn-${ mode === 'light' ? 'outline-dark' : mode === 'dark' ? 'outline-light' : mode } btn-lg z-index-2`}
+                                    >
+                                        <FontAwesomeIcon icon={faPlay} size='lg' /> {t('global.watch.watch-now')}
+                                    </Link>
+                                </>
                             :
-                                (featuredVideo?.featuredImage?.node?.localFile) ?
-                                    <GatsbyImage 
-                                        className="noTrailer" 
-                                        image={featuredVideo.featuredImage.node.localFile.childImageSharp.gatsbyImageData}
-                                        layout='fullWidth'
-                                        objectFit='cover'
-                                        objectPosition="50% 50%"
-                                        alt={title}
+                                undefined
+                        }
+                    </div>
+                    <div className='trailer'>
+                        {
+                            (featuredVideo) ? 
+                                <div className='playButton z-index-2'>
+                                    <Link to={`${(campus) ? '/' + campus + '/' : '/'}${config.watchMessageDetailsSlug}/${featuredVideo.slug}`}>
+                                        <StaticImage
+                                            src='../../../assets/img/global/button__play-white.svg'
+                                            width='120'
+                                            alt=''
+                                        />
+                                    </Link>
+                                </div>
+                            :
+                                undefined
+                        }    
+                        <div className='trailerContainer z-index-1'>
+                            {
+                                ( seriesDetails?.seriesTrailer ) ?
+                                    <VideoReactPlayer
+                                        src={ seriesDetails.seriesTrailer }
+                                        controls={false}
+                                        config={{
+                                            file: {
+                                                attributes: {
+                                                    poster: thumbnail,
+                                                    autoplay: true,
+                                                }
+                                            }
+                                        }}
                                     />
                                 :
-                                    <StaticImage
-                                        className="noTrailer"
-                                        src="../../../assets/img/global/noimage.jpg"
-                                        layout='fullWidth'
-                                        objectFit='cover'
-                                        objectPosition="50% 50%"
-                                        alt=""
-                                    />
-                        }
+                                    (featuredVideo?.featuredImage?.node?.localFile) ?
+                                        <GatsbyImage 
+                                            className='noTrailer' 
+                                            image={featuredVideo.featuredImage.node.localFile.childImageSharp.gatsbyImageData}
+                                            layout='fullWidth'
+                                            objectFit='cover'
+                                            objectPosition='50% 50%'
+                                            alt={title}
+                                        />
+                                    :
+                                        <StaticImage
+                                            className='noTrailer'
+                                            src='../../../assets/img/global/noimage.jpg'
+                                            layout='fullWidth'
+                                            objectFit='cover'
+                                            objectPosition='50% 50%'
+                                            alt=''
+                                        />
+                            }
+                        </div>
                     </div>
                 </div>
 
-            </div>
+            </Container>
+            
 
-            <div className="background">
-                <div className="overlay"></div>
+            <div className='background'>
+                <div className='overlay'></div>
                 <GatsbyImage
-                    className   = "background-image"
+                    className   = 'background-image'
                     image       = { 
                             ( seriesGraphics?.background?.localFile ) ?
                                 seriesGraphics.background.localFile.childImageSharp.gatsbyImageData 
                             :
                                 undefined
                         }
-                    alt         = ""
+                    alt         = ''
                 />
             </div>
 

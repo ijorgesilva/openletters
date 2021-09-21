@@ -1,7 +1,7 @@
-// Dependencies
+
 import React from "react"
 
-// Components
+
 import "./menuSticky.scss"
 
 export default function MenuSticky( {id, menuLinks, link, linkText, className, ...props } ){
@@ -24,7 +24,7 @@ export default function MenuSticky( {id, menuLinks, link, linkText, className, .
                         </div>
                     </nav>
                     <div className="cta">
-                        <a className="btn btn--animation btn--three" href={link} activeClassName="active">{linkText}</a>
+                        <a className="button button--animation button--three" href={link} activeClassName="active">{linkText}</a>
                     </div>
                 </div>
             </div>

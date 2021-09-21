@@ -1,9 +1,9 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
-// Components
+
 import { getDate } from '../../utils/utils'
 import Navigation from '../../menu/navigation'
 import HeroPost from '../../../components/hero/heroPost'
@@ -14,16 +14,17 @@ import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './newsDetails.scss'
 
 export default function NewsDetails( { pageContext, location } ){
 
-    /* Standard fields */
     const { t } = useTranslation()
+    const mode          = 'dark'
+    const contentMode   = 'light'
         
     const { title, excerpt, date, modified, featuredImage, content, terms, breadcrumbs } = pageContext
 
@@ -45,9 +46,11 @@ export default function NewsDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
+                mode        = { contentMode }
             />
             
             <Navigation
+                mode            = { mode }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -56,6 +59,8 @@ export default function NewsDetails( { pageContext, location } ){
             />
             
             <MenuPage
+                mode        = { mode }
+                close       = { '/' + breadcrumbs.campus + '/' +  config.newsPostDetailsSlug }
                 menuBrand   =   { 
                     {
                         'name': t('global.blog.title'),
@@ -67,16 +72,17 @@ export default function NewsDetails( { pageContext, location } ){
                                         {
                                             name: t('global.news.title'), 
                                             link: '/' + breadcrumbs.campus + '/' + config.newsPostDetailsSlug, 
-                                            as: "", 
-                                            target: ""
+                                            as: '', 
+                                            target: ''
                                         }
                                     ]
                                 }
             />
 
-            <article className="contentMain mb-5">
+            <article className='contentMain mb-5'>
 
                 <HeroPost 
+                    mode            = { contentMode }
                     title           = { title }
                     backgroundPhoto =   {
                                             ( featuredImage ) ? 
@@ -84,47 +90,46 @@ export default function NewsDetails( { pageContext, location } ){
                                             : 
                                                 undefined
                                         }
-                    className       = "z-index-0"
+                    className       = 'z-index-0'
+                    size            = 'sm'
                 />
 
-                <Container className="mt-5">
-                    
+                <ToolbarDetails 
+                    location    = { location } 
+                    mode        = { contentMode } 
+                /> 
+                
+                <Container className='mt-5'>
                     <Row>
-
                         <Col>
-                            <div className="watchLeft sticky">
-                                <hr />
-                                <ToolbarDetails location={location} />
+                            <div className='watchLeft sticky'>
                             </div>
                         </Col>
-
-                        <Col className="" xs={12} md={8}>
-
-                            <div dangerouslySetInnerHTML={{__html: content}}>
-                            </div>
+                        <Col className='' xs={12} md={8}>
+                            <div dangerouslySetInnerHTML={{__html: content}}></div>
                             {
                                 ( terms ) ?
-                                    <TagSimple terms={terms} />
+                                    <TagSimple 
+                                        terms   = { terms } 
+                                        mode    = { contentMode }
+                                    />
                                 :
                                     undefined
                             }
-
                             {
                                 ( config.blogShowDates ) ?
-                                    <div className="createdDate user-select-none">
+                                    <div className='createdDate user-select-none'>
                                         { 
                                             (modifiedDate) ? 
-                                                <time datetime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                                <time dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
                                             : 
-                                                <time datetime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                                <time dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
                                         }
                                     </div>
                                 :
                                     undefined
                             }
-                            
                         </Col>
-
                         <Col>
                         </Col>
                     </Row>
@@ -132,7 +137,10 @@ export default function NewsDetails( { pageContext, location } ){
 
             </article>
 
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus  = { breadcrumbs.campus }
+                mode    = { contentMode }
+            />
             
         </>
     )

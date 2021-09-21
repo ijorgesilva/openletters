@@ -1,18 +1,36 @@
-// Dependencies
+
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-// Components
+
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
 import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarousel( { title, items, className, id, iconCarousel, count, campus, styles, infinite, configLayout } ){
+export default function SectionFeedCarousel( 
+    { 
+        title, 
+        items, 
+        className, 
+        id, 
+        iconCarousel, 
+        count, 
+        campus, 
+        styles, 
+        infinite, 
+        configLayout, 
+        mode, 
+        width,
+        order,
+    } 
+    ){
 
     const objLength = (items) ? items.length : 0
+    let sortedItems = []
+    let countStarts
     let defaultConfig = ( configLayout ) ?
                             configLayout
                         :
@@ -21,10 +39,20 @@ export default function SectionFeedCarousel( { title, items, className, id, icon
                                 itemsVisible: 5,
                             }
 
+    switch ( order ) {
+        case 'asc':
+            sortedItems = items.sort().reverse()
+            break
+        case 'desc':
+        default:
+            sortedItems = items
+            break
+    }
+    
     return (
 
-        <section className={`sectionFeedCarousel ${ ( className ) ? className : '' }`} id={id} style={styles}>
-            <Container fluid>
+        <section className={`sectionFeedCarousel pt-4 pb-4 ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`} id={id} style={styles}>
+            <Container fluid = { width === 'container' ? false : true }>
                 {
                     (title) ? 
                         <h4 className="title">{title}</h4>
@@ -44,10 +72,11 @@ export default function SectionFeedCarousel( { title, items, className, id, icon
                             containerClass="carousel-container"
                         >
                             {
-                                items.map( (item, index) => (
+                                sortedItems.map( (item, index) => (
                                     <BlurbVerticalDarkVod 
                                         key             = {index}
                                         className       = { ( objLength === index + 1 ) ? 'last' : undefined }
+                                        mode            = { mode }
                                         featuredImage   = { ( item.featuredImage.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
                                         link            = {  ( item.slug ) ? 
                                                                 `${ ( campus ) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` 
@@ -59,7 +88,7 @@ export default function SectionFeedCarousel( { title, items, className, id, icon
                                                                 :
                                                                     undefined
                                                             }
-                                        title           = { `${ (count === true) ? '<span>' + (index + 1) + ' |</span> ' : '' }  ${item.title}` }
+                                        title           = { `${ ( count === true ) ? ( order === 'asc' ) ? '<span>' + (index + 1) + ' |</span> ' : ( order === 'desc' ) ? '<span>' + Math.abs( index - sortedItems.length ) + ' |</span> ' : '' : ''}  ${item.title}` }
                                         serieTitle      = { ( item.videoDetails.videoSeries ) ? 
                                                                 item.videoDetails.videoSeries.title
                                                             : 

@@ -1,8 +1,7 @@
-// Dependencies
+
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
-// Components
 import MainContent from '../../content/mainContent'
 import Navigation from '../../menu/navigation'
 import HeaderPage from '../../headerPage'
@@ -11,18 +10,18 @@ import MenuPage from '../../menu/menuPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import RenderSection from '../../renderSection'
 
-// Hooks
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
 import './pageDetails.scss'
 
 export default function PageDetails( { location, pageContext } ){
     
     const { title, seo, date, modified, featuredImage, content, pageDetails, breadcrumbs, campus } = pageContext
 
-    /* Standard fields */
     const { t } = useTranslation()
+
+    const mode          = 'dark'
+    const contentMode   = 'light'
 
     const cover = ( featuredImage?.node?.localFile?.localFile ) ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -38,8 +37,10 @@ export default function PageDetails( { location, pageContext } ){
         <>
 
             <HeaderPage 
+                mode        = { contentMode }
                 title       = { title }
-                location    = { location } 
+                location    = { location }
+                className   = 'pageDetails'
                 cover       = { cover }
                 description = { seo.metaDesc }
                 article     = { true }
@@ -50,6 +51,7 @@ export default function PageDetails( { location, pageContext } ){
             />
             
             <Navigation
+                mode            = { mode }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -66,7 +68,7 @@ export default function PageDetails( { location, pageContext } ){
                         className   = { pageDetails.pageMenues.menuDetails.menuCss }
                         id          = { pageDetails.pageMenues.menuDetails.menuId }
                         bg          = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
-                        variant     = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
+                        mode        = { mode ? mode : pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
                     />
                 :
                     undefined
@@ -76,11 +78,12 @@ export default function PageDetails( { location, pageContext } ){
                 ( sections ) ?
                     sections.map( ( _, index ) => (
                         <RenderSection 
-                            index   = { index }
-                            section = { _ }
-                            campus  = { campus }
-                            filter  = { { campus: campus } }
-                            location= { location }
+                            key         = { index }
+                            section     = { _ }
+                            campus      = { campus }
+                            filter      = { { campus: campus } }
+                            location    = { location }
+                            mode        = { contentMode }
                         />
                     ))
                 :
@@ -90,9 +93,9 @@ export default function PageDetails( { location, pageContext } ){
             {
                 ( !pageDetails.pageHideShare ) ?
                     <ToolbarDetails 
-                        location = {location} 
-                        variant  = 'light'
-                    />
+                        location    = { location } 
+                        mode        = { contentMode } 
+                    /> 
                 :
                     undefined
             }
@@ -100,15 +103,18 @@ export default function PageDetails( { location, pageContext } ){
             {
                 ( !pageDetails.pageHideContent ) ?
                     <MainContent 
-                        date        = {date}
-                        modified    = {modified}
-                        content     = {content}
+                        date        = { date }
+                        modified    = { modified }
+                        content     = { content }
                     />
                 :
                     undefined
             }
 
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus  = { breadcrumbs.campus } 
+                mode    = { contentMode }
+            />
             
         </>
     )

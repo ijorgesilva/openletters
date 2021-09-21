@@ -14,7 +14,7 @@ export default function SectionTextBasic(props) {
                 </p>
                 {
                     (props.link) ?
-                        <a className="btn btn--animation btn--dark-outline mt-5" href={props.link} target={props.target} rel="noreferrer" >{props.linkText}</a>  
+                        <a className="button button--animation button--dark-outline mt-5" href={props.link} target={props.target} rel="noreferrer" >{props.linkText}</a>  
                     : <div></div>
                 }
             </div>

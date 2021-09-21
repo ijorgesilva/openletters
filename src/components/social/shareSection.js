@@ -1,17 +1,17 @@
-// Dependencies
+
 import React from 'react'
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { useTranslation } from "react-i18next"
 import { Container, Col, Row } from 'react-bootstrap'
 import {FacebookShareButton, TwitterShareButton} from 'react-share'
 
-// Components
+
 import './shareSection.scss'
 import config from '../../../data/SiteConfig'
 
 export default function ShareSection( { title, id, subtitle, className, variant, photo, location } ) {
 
-    /* Standard fields */
+    
     const { t } = useTranslation()
 
     const canonicalUrl = config.siteUrl + location.pathname

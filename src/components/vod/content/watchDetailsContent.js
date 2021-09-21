@@ -1,4 +1,4 @@
-// Dependencies
+
 import React from 'react'
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Tabs, Tab, Alert } from 'react-bootstrap'
@@ -6,15 +6,33 @@ import { Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
 import TextTruncate from 'react-text-truncate'
 
-// Components
+
 import config from '../../../../data/SiteConfig'
 import FeedListEven from '../../feed/feedListEven'
 import TagSimple from '../../tag/tagSimple'
 import YouVersion from '../../bible/youVersion'
 
-export default function WatchDetailsContent ( { title, videoDetails, excerpt, content, tags, resources, campus, backUrl, bibleUrl, bible } ) {
+import './watchDetailsContent.scss'
+
+export default function WatchDetailsContent ( 
+    { 
+        id,
+        title,
+        className,
+        videoDetails, 
+        excerpt, 
+        content, 
+        tags, 
+        resources, 
+        campus, 
+        backUrl, 
+        bibleUrl,
+        bible,
+        mode,
+    } 
+    ) {
     
-    /* Standard fields */
+    
     const { t } = useTranslation()
     
     const seriesIcon = ( videoDetails.videoSeries?.seriesGraphics?.poster?.localFile ) ?
@@ -24,7 +42,7 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
 
     return (
 
-        <div className="watchDetailsContent content" id="content">
+        <div className={`watchDetailsContent content ${ mode ? mode : 'light' } ${ className ? className : ''}`} id = {id}>
             <div className="overview">
                 {
                     ( videoDetails.videoSeries?.slug && seriesIcon ) ?
@@ -47,7 +65,8 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                                 </h1>
                                 {
                                     ( videoDetails.videoSeries?.title ) ? 
-                                        <Link to={`${config.watchSeriesDetailsSlug}/${videoDetails.videoSeries.slug}`}>
+                                        <Link to={backUrl}>
+                                            {/* ${config.watchSeriesDetailsSlug}/${videoDetails.videoSeries.slug} */}
                                             <h2>
                                                 {videoDetails.videoSeries.title}
                                             </h2>
@@ -72,13 +91,12 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                 }
                 {
                     ( excerpt ) ?
-                        <div className="extract" dangerouslySetInnerHTML={{__html: excerpt}}></div>
+                        <div className="extract lead" dangerouslySetInnerHTML={{__html: excerpt}}></div>
                     :
                         undefined
                 }
-                
-
             </div>
+
             {   
                 (videoDetails.videoAttachments) ? 
                     <div className="attachments" id="attachments">
@@ -112,63 +130,63 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
                     undefined
             }
 
-            <Tabs className="mt-5 sticky" defaultActiveKey="notes" id="">
-                
+            <Tabs className="sticky" defaultActiveKey="notes" id="">
                 {
-                    (content) ? 
+                    ( content ) ? 
                         <Tab 
                             eventKey="notes" 
                             title={t('global.notes')}
-                            className="mt-5"
                         >
-                            <article dangerouslySetInnerHTML={{__html: content }}></article> 
+                            <div className = 'notes'>
+                                <article dangerouslySetInnerHTML={{__html: content }}></article> 
+                            </div>
                         </Tab>
                     : 
                         <Alert variant="dark">
                             {t('global.watch.content-empty')}
                         </Alert>
                 }
-
                 {
-                    (bible) ?
+                    ( bible ) ?
                         <Tab 
                             eventKey="bible" 
                             title={t('global.bible.title')}
                         >
-                            <YouVersion 
-                                bibleUrl = {bibleUrl}
-                            />
+                            <div className = 'bible'>
+                                <YouVersion 
+                                    bibleUrl = { bibleUrl }
+                                />
+                            </div>
                         </Tab>
                     :
                         undefined
                 }
-                
                 {
-                    (videoDetails.videoTranscript) ? 
+                    ( videoDetails.videoTranscript ) ? 
                         <Tab 
-                            eventKey="transcript" 
+                            eventKey='transcript' 
                             title={t('global.transcripts')}
-                            className="mt-5"
                         >
-                            {videoDetails.videoTranscript}
+                            <div className = 'transcript' dangerouslySetInnerHTML={{__html: videoDetails.videoTranscript }}>
+                            </div>
                         </Tab>
                     :
                         undefined
                 }
-
                 {
-                    (resources) ?
+                    ( resources ) ?
                         <Tab 
                             eventKey="resources" 
                             title={t('global.related-resources')}
                         >
-                            <div className="resources"></div>
-                            <FeedListEven
-                                items   = { resources }
-                                slug    = { config.blogPostDetailsSlug }
-                                campus  = { campus }
-                                className="mt-5"
-                            />
+                            <div className='resources'>
+                                <FeedListEven
+                                    items   = { resources }
+                                    slug    = { config.blogPostDetailsSlug }
+                                    campus  = { campus }
+                                    mode    = { mode }
+                                />
+                            </div>
                         </Tab>
                     : 
                         undefined
@@ -178,7 +196,10 @@ export default function WatchDetailsContent ( { title, videoDetails, excerpt, co
             
             {
                 ( tags?.length > 0 ) ?
-                    <TagSimple terms={tags} variant="" />
+                    <TagSimple 
+                        terms   = { tags } 
+                        variant = { mode } 
+                    />
                 : 
                     undefined
             }

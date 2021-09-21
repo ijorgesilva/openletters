@@ -8,7 +8,10 @@ export const useWebsiteConfiguration = () => {
                                         websiteSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
+                                                
                                                 settingsCode
+                                                settingsCss
+
                                                 settingsLegalPage {
                                                     ... on WpPage {
                                                         id
@@ -28,19 +31,11 @@ export const useWebsiteConfiguration = () => {
                                                 settingsFooter {
                                                     settingsFooterDisclaimer
                                                 }
+                                                
                                                 settingsMenus {
                                                     settingsMenuCampusSelector
                                                 }
-                                                settingsGraphics {
-                                                    settingsLogo {
-                                                        localFile {
-                                                            childImageSharp {
-                                                                gatsbyImageData(layout: FULL_WIDTH)
-                                                            }
-                                                            publicURL
-                                                        }
-                                                    }
-                                                }
+                                                
                                                 settingsDefaultCampus {
                                                     ... on WpCampus {
                                                         id
@@ -48,6 +43,7 @@ export const useWebsiteConfiguration = () => {
                                                         slug
                                                     }
                                                 }
+
                                                 settingsAuthentication {
                                                     settingsAuthenticationActive
                                                     settingsAuthenticationType
@@ -56,6 +52,7 @@ export const useWebsiteConfiguration = () => {
                                                         settingsAuthenticationTypeExternalUrl
                                                     }
                                                 }
+
                                             }
                                         }
                                     }

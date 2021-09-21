@@ -1,17 +1,18 @@
-// Dependencies
+
 import React from 'react'
 import { Link } from 'gatsby'
-import TextTruncate from 'react-text-truncate'
 import { GatsbyImage } from "gatsby-plugin-image"
 
-// Components
+
 import './blurbVerticalSeries.scss'
 
-export default function BlurbVerticalSeries ( { title, className, link, iconImage, poster, background, logo } ) {
+export default function BlurbVerticalSeries ( 
+    { title, className, link, iconImage, poster, background, logo, mode } 
+    ) {
     
     return (
         
-            <div className={`blurbVerticalSeries card user-select-none ${ ( className ) ? className : ''}`}>
+            <div className={`blurbVerticalSeries card user-select-none ${ ( mode ) ? mode : 'light'} ${ ( className ) ? className : ''}`}>
                 
                     <div className={`card-img-container`}>
                         <Link to={link}>
@@ -28,10 +29,7 @@ export default function BlurbVerticalSeries ( { title, className, link, iconImag
                                     undefined
                             }
     
-                            <div 
-                                className={`card-img-caption ${ ( poster ) ? 'poster' : 'background'}`}
-                            >
-                                
+                            <div className={`card-img-caption ${ ( poster ) ? 'poster' : 'background'}`} >
                                 {
                                     ( poster ) ?
                                         <GatsbyImage 
@@ -51,7 +49,7 @@ export default function BlurbVerticalSeries ( { title, className, link, iconImag
                                                             />
                                                         </div>
                                                     :
-                                                        <div class="card-text">
+                                                        <div className="card-text">
                                                             <h5>{title}</h5>
                                                         </div>
 
@@ -64,14 +62,11 @@ export default function BlurbVerticalSeries ( { title, className, link, iconImag
                                             </>
                                         :
                                             <>
-                                                <div class="card-text">
+                                                <div className="card-text">
                                                     <h5>{title}</h5>
                                                 </div>
                                                 <div className="card-img-top no-poster gatsby-image-wrapper"></div>
                                             </>
-                                            
-
-
                                 }
 
                             </div>

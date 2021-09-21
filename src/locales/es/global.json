@@ -6,6 +6,9 @@
 			"title": "Podcasts?"
 		},
 		"social": {
+			"check-this": "Mira esto!",
+			"follow-us": "Síguenos en",
+			"share": "Compartir",
 			"share-on": "Compartir en",
 			"sharesimpleicon-title": "Compartir en"
 		}
@@ -44,6 +47,8 @@
 			"decline": "Declinar",
 			"description": "Este sitio web utiliza cookies para mejorar la experiencia del usuario."
 		},
+		"copied": "Copiado!",
+		"copied-failed": "Falló en copiar!",
 		"created-on": "Creado el",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
@@ -56,6 +61,10 @@
 			"location": "Dirección",
 			"organized-by": "Organizado por",
 			"title": "Eventos"
+		},
+		"forms": {
+			"sending": "Enviando...",
+			"submit": "Enviar"
 		},
 		"give": {
 			"title": "Dar ahora"
@@ -72,6 +81,12 @@
 		"news": {
 			"description": "Revisa las últimas noticias",
 			"title": "Noticias"
+		},
+		"newsletter": {
+			"description": "Regístrese para recibir nuestras noticias electrónicas semanales y actualizaciones sobre lo que sigue. ",
+			"subscribe": "Subscríbete",
+			"your-email": "Tú email",
+			"your-name": "Tú nombre"
 		},
 		"no-records": "Nada que mostrar!",
 		"notes": "Notas",

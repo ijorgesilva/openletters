@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next'
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-// Components
+
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
 
-// Style
+
 import './index.scss'
 
-export default function MenuAuth ( {} ) {
+export default function MenuAuth ( { mode } ) {
 
     const { t } = useTranslation()
 
@@ -21,8 +21,8 @@ export default function MenuAuth ( {} ) {
     if( settings.settingsAuthenticationActive ) {
         switch( settingsAuthType ) {
             case 'external':
-                return(
-                    <div className="menuAuth">
+                return (
+                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <a 
                             href    = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalUrl }
                             target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(":")[0] }
@@ -38,8 +38,8 @@ export default function MenuAuth ( {} ) {
                 )
                 break
             case 'internal':
-                return(
-                    <div className="menuAuth">
+                return (
+                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <Link 
                             to      = ""
                             title   = { t('global.authentication.sign-in') }
@@ -53,16 +53,10 @@ export default function MenuAuth ( {} ) {
                     </div>
                 )
             default:
-                return(<></>)
+                return <></>
                 break
         }
     }
-    else {
-        return (
-            <>
-            </>
-        )
-            
-    }
+    else return <></>
 
 }

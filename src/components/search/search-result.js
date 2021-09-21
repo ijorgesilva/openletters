@@ -1,4 +1,4 @@
-// Dependencies
+
 import { Link } from 'gatsby'
 import { Badge } from 'react-bootstrap'
 import { default as React } from 'react'
@@ -26,27 +26,27 @@ const HitCount = connectStateResults(({ searchResults }) => {
 
 function ShowPageType ( { type } ) {
 
-  /* Standard fields */
+  
   const { t } = useTranslation()
 
   switch(type){
     case 'video':
-      return <Badge variant="primary">{t('global.watch.video')}</Badge>
+      return <Badge variant="secondary">{t('global.watch.video')}</Badge>
       break
     case 'series':
       return <Badge variant="dark">{t('global.watch.series')}</Badge>
       break
     case 'page':
-      return <Badge variant="info">{t('global.pages.name')}</Badge>
+      return <Badge variant="dark">{t('global.pages.name')}</Badge>
       break
     case 'event':
-      return <Badge variant="info">{t('global.events.event')}</Badge>
+      return <Badge variant="dark">{t('global.events.event')}</Badge>
       break
     case 'post':
-      return <Badge variant="info">{t('global.blog.post')}</Badge>
+      return <Badge variant="dark">{t('global.blog.post')}</Badge>
       break
     case 'news':
-      return <Badge variant="info">{t('global.news.title')}</Badge>
+      return <Badge variant="dark">{t('global.news.title')}</Badge>
       break
     case 'attachment':
     case 'document':
@@ -60,7 +60,7 @@ function ShowPageType ( { type } ) {
 
 function PageHit ( { hit } ) {
 
-  /* Standard fields */
+  
   const { t } = useTranslation()
 
   return (

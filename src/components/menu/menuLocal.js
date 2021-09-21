@@ -1,27 +1,30 @@
-// Dependencies
+
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import { useTranslation } from 'react-i18next'
 
-// Components
+
 import MegaMenu from './menuLocal/megaMenu'
 import RegularMenu from './menuLocal/regularMenu'
 import MenuLink from './menuLocal/menuLink'
-import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
-import { useCampuses } from '../../hooks/useCampuses' 
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-// Style
+// Custom Hooks
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+import { useCampuses } from '../../hooks/useCampuses'
+import { useTheme } from '../../hooks/useTheme'
+
+
 import './menuLocal.scss'
 
-export default function MenuLocal ( { location, campus } ) {
+export default function MenuLocal ( { location, campus, mode } ) {
 
     const { t } = useTranslation()
 
-    const  currentCampus    = useCampuses( campus )
+    const currentCampus     = useCampuses( campus )
     const siteSettings      = useWebsiteConfiguration()
+    const theme             = useTheme()
     
     let menuLocalData = [
         {name: "About", link: "#", megamenu: true,
@@ -141,26 +144,25 @@ export default function MenuLocal ( { location, campus } ) {
                             :
                                 '/' + campus
 
-    const campusLogo    =   ( siteSettings.settingsGraphics.settingsLogo?.localFile?.childImageSharp?.gatsbyImageData ) ?
-                                siteSettings.settingsGraphics.settingsLogo.localFile.childImageSharp.gatsbyImageData
+    const campusLogo    =   ( theme.graphics.logo ) ?
+                                theme.graphics.logo
                             :
-                                ( siteSettings.settingsGraphics.settingsLogo?.localFile?.publicURL ) ?
-                                    siteSettings.settingsGraphics.settingsLogo.localFile.publicURL
+                                ( currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile?.publicURL ) ?
+                                    currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.publicURL
                                 :
-                                    ( currentCampus.campusDetails.campusBrand.campusBrandLogo?.localFile?.childImageSharp?.gatsbyImageData ) ?
-                                        currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.childImageSharp.gatsbyImageData
-                                    :
-                                        ( currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile?.publicURL ) ?
-                                            currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.publicURL
-                                        :
-                                            undefined
+                                    undefined
 
     const campusLogoStyle = {
         backgroundImage: "url("+ campusLogo +")",
     }
 
     return (
-        <Navbar className={`navlocal container-fluid navbar z-index-3`} bg="transparent" expand="lg" >
+        <Navbar 
+            className   = {`navlocal container-fluid z-index-3 ${ ( mode ) ? mode : 'light' }`}         
+            bg          = { ( mode ) ? mode : 'light' } 
+            variant     = { ( mode ) ? mode : 'light' } 
+            expand      = "lg" 
+        >
 
             <Navbar.Brand
                 rel         = 'home'
@@ -173,7 +175,7 @@ export default function MenuLocal ( { location, campus } ) {
                 { currentCampus.title }
             </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-dark">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" className={`navbar-${ ( mode ) ? mode : 'light'}`}>
                 <FontAwesomeIcon icon={faBars} size="md" />
             </Navbar.Toggle>
 
@@ -202,7 +204,7 @@ export default function MenuLocal ( { location, campus } ) {
                                 : 
                                     <MenuLink 
                                         key         = {index} 
-                                        className   = {`${menu.class}`} 
+                                        className   = {menu.class} 
                                         content     = {menu.submenu} 
                                         name        = {menu.name} 
                                         type        = {menu.type} 
@@ -210,6 +212,7 @@ export default function MenuLocal ( { location, campus } ) {
                                         target      = {menu.target}
                                         iframe      = {menu.iframe} 
                                         iframeTitle = {menu.iframeTitle} 
+                                        mode        = { mode }
                                     />
                             )
                         )

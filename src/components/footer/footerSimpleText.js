@@ -1,20 +1,26 @@
-// Components
+
 import React from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-// Assets
+
+import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+
+
 import "./footerSimpleText.scss"
+
+// Data
 import config from '../../../data/SiteConfig'
 
-export default function FooterSimpleText( { campus } ) {
+export default function FooterSimpleText( { campus, mode } ) {
     
-    /* Standard fields */
+    
     const { t } = useTranslation()
     const settings = useWebsiteConfiguration()
     const defaultCampusSlug = useWebsiteConfiguration().settingsDefaultCampus.slug
     const getPageCampuses = settings.settingsLegalPage.pageDetails.pageCampus
+    const theme = useTheme()
 
     let findPageCampus = getPageCampuses.find( x => x.slug === campus )
     let findPageCampusSlug = (findPageCampus?.slug) ? findPageCampus.slug : undefined
@@ -32,7 +38,7 @@ export default function FooterSimpleText( { campus } ) {
                                 getPageCampuses[0].slug
 
     return (
-        <footer className="footerSimpleText z-index-2">
+        <footer className={`footerSimpleText z-index-2 ${ mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }`}>
             <div className="c-container  z-index-1 position-relative">
                 <div className="copyright">
                     {  

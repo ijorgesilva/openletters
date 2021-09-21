@@ -1,20 +1,27 @@
-import React from "react"
-import { Dropdown } from "react-bootstrap"
 
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Dropdown } from 'react-bootstrap'
 import { faYoutube, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 
+
 import AppLinks from "../widget/appLinks"
+
 
 import "./followDropdown.scss"
  
-export default function FollowDropdown ( { instagramUrl, facebookUrl, twitterUrl, youtubeUrl, appStoreUrl, playStoreUrl, mailchimpUrl } ) {
+export default function FollowDropdown ( { instagramUrl, facebookUrl, twitterUrl, youtubeUrl, appStoreUrl, playStoreUrl, mailchimpUrl, mode } ) {
+
+    
+    const { t } = useTranslation()
 
     return (
-        <Dropdown className={`followdropdown`}>
+        <Dropdown className={`followdropdown ${ ( mode ) ? mode : 'light'}`}>
+
             <Dropdown.Toggle variant="transparent">
-                Follow us
+                {t('components.social.follow-us')}
             </Dropdown.Toggle>
         
             <Dropdown.Menu>
@@ -104,35 +111,39 @@ export default function FollowDropdown ( { instagramUrl, facebookUrl, twitterUrl
 
 const CustomForm = ({status, message, onValidated }) => {
     let email
-    // let name
     const submit = () =>
       email &&
-    //   name &&
       email.value.indexOf("@") > -1 &&
       onValidated({
         EMAIL: email.value,
         // NAME: name.value
       });
   
+    
+    const { t } = useTranslation()
+
     return (
         <>
-            <Dropdown.Header className={"text-center"}>Subscribe to Victory</Dropdown.Header>
-            <p className={"text-center"}>Sign up to receive our weekly eNews and updates about what's next at Victory.</p>
+            <Dropdown.Header className={"text-center"}>{t('global.newsletter.subscribe')}</Dropdown.Header>
+            <p className={"text-center"}>{t('global.newsletter.description')}</p>
             <div className='mailchimp'>
-                
-                {status === "sending" && <div className="h-color-one-shade-two mb-2">sending...</div>}
-                {status === "error" && ( <div className={"h-color-three-shade-three mb-2"} dangerouslySetInnerHTML={{ __html: message }} /> )}
-                {status === "success" && ( <div className={"h-color-one-dark-shade-two mb-2"} dangerouslySetInnerHTML={{ __html: message }} /> )}
-                <div class="form-group">
-                    {/* <input className="form-control mb-2" ref={node => (name = node)} type="text" placeholder="Your name" /> */}
-                    <input className="form-control" ref={node => (email = node)} type="email" placeholder="Your email" />
+
+                {status === "sending" && <div className="fade alert alert-info show mb-2">{t('global.forms.sending')}</div>}
+                {status === "error"   && ( <div className="fade alert alert-danger show mb-2" dangerouslySetInnerHTML={{ __html: message }} /> )}
+                {status === "success" && ( <div className="fade alert alert-success show mb-2" dangerouslySetInnerHTML={{ __html: message }} /> )}
+
+                <div className="form-group">
+                    {/* <input className="form-control mb-2" ref={node => (name = node)} type="text" placeholder={t('global.newsletter.your-name')} /> */}
+                    <input className="form-control" ref={node => (email = node)} type="email" placeholder={t('global.newsletter.your-email')} />
                 </div>
+                
                 <span className="input-group-btn text-right">
-                    <button className="btn btn-sm btn--animation btn--dark-outline" onClick={submit}>
-                        Submit
+                    <button className="btn btn-outline-primary btn-block mt-3" onClick={submit}>
+                        {t('global.forms.submit')}
                     </button>
                 </span>
-        </div>
+
+            </div>
       </>
     );
   };

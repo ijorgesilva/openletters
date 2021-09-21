@@ -1,4 +1,4 @@
-@import "../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 /* 
 REFACTOR 
@@ -146,25 +146,6 @@ REFACTOR
     bottom: -100px;
 }
 
-.c-video--simple {
-    min-height: 600px;
-    padding: 150px 0px;
-}
-
-.c-video__player {
-    background-color: rgba(var(--color-black),1);
-}
-
-
-.c-video__background {
-    background-image: url('../assets/img/smallgroups/background_video_simple.jpg');
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.1;
-}
-
 iframe {
     width: 1px;
     min-width: 100%;
@@ -259,9 +240,8 @@ figcaption {
 /*
   Global
  */
- 
+ // TODO: Refactor to use already existing classes
 .content-container {
-  max-width: var(--max-layout-width);
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--container-padding);
@@ -277,29 +257,7 @@ figcaption {
 /* 
   Bootstrap
 */
-/* Tabs */
-.nav-tabs {
 
-  &.light {
-    border-bottom: 1px solid rgba(var(--color-white), 0.1);
-    margin-bottom: 2rem;
-    .nav-link {
-      color: rgba(var(--color-white), 0.4);
-      font-weight: 100;
-      &.active {
-        background-color: transparent !important;
-        color: rgba(var(--color-white), 1);
-        font-weight: 600;
-        border-bottom: 3px solid var(--color-four);
-      }
-    }
-
-    > .tab-pane {
-      padding: 3rem 0;
-    }
-  }
-
-}
 /* Pagination */
 .page-item{
 

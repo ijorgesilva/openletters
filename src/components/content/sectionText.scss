@@ -1,18 +1,36 @@
-@import "../../../node_modules/include-media/dist/_include-media.scss";
+@import "~include-media/dist/_include-media.scss";
 
 .sectionText {
-    > div {
+    position: relative;
+    
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .title {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+        .content {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.9);
+        }
+    }
+    
+    &.dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .title {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        }
+        .content {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.9);
+        }
+    }
 
+    > div {
         &.two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "left right";
-
-            .container, .fullwidth {
-                max-width: 720px;
-                padding: var(--container-padding);
-            }
-
+            gap: 2rem;
             .media {
                 &.left {
                     grid-area: left;
@@ -26,25 +44,8 @@
                 }
             }
         }
-
-        &.one-column {
-            .container, .fullwidth {
-                max-width: 720px;
-                padding: var(--container-padding);
-            }
-        }
-
         .container, .fullwidth {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            margin: 0px auto;
-            min-height: 600px;
-            max-width: 720px;
-            padding: var(--section-padding);
             .content {
-                margin-top: 3rem;
-                .title {}
                 .links {
                     display: flex;
                     justify-content: center;
@@ -53,9 +54,6 @@
                 }
             }
         }
-
-        .media {}
-
     }
 
 }

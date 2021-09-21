@@ -1,7 +1,7 @@
-// Dependencies 
+ 
 import React from 'react'
 
-// Components
+
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import noImage from '../../../assets/img/global/noimage.jpg'
 

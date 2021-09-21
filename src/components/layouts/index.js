@@ -1,27 +1,37 @@
-// Dependencies
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTrans } from '../../i18n/withTrans'
 import CookieConsent from 'react-cookie-consent'
 import { ContextProviderComponent } from '../../provider/context'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { Helmet } from 'react-helmet'
 
-// Components
+
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+import { useTheme } from '../../hooks/useTheme'
 
-import '../global.scss'
+
+import '../app.scss'
 import '../layout.scss'
 
 const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
-    const customCode = useWebsiteConfiguration().settingsCode
+    const customCode    = useWebsiteConfiguration().settingsCode
+    const customCss     = `${useWebsiteConfiguration().settingsCss}`
+    const theme         = useTheme()
 
     switch(pageContext.layout){
         case 'serieDetails':
         case 'watchDetails':
             return (
                 <ContextProviderComponent>
-                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+
+                    <Helmet>
+                        <style>
+                            { ( theme?.cssVariables ) ? `${ theme.cssVariables }` : ''} 
+                        </style>
+                    </Helmet>
+
                     <main>
                         {children}
                     </main>
@@ -37,13 +47,26 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
 
+                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+
+                    <style>
+                        { ( customCss ) ? customCss : ''}
+                    </style>
+
                 </ContextProviderComponent>
             )
             break
+            
         default:
             return (
                 <ContextProviderComponent>
-                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+
+                    <Helmet>
+                        <style>
+                            { ( theme?.cssVariables ) ? `${ theme.cssVariables }` : ''} 
+                        </style>
+                    </Helmet>
+
                     <main>
                         {children}
                     </main>
@@ -58,6 +81,12 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
+
+                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+
+                    <style>
+                        { ( customCss ) ? customCss : ''}
+                    </style>
 
                 </ContextProviderComponent>
             )

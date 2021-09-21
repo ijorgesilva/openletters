@@ -2,25 +2,36 @@
     display: block;
     padding: 2rem 0rem;
 
+    &.light {
+        span {
+            border-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            &:hover{
+                border-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
+
+    }
+
+    &.dark {
+        span {
+            border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            &:hover{
+                border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+    }
+
     span {
         font-weight: 100;
         padding: 0.4rem 1rem;
         margin-left: 1rem;
         border-width: 1px;
         border-style: solid;
-        border-color: var(--color-gray-five);
-        color: var(--color-gray-five);
-        opacity: 0.5;
         transition: var(--transition-fast);
-        &:hover{
-            opacity: 1;
-        }
     }
 
-    &.light {
-        span {
-            border-color: var(--color-gray-one);
-            color: var(--color-gray-one);
-        }
-    }
 }

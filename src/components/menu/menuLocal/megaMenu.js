@@ -1,8 +1,8 @@
-// Dependencies
-import React from "react"
-import { Row, Col, NavDropdown } from "react-bootstrap"
 
-// Components
+import React from 'react'
+import { Row, Col, NavDropdown } from 'react-bootstrap'
+
+
 import SubMenu from './subMenu'
 
 export default function MegaMenu( { index, className, title, content } ){
@@ -15,7 +15,7 @@ export default function MegaMenu( { index, className, title, content } ){
         >
             <Row>
                 {content.map( (menu, index) => (
-                    <Col key={index} className="navcontent" xs={12} md lg> 
+                    <Col key={index} className='navcontent' xs={12} md lg> 
                         
                             { (menu.header) ? <h6 dangerouslySetInnerHTML={{__html: menu.name}}></h6> : <></> }
                             { (menu.submenu) ? <SubMenu content={menu.submenu}></SubMenu> : <></> }

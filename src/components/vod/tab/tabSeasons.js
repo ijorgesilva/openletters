@@ -1,13 +1,17 @@
-// Dependencies
+
 import React from 'react'
 import { Tab, Row, Col, Nav } from 'react-bootstrap'
 
-// Components
+
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import config from '../../../../data/SiteConfig'
 import './tabSeasons.scss'
 
-export default function TabSeasons ( { className, id, title, serie, items, itemsVisible, iconCarousel, count, campus } ) {
+export default function TabSeasons ( 
+    { 
+        className, id, title, series, items, itemsVisible, iconCarousel, count, campus, mode
+    } 
+    ) {
 
     const objLength = (items?.length) ? items.length : 0
 
@@ -16,7 +20,7 @@ export default function TabSeasons ( { className, id, title, serie, items, items
     items.map( item => (
         (item.videoDetails.videoSeason) ?
             (item.videoDetails.videoSeason.status === 'publish') ?
-                ( seasonsList.some(serie => serie['slug'] === item.videoDetails.videoSeason.slug) ) ?
+                ( seasonsList.some(series => series['slug'] === item.videoDetails.videoSeason.slug) ) ?
                     undefined
                 : 
                     seasonsList.push(
@@ -56,11 +60,11 @@ export default function TabSeasons ( { className, id, title, serie, items, items
 
     return (
         
-        <section className={`tabSeasons ${className}`} id={id}>
+        <section className={`tabSeasons ${ mode ? mode : 'light'} ${ className ? className : ''}`} id={id}>
 
                 {
-                    (title) ? 
-                        <h4 className="h-color-six-shade-three mb-5">{title}</h4>
+                    ( title ) ? 
+                        <h4 className="mb-5">{title}</h4>
                     : 
                         undefined
                 }
@@ -85,7 +89,10 @@ export default function TabSeasons ( { className, id, title, serie, items, items
                             <Tab.Content>
                                 {
                                     seasonsList.map( (season, index) => (
-                                        <Tab.Pane eventKey={index}>
+                                        <Tab.Pane 
+                                            eventKey    = {index} 
+                                            key         = {index}
+                                        >
 
                                             <div className="list">
                                                 {   
@@ -93,17 +100,17 @@ export default function TabSeasons ( { className, id, title, serie, items, items
                                                         (item.videoDetails.videoSeason?.slug) ?
                                                             ( item.videoDetails.videoSeason.slug === season.slug ) ?
                                                                 <BlurbVerticalDarkVod 
-                                                                    key={index}
-                                                                    className={ (objLength === index + 1) ? 'last' : undefined }
-                                                                    featuredImage={ ( item.featuredImage.node ) ? 
-                                                                                        item.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
-                                                                                    : 
-                                                                                        undefined 
-                                                                                    }
-                                                                    link={ (item.slug) ? `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` : undefined }
-                                                                    title={ `${item.title}` }
-                                                                    subtitle={ (item.videoDetails.speaker) ? (item.videoDetails.speaker) : undefined }
-                                                                    excerpt={ (item.excerpt) ? item.excerpt : undefined }
+                                                                    key             = {index}
+                                                                    className       = { (objLength === index + 1) ? 'last' : undefined }
+                                                                    featuredImage   = { ( item.featuredImage.node ) ? 
+                                                                                            item.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
+                                                                                        : 
+                                                                                            undefined 
+                                                                                        }
+                                                                    link            = { (item.slug) ? `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` : undefined }
+                                                                    title           = { `${item.title}` }
+                                                                    subtitle        = { (item.videoDetails.speaker) ? (item.videoDetails.speaker) : undefined }
+                                                                    excerpt         = { (item.excerpt) ? item.excerpt : undefined }
                                                                 />
                                                             : undefined
                                                         : undefined

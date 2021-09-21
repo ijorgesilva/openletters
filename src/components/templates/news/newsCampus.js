@@ -1,10 +1,10 @@
-// Dependencies
+
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
 
-// Components
+
 import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
@@ -14,18 +14,19 @@ import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-// Hooks
+
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
-// Styles
+
 import './newsCampus.scss'
 
 export default function NewsCampus ( { data, location, pageContext } ){
 
     const { title, featuredImage, breadcrumbs } = pageContext
 
-    /* Standard fields */
     const { t } = useTranslation()
+    const mode          = 'dark'
+    const contentMode   = 'light'
     
     return (
         <>
@@ -33,6 +34,7 @@ export default function NewsCampus ( { data, location, pageContext } ){
             <HeaderPage 
                 title       = { t('global.news.title') + ' | ' + title }
                 location    = { location } 
+                mode        = { contentMode }
                 cover       = { 
                                 (featuredImage?.node?.localFile) ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -46,11 +48,13 @@ export default function NewsCampus ( { data, location, pageContext } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
+                mode            = { mode }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
+                mode        = { mode }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.blog.title'),
@@ -62,15 +66,15 @@ export default function NewsCampus ( { data, location, pageContext } ){
                                         {
                                             name: t('global.news.title'), 
                                             link: '/' + breadcrumbs.campus + '/' + config.newsPostDetailsSlug, 
-                                            as: "", 
-                                            target: ""
+                                            as: '', 
+                                            target: ''
                                         }
                                     ]
                                 }
             />
 
-            <section className="">
-                <Container className="mt-5 mb-5">
+            <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
+                <Container className='mt-5 mb-5'>
                     <Row>
                         <Col xs={12} md={8}>
                             {
@@ -85,11 +89,12 @@ export default function NewsCampus ( { data, location, pageContext } ){
                                                                     : 
                                                                         undefined    
                                                                 }
+                                            mode            = { contentMode }
                                             title           = { news.title }
                                             subtitle        = { getDate(news.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
                                             tags            =   { 
-                                                                    ( news.newsTags?.nodes ) ? 
-                                                                        news.newsTags 
+                                                                    ( news.tags?.nodes ) ? 
+                                                                        news.tags 
                                                                     : 
                                                                         undefined  
                                                                 }
@@ -99,14 +104,17 @@ export default function NewsCampus ( { data, location, pageContext } ){
                                         />
                                     ))
                                 :
-                                    <AlertEmptyState variant="transparent" className="mt-5" content="" />
+                                    <AlertEmptyState mode = { mode } className='mt-5' content='' />
                             }
                         </Col>
                     </Row>
                 </Container>
             </section>
             
-            <FooterSimpleText campus={ breadcrumbs.campus } />
+            <FooterSimpleText 
+                campus = { breadcrumbs.campus } 
+                mode   = { contentMode }
+            />
 
         </>
     )
@@ -148,7 +156,7 @@ export const query = graphql`
                         }
                     }
                 }
-                newsTags {
+                tags {
                     nodes {
                         slug
                         name
