@@ -1,10 +1,8 @@
 
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-
 
 import BlurbHorizonal from '../blurb/blurbHorizontal'
 import { responsive } from '../../../data/feedConfiguration'
@@ -14,20 +12,6 @@ import { getDate } from '../../components/utils/utils'
 export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, date, count, ...props } ) {
 
     const defaultVisible = 4
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
-            }
-        }
-    `)
-
-    const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
 
     const objLength = items.nodes.length
 
@@ -51,7 +35,6 @@ export default function SectionFeedCarousel ( { title, items, className, id, slu
                                 title={` ${ (count === true) ? index + 1 : '' } obj.title `}
                                 featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                 className={ (objLength === index + 1) ? 'last' : undefined }
-                                noImage={ noImage }
                                 link={ (obj.slug) ? `${slug}${obj.slug}` : null }
                                 subtitle = { (obj.date) ? getDate(obj.date,2,'us','LLLL d, yyyy') : undefined }
                                 excerpt = { (obj.excerpt) ? obj.excerpt : null }

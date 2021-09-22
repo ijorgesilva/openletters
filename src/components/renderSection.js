@@ -40,25 +40,26 @@ export default function RenderSection (
     const sectionTitle      = ( section.sectionDetails.sectionTitle ) ? section.sectionDetails.sectionTitle : undefined
     const sectionContent    = ( section.sectionDetails.sectionContent ) ? section.sectionDetails.sectionContent : undefined
 
+    const sectionConfiguration = section.sectionDetails.sectionConfiguration
+    console.log(sectionConfiguration)
     
-    const sectionId             =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationId ) ? 
-                                        section.sectionDetails.sectionConfiguration.sectionConfigurationId 
+    const sectionId             =   ( sectionConfiguration?.sectionConfigurationId ) ? 
+                                        sectionConfiguration.sectionConfigurationId 
                                     : section.slug
-    const sectionClassname      =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationClassname ) ? 
-                                        `${section.sectionDetails.sectionConfiguration.sectionConfigurationClassname} ${ ( className ) ? className : ''}`
+    const sectionClassname      =   ( sectionConfiguration?.sectionConfigurationClassname ) ? 
+                                        `${sectionConfiguration.sectionConfigurationClassname} ${ ( className ) ? className : ''}`
                                     : `${ ( className ) ? className : ''}`
-    const sectionColorScheme    =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0]  ) ? 
-                                        section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0] === 'inherit' ?
+    const sectionColorScheme    =   ( sectionConfiguration?.sectionConfigurationColorScheme.split(':')[0]  ) ? 
+                                        sectionConfiguration.sectionConfigurationColorScheme.split(':')[0] === 'inherit' ?
                                             mode
-                                        :
-                                            section.sectionDetails.sectionConfiguration.sectionConfigurationColorScheme.split(':')[0]
+                                        : sectionConfiguration?.sectionConfigurationColorScheme.split(':')[0]
                                     : 'light'
-    const sectionContainerWidth =   ( section.sectionDetails.sectionConfiguration.sectionConfigurationContainerWidth ) ? 
-                                        section.sectionDetails.sectionConfiguration.sectionConfigurationContainerWidth.split(':')[0] 
+    const sectionContainerWidth =   ( sectionConfiguration?.sectionConfigurationContainerWidth ) ? 
+                                        sectionConfiguration.sectionConfigurationContainerWidth.split(':')[0] 
                                     : 'container'
-    const sectionBackground     =   section.sectionDetails.sectionConfiguration.sectionConfigurationBackground.backgroundLayer
-    const sectionSize           =   section.sectionDetails.sectionConfiguration.sectionConfigurationSize ?
-                                        section.sectionDetails.sectionConfiguration.sectionConfigurationSize.split(':')[0]
+    const sectionBackground     =   sectionConfiguration?.sectionConfigurationBackground.backgroundLayer
+    const sectionSize           =   sectionConfiguration?.sectionConfigurationSize ?
+                                        sectionConfiguration.sectionConfigurationSize.split(':')[0]
                                     : size ? size : 'md'
 
     switch( true ){
@@ -76,6 +77,7 @@ export default function RenderSection (
                     content     = { sectionContent }
                     className   = { `${ sectionClassname ? sectionClassname : '' }` }
                     mode        = { sectionColorScheme }
+                    size        = { sectionSize }
                     width       = { sectionContainerWidth }
                     subtitle    = { (ctaItem.sectionCtaSubtitle) ? ctaItem.sectionCtaSubtitle : undefined }
                     buttonText  = { (ctaItem.sectionCtaButton.sectionButtonText) ? ctaItem.sectionCtaButton.sectionButtonText : undefined }
@@ -107,6 +109,7 @@ export default function RenderSection (
                         mode        = { sectionColorScheme }
                         className   = { sectionClassname }
                         width       = { sectionContainerWidth }
+                        size        = { sectionSize }
                         subtitle    = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
                         Spotify     = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
                         Soundcloud  = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
@@ -158,6 +161,7 @@ export default function RenderSection (
                                 title        = { videoItems.name }
                                 items        = { filteredVideos.sort(sortByDate)  }
                                 mode         = { sectionColorScheme }
+                                size         = { sectionSize }
                                 width        = { sectionContainerWidth }
                                 campus       = { campus }
                                 order        = 'asc'
@@ -194,6 +198,7 @@ export default function RenderSection (
                     className       = { sectionClassname }
                     title           = { sectionTitle }
                     campus          = { campus }
+                    size            = { sectionSize }
                     mode            = { sectionColorScheme }
                     width           = { sectionContainerWidth }
                     configLayout    =  {{
@@ -366,7 +371,7 @@ export default function RenderSection (
             return(
                 <hr 
                     id          = { sectionId }
-                    className   = {`${ sectionClassname ? sectionClassname : ''}`}
+                    className   = {`${ sectionSize ? sectionSize : 'md' } ${ sectionClassname ? sectionClassname : ''}`}
                     style       = {{ width: '100%' }}
                 />
             )
@@ -490,7 +495,8 @@ export default function RenderSection (
                     id              = { sectionId }
                     content         = { sectionContent }
                     className       = { sectionClassname }
-                    variant         = { sectionColorScheme }
+                    size            = { sectionSize }
+                    mode            = { sectionColorScheme }
                     containerWidth  = { sectionContainerWidth }
                     location        = { location }
                     url             = { videoParams.url }

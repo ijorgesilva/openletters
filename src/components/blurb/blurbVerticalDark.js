@@ -1,14 +1,13 @@
 
 import React from 'react'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
-
 
 import './blurbVerticalDark.scss'
 
 export default function BlurbVerticalDark ( 
-    { title, excerpt, className, link, featuredImage, noImage, target, linkType, iconImage, mode } 
+    { title, excerpt, className, link, featuredImage, target, linkType, iconImage, mode } 
     ) {
 
     return (
@@ -34,19 +33,7 @@ export default function BlurbVerticalDark (
                                         alt=""
                                     />
                                 : 
-                                    (noImage) ?
-                                        <GatsbyImage 
-                                            image={noImage} 
-                                            className="card-img-top"
-                                            alt=""
-                                        />
-                                    :
-                                        <StaticImage
-                                            src="../../assets/img/global/noImage.jpg"
-                                            className="card-img-top"
-                                            layout="fixed"
-                                            alt=""
-                                        />
+                                    <div className="card-img-top"></div>
                             }
                         </div>
                         <div className="card-body">
@@ -83,19 +70,7 @@ export default function BlurbVerticalDark (
                                         alt=""
                                     />
                                 : 
-                                    (noImage) ?
-                                        <GatsbyImage 
-                                            image={noImage} 
-                                            className="card-img-top"
-                                            alt=""
-                                        />
-                                    :
-                                        <StaticImage
-                                            src="../../assets/img/global/noImage.jpg"
-                                            className="card-img-top"
-                                            layout="fixed"
-                                            alt=""
-                                        />
+                                    <div className="card-img-top"></div>
                             }
                         </div>
                         <div className="card-body">

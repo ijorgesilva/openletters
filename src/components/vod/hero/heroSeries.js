@@ -41,7 +41,7 @@ export default function HeroSeries (
                     }
                 </div>
 
-                <div className='jumbotron content-container'>
+                <div className='jumbotron'>
                     <div className='about'>
                         {
                             (featuredVideo) ? 
@@ -106,14 +106,7 @@ export default function HeroSeries (
                                             alt={title}
                                         />
                                     :
-                                        <StaticImage
-                                            className='noTrailer'
-                                            src='../../../assets/img/global/noimage.jpg'
-                                            layout='fullWidth'
-                                            objectFit='cover'
-                                            objectPosition='50% 50%'
-                                            alt=''
-                                        />
+                                        undefined
                             }
                         </div>
                     </div>

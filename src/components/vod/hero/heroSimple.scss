@@ -50,9 +50,10 @@
         align-items: center;
         margin-bottom: 0px;
         border-radius: unset;
-        padding: 10rem 0rem 7rem 0rem;
+        padding: 10rem 15px 7rem 15px;
 
         .content {
+            z-index: 2;
             p {
                 max-width: 520px;
                 font-size: 1.2rem;
@@ -94,6 +95,7 @@
         }
 
         .heroBackground {
+            z-index: 0;
             position: absolute;
             display: flex;
             justify-content: center;

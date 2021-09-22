@@ -1,8 +1,6 @@
-
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
-
 
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
@@ -13,9 +11,7 @@ import RenderSection from '../../renderSection'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
 
 import './watchCampus.scss'
 

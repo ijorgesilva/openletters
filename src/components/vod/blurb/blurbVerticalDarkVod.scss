@@ -1,8 +1,9 @@
-.BlurbVerticalDarkVod {
+.blurbVerticalVod {
 
     border: unset;
     background-color: unset;
     text-decoration: unset;
+
 
     &.light {
         &:hover{
@@ -30,11 +31,11 @@
                 font-weight: normal;
                 opacity: 0.4;
             }
-            .card-img-container {
-                picture{
-                    &::after {
-                        background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
-                    }
+        }
+        .card-img-container{ 
+            .gatsby-image-wrapper {
+                &::after {
+                    background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
                 }
             }
         }
@@ -66,18 +67,18 @@
                 font-weight: normal;
                 opacity: 0.4;
             }
-            .card-img-container {
-                picture{
-                    &::after {
-                        background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
-                    }
+        }
+        .card-img-container{ 
+            .gatsby-image-wrapper {
+                &::after {
+                    background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
                 }
             }
         }
     }
 
-
     .card-body {
+        padding: 15px;
         h5 {
             a {
                 opacity: 0.9;
@@ -105,13 +106,11 @@
             opacity: 0.4;
         }
     }
-
     .card-img-container {
         position: relative;
         transition: all 300ms ease;
         border: 1px solid transparent;
         border-radius: 5px;
-
         .card-icon {
             display: flex;
             align-items: center;
@@ -130,7 +129,7 @@
                 height: 45px;
             }
         }
-        picture{
+        .gatsby-image-wrapper {
             &::after {
                 content: '';
                 position: absolute;

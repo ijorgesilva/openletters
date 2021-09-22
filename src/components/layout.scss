@@ -4,10 +4,6 @@
 REFACTOR 
 */
 
-.badge-pill {
-    border-radius: 100px;
-}
-
 /* TODO: quick fix */
 .link-more {
     display: none;
@@ -62,115 +58,10 @@ REFACTOR
     }
 }
 
-/*
- * 
- */
-.alert-top {
-    margin-top: -130px;
-}
-
-@include media("≥phone", "<850px") {
-    .alert-top {
-        margin-top: -110px;
-    }
-}
-.alert-announcement .alert {
-    color: var(--color-one-dark-shade-three);
-    background-color: var(--color-one-shade-three);
-    border-color: var(--color-one);
-}
-
-
-.c-testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 40px;
-    grid-template-rows: 1fr;
-    overflow: hidden;
-    position: relative;
-}
-
-.c-testimonials--wall .card {
-    min-height: 400px;
-}
-
-.c-testimonials--wall .c-testimonials__grid {
-    max-height: 100vh;
-}
-
-.c-testimonials {
-    padding: 100px 0px 0px 0px;
-}
-
-.testimonial-card .card-up {
-    height: 7px;
-    overflow: hidden;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-}
-
-.testimonial-card span {
-    font-size: 14px;
-    color: var(--color-gray-five);
-}
-
-.testimonial-card .avatar {
-    width: 120px;
-    margin-top: 30px;
-    overflow: hidden;
-    border: 5px solid #fff;
-    border-radius: 50%;
-}
-
-.testimonial-card .avatar img {
-    width: 100%;
-    object-fit: cover;
-    height: 110px;
-}
-
-.rounded-circle {
-    border-radius: 50% !important;
-}
-
-.testimonial-card .card-body {
-    text-align: center;
-}
-
-.a-goingup {
-    position: relative;
-    top: -150px;
-}
-
-.a-goingdown {
-    position: relative;
-    bottom: -100px;
-}
-
 iframe {
     width: 1px;
     min-width: 100%;
 }
-
-/***/
-.c-follow__social {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20px,1fr));
-    grid-gap: 15px;
-    justify-items: center;
-}
-.c-follow__social a i{
-    transition: all 300ms ease;
-    font-size: 1.2rem;
-}
-.c-follow__social a i:hover{
-    color: var(--color-five);
-}
-.c-follow__apps {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-}
-
 
 /*******************************************************
  * Wordpress code
@@ -236,23 +127,6 @@ figcaption {
 #wrapper-navbar img {
   width: 202px;
   height: 33px; }
-
-/*
-  Global
- */
- // TODO: Refactor to use already existing classes
-.content-container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
-  position: relative;
-  &.fluid {
-    width: 100%;
-    max-width: unset;
-  }
-}
- 
 
 /* 
   Bootstrap

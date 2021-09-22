@@ -117,7 +117,7 @@ export const useTheme = () => {
     */
     
     theme.layout = {
-        spacer: ( layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerValue ) ? layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerValue+layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerUnit : 1,
+        spacer: ( layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerValue ) ? layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerValue+layoutStyles.settingsStylesLayoutSpacer.settingsStylesLayoutSpacerUnit : '1rem',
         width:  {
                     sm: ( layoutStyles.settingsStylesLayoutWidth.settingsStylesLayoutWidthSm ) ? layoutStyles.settingsStylesLayoutWidth.settingsStylesLayoutWidthSm :540,
                     md: ( layoutStyles.settingsStylesLayoutWidth.settingsStylesLayoutWidthMd ) ? layoutStyles.settingsStylesLayoutWidth.settingsStylesLayoutWidthMd :720,
@@ -271,23 +271,19 @@ export const useTheme = () => {
             /*
              * Layout
              */
-            // Spacer
             --spacer: ${theme.layout.spacer};
 
-            // Container max width
             --width-sm: ${theme.layout.width.sm}px;
             --width-md: ${theme.layout.width.md}px;
             --width-lg: ${theme.layout.width.lg}px;
             --width-xl: ${theme.layout.width.xl}px;
             
-            // Border
             --border-width: 1px;
             --border-radius: 5px;
 
             /*
              * Font
              */
-
 
             /*
              * Header

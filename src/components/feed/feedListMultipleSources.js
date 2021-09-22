@@ -1,12 +1,10 @@
-
 import React from 'react'
-
 
 import BlurbVertical from '../blurb/blurbVertical'
 import config from '../../../data/SiteConfig'
 import './feedListMultipleSources.scss'
 
-export default function FeedListMultipleSources ( { data, className, slug, noImage, excerpt, ...props } ) {
+export default function FeedListMultipleSources ( { data, className, slug, excerpt } ) {
 
     return (
         <div className={`feedListMultipleSources ${ (className) ? className : ''}`}>
@@ -24,7 +22,6 @@ export default function FeedListMultipleSources ( { data, className, slug, noIma
                                             linkType={ (item.linkDetails.linkLink.linkLinkType) ? item.linkDetails.linkLink.linkLinkType : undefined }
                                             featuredImage={ (item.featuredImage) ? item.featuredImage.node.localFile.childImageSharp.fluid : undefined }
                                             excerpt={ (item.excerpt && excerpt === true) ? item.excerpt : undefined }
-                                            noImage={ (noImage) ? noImage.childImageSharp.fluid : undefined }
                                         />
                                     </div>
                                 :  
@@ -35,10 +32,10 @@ export default function FeedListMultipleSources ( { data, className, slug, noIma
                                                 link={`${config.blogPostDetailsSlug}/${item.slug}`}
                                                 featuredImage={(item.featuredImage) ? item.featuredImage.node.localFile.childImageSharp.fluid : undefined}
                                                 excerpt={ (item.excerpt && excerpt === true) ? item.excerpt : undefined }
-                                                noImage={ (noImage) ? noImage.childImageSharp.fluid : undefined }
                                             />
                                         </div>
-                                    : undefined
+                                    : 
+                                        undefined
                                     
                             }
                         </>

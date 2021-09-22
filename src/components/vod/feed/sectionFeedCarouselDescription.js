@@ -1,11 +1,9 @@
 
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import TextTruncate from 'react-text-truncate'
-
 
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
@@ -14,20 +12,6 @@ import './sectionFeedCarousel.scss'
 export default function SectionFeedCarouselDescription( { title, description, items, className, itemsVisible, id, iconCarousel, ...props} ){
     
     const defaultVisible = 3
-
-    const data = useStaticQuery(graphql`
-        query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
-            }
-        }
-    `)
-
-    const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
 
     const objLength = items.length
 
@@ -67,14 +51,12 @@ export default function SectionFeedCarouselDescription( { title, description, it
                                         key={index}
                                         className={ (objLength === index + 1) ? 'last' : undefined }
                                         featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
-                                        noImage={ (noImage) ? noImage : null }
                                         link={ (obj.slug) ? `/watch/message/${obj.slug}` : null }
                                         title={ (obj.videoDetails.videoSeries) ? obj.title : null }
                                         serieTitle={(obj.videoDetails.videoSeries.title) ? obj.videoDetails.videoSeries.title : null}
                                         serieLink={(obj.videoDetails.videoSeries.slug) ? `/watch/serie/${obj.videoDetails.videoSeries.slug}` : null}
                                         subtitle={ (obj.videoDetails.speaker) ? (obj.videoDetails.speaker) : null }
                                         excerpt={ (obj.excerpt) ? obj.excerpt : null }
-                                        // iconImage={ (props.iconCarousel) ? props.iconCarousel : null }
                                     />
                                 ))
                             }

@@ -91,6 +91,9 @@
 
     .overview {
         padding: 0 15px;
+        .extract {
+            padding-bottom: var(--spacer);
+        }
         .introCard {
             margin-bottom: 2rem;
             &.introCardGrid {

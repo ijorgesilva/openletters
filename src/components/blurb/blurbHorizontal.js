@@ -21,7 +21,6 @@ export default function BlurbHorizontal(
         keyIndex, 
         featuredImage, 
         className, 
-        noImage, 
         link, 
         tag, 
         tags, 
@@ -32,10 +31,9 @@ export default function BlurbHorizontal(
     } 
     ) {
 
-    
     const { t } = useTranslation()
 
-    const image = (featuredImage) ? featuredImage : (noImage) ? noImage : undefined
+    const image = featuredImage ? featuredImage : undefined
     const tagClass = (tagClassName) ? tagClassName : ''
     const tagsCounter = (tags) ? tags.nodes.length : 0
 

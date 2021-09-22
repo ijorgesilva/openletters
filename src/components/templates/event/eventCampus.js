@@ -1,9 +1,7 @@
-
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
-
 
 import AlertEmptyState from '../../alert/alertEmptyState'
 import Navigation from '../../menu/navigation'
@@ -14,10 +12,7 @@ import HeaderPage from '../../headerPage'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import config from '../../../../data/SiteConfig'
 
-
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
-
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {
@@ -70,7 +65,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
             />
 
             <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
-                <Container className='mt-5 mb-5'>
+                <Container className='mt-3 mb-3'>
                     <Row>
                         <Col xs={12} md={8}>
                             {

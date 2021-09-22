@@ -50,19 +50,23 @@
    plugins: [
 
         /*
-         * Functions
-         */
+        * Functions
+        */
         `gatsby-plugin-styled-components`, // REMOVE
-         "gatsby-plugin-react-helmet", 
-         "node-sass", 
-         "gatsby-plugin-sass", 
-         {
-           resolve: `gatsby-plugin-layout`,
-           options: {
-             component: `${__dirname}/src/components/layouts/index.js`
-           }
-         },
-         {
+        "gatsby-plugin-react-helmet", 
+        {
+          resolve: `gatsby-plugin-sass`,
+          options: {
+            implementation: require("node-sass"),
+          },
+        },
+        {
+          resolve: `gatsby-plugin-layout`,
+          options: {
+          component: `${__dirname}/src/components/layouts/index.js`
+        }
+        },
+        {
           resolve: "gatsby-plugin-manifest",
           options: {
             name: config.siteTitle,
@@ -88,118 +92,118 @@
           }
         },
 
-         /*
-          * Sources & Assets
-          */
-         {
-           resolve: `gatsby-source-wordpress`,
-           options: {
-             url: process.env.WPGRAPHQL_URL || config.wordpressUri,
-             verbose: true,
-             // develop: {
-             //   hardCacheMediaFiles: true,
-             // },
-             schema: {
-               perPage: 100, // currently set to 100
-               requestConcurrency: 100, // currently set to 5
-               previewRequestConcurrency: 100, // currently set to 2
-             },
-             debug: {
-               graphql: {
-                 writeQueriesToDisk: true,
-                 showQueryVarsOnError: true,
-               },
-             },
-             type: {
-               Post: {
-                 limit: 5000,
-               },
-             },
-           },
-         },
-
-         {
-           resolve: `gatsby-source-filesystem`,
-           options: {
-             name: `images`,
-             path: path.join(__dirname, `src`, `assets`),
-           },
-         },
-
-         /*
-          * Analytics
-          */
-         {
-           resolve: `gatsby-plugin-gdpr-cookies`,
-           options: {
-             googleAnalytics: {
-               trackingId: config.googleAnalyticsID,
-               anonymize: true
-             },
-             facebookPixel: {
-               pixelId: config.facebookPixel,
-             },
-             environments: ['production', 'development']
-           },
-         },
-
-         /*
-          * Image Processing
-          */
-         `gatsby-plugin-image`,
-         `gatsby-transformer-sharp`,
-         {
-           resolve: `gatsby-plugin-sharp`,
-           options: {
-             defaults: {},// Defaults used for gatsbyImageData and StaticImage
-             failOnError: true, // Set to false to allow builds to continue on image errors
-             stripMetadata: true,
-             defaultQuality: 60,
-             // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
-           },
-         },
-
-         /*
-          * SEO related
-          */
-         {
-           resolve: `gatsby-plugin-canonical-urls`,
-           options: {
-             siteUrl: config.canonicalUrl,
-             stripQueryString: true,
-           },
-         },
-         {
-           resolve: 'gatsby-plugin-robots-txt',
-           options: {
-             host: config.siteUrl,
-             policy: [
-               { userAgent: '*', allow: '/' }
-             ]
-           }
-         },
-         `gatsby-plugin-sitemap`,
-
-         /*
-          * Search: Algolia
-          * Description: This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
-          */
-         {
-            resolve: `gatsby-plugin-algolia`,
-            options: {
-              appId: process.env.GATSBY_ALGOLIA_APP_ID,
-              apiKey: process.env.ALGOLIA_ADMIN_KEY,
-              queries: require("./src/utils/algolia-queries"),
-              matchFields: ['slug', 'modified'],
-              enablePartialUpdates: true,
-              chunkSize: 10000,
+        /*
+        * Sources & Assets
+        */
+        {
+          resolve: `gatsby-source-wordpress`,
+          options: {
+            url: process.env.WPGRAPHQL_URL || config.wordpressUri,
+            verbose: true,
+            // develop: {
+            //   hardCacheMediaFiles: true,
+            // },
+            schema: {
+              perPage: 100, // currently set to 100
+              requestConcurrency: 100, // currently set to 5
+              previewRequestConcurrency: 100, // currently set to 2
             },
+            debug: {
+              graphql: {
+                writeQueriesToDisk: true,
+                showQueryVarsOnError: true,
+              },
+            },
+            type: {
+              Post: {
+                limit: 5000,
+              },
+            },
+          },
         },
 
-         /*
-          * Redirect
-          * Must be the last in the array
-          */
+        {
+          resolve: `gatsby-source-filesystem`,
+          options: {
+            name: `images`,
+            path: path.join(__dirname, `src`, `assets`),
+          },
+        },
+
+        /*
+        * Analytics
+        */
+        {
+          resolve: `gatsby-plugin-gdpr-cookies`,
+          options: {
+            googleAnalytics: {
+              trackingId: config.googleAnalyticsID,
+              anonymize: true
+            },
+            facebookPixel: {
+              pixelId: config.facebookPixel,
+            },
+            environments: ['production', 'development']
+          },
+        },
+
+        /*
+        * Image Processing
+        */
+        `gatsby-plugin-image`,
+        `gatsby-transformer-sharp`,
+        {
+          resolve: `gatsby-plugin-sharp`,
+          options: {
+            defaults: {},// Defaults used for gatsbyImageData and StaticImage
+            failOnError: true, // Set to false to allow builds to continue on image errors
+            stripMetadata: true,
+            defaultQuality: 60,
+            // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
+          },
+        },
+
+        /*
+        * SEO related
+        */
+        {
+          resolve: `gatsby-plugin-canonical-urls`,
+          options: {
+            siteUrl: config.canonicalUrl,
+            stripQueryString: true,
+          },
+        },
+        {
+          resolve: 'gatsby-plugin-robots-txt',
+          options: {
+            host: config.siteUrl,
+            policy: [
+            { userAgent: '*', allow: '/' }
+            ]
+          }
+        },
+        `gatsby-plugin-sitemap`,
+
+        /*
+        * Search: Algolia
+        * Description: This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+        */
+        {
+          resolve: `gatsby-plugin-algolia`,
+          options: {
+            appId: process.env.GATSBY_ALGOLIA_APP_ID,
+            apiKey: process.env.ALGOLIA_ADMIN_KEY,
+            queries: require("./src/utils/algolia-queries"),
+            matchFields: ['slug', 'modified'],
+            enablePartialUpdates: true,
+            chunkSize: 10000,
+          },
+        },
+
+        /*
+        * Redirect
+        * Must be the last in the array
+        */
         `gatsby-plugin-meta-redirect`,
           
    ],

@@ -8,13 +8,26 @@ import { useTranslation } from "react-i18next"
 import './sectionPodcast.scss'
 
 export default function SectionPodcast ( 
-    { className, id, title, subtitle, content, Spotify, Soundcloud, iTunes, graphic, mode, width } 
+    { 
+        className, 
+        id, 
+        title, 
+        subtitle, 
+        content, 
+        Spotify, 
+        Soundcloud, 
+        iTunes, 
+        graphic, 
+        mode, 
+        width, 
+        size,
+     } 
     ){
         
     const { t } = useTranslation()
     
     return(
-        <section className={`sectionPodcast ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id}>
+        <section className={`sectionPodcast ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id}>
             <Container fluid = { width === 'container' ? false : true }>
                 <Row>
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import TagSimple from './tagSimple'
+import { Container } from 'react-bootstrap'
 
 export default function SectionTags ( 
     { id, className, mode, tags, tagClass } 
@@ -9,7 +10,7 @@ export default function SectionTags (
             className = {`sectionTags pb-5 ${ mode ? mode : '' } ${ className ? className : '' }`} 
             id        = { id } 
         >
-            <div className = "content-container" >
+            <Container fluid>
                 {
                     ( tags?.length > 0 ) ?
                         <TagSimple 
@@ -20,7 +21,7 @@ export default function SectionTags (
                     :
                         undefined
                 }
-            </div>
+            </Container>
         </section>
     )
 }

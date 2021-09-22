@@ -30,7 +30,7 @@ export function getSerieLink(data){
     return serieLink
 }
 
-export function getHeroBackground(data, noImage) {
+export function getHeroBackground(data) {
     let heroImage
     
     if(data.featuredImage.node.localFile.childImageSharp) {
@@ -38,9 +38,6 @@ export function getHeroBackground(data, noImage) {
     }
     else if(data.videoDetails.videoSeries.serieGraphics.poster) {
         heroImage = data.videoDetails.videoSeries.serieGraphics.poster.localFile.childImageSharp.fluid.src
-    }
-    else {
-        heroImage = noImage.fluid.src
     }
     return heroImage
 }

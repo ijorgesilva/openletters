@@ -1,19 +1,27 @@
-
 import React from 'react'
 import { Link } from 'gatsby'
 import TextTruncate from 'react-text-truncate'
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
-
+import { GatsbyImage } from "gatsby-plugin-image"
 
 import './blurbVerticalDarkVod.scss'
 
 export default function BlurbVerticalDarkVod ( 
-    { className, link, iconImage, featuredImage, title, serieTitle, serieLink, excerpt, mode } 
+    { 
+        className, 
+        link, 
+        iconImage, 
+        featuredImage, 
+        title, 
+        serieTitle, 
+        serieLink, 
+        excerpt, 
+        mode 
+    } 
     ) {
 
     return (
         
-            <div className={`BlurbVerticalDarkVod card user-select-none ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`}>
+            <div className={`blurbVerticalVod card user-select-none ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`}>
                 
                     <div className="card-img-container">
                         <Link to={link}>
@@ -29,15 +37,11 @@ export default function BlurbVerticalDarkVod (
                                 ( featuredImage ) ? 
                                     <GatsbyImage 
                                         image={featuredImage} 
-                                        className="card-img-top"
+                                        className="card-img-top aspect-ratio-16_9"
                                         alt=""
                                     />
                                 : 
-                                    <StaticImage 
-                                        src={'../../../assets/img/global/noimage.jpg'} 
-                                        className="card-img-top" 
-                                        alt="" 
-                                    />
+                                    <div className="card-img-top" alt=""></div>
                             }
                         </Link>
                     </div>

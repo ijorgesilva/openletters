@@ -15,7 +15,20 @@ import { useLatestSeries } from '../../../hooks/useLatestSeries'
 
 import './sectionLatestSeries.scss'
 
-export default function SectionLatestSeries ( { title, className, id, campus, styles, infinite, configLayout, mode, width  } ) {
+export default function SectionLatestSeries ( 
+    { 
+        title, 
+        className, 
+        id, 
+        campus, 
+        styles, 
+        infinite, 
+        configLayout, 
+        mode, 
+        width,
+        size,
+    } 
+    ) {
     
     const latestSeries = useLatestSeries( campus )
     const objLength = ( latestSeries ) ? latestSeries.length : 0
@@ -30,7 +43,7 @@ export default function SectionLatestSeries ( { title, className, id, campus, st
 
     return (
         <section 
-            className   = {`sectionLatestSeries pt-4 pb-4 ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`} 
+            className   = {`sectionLatestSeries ${ size ? size : 'mf' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} 
             id          = {id} 
             style       = {styles}
         >

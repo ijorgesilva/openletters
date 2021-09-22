@@ -38,21 +38,23 @@ const config = {
   
     /* Watch */
     watchSlug: "watch",
-    watchMessageDetailsSlug: "message",
-    watchSeriesDetailsSlug: "series",
-    blogPostDetailsSlug: "blog",
+    watchMessageDetailsSlug: "m",
+    watchSeriesDetailsSlug: "s",
 
     /* News */
-    newsPostDetailsSlug: "news",
+    newsPostDetailsSlug: "n",
 
     /* Events */
-    eventPostDetailsSlug: "events",
+    eventPostDetailsSlug: "e",
 
     /* Pages */
     pagesSlug: 'p',
 
+    /* post */
+    blogPostDetailsSlug: "b",
+
     /* Attachments */
-    attachmentSlug: 'document',
+    attachmentSlug: 'd',
 
     /* Groups */
     groupTypeSlug: "gt",
@@ -63,7 +65,7 @@ const config = {
 
     /* Classes */
     classesSlug: "c",
-    lessonSlug: "l",
+    lessonSlug: "cl",
 
     /* Serve */
     serveSlug: "s",

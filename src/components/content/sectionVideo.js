@@ -5,31 +5,34 @@ import ReactPlayer from 'react-player'
 
 import './sectionVideo.scss'
 
-export default function SectionVideo ( {
-    title,
-    id,
-    content,
-    className,
-    variant,
-    containerWidth,
-    location,
-    url,
-    thumbnail,
-    controls,
-    height,
-    width,
-    light,
-    loop,
-    muted,
-    pip,
-    volume,
-    autoplay,
-} ) {
+export default function SectionVideo ( 
+    {
+        title,
+        id,
+        content,
+        className,
+        mode,
+        containerWidth,
+        location,
+        url,
+        thumbnail,
+        controls,
+        height,
+        width,
+        light,
+        loop,
+        muted,
+        pip,
+        volume,
+        autoplay,
+        size,
+    } 
+    ) {
 
     return (
         <section
             id          = {id}
-            className   = {`sectionVideo ${ (className) ? className : ''} ${ (variant) ? variant : 'light' }`}
+            className   = {`sectionVideo ${ size ? size : 'md'} ${ mode ? mode : 'light' } ${ className ? className : ''}`}
         >
             <div className={`columns`}>
                 <div className={`${ ( containerWidth ) ? containerWidth : 'container' }`}>

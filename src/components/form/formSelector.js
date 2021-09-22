@@ -27,7 +27,6 @@ export default function FormSelector (
 
     const queryString = iframeQueryStrings ? `${config.wordpressRootUri}${form.uri}${iframeQueryStrings}` : `${config.wordpressRootUri}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
     
-    console.log(form)
     switch ( true ){
         /*
         * Single Column

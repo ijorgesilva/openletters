@@ -6,7 +6,6 @@ import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-
 import BlurbHorizonal from '../blurb/blurbHorizontal'
 import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'
@@ -21,13 +20,6 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
 
     const data = useStaticQuery(graphql`
         query{
-            noImage: file(relativePath: {eq: "img/global/noimage.jpg"}) {
-                childImageSharp {
-                    fluid {
-                        src
-                    }
-                }
-            }
             eventIcon: file(relativePath: {eq: "img/global/icon-calendar-white.svg"}) {
                 publicURL
             }
@@ -36,8 +28,6 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
             }
         }
     `)
-
-    const noImage = data.noImage ? data.noImage : data.noImage.childImageSharp.fluid.src
 
     const objLengthOne = itemsNews.nodes.length
     const objLengthTwo = itemsEvents.nodes.length
@@ -64,7 +54,6 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                     title={ obj.title }
                                     featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                     className={ (objLengthOne === index + 1) ? 'last' : undefined }
-                                    noImage={ noImage }
                                     // tag={"<img src='"+data.newsIcon.publicURL+"' alt='News'/> News"}
                                     tag={t('global.news')}
                                     link={ (obj.slug) ? `${slugOne}${obj.slug}` : null }
@@ -78,11 +67,11 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                         (itemsEvents && slugTwo) ?
                             itemsEvents.nodes.map( (obj, index) => (
                                 <BlurbHorizonal 
+                                    key = { index }
                                     keyIndex={ index }
                                     title={ obj.title }
                                     featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                     className={ (objLengthTwo === index + 1) ? 'last' : undefined }
-                                    noImage={ noImage }
                                     // tag={"<img src='"+data.eventIcon.publicURL+"' alt='Event'/> Event"}
                                     tag={t('global.event')}
                                     link={ (obj.slug) ? `${slugTwo}${obj.slug}` : null }

@@ -1,9 +1,6 @@
  
 import React from 'react'
-
-
 import BlurbHorizontal from '../blurb/blurbHorizontal'
-import noImage from '../../assets/img/global/noimage.jpg'
 
 export default {
     title: 'content/blurb/blurbHorizontal',
@@ -20,9 +17,7 @@ const Template = (args) => <BlurbHorizontal {...args} />
 export const Primary = Template.bind({})
 Primary.args = {
     key: '',
-    featuredImage: noImage,
     className: '',
-    noImage: noImage,
     link: '#',
     title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     tags: '',

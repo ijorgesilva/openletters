@@ -1,7 +1,5 @@
 import React from "react"
 
-import { useStaticQuery, graphql } from 'gatsby'
-
 // const querySite = useStaticQuery(graphql`
 // query SiteTitleQuery {
 //   site {

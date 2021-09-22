@@ -32,6 +32,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
             <HeaderPage 
                 title       = { t('global.blog.title') + ' | ' + title }
                 location    = { location } 
+                className   = 'blogCampus'
                 mode        = { contentMode }
                 cover       = { 
                                 (featuredImage?.node?.localFile) ?
@@ -72,7 +73,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
             />
 
             <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
-                <Container className='mt-5 mb-5'>
+                <Container className='mt-3 mb-3'>
                     <Row>
                         <Col xs={12} md={8}>
                             {

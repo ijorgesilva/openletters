@@ -1,9 +1,6 @@
- 
 import React from 'react'
 
-
 import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
-import noImage from '../../../assets/img/global/noimage.jpg'
 
 export default {
     title: 'vod/blurb/blurbVerticalDarkVod',
@@ -23,7 +20,6 @@ Primary.args = {
     link: '#',
     iconImage: '',
     featuredImage: '',
-    noImage: noImage,
     title: 'Test',
     serieTitle: 'Building the House',
     serieLink: '#',

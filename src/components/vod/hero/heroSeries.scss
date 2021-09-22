@@ -22,9 +22,6 @@
                 }
                 .trailer {
                     .playButton {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
                         > a {
                             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
                             > div {
@@ -66,9 +63,6 @@
                 }
                 .trailer {
                     .playButton {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
                         > a {
                             color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                             > div {
@@ -141,7 +135,7 @@
                 .playButton {
                     position: absolute;
                     width: 100%;
-                    height: 100%;
+                    height: calc(100% - 45px);
                     > a {
                         display: flex;
                         justify-content: center;
