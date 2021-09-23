@@ -36,7 +36,7 @@ export default function HeroSimple(
         <section className={`heroSimple ${ mode ? ' ' + mode : 'light' } ${ className ? ' ' + className : '' }`} id={id}>
             <Jumbotron className=''>
 
-                <Container className='content'>
+                <Container className='content' fluid>
                     {
                         (iconSeries && iconSeriesLink) ?
                             <Link to={`${iconSeriesLink}`}>

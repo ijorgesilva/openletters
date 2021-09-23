@@ -50,7 +50,7 @@
                 &.btn {
                     color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
                     &:hover {
-                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
                     }
                     &.active {
                         color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);

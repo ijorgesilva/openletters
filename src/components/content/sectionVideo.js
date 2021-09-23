@@ -1,7 +1,5 @@
-
 import React from 'react'
 import ReactPlayer from 'react-player'
-
 
 import './sectionVideo.scss'
 
@@ -48,33 +46,24 @@ export default function SectionVideo (
                     
                     {
                         ( content ) ?
-                            <div className='content'
-                                dangerouslySetInnerHTML={{__html: content}}
-                            ></div>
+                            <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
                         :
                             undefined
                     }
                     
-                    <div className="player-container">
+                    <div className='player-container noselect'>
                         <ReactPlayer
                             className   = {`react-player`}
                             url         = { url }
-                            controls    = { ( controls ) ? controls : true }
-                            height      = { `${ ( height ) ? width : '100%' }` }
-                            width       = { `${ ( width ) ? width : '100%' }` }
-                            light       = { ( light ) ? light : false }
-                            loop        = { ( loop ) ? loop : false }
-                            muted       = { ( muted ) ? muted : false }
-                            pip         = { ( pip ) ? pip : false }
-                            volume      = { ( volume ) ? volume : 1 }
-                            playing     = { ( autoplay ) ? autoplay : false }
-                            config      = {{
-                                                file: {
-                                                    attributes: {
-                                                        poster: thumbnail,
-                                                    }
-                                                }
-                                            }}
+                            controls    = { controls ? controls : true }
+                            height      = { `${ height ? width : '100%' }` }
+                            width       = { `${ width ? width : '100%' }` }
+                            light       = { light ? thumbnail : false }
+                            loop        = { loop ? loop : false }
+                            muted       = { muted ? muted : false }
+                            pip         = { pip ? pip : false }
+                            volume      = { volume ? volume : 1 }
+                            playing     = { autoplay ? autoplay : false }
                         />
                     </div>
 

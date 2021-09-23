@@ -17,7 +17,17 @@ import config from '../../../data/SiteConfig'
 
 import './menuGlobal.scss'
 
-export default function MenuGlobal( { followOptions, helpMenu, giveMenu, className, location, searchIndices, mode } ){
+export default function MenuGlobal( 
+    { 
+        followOptions, 
+        helpMenu, 
+        giveMenu, 
+        className, 
+        location, 
+        searchIndices, 
+        mode,
+    } 
+    ){
 
     const { t } = useTranslation()
 

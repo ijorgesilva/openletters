@@ -327,7 +327,7 @@
     }
 
     a:hover {
-        color: var(--color-one-dark-shade-one);
+        color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)
     }
 
     /*
@@ -466,8 +466,8 @@
         margin-bottom: 0rem;
 
         &.dark{
-            border-top: 1px solid rgba(var(--color-six-shade-one),0.2);
-            background-color: rgba(var(--color-six-dark-shade-three),1);
+            border-top: 1px solid rgba(hsla(var(--light-h), var(--light-s), var(--light-l), 1),0.2);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             padding-bottom: 0rem;
         }
     }
@@ -523,20 +523,7 @@
     /*
      * Spacing
      */
-    .hero {
-        &.sm {
-            min-height: 200px;
-        }
-        &.md {
-            min-height: 400px;
-        }
-        &.xl {
-            min-height: 600px;
-            max-height: 100vh;
-        }
-
-    }
-    .hero,
+    
     section {
         &.sm {
             padding-top: calc(var(--spacer) * 0.5);
@@ -549,11 +536,32 @@
         &.xl {
             padding-top: calc(var(--spacer) * 2);
             padding-bottom: calc(var(--spacer) * 2);
-            max-height: 80vh;
         }
         &.none {
             padding-top: 0rem;
             padding-bottom: 0rem;
+        }
+    }
+
+    .hero {
+        &.sm {
+            min-height: 200px;
+            padding-top: calc(var(--spacer) * 0.5);
+            padding-bottom: calc(var(--spacer) * 0.5);
+        }
+        &.md {
+            min-height: 400px;
+            padding-top: calc(var(--spacer) * 1);
+            padding-bottom: calc(var(--spacer) * 1);
+        }
+        &.xl {
+            min-height: 600px;
+            max-height: 100vh;
+            padding-top: calc(var(--spacer) * 2);
+            padding-bottom: calc(var(--spacer) * 2);
+        }
+        &.none {
+            padding: 0rem;
         }
     }
 
@@ -628,12 +636,16 @@
     /*
      * Light/Dark mode
      */
-    body {
+    html {
         &.light {
-            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            body {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
         }
         &.dark {
-            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            body {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
         }
     }
     section {

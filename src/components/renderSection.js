@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
@@ -31,7 +30,6 @@ export default function RenderSection (
     }
     ) {
     
-    
     const { t } = useTranslation()
 
     // General
@@ -41,7 +39,6 @@ export default function RenderSection (
     const sectionContent    = ( section.sectionDetails.sectionContent ) ? section.sectionDetails.sectionContent : undefined
 
     const sectionConfiguration = section.sectionDetails.sectionConfiguration
-    console.log(sectionConfiguration)
     
     const sectionId             =   ( sectionConfiguration?.sectionConfigurationId ) ? 
                                         sectionConfiguration.sectionConfigurationId 
@@ -488,7 +485,7 @@ export default function RenderSection (
                 'volume': videoParams.sectionVideoConfigurationVolume,
                 'autoplay': videoParams.sectionVideoConfigurationAutoplay,
             }
-
+            
             return(
                 <SectionVideo
                     title           = { sectionTitle }
@@ -499,17 +496,17 @@ export default function RenderSection (
                     mode            = { sectionColorScheme }
                     containerWidth  = { sectionContainerWidth }
                     location        = { location }
-                    url             = { videoParams.url }
-                    thumbnail       = { videoParams.thumbnail }
-                    controls        = { videoParams.controls }
-                    height          = { videoParams.height }
-                    width           = { videoParams.width }
-                    light           = { videoParams.light }
-                    loop            = { videoParams.loop }
-                    muted           = { videoParams.muted }
-                    pip             = { videoParams.pip }
-                    volume          = { videoParams.volume }
-                    autoplay        = { videoParams.autoplay }
+                    url             = { videoConf.url }
+                    thumbnail       = { videoConf.thumbnail }
+                    controls        = { videoConf.controls }
+                    height          = { videoConf.height }
+                    width           = { videoConf.width }
+                    light           = { videoConf.light }
+                    loop            = { videoConf.loop }
+                    muted           = { videoConf.muted }
+                    pip             = { videoConf.pip }
+                    volume          = { videoConf.volume }
+                    autoplay        = { videoConf.autoplay }
                 />
             )
             break

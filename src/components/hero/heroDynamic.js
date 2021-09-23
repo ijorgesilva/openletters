@@ -34,7 +34,7 @@ export default function HeroDynamic (
                 <div className='content align-items-center'>
                     <div>
                         <h1 className='display-1 text-uppercase text-white' dangerouslySetInnerHTML={{__html: title}}></h1>
-                        <h5 className='text-white mt-4 mb-3' dangerouslySetInnerHTML={{__html: subtitle}}></h5>
+                        <h5 className='text-white mt-2' dangerouslySetInnerHTML={{__html: subtitle}}></h5>
                         
                         {
                             ( buttons ) ?

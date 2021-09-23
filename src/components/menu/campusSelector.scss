@@ -155,20 +155,19 @@
         border: unset;
         border-radius: unset;
         box-shadow: unset;
-
-
+        .item__single-value {
+            background-color: transparent;
+        }
         .item__value-container {
             width: auto;
             min-width: 100px;
         }
-
         &.item__control--menu-is-open {
             transition: var(--transition-fast);
             &:hover{
                 border-color: unset;
             }
         }
-
         .item__indicators {
             .item__indicator-separator {
                 display: none;
@@ -181,17 +180,13 @@
         margin: unset;
         border-radius: unset;
         box-shadow: unset;
-
         .item__menu-list {
             padding: .5rem 0;
-
             .item__option {
                 padding: .5rem 2rem;
                 letter-spacing: 1px;
-
             }
         }
-
     }
 
 }

@@ -1,5 +1,30 @@
 @import "~include-media/dist/_include-media.scss";
 
+
+/* 
+ * React-player 
+ */
+.player-container{
+  .react-player__preview {
+    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+    .react-player__shadow {
+        position: absolute;
+    }
+    &::after {
+        padding-top: 56.9%;
+        position: relative;
+        width: 100%;
+        height: 0px;
+        content: ' ';
+    }
+  }
+  .react-player {
+    video {
+      background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+    }
+  }
+}
+
 /* 
 REFACTOR 
 */

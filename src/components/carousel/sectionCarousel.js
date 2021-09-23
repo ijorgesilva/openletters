@@ -99,15 +99,15 @@ export default function SectionCarousel ( {
                     {
                         ( items?.length > 0 ) ?
                             <Carousel 
-                                swipeable       = { ( swipeable ) ? swipeable : true }
-                                draggable       = { ( draggable ) ? draggable : true }
-                                infinite        = { ( infinite ) ? infinite : false }
-                                partialVisible  = { ( partialVisible ) ? partialVisible : false }
-                                autoPlay        = { ( autoplay ) ? autoplay : false }
-                                autoPlaySpeed   = { ( interval ) ? interval : 3000 }
+                                swipeable       = { swipeable ? swipeable : true }
+                                draggable       = { draggable ? draggable : true }
+                                infinite        = { infinite ? infinite : false }
+                                partialVisible  = { partialVisible ? partialVisible : false }
+                                autoPlay        = { autoplay ? autoplay : false }
+                                autoPlaySpeed   = { interval ? interval : 3000 }
                                 responsive      = { responsiveConf }
-                                itemClass       = {`item ${ ( gap ) ? gap.split(':')[0] : '' }`}
-                                showDots        = { ( dots ) ? dots : false }
+                                itemClass       = {`item ${ gap ? gap.split(':')[0] : '' }`}
+                                showDots        = { dots ? dots : false }
                                 dotListClass    = { dotsClass }
                                 containerClass  = "carousel-container"
                             >
