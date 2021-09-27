@@ -1,8 +1,6 @@
-
 import React from 'react'
 import { graphql } from 'gatsby'
 import { useTranslation } from 'react-i18next'
-
 
 import Navigation from '../../menu/navigation'
 import HeroSeries from '../../vod/hero/heroSeries'
@@ -16,9 +14,7 @@ import RenderSection from '../../renderSection.js'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import ShareSimpleIcon from '../../social/shareSimpleIcon'
 
-
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
 
 import './watchSeries.scss'
 

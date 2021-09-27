@@ -18,9 +18,11 @@ export default function BlurbHorizontalVod(
         mode 
     } 
     ) {
+    const regex = /(<([^>]+)>)/ig;
+    const noHTMLTitle = title?.replace(regex, '');
 
     return (
-        <div className={`card blurbHorizontalVod ${ mode ? mode : 'light'} ${ className ? className : ''}`} title={(title) ? title : ''}>
+        <div className={`card blurbHorizontalVod ${ mode ? mode : 'light'} ${ className ? className : ''}`} title={ title ? noHTMLTitle : ''}>
             
             <Link to={link}>
 

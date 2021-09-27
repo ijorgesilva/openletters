@@ -1,9 +1,7 @@
-
 import React from 'react'
 import { useTranslation } from "react-i18next"
 import { graphql } from 'gatsby'
 import { Container } from 'react-bootstrap'
-
 
 import Navigation from '../../menu/navigation'
 import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
@@ -15,10 +13,8 @@ import FooterSimpleText from '../../footer/footerSimpleText'
 import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 
-
 import { useParticipation } from '../../../hooks/useParticipation'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
 
 import './watchDetails.scss'
 

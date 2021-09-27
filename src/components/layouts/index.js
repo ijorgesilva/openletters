@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTrans } from '../../i18n/withTrans'
@@ -6,10 +5,8 @@ import CookieConsent from 'react-cookie-consent'
 import { ContextProviderComponent } from '../../provider/context'
 import { Helmet } from 'react-helmet'
 
-
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import { useTheme } from '../../hooks/useTheme'
-
 
 import '../app.scss'
 import '../layout.scss'

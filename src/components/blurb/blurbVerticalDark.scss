@@ -2,6 +2,7 @@
 
     border: unset;
     background-color: unset;
+    max-width: 270px;
     
     &.light {
         &.card {
@@ -119,6 +120,5 @@
     .card-img-top {
         border-radius: 5px;
         max-height: 144px;
-        max-width: 270px;
     }
 }

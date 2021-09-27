@@ -1,6 +1,6 @@
 .menuWatchDetails {
     position: relative;
-    z-index: 1;
+    z-index: 4;
 
     &.light {
         background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
