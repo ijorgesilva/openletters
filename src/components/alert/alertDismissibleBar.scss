@@ -5,7 +5,7 @@
         margin-bottom: 0px;
         padding: 30px;
         border-radius: unset;
-        background-color: rgba(var(--color-six-dark-shade-three),1);
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         color: var(--color-four);
         border: unset;
 
@@ -18,7 +18,7 @@
         }
 
         .close {
-            color: rgba(var(--color-white),1);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
             top: 17px;
             right: 17px;
             margin: auto;

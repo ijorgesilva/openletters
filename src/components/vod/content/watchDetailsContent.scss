@@ -91,9 +91,7 @@
 
     .overview {
         padding: 0 15px;
-        .extract {
-            padding-bottom: var(--spacer);
-        }
+        padding-bottom: 1rem;
         .introCard {
             margin-bottom: 2rem;
             &.introCardGrid {
@@ -134,12 +132,15 @@
 
     .attachments {
         border-radius: 7px;
-        margin: 2rem 0;
         padding: 1rem;
+        margin: 2rem 0;
         > a {
             &.item {
                 display: flex;
                 margin: 5px 0px;
+                .item-title {
+                    flex-grow: 1;
+                }
             }
         }
     }

@@ -7,23 +7,24 @@ import TabSeasons from '../../vod/tab/tabSeasons'
 
 import './sectionSeriesTabs.scss'
 
-export default function SectionSeriesTabs ( {
-    className, 
-    id, 
-    width, 
-    mode,
-    campus,
-    slugSeries,
-    videos,
-    seasons,
-    resources,
-    breadcrumbs,
-    playButtonIcon,
-    hasExcerpt,
-    count,
-    order,
-    } ) 
+export default function SectionSeriesTabs ( 
     {
+        className, 
+        id, 
+        width, 
+        mode,
+        campus,
+        slugSeries,
+        videos,
+        seasons,
+        resources,
+        breadcrumbs,
+        playButtonIcon,
+        hasExcerpt,
+        count,
+        order,
+    } 
+    ) {
     
     const { t } = useTranslation()
 

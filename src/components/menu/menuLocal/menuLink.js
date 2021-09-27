@@ -1,10 +1,7 @@
-
-import React, {useState} from "react"
-import { Link } from "gatsby"
-import IframeResizer from "iframe-resizer-react"
-import {  Nav, Modal } from "react-bootstrap"
-
-
+import React, {useState} from 'react'
+import { Link } from 'gatsby'
+import IframeResizer from 'iframe-resizer-react'
+import {  Nav, Modal } from 'react-bootstrap'
 
 export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, as, mode } ){
     
@@ -23,13 +20,13 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                 <div className={`menubutton`}>
                                     <Nav.Link
                                         className               = {`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ className ? className : '' }`}
-                                        as                      = { (as === "link") ? Link : undefined }
+                                        as                      = { (as === 'link') ? Link : undefined }
                                         to                      = {link}
                                         href                    = {link}
                                         target                  = {target}
                                         key                     = {index} 
                                         dangerouslySetInnerHTML = {{__html: name}} 
-                                        activeClassName         = "active"
+                                        activeClassName         = 'active'
                                     />
                                 </div>
                             </>
@@ -39,13 +36,13 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                 <>
                                     <div className={`menucta`}>
                                         <Nav.Link
-                                            as                      = { ( as === "link") ? Link : undefined }
+                                            as                      = { as === 'link' ? Link : undefined }
                                             className               = {`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ className ? className : '' }`}  
                                             key                     = { index} 
                                             onClick                 = { handleShow } 
                                             target                  = { target } 
                                             dangerouslySetInnerHTML = {{__html: name}} 
-                                            activeClassName         = "active"
+                                            activeClassName         = 'active'
                                         />
                                     </div>
                                     {
@@ -57,8 +54,8 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                                 <Modal.Body>
                                                     <IframeResizer 
                                                         src={iframe} 
-                                                        style={{minHeight: "600px", minWidth: '100%', width: '1px'}} 
-                                                        frameborder="0"
+                                                        style={{minHeight: '600px', minWidth: '100%', width: '1px'}} 
+                                                        frameborder='0'
                                                     >
                                                     </IframeResizer>
                                                 </Modal.Body>
@@ -70,9 +67,9 @@ export default function MenuLink( { type, className, link, target, index, name, 
                     default:
                         return (
                                 <Nav.Link 
-                                    as                      = { (as === "link") ? Link : undefined } 
+                                    as                      = { as === 'link' ? Link : undefined } 
                                     key                     = {index} target={target} 
-                                    className               = {`navitems navmain ${ ( className ) ? className : '' }`} 
+                                    className               = {`navitems navmain ${ className ? className : '' }`} 
                                     to                      = {link} 
                                     dangerouslySetInnerHTML = {{__html: name}} 
                                     href                    = {link} 

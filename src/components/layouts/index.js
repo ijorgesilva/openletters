@@ -38,8 +38,8 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         buttonText          = { t('global.accept') } 
                         declineButtonText   = { t('global.cookie-consent.decline') }
                         cookieName          = "gatsby-gdpr-google-analytics"
-                        style               = {{ background: "rgba(var(--color-six-dark-shade-three),1)", color: "var(--color-six-shade-three)" }}
-                        buttonStyle         = {{ backgroundColor: "rgba(var(--color-six-dark-shade-three),1)", fontSize: "13px", color: "var(--color-white)", border: "3px solid var(--color-white)" }}
+                        style               = {{ background: "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)", color: "hsla(var(--light-h), var(--light-s), var(--light-l), 1)", borderTop: "var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)" }}
+                        buttonStyle         = {{ backgroundColor: "hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)", fontSize: "13px", color: "var(--light)", border: "var(--border-width) solid var(--light)" }}
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
@@ -73,8 +73,8 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         buttonText          = { t('global.accept') } 
                         declineButtonText   = { t('global.cookie-consent.decline') }
                         cookieName          = "gatsby-gdpr-google-analytics"
-                        style               = {{ background: "rgba(var(--color-six-dark-shade-three),1)", color: "var(--color-six-shade-three)" }}
-                        buttonStyle         = {{ backgroundColor: "rgba(var(--color-six-dark-shade-three),1)", fontSize: "13px", color: "var(--color-white)", border: "3px solid var(--color-white)" }}
+                        style               = {{ background: "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)", color: "hsla(var(--light-h), var(--light-s), var(--light-l), 1)", borderTop: "var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)" }}
+                        buttonStyle         = {{ backgroundColor: "hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)", fontSize: "13px", color: "var(--light)", border: "var(--border-width) solid var(--light)" }}
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>

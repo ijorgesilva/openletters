@@ -12,7 +12,7 @@ export default function FeedListEven (
     ) {
 
     return (
-        <div className={`feedListEven p-4 ${ mode ? mode : '' } ${ className ? className : '' }`}>
+        <div className={`feedListEven pt-4 ${ mode ? mode : '' } ${ className ? className : '' }`}>
             <div className="list">
                 <FeedListEvenRenderer
                     items       = { items }

@@ -1,11 +1,9 @@
-
 import React from 'react'
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Tabs, Tab, Alert } from 'react-bootstrap'
 import { Link } from 'gatsby'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 import TextTruncate from 'react-text-truncate'
-
 
 import config from '../../../../data/SiteConfig'
 import FeedListEven from '../../feed/feedListEven'
@@ -32,7 +30,6 @@ export default function WatchDetailsContent (
     } 
     ) {
     
-    
     const { t } = useTranslation()
     
     const seriesIcon = ( videoDetails.videoSeries?.seriesGraphics?.poster?.localFile ) ?
@@ -43,24 +40,24 @@ export default function WatchDetailsContent (
     return (
 
         <div className={`watchDetailsContent content ${ mode ? mode : 'light' } ${ className ? className : ''}`} id = {id}>
-            <div className="overview">
+            <div className='overview'>
                 {
                     ( videoDetails.videoSeries?.slug && seriesIcon ) ?
-                        <div className="introCard introCardGrid">
-                            <Link className="serieGraphic" to={ backUrl }>
+                        <div className='introCard introCardGrid'>
+                            <Link className='serieGraphic' to={ backUrl }>
                                 {
                                     ( seriesIcon ) ?
                                         <GatsbyImage 
                                             image       = { seriesIcon }
-                                            className   = "graphic"
-                                            alt         = ""
+                                            className   = 'graphic'
+                                            alt         = ''
                                         />
                                     :
                                         <div></div>
                                 }
                             </Link>
                             <div>
-                                <h1 className="">
+                                <h1 className=''>
                                     {title}
                                 </h1>
                                 {
@@ -77,12 +74,12 @@ export default function WatchDetailsContent (
                             </div>
                         </div>
                     : 
-                        <div className="introCard">
+                        <div className='introCard'>
                             <div>
-                                <h1 className="">{title}</h1>
+                                <h1 className=''>{title}</h1>
                                 {
                                     ( videoDetails.videoSeries?.title ) ? 
-                                        <h2 className="">{videoDetails.videoSeries.title}</h2> 
+                                        <h2 className=''>{videoDetails.videoSeries.title}</h2> 
                                     : 
                                         undefined
                                 }
@@ -91,7 +88,7 @@ export default function WatchDetailsContent (
                 }
                 {
                     ( excerpt ) ?
-                        <div className="extract lead" dangerouslySetInnerHTML={{__html: excerpt}}></div>
+                        <div className='extract lead' dangerouslySetInnerHTML={{__html: excerpt}}></div>
                     :
                         undefined
                 }
@@ -99,28 +96,30 @@ export default function WatchDetailsContent (
 
             {   
                 (videoDetails.videoAttachments) ? 
-                    <div className="attachments" id="attachments">
+                    <div className='attachments' id='attachments'>
                         {
                             videoDetails.videoAttachments.map( (attachment, index) => (
                                 (attachment.attachment.attachmentFile && attachment.status === 'publish') ?
                                     <a 
-                                        className   = "item" 
+                                        className   = 'item' 
                                         href        = { attachment.attachment.attachmentFile.localFile.publicURL } 
                                         title       = { attachment.title } 
-                                        rel         = "noreferrer" 
-                                        target      = "_blank"
+                                        rel         = 'noreferrer' 
+                                        target      = '_blank'
                                         key         = {index}
                                     >
                                         <StaticImage 
                                             src ='../../../assets/img/global/attachment-dark.svg'
-                                            alt =""
+                                            alt =''
                                         />
-                                        <TextTruncate 
-                                            element="div" 
-                                            line={1} 
-                                            truncateText="…" 
-                                            text={attachment.title} 
-                                        />
+                                        <div className       = 'item-title'>
+                                            <TextTruncate 
+                                                element         = 'div' 
+                                                line            = {1} 
+                                                truncateText    = '…' 
+                                                text            = {attachment.title} 
+                                            />
+                                        </div>
                                     </a>
                                 : undefined
                             ))
@@ -130,11 +129,11 @@ export default function WatchDetailsContent (
                     undefined
             }
 
-            <Tabs className="sticky" defaultActiveKey="notes" id="">
+            <Tabs className='sticky z-index-5' defaultActiveKey='notes' id=''>
                 {
                     ( content ) ? 
                         <Tab 
-                            eventKey="notes" 
+                            eventKey='notes' 
                             title={t('global.notes')}
                         >
                             <div className = 'notes'>
@@ -142,14 +141,14 @@ export default function WatchDetailsContent (
                             </div>
                         </Tab>
                     : 
-                        <Alert variant="dark">
+                        <Alert variant='dark'>
                             {t('global.watch.content-empty')}
                         </Alert>
                 }
                 {
                     ( bible ) ?
                         <Tab 
-                            eventKey="bible" 
+                            eventKey='bible' 
                             title={t('global.bible.title')}
                         >
                             <div className = 'bible'>
@@ -176,7 +175,7 @@ export default function WatchDetailsContent (
                 {
                     ( resources ) ?
                         <Tab 
-                            eventKey="resources" 
+                            eventKey='resources' 
                             title={t('global.related-resources')}
                         >
                             <div className='resources'>

@@ -2,7 +2,6 @@
 
 .heroSeries {
     
-
     &.light {
         .container,
         .container-fluid {
@@ -115,6 +114,7 @@
                 grid-area: about;
                 h2 {
                     font-size: 1.5rem;
+                    line-height: 1.5rem;
                     margin-bottom: 1rem;
                 }
                 p {
