@@ -9,6 +9,7 @@ import SectionLatestSeries from './vod/feed/sectionLatestSeries'
 import SectionText from "../components/content/sectionText"
 import MenuPage from '../components/menu/menuPage'
 import SectionTabs from '../components/content/sectionTabs'
+import { useGetFeed } from '../hooks/useGetFeed'
 import SectionCarousel from '../components/carousel/sectionCarousel'
 import SectionShare from '../components/social/sectionShare'
 import SectionVideo from './content/sectionVideo'
@@ -403,27 +404,31 @@ export default function RenderSection (
         case ( sectionType === 'carousel' && sectionStatus ):
             const carouselConfiguration     = section.sectionDetails.sectionCarousel.sectionCarouselConfiguration
             const carouselItems = ( section.sectionDetails.sectionCarousel.sectionCarouselItems?.length > 0 ) ? section.sectionDetails.sectionCarousel.sectionCarouselItems : []
-
+            const carouselFeedType = section.sectionDetails.sectionCarousel.sectionCarouselFeed.feedType
+            
+            const carouselItemsFeed = useGetFeed(section.sectionDetails.sectionCarousel.sectionCarouselFeed)
+            
             return(
                 <>
                     {
                         ( carouselItems ) ?
                             <SectionCarousel 
-                                itemType        = { carouselConfiguration.sectionCarouselConfigurationItemType }
                                 id              = { sectionId }
                                 title           = { sectionTitle }
                                 content         = { sectionContent }
                                 className       = { sectionClassname }
                                 mode            = { sectionColorScheme }
+                                containerWidth  = { sectionContainerWidth }
                                 size            = { sectionSize }
+                                campus          = { campus }
+                                location        = { location }
+                                itemType        = { carouselConfiguration.sectionCarouselConfigurationItemType }
                                 swipeable       = { carouselConfiguration.sectionCarouselConfigurationSwipe }
                                 draggable       = { carouselConfiguration.sectionCarouselConfigurationDraggable }
                                 infinite        = { carouselConfiguration.sectionCarouselConfigurationInfinite }
                                 partialVisible  = { carouselConfiguration.sectionCarouselConfigurationPartiallyVisible }
                                 autoplay        = { carouselConfiguration.sectionCarouselConfigurationAutoplay }
                                 interval        = { carouselConfiguration.sectionCarouselConfigurationAutoplayInterval }
-                                campus          = { campus }
-                                location        = { location }
                                 dots            = { carouselConfiguration.sectionCarouselConfigurationDots }
                                 dotsClass       = { carouselConfiguration.sectionCarouselConfigurationDotsClass }
                                 gap             = { carouselConfiguration.sectionCarouselConfigurationGap }
@@ -431,9 +436,8 @@ export default function RenderSection (
                                 truncate        = { carouselConfiguration.sectionCarouselConfigurationTruncate }
                                 truncateLines   = { carouselConfiguration.sectionCarouselConfigurationTruncateLines }
                                 aspectRatio     = { carouselConfiguration.sectionCarouselConfigurationImageAspect }
-                                containerWidth  = { sectionContainerWidth }
-                                items           = { carouselItems }
                                 responsive      = { carouselConfiguration.sectionCarouselConfigurationResponsive }
+                                items           = { carouselItems }
                             />
                         :
                             undefined

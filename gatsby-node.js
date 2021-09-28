@@ -604,61 +604,116 @@ const blurb = `
     }
 `
 
+const referenceSeries = `
+    ... on WpSerie {
+        id
+        title
+        slug
+        status
+    }
+`
+const referenceCampus = `
+    ... on WpCampus {
+        id
+        slug
+        status
+    }
+`
+
 const feed = `
     feedType
+    
+    ## Feed Videos
     feedVideos {
         feedVideosCategory {
             ${tag}
-        }
-        feedVideosTag {
-            ${tag}
+            videosOnDemand {
+                nodes {
+                    id
+                    title
+                    slug
+                    excerpt
+                    status
+                    videoDetails {
+                        videoDayDate
+                        videoCampus {
+                            ${referenceCampus}
+                        }
+                        videoSeries {
+                            ${referenceSeries}
+                        }
+                    }
+                }
+            }
         }
     }
+
+    ## Feed Series
     feedSeries {
         feedSeriesCategory {
             ${tag}
         }
-        feedSeriesTags {
-            ${tag}
-        }
     }
+
+    ## Feed Posts
     feedPosts {
         feedPostsCategory {
             ${tag}
         }
-        feedPostsTags {
-            ${tag}
-        }
     }
+
+    ## Feed News
     feedNews {
         feedNewsCategory {
             ${tag}
         }
-        feedNewsTags {
-            ${tag}
-        }
     }
+
+    ## Feed Group Types
     feedGrouptypes {
         feedGrouptypesCategory {
             ${tag}
         }
-        feedGrouptypesTags {
-            ${tag}
-        }
     }
+
+    ## Feed Groups
     feedGroups {
         feedGroupsCategory {
             ${tag}
         }
-        feedGroupsTags {
-            ${tag}
-        }
     }
+
+    ## Feed Events
     feedEvents {
         feedEventsCategory {
             ${tag}
         }
-        feedEventsTags {
+    }
+
+    ## Ministries
+    feedMinistries {
+        feedMinistriesCategory {
+            ${tag}
+        }
+    }
+    
+    ## Volunteering
+    feedVolunteering {
+        feedVolunteeringCategory {
+            ${tag}
+        }
+    }
+
+    ## Courses
+    feedCourses {
+        feedCoursesCategory {
+            ${tag}
+        }
+    }
+
+    ## Lessons
+    feedLessons {
+        feedLessonsCategory {
             ${tag}
         }
     }

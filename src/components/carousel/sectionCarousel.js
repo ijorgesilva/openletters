@@ -1,12 +1,9 @@
-
 import React from 'react'
 import Carousel from 'react-multi-carousel'
 import { Container } from 'react-bootstrap'
+import { useGetResponsive } from '../../hooks/useGetResponsive'
 
-
-import { responsive as breakpoints } from '../../../data/feedConfiguration'
 import ItemSelector from './itemSelector'
-
 
 import 'react-multi-carousel/lib/styles.css'
 import './sectionCarousel.scss'
@@ -38,38 +35,8 @@ export default function SectionCarousel ( {
         responsive,
     } ) {
 
-    // TODO: Convert into external hook
-    const responsiveConf = {
-        largeDesktop: {
-            breakpoint:     { 
-                                max: ( responsive.responsiveXlMax ) ? responsive.responsiveXlMax : 4000, 
-                                min: ( responsive.responsiveXlMin ) ? responsive.responsiveXlMin : 3000 
-                            },
-            items: ( responsive.responsiveXlItems ) ? responsive.responsiveXlItems : 6
-        },
-        desktop: {
-            breakpoint:     { 
-                max: ( responsive.responsiveLMax ) ? responsive.responsiveLMax : 3000, 
-                min: ( responsive.responsiveLMin ) ? responsive.responsiveLMin : 1024 
-            },
-            items: ( responsive.responsiveLItems ) ? responsive.responsiveLItems : 5
-        },
-        tablet: {
-            breakpoint:     { 
-                max: ( responsive.responsiveSMax ) ? responsive.responsiveSMax : 1024, 
-                min: ( responsive.responsiveSMin ) ? responsive.responsiveSMin : 464 
-            },
-            items: ( responsive.responsiveSItems ) ? responsive.responsiveSItems : 3
-        },
-        mobile: {
-            breakpoint:     { 
-                max: ( responsive.responsiveXsMax ) ? responsive.responsiveXsMax : 464, 
-                min: ( responsive.responsiveXsMin ) ? responsive.responsiveXsMin : 0 
-            },
-            items: ( responsive.responsiveXsItems ) ? responsive.responsiveXsItems : 1
-        }
-    }
-    
+    const responsiveConf = useGetResponsive(responsive)
+
     return (
 
         <section id = {id} className = {`sectionCarousel ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
@@ -109,7 +76,7 @@ export default function SectionCarousel ( {
                                 itemClass       = {`item ${ gap ? gap.split(':')[0] : '' }`}
                                 showDots        = { dots ? dots : false }
                                 dotListClass    = { dotsClass }
-                                containerClass  = "carousel-container"
+                                containerClass  = 'carousel-container'
                             >
                                 {
                                     items.map( (_, index) => (

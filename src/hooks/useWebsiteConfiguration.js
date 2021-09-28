@@ -8,7 +8,24 @@ export const useWebsiteConfiguration = () => {
                                         websiteSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
-                                                
+
+
+                                                settingsNewsletter {
+                                                    settingsNewsletterProvider
+                                                    settingsNewsletterUrl
+                                                }
+                                                settingsSocial {
+                                                    settingsSocialYoutubeUrl
+                                                    settingsSocialTwitterUrl
+                                                    settingsSocialInstagramUrl
+                                                    settingsSocialFacebookUrl
+                                                }
+                                                settingsApp {
+                                                    settingsAppNativePrompt
+                                                    settingsAppGoogle
+                                                    settingsAppApple
+                                                }
+
                                                 settingsCode
                                                 settingsCss
 
