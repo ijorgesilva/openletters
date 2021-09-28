@@ -56,13 +56,11 @@ export const blogMenu = [
     {name: "News", link: "/news", as: "", target: ""},
 ]
 
-export const smallGroupBrand =  {name: "Small Groups", link: "/smallgroups"}
+export const smallGroupBrand =  {name: "Small Groups", link: "/global/p/smallgroups"}
 export const smallGroupMenu = [
-    {name: "Join", link: "/smallgroups", as: "", target: ""},
-    {name: "Host", link: "/smallgroups/host", as: "", target: ""},
-    {name: "Events", link: "/smallgroups/events", as: "", target: ""},
-    {name: "Blog & News", link: "/smallgroups/blog", as: "", target: ""},
-    {name: "Leader Login", link: "https://my.victoryatl.com/default.aspx?page=4236", as: "", target: "_blank"},
+    {name: "Join", link: "/global/p/smallgroups", as: "", target: ""},
+    {name: "Host", link: "/global/p/smallgroups/host", as: "", target: ""},
+    {name: "Leader Login", link: "https://members.victoryatl.com/Login?returnurl=%2fMyAccount", as: "", target: "_blank"},
 ]
 
 export const eventsBrand =  {name: "Events", link: "/events", as: "link"}
