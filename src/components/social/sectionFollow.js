@@ -1,0 +1,65 @@
+import React from 'react'
+
+import { Container } from 'react-bootstrap'
+
+import FollowNetworkLists from './followNetworkLists'
+
+import './sectionFollow.scss'
+
+export default function SectionFollow ( 
+    { 
+        title,
+        id,
+        content,
+        className,
+        mode,
+        size,
+        containerWidth,
+        networks,
+        alignment,
+    } ) {
+
+    let networkList = []
+    let networkName
+
+    // Variable building for each Network
+    if( networks ){
+        networks.sectionFollowNetworksType.forEach(function(_){
+            networkName = 'networks.sectionFollowNetworks'+_.split(':')[1].replace(/ /g,'')
+            networkList.push( { 
+                'type': _.split(':')[0],
+                'params': eval(networkName),
+            })
+        })
+    }
+
+    return (
+
+        <section className = {`sectionFollow ${ className ? className : '' } ${ size ? size : 'md' } ${ mode ? mode : 'light' }`} id = {id} >
+            
+                <Container fluid = { containerWidth === 'container' ? false : true }>
+
+                    <div className = 'general'>
+                        {
+                            ( title ) ?
+                                    <h4 className = 'title display-4 text-break' dangerouslySetInnerHTML={{__html: title}}></h4>
+                            :
+                                undefined
+                        }
+                        { 
+                            ( content ) ?
+                                <div className = 'content' dangerouslySetInnerHTML={{__html: content}}></div>
+                            :
+                                undefined
+                        }
+                    </div>
+                        <FollowNetworkLists 
+                            items       = { networkList }
+                            mode        = { mode }
+                            alignment   = { alignment }
+                        />
+                </Container>
+
+        </section>
+    )
+}

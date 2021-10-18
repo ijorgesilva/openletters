@@ -1,9 +1,9 @@
-
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 
+import Background from '../UI/background'
 
 import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
 import './heroDynamic.scss'
@@ -23,6 +23,7 @@ export default function HeroDynamic (
         width,
         size,
         overlay,
+        backgroundLayers,
     } 
     ) {
 
@@ -33,7 +34,7 @@ export default function HeroDynamic (
             <Container className={'z-index-2'} fluid = { width === 'container' ? true : false }>
                 <div className='content align-items-center'>
                     <div>
-                        <h1 className='display-1 text-uppercase text-white' dangerouslySetInnerHTML={{__html: title}}></h1>
+                        <h1 className='display-4 text-uppercase text-white' dangerouslySetInnerHTML={{__html: title}}></h1>
                         <h5 className='text-white mt-2' dangerouslySetInnerHTML={{__html: subtitle}}></h5>
                         
                         {
@@ -106,6 +107,11 @@ export default function HeroDynamic (
                     className = 'card-img-top'
                     height    = '100%'
                 />
+
+                <Background
+                    layers  = { backgroundLayers }
+                />
+
             </div>
 
         </div>

@@ -1,12 +1,9 @@
-
 import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
-
 
 import Background from '../UI/background'
 import Buttons from '../buttons/buttons'
 import RenderSection from '../renderSection'
-
 
 import './sectionText.scss'
 
@@ -52,7 +49,8 @@ export default function SectionText ( {
                                 {
                                     ( buttons?.length > 0 ) ?
                                         <Buttons 
-                                            buttons   = { buttons }
+                                            buttons     = { buttons }
+                                            mode        = { mode }
                                         />
                                     :
                                         undefined
@@ -99,7 +97,7 @@ export default function SectionText ( {
             </div>
 
             <Background
-                layers  = { backgroundLayers?.reverse() }
+                layers  = { backgroundLayers }
             />
 
         </section>

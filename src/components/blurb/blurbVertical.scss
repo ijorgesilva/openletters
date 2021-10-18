@@ -15,6 +15,13 @@
                 .card-title {
                     color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
                 }
+                .card-subtitle {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    a {
+                        text-decoration: unset;
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
+                }
                 .card-text {
                     color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
                 }
@@ -38,6 +45,13 @@
                 .card-title {
                     color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 }
+                .card-subtitle {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    a {
+                        text-decoration: unset;
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
                 .card-text {
                     color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
                 }
@@ -50,18 +64,30 @@
     }
 
     &.card {
+        // Lack of Gap support on Safari https://ishadeed.com/article/flexbox-gap/
+        margin-left: 0.1rem;
+        margin-right: 0.1rem;
+
+        &.grow {
+            height: 100%;
+        }
         .card-img {
             position: relative;
         }
         .card-body {
-            h3 {
+            .card-title {
                 font-size: 30px;
                 line-height: 30px;
                 margin-bottom: 0px;
             }
-            h4 {
-                font-size: 14px;
-                font-weight: 400;
+            .card-subtitle {
+                font-size: 1.1rem;
+                line-height: 1.4rem;
+                font-weight: bold;
+                margin: 1rem 0;
+                a {
+                    text-decoration: unset;
+                }
             }
         }
         &.horizontal {
@@ -81,6 +107,27 @@
                 }
             }
         }
+    }
+
+    /*
+     * Item Types
+     */
+    
+    &.card {
+       &.brand {
+            background-color: transparent;
+            border: unset;
+            > .card-img {
+                background-color: transparent;
+            }
+            > .card-body {
+                padding: 0;
+                opacity: 0;
+                > .buttons {
+                    margin-top: -50%;
+                }
+            }
+       } 
     }
 
     /*

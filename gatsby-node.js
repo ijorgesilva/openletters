@@ -620,6 +620,55 @@ const referenceCampus = `
     }
 `
 
+const carouselConfiguration = `
+    sectionCarouselConfigurationItemType
+    sectionCarouselConfigurationSwipe
+    sectionCarouselConfigurationDraggable
+    sectionCarouselConfigurationInfinite
+    sectionCarouselConfigurationPartiallyVisible
+    sectionCarouselConfigurationDots
+    sectionCarouselConfigurationDotsClass
+    sectionCarouselConfigurationAutoplay
+    sectionCarouselConfigurationStretched
+    sectionCarouselConfigurationAutoplayInterval
+    sectionCarouselConfigurationGap
+    sectionCarouselConfigurationClass
+    sectionCarouselConfigurationTruncate
+    sectionCarouselConfigurationTruncateLines
+    sectionCarouselConfigurationImageFit
+    sectionCarouselConfigurationImagePosition
+    sectionCarouselConfigurationImageAspect
+    sectionCarouselConfigurationBorder
+    sectionCarouselConfigurationBorderColor
+    sectionCarouselConfigurationGrow
+    sectionCarouselConfigurationResponsive {
+        responsiveXl {
+            responsiveXlCustom
+            responsiveXlItems
+            responsiveXlMax
+            responsiveXlMin
+        }
+        responsiveL {
+            responsiveLCustom
+            responsiveLItems
+            responsiveLMax
+            responsiveLMin
+        }
+        responsiveS {
+            responsiveSCustom
+            responsiveSItems
+            responsiveSMax
+            responsiveSMin
+        }
+        responsiveXs {
+            responsiveXsCustom
+            responsiveXsItems
+            responsiveXsMax
+            responsiveXsMin
+        }
+    }
+`
+
 const feed = `
     feedType
     
@@ -634,6 +683,12 @@ const feed = `
                     slug
                     excerpt
                     status
+                    ${featuredImageFields}
+                    tags {
+                      nodes {
+                        ${tag}
+                      }
+                    }
                     videoDetails {
                         videoDayDate
                         videoCampus {
@@ -977,46 +1032,7 @@ const sections = `
                 ${blurb}
             }
             sectionCarouselConfiguration {
-                sectionCarouselConfigurationItemType
-                sectionCarouselConfigurationSwipe
-                sectionCarouselConfigurationDraggable
-                sectionCarouselConfigurationInfinite
-                sectionCarouselConfigurationPartiallyVisible
-                sectionCarouselConfigurationDots
-                sectionCarouselConfigurationDotsClass
-                sectionCarouselConfigurationAutoplay
-                sectionCarouselConfigurationAutoplayInterval
-                sectionCarouselConfigurationGap
-                sectionCarouselConfigurationClass
-                sectionCarouselConfigurationTruncate
-                sectionCarouselConfigurationTruncateLines
-                sectionCarouselConfigurationImageAspect
-                sectionCarouselConfigurationResponsive {
-                    responsiveXl {
-                        responsiveXlCustom
-                        responsiveXlItems
-                        responsiveXlMax
-                        responsiveXlMin
-                    }
-                    responsiveL {
-                        responsiveLCustom
-                        responsiveLItems
-                        responsiveLMax
-                        responsiveLMin
-                    }
-                    responsiveS {
-                        responsiveSCustom
-                        responsiveSItems
-                        responsiveSMax
-                        responsiveSMin
-                    }
-                    responsiveXs {
-                        responsiveXsCustom
-                        responsiveXsItems
-                        responsiveXsMax
-                        responsiveXsMin
-                    }
-                }
+                ${carouselConfiguration}
             }
         }
 
@@ -1079,13 +1095,14 @@ const sections = `
             }
             sectionVideoConfiguration {
                 sectionVideoConfigurationControls
-                sectionVideoConfigurationHeight
                 sectionVideoConfigurationLight
                 sectionVideoConfigurationLoop
                 sectionVideoConfigurationMuted
                 sectionVideoConfigurationPip
                 sectionVideoConfigurationVolume
                 sectionVideoConfigurationWidth
+                sectionVideoConfigurationHeight
+                sectionVideoConfigurationMaxWidth
                 sectionVideoConfigurationAutoplay
             }
         }
@@ -1105,11 +1122,16 @@ const sections = `
                 sectionBlurbsConfigurationDirection
                 sectionBlurbsConfigurationClass
                 sectionBlurbsConfigurationGap
+                sectionBlurbsConfigurationImagePosition
+                sectionBlurbsConfigurationImageFit
                 sectionBlurbsConfigurationImageAspect
                 sectionBlurbsConfigurationJustification
                 sectionBlurbsConfigurationStretch
                 sectionBlurbsConfigurationTruncate
                 sectionBlurbsConfigurationTruncateLines
+                sectionBlurbsConfigurationBorder
+                sectionBlurbsConfigurationBorderColor
+                sectionBlurbsConfigurationGrow
             }
         }
 
@@ -1167,6 +1189,60 @@ const sections = `
                 sectionFormConfigurationJumbotronFluid
                 sectionFormConfigurationQuerystring
             }
+        }
+
+        ## Follow Us
+        sectionFollow {
+          sectionFollowNetworks {
+            sectionFollowNetworksType
+            sectionFollowNetworksFacebook {
+              sectionFollowNetworksFacebookUrl
+            }
+            sectionFollowNetworksPinterest {
+              sectionFollowNetworksPinterestUrl
+            }
+            sectionFollowNetworksInstagram {
+              sectionFollowNetworksInstagramUrl
+            }
+            sectionFollowNetworksTiktok {
+              sectionFollowNetworksTiktokUrl
+            }
+            sectionFollowNetworksTwitter {
+              sectionFollowNetworksTwitterUrl
+            }
+            sectionFollowNetworksYoutube {
+              sectionFollowNetworksYoutubeUrl
+            }
+          }
+          sectionFollowConfiguration {
+            sectionFollowConfigurationAlignment
+          }
+        }
+
+        ## Album
+        sectionAlbum {
+            sectionAlbumItems {
+                album {
+                    albumTitle
+                    albumSubtitle
+                    albumCover {
+                        ${localFile}
+                    }
+                }
+                song {
+                    songTitle
+                    songAuthor
+                    songDuration
+                    songResources {
+                        ${blurb}
+                    }
+                }
+            }
+            ## sectionAlbumConfiguration {
+                ## carouselConfiguration {
+                ##     $ { carouselConfiguration}
+                ## }
+            ## }
         }
 
     # End Sections

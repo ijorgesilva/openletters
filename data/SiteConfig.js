@@ -61,7 +61,7 @@ const config = {
     groupSlug: "g",
 
     /* Ministry */
-    ministrySlug: "m",
+    ministrySlugDetails: "ministry",
 
     /* Classes */
     classesSlug: "c",

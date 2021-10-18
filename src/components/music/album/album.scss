@@ -1,0 +1,22 @@
+@import "~include-media/dist/_include-media.scss";
+.sectionAlbum {
+    &.light {
+
+    }
+    &.dark {
+        
+    }
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone") {
+}
+

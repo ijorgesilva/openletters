@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 
+import Background from '../UI/background'
+
 import './sectionVideo.scss'
 
 export default function SectionVideo ( 
@@ -17,6 +19,7 @@ export default function SectionVideo (
         controls,
         height,
         width,
+        maxWidth,
         light,
         loop,
         muted,
@@ -24,6 +27,7 @@ export default function SectionVideo (
         volume,
         autoplay,
         size,
+        backgroundLayers,
     } 
     ) {
 
@@ -51,7 +55,7 @@ export default function SectionVideo (
                             undefined
                     }
                     
-                    <div className='player-container noselect'>
+                    <div className={`player-container noselect`} style={{ maxWidth: maxWidth ? maxWidth : '100%'}}>
                         <ReactPlayer
                             className   = {`react-player`}
                             url         = { url }
@@ -69,6 +73,11 @@ export default function SectionVideo (
 
                 </div>
             </div>
+
+            <Background
+                layers  = { backgroundLayers }
+            />
+
         </section>
     )
 }

@@ -1,40 +1,45 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-import ItemSelector from '../carousel/itemSelector'
+import BlurbVertical from '../blurb/blurbVertical'
 
 import './sectionBlurbs.scss'
 
-export default function SectionBlurbs ( { 
-    id,
-    campus,
-    title,
-    content,
-    className,
-    mode,
-    containerWidth,
-    size,
-    orientation,
-    blurbType,
-    dataType,
-    items,
-    imageAspect,
-    itemClass,
-    truncate,
-    truncateLines,
-    direction,
-    gap,
-    justification,
-    stretch,
-} ) {
+export default function SectionBlurbs ( 
+    { 
+        id,
+        title,
+        content,
+        className,
+        mode,
+        containerWidth,
+        size,
+        orientation,
+        items,
+        itemType,
+        imagePosition,
+        imageFit,
+        aspectRatio,
+        itemClass,
+        truncate,
+        truncateLines,
+        direction,
+        gap,
+        justification,
+        stretchedlink,
+        border,
+        borderColor,
+        itemGrow,
+    } 
+    ) {
 
     const flexConfig = {
         display: 'flex',
         flexDirection: ( direction ) ? direction : 'row',
         gap: ( gap ) ? gap : '1rem',
         justifyContent: ( justification ) ? justification : 'flex-start',
-        alignItems: ( stretch ) ? 'stretch' : 'flex-start',
-        alignContent: ( stretch ) ? 'stretch' : 'flex-start',
+        alignItems: stretchedlink ? 'stretch' : 'flex-start',
+        alignContent: stretchedlink ? 'stretch' : 'flex-start',
     }
 
     return (
@@ -62,29 +67,37 @@ export default function SectionBlurbs ( {
                     :
                         undefined
                 }
+
                 <div className="items" style={flexConfig}>
                     {
-                        ( items?.length > 0 ) ?
-                            items.map( (_, index) => (
-                                <ItemSelector
-                                    key              = { index }
-                                    counter          = { index + 1}
-                                    dataType         = { dataType }
-                                    blurbType        = { blurbType }
-                                    orientation      = { orientation }
-                                    image            = { _.itemImage?.localFile.childImageSharp.gatsbyImageData }
-                                    title            = { _.itemTitle }
-                                    subtitle         = { _.itemSubtitle }
-                                    content          = { _.itemContent }
-                                    mode             = { mode }
-                                    stretchedlink    = { _.itemButtons?.itemButtonsStretchedlink }
-                                    buttons          = { _.itemButtons?.itemButtonsButton }
-                                    truncate         = { truncate }
-                                    truncateLines    = { truncateLines }
-                                    className        = { `${ 'item-'+index } ${ ( _.itemCss ) ? _.itemCss : ''} ${ ( itemClass ) ? itemClass : '' }` }
-                                    removeDefaultCss = { _.itemCssRemoveDefault }
-                                    imageAspect      = { imageAspect }
-                                    campus           = { campus }
+                        ( items?.list.length > 0 ) ?
+                            items.list.map( (_, index) => (
+                                <BlurbVertical
+                                    key                 = { index }
+                                    image               = { _.image }
+                                    title               = { _.title }
+                                    subtitle            = { _.subtitle }
+                                    content             = { _.excerpt }
+                                    removeDefaultCss    = { _.itemCssRemoveDefault }
+                                    tags                = { _.tags }
+                                    
+                                    itemType            = { itemType }
+                                    mode                = { mode }
+                                    buttons             = { _.buttons }
+
+                                    counter             = { index + 1 }
+                                    orientation         = { orientation }
+                                    
+                                    truncate            = { truncate }
+                                    truncateLines       = { truncateLines }
+                                    stretchedlink       = { stretchedlink }
+                                    className           = { `${_.cssClass} ${ itemClass ? itemClass : '' }` }
+                                    aspectRatio         = { aspectRatio }
+                                    imageFit            = { imageFit }
+                                    imagePosition       = { imagePosition }
+                                    border              = { border }
+                                    borderColor         = { borderColor }
+                                    itemGrow            = { itemGrow }
                                 />
                             ))
                         :

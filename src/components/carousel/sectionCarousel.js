@@ -3,27 +3,27 @@ import Carousel from 'react-multi-carousel'
 import { Container } from 'react-bootstrap'
 import { useGetResponsive } from '../../hooks/useGetResponsive'
 
-import ItemSelector from './itemSelector'
+import BlurbVertical from '../blurb/blurbVertical'
 
 import 'react-multi-carousel/lib/styles.css'
 import './sectionCarousel.scss'
 
 export default function SectionCarousel ( { 
+        items,
         id, 
         className, 
         title, 
         content, 
-        items, 
         containerWidth, 
         mode, 
-        size, 
-        campus,
+        size,
         itemType,
         swipeable, 
         draggable, 
         infinite,
         partialVisible, 
         autoplay,
+        stretchedlink,
         interval,
         dots,
         dotsClass,
@@ -31,7 +31,12 @@ export default function SectionCarousel ( {
         itemClass,
         truncate,
         truncateLines,
+        imagePosition,
+        imageFit,
         aspectRatio,
+        border,
+        borderColor,
+        itemGrow,
         responsive,
     } ) {
 
@@ -64,7 +69,7 @@ export default function SectionCarousel ( {
                 }
                 <div className='carousel'>
                     {
-                        ( items?.length > 0 ) ?
+                        ( items?.list?.length > 0 ) ?
                             <Carousel 
                                 swipeable       = { swipeable ? swipeable : true }
                                 draggable       = { draggable ? draggable : true }
@@ -79,22 +84,30 @@ export default function SectionCarousel ( {
                                 containerClass  = 'carousel-container'
                             >
                                 {
-                                    items.map( (_, index) => (
-                                        <ItemSelector
-                                            key              = { index }
-                                            type             = { itemType }
-                                            image            = { _.itemImage?.localFile.childImageSharp.gatsbyImageData }
-                                            title            = { _.itemTitle }
-                                            subtitle         = { _.itemSubtitle }
-                                            content          = { _.itemContent }
-                                            truncate         = { truncate }
-                                            mode             = { mode }
-                                            truncateLines    = { truncateLines }
-                                            className        = { `${ 'item-'+index } ${_.itemCss} ${ ( itemClass ) ? itemClass : '' }` }
-                                            removeDefaultCss = { _.itemCssRemoveDefault }
-                                            buttons          = { _.itemButtons?.sectionCarouselItemButtonsButton }
-                                            aspectRatio      = { aspectRatio }
-                                            campus           = { campus }
+                                    items.list.map( (_, index) => (
+                                        <BlurbVertical
+                                            key                 = { index }
+                                            image               = { _.image }
+                                            title               = { _.title }
+                                            subtitle            = { _.subtitle }
+                                            content             = { _.excerpt }
+                                            
+                                            itemType            = { itemType }
+                                            mode                = { mode }
+                                            buttons             = { _.buttons }
+                                            // counter             = { counter }
+
+                                            truncate            = { truncate }
+                                            truncateLines       = { truncateLines }
+                                            stretchedlink       = { stretchedlink }
+                                            className           = { `${_.itemCss} ${ itemClass ? itemClass : '' }` }
+                                            removeDefaultCss    = { _.itemCssRemoveDefault }
+                                            imagePosition       = { imagePosition }
+                                            imageFit            = { imageFit }
+                                            aspectRatio         = { aspectRatio }
+                                            border              = { border }
+                                            borderColor         = { borderColor }
+                                            itemGrow            = { itemGrow }
                                         />
                                     ))
                                 }

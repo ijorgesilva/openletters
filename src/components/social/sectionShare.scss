@@ -29,7 +29,7 @@
     
     > div {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr minmax(50%, 1fr);
         grid-template-areas: "left right";
         .general {
             padding: 2rem;
@@ -53,5 +53,14 @@
 
 }
 
-@include media("<tablet") {
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<=phone") {
+    .sectionShare {
+        grid-template-columns: 1fr;
+    }
 }

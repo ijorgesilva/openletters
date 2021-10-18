@@ -4,14 +4,16 @@ import BlurbVertical from '../blurb/blurbVertical'
 
 export default function ItemSelector ( {
     dataType,
-    blurbType,
-    orientation,
-    counter,
+
     image,
     title,
     subtitle,
     content,
     buttons,
+
+    presentation,
+    orientation,
+    counter,
     mode,
     stretchedlink,
     truncate,
@@ -19,7 +21,7 @@ export default function ItemSelector ( {
     className,
     removeDefaultCss,
     imageAspect,
-    campus,
+    
     } ) {
         
     switch ( true ){
@@ -29,8 +31,24 @@ export default function ItemSelector ( {
         */
         case dataType === 'videos':
             return (
-                <>
-                </>
+                <BlurbVertical
+                    image               = { image }
+                    title               = { title }
+                    subtitle            = { subtitle }
+                    content             = { content }
+                    
+                    presentation        = { presentation }
+                    counter             = { counter }
+                    orientation         = { orientation }
+                    mode                = { mode }
+
+                    truncate            = { truncate }
+                    truncateLines       = { truncateLines }
+                    stretchedlink       = { stretchedlink }
+                    className           = { className }
+                    removeDefaultCss    = { removeDefaultCss }
+                    aspectRatio         = { imageAspect }
+                />
             )
             break
 
@@ -85,15 +103,55 @@ export default function ItemSelector ( {
             break
             
         /*
-        * Group Types
+        * Group dataTypes
         */
-        case dataType === 'grouptypes':
+        case dataType === 'groupdataTypes':
             return (
                 <>
                 </>
             )
             break
-                
+
+        /*
+        * Ministries
+        */
+        case dataType === 'ministries':
+            return (
+                <>
+                </>
+            )
+            break
+
+        /*
+        * Ministries
+        */
+        case dataType === 'volunteering':
+            return (
+                <>
+                </>
+            )
+            break  
+
+        /*
+        * Courses
+        */
+        case dataType === 'courses':
+            return (
+                <>
+                </>
+            )
+            break  
+
+        /*
+        * Lessons
+        */
+        case dataType === 'lessons':
+            return (
+                <>
+                </>
+            )
+            break  
+
         /*
         * Custom
         */
@@ -101,18 +159,20 @@ export default function ItemSelector ( {
             
             return (
                 <BlurbVertical
-                    type                = { blurbType }
-                    counter             = { counter }
-                    orientation         = { orientation }
-                    mode                = { mode }
                     image               = { image }
                     title               = { title }
                     subtitle            = { subtitle }
                     content             = { content }
+                    buttons             = { buttons }
+                    
+                    presentation        = { presentation }
+                    counter             = { counter }
+                    orientation         = { orientation }
+                    mode                = { mode }
+                    
                     truncate            = { truncate }
                     truncateLines       = { truncateLines }
                     stretchedlink       = { stretchedlink }
-                    buttons             = { buttons }
                     className           = { className }
                     removeDefaultCss    = { removeDefaultCss }
                     aspectRatio         = { imageAspect }
@@ -126,22 +186,7 @@ export default function ItemSelector ( {
         default:
             
             return (
-                <BlurbVertical
-                    type                = { blurbType }
-                    counter             = { counter }
-                    orientation         = { orientation }
-                    image               = { image }
-                    title               = { title }
-                    subtitle            = { subtitle }
-                    mode                = { mode }
-                    content             = { content }
-                    truncate            = { truncate }
-                    truncateLines       = { truncateLines }
-                    buttons             = { buttons }
-                    className           = { className }
-                    removeDefaultCss    = { removeDefaultCss }
-                    aspectRatio         = { imageAspect }
-                />
+                <></>
             )
             break
     }

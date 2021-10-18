@@ -7,6 +7,23 @@
     
     &.light {
         .dropdown-toggle {
+            &.btn {
+                &.primary {
+                    border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    background-color: transparent;
+                    &:hover {
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                        background-color: hsla(var(--primary-h),var(--primary-s),var(--primary-l), 0.3);
+                    }
+                    &[aria-expanded="true"]{
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--primary-h),var(--primary-s),var(--primary-l), 1);
+                    }
+                }
+            }
             &.btn{
                 border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
                 color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
@@ -56,6 +73,23 @@
 
     &.dark {
         .dropdown-toggle {
+            &.btn {
+                &.primary {
+                    border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: transparent;
+                    &:hover {
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--primary-h),var(--primary-s),var(--primary-l), 0.3);
+                    }
+                    &[aria-expanded="true"]{
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--primary-h),var(--primary-s),var(--primary-l), 1);
+                    }
+                }
+            }
             &.btn{
                 border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
                 color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);

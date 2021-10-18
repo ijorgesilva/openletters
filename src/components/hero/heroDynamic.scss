@@ -17,6 +17,13 @@
         }
         > .background {
             background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            &.overlay {
+                &:after {
+                    background: linear-gradient(to bottom, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 0%,hsla(var(--light-h), var(--light-s), var(--light-l), 0) 1%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 39%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.35) 61%, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 100%),
+                    linear-gradient(to left, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 1%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 39%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.35) 61%, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 100%),
+                    linear-gradient(to top, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 75%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.7) 100%);
+                }
+            }
         }
     }
 

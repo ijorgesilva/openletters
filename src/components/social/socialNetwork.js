@@ -33,7 +33,6 @@ export default function SocialNetwork (
     const { t } = useTranslation()
     const canonicalUrl = config.siteUrl + location.pathname
     const typeCaps = type.charAt(0).toUpperCase() + type.slice(1)
-    // const paramFlag = params ? true : false
 
     switch ( type ) {
         
@@ -122,7 +121,7 @@ export default function SocialNetwork (
         break
 
         default:
-            return <>test</>
+            return <></>
         break
     }
 

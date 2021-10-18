@@ -45,7 +45,7 @@ export default function ShareSection(
                     <div className = 'general'>
                         {
                             ( title ) ?
-                                    <span className = 'title display-3' dangerouslySetInnerHTML={{__html: title}}></span>
+                                    <h4 className = 'title text-break' dangerouslySetInnerHTML={{__html: title}}></h4>
                             :
                                 undefined
                         }

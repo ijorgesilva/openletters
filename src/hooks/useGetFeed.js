@@ -1,44 +1,143 @@
+import { useGetBestCampus } from './useGetBestCampus'
+import config from '../../data/SiteConfig'
 
-export const useGetFeed = ( feedObject ) => {
+export const useGetFeed = ( feedObject, campus ) => {
 
-    const feedType = feedObject.feedType
     let rawList = []
-    let parsedList = []
-    console.log(feedType)
-    // console.log('feedObject:')
+    let listObject = {
+        type: feedObject.feedType,
+        list: [],
+    } 
     // console.log(feedObject)
+    // console.log(listObject.type)
 
     switch( true ) {
-        case feedType === 'videos':
-            rawList = feedObject.feedVideos.feedVideosCategory.videosOnDemand.nodes
-            console.log(rawList)
 
+        /*
+         * Videos
+         */
+        case listObject.type === 'videos':
+            rawList = feedObject.feedVideos.feedVideosCategory.videosOnDemand.nodes
             if ( rawList?.length > 0 ) {
-                parsedList = rawList.map( (_, index) => (
-                    // TODO: Get url
-                    parsedList.push(
+                rawList.map( (_, index) => (
+                    (_.videoDetails.videoCampus.length > 0) ?
+                        listObject.list.push(
+                            {
+                                title: _.title,
+                                subtitle:   _.videoDetails.videoSeries?.slug ? 
+                                                `<a href='${'/' + useGetBestCampus( campus, _.videoDetails.videoCampus ) + '/' + config.watchSeriesDetailsSlug + '/' + _.videoDetails.videoSeries.slug }'>${_.videoDetails.videoSeries.title}</a>`
+                                            : '', 
+                                excerpt: _.excerpt,
+                                image: _.featuredImage?.node.localFile.childImageSharp.gatsbyImageData,
+                                date: _.videoDetails.videoDayDate,
+                                // TODO: USE Buttons structure
+                                url: '/' + useGetBestCampus( campus, _.videoDetails.videoCampus ) + '/' + config.watchSlug + '/' + _.slug,
+                                tags: _.tags,
+                                buttons: [],
+                            }
+                        )
+                    :
+                        undefined
+                ))
+            }
+            else undefined
+            // console.log('rawList:')
+            // console.log(rawList)
+            // console.log(listObject)
+            break
+
+        /*
+         * Series
+         */
+        case listObject.type === 'series':
+            break
+
+        /*
+         * Events
+         */
+        case listObject.type === 'events':
+            break
+
+        /*
+         * Posts
+         */
+        case listObject.type === 'posts':
+            break
+
+        /*
+         * News
+         */
+        case listObject.type === 'news':
+            break
+        /*
+         * Groups
+         */
+        case listObject.type === 'groups':
+            break
+        /*
+         * Group types
+         */
+        case listObject.type === 'grouptypes':
+            break
+        /*
+         * Ministries
+         */
+        case listObject.type === 'ministries':
+            break
+        /*
+         * Volunteering
+         */
+        case listObject.type === 'volunteering':
+            break
+
+        /*
+         * Courses
+         */
+        case listObject.type === 'courses':
+            break
+
+        /*
+         * Lessons
+         */
+        case listObject.type === 'lessons':
+            break
+        /*
+         * Custom
+         */
+        default:
+        case listObject.type === 'custom':
+            rawList = feedObject
+            listObject.type = 'custom'
+            if( rawList.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
                         {
-                            title: _.title,
-                            subtitle: '', // series url, send link (?)
-                            excerpt: _.excerpt,
-                            featuredPhoto: '',
-                            date: _.videoDetails.videoDayDate,
-                            url: '',
-                            tags: '',
-                            campus: '',
+                            title: _.itemTitle,
+                            subtitle: _.itemSubtitle,
+                            excerpt: _.itemContent,
+                            image: _.itemImage?.localFile.childImageSharp.gatsbyImageData,
+                            date: '',
+
+                            cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: [],
+
+                            buttons: _.itemButtons?.itemButtonsButton?.length > 0 ? _.itemButtons.itemButtonsButton : [],
                         }
                     )
                 ))
             }
             else undefined
-            console.log(parsedList)
-
+            // console.log('rawList')
+            // console.log(rawList)
+            // console.log('listObject')
+            // console.log(listObject)
+            
             break
-        default:
     }
 
     // TODO: Order 
     // TODO: Skip
 
-    return feedType
+    return listObject
 }

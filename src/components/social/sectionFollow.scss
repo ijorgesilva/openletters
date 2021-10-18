@@ -1,0 +1,75 @@
+@import "~include-media/dist/_include-media.scss";
+
+.sectionFollow {
+    &.light {
+        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+        .followNetworkLists {
+            .list {
+                a {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                    &:hover {
+                        color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                    }
+                }
+            }
+        }
+    }
+    
+    &.dark {
+        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+        .followNetworkLists {
+            .list {
+                a {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                    &:hover {
+                        color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                        border: var(--border-width, 1px) solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                    }
+                }
+            }
+        }
+    }
+
+    .followNetworkLists {
+        span {
+            font-weight: bold;
+        }
+        .list {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            a {
+                width: 45px;
+                height: 45px;
+                padding: 10px;
+                border-radius: 100%;
+                transition: var(--transition-fast);
+                line-height: 22px;
+            }
+        }
+    }
+}
+
+@include media("<desktop") {
+    
+}
+
+@include media("<=tablet") {
+    .sectionFollow {
+        .followNetworkLists {
+            > span {
+                width: 100%;
+                clear: both;
+            }
+        }
+    }
+}
+
+@include media("<=phone") {
+
+}

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from "gatsby"
@@ -6,7 +5,6 @@ import { Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 
 import './raiseHand.scss'
 
@@ -32,18 +30,18 @@ export default function RaiseHand (
                 drop={drop}
             >
 
-                <Dropdown.Toggle className = 'toggler' id = "Share" variant = { mode } >
+                <Dropdown.Toggle className = 'toggler primary' id = "Share" variant = { mode }>
                     <FontAwesomeIcon 
                         className="icon" 
                         icon={faHandSparkles} 
                         size="lg" 
                     />
-                    <span>{t('global:global.participation.raisehand.title')}</span>
+                    <span>{t('global.participation.raisehand.title')}</span>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="">
                     <Dropdown.ItemText className="user-select-none">
-                        <strong>{t('global:global.participation.raisehand.dropdown-text')}</strong>
+                        <strong>{t('global.participation.raisehand.dropdown-text')}</strong>
                     </Dropdown.ItemText>
                     {
                         options.map( (option, index) => (

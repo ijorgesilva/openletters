@@ -31,14 +31,14 @@ export const useGlobalIndeces = ( ) => {
                             :
                                 undefined
     
+    if( searchFunctions?.settingsSearchFunctionsSeriesActive === true ){
+        indexes.push( { name: `series`, title: `Series` } )
+    }
     if( searchFunctions?.settingsSearchFunctionsPagesActive === true ){
         indexes.push( { name: `pages`, title: `Pages` } )
     }
     if( searchFunctions?.settingsSearchFunctionsVideosActive === true ){
         indexes.push( { name: `videos`, title: `Messages` } )
-    }
-    if( searchFunctions?.settingsSearchFunctionsSeriesActive === true ){
-        indexes.push( { name: `series`, title: `Series` } )
     }
     if( searchFunctions?.settingsSearchFunctionsPostsActive === true ){
         indexes.push( { name: `posts`, title: `Posts` } )

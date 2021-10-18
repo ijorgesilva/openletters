@@ -16,6 +16,8 @@ import SectionVideo from './content/sectionVideo'
 import SectionBlurbs from './content/sectionBlurbs'
 import SectionAccordion from './accordion/sectionAccordion'
 import SectionForm from './form/sectionForm'
+import SectionFollow from '../components/social/sectionFollow'
+import SectionAlbum from '../components/music/album'
 
 import config from '../../data/SiteConfig'
 
@@ -303,6 +305,7 @@ export default function RenderSection (
                     title           = { sectionTitle }
                     subtitle        = { sectionContent }
                     size            = { sectionSize }
+                    backgroundLayers= { sectionBackground }
                     backgroundPhoto = { section.sectionDetails.sectionHero.sectionHeroBackground?.localFile.childImageSharp.gatsbyImageData }
                     buttons         = { section.sectionDetails.sectionHero.sectionHeroButtons?.sectionHeroButton }
                     overlay         = { section.sectionDetails.sectionHero.sectionHeroConfiguration.sectionHeroConfigurationOverlay }
@@ -402,17 +405,24 @@ export default function RenderSection (
         * Carousel
         */
         case ( sectionType === 'carousel' && sectionStatus ):
-            const carouselConfiguration     = section.sectionDetails.sectionCarousel.sectionCarouselConfiguration
-            const carouselItems = ( section.sectionDetails.sectionCarousel.sectionCarouselItems?.length > 0 ) ? section.sectionDetails.sectionCarousel.sectionCarouselItems : []
-            const carouselFeedType = section.sectionDetails.sectionCarousel.sectionCarouselFeed.feedType
-            
-            const carouselItemsFeed = useGetFeed(section.sectionDetails.sectionCarousel.sectionCarouselFeed)
+            const carouselConfiguration = section.sectionDetails.sectionCarousel.sectionCarouselConfiguration
+            const carouselItemsCustom   = section.sectionDetails.sectionCarousel.sectionCarouselItems
+
+            const carouselFeedType      = section.sectionDetails.sectionCarousel.sectionCarouselType
+            const carouselItemsFeed     =   ( carouselFeedType === 'custom' && carouselItemsCustom.length > 0 ) ? 
+                                                useGetFeed(carouselItemsCustom)
+                                            : 
+                                                ( carouselFeedType === 'feed' ) ? 
+                                                    useGetFeed(section.sectionDetails.sectionCarousel.sectionCarouselFeed) 
+                                                : undefined
             
             return(
                 <>
                     {
-                        ( carouselItems ) ?
+                        ( carouselItemsFeed?.list?.length > 0 ) ?
                             <SectionCarousel 
+
+                                // Section General
                                 id              = { sectionId }
                                 title           = { sectionTitle }
                                 content         = { sectionContent }
@@ -422,22 +432,33 @@ export default function RenderSection (
                                 size            = { sectionSize }
                                 campus          = { campus }
                                 location        = { location }
-                                itemType        = { carouselConfiguration.sectionCarouselConfigurationItemType }
-                                swipeable       = { carouselConfiguration.sectionCarouselConfigurationSwipe }
-                                draggable       = { carouselConfiguration.sectionCarouselConfigurationDraggable }
-                                infinite        = { carouselConfiguration.sectionCarouselConfigurationInfinite }
-                                partialVisible  = { carouselConfiguration.sectionCarouselConfigurationPartiallyVisible }
-                                autoplay        = { carouselConfiguration.sectionCarouselConfigurationAutoplay }
-                                interval        = { carouselConfiguration.sectionCarouselConfigurationAutoplayInterval }
-                                dots            = { carouselConfiguration.sectionCarouselConfigurationDots }
-                                dotsClass       = { carouselConfiguration.sectionCarouselConfigurationDotsClass }
-                                gap             = { carouselConfiguration.sectionCarouselConfigurationGap }
-                                itemClass       = { carouselConfiguration.sectionCarouselConfigurationClass }
-                                truncate        = { carouselConfiguration.sectionCarouselConfigurationTruncate }
-                                truncateLines   = { carouselConfiguration.sectionCarouselConfigurationTruncateLines }
-                                aspectRatio     = { carouselConfiguration.sectionCarouselConfigurationImageAspect }
-                                responsive      = { carouselConfiguration.sectionCarouselConfigurationResponsive }
-                                items           = { carouselItems }
+                                // Items
+                                items           = { carouselItemsFeed }
+                                // Configuration
+                                    // Behavior
+                                    swipeable       = { carouselConfiguration.sectionCarouselConfigurationSwipe }
+                                    draggable       = { carouselConfiguration.sectionCarouselConfigurationDraggable }
+                                    infinite        = { carouselConfiguration.sectionCarouselConfigurationInfinite }
+                                    partialVisible  = { carouselConfiguration.sectionCarouselConfigurationPartiallyVisible }
+                                    autoplay        = { carouselConfiguration.sectionCarouselConfigurationAutoplay }
+                                    stretchedlink   = { carouselConfiguration.sectionCarouselConfigurationStretched }
+                                    // Aspect
+                                    itemType        = { carouselConfiguration.sectionCarouselConfigurationItemType } // ?
+                                    dots            = { carouselConfiguration.sectionCarouselConfigurationDots }
+                                    dotsClass       = { carouselConfiguration.sectionCarouselConfigurationDotsClass }
+                                    interval        = { carouselConfiguration.sectionCarouselConfigurationAutoplayInterval }
+                                    itemClass       = { carouselConfiguration.sectionCarouselConfigurationClass }
+                                    gap             = { carouselConfiguration.sectionCarouselConfigurationGap }
+                                    truncate        = { carouselConfiguration.sectionCarouselConfigurationTruncate }
+                                    truncateLines   = { carouselConfiguration.sectionCarouselConfigurationTruncateLines }
+                                    imagePosition   = { carouselConfiguration.sectionCarouselConfigurationImagePosition }
+                                    imageFit        = { carouselConfiguration.sectionCarouselConfigurationImageFit }
+                                    aspectRatio     = { carouselConfiguration.sectionCarouselConfigurationImageAspect }
+                                    border          = { carouselConfiguration.sectionCarouselConfigurationBorder }
+                                    borderColor     = { carouselConfiguration.sectionCarouselConfigurationBorderColor }
+                                    itemGrow        = { carouselConfiguration.sectionCarouselConfigurationGrow }
+                                    // Responsive
+                                    responsive      = { carouselConfiguration.sectionCarouselConfigurationResponsive }
                             />
                         :
                             undefined
@@ -447,7 +468,58 @@ export default function RenderSection (
             break
 
         /*
-        * Social
+        * Blurbs
+        */
+        case ( sectionType === 'blurbs' && sectionStatus ):
+            
+            const blurbsConfiguration = section.sectionDetails.sectionBlurbs.sectionBlurbsConfiguration
+            const blurbsItemsCustom   = section.sectionDetails.sectionBlurbs.sectionBlurbsItems
+
+            const blurbsDataType      = section.sectionDetails.sectionBlurbs.sectionBlurbsType
+            const blurbsItemsFeed     =   ( blurbsDataType === 'custom' && blurbsItemsCustom.length > 0 ) ? 
+                                                useGetFeed(blurbsItemsCustom)
+                                            : 
+                                                ( blurbsDataType === 'feed' ) ? 
+                                                    useGetFeed(section.sectionDetails.sectionBlurbs.sectionBlurbsFeed) 
+                                                : undefined
+
+            // console.log('blurbsItemsFeed')
+            // console.log(blurbsItemsFeed)
+
+            return(
+                <SectionBlurbs
+                    title           = { sectionTitle }
+                    id              = { sectionId }
+                    content         = { sectionContent }
+                    className       = { sectionClassname }
+                    mode            = { sectionColorScheme }
+                    containerWidth  = { sectionContainerWidth }
+                    size            = { sectionSize }
+                    items           = { blurbsItemsFeed }
+        
+                    // Configuration
+                        itemType        = { blurbsConfiguration.sectionBlurbsConfigurationType?.split(':')[0] }
+                        orientation     = { blurbsConfiguration.sectionBlurbsConfigurationOrientation?.split(':')[0] }
+                        direction       = { blurbsConfiguration.sectionBlurbsConfigurationDirection }
+                        stretchedlink   = { blurbsConfiguration.sectionBlurbsConfigurationStretch }
+                        justification   = { blurbsConfiguration.sectionBlurbsConfigurationJustification?.split(':')[0] }
+                        itemClass       = { blurbsConfiguration.sectionBlurbsConfigurationClass }
+                        gap             = { blurbsConfiguration.sectionBlurbsConfigurationGap?.split(':')[0] }
+                        truncate        = { blurbsConfiguration.sectionBlurbsConfigurationTruncate }
+                        truncateLines   = { blurbsConfiguration.sectionBlurbsConfigurationTruncateLines }
+                        imagePosition   = { blurbsConfiguration.sectionBlurbsConfigurationImagePosition }
+                        imageFit        = { blurbsConfiguration.sectionBlurbsConfigurationImageFit }
+                        aspectRatio     = { blurbsConfiguration.sectionBlurbsConfigurationImageAspect }
+                        border          = { blurbsConfiguration.sectionBlurbsConfigurationBorder }
+                        borderColor     = { blurbsConfiguration.sectionBlurbsConfigurationBorderColor }
+                        itemGrow        = { blurbsConfiguration.sectionBlurbsConfigurationGrow }
+                />
+            )
+            break
+
+        
+        /*
+        * Share
         */
         case ( sectionType === 'share' && sectionStatus ):
             
@@ -482,6 +554,7 @@ export default function RenderSection (
                 'controls': videoParams.sectionVideoConfigurationControls,
                 'height': videoParams.sectionVideoConfigurationHeight,
                 'width': videoParams.sectionVideoConfigurationWidth,
+                'maxWidth': videoParams.sectionVideoConfigurationMaxWidth,
                 'light': videoParams.sectionVideoConfigurationLight,
                 'loop': videoParams.sectionVideoConfigurationLoop,
                 'muted': videoParams.sectionVideoConfigurationMuted,
@@ -499,51 +572,20 @@ export default function RenderSection (
                     size            = { sectionSize }
                     mode            = { sectionColorScheme }
                     containerWidth  = { sectionContainerWidth }
+                    backgroundLayers= { sectionBackground }
                     location        = { location }
                     url             = { videoConf.url }
                     thumbnail       = { videoConf.thumbnail }
                     controls        = { videoConf.controls }
                     height          = { videoConf.height }
                     width           = { videoConf.width }
+                    maxWidth        = { videoConf.maxWidth }
                     light           = { videoConf.light }
                     loop            = { videoConf.loop }
                     muted           = { videoConf.muted }
                     pip             = { videoConf.pip }
                     volume          = { videoConf.volume }
                     autoplay        = { videoConf.autoplay }
-                />
-            )
-            break
-
-        /*
-        * Blurbs
-        */
-        case ( sectionType === 'blurbs' && sectionStatus ):
-            const blurbsDataType          = section.sectionDetails.sectionBlurbs.sectionBlurbsType
-            const blurbsConfiguration     = section.sectionDetails.sectionBlurbs.sectionBlurbsConfiguration
-            const blurbsItems             = ( section.sectionDetails.sectionBlurbs.sectionBlurbsItems?.length > 0 ) ? section.sectionDetails.sectionBlurbs.sectionBlurbsItems : []
-
-            return(
-                <SectionBlurbs
-                    title           = { sectionTitle }
-                    id              = { sectionId }
-                    content         = { sectionContent }
-                    className       = { sectionClassname }
-                    mode            = { sectionColorScheme }
-                    containerWidth  = { sectionContainerWidth }
-                    size            = { sectionSize }
-                    items           = { blurbsItems }
-                    dataType        = { blurbsDataType }
-                    blurbType       = { blurbsConfiguration.sectionBlurbsConfigurationType?.split(':')[0] }
-                    orientation     = { blurbsConfiguration.sectionBlurbsConfigurationOrientation?.split(':')[0] }
-                    direction       = { blurbsConfiguration.sectionBlurbsConfigurationDirection }
-                    itemClass       = { blurbsConfiguration.sectionBlurbsConfigurationClass }
-                    gap             = { blurbsConfiguration.sectionBlurbsConfigurationGap?.split(':')[0] }
-                    imageAspect     = { blurbsConfiguration.sectionBlurbsConfigurationImageAspect }
-                    justification   = { blurbsConfiguration.sectionBlurbsConfigurationJustification?.split(':')[0] }
-                    stretch         = { blurbsConfiguration.sectionBlurbsConfigurationStretch }
-                    truncate        = { blurbsConfiguration.sectionBlurbsConfigurationTruncate }
-                    truncateLines   = { blurbsConfiguration.sectionBlurbsConfigurationTruncateLines }
                 />
             )
             break
@@ -618,6 +660,85 @@ export default function RenderSection (
                  />
             )
             break
+
+        /*
+        * Follow
+        */
+        case ( sectionType === 'follow' && sectionStatus ):
+            const followConfiguration = section.sectionDetails.sectionFollow.sectionFollowConfiguration
+            
+            return (
+                <SectionFollow
+                    title               = { sectionTitle }
+                    id                  = { sectionId }
+                    content             = { sectionContent }
+                    className           = { sectionClassname }
+                    containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme }
+                    size                = { sectionSize }
+                    networks            = { section.sectionDetails.sectionFollow.sectionFollowNetworks }
+
+                    alignment           = { followConfiguration.sectionFollowConfigurationAlignment }
+                />
+            )
+        break
+
+        /*
+        * Album
+        */
+        case ( sectionType === 'album' && sectionStatus ):
+            
+            const albumCover        = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumCover?.localFile.childImageSharp.gatsbyImageData
+            const albumTitle        = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumTitle
+            const albumSubtitle     = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumSubtitle
+            const albumSongs        = section.sectionDetails.sectionAlbum.sectionAlbumItems.song
+            // const albumCarouselConf = section.sectionDetails.sectionAlbum.sectionAlbumConfiguration.carouselConfiguration
+            // console.log(section.sectionDetails.sectionAlbum.sectionAlbumConfiguration.carouselConfiguration)
+
+            return (
+                <SectionAlbum 
+                    title               = { sectionTitle }
+                    id                  = { sectionId }
+                    content             = { sectionContent }
+                    className           = { sectionClassname }
+                    containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme }
+                    size                = { sectionSize }
+                    location            = { location }
+
+                    albumCover          = { albumCover }
+                    albumTitle          = { albumTitle }
+                    albumSubtitle       = { albumSubtitle }
+                    albumSongs          = { albumSongs }
+
+                    // Configuration
+                        // Behavior
+                        // swipeable       = { albumCarouselConf.sectionCarouselConfigurationSwipe }
+                        // draggable       = { albumCarouselConf.sectionCarouselConfigurationDraggable }
+                        // infinite        = { albumCarouselConf.sectionCarouselConfigurationInfinite }
+                        // partialVisible  = { albumCarouselConf.sectionCarouselConfigurationPartiallyVisible }
+                        // autoplay        = { albumCarouselConf.sectionCarouselConfigurationAutoplay }
+                        // stretchedlink   = { albumCarouselConf.sectionCarouselConfigurationStretched }
+                        // // Aspect
+                        // itemType        = { albumCarouselConf.sectionCarouselConfigurationItemType } // ?
+                        // dots            = { albumCarouselConf.sectionCarouselConfigurationDots }
+                        // dotsClass       = { albumCarouselConf.sectionCarouselConfigurationDotsClass }
+                        // interval        = { albumCarouselConf.sectionCarouselConfigurationAutoplayInterval }
+                        // itemClass       = { albumCarouselConf.sectionCarouselConfigurationClass }
+                        // gap             = { albumCarouselConf.sectionCarouselConfigurationGap }
+                        // truncate        = { albumCarouselConf.sectionCarouselConfigurationTruncate }
+                        // truncateLines   = { albumCarouselConf.sectionCarouselConfigurationTruncateLines }
+                        // imagePosition   = { albumCarouselConf.sectionCarouselConfigurationImagePosition }
+                        // imageFit        = { albumCarouselConf.sectionCarouselConfigurationImageFit }
+                        // aspectRatio     = { albumCarouselConf.sectionCarouselConfigurationImageAspect }
+                        // border          = { albumCarouselConf.sectionCarouselConfigurationBorder }
+                        // borderColor     = { albumCarouselConf.sectionCarouselConfigurationBorderColor }
+                        // itemGrow        = { albumCarouselConf.sectionCarouselConfigurationGrow }
+                        // // Responsive
+                        // responsive      = { albumCarouselConf.sectionCarouselConfigurationResponsive }
+                />
+            )
+        break
 
         /*
          * Default

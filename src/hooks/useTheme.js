@@ -1,6 +1,5 @@
 import convert from 'color-convert'
 import { useStaticQuery, graphql } from 'gatsby'
-// import { tint, shade } from 'tint-shade-color'
 
 export const useTheme = () => { 
 
