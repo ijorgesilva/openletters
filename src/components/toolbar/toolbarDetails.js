@@ -30,6 +30,7 @@ export default function ToolbarDetails (
                 }
                 <ShareSimpleIcon 
                     location    = { location } 
+                    style       = { 'toolBar' }
                     mode        = { mode ? mode : 'light' }
                     label
                 />

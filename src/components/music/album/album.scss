@@ -6,17 +6,85 @@
     &.dark {
         
     }
+    .album {
+        border-bottom: 1px solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        > div {
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: "cover info";
+            gap: 20px;
+            .albumCover {
+                grid-area: cover;
+                > .cover {
+                    overflow: hidden;
+                    border-radius: var(--border-radius);
+                }
+            }
+            .albumInfo {
+                grid-area: info;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .albumTitle {
+                    font-size: 2.5rem;
+                    line-height: 2.5rem;
+                    font-weight: bolder;
+                    margin: 0;
+                }
+                .albumSubtitle {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    font-weight: normal;
+                    margin-bottom: 2rem;
+                }
+                .buttons {
+                    display: flex;
+                    gap: 10px;
+                }
+            }
+        }
+    }
+    .resources {
+        border-top: 1px solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        border-bottom: 1px solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 2rem;
+        }
+    }
 }
 
-@include media("<desktop") {
-}
+@include media("<desktop") {}
 
-@include media("<=tablet") {
-}
+@include media("<=tablet") {}
 
 @include media("<tablet") {
+    .sectionAlbum {
+        .album {
+            > div {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: minmax(300px, 1fr);
+                grid-template-areas: "cover"
+                                     "info";
+                gap: 20px;
+                .albumCover {
+                    grid-area: cover;
+                    > .cover {
+                        
+                    }
+                }
+                .albumInfo {
+                    grid-area: info;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+            }
+        }
+    }
 }
 
-@include media("<=phone") {
-}
-
+@include media("<=phone") {}

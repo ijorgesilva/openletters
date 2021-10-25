@@ -635,13 +635,6 @@
             // padding-bottom: 100%;
         }
     }
-    .gatsby-image-wrapper {
-        &.card-img-top {
-            img {
-                border-radius: var(--border-radius);
-            }
-        }
-    }
     .aspect-ratio-9_16 {
         padding-top: 177%;
         position: relative;

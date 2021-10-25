@@ -96,6 +96,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 <div className={`container bartools ${ mode ? mode : 'light' }`}>
                     <ShareSimpleIcon 
                         location = {location} 
+                        style    = { 'toolbar' }
                         mode     = { mode }
                     />
                 </div>

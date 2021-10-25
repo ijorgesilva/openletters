@@ -22,6 +22,7 @@ export default function SectionAlbum (
         size,
         location,
 
+        albumAvailableOn,
         albumCover,
         albumTitle,
         albumSubtitle,
@@ -56,132 +57,123 @@ export default function SectionAlbum (
     return (
         <section 
             id          = {id}
-            className   = {`sectionAlbum ${ size ? size : ''}  ${ className ? className : ''} ${ mode ? mode : 'light' }`}
+            className   = {`sectionAlbum ${ className ? className : ''} ${ mode ? mode : 'light' }`}
         >
-            <Container fluid = { containerWidth === 'container' ? false : true }>
-
                 {
                     ( title || content ) ?
-                        <div className='general'>
+                        <Container fluid = { containerWidth === 'container' ? false : true } className = {`${ size ? size : ''}`}>
+                            <div className='general pb-3'>
+                                {
+                                    ( title ) ?
+                                        <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
+                                    :
+                                        undefined
+                                }
+                                { 
+                                    ( content ) ?
+                                        <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                    :
+                                        undefined
+                                }
+                            </div>
+                        </Container>
+                    :
+                        undefined
+                }
+
+                <div className = 'album pt-3 pb-3'>
+                    <Container fluid = { containerWidth === 'container' ? false : true }>
+                        <div className = 'albumCover'>
                             {
-                                ( title ) ?
-                                    <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
-                                :
-                                    undefined
-                            }
-                            { 
-                                ( content ) ?
-                                    <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                ( albumCover ) ?
+                                    <GatsbyImage 
+                                        image       = {albumCover} 
+                                        alt         = ''
+                                        className   = 'cover'
+                                    />
                                 :
                                     undefined
                             }
                         </div>
-                    :
-                        undefined
-                }
+                        <div className = 'albumInfo'>
+                                {
+                                    ( albumTitle ) ?
+                                        <h2 className='albumTitle' dangerouslySetInnerHTML={{__html: albumTitle}}></h2>
+                                    :
+                                        undefined
+                                }
+                                {
+                                    ( albumSubtitle ) ?
+                                        <h3 className='albumSubtitle' dangerouslySetInnerHTML={{__html: albumSubtitle}}></h3>
+                                    :
+                                        undefined
+                                }
 
+                                <div className = 'buttons' >
+                                    <FindOn 
+                                        items = { albumAvailableOn }
+                                    />
 
-            </Container>
+                                    <ShareSimpleIcon 
+                                        location    = { location } 
+                                        label
+                                    />
+                                </div>
 
-            <Container fluid = { containerWidth === 'container' ? false : true } className = 'album'>
+                        </div>
+                    </Container>
+                </div>
 
-                <Row>
-                    <Col xs={2} md={2} sm={6} 
-                        className = 'albumCover'>
+                <Playlist 
+                    className       = 'pt-3 pb-3'
+                    containerWidth  = { containerWidth }
+                    mode            = { mode }
+                    songs           = { albumSongs } 
+                />
+
+                <div className = 'resources'>
+                    <Container fluid = { containerWidth === 'container' ? false : true }>
                         {
-                            ( albumCover ) ?
-                                <GatsbyImage 
-                                    image={albumCover} 
-                                    alt=''
-                                />
+                            albumSongs.length > 0 ?
+                                albumSongs.map ( ( _, index ) => (
+                                    <SectionCarousel 
+                                        key             = { index }
+                                        id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
+                                        title           = { _.songTitle ? _.songTitle : ''}
+                                        className       = { `song-resource-${index+1} pt-4 pb-4 ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
+                                        mode            = { mode }
+                                        containerWidth  = { containerWidth }
+                                        location        = { location }
+                                        items           = { useGetFeed( _.songResources ) }
+
+                                        swipeable       = { swipeable }
+                                        draggable       = { draggable }
+                                        infinite        = { infinite }
+                                        partialVisible  = { partialVisible }
+                                        autoplay        = { autoplay }
+                                        stretchedlink   = { stretchedlink }
+                                        itemType        = { itemType }
+                                        dots            = { dots }
+                                        dotsClass       = { dotsClass }
+                                        interval        = { interval }
+                                        itemClass       = { itemClass }
+                                        gap             = { gap }
+                                        truncate        = { truncate }
+                                        truncateLines   = { truncateLines }
+                                        imagePosition   = { imagePosition }
+                                        imageFit        = { imageFit }
+                                        aspectRatio     = { aspectRatio }
+                                        border          = { border }
+                                        borderColor     = { borderColor }
+                                        itemGrow        = { itemGrow }
+                                        responsive      = { responsive }
+                                    />
+                                ))
                             :
                                 undefined
                         }
-                    </Col>
-                    <Col xs={10} md={10} sm={6} 
-                        className = 'albumInfo'>
-                            {
-                                ( albumTitle ) ?
-                                    <h2 className='albumTitle' dangerouslySetInnerHTML={{__html: albumTitle}}></h2>
-                                :
-                                    undefined
-                            }
-                            {
-                                ( albumSubtitle ) ?
-                                    <h3 className='albumSubtitle' dangerouslySetInnerHTML={{__html: albumSubtitle}}></h3>
-                                :
-                                    undefined
-                            }
-
-                            <div className = 'buttons' >
-                                <FindOn 
-                                />
-
-                                <ShareSimpleIcon 
-                                    location    = { location } 
-                                    mode        = { mode ? mode : 'light' }
-                                    label
-                                />
-                            </div>
-
-                    </Col>
-                </Row>
-
-            </Container>
-
-            <Container fluid = { containerWidth === 'container' ? false : true } className='playlist'>
-                <Playlist 
-                    mode    = { mode }
-                    songs   = { albumSongs } 
-                />
-            </Container>
-
-            <Container fluid = { containerWidth === 'container' ? false : true } className='resources'>
-                {
-                    albumSongs.length > 0 ?
-                        albumSongs.map ( ( _, index ) => (
-                            
-                                <SectionCarousel 
-                                    key             = { index }
-                                    id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
-                                    title           = { _.songTitle ? _.songTitle : ''}
-                                    className       = { `song-${index+1} ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
-                                    mode            = { mode }
-                                    containerWidth  = { containerWidth }
-                                    location        = { location }
-                                    items           = { useGetFeed( _.songResources ) }
-
-                                    swipeable       = { swipeable }
-                                    draggable       = { draggable }
-                                    infinite        = { infinite }
-                                    partialVisible  = { partialVisible }
-                                    autoplay        = { autoplay }
-                                    stretchedlink   = { stretchedlink }
-                                    itemType        = { itemType }
-                                    dots            = { dots }
-                                    dotsClass       = { dotsClass }
-                                    interval        = { interval }
-                                    itemClass       = { itemClass }
-                                    gap             = { gap }
-                                    truncate        = { truncate }
-                                    truncateLines   = { truncateLines }
-                                    imagePosition   = { imagePosition }
-                                    imageFit        = { imageFit }
-                                    aspectRatio     = { aspectRatio }
-                                    border          = { border }
-                                    borderColor     = { borderColor }
-                                    itemGrow        = { itemGrow }
-                                    responsive      = { responsive }
-                                />
-                            
-                        ))
-                        
-                    :
-                        undefined
-                }
-
-            </Container>
-
+                    </Container>
+                </div>
 
         </section>
     )

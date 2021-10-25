@@ -1,39 +1,44 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ListGroup, Button } from 'react-bootstrap'
+import { Container, ListGroup, Button } from 'react-bootstrap'
 
 import './playlist.scss'
 
 export default function Playlist ( 
     {
+        className,
         mode,
         songs,
+        containerWidth,
+        title,
     }
 ) {
     
-        const { t } = useTranslation()
-        // console.log(songs)
-        return (
-            <>
-                {
-                    songs.length > 0 ?
-                        <section>
-                            <ListGroup variant='flush'>
+    const { t } = useTranslation()
+    
+    return (
+        <>
+            {
+                songs.length > 0 ?
+                    <section className = {`playlist ${ className ? className : '' }`}>
+                        <Container fluid = { containerWidth === 'container' ? false : true }>
+                            <h6 className = {'title'} >{t('global:components.music.playlist-title')}</h6>
+                            <ListGroup variant='flush' >
                                 {
                                     songs.map ( ( _, index ) => (
-                                        <ListGroup.Item className = 'song' key = { index }>
-                                              <div className='row justify-content-between'>
-                                                    <div className='col-10 title'>
-                                                        <span> { index + 1 } </span>
-                                                        <h5 className = 'font-weight-bold'>{ _.songTitle }</h5>
-                                                        <p className = 'text-black-50'>{_.songDuration}</p>
+                                        <ListGroup.Item className = 'songs' key = { index }>
+                                                <div className={`track track-${index} row justify-content-between`}>
+                                                    <div className='info'>
+                                                        <span className = 'number'> { index + 1 } </span>
+                                                        <h5 className = 'title'>{ _.songTitle }</h5>
+                                                        <p className = 'duration'>{_.songDuration}</p>
                                                     </div>
-                                                    <div className='col-2'>
+                                                    <div className='buttons'>
                                                         <Button 
                                                             href  = { '#'+ _.songTitle.split(' ').join('_') }
-                                                            variant = {`outline-${ mode === 'light' ? 'dark' : 'light' }`}
+                                                            variant = {`outline-${ mode === 'light' ? 'light' : 'dark' }`}
                                                         >
-                                                            {t('global.music.resources')}
+                                                            {t('global:components.music.resources')}
                                                         </Button>
                                                     </div>
                                                 </div>
@@ -41,10 +46,11 @@ export default function Playlist (
                                     ))
                                 }
                             </ListGroup>
-                        </section>
-                    :
-                        undefined
-                }
-            </>
-        )
+                        </Container>
+                    </section>
+                :
+                    undefined
+            }
+        </>
+    )
 }

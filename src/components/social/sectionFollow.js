@@ -36,28 +36,32 @@ export default function SectionFollow (
     return (
 
         <section className = {`sectionFollow ${ className ? className : '' } ${ size ? size : 'md' } ${ mode ? mode : 'light' }`} id = {id} >
-            
+        
                 <Container fluid = { containerWidth === 'container' ? false : true }>
-
-                    <div className = 'general'>
-                        {
-                            ( title ) ?
-                                    <h4 className = 'title display-4 text-break' dangerouslySetInnerHTML={{__html: title}}></h4>
-                            :
-                                undefined
-                        }
-                        { 
-                            ( content ) ?
-                                <div className = 'content' dangerouslySetInnerHTML={{__html: content}}></div>
-                            :
-                                undefined
-                        }
-                    </div>
-                        <FollowNetworkLists 
-                            items       = { networkList }
-                            mode        = { mode }
-                            alignment   = { alignment }
-                        />
+                    {
+                        ( title || content ) ?
+                            <div className='general'>
+                                {
+                                    ( title ) ?
+                                        <h2 className = 'title display-4 text-break' dangerouslySetInnerHTML={{__html: title}}></h2>
+                                    :
+                                        undefined
+                                }
+                                { 
+                                    ( content ) ?
+                                        <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
+                                    :
+                                        undefined
+                                }
+                            </div>
+                        :
+                            undefined
+                    }
+                    <FollowNetworkLists 
+                        items       = { networkList }
+                        mode        = { mode }
+                        alignment   = { alignment }
+                    />
                 </Container>
 
         </section>

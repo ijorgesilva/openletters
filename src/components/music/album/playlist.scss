@@ -1,18 +1,52 @@
 @import "~include-media/dist/_include-media.scss";
 .playlist {
-    &.light {
+    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
+    
+    &.light {}
+    &.dark {}
 
+    .title {
+        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
     }
-    &.dark {
-        
-    }
-    .song {
-        .title {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            h1, h2, h3, h4, h5, p, span {
-                margin: unset;
+    .list-group {
+        border-radius: var(--border-radius);
+        .songs {
+            transition: var(--transition-fast);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            padding: 1rem 2.5rem;
+
+            &:hover {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+            .track {
+                .info {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    h1, h2, h3, h4, h5, p, span {
+                        margin: unset;
+                    }
+                    .number {
+                        margin-right: 10px;
+                        font-weight: normal;
+                    }
+                    .title {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        display: block;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+                    .duration {
+                        margin-left: 10px;
+                        font-weight: normal;
+                    }
+                }
             }
         }
     }
@@ -28,5 +62,19 @@
 }
 
 @include media("<=phone") {
+    .playlist {
+        .list-group{ 
+            .songs{ 
+                .track{ 
+                    .info{
+                        align-items: start;
+                    }
+                    .buttons {
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
 }
 

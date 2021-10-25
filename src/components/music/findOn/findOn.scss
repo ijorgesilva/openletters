@@ -1,7 +1,23 @@
 @import "~include-media/dist/_include-media.scss";
 
 .findOn {
-
+    .icon {
+        margin-right: 0.5rem;
+    }
+    .dropdown-menu {
+        .dropdown-item {
+            a {
+                display: block;
+                text-decoration: unset;
+                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+            }
+        }
+    }
+    .dropdown-toggle {
+        &::after{
+            display: none;
+        }
+    }
 }
 
 @include media("<desktop") {

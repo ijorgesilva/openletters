@@ -1229,6 +1229,15 @@ const sections = `
                         ${localFile}
                     }
                 }
+                availableon {
+                    availableonType
+                    availableonSpotify
+                    availableonTidal
+                    availableonPandora
+                    availableonDeezer
+                    availableonApple
+                    availableonAmazon
+                }
                 song {
                     songTitle
                     songAuthor
@@ -1238,11 +1247,11 @@ const sections = `
                     }
                 }
             }
-            ## sectionAlbumConfiguration {
-                ## carouselConfiguration {
-                ##     $ { carouselConfiguration}
-                ## }
-            ## }
+            sectionAlbumConfiguration {
+                sectionCarouselConfiguration {
+                    ${carouselConfiguration}
+                }
+            }
         }
 
     # End Sections

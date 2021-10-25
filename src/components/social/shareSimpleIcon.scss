@@ -1,150 +1,158 @@
 @import "~include-media/dist/_include-media.scss";
 
 .shareSimpleIcon {
-    height: 42px;
-
-    &.light{
-        .dropdown-toggle {
-            &.btn{
-                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
-                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
-                background-color: transparent;
-                &:hover {
-                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
-                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
-                }
-                &[aria-expanded="true"]{
-                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
-                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
-                }
-            }
-        }
-        .dropdown-menu {
-            border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
-            background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-            p {
-                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-            }
-            h6 {
-                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-            }
-            span {
-                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-            }
-            .dropdown-header {
-                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-            }
-            .dropdown-item {
-                color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.7);
-                &:hover {
-                    color: hsla(var(--ligdarkhdarkt-h),var(--dark-s),var(--dark-l),1);
-                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.1);
-                }
-                &:focus {
-                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.2);
-                }
-                &:active {
-                    background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-                }
-            }
-        }
-    }
-
-    &.dark{
-        .dropdown-toggle {
-            &.btn{
-                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
-                background-color: transparent;
-                &:hover {
-                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
-                }
-                &[aria-expanded="true"]{
-                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
-                }
-            }
-        }
-        .dropdown-menu {
-            border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-            background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
-            p {
-                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-            }
-            h6 {
-                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-            }
-            span {
-                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-            }
-            .dropdown-header {
-                color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-            }
-            .dropdown-item {
-                color: hsla(var(--light-h),var(--light-s),var(--light-l),0.7);
-                &:hover {
-                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
-                }
-                &:focus {
-                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
-                }
-                &:active {
-                    background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
-                }
-            }
-        }
-    }
 
     .dropdown-toggle {
-        border: unset;
-        &.btn {
-            display: flex;
-            gap: 10px;
-            margin: 0px;
-            padding: 10px;
-            height: 100%;
-            transition: var(--transition-fast);
-            &:hover {
-                background-color: unset;
+        &::after{
+            display: none;
+        }
+    }
+
+    // Styles
+    &.toolBar {
+        &.light{
+            .dropdown-toggle {
+                &.btn{
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0);
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                    background-color: transparent;
+                    &:hover {
+                        border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                        color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                        background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
+                    }
+                    &[aria-expanded="true"]{
+                        border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                        color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                        background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
+                    }
+                }
             }
-            &:focus {
-                box-shadow: unset;
+            .dropdown-menu {
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+                background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                p {
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                }
+                h6 {
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                }
+                span {
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                }
+                .dropdown-header {
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                }
+                .dropdown-item {
+                    color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.7);
+                    &:hover {
+                        color: hsla(var(--ligdarkhdarkt-h),var(--dark-s),var(--dark-l),1);
+                        background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.1);
+                    }
+                    &:focus {
+                        background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.2);
+                    }
+                    &:active {
+                        background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                    }
+                }
             }
-            &:active {
-                border: unset;
+        }
+    
+        &.dark{
+            .dropdown-toggle {
+                &.btn{
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    background-color: transparent;
+                    &:hover {
+                        border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
+                    }
+                    &[aria-expanded="true"]{
+                        border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
+                    }
+                }
+            }
+            .dropdown-menu {
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                p {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                }
+                h6 {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                }
+                span {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                }
+                .dropdown-header {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                }
+                .dropdown-item {
+                    color: hsla(var(--light-h),var(--light-s),var(--light-l),0.7);
+                    &:hover {
+                        color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                        background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
+                    }
+                    &:focus {
+                        background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.2);
+                    }
+                    &:active {
+                        background-color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                    }
+                }
+            }
+        }
+    
+        .dropdown-toggle {
+            border: unset;
+            &.btn {
+                display: flex;
+                gap: 10px;
+                margin: 0px;
+                padding: 10px;
+                height: 100%;
+                transition: var(--transition-fast);
+                &:hover {
+                    background-color: unset;
+                }
+                &:focus {
+                    box-shadow: unset;
+                }
+                &:active {
+                    border: unset;
+                    &:focus {
+                        box-shadow: unset;
+                    }
+                }
+            }
+            &::after {
+                display: none;
+            }
+        }
+    
+        &.show {
+            .dropdown-toggle {
                 &:focus {
                     box-shadow: unset;
                 }
             }
         }
-        &::after {
-            display: none;
-        }
-    }
-
-    &.show {
-        .dropdown-toggle {
-            &:focus {
-                box-shadow: unset;
-            }
-        }
-    }
-
-    .dropdown-menu {
-        padding: .5rem 0 .5rem 0;
-        .dropdown-item {
-            padding: .5rem 2rem .5rem 1.5rem;
-            button {
-                display: flex;
-                flex-direction: row;
-                gap: 10px;
-                letter-spacing: 1px;
+    
+        .dropdown-menu {
+            padding: .5rem 0 .5rem 0;
+            .dropdown-item {
+                padding: .5rem 2rem .5rem 1.5rem;
+                button {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    letter-spacing: 1px;
+                }
             }
         }
     }

@@ -1,5 +1,10 @@
 {
 	"components": {
+		"music": {
+			"find-on-title": "Find on",
+			"playlist-title": "Songs",
+			"resources": "Resources"
+		},
 		"podcast": {
 			"subtitle": "Are you a",
 			"text": "",

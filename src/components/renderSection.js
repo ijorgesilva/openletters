@@ -692,8 +692,8 @@ export default function RenderSection (
             const albumTitle        = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumTitle
             const albumSubtitle     = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumSubtitle
             const albumSongs        = section.sectionDetails.sectionAlbum.sectionAlbumItems.song
-            // const albumCarouselConf = section.sectionDetails.sectionAlbum.sectionAlbumConfiguration.carouselConfiguration
-            // console.log(section.sectionDetails.sectionAlbum.sectionAlbumConfiguration.carouselConfiguration)
+            const albumCarouselConf = section.sectionDetails.sectionAlbum.sectionAlbumConfiguration.sectionCarouselConfiguration
+            const albumAvailableOn  = section.sectionDetails.sectionAlbum.sectionAlbumItems.availableon
 
             return (
                 <SectionAlbum 
@@ -706,36 +706,37 @@ export default function RenderSection (
                     size                = { sectionSize }
                     location            = { location }
 
+                    albumAvailableOn    = { albumAvailableOn }
                     albumCover          = { albumCover }
                     albumTitle          = { albumTitle }
                     albumSubtitle       = { albumSubtitle }
                     albumSongs          = { albumSongs }
 
-                    // Configuration
+                    // Carousels Configuration
                         // Behavior
-                        // swipeable       = { albumCarouselConf.sectionCarouselConfigurationSwipe }
-                        // draggable       = { albumCarouselConf.sectionCarouselConfigurationDraggable }
-                        // infinite        = { albumCarouselConf.sectionCarouselConfigurationInfinite }
-                        // partialVisible  = { albumCarouselConf.sectionCarouselConfigurationPartiallyVisible }
-                        // autoplay        = { albumCarouselConf.sectionCarouselConfigurationAutoplay }
-                        // stretchedlink   = { albumCarouselConf.sectionCarouselConfigurationStretched }
-                        // // Aspect
-                        // itemType        = { albumCarouselConf.sectionCarouselConfigurationItemType } // ?
-                        // dots            = { albumCarouselConf.sectionCarouselConfigurationDots }
-                        // dotsClass       = { albumCarouselConf.sectionCarouselConfigurationDotsClass }
-                        // interval        = { albumCarouselConf.sectionCarouselConfigurationAutoplayInterval }
-                        // itemClass       = { albumCarouselConf.sectionCarouselConfigurationClass }
-                        // gap             = { albumCarouselConf.sectionCarouselConfigurationGap }
-                        // truncate        = { albumCarouselConf.sectionCarouselConfigurationTruncate }
-                        // truncateLines   = { albumCarouselConf.sectionCarouselConfigurationTruncateLines }
-                        // imagePosition   = { albumCarouselConf.sectionCarouselConfigurationImagePosition }
-                        // imageFit        = { albumCarouselConf.sectionCarouselConfigurationImageFit }
-                        // aspectRatio     = { albumCarouselConf.sectionCarouselConfigurationImageAspect }
-                        // border          = { albumCarouselConf.sectionCarouselConfigurationBorder }
-                        // borderColor     = { albumCarouselConf.sectionCarouselConfigurationBorderColor }
-                        // itemGrow        = { albumCarouselConf.sectionCarouselConfigurationGrow }
-                        // // Responsive
-                        // responsive      = { albumCarouselConf.sectionCarouselConfigurationResponsive }
+                        swipeable       = { albumCarouselConf.sectionCarouselConfigurationSwipe }
+                        draggable       = { albumCarouselConf.sectionCarouselConfigurationDraggable }
+                        infinite        = { albumCarouselConf.sectionCarouselConfigurationInfinite }
+                        partialVisible  = { albumCarouselConf.sectionCarouselConfigurationPartiallyVisible }
+                        autoplay        = { albumCarouselConf.sectionCarouselConfigurationAutoplay }
+                        stretchedlink   = { albumCarouselConf.sectionCarouselConfigurationStretched }
+                        // Aspect
+                        itemType        = { albumCarouselConf.sectionCarouselConfigurationItemType } // ?
+                        dots            = { albumCarouselConf.sectionCarouselConfigurationDots }
+                        dotsClass       = { albumCarouselConf.sectionCarouselConfigurationDotsClass }
+                        interval        = { albumCarouselConf.sectionCarouselConfigurationAutoplayInterval }
+                        itemClass       = { albumCarouselConf.sectionCarouselConfigurationClass }
+                        gap             = { albumCarouselConf.sectionCarouselConfigurationGap }
+                        truncate        = { albumCarouselConf.sectionCarouselConfigurationTruncate }
+                        truncateLines   = { albumCarouselConf.sectionCarouselConfigurationTruncateLines }
+                        imagePosition   = { albumCarouselConf.sectionCarouselConfigurationImagePosition }
+                        imageFit        = { albumCarouselConf.sectionCarouselConfigurationImageFit }
+                        aspectRatio     = { albumCarouselConf.sectionCarouselConfigurationImageAspect }
+                        border          = { albumCarouselConf.sectionCarouselConfigurationBorder }
+                        borderColor     = { albumCarouselConf.sectionCarouselConfigurationBorderColor }
+                        itemGrow        = { albumCarouselConf.sectionCarouselConfigurationGrow }
+                        // Responsiveness
+                        responsive      = { albumCarouselConf.sectionCarouselConfigurationResponsive }
                 />
             )
         break
