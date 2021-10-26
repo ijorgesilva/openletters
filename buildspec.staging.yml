@@ -26,7 +26,8 @@ phases:
       - echo "User-agent:*" > ./public/robots.txt
       - echo "Disallow:/" >> ./public/robots.txt
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
-      - aws s3 cp --recursive --acl public-read ./public s3://${DeployBucket}/
+      - echo "S3 bucket is $DEPLOY_BUCKET"
+      - aws s3 cp --recursive --acl public-read ./public s3://$DEPLOY_BUCKET
 
 cache:
   paths:
