@@ -1,5 +1,6 @@
 version: 0.2
 
+## TODO: Migrate to ENV variables
 env:
   variables:
     NODE_ENV: "staging"
@@ -25,14 +26,15 @@ phases:
       - echo "User-agent:*" > ./public/robots.txt
       - echo "Disallow:/" >> ./public/robots.txt
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
-      - aws s3 cp --recursive --acl public-read ./public s3://staging.victorychur.ch/
+      - aws s3 cp --recursive --acl public-read ./public s3://${DeployBucket}/
 
 cache:
   paths:
-    - './node_modules/**/*'
-    - './.cache/**/*'
-    - './.wordpress-cache/**/*'
-    - './WordPress/**/*'
+    - 'node_modules/*'
+    - '.cache/*'
+    - 'data/*'
+    - 'public/*'
+    - 'WordPress/*'
 
 artifacts:
   files:

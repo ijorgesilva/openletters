@@ -49,7 +49,6 @@
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
     "luxon": "^1.25.0",
-    "minipass": "^3.1.5",
     "moment": "^2.27.0",
     "node-sass": "^6.0.1",
     "path-browserify": "^1.0.1",
@@ -92,7 +91,8 @@
     "gatsby-source-wordpress": "^5.1.0",
     "prettier": "^2.2.1",
     "react-is": "^17.0.2",
-    "webpack": "^5.51.1"
+    "webpack": "^5.51.1",
+    "minipass": "^3.1.5"
   },
   "repository": {
     "type": "git",
