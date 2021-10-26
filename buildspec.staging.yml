@@ -4,7 +4,6 @@ version: 0.2
 env:
   variables:
     NODE_ENV: "staging"
-    DeployBucket: "staging.victorychur.ch"
 
 phases:
   install:

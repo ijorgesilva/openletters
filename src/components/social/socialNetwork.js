@@ -31,7 +31,7 @@ export default function SocialNetwork (
     ) {
 
     const { t } = useTranslation()
-    const canonicalUrl = config.siteUrl + location.pathname
+    const canonicalUrl = process.env.SITE_CANONICAL_URL + location.pathname
     const typeCaps = type.charAt(0).toUpperCase() + type.slice(1)
 
     switch ( type ) {

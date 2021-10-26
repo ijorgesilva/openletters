@@ -258,14 +258,14 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
                                 series: _.videoDetails.videoSeries?.title,
                                 seriesLink: (_.videoDetails.videoSeries?.title) ?
                                                 `/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
                                             : 
                                                 '',
                                 seriesLinkProduction:   (_.videoDetails.videoSeries?.title) ?
-                                                            `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
+                                                            `${process.env.SITE_URL}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
                                                         : 
                                                             '',
                                 streamingDate: _.videoDetails.videoDayDate,
@@ -307,7 +307,7 @@ const queries = [
                                 slug: _.videoDetails.videoSeries.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}`,
                             })
                         }
 
@@ -341,7 +341,7 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.pagesSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.pagesSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.pagesSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
                             })
                         }
                     })
@@ -375,7 +375,7 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.blogPostDetailsSlug}/${ (_.wpParent?.node?.slug) ? _.wpParent.node.slug + '/' : '' }${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.blogPostDetailsSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.blogPostDetailsSlug}/${_.slug}`,
                             })
                         }
                     })
@@ -409,7 +409,7 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.eventPostDetailsSlug}/${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.eventPostDetailsSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.eventPostDetailsSlug}/${_.slug}`,
                             })
                         }
                     })
@@ -443,7 +443,7 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
                             })
                         }
                     })
@@ -477,7 +477,7 @@ const queries = [
                                 slug: _.slug,
                                 language: 'en',
                                 link: `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
-                                linkProduction: `${config.siteUrl}/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
                             })
                         }
                     })

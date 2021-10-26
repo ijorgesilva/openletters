@@ -21,26 +21,26 @@
      FAST_REFRESH: true
    },
  
-   pathPrefix: config.pathPrefix === "" ? "/" : config.pathPrefix,
+   pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
  
    siteMetadata: {
-     siteUrl: urljoin(config.siteUrl, config.pathPrefix),
+     siteUrl: process.env.SITE_URL,
  
      title: config.siteTitle,
      titleTemplate: "%s"+' '+config.separator+' '+config.siteTitle,
      description: config.siteDescription,
-     url: config.siteUrl,
+     url: process.env.SITE_URL,
      image: config.siteLogo,
      twitterUsername: config.twitterUsername,
  
      rssMetadata: {
-       site_url: urljoin(config.siteUrl, config.pathPrefix),
-       feed_url: urljoin(config.siteUrl, config.pathPrefix, config.siteRss),
+       site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
+       feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, config.siteRss),
        title: config.siteTitle,
        description: config.siteDescription,
        image_url: `${urljoin(
-         config.siteUrl,
-         config.pathPrefix
+         process.env.SITE_URL,
+         process.env.PATH_PREFIX
        )}/logos/logo-512.png`,
        copyright: config.copyright
      }
@@ -72,7 +72,7 @@
             name: config.siteTitle,
             short_name: config.siteTitleShort,
             description: config.siteDescription,
-            start_url: config.pathPrefix,
+            start_url: `/${process.env.PATH_PREFIX.replace(/^\/|\/$/g, "")}`,
             background_color: config.backgroundColor,
             theme_color: config.themeColor,
             display: "standalone", //minimal-ui
@@ -98,11 +98,11 @@
         {
           resolve: `gatsby-source-wordpress`,
           options: {
-            url: process.env.WPGRAPHQL_URL || config.wordpressUri,
+            url: process.env.WPGRAPHQL_URL,
             verbose: true,
-            // develop: {
-            //   hardCacheMediaFiles: true,
-            // },
+            develop: {
+              hardCacheMediaFiles: true,
+            },
             schema: {
               perPage: 100, // currently set to 100
               requestConcurrency: 100, // currently set to 5
@@ -169,14 +169,14 @@
         {
           resolve: `gatsby-plugin-canonical-urls`,
           options: {
-            siteUrl: config.canonicalUrl,
+            siteUrl: process.env.SITE_CANONICAL_URL,
             stripQueryString: true,
           },
         },
         {
           resolve: 'gatsby-plugin-robots-txt',
           options: {
-            host: config.siteUrl,
+            host: process.env.SITE_URL,
             policy: [
             { userAgent: '*', allow: '/' }
             ]

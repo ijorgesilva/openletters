@@ -6,8 +6,8 @@ const config = {
   siteTitleShort: "Victory", // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
   siteTitleAlt: "", // Alternative site title for SEO.
   siteLogo: "/logos/logo-1024.png", // Logo used for SEO and manifest.
-  siteUrl: "https://new.victoryatl.com", // Domain of your website without pathPrefix.
-  canonicalUrl: "https://victoryatl.com",
+  // siteUrl: "https://new.victoryatl.com", // Domain of your website without pathPrefix.
+  // canonicalUrl: "https://victoryatl.com",
   pathPrefix: "", // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
   siteDescription: "Victory Church located on Atlanta Georgia", // Website description used for RSS feeds/meta description tag.
   siteFBAppID: "", // FB Application ID for using app insights
@@ -80,21 +80,5 @@ const config = {
     blogShowDates: true,
   
 };
-
-// Make sure pathPrefix is empty if not needed
-if (config.pathPrefix === "/") {
-  config.pathPrefix = "";
-} else {
-  // Make sure pathPrefix only contains the first forward slash
-  config.pathPrefix = `/${config.pathPrefix.replace(/^\/|\/$/g, "")}`;
-}
-
-// Make sure siteUrl doesn't have an ending forward slash
-if (config.siteUrl.substr(-1) === "/")
-  config.siteUrl = config.siteUrl.slice(0, -1);
-
-// Make sure siteRss has a starting forward slash
-if (config.siteRss && config.siteRss[0] !== "/")
-  config.siteRss = `/${config.siteRss}`;
 
 module.exports = config;

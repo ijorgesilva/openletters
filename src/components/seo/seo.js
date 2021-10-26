@@ -14,7 +14,7 @@ export default function SEO({ postNode, postPath, postSEO }){
           ? postMeta.description
           : postNode.excerpt;
         image = postMeta.cover;
-        postURL = urljoin(config.siteUrl, config.pathPrefix, postPath);
+        postURL = urljoin( process.env.SITE_URL, process.env.PATH_PREFIX, postPath);
     } else {
         title = config.siteTitle;
         description = config.siteDescription;
@@ -27,7 +27,7 @@ export default function SEO({ postNode, postPath, postSEO }){
             `(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]`
           )
         )
-          return urljoin(config.siteUrl, config.pathPrefix, imageURI);
+          return urljoin( process.env.SITE_URL, process.env.PATH_PREFIX, imageURI);
   
         return imageURI;
     }
@@ -58,7 +58,7 @@ export default function SEO({ postNode, postPath, postSEO }){
         url: getImagePath(config.siteLogo)
     }
 
-    const blogURL = urljoin(config.siteUrl, config.pathPrefix)
+    const blogURL = urljoin( process.env.SITE_URL, process.env.PATH_PREFIX)
 
     const schemaOrgJSONLD = [
         {

@@ -14,7 +14,7 @@ export default function ShareSection( { title, id, subtitle, className, variant,
     
     const { t } = useTranslation()
 
-    const canonicalUrl = config.siteUrl + location.pathname
+    const canonicalUrl = process.env.SITE_CANONICAL_URL + location.pathname
 
     const variantClass = (variant) ? variant : "dark"
 
