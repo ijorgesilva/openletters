@@ -1,9 +1,7 @@
-
+import { Link } from 'gatsby'
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import { Link } from 'gatsby'
 import { useTranslation } from "react-i18next"
-
 
 import './menuWatchDetails.scss'
 

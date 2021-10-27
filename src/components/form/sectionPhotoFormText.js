@@ -1,6 +1,5 @@
-
-import React from 'react'
 import IframeResizer from 'iframe-resizer-react'
+import React from 'react'
 
 import './sectionPhotoFormText.scss'
 
@@ -24,7 +23,7 @@ export default function SectionPhotoFormText (
     }
     
     return (
-        <section id={id} className={`sectionPhotoFormText  ${backgroundClassName}`}>
+        <section id={id} className={`sectionPhotoFormText  ${backgroundClassName ? backgroundClassName : ''}`}>
             <div className='container-lg'>
                 <div className='form h-background-white'>
                     <div className='photo h-background-one position-relative'>

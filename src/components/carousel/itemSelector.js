@@ -29,7 +29,7 @@ export default function ItemSelector ( {
         /*
         * Videos
         */
-        case dataType === 'videos':
+        case dataType === 'videos': {
             return (
                 <BlurbVertical
                     image               = { image }
@@ -50,112 +50,112 @@ export default function ItemSelector ( {
                     aspectRatio         = { imageAspect }
                 />
             )
-            break
+        }
 
         /*
         * Series
         */
-        case dataType === 'series':
+        case dataType === 'series': {
             return (
                 <>
                 </>
             )
-            break
+        }
             
         /*
         * Events
         */
-        case dataType === 'events':
+        case dataType === 'events': {
             return (
                 <>
                 </>
             )
-            break
+        }
             
         /*
         * Posts
         */
-        case dataType === 'posts':
+        case dataType === 'posts': {
             return (
                 <>
                 </>
             )
-            break
+        }
             
         /*
         * News
         */
-        case dataType === 'news':
+        case dataType === 'news': {
             return (
                 <>
                 </>
             )
-            break
+        }
             
         /*
         * Groups
         */
-        case dataType === 'groups':
+        case dataType === 'groups': {
             return (
                 <>
                 </>
             )
-            break
+        }
             
         /*
         * Group dataTypes
         */
-        case dataType === 'groupdataTypes':
+        case dataType === 'groupdataTypes': {
             return (
                 <>
                 </>
             )
-            break
+        }
 
         /*
         * Ministries
         */
-        case dataType === 'ministries':
+        case dataType === 'ministries': {
             return (
                 <>
                 </>
             )
-            break
+        }
 
         /*
         * Ministries
         */
-        case dataType === 'volunteering':
+        case dataType === 'volunteering': {
             return (
                 <>
                 </>
             )
-            break  
+        }
 
         /*
         * Courses
         */
-        case dataType === 'courses':
+        case dataType === 'courses': {
             return (
                 <>
                 </>
             )
-            break  
+        }
 
         /*
         * Lessons
         */
-        case dataType === 'lessons':
+        case dataType === 'lessons': {
             return (
                 <>
                 </>
             )
-            break  
+        }
 
         /*
         * Custom
         */
-        case dataType === 'custom':
+        case dataType === 'custom': {
             
             return (
                 <BlurbVertical
@@ -178,17 +178,17 @@ export default function ItemSelector ( {
                     aspectRatio         = { imageAspect }
                 />
             )
-            break
+        }
    
         /*
         * Default
         */
-        default:
-            
+        default: {
             return (
                 <></>
             )
-            break
+        }
+
     }
 
 }

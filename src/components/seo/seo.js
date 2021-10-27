@@ -1,7 +1,8 @@
+import moment from 'moment'
 import React from 'react'
 import Helmet from "react-helmet"
 import urljoin from "url-join"
-import moment from 'moment'
+
 import config from '../../../data/SiteConfig'
 
 export default function SEO({ postNode, postPath, postSEO }){

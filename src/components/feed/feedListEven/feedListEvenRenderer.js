@@ -1,12 +1,8 @@
-
 import React from 'react'
 
-
-import BlurbVerticalDark from '../../blurb/blurbVerticalDark'
-
-// Tools
-import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
 import config from '../../../../data/SiteConfig'
+import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
+import BlurbVerticalDark from '../../blurb/blurbVerticalDark'
 
 export default function FeedListEvenRenderer ( 
     { 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Container, ListGroup, Button } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import './playlist.scss'
 
@@ -10,7 +10,6 @@ export default function Playlist (
         mode,
         songs,
         containerWidth,
-        title,
     }
 ) {
     

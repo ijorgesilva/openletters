@@ -1,13 +1,10 @@
-
-import React from "react"
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import TextTruncate from 'react-text-truncate'
+import React from "react"
 import { useTranslation } from 'react-i18next'
-
+import TextTruncate from 'react-text-truncate'
 
 import { getDate } from '../../components/utils/utils'
-
 
 import './blurbHorizontalDarkFeatured.scss'
 
@@ -25,7 +22,7 @@ export default function BlurbHorizontalDarkFeatured(
 
     switch(type){
 
-        case 'event':
+        case 'event': {
             
             let eventExpired    = false
             const firstDate     =   (eventDates[0].eventDate ) ? 
@@ -66,7 +63,7 @@ export default function BlurbHorizontalDarkFeatured(
                             <div>
                                 {
                                     (firstDate) ? 
-                                        <time className="card-subtitle date" datetime={firstDate}>
+                                        <time className="card-subtitle date" dateTime={firstDate}>
                                             <strong>{ (eventExpired) ? '' + t('global.events.expired') + ' | ' : '' }</strong>
                                             { firstDate } 
                                             { (firstTime) ? ' | ' + firstTime : '' }
@@ -132,9 +129,9 @@ export default function BlurbHorizontalDarkFeatured(
         
                 </div>
             )
-        break
+        }
         
-        default: 
+        default: {
             return (
                 <div 
                     key={(keyIndex) ? keyIndex : undefined} 
@@ -218,7 +215,7 @@ export default function BlurbHorizontalDarkFeatured(
         
                 </div>
             )
-        break
+        }
     }
 
 }

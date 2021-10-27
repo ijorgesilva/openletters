@@ -1,13 +1,11 @@
-
-import React, {useEffect} from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React, {useEffect} from 'react'
 import { Container } from 'react-bootstrap'
 
-
-import VideoReactPlayer from '../../vod/player/videoReactPlayer'
-import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
-import ModalPlaylist from '../feed/modalPlaylist'
 import config from '../../../../data/SiteConfig'
+import SidebarFeedVod from '../../../components/vod/feed/sidebarFeedVod'
+import VideoReactPlayer from '../../vod/player/videoReactPlayer'
+import ModalPlaylist from '../feed/modalPlaylist'
 import './playlistDetails.scss'
 
 export default function PlaylistDetails( 

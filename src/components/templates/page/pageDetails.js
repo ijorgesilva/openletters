@@ -1,15 +1,14 @@
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
-import MainContent from '../../content/mainContent'
-import Navigation from '../../menu/navigation'
-import HeaderPage from '../../headerPage'
-import ToolbarDetails from '../../toolbar/toolbarDetails'
-import MenuPage from '../../menu/menuPage'
-import FooterSimpleText from '../../footer/footerSimpleText'
-import RenderSection from '../../renderSection'
-
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import MainContent from '../../content/mainContent'
+import FooterSimpleText from '../../footer/footerSimpleText'
+import HeaderPage from '../../headerPage'
+import MenuPage from '../../menu/menuPage'
+import Navigation from '../../menu/navigation'
+import RenderSection from '../../renderSection'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
 
 import './pageDetails.scss'
 
@@ -17,6 +16,7 @@ export default function PageDetails( { location, pageContext } ){
     
     const { title, seo, date, modified, featuredImage, content, pageDetails, breadcrumbs, campus } = pageContext
 
+    // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation()
 
     const mode          = 'dark'

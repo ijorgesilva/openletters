@@ -1,25 +1,25 @@
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
-import SectionTextPhoto from '../components/content/sectionTextPhoto'
-import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
-import SectionPodcast from '../components/content/sectionPodcast'
-import HeroDynamic from '../components/hero/heroDynamic'
-import SectionLatestSeries from './vod/feed/sectionLatestSeries'
-import SectionText from "../components/content/sectionText"
-import MenuPage from '../components/menu/menuPage'
-import SectionTabs from '../components/content/sectionTabs'
-import { useGetFeed } from '../hooks/useGetFeed'
-import SectionCarousel from '../components/carousel/sectionCarousel'
-import SectionShare from '../components/social/sectionShare'
-import SectionVideo from './content/sectionVideo'
-import SectionBlurbs from './content/sectionBlurbs'
-import SectionAccordion from './accordion/sectionAccordion'
-import SectionForm from './form/sectionForm'
-import SectionFollow from '../components/social/sectionFollow'
-import SectionAlbum from '../components/music/album'
-
 import config from '../../data/SiteConfig'
+import SectionCarousel from '../components/carousel/sectionCarousel'
+import SectionPodcast from '../components/content/sectionPodcast'
+import SectionTabs from '../components/content/sectionTabs'
+import SectionText from "../components/content/sectionText"
+import SectionTextPhoto from '../components/content/sectionTextPhoto'
+import HeroDynamic from '../components/hero/heroDynamic'
+import MenuPage from '../components/menu/menuPage'
+import SectionAlbum from '../components/music/album'
+import SectionFollow from '../components/social/sectionFollow'
+import SectionShare from '../components/social/sectionShare'
+import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
+import { useGetFeed } from '../hooks/useGetFeed'
+
+import SectionAccordion from './accordion/sectionAccordion'
+import SectionBlurbs from './content/sectionBlurbs'
+import SectionVideo from './content/sectionVideo'
+import SectionForm from './form/sectionForm'
+import SectionLatestSeries from './vod/feed/sectionLatestSeries'
 
 export default function RenderSection ( 
     { 
@@ -62,13 +62,26 @@ export default function RenderSection (
                                         sectionConfiguration.sectionConfigurationSize.split(':')[0]
                                     : size ? size : 'md'
 
-    switch( true ){
+
+    function sortByDate(a, b) {
+        const dateA = parseInt(a.videoDetails.videoDayDate, 10)
+        const dateB = parseInt(b.videoDetails.videoDayDate, 10)
+        let comparison = 0
+        if (dateA < dateB) {
+            comparison = 1
+        } else if (dateA > dateB) {
+            comparison = -1
+        }
+        return comparison
+    }
+    
+    switch( true ) {
 
         /*
          * Call To Action
          */
         // TODO: Move buttons to Buttons component on frontend and backend
-        case ( sectionType === 'cta' && sectionStatus ):
+        case ( sectionType === 'cta' && sectionStatus ): {
             const ctaItem = section.sectionDetails.sectionCta
             return (
                 <SectionTextPhoto 
@@ -93,12 +106,13 @@ export default function RenderSection (
                                     }
                 />
             )
-            break
+            
+        }
 
         /*
          * Podcast
          */
-        case ( sectionType === 'podcast' && sectionStatus ):
+        case ( sectionType === 'podcast' && sectionStatus ): {
             const podcastItem = section.sectionDetails.sectionPodcast
             return (
                 <>
@@ -122,13 +136,14 @@ export default function RenderSection (
                     />
                 </>
             )
-            break
+            
+        }
 
         /*
          * Videos by Tags
          */
         // TODO: Get order and Count variables from CMS. Both params should be active by default.
-        case ( sectionType === 'vodtags' && sectionStatus ):
+        case ( sectionType === 'vodtags' && sectionStatus ): {
             const videoItems = (section.sectionDetails.sectionVodTags.sectionVodTag) ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
             const filteredVideos = (videoItems) ? 
@@ -140,17 +155,6 @@ export default function RenderSection (
                                     :
                                         {}
 
-            function sortByDate(a, b) {
-                const dateA = parseInt(a.videoDetails.videoDayDate, 10)
-                const dateB = parseInt(b.videoDetails.videoDayDate, 10)
-                let comparison = 0
-                if (dateA < dateB) {
-                  comparison = 1
-                } else if (dateA > dateB) {
-                  comparison = -1
-                }
-                return comparison
-            }
             return (
                 <>
                     {
@@ -176,22 +180,23 @@ export default function RenderSection (
                     }
                 </>
             )
-            break
+            
+        }
 
         /*
          * Videos on Series
          */
-        case ( sectionType === 'vodseries' && sectionStatus ):
-            
+        case ( sectionType === 'vodseries' && sectionStatus ):{
             return (
                 <></>
             )
-            break
+            
+        }
 
         /*
          * Latest Series
          */
-        case ( sectionType === 'latestseries' ):
+        case ( sectionType === 'latestseries' ): {
             return (
                 <SectionLatestSeries 
                     id              = { sectionId }
@@ -207,12 +212,13 @@ export default function RenderSection (
                                        }}
                 />
             )
-            break
+            
+        }
 
         /*
          * Hero
          */      
-        case ( sectionType === 'hero' && sectionStatus ):
+        case ( sectionType === 'hero' && sectionStatus ): {
             let relatedPost = null
             let postFilterByCampus
             const postValidContext =    (section.sectionDetails.sectionHero.sectionHeroRelated?.length > 0 ) ?
@@ -224,7 +230,7 @@ export default function RenderSection (
 
             switch( postType ) {
 
-                case 'Post':
+                case 'Post':{
 
                     postFilterByCampus = postValidContext.filter( item => (
                             item.postDetails.postCampus.some (item => ( item.slug === campus))
@@ -244,8 +250,9 @@ export default function RenderSection (
                                             undefined,
                     }
                     break
+                }
 
-                case 'Newspost':
+                case 'Newspost': {
 
                     postFilterByCampus = postValidContext.filter( item => (
                         item.newsDetails.newsCampus.some (item => ( item.slug === campus))
@@ -264,10 +271,11 @@ export default function RenderSection (
                                         : 
                                             undefined,
                     }
-                    
                     break
+                }
+                    
 
-                case 'Event':
+                case 'Event': {
 
                     postFilterByCampus = postValidContext.filter( item => (
                         item.eventDetails.eventCampus.some (item => ( item.slug === campus))
@@ -290,10 +298,13 @@ export default function RenderSection (
                                         : 
                                             undefined,
                     }
+                    break
+                }
                     
+                default: {
                     break
-                default:
-                    break
+                }
+                    
             }
             
             return (
@@ -314,13 +325,13 @@ export default function RenderSection (
                 />
       
             )
-            break
+            
+        }
 
         /*
         * Text Basic
         */
-       case ( sectionType === 'text' && sectionStatus ):
-
+        case ( sectionType === 'text' && sectionStatus ): {
             return(
                 <SectionText 
                     id               = { sectionId }
@@ -338,12 +349,13 @@ export default function RenderSection (
                     location         = { location }
                 />
             )
-            break
+            
+        }
 
         /*
         * Page Menu
         */
-        case ( sectionType === 'pagemenu' && sectionStatus ):
+        case ( sectionType === 'pagemenu' && sectionStatus ): {
 
             const pageMenu  = section.sectionDetails.sectionPagemenu.sectionPagemenuMenu
             const menuId    = pageMenu.menuDetails.menuId
@@ -362,12 +374,13 @@ export default function RenderSection (
                     />
                 </>
             )
-                break
+                
+        }
 
         /*
         * Divider
         */
-        case ( sectionType === 'divider' && sectionStatus ):
+        case ( sectionType === 'divider' && sectionStatus ):{
 
             return(
                 <hr 
@@ -376,12 +389,13 @@ export default function RenderSection (
                     style       = {{ width: '100%' }}
                 />
             )
-            break
+            
+        }
 
         /*
         * Tabs
         */
-        case ( sectionType === 'tabs' && sectionStatus ):
+        case ( sectionType === 'tabs' && sectionStatus ): {
 
             const tabs = section.sectionDetails.sectionTabs?.sectionTabsTab
 
@@ -399,12 +413,13 @@ export default function RenderSection (
                     tabs            = { tabs }
                 />
             )
-            break
+            
+        }
 
         /*
         * Carousel
         */
-        case ( sectionType === 'carousel' && sectionStatus ):
+        case ( sectionType === 'carousel' && sectionStatus ): {
             const carouselConfiguration = section.sectionDetails.sectionCarousel.sectionCarouselConfiguration
             const carouselItemsCustom   = section.sectionDetails.sectionCarousel.sectionCarouselItems
 
@@ -465,12 +480,13 @@ export default function RenderSection (
                     }
                 </>
             )
-            break
+            
+        }
 
         /*
         * Blurbs
         */
-        case ( sectionType === 'blurbs' && sectionStatus ):
+        case ( sectionType === 'blurbs' && sectionStatus ): {
             
             const blurbsConfiguration = section.sectionDetails.sectionBlurbs.sectionBlurbsConfiguration
             const blurbsItemsCustom   = section.sectionDetails.sectionBlurbs.sectionBlurbsItems
@@ -515,13 +531,13 @@ export default function RenderSection (
                         itemGrow        = { blurbsConfiguration.sectionBlurbsConfigurationGrow }
                 />
             )
-            break
-
+            
+        }
         
         /*
         * Share
         */
-        case ( sectionType === 'share' && sectionStatus ):
+        case ( sectionType === 'share' && sectionStatus ): {
             
             const shareImage = section.sectionDetails.sectionShare.sectionShareImage
 
@@ -541,12 +557,12 @@ export default function RenderSection (
                     itemClass           = { section.sectionDetails.sectionShare.sectionShareItemClass }
                 />
             )
-            break
+        }
 
         /*
         * Video
         */
-        case ( sectionType === 'video' && sectionStatus ):
+        case ( sectionType === 'video' && sectionStatus ): {
             const videoParams = section.sectionDetails.sectionVideo.sectionVideoConfiguration
             const videoConf = {
                 'url': section.sectionDetails.sectionVideo.sectionVideoUrl,
@@ -588,22 +604,23 @@ export default function RenderSection (
                     autoplay        = { videoConf.autoplay }
                 />
             )
-            break
+            
+        }
 
         /*
         * iframe
         */
-        case ( sectionType === 'iframe' && sectionStatus ):
-
+        case ( sectionType === 'iframe' && sectionStatus ): {
             return(
                 <></>
             )
-            break
+            
+        }
         
         /*
         * Accordion
         */
-        case ( sectionType === 'accordion' && sectionStatus ):
+        case ( sectionType === 'accordion' && sectionStatus ): {
             const accordionItems = ( section.sectionDetails.sectionAccordion.sectionAccordionItem?.length > 0 ) ? section.sectionDetails.sectionAccordion.sectionAccordionItem : []
             const accordionItemClass = section.sectionDetails.sectionAccordion.sectionAccordionConfiguration.sectionAccordionConfigurationClass
             const accordionContainerClass = section.sectionDetails.sectionAccordion.sectionAccordionConfiguration.sectionAccordionConfigurationAccordionClass
@@ -622,12 +639,13 @@ export default function RenderSection (
                     containerClass   = { accordionContainerClass }
                 />
             )
-            break
+            
+        }
 
         /*
         * Form
         */
-        case ( sectionType === 'form' && sectionStatus ):
+        case ( sectionType === 'form' && sectionStatus ): {
             const formConfiguration = section.sectionDetails.sectionForm.sectionFormConfiguration
             const formType      = section.sectionDetails.sectionForm.sectionFormType.split(':')[0]
             const formIframe    = section.sectionDetails.sectionForm.sectionFormIframe
@@ -659,12 +677,13 @@ export default function RenderSection (
                     location            = { location }
                  />
             )
-            break
+            
+        }
 
         /*
         * Follow
         */
-        case ( sectionType === 'follow' && sectionStatus ):
+        case ( sectionType === 'follow' && sectionStatus ): {
             const followConfiguration = section.sectionDetails.sectionFollow.sectionFollowConfiguration
             
             return (
@@ -681,12 +700,13 @@ export default function RenderSection (
                     alignment           = { followConfiguration.sectionFollowConfigurationAlignment }
                 />
             )
-        break
+            
+        }
 
         /*
         * Album
         */
-        case ( sectionType === 'album' && sectionStatus ):
+        case ( sectionType === 'album' && sectionStatus ): {
             
             const albumCover        = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumCover?.localFile.childImageSharp.gatsbyImageData
             const albumTitle        = section.sectionDetails.sectionAlbum.sectionAlbumItems.album.albumTitle
@@ -739,16 +759,18 @@ export default function RenderSection (
                         responsive      = { albumCarouselConf.sectionCarouselConfigurationResponsive }
                 />
             )
-        break
+            
+        }
 
         /*
          * Default
          */
-        default:
+        default: {
             return (
                 <></>
             )
-            break
+            
+        }
     }
 }
 

@@ -1,10 +1,10 @@
-import React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import { Link } from "gatsby"
-import { Dropdown } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "gatsby"
+import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
+import { Dropdown } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import './raiseHand.scss'
 

@@ -1,7 +1,6 @@
-
 import { Link } from 'gatsby'
-import { Badge } from 'react-bootstrap'
 import { default as React } from 'react'
+import { Badge } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import {
             connectStateResults,
@@ -30,30 +29,31 @@ function ShowPageType ( { type } ) {
   const { t } = useTranslation()
 
   switch(type){
-    case 'video':
+    case 'video':{
       return <Badge variant="secondary">{t('global.watch.video')}</Badge>
-      break
-    case 'series':
+    }
+    case 'series':{
       return <Badge variant="dark">{t('global.watch.series')}</Badge>
-      break
-    case 'page':
+    }
+    case 'page':{
       return <Badge variant="dark">{t('global.pages.name')}</Badge>
-      break
-    case 'event':
+    }
+    case 'event':{
       return <Badge variant="dark">{t('global.events.event')}</Badge>
-      break
-    case 'post':
+    }
+    case 'post':{
       return <Badge variant="dark">{t('global.blog.post')}</Badge>
-      break
-    case 'news':
+    }
+    case 'news':{
       return <Badge variant="dark">{t('global.news.title')}</Badge>
-      break
+    }
     case 'attachment':
-    case 'document':
+    case 'document':{
       return <Badge variant="light">{t('global.attachments.title')}</Badge>
-      break
-    default:
+    }
+    default:{
       return ''
+    }
   }
 
 }

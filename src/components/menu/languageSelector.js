@@ -1,11 +1,9 @@
-
-import React, { useState, useEffect } from 'react'
 import i18n from 'i18next'
-import { useTranslation } from "react-i18next"
 import LanguageDetector from 'i18next-browser-languagedetector';
-import Cookies from 'universal-cookie';
+import React, { useState, useEffect } from 'react'
 import ReactFlagsSelect from 'react-flags-select';
-
+import { useTranslation } from "react-i18next"
+import Cookies from 'universal-cookie';
 
 import './languageSelector.scss'
 
@@ -20,6 +18,7 @@ i18n.use(LanguageDetector).init({
 
 export default function LanguageSelector(props){
     
+    // eslint-disable-next-line no-unused-vars
     const { t, i18n } = useTranslation()
 
     const options = [

@@ -1,9 +1,9 @@
-import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 
-import Background from '../UI/background'
 import Buttons from '../buttons/buttons'
 import RenderSection from '../renderSection'
+import Background from '../UI/background'
 
 import './sectionText.scss'
 

@@ -1,13 +1,11 @@
-
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-
-import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import './sectionFeedCarousel.scss'
 
 export default function SectionFeedCarousel( 
@@ -31,7 +29,6 @@ export default function SectionFeedCarousel(
 
     const objLength = (items) ? items.length : 0
     let sortedItems = []
-    let countStarts
     let defaultConfig = ( configLayout ) ?
                             configLayout
                         :

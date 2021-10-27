@@ -13,7 +13,6 @@ export default function SectionVideo (
         className,
         mode,
         containerWidth,
-        location,
         url,
         thumbnail,
         controls,

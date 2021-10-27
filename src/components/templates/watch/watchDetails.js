@@ -1,20 +1,19 @@
-import React from 'react'
-import { useTranslation } from "react-i18next"
 import { graphql } from 'gatsby'
+import React from 'react'
 import { Container } from 'react-bootstrap'
+import { useTranslation } from "react-i18next"
 
-import Navigation from '../../menu/navigation'
-import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
-import WatchDetailsContent from '../../vod/content/watchDetailsContent'
-import PlaylistDetails from '../../vod/player/playlistDetails'
 import { watchDetailsMenu } from '../../../../data/menues'
-import HeaderPage from '../../headerPage'
-import FooterSimpleText from '../../footer/footerSimpleText'
-import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
-import ToolbarDetails from '../../toolbar/toolbarDetails'
-
-import { useParticipation } from '../../../hooks/useParticipation'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useParticipation } from '../../../hooks/useParticipation'
+import FooterSimpleText from '../../footer/footerSimpleText'
+import HeaderPage from '../../headerPage'
+import Navigation from '../../menu/navigation'
+import ToolbarDetails from '../../toolbar/toolbarDetails'
+import WatchDetailsContent from '../../vod/content/watchDetailsContent'
+import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
+import MenuWatchDetails from '../../vod/menu/menuWatchDetails'
+import PlaylistDetails from '../../vod/player/playlistDetails'
 
 import './watchDetails.scss'
 

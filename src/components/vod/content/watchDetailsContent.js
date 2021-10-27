@@ -1,14 +1,14 @@
-import React from 'react'
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
-import { Tabs, Tab, Alert } from 'react-bootstrap'
 import { Link } from 'gatsby'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
+import { Tabs, Tab, Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import TextTruncate from 'react-text-truncate'
 
 import config from '../../../../data/SiteConfig'
+import YouVersion from '../../bible/youVersion'
 import FeedListEven from '../../feed/feedListEven'
 import TagSimple from '../../tag/tagSimple'
-import YouVersion from '../../bible/youVersion'
 
 import './watchDetailsContent.scss'
 

@@ -1,7 +1,7 @@
-import React from 'react'
 import { Link } from 'gatsby'
-import TextTruncate from 'react-text-truncate'
 import { GatsbyImage } from "gatsby-plugin-image"
+import React from 'react'
+import TextTruncate from 'react-text-truncate'
 
 import './blurbVerticalDarkVod.scss'
 

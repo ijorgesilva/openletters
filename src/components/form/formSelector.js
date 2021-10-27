@@ -1,11 +1,9 @@
-import React from 'react'
 import IframeResizer from 'iframe-resizer-react'
+import React from 'react'
 import './formSelector.scss'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import Background from '../UI/background'
-
-import config from '../../../data/SiteConfig'
-import { Container, Row, Col } from 'react-bootstrap'
 
 export default function FormSelector ( 
     {
@@ -25,13 +23,13 @@ export default function FormSelector (
     } 
     ) {
 
-    const queryString = iframeQueryStrings ? `${config.wordpressRootUri}${form.uri}${iframeQueryStrings}` : `${config.wordpressRootUri}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
+    const queryString = iframeQueryStrings ? `${process.env.SITE_URL}${form.uri}${iframeQueryStrings}` : `${process.env.SITE_URL}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
     
     switch ( true ){
         /*
         * Single Column
         */
-        case type === 'onecolumn':
+        case type === 'onecolumn': {
             return (
                 <div className = {`formSelector ${ jumbotronPadding ? jumbotronPadding : ''} ${ jumbotron ? 'jumbotron' : ''} ${ jumbotronFluid ? 'jumbotron-fluid' : ''} ${containerClass ? containerClass : ''}`}>
                     <Container>
@@ -48,12 +46,12 @@ export default function FormSelector (
                     </Container>
                 </div>
             )
-            break
+        }
 
         /*
         * Two Columns
         */
-        case type === 'twocolumns':
+        case type === 'twocolumns': {
             return (
                 <div 
                     className={`formSelector ${ jumbotronPadding ? jumbotronPadding : ''} ${ jumbotron ? 'jumbotron' : ''} ${ jumbotronFluid ? 'jumbotron-fluid' : ''} ${ jumbotronMode ? jumbotronMode : 'light' } ${ containerClass ? containerClass : ''}`}
@@ -105,15 +103,15 @@ export default function FormSelector (
                     </Container>
                 </div>
             )
-            break
+        }
 
         /*
         * Default
         */
-        default:
+        default:{
             return (
                 <></>
             )
-            break
+        }
     }
 }

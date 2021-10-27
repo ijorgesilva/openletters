@@ -1,10 +1,10 @@
 import React from 'react'
 
-import BlurbVertical from '../blurb/blurbVertical'
 import config from '../../../data/SiteConfig'
+import BlurbVertical from '../blurb/blurbVertical'
 import './feedListMultipleSources.scss'
 
-export default function FeedListMultipleSources ( { data, className, slug, excerpt } ) {
+export default function FeedListMultipleSources ( { data, className, excerpt } ) {
 
     return (
         <div className={`feedListMultipleSources ${ (className) ? className : ''}`}>

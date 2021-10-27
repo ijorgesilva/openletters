@@ -1,9 +1,8 @@
 
-import React from 'react'
 import { Link } from 'gatsby'
-import { Nav, Navbar, CloseButton } from 'react-bootstrap'
+import React from 'react'
+import { Nav, Navbar } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-
 
 import MenuPageItem from './menuPageItem'
 import './menuPage.scss'
@@ -13,7 +12,6 @@ export default function MenuPage ( {
     menu, 
     className, 
     id, 
-    location,
     mode,
     menues, 
     campus, 

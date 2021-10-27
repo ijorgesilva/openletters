@@ -4,15 +4,13 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 import './sectionFeedCarouselResources.scss'
+import {responsive} from '../../../data/feedConfiguration'
 import config from '../../../data/SiteConfig'
 import BlurbVertical from '../blurb/blurbVertical'
-import {responsive} from '../../../data/feedConfiguration'
 
-export default function SectionFeedCarouselResources ( { title, items, className, variant, itemsVisible, id, excerpt, ...props } ) {
+export default function SectionFeedCarouselResources ( { title, items, className, variant, itemsVisible, id, excerpt } ) {
     
     const defaultVisible = 5
-
-    const objLength = (items && items.nodes) ? items.nodes.length : 0
 
     return(
         <div className={`sectionFeedCarouselResources ${ className ? className : ''} ${variant ? variant : 'dark'}`} id={id}>

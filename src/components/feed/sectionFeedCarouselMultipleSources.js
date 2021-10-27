@@ -1,39 +1,26 @@
-
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { useTranslation } from "react-i18next"
 import { Container } from 'react-bootstrap'
+import { useTranslation } from "react-i18next"
 import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
 
-import BlurbHorizonal from '../blurb/blurbHorizontal'
+import 'react-multi-carousel/lib/styles.css'
 import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'
 import { getDate } from '../../components/utils/utils'
+import BlurbHorizontal from '../blurb/blurbHorizontal'
 
-export default function SectionFeedCarouselMultipleSources ( { title, itemsNews, itemsEvents, slugOne, slugTwo, itemsVisible, date, className, id, ...props } ) {
+export default function SectionFeedCarouselMultipleSources ( { title, itemsNews, itemsEvents, slugOne, slugTwo, itemsVisible, className, id } ) {
 
     
     const { t } = useTranslation()
     
     const defaultVisible = 4
 
-    const data = useStaticQuery(graphql`
-        query{
-            eventIcon: file(relativePath: {eq: "img/global/icon-calendar-white.svg"}) {
-                publicURL
-            }
-            newsIcon: file(relativePath: {eq: "img/global/icon-news-white.svg"}) {
-                publicURL
-            }
-        }
-    `)
-
     const objLengthOne = itemsNews.nodes.length
     const objLengthTwo = itemsEvents.nodes.length
 
     return (
-        <section className={`sectionFeedCarousel ${className}`} id={id}>
+        <section className={`sectionFeedCarousel ${ className ? className : '' }`} id={id}>
             <Container fluid>
                 <h4 className="h-color-six-shade-three mb-5" dangerouslySetInnerHTML={{__html: title}}></h4>
                 <Carousel 
@@ -49,7 +36,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                     {
                         (itemsNews && slugOne) ?
                             itemsNews.nodes.map( (obj, index) => (
-                                <BlurbHorizonal 
+                                <BlurbHorizontal 
                                     key={ index }
                                     title={ obj.title }
                                     featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
@@ -66,7 +53,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                     {
                         (itemsEvents && slugTwo) ?
                             itemsEvents.nodes.map( (obj, index) => (
-                                <BlurbHorizonal 
+                                <BlurbHorizontal 
                                     key = { index }
                                     keyIndex={ index }
                                     title={ obj.title }

@@ -1,6 +1,3 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-
 import { 
     faFacebook,
     faYoutube,
@@ -10,6 +7,9 @@ import {
     faTiktok,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 
 export default function FollowNetworks ( 
     {
@@ -24,7 +24,7 @@ export default function FollowNetworks (
 
     switch ( type ) {
         
-        case 'facebook':
+        case 'facebook':{
             return (
                 <a  href = { params.sectionFollowNetworksFacebookUrl } 
                     target='_blank' 
@@ -35,9 +35,9 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faFacebook} size='lg' /> 
                 </a>
             )
-            break
+        }
         
-        case 'youtube':
+        case 'youtube':{
             return (
                 <a  href = { params.sectionFollowNetworksYoutubeUrl } 
                     target='_blank' 
@@ -48,9 +48,9 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faYoutube} size='lg'/> 
                 </a>
             )
-            break
+        }
 
-        case 'instagram':
+        case 'instagram':{
             return (
                 <a  href = { params.sectionFollowNetworksInstagramUrl } 
                     target='_blank' 
@@ -61,9 +61,9 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faInstagram} size='lg' /> 
                 </a>
             )
-            break
+        }
 
-        case 'pinterest':
+        case 'pinterest':{
             return (
                 <a  href = { params.sectionFollowNetworksPinterestUrl } 
                     target='_blank' 
@@ -74,9 +74,9 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faPinterest} size='lg' /> 
                 </a>
             )
-            break
+        }
 
-        case 'tiktok':
+        case 'tiktok':{
             return (
                 <a  href = { params.sectionFollowNetworksTiktokUrl } 
                     target='_blank' 
@@ -87,9 +87,9 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faTiktok} size='lg' /> 
                 </a>
             )
-            break
+        }
 
-        case 'twitter':
+        case 'twitter':{
             return (
                 <a  href = { params.sectionFollowNetworksTwitterUrl } 
                     target='_blank' 
@@ -100,10 +100,10 @@ export default function FollowNetworks (
                     <FontAwesomeIcon icon={faTwitter} size='lg' /> 
                 </a>
             )
-            break
+        }
 
-        default:
+        default:{
             return <></>
-        break
+        }
     }
 }

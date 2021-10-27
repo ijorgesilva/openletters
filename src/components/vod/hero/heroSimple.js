@@ -1,10 +1,10 @@
-import React from 'react'
+import { faInfo, faPlay } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import React from 'react'
 import { Container, Jumbotron } from 'react-bootstrap'
 import TextTruncate from 'react-text-truncate'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfo, faPlay } from '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import './heroSimple.scss'

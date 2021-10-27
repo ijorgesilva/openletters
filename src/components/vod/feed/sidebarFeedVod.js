@@ -1,13 +1,12 @@
+import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import TextTruncate from 'react-text-truncate'
-import { Link } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 
-
-import BlurbHorizontalVod from '../blurb/blurbHorizontalVod'
 import config from '../../../../data/SiteConfig'
+import BlurbHorizontalVod from '../blurb/blurbHorizontalVod'
 
 // Styling
 import './sidebarFeedVod.scss'
@@ -29,7 +28,6 @@ export default function SidebarFeedVod(
 
     const { t } = useTranslation()
     let sortedItems = []
-    let countStarts
 
     switch ( order ) {
         case 'asc':

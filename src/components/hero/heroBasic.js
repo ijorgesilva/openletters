@@ -1,18 +1,15 @@
-
 import React from "react"
 import { Container } from "react-bootstrap"
 
-
 import "./heroBasic.scss"
 
-export default function HeroBasic( {title, subtitle, backgroundPhoto, className, children} ){
+export default function HeroBasic( {title, subtitle, backgroundPhoto, className, children } ){
 
     const styleBackground = {
         backgroundImage: "url(" + backgroundPhoto + ")"
     }
 
     return (
-
         <div className={`position-relative ${className}`}>
             <Container className={"z-index-2"}>
                 
@@ -29,6 +26,5 @@ export default function HeroBasic( {title, subtitle, backgroundPhoto, className,
             </Container>
             <div className="c-hero__bg z-index-1" style={styleBackground}></div>
         </div>
-
     )
 }

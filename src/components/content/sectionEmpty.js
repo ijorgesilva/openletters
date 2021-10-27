@@ -1,12 +1,9 @@
-
-
 import React from "react"
 import { Container } from 'react-bootstrap'
 
-
 import "./sectionEmpty.scss"
 
-export default function SectionEmpty( { title, id, className, children, ...props } ) {
+export default function SectionEmpty( { title, id, className, children } ) {
     return (
         <section id={id} className={`sectionEmpty ${className}`}>
             <Container fluid>

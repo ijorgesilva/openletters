@@ -1,15 +1,14 @@
-
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import TextTruncate from 'react-text-truncate'
 
-import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import {responsive} from '../../../../data/feedConfiguration'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import './sectionFeedCarousel.scss'
 
-export default function SectionFeedCarouselDescription( { title, description, items, className, itemsVisible, id, iconCarousel, ...props} ){
+export default function SectionFeedCarouselDescription( { title, description, items, className, itemsVisible, id } ){
     
     const defaultVisible = 3
 

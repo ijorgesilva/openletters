@@ -1,15 +1,13 @@
-
-import React from 'react'
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
-import { useTranslation } from 'react-i18next'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'gatsby'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 import { Container } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
-
-import VideoReactPlayer from '../player/videoReactPlayer'
 import config from '../../../../data/SiteConfig'
+import VideoReactPlayer from '../player/videoReactPlayer'
 import './heroSeries.scss'
 
 export default function HeroSeries ( 

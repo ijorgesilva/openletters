@@ -1,6 +1,7 @@
 import React from 'react'
-import TagSimple from './tagSimple'
 import { Container } from 'react-bootstrap'
+
+import TagSimple from './tagSimple'
 
 export default function SectionTags ( 
     { id, className, mode, tags, tagClass } 

@@ -1,26 +1,23 @@
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import MegaMenu from './menuLocal/megaMenu'
-import RegularMenu from './menuLocal/regularMenu'
-import MenuLink from './menuLocal/menuLink'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// Custom Hooks
-import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import { useCampuses } from '../../hooks/useCampuses'
 import { useTheme } from '../../hooks/useTheme'
 
+import MegaMenu from './menuLocal/megaMenu'
+import MenuLink from './menuLocal/menuLink'
+import RegularMenu from './menuLocal/regularMenu'
+
 import './menuLocal.scss'
 
-export default function MenuLocal ( { location, campus, mode } ) {
+export default function MenuLocal ( { campus, mode } ) {
 
     const { t } = useTranslation()
 
     const currentCampus     = useCampuses( campus )
-    const siteSettings      = useWebsiteConfiguration()
     const theme             = useTheme()
     
     let menuLocalData = [

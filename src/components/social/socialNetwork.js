@@ -1,3 +1,12 @@
+import { 
+    faFacebook,
+    faTwitter,
+    faTelegram,
+    faGetPocket,
+    faWhatsapp
+} from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { 
@@ -8,17 +17,6 @@ import {
     EmailShareButton,
     WhatsappShareButton
 } from 'react-share'
-import { 
-    faFacebook,
-    faTwitter,
-    faTelegram,
-    faGetPocket,
-    faWhatsapp
-} from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import config from '../../../data/SiteConfig'
 
 export default function SocialNetwork ( 
     { 
@@ -36,7 +34,7 @@ export default function SocialNetwork (
 
     switch ( type ) {
         
-        case 'facebook':
+        case 'facebook':{
             return (
                 <FacebookShareButton 
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn btn-'+mode : 'btn btn-light' }`}
@@ -48,9 +46,9 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faFacebook} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} /> 
                 </FacebookShareButton>
             )
-            break
+        }
 
-        case 'twitter':
+        case 'twitter':{
             return (
                 <TwitterShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
@@ -64,9 +62,9 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faTwitter} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} /> 
                 </TwitterShareButton>
             )
-        break
+        }
         
-        case 'telegram':
+        case 'telegram':{
             return (
                 <TelegramShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
@@ -77,9 +75,9 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faTelegram} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} /> 
                 </TelegramShareButton>
             )
-        break
+        }
         
-        case 'pocket':
+        case 'pocket':{
             return (
                 <PocketShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
@@ -90,9 +88,9 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faGetPocket} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} /> 
                 </PocketShareButton>
             )
-        break
+        }
         
-        case 'email':
+        case 'email':{
             return (
                 <EmailShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
@@ -105,9 +103,9 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faEnvelope} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} />
                 </EmailShareButton>
             )
-        break
+        }
 
-        case 'whatsapp':
+        case 'whatsapp':{
             return (
                 <WhatsappShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
@@ -118,11 +116,11 @@ export default function SocialNetwork (
                     <FontAwesomeIcon icon={faWhatsapp} size='lg' title={t('components.social.share-on') + ' ' + typeCaps} /> 
                 </WhatsappShareButton>
             )
-        break
+        }
 
-        default:
+        default:{
             return <></>
-        break
+        }
     }
 
 }

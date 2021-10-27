@@ -1,8 +1,8 @@
-import React from 'react'
 import { Link } from 'gatsby'
+import React from 'react'
 
-import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import config from '../../../data/SiteConfig'
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 
 export default function MenuPageItem ( { item, campus } ) {
 
@@ -15,7 +15,8 @@ export default function MenuPageItem ( { item, campus } ) {
     const defaultCampusSlug = useWebsiteConfiguration().settingsDefaultCampus.slug
 
     switch ( menuType ) {
-        case 'page':
+
+        case 'page': {
             // Resolve (Best) Page URL
             let getItemSlug = item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPagePage.slug
             let getPageCampuses =   ( item.menuPageMenuItem?.menuPageMenuItemPage?.menuPageMenuItemPagePage?.pageDetails?.pageCampus.length > 0 ) ?
@@ -47,8 +48,9 @@ export default function MenuPageItem ( { item, campus } ) {
                     {item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageTitle}
                 </Link> 
             )
-            break
-        case 'custom':
+        }
+
+        case 'custom': {
 
             let customItem = item.menuPageMenuItem.menuPageMenuItemCustom
 
@@ -76,7 +78,7 @@ export default function MenuPageItem ( { item, campus } ) {
                     </a>
                 )       
             }
-            break
+        }
     }
 
 }

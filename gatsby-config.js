@@ -18,7 +18,6 @@
  
    flags: {
      FAST_DEV: true,
-     FAST_REFRESH: true
    },
  
    pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,

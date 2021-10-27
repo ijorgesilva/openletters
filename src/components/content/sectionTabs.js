@@ -1,11 +1,7 @@
-
 import React from 'react'
 import { Tab, Nav } from 'react-bootstrap'
 
-
 import RenderSection from '../renderSection'
-
-
 import './sectionTabs.scss'
 
 export default function SectionTabs ( 

@@ -1,16 +1,17 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import { withTrans } from '../../i18n/withTrans'
+import React from 'react'
 import CookieConsent from 'react-cookie-consent'
-import { ContextProviderComponent } from '../../provider/context'
 import { Helmet } from 'react-helmet'
 
-import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import { useTheme } from '../../hooks/useTheme'
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+import { withTrans } from '../../i18n/withTrans'
+import { ContextProviderComponent } from '../../provider/context'
 
 import '../app.scss'
 import '../layout.scss'
 
+// eslint-disable-next-line no-unused-vars
 const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
     const customCode    = useWebsiteConfiguration().settingsCode
@@ -19,7 +20,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
     switch(pageContext.layout){
         case 'serieDetails':
-        case 'watchDetails':
+        case 'watchDetails':{
             return (
                 <ContextProviderComponent>
 
@@ -52,9 +53,9 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
                 </ContextProviderComponent>
             )
-            break
+        }
             
-        default:
+        default:{
             return (
                 <ContextProviderComponent>
 
@@ -87,7 +88,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
                 </ContextProviderComponent>
             )
-            break
+        }
 
     }
     

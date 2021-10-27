@@ -1,6 +1,5 @@
 version: 0.2
 
-## TODO: Migrate to ENV variables
 env:
   variables:
     NODE_ENV: "staging"

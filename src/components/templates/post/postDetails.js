@@ -1,22 +1,17 @@
-
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
-
-import { getDate } from '../../utils/utils'
-import Navigation from '../../menu/navigation'
+import config from '../../../../data/SiteConfig'
 import HeroPost from '../../../components/hero/heroPost'
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
+import MenuPage from '../../menu/menuPage'
+import Navigation from '../../menu/navigation'
 import TagSimple from '../../tag/tagSimple'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
-import MenuPage from '../../menu/menuPage'
-import FooterSimpleText from '../../footer/footerSimpleText'
-import config from '../../../../data/SiteConfig'
-
-
-import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
+import { getDate } from '../../utils/utils'
 
 import './postDetails.scss'
 

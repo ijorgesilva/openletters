@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-import ShareSimpleIcon from '../social/shareSimpleIcon'
 import RaiseHand from '../participation/raiseHand'
+import ShareSimpleIcon from '../social/shareSimpleIcon'
 
 import './toolbarDetails.scss'
 

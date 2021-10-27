@@ -1,17 +1,16 @@
+import { graphql } from 'gatsby'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { graphql } from 'gatsby'
 
+import config from '../../../../data/SiteConfig'
+import SectionFeedCarousel from '../../../components/vod/feed/sectionFeedCarousel'
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
+import RenderSection from '../../renderSection'
 import { getHeroDescription } from '../../utils/utils'
 import HeroSimple from '../../vod/hero/heroSimple'
-import SectionFeedCarousel from '../../../components/vod/feed/sectionFeedCarousel'
-import RenderSection from '../../renderSection'
-import FooterSimpleText from '../../footer/footerSimpleText'
-import config from '../../../../data/SiteConfig'
-
-import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 
 import './watchCampus.scss'
 

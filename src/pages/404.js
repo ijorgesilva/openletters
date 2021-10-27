@@ -1,14 +1,12 @@
-
-import React from "react"
-import { useTranslation } from "react-i18next"
-import { Button } from 'react-bootstrap'
 import { graphql } from 'gatsby'
+import React from 'react'
+import { Button } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
-
-import Navigation from '../components/menu/navigation'
-import HeaderPage from '../components/headerPage'
-import HeroBasic from "../components/hero/heroBasic"
 import FooterSimpleText from '../components/footer/footerSimpleText'
+import HeaderPage from '../components/headerPage'
+import HeroBasic from '../components/hero/heroBasic'
+import Navigation from '../components/menu/navigation'
 
 export default function Home( { data, location } ) {
 
@@ -39,9 +37,9 @@ export default function Home( { data, location } ) {
         title={t('global.404-title')}
         subtitle={t('global.404-description')}
         backgroundPhoto={ ( data.poster != null ) ? data.poster.publicURL : undefined }
-        className={"c-hero position-relative z-index-1"}
+        className={'c-hero position-relative z-index-1'}
         >
-          <Button className="button button--animation bbuttontbuttonn--light-outline ml-3" variant="none" href="/" target="_self">
+          <Button className='button button--animation bbuttontbuttonn--light-outline ml-3' variant='none' href='/' target='_self'>
             {t('global.404-go-back')}
           </Button>
       </HeroBasic>
@@ -53,13 +51,9 @@ export default function Home( { data, location } ) {
   )
 }
 
-
 export const query = graphql`
-    query fourOfourPage {
-
+  query fourOfourPage {
         poster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
             publicURL
         }
-
-    }  
-`
+  }`

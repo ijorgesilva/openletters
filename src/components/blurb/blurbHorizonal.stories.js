@@ -1,5 +1,5 @@
- 
 import React from 'react'
+
 import BlurbHorizontal from '../blurb/blurbHorizontal'
 
 export default {

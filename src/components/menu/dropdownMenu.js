@@ -1,6 +1,6 @@
+import { Link } from "gatsby"
 import React from "react"
 import { Dropdown } from "react-bootstrap"
-import { Link } from "gatsby"
 
 import "./dropdownMenu.scss"
 

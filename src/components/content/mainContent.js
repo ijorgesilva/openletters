@@ -2,8 +2,8 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import { getDate } from '../utils/utils'
 import config from '../../../data/SiteConfig'
+import { getDate } from '../utils/utils'
 
 export default function MainContent ( { date, modified, content } ) {
 

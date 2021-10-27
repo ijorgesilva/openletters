@@ -1,7 +1,6 @@
 version: 0.2
 
 env:
-  ## TODO: Migrate to ENV variables
   variables:
     NODE_ENV: "production"
 

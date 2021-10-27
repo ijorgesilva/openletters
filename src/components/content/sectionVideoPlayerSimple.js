@@ -2,7 +2,7 @@ import React from 'react'
 import {Container} from 'react-bootstrap'
 import ReactPlayer from 'react-player'
 
-export default function SectionVideoPlayerSimple ( { src, title, poster, controls, className, muted, pip, id, ...props} ) {
+export default function SectionVideoPlayerSimple ( { src, title, poster, controls, className, muted, pip, id } ) {
     
     return (
         <section className="c-video--simple h-background-six position-relative" id={id}>

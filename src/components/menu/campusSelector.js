@@ -1,16 +1,12 @@
-
+import { navigate } from 'gatsby'
 import React, { useContext } from 'react'
 import { useState } from 'react'
-import { navigate } from 'gatsby'
 import Select from 'react-select'
 import Cookies from 'universal-cookie'
 
-// Context
-import ContextConsumer from '../../provider/context'
-
-
 import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
+import ContextConsumer from '../../provider/context'
 
 
 import './campusSelector.scss'

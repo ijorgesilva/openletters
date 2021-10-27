@@ -1,15 +1,13 @@
-
 import React from 'react'
 import { Tab, Row, Col, Nav } from 'react-bootstrap'
 
-
-import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import config from '../../../../data/SiteConfig'
+import BlurbVerticalDarkVod from '../blurb/blurbVerticalDarkVod'
 import './tabSeasons.scss'
 
 export default function TabSeasons ( 
     { 
-        className, id, title, series, items, itemsVisible, iconCarousel, count, campus, mode
+        className, id, title, items, campus, mode
     } 
     ) {
 

@@ -1,10 +1,6 @@
-
 import React from 'react'
 
-
 import FeedListEvenRenderer from './feedListEvenRenderer'
-
-
 import './feedListEven.scss'
 
 export default function FeedListEven ( 

@@ -1,15 +1,10 @@
-
-import React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
-import TextTruncate from 'react-text-truncate'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-
-
+import TextTruncate from 'react-text-truncate'
 
 import { getDate } from '../../components/utils/utils'
-
 
 import './blurbHorizontal.scss'
 
@@ -39,7 +34,7 @@ export default function BlurbHorizontal(
 
     switch(type){
 
-        case 'event':
+        case 'event': {
             
             let eventExpired    = false
             const firstDate     =   (eventDate[0].eventDate ) ? 
@@ -129,7 +124,8 @@ export default function BlurbHorizontal(
                     </Link>
                 </div>
             )
-        default:
+        }
+        default: {
             return (
                 <div 
                     key         = { keyIndex ? keyIndex : undefined} 
@@ -206,6 +202,7 @@ export default function BlurbHorizontal(
         
                 </div>
             )
+        }
 
     }
 }

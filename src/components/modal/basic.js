@@ -1,10 +1,7 @@
+import React, { useState } from "react"
+import { Modal, Button } from 'react-bootstrap'
 
-import React, { Children } from "react"
-import { Modal } from 'react-bootstrap'
-
-
-
-export default function ModalBasic( {title, children, btnText, btnClassName, center, className, ...props} ){
+export default function ModalBasic( {title, children, btnClassName, center, className, footer, text} ){
     
     const [show, setShow] = useState(false);
 

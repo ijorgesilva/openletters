@@ -2,8 +2,9 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import './sectionForm.scss'
 
-import FormSelector from './formSelector'
 import Background from '../UI/background'
+
+import FormSelector from './formSelector'
 
 export default function SectionForm ( 
     {

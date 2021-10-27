@@ -1,13 +1,14 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
+import { Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
+import { useGetFeed } from '../../../hooks/useGetFeed'
 import SectionCarousel from '../../carousel/sectionCarousel'
 import ShareSimpleIcon from '../../social/shareSimpleIcon'
 import FindOn from '../findOn'
+
 import Playlist from './playlist'
-import { useGetFeed } from '../../../hooks/useGetFeed'
 
 import './album.scss'
 
@@ -52,6 +53,7 @@ export default function SectionAlbum (
     } 
 ) {
 
+    // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation()
 
     return (

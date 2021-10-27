@@ -1,24 +1,16 @@
-
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-
+import { menuHelp, menuGive, followOptions } from '../../../data/menues'
+import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import MenuGlobal from "../menu/menuGlobal"
 import MenuLocal from "../menu/menuLocal"
-
-
-import { useTheme } from '../../hooks/useTheme'
-
-// Data
-import { menuHelp, menuGive, followOptions } from '../../../data/menues'
-
-
 import './navigation.scss'
 
 export default function Navigation( { menuLocal, menuGlobal, location, campus, searchIndices, mode } ){
 
-    
+    // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation()
     const theme = useTheme()
 

@@ -7,7 +7,7 @@ export default function Layer ( { params, zindex, className } ) {
     
     switch( layerType ){
 
-        case 'color':
+        case 'color':{
             const layerColor = {
                 color: params.backgroundLayerColor.backgroundLayerColorColor,
                 opacity: params.backgroundLayerColor.backgroundLayerColorOpacity,
@@ -23,9 +23,9 @@ export default function Layer ( { params, zindex, className } ) {
                 >
                 </div>
             )
-            break
+        }
 
-        case 'image':
+        case 'image':{
             const layerImage = {
                 imageFile: params.backgroundLayerImage.backgroundLayerImageImage?.localFile.publicURL,
                 position: params.backgroundLayerImage.backgroundLayerImagePosition.replace('-',' '),
@@ -52,9 +52,9 @@ export default function Layer ( { params, zindex, className } ) {
                 >
                 </div>
             )
-            break
+        }
 
-        case 'gradient':
+        case 'gradient':{
 
             let steps = ''
             const layerGradient = params.backgroundLayerGradient
@@ -82,9 +82,9 @@ export default function Layer ( { params, zindex, className } ) {
                 >
                 </div>
             )
-            break
+        }
 
-        case 'text':
+        case 'text':{
             const layerText = {
                 content: params.backgroundLayerText.backgroundLayerTextText,
                 opacity: params.backgroundLayerText.backgroundLayerTextOpacity
@@ -100,7 +100,7 @@ export default function Layer ( { params, zindex, className } ) {
                 >
                 </div>
             )
-            break
+        }
         default:
             return <></>
     }

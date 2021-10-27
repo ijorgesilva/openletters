@@ -1,19 +1,15 @@
-
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Nav, Navbar } from 'react-bootstrap'
-
-
-import LanguageSelector from './languageSelector'
-import FollowDropdown from './followDropdown'
-import DropdownMenu from './dropdownMenu'
-import CampusSelector from './campusSelector'
-import MenuAuth from './menuAuth'
-import Search from "../search"
-
+import { useTranslation } from 'react-i18next'
 
 import config from '../../../data/SiteConfig'
+import Search from "../search"
 
+import CampusSelector from './campusSelector'
+import DropdownMenu from './dropdownMenu'
+import FollowDropdown from './followDropdown'
+import LanguageSelector from './languageSelector'
+import MenuAuth from './menuAuth'
 
 import './menuGlobal.scss'
 

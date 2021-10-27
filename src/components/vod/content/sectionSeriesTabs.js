@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs, Tab, Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+
 import FeedListEven from '../../feed/feedListEven'
 import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
 import TabSeasons from '../../vod/tab/tabSeasons'

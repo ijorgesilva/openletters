@@ -1,15 +1,14 @@
-
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
 
-import BlurbHorizonal from '../blurb/blurbHorizontal'
+import 'react-multi-carousel/lib/styles.css'
 import { responsive } from '../../../data/feedConfiguration'
 import './sectionFeedCarousel.scss'
 import { getDate } from '../../components/utils/utils'
+import BlurbHorizontal from '../blurb/blurbHorizontal'
 
-export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, date, count, ...props } ) {
+export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, count } ) {
 
     const defaultVisible = 4
 
@@ -30,7 +29,7 @@ export default function SectionFeedCarousel ( { title, items, className, id, slu
                 >
                     {
                         items.nodes.map( (obj, index) => (
-                            <BlurbHorizonal 
+                            <BlurbHorizontal 
                                 key={ index }
                                 title={` ${ (count === true) ? index + 1 : '' } obj.title `}
                                 featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }

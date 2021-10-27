@@ -1,6 +1,5 @@
 import React from "react"
 
-
 import appStoreIcon from "../../assets/img/global/Download_on_the_App_Store_Badge.svg"
 import playStoreIcon from "../../assets/img/global/Google_Play_Store_badge_EN.svg"
 

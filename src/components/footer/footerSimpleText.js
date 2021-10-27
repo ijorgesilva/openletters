@@ -1,17 +1,11 @@
-
-import React from 'react'
 import { Link } from 'gatsby'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-
+import config from '../../../data/SiteConfig'
 import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
-
-
 import "./footerSimpleText.scss"
-
-// Data
-import config from '../../../data/SiteConfig'
 
 export default function FooterSimpleText( { campus, mode } ) {
     

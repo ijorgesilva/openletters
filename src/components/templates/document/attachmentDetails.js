@@ -1,25 +1,19 @@
-
+import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from 'react'
 import { useTranslation } from "react-i18next"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons"
 
-
-import Navigation from '../../menu/navigation'
-import HeaderPage from '../../headerPage'
 import HeroPost from '../../../components/hero/heroPost'
-import FooterSimpleText from '../../footer/footerSimpleText'
-
-
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-
+import FooterSimpleText from '../../footer/footerSimpleText'
+import HeaderPage from '../../headerPage'
+import Navigation from '../../menu/navigation'
 
 import './attachmentDetails.scss'
 
 export default function AttachmentDetails ( { location, pageContext } ) {
     
-    const { title, slug, excerpt, breadcrumbs, attachmentDetails } = pageContext
-
+    const { title, excerpt, breadcrumbs, attachmentDetails } = pageContext
     
     const { t } = useTranslation()
 

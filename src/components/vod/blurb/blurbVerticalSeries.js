@@ -1,8 +1,6 @@
-
-import React from 'react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from "gatsby-plugin-image"
-
+import React from 'react'
 
 import './blurbVerticalSeries.scss'
 

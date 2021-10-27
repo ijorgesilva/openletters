@@ -1,13 +1,12 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { Dropdown } from 'react-bootstrap'
-import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShareButton } from 'react-share'
 import { faTwitter, faFacebook, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope, faShareSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { Dropdown } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { FacebookShareButton, TwitterShareButton, EmailShareButton, WhatsappShareButton } from 'react-share'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
-import config from '../../../data/SiteConfig'
 import './shareSimpleIcon.scss'
 
 export default function ShareSimpleIcon( 

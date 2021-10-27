@@ -1,5 +1,6 @@
-import { useGetBestCampus } from './useGetBestCampus'
 import config from '../../data/SiteConfig'
+
+import { useGetBestCampus } from './useGetBestCampus'
 
 export const useGetFeed = ( feedObject, campus ) => {
 
@@ -19,7 +20,7 @@ export const useGetFeed = ( feedObject, campus ) => {
         case listObject.type === 'videos':
             rawList = feedObject.feedVideos.feedVideosCategory.videosOnDemand.nodes
             if ( rawList?.length > 0 ) {
-                rawList.map( (_, index) => (
+                rawList.map( _ => (
                     (_.videoDetails.videoCampus.length > 0) ?
                         listObject.list.push(
                             {

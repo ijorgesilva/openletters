@@ -1,8 +1,6 @@
-
-import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-
 
 import './sectionPhotoText.scss'
 
@@ -10,7 +8,7 @@ export default function SectionPhotoText ( { title, photo, text, className, id }
 
     return (
 
-        <section className={`sectionPhotoText ${className}`} id={id}>
+        <section className={`sectionPhotoText ${className ? className : ''}`} id={id}>
             <Container fluid>
                 <Row>
                     <Col className="p-0">

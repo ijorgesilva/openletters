@@ -1,9 +1,6 @@
-
 import React from 'react'
 import { Container, Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-
-
 
 export default function AlertEmptyState ( { mode, className, content } ) {
 

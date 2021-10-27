@@ -1,8 +1,8 @@
 import React from 'react'
-import Carousel from 'react-multi-carousel'
 import { Container } from 'react-bootstrap'
-import { useGetResponsive } from '../../hooks/useGetResponsive'
+import Carousel from 'react-multi-carousel'
 
+import { useGetResponsive } from '../../hooks/useGetResponsive'
 import BlurbVertical from '../blurb/blurbVertical'
 
 import 'react-multi-carousel/lib/styles.css'

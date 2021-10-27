@@ -24,9 +24,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     )
 }
 
-exports.createPages = async( { page, actions, graphql, reporter } ) => {
-
-    const { createPage } = actions
+exports.createPages = async( { actions, graphql, reporter } ) => {
 
     const result = await graphql(
         `${query}`
@@ -37,7 +35,6 @@ exports.createPages = async( { page, actions, graphql, reporter } ) => {
         return
     }
 
-    let numberPages   = 0
     let createWatch   = false
     let createBlog    = false
     let createNews    = false

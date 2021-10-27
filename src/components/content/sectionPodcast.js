@@ -1,9 +1,7 @@
-
+import { StaticImage, GatsbyImage } from "gatsby-plugin-image"
 import React from 'react'
 import { Container, Row, Col } from "react-bootstrap"
-import { StaticImage, GatsbyImage } from "gatsby-plugin-image"
 import { useTranslation } from "react-i18next"
-
 
 import './sectionPodcast.scss'
 

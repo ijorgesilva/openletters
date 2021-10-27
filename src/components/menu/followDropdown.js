@@ -1,15 +1,11 @@
-
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { Dropdown } from 'react-bootstrap'
 import { faYoutube, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from 'react'
+import { Dropdown } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 
-
 import AppLinks from "../widget/appLinks"
-
-
 import "./followDropdown.scss"
  
 export default function FollowDropdown ( { instagramUrl, facebookUrl, twitterUrl, youtubeUrl, appStoreUrl, playStoreUrl, mailchimpUrl, mode } ) {

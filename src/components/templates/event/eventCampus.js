@@ -1,18 +1,17 @@
+import { graphql } from 'gatsby'
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { graphql } from 'gatsby'
 
+import config from '../../../../data/SiteConfig'
+import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import AlertEmptyState from '../../alert/alertEmptyState'
+import BlurbHorizontal from '../../blurb/blurbHorizontal'
+import FooterSimpleText from '../../footer/footerSimpleText'
+import HeaderPage from '../../headerPage'
+import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
 import { getDate } from '../../utils/utils'
-import BlurbHorizontal from '../../blurb/blurbHorizontal'
-import MenuPage from '../../menu/menuPage'
-import HeaderPage from '../../headerPage'
-import FooterSimpleText from '../../footer/footerSimpleText'
-import config from '../../../../data/SiteConfig'
-
-import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {

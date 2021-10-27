@@ -1,16 +1,12 @@
-
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-
-import BlurbVerticalSeries from '../blurb/blurbVerticalSeries'
 import {responsive} from '../../../../data/feedConfiguration'
 import config from '../../../../data/SiteConfig'
-
-
 import { useLatestSeries } from '../../../hooks/useLatestSeries'
+import BlurbVerticalSeries from '../blurb/blurbVerticalSeries'
 
 
 import './sectionLatestSeries.scss'
