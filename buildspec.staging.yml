@@ -27,13 +27,13 @@ phases:
       - echo "S3 bucket is $DEPLOY_BUCKET"
       - aws s3 cp --recursive --acl public-read ./public s3://$DEPLOY_BUCKET
 
-# cache:
-#   paths:
-#     - 'node_modules/*'
-#     - '.cache/*'
-#     - 'data/*'
-#     - 'public/*'
-#     - 'WordPress/*'
+cache:
+  paths:
+    - 'node_modules/*'
+    - '.cache/*'
+    - 'data/*'
+    - 'public/*'
+    - 'WordPress/*'
 
 artifacts:
   files:

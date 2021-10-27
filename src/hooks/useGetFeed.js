@@ -6,11 +6,9 @@ export const useGetFeed = ( feedObject, campus ) => {
 
     let rawList = []
     let listObject = {
-        type: feedObject.feedType ? feedObject.feedType : 'custom' ,
+        type: feedObject?.feedType ? feedObject.feedType : 'custom' ,
         list: [],
     } 
-    // console.log(feedObject)
-    // console.log(listObject.type)
 
     switch( true ) {
 
@@ -45,71 +43,71 @@ export const useGetFeed = ( feedObject, campus ) => {
             // console.log('rawList:')
             // console.log(rawList)
             // console.log(listObject)
-            break
+        break
 
         /*
          * Series
          */
         case listObject.type === 'series':
-            break
+        break
 
         /*
          * Events
          */
         case listObject.type === 'events':
-            break
+        break
 
         /*
          * Posts
          */
         case listObject.type === 'posts':
-            break
+        break
 
         /*
          * News
          */
         case listObject.type === 'news':
-            break
+        break
         /*
          * Groups
          */
         case listObject.type === 'groups':
-            break
+        break
         /*
          * Group types
          */
         case listObject.type === 'grouptypes':
-            break
+        break
         /*
          * Ministries
          */
         case listObject.type === 'ministries':
-            break
+        break
         /*
          * Volunteering
          */
         case listObject.type === 'volunteering':
-            break
+        break
 
         /*
          * Courses
          */
         case listObject.type === 'courses':
-            break
+        break
 
         /*
          * Lessons
          */
         case listObject.type === 'lessons':
-            break
+        break
         /*
          * Custom
          */
         default:
-        case listObject.type === 'custom':
+        case listObject.type === 'custom': 
             rawList = feedObject
             listObject.type = 'custom'
-            if( rawList.length > 0 ) {
+            if( rawList?.length > 0 ) {
                 rawList.map( (_, index) => (
                     listObject.list.push(
                         {
@@ -133,10 +131,8 @@ export const useGetFeed = ( feedObject, campus ) => {
             // console.log(rawList)
             // console.log('listObject')
             // console.log(listObject)
-            
-            break
+        break
     }
-
     // TODO: Order 
     // TODO: Skip
 

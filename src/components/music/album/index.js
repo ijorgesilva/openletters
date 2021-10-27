@@ -135,41 +135,45 @@ export default function SectionAlbum (
 
                 <div className = 'resources'>
                     <Container fluid = { containerWidth === 'container' ? false : true }>
+                        {console.log(albumSongs)}
                         {
                             albumSongs.length > 0 ?
                                 albumSongs.map ( ( _, index ) => (
-                                    <SectionCarousel 
-                                        key             = { index }
-                                        id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
-                                        title           = { _.songTitle ? _.songTitle : ''}
-                                        className       = { `song-resource-${index+1} pt-4 pb-4 ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
-                                        mode            = { mode }
-                                        containerWidth  = { containerWidth }
-                                        location        = { location }
-                                        items           = { useGetFeed( _.songResources ) }
+                                    _.songResources ? 
+                                        <SectionCarousel 
+                                            key             = { index }
+                                            id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
+                                            title           = { _.songTitle ? _.songTitle : ''}
+                                            className       = { `song-resource-${index+1} pt-4 pb-4 ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
+                                            mode            = { mode }
+                                            containerWidth  = { containerWidth }
+                                            location        = { location }
+                                            items           = { useGetFeed( _.songResources ) }
 
-                                        swipeable       = { swipeable }
-                                        draggable       = { draggable }
-                                        infinite        = { infinite }
-                                        partialVisible  = { partialVisible }
-                                        autoplay        = { autoplay }
-                                        stretchedlink   = { stretchedlink }
-                                        itemType        = { itemType }
-                                        dots            = { dots }
-                                        dotsClass       = { dotsClass }
-                                        interval        = { interval }
-                                        itemClass       = { itemClass }
-                                        gap             = { gap }
-                                        truncate        = { truncate }
-                                        truncateLines   = { truncateLines }
-                                        imagePosition   = { imagePosition }
-                                        imageFit        = { imageFit }
-                                        aspectRatio     = { aspectRatio }
-                                        border          = { border }
-                                        borderColor     = { borderColor }
-                                        itemGrow        = { itemGrow }
-                                        responsive      = { responsive }
-                                    />
+                                            swipeable       = { swipeable }
+                                            draggable       = { draggable }
+                                            infinite        = { infinite }
+                                            partialVisible  = { partialVisible }
+                                            autoplay        = { autoplay }
+                                            stretchedlink   = { stretchedlink }
+                                            itemType        = { itemType }
+                                            dots            = { dots }
+                                            dotsClass       = { dotsClass }
+                                            interval        = { interval }
+                                            itemClass       = { itemClass }
+                                            gap             = { gap }
+                                            truncate        = { truncate }
+                                            truncateLines   = { truncateLines }
+                                            imagePosition   = { imagePosition }
+                                            imageFit        = { imageFit }
+                                            aspectRatio     = { aspectRatio }
+                                            border          = { border }
+                                            borderColor     = { borderColor }
+                                            itemGrow        = { itemGrow }
+                                            responsive      = { responsive }
+                                        />
+                                    :
+                                        undefined
                                 ))
                             :
                                 undefined
