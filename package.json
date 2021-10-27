@@ -63,6 +63,7 @@
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.7.0",
     "react-instantsearch-dom": "^6.11.0",
+    "react-is": "^17.0.2",
     "react-mailchimp-subscribe": "^2.1.0",
     "react-multi-carousel": "^2.6.1",
     "react-player": "^2.9.0",
