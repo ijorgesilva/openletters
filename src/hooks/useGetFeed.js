@@ -6,7 +6,7 @@ export const useGetFeed = ( feedObject, campus ) => {
 
     let rawList = []
     let listObject = {
-        type: feedObject.feedType,
+        type: feedObject.feedType ? feedObject.feedType : 'custom' ,
         list: [],
     } 
     // console.log(feedObject)
