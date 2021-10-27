@@ -254,6 +254,13 @@
     @media (min-width: 1200px) { 
         .container, .container-sm, .container-md, .container-lg, .container-xl { max-width: var(--width-xl) !important; } }
 
+    .container-sm-dark {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        >.columns{
+            max-width: var(--width-sm) !important;
+        }
+    }
+
     /*
     * Border
     */

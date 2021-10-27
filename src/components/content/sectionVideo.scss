@@ -1,2 +1,11 @@
 .sectionVideo {
+
+    .react-player {
+        > div {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-rows: minmax(520px, auto);
+            grid-template-columns: minmax(720px, auto);
+        }
+    }
 }

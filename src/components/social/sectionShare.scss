@@ -40,9 +40,11 @@
         .media {
             &.left {
                 grid-area: left;
+                max-height: 720px;
             }
             &.right {
                 grid-area: right;
+                max-height: 720px;
             }
             .gatsby-image-wrapper{
                 height: 100%;
