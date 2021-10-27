@@ -103,9 +103,10 @@
               hardCacheMediaFiles: true,
             },
             schema: {
-              perPage: 100, // currently set to 100
-              requestConcurrency: 100, // currently set to 5
-              previewRequestConcurrency: 100, // currently set to 2
+              perPage: 50, // currently set to 100
+              requestConcurrency: 50, // currently set to 5
+              previewRequestConcurrency: 50, // currently set to 2
+              timeout: 120000,
             },
             debug: {
               graphql: {
