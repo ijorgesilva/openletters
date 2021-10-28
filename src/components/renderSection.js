@@ -551,7 +551,7 @@ export default function RenderSection (
                     mode                = { sectionColorScheme }
                     size                = { sectionSize }
                     location            = { location }
-                    image               = { shareImage.sectionShareImageImage.localFile.childImageSharp.gatsbyImageData }
+                    image               = { shareImage.sectionShareImageImage?.localFile.childImageSharp.gatsbyImageData }
                     imageAlignment      = { shareImage.sectionShareImageAlignment.split(':')[0] }
                     networks            = { section.sectionDetails.sectionShare.sectionShareNetworks }
                     itemClass           = { section.sectionDetails.sectionShare.sectionShareItemClass }
