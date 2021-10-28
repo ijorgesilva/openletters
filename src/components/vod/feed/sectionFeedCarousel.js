@@ -75,7 +75,7 @@ export default function SectionFeedCarousel(
                                         key             = {index}
                                         className       = { ( objLength === index + 1 ) ? 'last' : undefined }
                                         mode            = { mode }
-                                        featuredImage   = { ( item.featuredImage.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
+                                        featuredImage   = { ( item.featuredImage?.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
                                         link            = {  ( item.slug ) ? 
                                                                 `${ ( campus ) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` 
                                                             : 
