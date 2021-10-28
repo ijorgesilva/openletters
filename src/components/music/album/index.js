@@ -135,7 +135,6 @@ export default function SectionAlbum (
 
                 <div className = 'resources'>
                     <Container fluid = { containerWidth === 'container' ? false : true }>
-                        {console.log(albumSongs)}
                         {
                             albumSongs.length > 0 ?
                                 albumSongs.map ( ( _, index ) => (
