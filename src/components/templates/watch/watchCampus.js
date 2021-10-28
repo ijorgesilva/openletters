@@ -20,12 +20,12 @@ export default function WatchPage( { pageContext, data, location } ) {
     
     const { t } = useTranslation()
 
-    let hero = data.hero.nodes[0]
-    let backgroundImage =   ( hero.featuredImage?.node?.localFile?.childImageSharp ) ? 
-                                hero.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+    let hero = data.hero?.nodes[0]
+    let backgroundImage =   ( hero?.featuredImage?.node?.localFile?.childImageSharp ) ? 
+                                hero?.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                             : 
-                                ( hero.videoDetails?.videoSeries?.seriesGraphics?.background ) ? 
-                                    hero.videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
+                                ( hero?.videoDetails?.videoSeries?.seriesGraphics?.background ) ? 
+                                    hero?.videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                                 : 
                                     undefined
 
