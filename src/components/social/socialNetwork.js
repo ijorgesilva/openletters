@@ -28,8 +28,8 @@ export default function SocialNetwork (
     } 
     ) {
 
+
     const { t } = useTranslation()
-    const canonicalUrl = process.env.SITE_CANONICAL_URL + location.pathname
     const typeCaps = type.charAt(0).toUpperCase() + type.slice(1)
 
     switch ( type ) {
@@ -38,7 +38,7 @@ export default function SocialNetwork (
             return (
                 <FacebookShareButton 
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn btn-'+mode : 'btn btn-light' }`}
-                    url                 = { params.sectionShareNetworksFacebookCustomUrl ? params.sectionShareNetworksFacebookCustomUrlUrl : canonicalUrl }
+                    url                 = { params.sectionShareNetworksFacebookCustomUrl ? params.sectionShareNetworksFacebookCustomUrlUrl : location.href }
                     quote               = { params.sectionShareNetworksFacebookQuote } 
                     hashtag             = { params.sectionShareNetworksFacebookHashtags } 
                     resetButtonStyle    = { false }
@@ -52,7 +52,7 @@ export default function SocialNetwork (
             return (
                 <TwitterShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
-                    url                 = { params.sectionShareNetworksTwitterCustomUrl ? params.sectionShareNetworksTwitterCustomUrlUrl : canonicalUrl}
+                    url                 = { params.sectionShareNetworksTwitterCustomUrl ? params.sectionShareNetworksTwitterCustomUrlUrl : location.href}
                     title               = { params.sectionShareNetworksTwitterTitle }
                     via                 = { params.sectionShareNetworksTwitterVia }
                     hashtags            = { params.sectionShareNetworksTwitterHashtags?.split(' ')  }
@@ -68,7 +68,7 @@ export default function SocialNetwork (
             return (
                 <TelegramShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
-                    url                 = { ( params.sectionShareNetworksTelegramCustomUrl ) ? params.sectionShareNetworksTelegramCustomUrlUrl : canonicalUrl}
+                    url                 = { ( params.sectionShareNetworksTelegramCustomUrl ) ? params.sectionShareNetworksTelegramCustomUrlUrl : location.href}
                     title               = { params.sectionShareNetworksTelegramTitle }
                     resetButtonStyle    = { false }
                 >
@@ -81,7 +81,7 @@ export default function SocialNetwork (
             return (
                 <PocketShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
-                    url                 = { params.sectionShareNetworksPocketCustomUrl ? params.sectionShareNetworksPocketCustomUrlUrl : canonicalUrl}
+                    url                 = { params.sectionShareNetworksPocketCustomUrl ? params.sectionShareNetworksPocketCustomUrlUrl : location.href}
                     title               = { params.sectionShareNetworksPocketTitle }
                     resetButtonStyle    = { false }
                 >
@@ -94,7 +94,7 @@ export default function SocialNetwork (
             return (
                 <EmailShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
-                    url                 = { params.sectionShareNetworksEmailCustomUrl ? params.sectionShareNetworksEmailCustomUrlUrl : canonicalUrl }
+                    url                 = { params.sectionShareNetworksEmailCustomUrl ? params.sectionShareNetworksEmailCustomUrlUrl : location.href }
                     subject             = { params.sectionShareNetworksEmailSubject }
                     body                = { params.sectionShareNetworksEmailBody }
                     separator           = {' '}
@@ -109,7 +109,7 @@ export default function SocialNetwork (
             return (
                 <WhatsappShareButton
                     className           = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn '+ 'btn-' + mode : 'btn btn-light' }`}
-                    url                 = { params.sectionShareNetworksWhatsappCustomUrl ? params.sectionShareNetworksWhatsappCustomUrlUrl : canonicalUrl}
+                    url                 = { params.sectionShareNetworksWhatsappCustomUrl ? params.sectionShareNetworksWhatsappCustomUrlUrl : location.href}
                     title               = { params.sectionShareNetworksWhatsappTitle }
                     resetButtonStyle    = { false }
                 >
