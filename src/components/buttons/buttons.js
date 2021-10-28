@@ -19,9 +19,8 @@ export default function Buttons (
                         <Link 
                             key         = {index}
                             className   = {`${ ( _.buttonCssRemoveDefault ) ? '' : 'link btn btn-outline-secondary'} ${ mode === 'dark' ? 'btn-dark' : 'btn-light' } ${ ( index === 0 && stretchedlink ) ? 'stretched-link' : '' } ${ ( _.buttonCss ) ? _.buttonCss : ''} ${ ( index === 0) ? 'first' : ( buttons.length === index + 1 ) ? 'last' : 'middle'}`}
-                            href        = {_.buttonLink} 
-                            target      = {_.buttonTarget.split(":")[0]} 
-                            rel         = "noreferrer"
+                            to          = {_.buttonLink} 
+                            target      = {_.buttonTarget.split(":")[0]}
                         >
                             {_.buttonText}
                         </Link>
