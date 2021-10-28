@@ -100,10 +100,10 @@ require('dotenv').config({
               hardCacheMediaFiles: true,
             },
             schema: {
-              perPage: 50, // currently set to 100
-              requestConcurrency: 50, // currently set to 5
-              previewRequestConcurrency: 50, // currently set to 2
-              timeout: 120000,
+              perPage: process.env.SCHEMA_PER_PAGE || 50, // currently set to 100
+              requestConcurrency: process.env.SCHEMA_REQUEST_CONCURRENCY || 50, // currently set to 5
+              previewRequestConcurrency: process.env.SCHEMA_PREVIEW_REQUEST_CONCURRENCY || 50, // currently set to 2
+              timeout: process.env.SCHEMA_TIMEOUT || 120000,
             },
             debug: {
               graphql: {
