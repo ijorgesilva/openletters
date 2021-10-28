@@ -3,8 +3,6 @@ import React from 'react'
 import Helmet from "react-helmet"
 import urljoin from "url-join"
 
-import config from '../../../data/SiteConfig'
-
 export default function SEO({ postNode, postPath, postSEO }){
     let title, description, image, postURL
 
@@ -17,9 +15,9 @@ export default function SEO({ postNode, postPath, postSEO }){
         image = postMeta.cover;
         postURL = urljoin( process.env.SITE_URL, process.env.PATH_PREFIX, postPath);
     } else {
-        title = config.siteTitle;
-        description = config.siteDescription;
-        image = config.siteLogo;
+        title = process.env.SITE_TITLE;
+        description = process.env.SITE_DESCRIPTION;
+        image = process.env.SITE_IMAGE;
     }
 
     const getImagePath = imageURI => {
@@ -40,7 +38,7 @@ export default function SEO({ postNode, postPath, postSEO }){
   
         if (!postNode.frontmatter.date) return null;
   
-        return moment(postNode.frontmatter.date, config.dateFromFormat).toDate();
+        return moment(postNode.frontmatter.date, process.env.DATE_FROM_FORMAT).toDate();
     }
 
     image = getImagePath(image)
@@ -49,14 +47,14 @@ export default function SEO({ postNode, postPath, postSEO }){
 
     const authorJSONLD = {
         "@type": "Person",
-        name: config.userName,
-        email: config.userEmail,
-        address: config.userLocation
+        name: process.env.USER_NAME,
+        email: process.env.USER_EMAIL,
+        address: process.env.USER_LOCATION
     }
 
     const logoJSONLD = {
         "@type": "ImageObject",
-        url: getImagePath(config.siteLogo)
+        url: getImagePath(process.env.SITE_IMAGE)
     }
 
     const blogURL = urljoin( process.env.SITE_URL, process.env.PATH_PREFIX)
@@ -67,7 +65,7 @@ export default function SEO({ postNode, postPath, postSEO }){
           "@type": "WebSite",
           url: blogURL,
           name: title,
-          alternateName: config.siteTitleAlt ? config.siteTitleAlt : ""
+          alternateName: process.env.SITE_TITLEAlt ? process.env.SITE_TITLEAlt : ""
         }
     ]
 
@@ -93,7 +91,7 @@ export default function SEO({ postNode, postPath, postSEO }){
             "@type": "BlogPosting",
             url: blogURL,
             name: title,
-            alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
+            alternateName: process.env.SITE_TITLEAlt ? process.env.SITE_TITLEAlt : "",
             headline: title,
             image: { "@type": "ImageObject", url: image },
             author: authorJSONLD,
@@ -127,14 +125,14 @@ export default function SEO({ postNode, postPath, postSEO }){
             <meta property="og:image" content={image} />
             <meta
                 property="fb:app_id"
-                content={config.siteFBAppID ? config.siteFBAppID : ""}
+                content={process.env.siteFBAppID ? process.env.siteFBAppID : ""}
             />
 
             {/* Twitter Card tags */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta
                 name="twitter:creator"
-                content={config.userTwitter ? config.userTwitter : ""}
+                content={process.env.userTwitter ? process.env.userTwitter : ""}
             />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />

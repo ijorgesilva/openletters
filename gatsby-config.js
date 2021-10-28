@@ -3,14 +3,11 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
- const path = require("path");
+const path = require("path");
 
- const urljoin = require("url-join");
-
- const config = require("./data/SiteConfig");
+const urljoin = require("url-join");
  
-//  require('dotenv').config()
- require('dotenv').config({
+require('dotenv').config({
   path: `.env${ (process.env.NODE_ENV === 'development' ) ? '.development' : (process.env.NODE_ENV) ? '.'+process.env.NODE_ENV : ''}`
 })
 
@@ -25,23 +22,23 @@
    siteMetadata: {
      siteUrl: process.env.SITE_URL,
  
-     title: config.siteTitle,
-     titleTemplate: "%s"+' '+config.separator+' '+config.siteTitle,
-     description: config.siteDescription,
+     title: process.env.SITE_TITLE,
+     titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
+     description: process.env.SITE_DESCRIPTION,
      url: process.env.SITE_URL,
-     image: config.siteLogo,
-     twitterUsername: config.twitterUsername,
+     image: process.env.SITE_IMAGE,
+     twitterUsername: process.env.TWITTER_USERNAME,
  
      rssMetadata: {
        site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
-       feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, config.siteRss),
-       title: config.siteTitle,
-       description: config.siteDescription,
+       feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
+       title: process.env.SITE_TITLE,
+       description: process.env.SITE_DESCRIPTION,
        image_url: `${urljoin(
          process.env.SITE_URL,
          process.env.PATH_PREFIX
        )}/logos/logo-512.png`,
-       copyright: config.copyright
+       copyright: process.env.SITE_COPYRIGHT
      }
    },
  
@@ -68,13 +65,13 @@
         {
           resolve: "gatsby-plugin-manifest",
           options: {
-            name: config.siteTitle,
-            short_name: config.siteTitleShort,
-            description: config.siteDescription,
+            name: process.env.SITE_TITLE,
+            short_name: process.env.SITE_TITLE,
+            description: process.env.SITE_DESCRIPTION,
             start_url: `/${process.env.PATH_PREFIX.replace(/^\/|\/$/g, "")}`,
-            background_color: config.backgroundColor,
-            theme_color: config.themeColor,
-            display: "standalone", //minimal-ui
+            background_color: `#${process.env.MANIFEST_THEME_COLOR}`,
+            theme_color: `#${process.env.MANIFEST_THEME_BACKGROUND_COLOR}`,
+            display: "standalone",
             icon: `src/assets/img/logo.png`,
             icons: [
               {
@@ -137,11 +134,11 @@
           resolve: `gatsby-plugin-gdpr-cookies`,
           options: {
             googleAnalytics: {
-              trackingId: config.googleAnalyticsID,
+              trackingId: process.env.GOOGLE_TRACKING_ID,
               anonymize: true
             },
             facebookPixel: {
-              pixelId: config.facebookPixel,
+              pixelId: process.env.FACEBOOK_PIXEL,
             },
             environments: ['production', 'development']
           },
