@@ -57,7 +57,7 @@ export default function SectionForm (
                     }
                     <FormSelector
                         type                = { type }
-                        formIframe          = { formIframe }
+                        formIframe          = { `${formIframe}` }
                         form                = { form }
                         location            = { location }
                         containerClass      = { containerClass }

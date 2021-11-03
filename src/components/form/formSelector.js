@@ -22,8 +22,7 @@ export default function FormSelector (
         secondaryColumnBackground,
     } 
     ) {
-
-    const queryString = iframeQueryStrings ? `${process.env.SITE_URL}${form.uri}${iframeQueryStrings}` : `${process.env.SITE_URL}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
+    const queryString = iframeQueryStrings ? `${process.env.WP_SERVER}${form.uri}${iframeQueryStrings}` : `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
     
     switch ( true ){
         /*
@@ -34,7 +33,7 @@ export default function FormSelector (
                 <div className = {`formSelector ${ jumbotronPadding ? jumbotronPadding : ''} ${ jumbotron ? 'jumbotron' : ''} ${ jumbotronFluid ? 'jumbotron-fluid' : ''} ${containerClass ? containerClass : ''}`}>
                     <Container>
                         {
-                            (formIframe) ?
+                            formIframe ?
                                 <IframeResizer 
                                     src         = { queryString }
                                     style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}} 
