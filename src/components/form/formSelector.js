@@ -10,7 +10,6 @@ export default function FormSelector (
         type,
         formIframe,
         form,
-        location,
         containerClass,
         jumbotron,
         jumbotronMode,
@@ -22,8 +21,12 @@ export default function FormSelector (
         secondaryColumnBackground,
     } 
     ) {
-    const queryString = iframeQueryStrings ? `${process.env.WP_SERVER}${form.uri}${iframeQueryStrings}` : `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(location.href)}`
-    
+
+    const iframeFormUrl = iframeQueryStrings ? 
+                            process.env.WP_SERVER + form.uri + iframeQueryStrings
+                        : 
+                            `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(form.uri)}`
+
     switch ( true ){
         /*
         * Single Column
@@ -35,7 +38,7 @@ export default function FormSelector (
                         {
                             formIframe ?
                                 <IframeResizer 
-                                    src         = { queryString }
+                                    src         = { iframeFormUrl }
                                     style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}} 
                                     frameborder = '0'
                                     allowTransparency
@@ -88,9 +91,9 @@ export default function FormSelector (
                                         undefined
                                 }
                                 {
-                                    (formIframe) ?
+                                    formIframe ?
                                         <IframeResizer 
-                                            src         = { queryString } 
+                                            src         = { iframeFormUrl } 
                                             style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}}
                                             frameborder = '0' 
                                             allowTransparency
