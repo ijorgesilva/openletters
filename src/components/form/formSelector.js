@@ -25,7 +25,7 @@ export default function FormSelector (
     const iframeFormUrl = iframeQueryStrings ? 
                             process.env.WP_SERVER + form.uri + iframeQueryStrings
                         : 
-                            `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${encodeURI(form.uri)}`
+                            `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
 
     switch ( true ){
         /*

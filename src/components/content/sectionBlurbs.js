@@ -35,9 +35,9 @@ export default function SectionBlurbs (
 
     const flexConfig = {
         display: 'flex',
-        flexDirection: ( direction ) ? direction : 'row',
-        gap: ( gap ) ? gap : '1rem',
-        justifyContent: ( justification ) ? justification : 'flex-start',
+        flexDirection: direction ? direction : 'row',
+        gap: gap ? gap : '1rem',
+        justifyContent: justification ? justification : 'flex-start',
         alignItems: stretchedlink ? 'stretch' : 'flex-start',
         alignContent: stretchedlink ? 'stretch' : 'flex-start',
     }
