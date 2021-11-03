@@ -22,10 +22,12 @@ export default function FormSelector (
     } 
     ) {
 
+    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://cms.victorychur.ch'
+
     const iframeFormUrl = iframeQueryStrings ? 
-                            process.env.WP_SERVER + form.uri + iframeQueryStrings
+                            iframeServerRoot + form.uri + iframeQueryStrings
                         : 
-                            `${process.env.WP_SERVER}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+                            `${iframeServerRoot}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
 
     switch ( true ){
         /*

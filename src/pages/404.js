@@ -7,28 +7,30 @@ import FooterSimpleText from '../components/footer/footerSimpleText'
 import HeaderPage from '../components/headerPage'
 import HeroBasic from '../components/hero/heroBasic'
 import Navigation from '../components/menu/navigation'
+import { useGlobalIndeces } from '../hooks/useGlobalIndeces'
 
 export default function Home( { data, location } ) {
 
   const { t } = useTranslation()
 
-  const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
-
   return (
 
     <>
-    
-      <HeaderPage 
-        title={t('global.404-title')}
-        location={location} 
-        cover={ ( data.poster != null ) ? data.poster.publicURL : undefined }
-        description={t('global.404-description')}
+
+
+      <HeaderPage
+          title       = {t('global.404-title')}
+          location    = { location } 
+          className   = '404'
+          cover       = { ( data.poster != null ) ? data.poster.publicURL : undefined }
+          description = {t('global.404-description')}
       />
             
       <Navigation
           location        = { location }
+          mode            = { 'dark' }
           campus          = { 'global' }
-          searchIndices   = { searchIndices }
+          searchIndices   = { useGlobalIndeces() }
           menuGlobal
           menuLocal
       />
@@ -39,13 +41,16 @@ export default function Home( { data, location } ) {
         backgroundPhoto={ ( data.poster != null ) ? data.poster.publicURL : undefined }
         className={'c-hero position-relative z-index-1'}
         >
-          <Button className='button button--animation bbuttontbuttonn--light-outline ml-3' variant='none' href='/' target='_self'>
+          <Button className='ml-3' variant='none' href='/' target='_self'>
             {t('global.404-go-back')}
           </Button>
       </HeroBasic>
 
-      <FooterSimpleText campus={ 'global' } />
-      
+      <FooterSimpleText 
+          campus = { 'global' } 
+          mode   = { 'dark' }
+      />
+
     </>
 
   )
@@ -53,7 +58,8 @@ export default function Home( { data, location } ) {
 
 export const query = graphql`
   query fourOfourPage {
-        poster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
-            publicURL
-        }
-  }`
+      poster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
+          publicURL
+      }
+  }
+`

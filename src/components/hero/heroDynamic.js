@@ -1,25 +1,23 @@
+import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
-
-import Background from '../UI/background'
 
 import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
+import Background from '../UI/background'
 import './heroDynamic.scss'
 
 export default function HeroDynamic ( 
     { 
-        title, 
-        subtitle, 
-        backgroundPhoto, 
-        id, 
-        className, 
-        buttons, 
+        title,
+        subtitle,
+        backgroundPhoto,
+        id,
+        className,
+        buttons,
         children, 
-        related, 
-        location, 
-        mode, 
+        related,
+        mode,
         width,
         size,
         overlay,
