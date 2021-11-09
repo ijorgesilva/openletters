@@ -147,7 +147,7 @@ export default function RenderSection (
             const videoItems = section.sectionDetails.sectionVodTags.sectionVodTag ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
             const filteredVideos = videoItems ? 
-                                        videoItems.videosOnDemand.nodes?.filter( item => (
+                                        videoItems.videosOnDemand?.nodes?.filter( item => (
                                             item.status === 'publish'
                                         )).filter( item => (
                                             item.videoDetails.videoCampus.some( item => item.slug === filter.campus )
