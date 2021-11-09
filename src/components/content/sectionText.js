@@ -1,5 +1,6 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 import Buttons from '../buttons/buttons'
 import RenderSection from '../renderSection'
@@ -25,10 +26,9 @@ export default function SectionText ( {
     
     return (
         <section  id = {id} className = {`sectionText ${ size ? size : 'md' } ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
-
+            
             <div className={`columns ${ ( media?.sectionTextbasicMediaType ) ? 'two-columns' : 'one-column' }`}>
-                <div className={`${ ( containerWidth ) ? containerWidth : 'container' }`}>
-
+                <Container fluid = { containerWidth === 'container' ? false : true }>
                     {
                         ( title || content || buttons?.length > 0 ) ?
                             <div className='general'>
@@ -59,7 +59,6 @@ export default function SectionText ( {
                         :
                             undefined
                     }
-
                     {
                         ( sections?.length > 0 ) ?
                             sections.map( ( section, index ) => (
@@ -76,8 +75,7 @@ export default function SectionText ( {
                         :
                             undefined
                     }
-
-                </div>
+                </Container>
 
                 {
                     ( media?.sectionTextbasicMediaType ) ? 
