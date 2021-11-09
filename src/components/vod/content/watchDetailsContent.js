@@ -196,8 +196,9 @@ export default function WatchDetailsContent (
             {
                 ( tags?.length > 0 ) ?
                     <TagSimple 
-                        terms   = { tags } 
                         variant = { mode } 
+                        width   = 'container'
+                        items   = { tags }
                     />
                 : 
                     undefined

@@ -107,9 +107,9 @@ export default function PostDetails( { location, pageContext } ){
                         <Col className='' xs={12} md={8}>
                             <div dangerouslySetInnerHTML={{__html: content}}></div>
                             {
-                                ( terms ) ?
+                                terms ?
                                     <TagSimple 
-                                        terms   = { terms } 
+                                        items   = { terms } 
                                         mode    = { contentMode }
                                     />
                                 :

@@ -19,10 +19,10 @@ import './watchSeries.scss'
 
 export default function WatchSeries( { pageContext, location, data } ) {
 
-    const { title, slug, excerpt, seriesDetails, campus, seriesGraphics, videoOnDemandTags, breadcrumbs } = pageContext
-    
+    const { title, slug, excerpt, seriesDetails, campus, seriesGraphics, breadcrumbs } = pageContext
+
     const { t } = useTranslation()
-    
+
     const cover = ( seriesDetails?.seriesTrailerPoster?.localFile ) ? 
                         seriesDetails.seriesTrailerPoster.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
@@ -124,9 +124,10 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 />
                 
                 <SectionTags
-                    id   = 'tags'
-                    tags = { videoOnDemandTags?.nodes }
-                    mode = { mode }
+                    id      = 'tags'
+                    width   = 'container'
+                    mode    = { mode }
+                    tags    = { data.series.tags?.nodes }
                 />
 
             </div>
@@ -165,6 +166,13 @@ export const query = graphql`
             slug: {eq: $slug}
         ) {
             slug
+            tags {
+                nodes {
+                    id
+                    slug
+                    name
+                }
+            }
             seriesDetails{
                 seriesResources{
                     ... on WpPost {

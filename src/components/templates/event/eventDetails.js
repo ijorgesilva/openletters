@@ -212,7 +212,7 @@ export default function EventDetails( { pageContext, location } ){
                             </div>
                             
                             <TagSimple 
-                                terms   = { tags }
+                                items   = { tags }
                                 mode    = { contentMode }
                             />
                             

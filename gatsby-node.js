@@ -157,6 +157,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                                 ...video,
                                 title: video.title,
                                 slug: video.slug,
+                                tags: video.tags,
                                 id: video.id,
                                 layout: "watchDetails",
                                 serieId: (video.videoDetails.videoSeries) ? 
@@ -594,7 +595,6 @@ const blurb = `
     itemCss
     itemCssRemoveDefault
     itemButtons {
-        itemButtonsStretchedlink
         itemButtonsButton {
             ${buttons}
         }
@@ -607,6 +607,11 @@ const referenceSeries = `
         title
         slug
         status
+        tags {
+            nodes {
+                ${tag}
+            }
+        }
     }
 `
 const referenceCampus = `
@@ -1422,11 +1427,6 @@ const allWpVideo = `
                                 ${localFile}
                             }
                         }
-                        videoOnDemandTags {
-                            nodes {
-                                ${tag}
-                            }
-                        }
                     }
                 }
                 videoSpeaker {
@@ -1441,7 +1441,7 @@ const allWpVideo = `
                   videoHideSearchEngines
                 }
             }
-            videoOnDemandTags {
+            tags {
                 nodes {
                     ${tag}
                 }
@@ -1485,11 +1485,6 @@ const allWpSeries = `
                 }
                 background {
                     ${localFile}
-                }
-            }
-            videoOnDemandTags {
-                nodes {
-                    ${tag}
                 }
             }
         }

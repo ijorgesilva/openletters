@@ -24,10 +24,10 @@ export default function WatchDetails( { pageContext, location, data } ) {
             slug, 
             excerpt, 
             content, 
+            tags,
             featuredImage, 
             videoDetails, 
-            participationCampus, 
-            videoOnDemandTags, 
+            participationCampus,
             breadcrumbs 
         } = pageContext
     
@@ -140,7 +140,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
                             title           = { title }
                             excerpt         = { excerpt } 
                             content         = { content }
-                            tags            = { videoOnDemandTags }
+                            tags            = { tags?.nodes }
                             mode            = { modeContent }
                             videoDetails    = { videoDetails }
                             resources       = { resources }
@@ -218,7 +218,6 @@ export const query = graphql`
                         }
                     }
                 }
-
             }
         }
 

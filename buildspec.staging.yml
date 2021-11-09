@@ -25,7 +25,7 @@ phases:
       - echo "Disallow:/" >> ./public/robots.txt
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
       - echo "S3 bucket is $DEPLOY_BUCKET"
-      - aws s3 cp --recursive --acl public-read ./public s3://$DEPLOY_BUCKET
+      - aws s3 sync --delete --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./public s3://$DEPLOY_BUCKET
 
 cache:
   paths:

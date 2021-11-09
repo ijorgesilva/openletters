@@ -1,12 +1,13 @@
 import React from 'react'
 import './tagSimple.scss'
 
-export default function TagSimple( { terms, mode, className } ) {
+export default function TagSimple( { items, mode, className } ) {
+    console.log(items)
     return (
         <div className={`tagSimple ${ mode ? mode : 'light' } ${ className ? className : '' }`}>
             {
-                terms?.length > 0 ?
-                    terms.map( (term, index) => (
+                items?.length > 0 ?
+                    items.map( (term, index) => (
                         <span  key={index} className={`user-select-none ${ className ? className : ''}`}>
                             {term.name}
                         </span>
