@@ -144,10 +144,10 @@ export default function RenderSection (
          */
         // TODO: Get order and Count variables from CMS. Both params should be active by default.
         case ( sectionType === 'vodtags' && sectionStatus ): {
-            const videoItems = (section.sectionDetails.sectionVodTags.sectionVodTag) ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
+            const videoItems = section.sectionDetails.sectionVodTags.sectionVodTag ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
-            const filteredVideos = (videoItems) ? 
-                                        videoItems.videosOnDemand.nodes.filter( item => (
+            const filteredVideos = videoItems ? 
+                                        videoItems.videosOnDemand.nodes?.filter( item => (
                                             item.status === 'publish'
                                         )).filter( item => (
                                             item.videoDetails.videoCampus.some( item => item.slug === filter.campus )
@@ -158,7 +158,7 @@ export default function RenderSection (
             return (
                 <>
                     {
-                        (filteredVideos.length > 0) ?
+                        filteredVideos?.length > 0 ?
                             <SectionFeedCarousel 
                                 id           = { sectionId }
                                 className    = { sectionClassname }

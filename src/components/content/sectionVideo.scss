@@ -3,9 +3,6 @@
     .react-player {
         > div {
             margin-top: 2rem;
-            display: grid;
-            grid-template-rows: minmax(320px, auto);
-            grid-template-columns: minmax(1fr, auto);
         }
     }
 }

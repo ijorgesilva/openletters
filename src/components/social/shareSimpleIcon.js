@@ -31,7 +31,7 @@ export default function ShareSimpleIcon(
             >
                 <FontAwesomeIcon className='icon' icon={faShareSquare} size='lg'/>
                 {
-                    ( label ) ?
+                    label ?
                         <span>{t('components.social.share')}</span>
                     :
                         undefined
