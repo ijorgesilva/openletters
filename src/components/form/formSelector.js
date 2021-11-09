@@ -22,7 +22,7 @@ export default function FormSelector (
     } 
     ) {
 
-    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://cms.victorychur.ch'
+    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://editor.victorychur.ch'
 
     const iframeFormUrl = iframeQueryStrings ? 
                             iframeServerRoot + form.uri + iframeQueryStrings

@@ -29,7 +29,6 @@ export default function ModalBasic( {title, children, btnClassName, center, clas
                 </Modal.Header>
                 <Modal.Body>
                     {children}
-                    {/* <iframe id="connect-iframe" className="" src="https://cms.victorychur.ch/form/global-contact-form/?origin=smallgroups" style="min-height: 600px;" width="100%" frameborder="0"></iframe> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

@@ -30,7 +30,7 @@ export const useGetFeed = ( feedObject, campus ) => {
                                 image: _.featuredImage?.node.localFile.childImageSharp.gatsbyImageData,
                                 date: _.videoDetails.videoDayDate,
                                 // TODO: USE Buttons structure
-                                url: '/' + useGetBestCampus( campus, _.videoDetails.videoCampus ) + '/' + config.watchSlug + '/' + _.slug,
+                                url: '/' + useGetBestCampus( campus, _.videoDetails.videoCampus ) + '/' + config.watchMessageDetailsSlug + '/' + _.slug,
                                 tags: _.tags,
                                 buttons: [],
                             }
@@ -40,9 +40,10 @@ export const useGetFeed = ( feedObject, campus ) => {
                 ))
             }
             else undefined
-            // console.log('rawList:')
-            // console.log(rawList)
-            // console.log(listObject)
+            console.log('rawList:')
+            console.log(rawList)
+            console.log('listObject')
+            console.log(listObject)
         break
 
         /*
@@ -127,10 +128,6 @@ export const useGetFeed = ( feedObject, campus ) => {
                 ))
             }
             else undefined
-            // console.log('rawList')
-            // console.log(rawList)
-            // console.log('listObject')
-            // console.log(listObject)
         break
     }
     // TODO: Order 
