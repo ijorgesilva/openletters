@@ -39,6 +39,7 @@
 			"youversion-default": "https://chop.bible.com/bible/1/GEN.1.kjv"
 		},
 		"blog": {
+			"blog-and-news-title": "Blog & News",
 			"created-date": "Created on ",
 			"description": "Check our latest post and articles",
 			"meta-description": "",
@@ -54,6 +55,9 @@
 		},
 		"copied": "Copied!",
 		"copied-failed": "Failed to copy!",
+		"courses": {
+			"title": "Courses"
+		},
 		"created-on": "Created on",
 		"empty": {
 			"text-not-available": "No description available"
@@ -74,6 +78,10 @@
 		"give": {
 			"title": "Give"
 		},
+		"groups": {
+			"title": "Groups",
+			"title-singular": "Group"
+		},
 		"help": {
 			"need-help": "Need help?",
 			"title": "Help"
@@ -81,6 +89,11 @@
 		"home-page": "Home Page",
 		"legal": {
 			"disclaimer": "Copyright ©. All Rights Reserved."
+		},
+		"ministry": {
+			"description": "",
+			"title": "Ministry",
+			"title-plural": "Ministries"
 		},
 		"modified-on": "Modified on",
 		"news": {
@@ -93,6 +106,7 @@
 			"your-email": "Your email",
 			"your-name": "Your name"
 		},
+		"next": "Next >",
 		"no-records": "Nothing to show!",
 		"notes": "Notes",
 		"pages": {
@@ -104,11 +118,18 @@
 				"title": "Raise Hand"
 			}
 		},
+		"previous": "< Previous",
+		"read_more": "Read more",
 		"related-resources": "Resources",
 		"search": {
 			"placeholder": "Search..."
 		},
 		"transcripts": "Transcripts",
+		"view": "View",
+		"volunteering": {
+			"serve": "Serve",
+			"volunteering": "Volunteering"
+		},
 		"watch": {
 			"about-series": "About the Series",
 			"content-empty": "No notes available",

@@ -31,7 +31,7 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                 className   = 'eventCampus'
                 mode        = { contentMode }
                 cover       = { 
-                                (featuredImage?.node?.localFile) ?
+                                featuredImage?.node ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                                 : 
                                     undefined 
@@ -72,9 +72,9 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                     data.events.nodes.map( ( event, index ) => (
                                         <BlurbHorizontal 
                                             key             = { index }
-                                            className       = { 'mb-4' }
+                                            className       = { 'mb-3' }
                                             featuredImage   =   {  
-                                                                    ( event.featuredImage?.node?.localFile ) ? 
+                                                                    event.featuredImage?.node ? 
                                                                         event.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                                                     : 
                                                                         undefined    

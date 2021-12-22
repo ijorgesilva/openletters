@@ -3,15 +3,25 @@
 .sectionBlurbs {
     .items {
         margin-top: var(--padding-top);
-        flex-direction: row;
+        flex-flow: row wrap;
         > div {
-            flex: 1;
-            max-width: 300px;
+            width: 100%;
+            max-width: 320px;
+            flex-basis: 20%;
+            box-sizing: border-box;
+            position: relative;
+            flex-grow: 1;
         }
     }
 }
 
 @include media("<desktop") {
+    .sectionBlurbs {
+        .items {
+            > div {
+            }
+        }
+    }
 }
 
 @include media("<=tablet") {
@@ -22,6 +32,10 @@
         .items {
             flex-direction: column !important;
             gap: 3rem !important;
+            > div {
+                max-width: unset;
+                width: 100%;
+            }
         }
     }
 }

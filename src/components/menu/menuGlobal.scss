@@ -4,10 +4,11 @@
     position: relative;
     z-index: 10;
 
-    .navglobal{
+    .navglobal {
         position: relative;
         z-index: 5;
         height: 60px;
+        border-bottom: 1px solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
         
 
         &.navbar-dark {

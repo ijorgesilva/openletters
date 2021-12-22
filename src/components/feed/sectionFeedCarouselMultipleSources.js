@@ -39,7 +39,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                 <BlurbHorizontal 
                                     key={ index }
                                     title={ obj.title }
-                                    featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
+                                    featuredImage={ obj.featuredImage?.node ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                     className={ (objLengthOne === index + 1) ? 'last' : undefined }
                                     // tag={"<img src='"+data.newsIcon.publicURL+"' alt='News'/> News"}
                                     tag={t('global.news')}
@@ -57,7 +57,7 @@ export default function SectionFeedCarouselMultipleSources ( { title, itemsNews,
                                     key = { index }
                                     keyIndex={ index }
                                     title={ obj.title }
-                                    featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
+                                    featuredImage={ obj.featuredImage?.node ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                     className={ (objLengthTwo === index + 1) ? 'last' : undefined }
                                     // tag={"<img src='"+data.eventIcon.publicURL+"' alt='Event'/> Event"}
                                     tag={t('global.event')}

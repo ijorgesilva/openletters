@@ -30,6 +30,12 @@ export default function BlurbVertical (
         borderColor,
         itemGrow,
         numbered,
+        // Visibility
+        hideImage,
+        hideTitle,
+        hideSubtitle,
+        hideExcerpt,
+        hideButton,
     }
     ) {
 
@@ -38,36 +44,54 @@ export default function BlurbVertical (
     return (
         <Card className = {`${ removeDefaultCss ? '' : 'blurbVertical' } ${ mode ? mode : 'light' } ${ className ? className : ''}  ${ border ? border : '' } ${ borderColor ? borderColor : '' } ${ itemGrow ? 'grow' : ''} ${ cardOrientation ? cardOrientation : ''} ${ itemType ? itemType : ''}`}>
 
-            <div className={`card-img ${ ( !image ) ? ( aspectRatio ) ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' : '' }`} aria-hidden='true'>
-                {
-                    ( numbered ) ?
-                        <span className='number font-weight-bolder h1 noselect'>{counter}</span>
-                    :
-                        undefined
-                }
-                <GatsbyImage
-                    className       = {`card-img-top ${ aspectRatio ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' }`}
-                    image           = { image }
-                    objectPosition  = { imagePosition }
-                    objectFit       = { imageFit }
-                    alt             = { title }
-                />
-            </div>
+            {
+                hideImage ?
+                    undefined
+                :
+                    <div className={`card-img ${ ( !image ) ? ( aspectRatio ) ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' : '' }`} aria-hidden='true'>
+                        {
+                            numbered ?
+                                <span className='number font-weight-bolder h1 noselect'>{counter}</span>
+                            :
+                                undefined
+                        }
+                        <GatsbyImage
+                            className       = {`card-img-top ${ aspectRatio ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' }`}
+                            image           = { image }
+                            objectPosition  = { imagePosition }
+                            objectFit       = { imageFit }
+                            alt             = { title }
+                        />
+                    </div>
+            }
 
             <Card.Body>
-                <Card.Title as='h3' dangerouslySetInnerHTML={{__html: title}}></Card.Title>
-                <h4 className='card-subtitle' dangerouslySetInnerHTML={{__html: subtitle}}></h4>
                 {
-                    ( truncate ) ?
-                        <TextTruncate line = { ( truncateLines ) ? truncateLines : 3 } element='p' truncateText='…' text={content.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                    hideTitle ? undefined
+                    : <Card.Title className='text-break' as='h3' dangerouslySetInnerHTML={{__html: title}}></Card.Title>
+                }
+                {
+                    hideSubtitle ? undefined
+                    : <h4 className='card-subtitle text-break' dangerouslySetInnerHTML={{__html: subtitle}}></h4>
+                }
+                {
+                    hideExcerpt ? undefined
                     :
-                        <Card.Text  dangerouslySetInnerHTML={{__html: content}}></Card.Text>    
+                        <>
+                        {
+                            truncate ?
+                                <TextTruncate line = { ( truncateLines ) ? truncateLines : 3 } element='p' truncateText='…' text={content.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                            :
+                                <Card.Text  dangerouslySetInnerHTML={{__html: content.replace(/<p>/, '').replace(/<\/p>/, '')}}></Card.Text>    
+                        }
+                        </>
                 }
                 {
                     ( buttons?.length > 0 ) ?
                         <Buttons 
                             stretchedlink   = { stretchedlink }
                             buttons         = { buttons }
+                            className       = { hideButton ? 'hide' : '' }    
                         />
                     :
                         undefined

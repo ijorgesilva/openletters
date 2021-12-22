@@ -98,17 +98,17 @@ export default function TabSeasons (
                                                         (item.videoDetails.videoSeason?.slug) ?
                                                             ( item.videoDetails.videoSeason.slug === season.slug ) ?
                                                                 <BlurbVerticalDarkVod 
-                                                                    key             = {index}
+                                                                    key             = { index }
                                                                     className       = { (objLength === index + 1) ? 'last' : undefined }
-                                                                    featuredImage   = { ( item.featuredImage.node ) ? 
+                                                                    featuredImage   = { item.featuredImage?.node ? 
                                                                                             item.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
                                                                                         : 
                                                                                             undefined 
                                                                                         }
-                                                                    link            = { (item.slug) ? `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` : undefined }
+                                                                    link            = { item.slug ? `${ (campus) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` : undefined }
                                                                     title           = { `${item.title}` }
-                                                                    subtitle        = { (item.videoDetails.speaker) ? (item.videoDetails.speaker) : undefined }
-                                                                    excerpt         = { (item.excerpt) ? item.excerpt : undefined }
+                                                                    subtitle        = { item.videoDetails.speaker ? (item.videoDetails.speaker) : undefined }
+                                                                    excerpt         = { item.excerpt ? item.excerpt : undefined }
                                                                 />
                                                             : undefined
                                                         : undefined

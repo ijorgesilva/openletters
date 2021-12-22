@@ -39,6 +39,7 @@
 			"youversion-default": "https://chop.bible.com/es-ES/bible/149/GEN.1.rvr1960"
 		},
 		"blog": {
+			"blog-and-news-title": "Blog & Noticias",
 			"created-date": "Creado el ",
 			"description": "Consulte nuestras últimas publicaciones y artículos",
 			"meta-description": "",
@@ -54,6 +55,9 @@
 		},
 		"copied": "Copiado!",
 		"copied-failed": "Falló en copiar!",
+		"courses": {
+			"title": "Cursos"
+		},
 		"created-on": "Creado el",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
@@ -74,6 +78,10 @@
 		"give": {
 			"title": "Dar ahora"
 		},
+		"groups": {
+			"title": "Grupos",
+			"title-singular": "Grupo"
+		},
 		"help": {
 			"need-help": "Necesita ayuda?",
 			"title": "Ayuda"
@@ -81,6 +89,11 @@
 		"home-page": "Página Principal",
 		"legal": {
 			"disclaimer": "© Todos los Derechos Reservados."
+		},
+		"ministry": {
+			"description": "",
+			"title": "Ministerio",
+			"title-plural": "Ministerios"
 		},
 		"modified-on": "Modificado el",
 		"news": {
@@ -93,6 +106,7 @@
 			"your-email": "Tú email",
 			"your-name": "Tú nombre"
 		},
+		"next": "Siguiente >",
 		"no-records": "Nada que mostrar!",
 		"notes": "Notas",
 		"pages": {
@@ -104,11 +118,18 @@
 				"title": "Levantar Mano"
 			}
 		},
+		"previous": "< Anterior",
+		"read_more": "Leer más",
 		"related-resources": "Recursos",
 		"search": {
 			"placeholder": "Buscar..."
 		},
 		"transcripts": "Transcripciones",
+		"view": "Ver",
+		"volunteering": {
+			"serve": "Sirve",
+			"volunteering": "Voluntariado"
+		},
 		"watch": {
 			"about-series": "Acerca de la Serie",
 			"content-empty": "No hay notas disponibles",

@@ -306,20 +306,20 @@
                 color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 font-weight: 100;
                 &.active {
-                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                font-weight: 600;
-                border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    font-weight: 600;
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
                 }
                 &:hover {
-                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
                 }
             }
         }

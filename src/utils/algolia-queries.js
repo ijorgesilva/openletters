@@ -27,8 +27,10 @@ const videosAndSeries = `
                         slug
                         status
                         campusDetails {
-                            campusWatch {
-                                campusWatchPage
+                            campusPages {
+                                campusWatch {
+                                    pageActive
+                                }
                             }
                         }
                     }
@@ -121,6 +123,13 @@ const posts = `
                         title
                         slug
                         status
+                        campusDetails {
+                            campusPages {
+                                campusBlog {
+                                    pageActive
+                                }
+                            }
+                        }
                     }
                 }
                 postHide {
@@ -155,6 +164,13 @@ const news = `
                         title
                         slug
                         status
+                        campusDetails {
+                            campusPages {
+                                campusNews {
+                                    pageActive
+                                }
+                            }
+                        }
                     }
                 }
                 newsHide {
@@ -189,6 +205,13 @@ const events = `
                         title
                         slug
                         status
+                        campusDetails {
+                            campusPages {
+                                campusEvents {
+                                    pageActive
+                                }
+                            }
+                        }
                     }
                 }
                 eventHide {
@@ -223,11 +246,202 @@ const attachments = `
                         slug
                         status
                         databaseId
+                        campusDetails {
+                            campusPages {
+                                campusAttachments {
+                                    pageActive
+                                }
+                            }
+                        }
                     }
                 }
                 attachmentHide {
                     attachmentHideSearchResults
                 }
+            }
+        }
+    }
+}
+`
+const ministries = `
+{
+    ########
+    # Ministries
+    ########
+    ministries: allWpMinistry (
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
+        nodes {
+            id
+            title
+            slug
+            general {
+                campus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        status
+                        campusDetails {
+                            campusPages {
+                                campusMinistry {
+                                    pageActive
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            visibility {
+                hide
+                searchResults
+            }
+        }
+    }
+}
+`
+const volunteering = `
+{
+    ########
+    # Volunteering
+    ########
+    volunteering: allWpVolunteeropportunity (filter: {status: {eq: "publish"}}) {
+        nodes {
+            id
+            title
+            slug
+            general {
+                campus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        status
+                        campusDetails {
+                            campusPages {
+                                campusVolunteering {
+                                    pageActive
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            visibility {
+                hide
+                searchResults
+            }
+        }
+    }
+}
+`
+const courses = `
+{
+    ########
+    # Courses
+    ########
+    courses: allWpCourse (filter: {status: {eq: "publish"}}) {
+        nodes {
+            id
+            title
+            slug
+            general {
+                campus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        status
+                        campusDetails {
+                            campusPages {
+                                campusCourses {
+                                    pageActive
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            visibility {
+                hide
+                searchResults
+            }
+        }
+    }
+}
+`
+const groupTypes = `
+{
+    ########
+    # Group Types
+    ########
+    groupTypes: allWpGroupType (filter: {status: {eq: "publish"}}) {
+        nodes {
+            id
+            title
+            slug
+            general {
+                campus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        status
+                        campusDetails {
+                            campusPages {
+                                campusGroups {
+                                    pageActive
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            visibility {
+                hide
+                searchResults
+            }
+        }
+    }
+}
+`
+const groups = `
+{
+    ########
+    # Groups
+    ########
+    groups: allWpGroup (filter: {status: {eq: "publish"}}) {
+        nodes {
+            id
+            title
+            slug
+            general {
+                campus {
+                    ... on WpCampus {
+                        id
+                        title
+                        slug
+                        databaseId
+                        status
+                        campusDetails {
+                            campusPages {
+                                campusGroups {
+                                    pageActive
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            visibility {
+                hide
+                searchResults
             }
         }
     }
@@ -245,7 +459,7 @@ const queries = [
         data.videos.nodes.forEach( _ => {
             if( _.videoDetails.videoCampus?.length > 0 ) {
                 _.videoDetails.videoCampus.forEach ( campus => {
-                    if ( campus.status === 'publish' && campus.campusDetails.campusWatch.campusWatchPage ){
+                    if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusWatch.pageActive ){
                         
                         if( !_.videoDetails.videoHide.videoHideSearchResults ){
                             videoList.push({
@@ -292,7 +506,7 @@ const queries = [
         data.videos.nodes.forEach( _ => {
             if( _.videoDetails.videoCampus?.length > 0 ) {
                 _.videoDetails.videoCampus.forEach ( campus => {
-                    if ( campus.status === 'publish' && campus.campusDetails.campusWatch.campusWatchPage ){
+                    if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusWatch.pageActive ){
                         
                         if ( _.videoDetails.videoSeries?.id && 
                              !_.videoDetails.videoSeries?.seriesDetails.seriesHide.seriesHideSearchResults 
@@ -365,7 +579,7 @@ const queries = [
             if ( _.postDetails.postCampus?.length > 0 ) {
                 if ( !_.postDetails.postHide.postHideSearchResults ){
                     _.postDetails.postCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusBlog.pageActive ) {
                             postsList.push({
                                 objectID: _.id,
                                 title: _.title,
@@ -399,7 +613,7 @@ const queries = [
             if ( _.eventDetails.eventCampus?.length > 0 ) {
                 if ( !_.eventDetails.eventHide.eventHideSearchResults ){
                     _.eventDetails.eventCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusEvents.pageActive ) {
                             eventsList.push({
                                 objectID: _.id,
                                 title: _.title,
@@ -433,7 +647,7 @@ const queries = [
             if ( _.newsDetails.postCampus?.length > 0 ) {
                 if ( !_.postDetails.newsHide.newsHideSearchResults ){
                     _.newsDetails.newsCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusNews.pageActive ) {
                             newsList.push({
                                 objectID: _.id,
                                 title: _.title,
@@ -467,7 +681,7 @@ const queries = [
             if ( _.attachment.attachmentCampus?.length > 0 ) {
                 if ( !_.attachment.attachmentHide.attachmentHideSearchResults ) {
                     _.attachment.attachmentCampus.forEach( campus => {
-                        if ( campus.status === 'publish' ) {
+                        if ( campus.status === 'publish'  && campus.campusDetails.campusPages?.campusAttachments.pageActive ) {
                             attachmentList.push({
                                 objectID: _.id,
                                 title: _.title,
@@ -491,5 +705,173 @@ const queries = [
     settings: { attributesToSnippet: [ `campus` ] }
   },
 
+  /* Ministries Index */
+  {
+    query: ministries,
+    transformer: ({ data }) => {
+        let ministryList = []
+        data.ministries.nodes.forEach( _ => {
+            if ( _.general.campus?.length > 0 ) {
+                if ( _.visibility.searchResults ) {
+                    _.general.campus.forEach( campus => {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusMinistry.pageActive ) {
+                            ministryList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'ministry',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return ministryList
+    },
+    indexName: `ministries`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Volunteering Index */
+  {
+    query: volunteering,
+    transformer: ({ data }) => {
+        let volunteeringList = []
+
+        data.volunteering.nodes.forEach( _ => {
+            if ( _.general.campus?.length > 0 ) {
+                if ( _.visibility.searchResults ) {
+                    _.general.campus.forEach( campus => {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusVolunteering.pageActive ) {
+                            volunteeringList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'volunteering',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.volunteeringSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.volunteeringSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return volunteeringList
+    },
+    indexName: `volunteering`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Courses Index */
+  {
+    query: courses,
+    transformer: ({ data }) => {
+        let coursesList = []
+
+        data.courses.nodes.forEach( _ => {
+            if ( _.general.campus?.length > 0 ) {
+                if ( _.visibility.searchResults ) {
+                    _.general.campus.forEach( campus => {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusCourses.pageActive ) {
+                            coursesList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'courses',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.coursesSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.coursesSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return coursesList
+    },
+    indexName: `courses`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Group Types Index */
+  {
+    query: groupTypes,
+    transformer: ({ data }) => {
+        let groupTypesList = []
+
+        data.groupTypes.nodes.forEach( _ => {
+            if ( _.general.campus?.length > 0 ) {
+                if ( _.visibility.searchResults ) {
+                    _.general.campus.forEach( campus => {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusGroups.pageActive ) {
+                            groupTypesList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'groupTypes',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.groupTypesSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.groupTypesSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return groupTypesList
+    },
+    indexName: `groupTypes`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
+
+  /* Groups */
+  {
+    query: groups,
+    transformer: ({ data }) => {
+        let groupsList = []
+
+        data.groups.nodes.forEach( _ => {
+            if ( _.general.campus?.length > 0 ) {
+                if ( _.visibility.searchResults ) {
+                    _.general.campus.forEach( campus => {
+                        if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusGroups.pageActive ) {
+                            groupsList.push({
+                                objectID: _.id,
+                                title: _.title,
+                                type: 'groups',
+                                campus: campus.slug,
+                                campusTitle: campus.title,
+                                slug: _.slug,
+                                language: 'en',
+                                link: `/${campus.slug}/${config.groupsSlug}/${_.slug}`,
+                                linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.groupsSlug}/${_.slug}`,
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+        return groupsList
+    },
+    indexName: `groups`,
+    settings: { attributesToSnippet: [ `campus` ] }
+  },
 ]
 module.exports = queries

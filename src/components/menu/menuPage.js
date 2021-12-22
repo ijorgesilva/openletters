@@ -8,6 +8,7 @@ import MenuPageItem from './menuPageItem'
 import './menuPage.scss'
 
 export default function MenuPage ( { 
+    breadcrumbs,
     menuBrand, 
     menu, 
     className, 
@@ -43,7 +44,7 @@ export default function MenuPage ( {
             <Navbar 
                 id                  = { id }
                 defaultActiveKey    = '0'
-                className           = {`menuPage ${ mode ? mode : 'light' } ${ className ? className : '' } ${ ( sticky )? 'sticky' : ''}`} 
+                className           = {`menuPage ${ mode ? mode : 'light' } ${ className ? className : '' } ${ sticky ? 'sticky' : ''}`} 
                 bg                  = { mode ? mode : 'light' } 
                 variant             = { mode ? mode : 'light' } 
             >
@@ -61,7 +62,7 @@ export default function MenuPage ( {
 
                 <Nav className='disable-scrollbars'>
                     {
-                        ( items ) ?
+                        items ?
                             items.map( ( _, index ) => (
                                 <Nav.Item key={index} as='li'>
                                     <MenuPageItem 
@@ -92,20 +93,32 @@ export default function MenuPage ( {
 
                 <Nav className='disable-scrollbars'>
                     <Navbar 
-                        className={`menuPage`} 
-                        bg = { mode ? mode : 'light' } 
-                        variant = { mode ? mode : 'light' } 
+                        className   = {`menuPage`} 
+                        bg          = { mode ? mode : 'light' } 
+                        variant     = { mode ? mode : 'light' } 
                     >
                         {
                             menu.map( (item, index) => (
                                 <Nav.Item key={index} as='li'>
                                     {
-                                        (item.target) ? 
-                                            <Nav.Link href={item.link} title={item.name} target={item.target.split(':')[0]}
+                                        item.target ? 
+                                            <Nav.Link 
+                                                href        = {item.link} 
+                                                className   = {`${item.className ? item.className : '' } ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
+                                                title       = {item.name} 
+                                                target      = {item.target.split(':')[0]}
                                             >
                                                 {item.name}
                                             </Nav.Link>
-                                        :   <Link to={item.link} className='nav-link' title={item.name} activeClassName='active'>{item.name}</Link>  
+                                        :   
+                                            <Link 
+                                                to              = {item.link} 
+                                                className       = {`nav-link ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
+                                                title           = {item.name} 
+                                                activeClassName = 'active'
+                                            >
+                                                {item.name}
+                                            </Link>  
                                     }
                                 </Nav.Item>
                             ))
@@ -115,9 +128,9 @@ export default function MenuPage ( {
 
                 {
                     close ? 
-                        <div className={`p-3 z-index-3`}>
+                        <div className={`pl-3 pr-3 z-index-3`}>
                             <Link to = {close} className={`close`} variant={`${ mode === 'light' ? 'black' : mode === 'dark' ? 'white' : mode }`} aria-label={t('global.close')}>
-                                <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">✕</span>
                                 <span className="sr-only">{t('global.close')} </span>
                             </Link>
                         </div>

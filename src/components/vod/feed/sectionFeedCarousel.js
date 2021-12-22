@@ -75,13 +75,13 @@ export default function SectionFeedCarousel(
                                         key             = {index}
                                         className       = { ( objLength === index + 1 ) ? 'last' : undefined }
                                         mode            = { mode }
-                                        featuredImage   = { ( item.featuredImage?.node ) ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
-                                        link            = {  ( item.slug ) ? 
+                                        featuredImage   = { item.featuredImage?.node ? item.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
+                                        link            = { item.slug ? 
                                                                 `${ ( campus ) ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${item.slug}` 
                                                             : 
                                                                 undefined 
                                                         }
-                                        serieLink       = { ( item.videoDetails.videoSeries ) ? 
+                                        serieLink       = { item.videoDetails.videoSeries ? 
                                                                     `${ ( campus ) ? '/' + campus : '' }/${config.watchSeriesDetailsSlug}/${item.videoDetails.videoSeries.slug}` 
                                                                 :
                                                                     undefined

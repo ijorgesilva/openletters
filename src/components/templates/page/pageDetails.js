@@ -22,12 +22,12 @@ export default function PageDetails( { location, pageContext } ){
     const mode          = 'dark'
     const contentMode   = 'light'
 
-    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+    const cover =   featuredImage?.node?.localFile?.localFile ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
     
-    const sections =    ( pageDetails.pageSections?.length > 0 ) ? 
+    const sections =    pageDetails.pageSections?.length > 0 ? 
                             pageDetails.pageSections
                         : 
                             undefined
@@ -59,7 +59,7 @@ export default function PageDetails( { location, pageContext } ){
             />
 
             {
-                (pageDetails.pageMenues) ?
+                pageDetails.pageMenues ?
                     <MenuPage
                         menues      = { pageDetails.pageMenues }
                         campus      = { breadcrumbs.campus }
@@ -74,7 +74,7 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                ( sections ) ?
+                sections ?
                     sections.map( ( _, index ) => (
                         <RenderSection 
                             key         = { index }
@@ -90,7 +90,7 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                ( !pageDetails.pageHideShare ) ?
+                !pageDetails.pageHideShare ?
                     <ToolbarDetails 
                         location    = { location } 
                         mode        = { contentMode } 
@@ -100,7 +100,7 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                ( !pageDetails.pageHideContent ) ?
+                !pageDetails.pageHideContent ?
                     <MainContent 
                         date        = { date }
                         modified    = { modified }

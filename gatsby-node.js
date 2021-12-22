@@ -7,7 +7,9 @@
 // You can delete this file if you're not using it
 const path      = require('path')
 
-const config    = require('./data/SiteConfig')
+const config            = require('./data/SiteConfig')
+const queriesCommon     = require('./src/fragments/queriesCommon')
+const queriesPostTypes  = require('./src/fragments/queriesPostTypes')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig(
@@ -39,18 +41,19 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     let createBlog    = false
     let createNews    = false
     let createEvents  = false
-
+    let createMinistries  = false
+    
     // Var for storing created series per campus to avoid duplicates
     let createdSeries = [] 
 
     /*******************
-     * Campus Pages creation 
+     * Post Types creation by Campus
      *******************/
     if ( result.data.campuses?.nodes?.length > 0 ) {
         result.data.campuses.nodes.forEach( campus => {
 
-            /* Watch Page per Campus */
-            if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
+            /*  Watch Main Page*/
+            if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
                 createWatch = true
                 actions.createPage({
                     path: `/${campus.slug}/${config.watchSlug}`,
@@ -71,8 +74,8 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 })
             }
 
-            /* Blog Page per Campus */
-            if( campus.campusDetails.campusBlog.campusBlogPage === true ) {
+            /* Blog Main Page*/
+            if( campus.campusDetails.campusPages.campusBlog.pageActive === true ) {
                 createBlog = true
                 actions.createPage({
                     path: `/${campus.slug}/${config.blogPostDetailsSlug}`,
@@ -93,8 +96,8 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 })
             }
 
-            /* News Page per Campus */
-            if( campus.campusDetails.campusNews.campusNewsPage === true ) {
+            /* News Main Page*/
+            if( campus.campusDetails.campusPages.campusNews.pageActive === true ) {
                 createNews = true
                 actions.createPage({
                     path: `/${campus.slug}/${config.newsPostDetailsSlug}`,
@@ -115,8 +118,8 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 })
             }
 
-            /* Events Page per Campus */
-            if( campus.campusDetails.campusEvents.campusEventsPage === true ) {
+            /* Events Main Page */
+            if( campus.campusDetails.campusPages.campusEvents.pageActive === true ) {
                 createEvents = true
                 actions.createPage({
                     path: `/${campus.slug}/${config.eventPostDetailsSlug}`,
@@ -137,6 +140,28 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 })
             }
 
+            /* Ministry Main Page and Sub-pages */
+            if( campus.campusDetails.campusPages.campusMinistry.pageActive === true ) {
+                createMinistries = true
+                actions.createPage({
+                    path: `/${campus.slug}/${config.ministrySlug}`,
+                    component: path.resolve(`./src/components/templates/ministry/ministryCampus.js`),
+                    context: {
+                        ...campus,
+                        title: campus.title,
+                        slug: campus.slug,
+                        id: campus.id,
+                        campusId: '/' + campus.databaseId.toString() + '/',
+                        breadcrumbs: {
+                            'campus': campus.slug,
+                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                            'back':   `/${campus.slug}/${config.ministrySlug}`,
+                            'current': `/${campus.slug}/${config.ministrySlug}`
+                        }
+                    }
+                })
+            }
+
         })
     }
 
@@ -148,7 +173,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         result.data.videos.nodes.forEach( video => {
             if( video.videoDetails.videoCampus?.length > 0 ) {
                 video.videoDetails.videoCampus.forEach ( campus => {
-                    if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
+                    if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
                         /* Videos Page Creation for Each Campus selected */
                         actions.createPage({
                             path: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
@@ -340,7 +365,6 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         }
     }
 
-
     /*******************
      * Attachment Pages creation 
     *******************/
@@ -371,6 +395,223 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         })
     }
 
+    /*******************
+     * Ministry Pages creation 
+     *******************/
+    let customPageSlug
+    if ( createMinistries && result.data.ministries?.nodes?.length > 0 ) {
+        if ( result.data.ministries?.nodes?.length > 0 ) {
+            result.data.ministries.nodes.forEach( _ => {
+                if( _.general.campus?.length > 0 ) {
+                    _.general.campus.forEach ( campus => {
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                            component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                            context: {
+                                ..._,
+                                title: _.title,
+                                slug: _.slug,
+                                id: _.id,
+                                featuredImage: _.general.featuredPhoto,
+                                excerpt: _.general.summary,
+                                layout: 'ministryDetails',
+                                view: 'frontpage',
+                                campusId: `/${campus.databaseId}/`,
+                                breadcrumbs: {
+                                                'campus': campus.slug,
+                                                'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                                                'slug': _.slug,
+                                            },
+                            }
+                        })
+                        /* Video Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageVideos.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.watchSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsVideos',
+                                    view: 'videos',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.watchSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Event Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageEvents.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.eventPostDetailsSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsEvents',
+                                    view: 'events',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.eventPostDetailsSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Blog & News Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageBlogNews.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.blogPostDetailsSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsBlogNews',
+                                    view: 'blog',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.blogPostDetailsSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Courses Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageCourses.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.coursesSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsCourses',
+                                    view: 'courses',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.coursesSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Volunteering Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageVolunteering.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.volunteeringSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsVolunteering',
+                                    view: 'volunteering',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.volunteeringSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Groups Page Creation */
+                        if( _.ministryDetails.ministryPages.ministryPageGroups.active ) {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.groupsSlug}`,
+                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                context: {
+                                    ..._,
+                                    title: _.title,
+                                    slug: _.slug,
+                                    id: _.id,
+                                    featuredImage: _.general.featuredPhoto,
+                                    excerpt: _.general.summary,
+                                    layout: 'ministryDetailsGroups',
+                                    view: 'groups',
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                    'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.groupsSlug}`,
+                                                    'slug': _.slug,
+                                                },
+                                }
+                            })
+                        }
+                        /* Custom Pages Creation */
+                        if( _.ministryDetails.ministryPagesCustom.length > 0 ){
+                            _.ministryDetails.ministryPagesCustom.forEach( ( customPage, index ) => {
+                                customPageSlug = customPage.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() 
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                    component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                    context: {
+                                        ..._,
+                                        title: _.title,
+                                        slug: _.slug,
+                                        id: _.id,
+                                        customPageIndex: index,
+                                        featuredImage: _.general.featuredPhoto,
+                                        excerpt: _.general.summary,
+                                        layout: 'ministryDetailsCustomPage',
+                                        view: 'customPage',
+                                        campusId: `/${campus.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                        'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                        'currentPath': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                                        'slug': _.slug,
+                                                        'currentSlug': customPageSlug,
+                                                    },
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    }
+
     /******************* 
      * Redirects creation 
      *******************/
@@ -386,1434 +627,31 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
 }
 
-
-/************************* 
- * Fragments 
- *************************/
-
-const language = `
-    language {
-        code
-        locale
-        name
-    }
-`
-const tag = `
-    id
-    slug
-    name
-`
-
-const wpParent = `
-    wpParent {
-        node {
-            id
-            slug
-            status
-        }
-    }
-`
-
-const customMenues = `
-    ... on WpCustomMenu {
-        id
-        status
-        menuDetails {
-            menuCustomTitle
-            menuLocation
-            menuCss
-            menuId
-            menuColorScheme
-            menuCampusMenu {
-                menuCampusMenuItems {
-                    menuCampusMenuItem {
-                        menuCampusMenuItemTitle
-                        menuCampusMenuItemType
-                        menuCampusMenuItemWatch
-                        menuCampusMenuItemBlog {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemCustom {
-                            menuCampusMenuItemCustomUrl
-                            menuCampusMenuItemCustomTitle
-                            menuCampusMenuItemCustomTarget
-                            menuCampusMenuItemCustomLinkType
-                        }
-                        menuCampusMenuItemDropdown {
-                            menuCampusMenuItemDropdownMegamenu
-                            menuCampusMenuItemDropdownItems {
-                                menuItemGroupDropdownItemTitle
-                                menuItemGroupDropdownItemType
-                                menuItemGroupDropdownItemGroupWatch
-                                menuItemGroupDropdownItemGroupNews {
-                                    fieldGroupName
-                                }
-                                menuItemGroupDropdownItemGroupEvents {
-                                    fieldGroupName
-                                }
-                                menuItemGroupDropdownItemGroupCustom {
-                                    menuItemGroupDropdownItemGroupCustomTitle
-                                    menuItemGroupDropdownItemGroupCustomUrl
-                                    menuItemGroupDropdownItemGroupCustomTarget
-                                    menuItemGroupDropdownItemGroupCustomLinkType
-                                }
-                                menuItemGroupDropdownItemGroupBlog {
-                                    fieldGroupName
-                                }
-                            }
-                        }
-                        menuCampusMenuItemEvents {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemNews {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemPage {
-                            menuCampusMenuItemPageTitle
-                            menuCampusMenuItemPagePage {
-                                ... on WpPage {
-                                    id
-                                    slug
-                                    status
-                                    pageDetails {
-                                        pageCampus {
-                                            ... on WpCampus {
-                                                id
-                                                slug
-                                            }
-                                        }
-                                    }
-                                    ${wpParent}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            menuPagesMenu {
-                menuPageMenuItems {
-                    menuPageMenuItem {
-                        menuPageMenuItemType
-                        menuPageMenuItemPage {
-                            menuPageMenuItemPageTitle
-                            menuPageMenuItemPagePage {
-                                ... on WpPage {
-                                    id
-                                    slug
-                                    status
-                                    pageDetails {
-                                        pageCampus {
-                                            ... on WpCampus {
-                                                id
-                                                slug
-                                            }
-                                        }
-                                    }
-                                    ${wpParent}
-                                }
-                            }
-                            menuPageMenuItemPageCss
-                            menuPageMenuItemPageRemoveDefault
-                        }
-                        menuPageMenuItemCustom {
-                            menuPageMenuItemCustomLinkType
-                            menuPageMenuItemCustomTarget
-                            menuPageMenuItemCustomTitle
-                            menuPageMenuItemCustomUrl
-                            menuPageMenuItemCustomCss
-                            removeDefaultCssClasses
-                        }
-                    }
-                }
-                menuPagesMenuBase {
-                    menuPagesMenuHideBase
-                    menuPagesMenuBaseUrl
-                    menuPagesMenuBaseTitle
-                }
-            }
-        }
-    }
-`
-const buttons = `
-    buttonLink
-    buttonTarget
-    buttonText
-    buttonType
-    buttonUrl
-    buttonCss
-    buttonCssRemoveDefault
-`
-
-const localFile = `
-    localFile {
-        childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-        }
-    }
-`
-
-const featuredImageFields = `
-    featuredImage {
-        node {
-            ${localFile}
-        }
-    }
-`
-
-const seoFields = `
-    seo {
-        title
-        focuskw 
-        metaDesc 
-        metaKeywords 
-        opengraphDescription 
-        opengraphImage {
-            altText
-            uri
-            sourceUrl
-            title
-        }
-        opengraphTitle 
-        twitterDescription 
-        twitterImage {
-            altText
-            uri
-            sourceUrl
-            title
-        }
-        twitterTitle
-    }
-`
-
-const blurb = `
-    itemImage {
-        ${localFile}
-    }
-    itemTitle
-    itemSubtitle
-    itemContent
-    itemCss
-    itemCssRemoveDefault
-    itemButtons {
-        itemButtonsButton {
-            ${buttons}
-        }
-    }
-`
-
-const referenceSeries = `
-    ... on WpSerie {
-        id
-        title
-        slug
-        status
-        tags {
-            nodes {
-                ${tag}
-            }
-        }
-    }
-`
-const referenceCampus = `
-    ... on WpCampus {
-        id
-        slug
-        status
-    }
-`
-
-const carouselConfiguration = `
-    sectionCarouselConfigurationItemType
-    sectionCarouselConfigurationSwipe
-    sectionCarouselConfigurationDraggable
-    sectionCarouselConfigurationInfinite
-    sectionCarouselConfigurationPartiallyVisible
-    sectionCarouselConfigurationDots
-    sectionCarouselConfigurationDotsClass
-    sectionCarouselConfigurationAutoplay
-    sectionCarouselConfigurationStretched
-    sectionCarouselConfigurationAutoplayInterval
-    sectionCarouselConfigurationGap
-    sectionCarouselConfigurationClass
-    sectionCarouselConfigurationTruncate
-    sectionCarouselConfigurationTruncateLines
-    sectionCarouselConfigurationImageFit
-    sectionCarouselConfigurationImagePosition
-    sectionCarouselConfigurationImageAspect
-    sectionCarouselConfigurationBorder
-    sectionCarouselConfigurationBorderColor
-    sectionCarouselConfigurationGrow
-    sectionCarouselConfigurationResponsive {
-        responsiveXl {
-            responsiveXlCustom
-            responsiveXlItems
-            responsiveXlMax
-            responsiveXlMin
-        }
-        responsiveL {
-            responsiveLCustom
-            responsiveLItems
-            responsiveLMax
-            responsiveLMin
-        }
-        responsiveS {
-            responsiveSCustom
-            responsiveSItems
-            responsiveSMax
-            responsiveSMin
-        }
-        responsiveXs {
-            responsiveXsCustom
-            responsiveXsItems
-            responsiveXsMax
-            responsiveXsMin
-        }
-    }
-`
-
-const feed = `
-    feedType
-    
-    ## Feed Videos
-    feedVideos {
-        feedVideosCategory {
-            ${tag}
-            videosOnDemand {
-                nodes {
-                    id
-                    title
-                    slug
-                    excerpt
-                    status
-                    ${featuredImageFields}
-                    tags {
-                      nodes {
-                        ${tag}
-                      }
-                    }
-                    videoDetails {
-                        videoDayDate
-                        videoCampus {
-                            ${referenceCampus}
-                        }
-                        videoSeries {
-                            ${referenceSeries}
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    ## Feed Series
-    feedSeries {
-        feedSeriesCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Posts
-    feedPosts {
-        feedPostsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed News
-    feedNews {
-        feedNewsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Group Types
-    feedGrouptypes {
-        feedGrouptypesCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Groups
-    feedGroups {
-        feedGroupsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Events
-    feedEvents {
-        feedEventsCategory {
-            ${tag}
-        }
-    }
-
-    ## Ministries
-    feedMinistries {
-        feedMinistriesCategory {
-            ${tag}
-        }
-    }
-    
-    ## Volunteering
-    feedVolunteering {
-        feedVolunteeringCategory {
-            ${tag}
-        }
-    }
-
-    ## Courses
-    feedCourses {
-        feedCoursesCategory {
-            ${tag}
-        }
-    }
-
-    ## Lessons
-    feedLessons {
-        feedLessonsCategory {
-            ${tag}
-        }
-    }
-`
-
-const backgroundLayer = `
-    backgroundLayer {
-        backgroundLayerType
-        backgroundLayerColor {
-            backgroundLayerColorColor
-            backgroundLayerColorOpacity
-        }
-        backgroundLayerImage {
-            backgroundLayerImageImage {
-                localFile {
-                    publicURL
-                }
-            }
-            backgroundLayerImageOpacity
-            backgroundLayerImagePosition
-            backgroundLayerImageRepeat
-            backgroundLayerImageSize
-            backgroundLayerImageSizeCustom
-            backgroundLayerImageFixed
-        }
-        backgroundLayerGradient {
-            backgroundLayerGradientType
-            backgroundLayerGradientAngle
-            backgroundLayerGradientOpacity
-            backgroundLayerGradientSteps {
-                step {
-                    color
-                    stop
-                }
-            }
-        }
-        backgroundLayerText {
-            backgroundLayerTextOpacity
-            backgroundLayerTextText
-        }
-    }
-`
-
-const sections = `
-    sectionType
-    
-    # General
-    sectionTitle
-    sectionContent
-
-    # Configuration: Style, Background, etc.
-    sectionConfiguration {
-        sectionConfigurationClassname
-        sectionConfigurationId
-        sectionConfigurationColorScheme
-        sectionConfigurationContainerWidth
-        sectionConfigurationSize
-
-        sectionConfigurationBackground {
-            ${backgroundLayer}
-        }
-    }
-    
-    # Sections
-        ## Call To Actions
-        sectionCta {
-            sectionCtaSubtitle
-            sectionCtaLink {
-                sectionLinkText
-                sectionLinkType
-                sectionLinkUrl
-            }
-            sectionCtaButton {
-                sectionButtonUrl
-                sectionButtonType
-                sectionButtonText
-            }
-            sectionCtaPhoto {
-                ${localFile}
-            }
-        }
-
-        ## Podcast
-        sectionPodcast {
-            sectionPodcastSubtitle
-            sectionPodcastItunesUrl
-            sectionPodcastSpotifyUrl
-            sectionPodcastSoundcloudUrl
-            sectionPodcastGraphic {
-                ${localFile}
-            }
-        }
-
-        ## VOD by Tag
-        sectionVodTags {
-            sectionVodTag {
-                slug
-                databaseId
-                description
-                name
-                videosOnDemand {
-                    nodes {
-                        title
-                        slug
-                        excerpt
-                        status
-                        ${featuredImageFields}
-                        videoDetails {
-                            videoOneLiner
-                            videoDayDate
-                            videoUrl
-                            videoSeries {
-                                ... on WpSerie {
-                                    id
-                                    title
-                                    slug
-                                }
-                            }
-                            videoCampus {
-                                ... on WpCampus {
-                                    id
-                                    slug
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        ## Hero
-        sectionHero {
-            sectionHeroButtons {
-                sectionHeroButton {
-                    sectionHeroButtonType
-                    sectionHeroButtonTarget
-                    sectionHeroButtonText
-                    sectionHeroButtonUrl
-                    sectionHeroButtonLink
-                }
-            }
-            sectionHeroBackground {
-                ${localFile}
-            }
-            sectionHeroRelated {
-                ... on WpPost {
-                    id
-                    title
-                    slug
-                    excerpt
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    postDetails {
-                        postCampus {
-                            ... on WpCampus {
-                                id
-                                status
-                                slug
-                            }
-                        }
-                    }
-                }
-                ... on WpNewspost {
-                    id
-                    title
-                    slug
-                    excerpt
-                    date(formatString: "YYYYMMDD")
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    newsDetails {
-                        newsCampusId
-                        newsCampus {
-                            ... on WpCampus {
-                                id
-                                slug
-                            }
-                        }
-                    }
-                }
-                ... on WpEvent {
-                    id
-                    title
-                    slug
-                    excerpt
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    eventDetails {
-                    eventDates {
-                        eventDate
-                        eventTime
-                    }
-                    eventCampus {
-                        ... on WpCampus {
-                                id
-                                slug
-                            }
-                        }
-                    }
-                }
-            }
-            sectionHeroConfiguration {
-              sectionHeroConfigurationOverlay
-            }
-        }
-
-        ## Page Menu
-        sectionPagemenu {
-            sectionSticky
-            sectionPagemenuMenu{
-                ${customMenues}
-            }
-        }
-
-        ## Text
-        ### Because Text section contain nested elements is also under allWpPage.
-        ### Object Fields / Relashionship elements has been removed below.
-        sectionText {
-            sectionTextButtons {
-                sectionTextButton {
-                    ${buttons}
-                }
-            }
-            sectionTextMedia {
-                sectionTextbasicMediaType
-                sectionTextbasicMediaAlignment
-                sectionTextbasicMediaPhoto {
-                    ${localFile}
-                }
-            }
-            ## Don't loads nested elements
-        }
-
-        ## Tabs
-        ### Because Tab section contain nested elements is also under allWpPage. 
-        ### Object Fields / Relationship elements has been removed below.
-        sectionTabs {
-            sectionTabsTab {
-                sectionTabsTabType
-                sectionTabsTabName
-                sectionTabsTabContent
-            }
-        }
-
-        ## Carousel
-        sectionCarousel {
-            sectionCarouselType
-            sectionCarouselFeed {
-                ${feed}
-            }
-            sectionCarouselItems {
-                ${blurb}
-            }
-            sectionCarouselConfiguration {
-                ${carouselConfiguration}
-            }
-        }
-
-        ## Share
-        sectionShare {
-            sectionShareNetworks {
-                sectionShareNetworksType
-                sectionShareNetworksEmail {
-                    sectionShareNetworksEmailBody
-                    sectionShareNetworksEmailCustomUrl
-                    sectionShareNetworksEmailCustomUrlUrl
-                    sectionShareNetworksEmailSubject
-                }
-                sectionShareNetworksFacebook {
-                    sectionShareNetworksFacebookCustomUrl
-                    sectionShareNetworksFacebookCustomUrlUrl
-                    sectionShareNetworksFacebookHashtags
-                    sectionShareNetworksFacebookQuote
-                }
-                sectionShareNetworksPocket {
-                    sectionShareNetworksPocketCustomUrl
-                    sectionShareNetworksPocketCustomUrlUrl
-                    sectionShareNetworksPocketTitle
-                }
-                sectionShareNetworksTelegram {
-                    sectionShareNetworksTelegramCustomUrl
-                    sectionShareNetworksTelegramCustomUrlUrl
-                    sectionShareNetworksTelegramTitle
-                }
-                sectionShareNetworksTwitter {
-                    sectionShareNetworksTwitterCustomUrl
-                    sectionShareNetworksTwitterCustomUrlUrl
-                    sectionShareNetworksTwitterHashtags
-                    sectionShareNetworksTwitterRelated
-                    sectionShareNetworksTwitterTitle
-                    sectionShareNetworksTwitterVia
-                }
-                sectionShareNetworksWhatsapp {
-                    sectionShareNetworksWhatsappCustomUrl
-                    sectionShareNetworksWhatsappCustomUrlUrl
-                    sectionShareNetworksWhatsappTitle
-                }
-            }
-            sectionShareImage {
-              sectionShareImageAlignment
-              sectionShareImageImage {
-                ${localFile}
-              }
-            }
-            sectionShareItemClass
-        }
-
-        ## Video
-        sectionVideo {
-            sectionVideoUrl
-            sectionVideoThumbnail {
-                localFile {
-                    publicURL
-                }
-            }
-            sectionVideoConfiguration {
-                sectionVideoConfigurationControls
-                sectionVideoConfigurationLight
-                sectionVideoConfigurationLoop
-                sectionVideoConfigurationMuted
-                sectionVideoConfigurationPip
-                sectionVideoConfigurationVolume
-                sectionVideoConfigurationWidth
-                sectionVideoConfigurationHeight
-                sectionVideoConfigurationMaxWidth
-                sectionVideoConfigurationAutoplay
-            }
-        }
-
-        ## Blurb
-        sectionBlurbs {
-            sectionBlurbsType
-            sectionBlurbsFeed {
-                ${feed}
-            }
-            sectionBlurbsItems {
-                ${blurb}
-            }
-            sectionBlurbsConfiguration {
-                sectionBlurbsConfigurationOrientation
-                sectionBlurbsConfigurationType
-                sectionBlurbsConfigurationDirection
-                sectionBlurbsConfigurationClass
-                sectionBlurbsConfigurationGap
-                sectionBlurbsConfigurationImagePosition
-                sectionBlurbsConfigurationImageFit
-                sectionBlurbsConfigurationImageAspect
-                sectionBlurbsConfigurationJustification
-                sectionBlurbsConfigurationStretch
-                sectionBlurbsConfigurationTruncate
-                sectionBlurbsConfigurationTruncateLines
-                sectionBlurbsConfigurationBorder
-                sectionBlurbsConfigurationBorderColor
-                sectionBlurbsConfigurationGrow
-            }
-        }
-
-        ## IFrame
-        sectionIframe {
-            sectionIframeType
-            sectionIframeCustom
-            sectionIframeOembed
-        }
-        
-        ## Accordion
-        sectionAccordion {
-            sectionAccordionItem {
-              itemTitle
-              itemContent
-              itemCss
-              itemCssRemoveDefault
-            }
-            sectionAccordionConfiguration {
-                sectionAccordionConfigurationClass
-                sectionAccordionConfigurationAccordionClass
-            }
-        }
-
-        ## Form
-        sectionForm {
-            sectionFormType
-            sectionFormIframe
-            sectionFormForm {
-                ... on WpForm {
-                    id
-                    title
-                    uri
-                    status
-                    formDetails {
-                        formGeneral {
-                            formGeneralTitle
-                            formGeneralContent
-                        }
-                    }
-                }
-            }
-            sectionFormColumns {
-                sectionFormColumnsText
-                sectionFormColumnsAlignment
-                sectionFormColumnsBackground {
-                    ${backgroundLayer}
-                }
-            }
-            sectionFormConfiguration {
-                sectionFormConfigurationClass
-                sectionFormConfigurationJumbotron
-                sectionFormConfigurationJumbotronMode
-                sectionFormConfigurationJumbotronPadding
-                sectionFormConfigurationJumbotronFluid
-                sectionFormConfigurationQuerystring
-            }
-        }
-
-        ## Follow Us
-        sectionFollow {
-          sectionFollowNetworks {
-            sectionFollowNetworksType
-            sectionFollowNetworksFacebook {
-              sectionFollowNetworksFacebookUrl
-            }
-            sectionFollowNetworksPinterest {
-              sectionFollowNetworksPinterestUrl
-            }
-            sectionFollowNetworksInstagram {
-              sectionFollowNetworksInstagramUrl
-            }
-            sectionFollowNetworksTiktok {
-              sectionFollowNetworksTiktokUrl
-            }
-            sectionFollowNetworksTwitter {
-              sectionFollowNetworksTwitterUrl
-            }
-            sectionFollowNetworksYoutube {
-              sectionFollowNetworksYoutubeUrl
-            }
-          }
-          sectionFollowConfiguration {
-            sectionFollowConfigurationAlignment
-          }
-        }
-
-        ## Album
-        sectionAlbum {
-            sectionAlbumItems {
-                album {
-                    albumTitle
-                    albumSubtitle
-                    albumCover {
-                        ${localFile}
-                    }
-                }
-                availableon {
-                    availableonType
-                    availableonSpotify
-                    availableonTidal
-                    availableonPandora
-                    availableonDeezer
-                    availableonApple
-                    availableonAmazon
-                }
-                song {
-                    songTitle
-                    songAuthor
-                    songDuration
-                    songResources {
-                        ${blurb}
-                    }
-                }
-            }
-            sectionAlbumConfiguration {
-                sectionCarouselConfiguration {
-                    ${carouselConfiguration}
-                }
-            }
-        }
-
-    # End Sections
-
-`
-
-/*************************
- * Pages & Posts
- *************************/
-/* Custom Post Types */
-const allWpCampus = `
-    ########
-    # Campuses
-    ########
-    campuses: allWpCampus(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            status
-            databaseId
-            ${featuredImageFields}
-            ${seoFields}
-            campusDetails {
-                campusWatch {
-                    campusWatchPage
-                    campusWatchSections {
-                        ... on WpContentSection {
-                            id
-                            slug
-                            databaseId
-                            status
-                            sectionDetails {
-                                ${sections}
-                            }
-                        }
-                    }
-                }
-                campusBlog {
-                    campusBlogPage
-                }
-                campusNews {
-                    campusNewsPage
-                }
-                campusEvents {
-                    campusEventsPage
-                }
-                campusBrand {
-                    campusBrandOverwrite
-                    campusBrandUrl
-                    campusBrandLogo {
-                        ${localFile}
-                    }
-                }
-                campusSelector {
-                    campusSelectorOverwrite
-                    campusSelectorHome {
-                        campusHomeUrl
-                        campusHomeType
-                    }
-                }
-            }
-        }
-    }
-`
-
-const allWpVideo = `
-    ########
-    # Videos on Demand
-    ########
-    videos: allWpVideoOnDemand (
-            filter: {
-                status: {eq: "publish"}
-            }  
-        ) {
-        nodes {
-            id
-            title
-            slug
-            content
-            excerpt
-            modified
-            ${seoFields}
-            ${featuredImageFields}
-            videoDetails {
-                videoOneLiner
-                videoTranscript
-                videoDayDate
-                videoUrl
-                videoAttachments {
-                    ... on WpDocument {
-                        id
-                        title
-                        status
-                        attachment {
-                            attachmentFile {
-                                id
-                                title
-                                localFile {
-                                    publicURL
-                                }
-                            }
-                        }
-                    }
-                }
-                videoCampusId
-                videoCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                        ${featuredImageFields}
-                        campusDetails {
-                            campusWatch {
-                                campusWatchPage
-                            }
-                        }
-                        participation {
-                            participationRaisehand {
-                                participationRaisehandBehavior
-                                participationRaisehandCustom {
-                                    participationRaisehandCustomType
-                                    participationRaisehandCustomTitle
-                                    participationRaisehandCustomUrl
-                                    participationRaisehandCustomTarget
-                                    participationRaisehandCustomClass
-                                    participationRaisehandCustomIcon {
-                                        localFile {
-                                            childImageSharp {
-                                                gatsbyImageData(
-                                                    layout: FIXED
-                                                    width: 32
-                                                    height: 32
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                videoSerieId
-                videoSeries {
-                    ... on WpSerie {
-                        id
-                        databaseId
-                        title
-                        slug
-                        excerpt
-                        seriesDetails {
-                            seriesTrailer
-                            seriesTrailerPoster {
-                                ${localFile}
-                            }
-                            seriesSeasonsActive
-                        }
-                        seriesGraphics {
-                            poster {
-                                ${localFile}
-                            }
-                            logo {
-                                ${localFile}
-                            }
-                            background {
-                                ${localFile}
-                            }
-                        }
-                    }
-                }
-                videoSpeaker {
-                    ... on WpSpeaker {
-                        id
-                        title
-                        uri
-                        ${featuredImageFields}
-                    }
-                }
-                videoHide {
-                  videoHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpSeries = `
-    ########
-    # Series 
-    ########
-    series: allWpSerie (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            slug
-            databaseId
-            excerpt
-            ${seoFields}
-            seriesDetails {
-                seriesTrailer
-                seriesSeasonsActive
-                seriesTrailerPoster {
-                    ${localFile}
-                }
-                seriesHide {
-                    seriesHideSearchEngines
-                }
-            }
-            seriesGraphics {
-                poster {
-                    ${localFile}
-                }
-                logo {
-                    ${localFile}
-                }
-                background {
-                    ${localFile}
-                }
-            }
-        }
-    }
-`
-
-const allWpNews = `
-    ########
-    # News 
-    ########
-    news: allWpNewspost (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            newsDetails {
-                newsCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                    }
-                }
-                newsHide {
-                  newsHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpEvents = `
-    ########
-    # Events 
-    ########
-    events: allWpEvent(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            eventDetails {
-                eventAddress
-                eventCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                    }
-                }
-                eventDates {
-                    eventDate
-                    eventTime
-                }
-                eventLink {
-                    eventLinkText
-                    eventLinkUrl
-                }
-                eventHide {
-                    eventHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpRedirect = `
-    ########
-    # Redirects 
-    ########
-    redirects: allWpRedirect {
-        nodes {
-            redirect {
-                redirectFrompath
-                redirectIspermanent
-                redirectTopath
-            }
-        }
-    }
-`
-
-/* Standard Post Types */
-const allWpPage = `
-    ########
-    # Pages
-    ########
-    pages: allWpPage(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            status
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            isFrontPage
-            ${seoFields}
-            ${featuredImageFields}
-            pageDetails {
-                pageCampus {
-                    ... on WpCampus {
-                        id
-                        slug
-                    }
-                }
-                pageMenues {
-                    ${customMenues}
-                }
-                pageHideContent
-                pageHideShare
-                pageSections {
-                    ... on WpContentSection {
-                        status
-                        sectionDetails {
-
-                            ${sections}
-                            
-                            ## Tabs
-                            sectionTabs {
-                                sectionTabsTab {
-                                    sectionTabsTabType
-                                    sectionTabsTabName
-                                    sectionTabsTabContent
-                                    sectionTabsTabSection {
-                                        ... on WpContentSection {
-                                            status
-                                            sectionDetails {
-                                                ${sections}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            ## Text, Media and Buttons
-                            sectionText {
-                                sectionTextButtons {
-                                    sectionTextButton {
-                                        ${buttons}
-                                    }
-                                }
-                                sectionTextMedia {
-                                    sectionTextbasicMediaType
-                                    sectionTextbasicMediaAlignment
-                                    sectionTextbasicMediaPhoto {
-                                        ${localFile}
-                                    }
-                                }
-                                sectionTextSections {
-                                    ... on WpContentSection {
-                                        id
-                                        slug
-                                        databaseId
-                                        status
-                                        sectionDetails {
-                                            ${sections}
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-                pageHide {
-                  pageHideSearchEngines
-                }
-            }
-            ${wpParent}
-        }
-    }
-`
-
-const allWpPosts = `
-    ########
-    # Posts 
-    ########
-    posts: allWpPost(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            postDetails {
-                postCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                        ${featuredImageFields}
-                    }
-                }
-                postAuthor {
-                    ... on WpSpeaker {
-                        id
-                        title
-                        slug
-                        ${featuredImageFields}
-                    }
-                }
-                postFooterSection {
-                    ... on WpContentSection {
-                            id
-                            slug
-                            databaseId
-                            status
-                            sectionDetails {
-                                ${sections}
-                            }
-                    }
-                }
-                postHide {
-                    postHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpResources = `
-    ########
-    # Attachments
-    ########
-    attachments: allWpDocument (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            excerpt
-            attachment {
-                attachmentCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                    }
-                }
-                attachmentFile {
-                    id
-                    title
-                    localFile {
-                        publicURL
-                    }
-                }
-                attachmentHide {
-                    attachmentHideSearchEngines
-                }
-            }
-        }
-    }
-`
-
 /* 
  * Main Query 
  */
 const query = `
     query {
 
-        ${allWpCampus}
+        ${queriesPostTypes.allWpCampus}
 
-        ${allWpRedirect}
+        ${queriesCommon.allWpRedirect}
 
-        ${allWpPage}
+        ${queriesPostTypes.allWpMinistry}
+
+        ${queriesPostTypes.allWpPage}
         
-        ${allWpPosts}
+        ${queriesPostTypes.allWpPosts}
 
-        ${allWpNews}
+        ${queriesPostTypes.allWpNews}
 
-        ${allWpEvents}
+        ${queriesPostTypes.allWpEvents}
 
-        ${allWpSeries}
+        ${queriesPostTypes.allWpSeries}
 
-        ${allWpVideo}
+        ${queriesPostTypes.allWpVideo}
 
-        ${allWpResources}
+        ${queriesPostTypes.allWpDocument}
         
     }
 `

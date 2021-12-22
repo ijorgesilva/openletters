@@ -4,7 +4,12 @@ import React from 'react'
 import config from '../../../data/SiteConfig'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 
-export default function MenuPageItem ( { item, campus } ) {
+export default function MenuPageItem ( 
+    {
+        item, 
+        campus,
+    } 
+) {
 
     // Get Menu Type
     let menuType =  (item?.menuPageMenuItem?.menuPageMenuItemType) ?
@@ -18,7 +23,7 @@ export default function MenuPageItem ( { item, campus } ) {
 
         case 'page': {
             // Resolve (Best) Page URL
-            let getItemSlug = item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPagePage.slug
+            let getItemSlug = item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPagePage?.slug
             let getPageCampuses =   ( item.menuPageMenuItem?.menuPageMenuItemPage?.menuPageMenuItemPagePage?.pageDetails?.pageCampus.length > 0 ) ?
                                         item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPagePage.pageDetails.pageCampus
                                     :
@@ -43,7 +48,7 @@ export default function MenuPageItem ( { item, campus } ) {
                     to                  = { fullPageUrl } 
                     className           = {`${ ( item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageRemoveDefault ) ? '' : 'nav-link' } ${ ( item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageCss ) ? item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageCss : '' }`}
                     title               = { item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageTitle } 
-                    activeClassName     = "active"
+                    activeClassName     = 'active'
                 >
                     {item.menuPageMenuItem.menuPageMenuItemPage.menuPageMenuItemPageTitle}
                 </Link> 
@@ -58,9 +63,9 @@ export default function MenuPageItem ( { item, campus } ) {
                 return (
                     <Link 
                         to              = {customItem.menuPageMenuItemCustomUrl} 
-                        className       = {`${ ( customItem.removeDefaultCssClasses ) ? '' : 'nav-link' } ${ ( customItem.menuPageMenuItemCustomCss ) ? customItem.menuPageMenuItemCustomCss : '' }`}
+                        className       = {`${ customItem.removeDefaultCssClasses ? '' : 'nav-link' } ${ customItem.menuPageMenuItemCustomCss ? customItem.menuPageMenuItemCustomCss : '' }`}
                         title           = {customItem.menuPageMenuItemCustomTitle} 
-                        activeClassName = "active"
+                        activeClassName = 'active'
                     >
                         {customItem.menuPageMenuItemCustomTitle}
                     </Link>  
@@ -70,7 +75,7 @@ export default function MenuPageItem ( { item, campus } ) {
                 return (
                     <a 
                         href        = { customItem.menuPageMenuItemCustomUrl } 
-                        className   = {`${ ( customItem.removeDefaultCssClasses ) ? '' : 'nav-link' }  ${ ( customItem.menuPageMenuItemCustomCss ) ? customItem.menuPageMenuItemCustomCss : '' }`}
+                        className   = {`${ customItem.removeDefaultCssClasses ? '' : 'nav-link' }  ${ customItem.menuPageMenuItemCustomCss ? customItem.menuPageMenuItemCustomCss : '' }`}
                         title       = { customItem.menuPageMenuItemCustomTitle } 
                         target      = { customItem.menuPageMenuItemCustomTarget.split(':')[0] }
                     >

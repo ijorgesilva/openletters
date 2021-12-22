@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime } from 'luxon'
 import React from 'react'
 
 export function isEmpty(obj) {

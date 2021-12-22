@@ -49,7 +49,7 @@ export default function SectionFeedCarouselDescription( { title, description, it
                                     <BlurbVerticalDarkVod 
                                         key={index}
                                         className={ (objLength === index + 1) ? 'last' : undefined }
-                                        featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
+                                        featuredImage={ obj.featuredImage?.node ? obj.featuredImage.node.localFile.childImageSharp.fluid : undefined }
                                         link={ (obj.slug) ? `/watch/message/${obj.slug}` : null }
                                         title={ (obj.videoDetails.videoSeries) ? obj.title : null }
                                         serieTitle={(obj.videoDetails.videoSeries.title) ? obj.videoDetails.videoSeries.title : null}

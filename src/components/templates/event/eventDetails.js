@@ -41,12 +41,9 @@ export default function EventDetails( { pageContext, location } ){
         }
     }
 
-    const htmlDate = ( modified ) ? 
-                        getDate(modified,2,'us','yyyy-MM-dd' ) 
-                    : 
-                        getDate(date,2,'us','yyyy-MM-dd' )
-    const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
-    const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
+    const htmlDate = modified ? getDate(modified,2, config.dateLocale, 'yyyy-MM-dd' ) : getDate(date, 2, config.dateLocale, 'yyyy-MM-dd' )
+    const createdDate = getDate(date, 2, config.dateLocale, config.dateFormat )
+    const modifiedDate = getDate(modified, 2, config.dateLocale, config.dateFormat )
     
     const cover = ( featuredImage?.node?.localFile?.localFile ) ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
@@ -103,7 +100,7 @@ export default function EventDetails( { pageContext, location } ){
                     mode            = { contentMode }
                     title           = { title }
                     backgroundPhoto =   {
-                                            ( featuredImage ) ? 
+                                            featuredImage ? 
                                                 featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                             : 
                                                 undefined
@@ -117,7 +114,7 @@ export default function EventDetails( { pageContext, location } ){
                     mode        = { contentMode } 
                 /> 
 
-                <Container className='mt-5'>
+                <Container className='mt-3'>
                     <Row>
                         <Col>
                             <div className='watchLeft sticky'>
@@ -138,7 +135,7 @@ export default function EventDetails( { pageContext, location } ){
                                 }
                                 <div className = 'details'>
                                     {
-                                        ( eventDetails.eventDates.length > 0 ) ?
+                                        eventDetails.eventDates.length > 0 ?
                                             <div  onClick={() => copyToClipBoardTime( getDate(eventDetails.eventDates[0].eventDate,2,'us','LLLL d, yyyy' ) + '. ' + eventDetails.eventDates[0].eventTime )}>
                                                 <h6>{t('global.events.date-time')}</h6>
                                                 {
@@ -160,7 +157,7 @@ export default function EventDetails( { pageContext, location } ){
                                             undefined
                                     }
                                     {
-                                        ( eventDetails.eventAddress ) ?
+                                        eventDetails.eventAddress ?
                                             <div onClick={() => copyToClipBoard(eventDetails.eventAddress)}>
                                                 <h6>
                                                     {t('global.events.location')} 
@@ -176,7 +173,7 @@ export default function EventDetails( { pageContext, location } ){
                                             undefined
                                     }
                                     {
-                                        (eventDetails.eventCampus) ? 
+                                        eventDetails.eventCampus ? 
                                             <div>
                                                 <h6>{t('global.events.organized-by')}</h6>
                                                 {
@@ -192,13 +189,13 @@ export default function EventDetails( { pageContext, location } ){
                                     }
                                 </div>
                                 {
-                                    ( config.blogShowDates ) ?
+                                    config.blogShowDates ?
                                         <div className='createdDate user-select-none'>
                                             { 
-                                                (modifiedDate) ? 
-                                                    <time dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                                modifiedDate ? 
+                                                    <time className = 'text-muted' dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
                                                 : 
-                                                    <time dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                                    <time className = 'text-muted' dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
                                             }
                                         </div>
                                     :

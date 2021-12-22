@@ -23,11 +23,11 @@ export default function PostDetails( { location, pageContext } ){
     const mode          = 'dark'
     const contentMode   = 'light'
     
-    const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
-    const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
-    const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
+    const htmlDate = modified ? getDate(modified,2, config.dateLocale, 'yyyy-MM-dd' ) : getDate(date, 2, config.dateLocale, 'yyyy-MM-dd' )
+    const createdDate = getDate(date, 2, config.dateLocale, config.dateFormat )
+    const modifiedDate = getDate(modified, 2, config.dateLocale, config.dateFormat )
 
-    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+    const cover =   featuredImage?.node?.localFile?.localFile ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
@@ -40,7 +40,7 @@ export default function PostDetails( { location, pageContext } ){
                 location    = { location } 
                 mode        = { contentMode }
                 cover       = { cover }
-                description = { ( excerpt ) ? excerpt : excerpt}
+                description = { excerpt ? excerpt : excerpt}
                 article     = { true }
                 metaTags    =   {{
                                     noIndex: ( typeof postDetails.postHide?.postHideSearchEngines === 'undefined' ) ? 
@@ -83,7 +83,7 @@ export default function PostDetails( { location, pageContext } ){
                     mode            = { contentMode }
                     title           = { title }
                     backgroundPhoto =   {
-                                            ( featuredImage?.node?.localFile ) ? 
+                                            featuredImage?.node ? 
                                                 featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                             : 
                                                 undefined
@@ -116,7 +116,7 @@ export default function PostDetails( { location, pageContext } ){
                                     undefined
                             }
                             {
-                                ( config.blogShowDates ) ?
+                                config.blogShowDates ?
                                     <div className='createdDate user-select-none'>
                                         { 
                                             (modifiedDate) ? 
@@ -130,7 +130,7 @@ export default function PostDetails( { location, pageContext } ){
                             }
                             <div className='authors'>
                                 {   
-                                    (postDetails.postAuthor) ?
+                                    postDetails.postAuthor ?
                                         postDetails.postAuthor.map( (author, index) => (
                                                 <div key = { index } className = 'author'>
                                                     {

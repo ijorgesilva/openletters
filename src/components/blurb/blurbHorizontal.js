@@ -1,5 +1,6 @@
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { DateTime } from 'luxon'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import TextTruncate from 'react-text-truncate'
@@ -29,28 +30,28 @@ export default function BlurbHorizontal(
     const { t } = useTranslation()
 
     const image = featuredImage ? featuredImage : undefined
-    const tagClass = (tagClassName) ? tagClassName : ''
-    const tagsCounter = (tags) ? tags.nodes.length : 0
+    const tagClass = tagClassName ? tagClassName : ''
+    const tagsCounter = tags ? tags.nodes.length : 0
 
     switch(type){
 
         case 'event': {
             
             let eventExpired    = false
-            const firstDate     =   (eventDate[0].eventDate ) ? 
+            const firstDate     =   eventDate[0].eventDate  ? 
                                             getDate(eventDate[0].eventDate,2,'us','LLLL d, yyyy' ) 
                                     : 
                                         undefined
             const firstTime     =   eventDate[0].eventTime
-            let today           = new Date();
+            let today           = new Date()
                                         
-            if( today > eventDate[0].eventDate ) {
+            if( DateTime.fromJSDate(today) > DateTime.fromISO(eventDate[0].eventDate) ) {
                 eventExpired = true
             }
 
             return (
                 <div 
-                    key         = {(keyIndex) ? keyIndex : undefined} 
+                    key         = { keyIndex ? keyIndex : undefined } 
                     className   = {`card blurbHorizontal ${ mode ? mode : 'light' } ${ className ? className : '' } ${ eventExpired ? 'expired' : '' }`} 
                     title       = {title}
                 >
@@ -68,24 +69,24 @@ export default function BlurbHorizontal(
                         <div className='card-body'>
                             <div>
                                 {
-                                    (firstDate) ? 
+                                    firstDate ? 
                                         <time 
-                                            className   = 'card-subtitle date' 
+                                            className   = 'card-subtitle date mb-1' 
                                             dateTime    = {firstDate}
                                         >
-                                            <strong>{ (eventExpired) ? '' + t('global.events.expired') + ' | ' : '' }</strong>
+                                            <strong>{ eventExpired ? '' + t('global.events.expired') + ' | ' : '' }</strong>
                                             { firstDate } 
-                                            { (firstTime) ? ' | ' + firstTime : '' }
+                                            { firstTime ? ' | ' + firstTime : '' }
                                         </time>
                                     : 
                                         undefined
                                 }
-                                <h5 className='card-title mt-2'>
+                                <h5 className='card-title'>
                                     {title}
                                 </h5>
                                 <p className='card-text'>
                                     {
-                                        (excerpt) ? 
+                                        excerpt ? 
                                             <TextTruncate line={1} truncateText='…' text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                                         : 
                                             undefined
@@ -97,7 +98,7 @@ export default function BlurbHorizontal(
                                     <div className='tags'>
                                         {
                                             ( tag ) ?
-                                                <div className={`badge badge-pill badge-image ${tagClass}`} dangerouslySetInnerHTML={{__html: tag}}></div>
+                                                <div className={`badge badge-pill badge-image ${ tagClass ? tagClass : '' }`} dangerouslySetInnerHTML={{__html: tag}}></div>
                                             :
                                                 undefined
                                         }
@@ -105,7 +106,7 @@ export default function BlurbHorizontal(
                                             ( tagsCounter > 0 ) ?
                                                 tags.nodes.map( ( obj, index ) => (
                                                     (index < 3) ?
-                                                        <div key={index} className={`badge badge-pill badge-image ${tagClass}`}>
+                                                        <div key={index} className={`badge badge-pill badge-image ${ tagClass ? tagClass : '' }`}>
                                                             {obj.name}
                                                         </div>
                                                     :
@@ -148,19 +149,19 @@ export default function BlurbHorizontal(
         
                             <div>
                                 {
-                                    (subtitle) ? 
+                                    subtitle ? 
                                         <h6 className='card-subtitle'>
                                             {subtitle}
                                         </h6> 
                                     : 
                                         undefined
                                 }
-                                <h5 className='card-title mt-2'>
+                                <h5 className='card-title'>
                                     {title}
                                 </h5>
                                 <p className='card-text'>
                                     {
-                                        (excerpt) ? 
+                                        excerpt ? 
                                             <TextTruncate line={1} truncateText='…' text={excerpt.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                                         : 
                                             undefined

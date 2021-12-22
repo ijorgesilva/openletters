@@ -1,10 +1,9 @@
 
-import { createRef, default as React, useState, useMemo } from 'react'
 import algoliasearch from 'algoliasearch/lite'
+import { createRef, default as React, useState, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { InstantSearch } from 'react-instantsearch-dom'
 import { ThemeProvider } from 'styled-components'
-import { useTranslation } from 'react-i18next'
-
 
 import StyledSearchBox from './styled-search-box'
 import StyledSearchResult from './styled-search-result'

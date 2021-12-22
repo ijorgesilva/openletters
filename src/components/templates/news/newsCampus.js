@@ -32,7 +32,7 @@ export default function NewsCampus ( { data, location, pageContext } ){
                 className   = 'newsCampus'
                 mode        = { contentMode }
                 cover       = { 
-                                (featuredImage?.node?.localFile) ?
+                                featuredImage?.node ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                                 : 
                                     undefined 
@@ -80,7 +80,7 @@ export default function NewsCampus ( { data, location, pageContext } ){
                                             key             = { index }
                                             className       = { 'mb-4' }
                                             featuredImage   =   {  
-                                                                    ( news.featuredImage?.node?.localFile ) ? 
+                                                                    news.featuredImage?.node ? 
                                                                         news.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                                                     : 
                                                                         undefined    
@@ -89,7 +89,7 @@ export default function NewsCampus ( { data, location, pageContext } ){
                                             title           = { news.title }
                                             subtitle        = { getDate(news.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
                                             tags            =   { 
-                                                                    ( news.tags?.nodes ) ? 
+                                                                    news.tags?.nodes ? 
                                                                         news.tags 
                                                                     : 
                                                                         undefined  

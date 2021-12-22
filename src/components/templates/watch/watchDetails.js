@@ -50,7 +50,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
         ))
     }
     
-    const poster = ( featuredImage?.node?.localFile ) ? 
+    const poster = featuredImage?.node ? 
                         featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
                         ( videoDetails.videoSeries?.seriesGraphics?.background?.localFile ) ?

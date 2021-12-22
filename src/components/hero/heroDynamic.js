@@ -36,7 +36,7 @@ export default function HeroDynamic (
                         <h5 className='text-white mt-2' dangerouslySetInnerHTML={{__html: subtitle}}></h5>
                         
                         {
-                            ( buttons ) ?
+                            buttons ?
                                 <div className='buttons mt-3'>
                                     {
                                         buttons.map( (button, index) => (
@@ -67,7 +67,7 @@ export default function HeroDynamic (
                         }
 
                         {
-                            ( related ) ? 
+                            related ? 
                                 <div className='related'>
                                     <BlurbHorizontalDarkFeatured 
                                         type            = { related.type }
@@ -87,7 +87,7 @@ export default function HeroDynamic (
                         }
 
                         {
-                            ( children ) ?
+                            children ?
                                 <div className='children'>
                                     {children}
                                 </div>

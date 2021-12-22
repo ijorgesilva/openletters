@@ -4,41 +4,52 @@ const config = {
   watchDetailsViewSidebarBackground: false,
   watchDetailsViewHeroBackground: true,
     
+  /* Locales */
+  dateLocale: 'us',
+  dateFormat: 'LLLL d, yyyy',
+
   /* Gatsby Permalinks */
   
     /* Watch */
-    watchSlug: "watch",
-    watchMessageDetailsSlug: "m",
-    watchSeriesDetailsSlug: "s",
+    watchSlug: 'watch',
+    watchMessageDetailsSlug: 'm',
+    watchSeriesDetailsSlug: 's',
 
     /* News */
-    newsPostDetailsSlug: "n",
+    newsPostDetailsSlug: 'n',
 
     /* Events */
-    eventPostDetailsSlug: "e",
+    eventPostDetailsSlug: 'e',
 
     /* Pages */
     pagesSlug: 'p',
 
     /* post */
-    blogPostDetailsSlug: "b",
+    blogPostDetailsSlug: 'b',
 
     /* Attachments */
     attachmentSlug: 'd',
 
-    /* Groups */
-    groupTypeSlug: "gt",
-    groupSlug: "g",
+    /* Group Types */
+    groupTypesSlug: 'gt',
+
+    /* Group */
+    groupsSlug: 'g',
 
     /* Ministry */
-    ministrySlugDetails: "ministry",
+    ministrySlug: 'd',
 
-    /* Classes */
-    classesSlug: "c",
-    lessonSlug: "cl",
+    /* Class */
+    coursesSlug: 'c',
 
-    /* Serve */
-    serveSlug: "s",
+    /* Lesson */
+    lessonSlug: 'l',
+
+    /* People */
+    peopleSlug: 'i',
+
+    /* Volunteering */
+    volunteeringSlug: 'v',
 
   /* Features */
     /* Features Flags */

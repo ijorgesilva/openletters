@@ -34,7 +34,7 @@ export default function FeedListEvenRenderer (
                                         }
                     target          = { ( item.linkDetails.linkLink.linkLinkTarget ) ? item.linkDetails.linkLink.linkLinkTarget : undefined }
                     linkType        = { ( item.linkDetails.linkLink.linkLinkType ) ? item.linkDetails.linkLink.linkLinkType : undefined }
-                    featuredImage   = { ( item.featuredImage?.node?.localFile ) ? 
+                    featuredImage   = { ( item.featuredImage?.node ) ? 
                                             item.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
                                         : 
                                             undefined 
@@ -62,7 +62,7 @@ export default function FeedListEvenRenderer (
                     className       = 'post'
                     title           = { item.title }
                     link            = {`/${(bestCampusSlug) ? bestCampusSlug : '' }/${config.blogPostDetailsSlug}/${item.slug}`}
-                    featuredImage   =   { ( item.featuredImage?.node?.localFile ) ? 
+                    featuredImage   =   { item.featuredImage?.node ? 
                                             item.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
                                         : 
                                             undefined

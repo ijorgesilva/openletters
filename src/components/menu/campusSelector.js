@@ -32,7 +32,7 @@ export default function CampusSelector( { className, location, mode } ) {
                             : 
                                 '/' + campus.slug,
                     "visibility": campus.campusDetails.campusConfiguration.campusConfigurationVisibility,
-                    "logo": ( campus.featuredImage?.node?.localFile ) ? 
+                    "logo": campus.featuredImage?.node ? 
                                 campus.featuredImage.node.localFile.childImageSharp.gatsbyImageData 
                             : 
                                 '',

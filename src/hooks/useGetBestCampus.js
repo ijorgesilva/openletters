@@ -13,7 +13,7 @@ export const useGetBestCampus = ( currentCampus, availableCampuses ) => {
             break;
 
         default:
-            campus = ''
+            campus = currentCampus
             break;
     }
 

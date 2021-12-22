@@ -21,16 +21,16 @@ export default function WatchPage( { pageContext, data, location } ) {
     const { t } = useTranslation()
 
     let hero = data.hero?.nodes[0]
-    let backgroundImage =   ( hero?.featuredImage?.node?.localFile?.childImageSharp ) ? 
+    let backgroundImage =   hero?.featuredImage?.node?.localFile?.childImageSharp ? 
                                 hero?.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                             : 
-                                ( hero?.videoDetails?.videoSeries?.seriesGraphics?.background ) ? 
+                                hero?.videoDetails?.videoSeries?.seriesGraphics?.background ? 
                                     hero?.videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                                 : 
                                     undefined
 
-    const sections =    ( campusDetails.campusWatch.campusWatchSections?.length > 0 ) ? 
-                            campusDetails.campusWatch.campusWatchSections 
+    const sections =    ( campusDetails.campusPages.campusWatch.pageSections?.length > 0 ) ? 
+                            campusDetails.campusPages.campusWatch.pageSections 
                         : 
                             undefined
     // TODO: Force mode on page with mode override? Is that even needed?
@@ -63,17 +63,17 @@ export default function WatchPage( { pageContext, data, location } ) {
                 id              = 'latest'
                 className       = 'z-index-1'
                 mode            = { contentMode }
-                iconSeries       =   { ( hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ) ? 
+                iconSeries       =   { hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ? 
                                         hero.videoDetails.videoSeries.seriesGraphics.logo.localFile.childImageSharp.gatsbyImageData 
                                     : 
                                         undefined 
                                     }
-                iconSeriesTitle  =   { ( hero.videoDetails?.videoSeries?.title ) ? 
+                iconSeriesTitle  =   { hero.videoDetails?.videoSeries?.title ? 
                                         hero.videoDetails.videoSeries.title 
                                     : 
                                         undefined 
                                     }
-                iconSeriesLink   =   { ( hero.videoDetails?.videoSeries?.slug ) ? 
+                iconSeriesLink   =   { hero.videoDetails?.videoSeries?.slug ? 
                                         `/${slug}/${config.watchSeriesDetailsSlug}/`+ hero.videoDetails.videoSeries.slug 
                                     : 
                                         undefined 
@@ -82,8 +82,8 @@ export default function WatchPage( { pageContext, data, location } ) {
                 description     = { getHeroDescription(hero) }
                 playText        = { t('global.watch.watch-now') }
                 seriesLinkText   = { t('global.watch.more-info') }
-                playUrl         = { (hero.slug) ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
-                seriesUrl       = { (hero.videoDetails.videoSeries) ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
+                playUrl         = { hero.slug ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
+                seriesUrl       = { hero.videoDetails.videoSeries ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
                 backgroundImage = { backgroundImage }
             />
 
@@ -106,7 +106,7 @@ export default function WatchPage( { pageContext, data, location } ) {
             }
             
             {
-                ( sections ) ?
+                sections ?
                     sections.map( ( section, index ) => (
                         <RenderSection 
                             key     = { index }

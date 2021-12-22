@@ -31,7 +31,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
                 className   = 'blogCampus'
                 mode        = { contentMode }
                 cover       = { 
-                                (featuredImage?.node?.localFile) ?
+                                featuredImage?.node ?
                                     featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                                 : 
                                     undefined 
@@ -79,7 +79,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
                                             key             = { index }
                                             className       = { 'mb-4' }
                                             featuredImage   =   {  
-                                                                    ( post.featuredImage?.node?.localFile ) ? 
+                                                                    post.featuredImage?.node ? 
                                                                         post.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                                                     : 
                                                                         undefined    

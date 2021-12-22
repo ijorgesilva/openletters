@@ -32,7 +32,7 @@ export default function SectionFeedCarousel ( { title, items, className, id, slu
                             <BlurbHorizontal 
                                 key={ index }
                                 title={` ${ (count === true) ? index + 1 : '' } obj.title `}
-                                featuredImage={ (obj.featuredImage) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
+                                featuredImage={ (obj.featuredImage?.node) ? obj.featuredImage.node.localFile.childImageSharp.fluid.src : undefined }
                                 className={ (objLength === index + 1) ? 'last' : undefined }
                                 link={ (obj.slug) ? `${slug}${obj.slug}` : null }
                                 subtitle = { (obj.date) ? getDate(obj.date,2,'us','LLLL d, yyyy') : undefined }
