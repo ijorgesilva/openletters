@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
@@ -17,7 +18,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
     
     const { t } = useTranslation()
 
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
 
     return (
@@ -40,7 +41,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
@@ -78,7 +79,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
 
         </div>

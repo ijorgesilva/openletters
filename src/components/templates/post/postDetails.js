@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../../data/SiteConfig'
 import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -20,7 +21,7 @@ export default function PostDetails( { location, pageContext } ){
     const { title, excerpt, date, modified, featuredImage, content, terms, postDetails, breadcrumbs } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
     
     const htmlDate = modified ? getDate(modified,2, config.dateLocale, 'yyyy-MM-dd' ) : getDate(date, 2, config.dateLocale, 'yyyy-MM-dd' )
@@ -51,14 +52,14 @@ export default function PostDetails( { location, pageContext } ){
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.blogPostDetailsSlug }
                 menuBrand   =   { 
                                     {
@@ -156,7 +157,7 @@ export default function PostDetails( { location, pageContext } ){
 
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
-                mode   = { contentMode }
+                mode   = { theme.styles.footer }
             />
             
         </>

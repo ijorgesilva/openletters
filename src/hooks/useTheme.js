@@ -77,6 +77,10 @@ export const useTheme = () => {
         buttons: {},
         font: {},
         cssVariables: '',
+        styles: {
+            header: siteStyles.settingsStylesFooter.settingsStylesFooterColor,
+            footer: siteStyles.settingsStylesHeader.settingsStylesHeaderColor,
+        }
     }
 
     /* 

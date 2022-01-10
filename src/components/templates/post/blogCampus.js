@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import RenderFeed from '../../feed/renderFeed'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
@@ -16,7 +17,7 @@ export default function BlogCampus ( { data, location, pageContext } ){
     const { title, featuredImage, breadcrumbs } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
     
     return (
@@ -40,13 +41,13 @@ export default function BlogCampus ( { data, location, pageContext } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.blog.title'),
@@ -81,8 +82,8 @@ export default function BlogCampus ( { data, location, pageContext } ){
             }
 
             <FooterSimpleText
-                mode    = { contentMode }
-                campus  = { breadcrumbs.campus } 
+                campus  = { breadcrumbs.campus }
+                mode    = { theme.styles.footer }
             />
             
         </>

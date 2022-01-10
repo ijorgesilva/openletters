@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../../data/SiteConfig'
 import { useGenerateMinistryMenu } from '../../../hooks/useGenerateMinistryMenu'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -22,7 +23,7 @@ export default function MinistryDetails(
 ) {
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
         
     const { title, excerpt, featuredImage, breadcrumbs, view, ministryDetails, customPageIndex } = pageContext
@@ -45,7 +46,7 @@ export default function MinistryDetails(
             />
             
             <Navigation
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -54,7 +55,7 @@ export default function MinistryDetails(
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.ministrySlug }
                 menuBrand   =   { 
                                     {
@@ -89,7 +90,7 @@ export default function MinistryDetails(
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus }
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
             
         </>

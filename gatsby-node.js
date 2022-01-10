@@ -56,7 +56,6 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      *******************/
     if ( result.data.campuses?.nodes?.length > 0 ) { // All the Archives and Main pages are circumscribed to a campus
         result.data.campuses.nodes.forEach( campus => {
-
             /*  Watch Main Page*/
             if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) { // Global flag: Turned on/off on website settings
                 if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {

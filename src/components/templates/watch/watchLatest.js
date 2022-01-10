@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -14,7 +15,7 @@ export default function WatchLatest( { location, pageContext } ) {
     const { title, breadcrumbs } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
     
     let searchIndices   = [{ name: `videos`, title: `Messages` }]
@@ -35,13 +36,13 @@ export default function WatchLatest( { location, pageContext } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 menuBrand   =   { 
                                     {
                                         'name': t('global.watch.title'),
@@ -70,7 +71,7 @@ export default function WatchLatest( { location, pageContext } ) {
 
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
-                mode   = { contentMode }
+                mode   = { theme.styles.footer }
             />
         </>
     )

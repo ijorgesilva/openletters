@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../../data/SiteConfig'
 import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -18,7 +19,7 @@ import './newsDetails.scss'
 export default function NewsDetails( { pageContext, location } ){
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
         
     const { title, excerpt, date, modified, featuredImage, content, terms, breadcrumbs } = pageContext
@@ -45,7 +46,7 @@ export default function NewsDetails( { pageContext, location } ){
             />
             
             <Navigation
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -54,7 +55,7 @@ export default function NewsDetails( { pageContext, location } ){
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.newsPostDetailsSlug }
                 menuBrand   =   { 
                                     {
@@ -134,7 +135,7 @@ export default function NewsDetails( { pageContext, location } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus }
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
             
         </>

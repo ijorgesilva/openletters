@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { watchDetailsMenu } from '../../../../data/menues'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
@@ -35,7 +36,8 @@ export default function WatchSeries( { pageContext, location, data } ) {
                     : 
                         undefined
 
-    const mode  = 'dark'
+    const theme = useTheme()
+    const contentMode  = 'dark'
 
     return (
         <>
@@ -44,7 +46,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location    = { location }
                 cover       = { cover }
                 description = { excerpt }
-                mode        = { mode }
+                mode        = { contentMode }
                 className   = 'watchSeries'
                 article
                 metaTags    =   {{
@@ -57,7 +59,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
             />
 
@@ -71,11 +73,11 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                 } 
                 menu        = { watchDetailsMenu } 
                 close       = { breadcrumbs.back }
-                mode        = { mode }
+                mode        = { contentMode }
                 className   = 'transparent'
             />
 
-            <div className={`watchSeries bg-${ mode ? mode : 'light' }`}>
+            <div className={`watchSeries bg-${ contentMode ? contentMode : 'light' }`}>
 
                 <HeroSeries 
                     title           = { title }
@@ -85,18 +87,18 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                             undefined
                                         }
                     campus          = { campus }
-                    mode            = { mode }
+                    mode            = { contentMode }
                     width           = 'container'
                     seriesDetails   = { seriesDetails }
                     seriesGraphics  = { seriesGraphics }
                     featuredVideo   = { data.VideosOnSerie.nodes[0] }
                 />
 
-                <div className={`container bartools ${ mode ? mode : 'light' }`}>
+                <div className={`container bartools ${ contentMode ? contentMode : 'light' }`}>
                     <ShareSimpleIcon 
                         location = {location} 
                         style    = { 'toolbar' }
-                        mode     = { mode }
+                        mode     = { contentMode }
                     />
                 </div>
 
@@ -104,13 +106,13 @@ export default function WatchSeries( { pageContext, location, data } ) {
                     id          = 'description'
                     width       = 'container'
                     excerpt     = { excerpt }
-                    mode        = { mode }
+                    mode        = { contentMode }
                 />
 
                 <SectionSeriesTabs 
                     id              = 'videos'
                     width           = 'container'
-                    mode            = { mode }
+                    mode            = { contentMode }
                     campus          = { campus }
                     videos          = { data.VideosOnSerie?.nodes }
                     seasons         = { seriesDetails.seriesSeasonsActive ? true : false }
@@ -126,7 +128,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
                 <SectionTags
                     id      = 'tags'
                     width   = 'container'
-                    mode    = { mode }
+                    mode    = { contentMode }
                     tags    = { data.series.tags?.nodes }
                 />
 
@@ -148,7 +150,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
             
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
-                mode = { mode }
+                mode = { theme.styles.footer }
             />
             
         </>

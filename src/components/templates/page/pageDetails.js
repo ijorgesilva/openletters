@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from "react-i18next"
 
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import MainContent from '../../content/mainContent'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
@@ -19,7 +20,7 @@ export default function PageDetails( { location, pageContext } ){
     // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation()
 
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
 
     const cover =   featuredImage?.node?.localFile?.localFile ?
@@ -50,7 +51,7 @@ export default function PageDetails( { location, pageContext } ){
             />
             
             <Navigation
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -67,7 +68,7 @@ export default function PageDetails( { location, pageContext } ){
                         className   = { pageDetails.pageMenues.menuDetails.menuCss }
                         id          = { pageDetails.pageMenues.menuDetails.menuId }
                         bg          = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
-                        mode        = { mode ? mode : pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
+                        mode        = { theme.styles.header ? theme.styles.header : pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
                     />
                 :
                     undefined
@@ -112,7 +113,7 @@ export default function PageDetails( { location, pageContext } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
             
         </>

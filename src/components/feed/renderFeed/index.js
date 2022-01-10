@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useGetFeed } from '../../../hooks/useGetFeed'
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
+import AlertEmptyState from '../../alert/alertEmptyState'
 
 import FeedRenderingLayout from './feedRenderingLayout'
 
@@ -28,9 +29,16 @@ export default function RenderFeed (
         list: []
     }
 
-    switch (view) {
+    switch (true) {
         
-        case 'ministries': {
+        case (builtFeedObject.list.length === 0): {
+            console.log
+            return (
+                <AlertEmptyState />
+            )
+        }
+
+        case view === 'ministries': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesMinistries.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesMinistries.itemConfiguration
@@ -79,7 +87,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'courses': {
+        case view === 'courses': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesCourses.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesCourses.itemConfiguration
@@ -128,7 +136,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'volunteering': {
+        case view === 'volunteering': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesVolunteer.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesVolunteer.itemConfiguration
@@ -177,7 +185,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'groups': {
+        case view === 'groups': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesGroups.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesGroups.itemConfiguration
@@ -226,7 +234,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'groupTypes': {
+        case view === 'groupTypes': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesGroups.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesGroups.itemConfiguration
@@ -275,7 +283,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'posts': { 
+        case view === 'posts': { 
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesBlog.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesBlog.itemConfiguration
@@ -324,7 +332,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'news': { 
+        case view === 'news': { 
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesBlog.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesBlog.itemConfiguration
@@ -373,7 +381,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'events': { 
+        case view === 'events': { 
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesEvents.feedLayout.split(':')[0]
             layoutConf      = itemConf.settingsPagesEvents.itemConfiguration
@@ -422,7 +430,7 @@ export default function RenderFeed (
             )
         }
 
-        case 'videos': {
+        case view === 'videos': {
             return (
                 <>
                 </>

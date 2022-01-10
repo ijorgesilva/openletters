@@ -596,6 +596,16 @@
         }
     }
 
+    .leftColumn {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .rightColumn {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
     /*
      * Footer Placing
      * Align footer always to the bottom of the page
@@ -948,22 +958,22 @@ a {
             transform: translateX(0px) scale(1); // Icon to left: translateX(-10px) scale(1.25);
             transition: .15s ease-out;
         }
-    }
-    [class=spn] { /** Span Class **/
-        position: relative;
-        left:0px; // Icon to left: -9px
-        transform-origin: left right; // Icon to left: left right
-        transform: translateX(0px);// Icon to left: -9px
-        transition: .20s ease-in-out;
-    }
-    &:hover { /** -- Icons on Hover properties -- **/
-        [class~=fa], [class~=svg-inline--fa],
-        [class~=mdi]::before, [class~=icon]::before, [class~="typcn"]::before { /** -- Since Material, Iconic and Typicons use ::before -- **/
-            opacity: 1;
-            transform: translateX(20px) scale(1); // Icon to left: translateX(20px) scale(.75);
+        [class=spn] { /** Span Class **/
+            position: relative;
+            left:0px; // Icon to left: -9px
+            transform-origin: left right; // Icon to left: left right
+            transform: translateX(0px);// Icon to left: -9px
+            transition: .20s ease-in-out;
         }
-        [class=spn] {/** -- Span on Hover properties -- **/   
-            left:0px; // transform: translateX(0);
+        &:hover { /** -- Icons on Hover properties -- **/
+            [class~=fa], [class~=svg-inline--fa],
+            [class~=mdi]::before, [class~=icon]::before, [class~="typcn"]::before { /** -- Since Material, Iconic and Typicons use ::before -- **/
+                opacity: 1;
+                transform: translateX(20px) scale(1); // Icon to left: translateX(20px) scale(.75);
+            }
+            [class=spn] {/** -- Span on Hover properties -- **/   
+                left:0px; // transform: translateX(0);
+            }
         }
     }
 }

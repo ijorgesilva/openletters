@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import HeroPost from '../../../components/hero/heroPost'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -18,7 +19,7 @@ export default function EventDetails( { pageContext, location } ){
     const { title, excerpt, date, modified, featuredImage, content, tags, eventDetails, breadcrumbs } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
 
     const [copySuccessTime, setCopySuccessTime] = useState('')
@@ -73,13 +74,13 @@ export default function EventDetails( { pageContext, location } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { searchIndices }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.eventPostDetailsSlug }
                 menuBrand   =   { 
                                     {
@@ -117,12 +118,12 @@ export default function EventDetails( { pageContext, location } ){
                 <Container className='mt-3'>
                     <Row>
                         <Col>
-                            <div className='watchLeft sticky'>
+                            <div className='leftColumn sticky'>
                                 {
                                     ( eventDetails.eventLink.eventLinkText && eventDetails.eventLink.eventLinkUrl ) ?
                                         <div className = 'register'>
                                             <Button 
-                                                className   = {`btn btn-${ mode === 'light' ? 'outline-primary' : mode === 'dark' ? 'outline-primary' : mode } btn-lg`}
+                                                className   = {`btn btn-${ contentMode === 'light' ? 'outline-primary' : contentMode === 'dark' ? 'outline-primary' : contentMode } btn-lg`}
                                                 variant = { 'transparent' }
                                                 href={eventDetails.eventLink.eventLinkUrl} 
                                                 target='_blank'
@@ -223,7 +224,7 @@ export default function EventDetails( { pageContext, location } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
                 />
         </>
     )

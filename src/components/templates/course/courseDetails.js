@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import { useGetFeed } from '../../../hooks/useGetFeed'
+import { useTheme } from '../../../hooks/useTheme'
 import SectionCarousel from '../../carousel/sectionCarousel'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
@@ -23,7 +24,7 @@ export default function CourseDetails( { pageContext, data, location } ){
     const { title, excerpt, postContent, general, tags, breadcrumbs, courseDetails, pageLayout } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
 
     const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
@@ -88,13 +89,13 @@ export default function CourseDetails( { pageContext, data, location } ){
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { searchIndices }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.coursesSlug }
                 menuBrand   =   { 
                                     {
@@ -115,7 +116,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                     id              = { 'hero' }
                     className       = { 'z-index-0' }
                     titleClassName  = { 'display-4' }
-                    mode            = { mode }
+                    mode            = { theme.styles.header }
                     width           = { 'fullwidth' }
                     title           = { title }
                     size            = { 'md' }
@@ -127,7 +128,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                 
                 <MenuPage
                     mode        = { contentMode }
-                    menu        =   { pageNavitation }
+                    menu        = { pageNavitation }
                     className   = {'sticky'}
                 />
                 
@@ -358,7 +359,7 @@ export default function CourseDetails( { pageContext, data, location } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
 
         </>
