@@ -26,27 +26,51 @@ const queriesPostTypes = {
                     campusPages {
                         campusWatch {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusEvents {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusBlog {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusNews {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusMinistry {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusGroups {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusVolunteering {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                         campusCourses {
                             pageActive
+                            pageSections {
+                                ${queriesSectionsMain}
+                            }
                         }
                     }
                     campusBrand {
