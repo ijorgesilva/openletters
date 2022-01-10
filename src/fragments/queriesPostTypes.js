@@ -512,7 +512,84 @@ const queriesPostTypes = {
                 }
             }
         }
-    `
+    `,
+    allWpCourse: `
+        ########
+        # Courses 
+        ########
+        courses: allWpCourse {
+            nodes {
+                id
+                title
+                slug
+                databaseId
+                general {
+                    summary
+                    campus {
+                        ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
+                postContent {
+                    content
+                }
+                pageLayout {
+                    pageLayout {
+                        ${queriesSectionsMain}
+                    }
+                }
+                courseDetails {
+                    courseDescription
+                    courseInstructors {
+                        ... on WpSpeaker {
+                            id
+                            title
+                            uri
+                            ${queriesCommon.featuredImageFields}
+                        }
+                    }
+                    courseMediaTrailer
+                    courseModality
+                    coursePace
+                    courseTimeLocation {
+                        startDate
+                        endDate
+                        endDateActive
+                        location {
+                            ... on WpEventVenue {
+                                venueDetails {
+                                    venueAddress
+                                }
+                            }
+                        }
+                    }
+                    courseProvider {
+                        providerType
+                        providerExternal {
+                            providerExternalUrl
+                            providerExternalUrlText
+                        }
+                    }
+                    courseMediaThumbnail {
+                        ${queriesCommon.localFile}
+                    }
+                    courseDuration {
+                        weeklyHours
+                        duration
+                    }
+                    courseLanguages
+                    courseCertificate
+                }
+                tags {
+                    nodes {
+                        ${queriesCommon.tag}
+                    }
+                }
+            }
+        }
+    `,
 }
 
 module.exports = queriesPostTypes;

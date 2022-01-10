@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import config from '../../../data/SiteConfig'
+import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import Search from "../search"
 
 import CampusSelector from './campusSelector'
@@ -28,6 +28,7 @@ export default function MenuGlobal(
     const { t } = useTranslation()
 
     const globalNavbarCollapse = false
+    const menuConf = useWebsiteConfiguration()
     
     return (
         
@@ -40,7 +41,7 @@ export default function MenuGlobal(
                 expand      = "lg"
             >
                 {
-                    (config.menuCampusSelector === true) ?
+                    menuConf.settingsMenus.settingsMenuCampusSelector ?
                         <CampusSelector 
                             location    = { location }
                             className   = 'mr-auto'
@@ -70,7 +71,7 @@ export default function MenuGlobal(
                         />
                         
                         {
-                            ( helpMenu ) ?
+                            helpMenu ?
                                 <DropdownMenu 
                                     data    = {helpMenu} 
                                     title   = {t('global.help.need-help')} 
@@ -80,7 +81,7 @@ export default function MenuGlobal(
                                 undefined
                         }
                         {
-                            ( giveMenu ) ?
+                            giveMenu ?
                                 <DropdownMenu 
                                     data    = {giveMenu} 
                                     title   = {t('global.give.title')}
@@ -94,7 +95,7 @@ export default function MenuGlobal(
                 </Navbar.Collapse>
 
                 {
-                    ( config.menuLanguageSelector ) ?
+                    menuConf.settingsMenus.settingsMenuLanguageSelector ?
                         <LanguageSelector 
                             className ={`langselector`}
                         />
@@ -103,7 +104,7 @@ export default function MenuGlobal(
                 }
                 
                 {
-                    ( searchIndices?.length > 0 && config.hasSearch ) ? 
+                    ( searchIndices?.length > 0 && menuConf.settingsMenus.settingsMenuSearch ) ? 
                         <div className='search'>
                             <Search 
                                 indices = {searchIndices} 

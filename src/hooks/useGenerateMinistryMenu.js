@@ -18,8 +18,8 @@ export const useGenerateMinistryMenu = ( breadcrumbs, pages, customPages ) => {
                 as: 'Link', 
         } )
     }
-    if( pages.ministryPageServe?.active ) {
-        tempMenu = pages.ministryPageServe
+    if( pages.ministryPageVolunteering?.active ) {
+        tempMenu = pages.ministryPageVolunteering
         ministryMenu.push( {
                 name: tempMenu.menuTitle || t('global:global.volunteering.serve'),
                 weight: tempMenu.menuWeight || 5,
@@ -27,8 +27,8 @@ export const useGenerateMinistryMenu = ( breadcrumbs, pages, customPages ) => {
                 as: 'Link', 
         } )
     }
-    if( pages.ministryPageClasses?.active ) {
-        tempMenu = pages.ministryPageClasses
+    if( pages.ministryPageCourses?.active ) {
+        tempMenu = pages.ministryPageCourses
         ministryMenu.push( {
                 name: tempMenu.menuTitle || t('global:global.courses.title'),
                 weight: tempMenu.menuWeight || 1,

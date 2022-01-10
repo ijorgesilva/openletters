@@ -7,6 +7,10 @@ const videosAndSeries = `
     # Videos on Demand
     ########
     videos: allWpVideoOnDemand (
+            sort: {
+                fields: videoDetails___videoDayDate, 
+                order: DESC,
+            },
             filter: {
                 status: {eq: "publish"}
             }  
@@ -27,6 +31,9 @@ const videosAndSeries = `
                         slug
                         status
                         campusDetails {
+                            campusConfiguration{
+                                campusConfigurationVisibility
+                            }
                             campusPages {
                                 campusWatch {
                                     pageActive
@@ -51,6 +58,13 @@ const videosAndSeries = `
                         }
                     }
                 }
+                videoSpeaker {
+                    ... on WpSpeaker {
+                        id
+                        status
+                        title
+                    }
+                }
                 videoHide {
                   videoHideSearchResults
                 }
@@ -65,6 +79,10 @@ const pages = `
     # Pages
     ########
     pages: allWpPage(
+        sort: {
+            fields: date,
+            order: DESC
+        },
         filter: {
             status: {eq: "publish"}
         }
@@ -105,6 +123,10 @@ const posts = `
     # Posts 
     ########
     posts: allWpPost(
+        sort: {
+            fields: date, 
+            order: DESC
+        },
         filter: {
             status: {eq: "publish"}
         }
@@ -146,8 +168,14 @@ const news = `
     # News 
     ########
     news: allWpNewspost (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
         filter: {
-            status: {eq: "publish"}
+            status: {
+                eq: "publish"
+            }
         }
     ) {
         nodes{
@@ -187,6 +215,10 @@ const events = `
     # Events 
     ########
     events: allWpEvent(
+        sort: {
+            fields: eventDetails___eventDates___eventDate, 
+            order: DESC
+        },
         filter: {
             status: {eq: "publish"}
         }
@@ -228,6 +260,10 @@ const attachments = `
     # Attachments
     ########
     attachments: allWpDocument (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
         filter: {
             status: {eq: "publish"}
         }
@@ -269,6 +305,10 @@ const ministries = `
     # Ministries
     ########
     ministries: allWpMinistry (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
         filter: {
             status: {eq: "publish"}
         }
@@ -308,7 +348,17 @@ const volunteering = `
     ########
     # Volunteering
     ########
-    volunteering: allWpVolunteeropportunity (filter: {status: {eq: "publish"}}) {
+    volunteering: allWpVolunteeropportunity (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
+        filter: {
+            status: {
+                eq: "publish"
+            }
+        }
+    ) {
         nodes {
             id
             title
@@ -344,7 +394,15 @@ const courses = `
     ########
     # Courses
     ########
-    courses: allWpCourse (filter: {status: {eq: "publish"}}) {
+    courses: allWpCourse (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
+        filter: {
+            status: {eq: "publish"}
+        }
+    ) {
         nodes {
             id
             title
@@ -380,7 +438,13 @@ const groupTypes = `
     ########
     # Group Types
     ########
-    groupTypes: allWpGroupType (filter: {status: {eq: "publish"}}) {
+    groupTypes: allWpGroupType (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
+        filter: {status: {eq: "publish"}}
+    ) {
         nodes {
             id
             title
@@ -416,7 +480,13 @@ const groups = `
     ########
     # Groups
     ########
-    groups: allWpGroup (filter: {status: {eq: "publish"}}) {
+    groups: allWpGroup (
+        sort: {
+            fields: date, 
+            order: DESC
+        },
+        filter: {status: {eq: "publish"}}
+    ) {
         nodes {
             id
             title
@@ -455,12 +525,13 @@ const queries = [
     query: videosAndSeries,
     transformer: ({ data }) => {
         let videoList = []
-
         data.videos.nodes.forEach( _ => {
             if( _.videoDetails.videoCampus?.length > 0 ) {
                 _.videoDetails.videoCampus.forEach ( campus => {
-                    if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusWatch.pageActive ){
-                        
+                    if ( campus.status === 'publish' 
+                        && campus.campusDetails.campusPages?.campusWatch.pageActive // If page it's active create the entry
+                        && campus.campusDetails.campusConfiguration.campusConfigurationVisibility // If campus it's visible create the entry 
+                    ){ 
                         if( !_.videoDetails.videoHide.videoHideSearchResults ){
                             videoList.push({
                                 objectID: _.id,
@@ -474,6 +545,7 @@ const queries = [
                                 link: `/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
                                 linkProduction: `${process.env.SITE_URL}/${campus.slug}/${config.watchMessageDetailsSlug}/${_.slug}`,
                                 series: _.videoDetails.videoSeries?.title,
+                                speakers: _.videoDetails.videoSpeaker?.map( _ => _.title ) || '',
                                 seriesLink: (_.videoDetails.videoSeries?.title) ?
                                                 `/${campus.slug}/${config.watchSeriesDetailsSlug}/${_.videoDetails.videoSeries.slug}` 
                                             : 
@@ -495,7 +567,7 @@ const queries = [
         return videoList
     },
     indexName: `videos`,
-    settings: { attributesToSnippet: [`excerpt:20`,`campus`] },
+    settings: { attributesToSnippet: [`excerpt:20`,`campus`], attributesForFaceting: [ `campus`, `series`, 'speakers' ] },
   },
 
   /* Series Index */
@@ -506,7 +578,10 @@ const queries = [
         data.videos.nodes.forEach( _ => {
             if( _.videoDetails.videoCampus?.length > 0 ) {
                 _.videoDetails.videoCampus.forEach ( campus => {
-                    if ( campus.status === 'publish' && campus.campusDetails.campusPages?.campusWatch.pageActive ){
+                    if ( campus.status === 'publish' 
+                        && campus.campusDetails.campusPages?.campusWatch.pageActive // If page it's active create the entry
+                        && campus.campusDetails.campusConfiguration.campusConfigurationVisibility // If campus it's visible create the entry 
+                    ){
                         
                         if ( _.videoDetails.videoSeries?.id && 
                              !_.videoDetails.videoSeries?.seriesDetails.seriesHide.seriesHideSearchResults 
@@ -532,7 +607,7 @@ const queries = [
         return seriesList
     },
     indexName: `series`,
-    settings: { attributesToSnippet: [`excerpt:20`,`campus`] },
+    settings: { attributesToSnippet: [`excerpt:20`,`campus`], attributesForFaceting: [ `campus` ] },
   },
 
   /* Pages Index */
@@ -566,7 +641,7 @@ const queries = [
         return pagesList
     },
     indexName: `pages`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Posts Index */
@@ -600,7 +675,7 @@ const queries = [
         return postsList
     },
     indexName: `posts`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Events Index */
@@ -634,7 +709,7 @@ const queries = [
         return eventsList
     },
     indexName: `events`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* News Index */
@@ -668,7 +743,7 @@ const queries = [
         return newsList
     },
     indexName: `news`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Attachment Index */
@@ -735,7 +810,7 @@ const queries = [
         return ministryList
     },
     indexName: `ministries`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Volunteering Index */
@@ -769,7 +844,7 @@ const queries = [
         return volunteeringList
     },
     indexName: `volunteering`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Courses Index */
@@ -803,7 +878,7 @@ const queries = [
         return coursesList
     },
     indexName: `courses`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Group Types Index */
@@ -837,7 +912,7 @@ const queries = [
         return groupTypesList
     },
     indexName: `groupTypes`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 
   /* Groups */
@@ -871,7 +946,7 @@ const queries = [
         return groupsList
     },
     indexName: `groups`,
-    settings: { attributesToSnippet: [ `campus` ] }
+    settings: { attributesToSnippet: [ `campus` ], attributesForFaceting: [ `campus` ] }
   },
 ]
 module.exports = queries

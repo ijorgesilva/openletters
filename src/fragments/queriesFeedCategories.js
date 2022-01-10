@@ -144,6 +144,15 @@ const queriesFeedCategories = {
                 title
                 slug
                 status
+                general {
+                    summary
+                    campus {
+                        ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
                 tags {
                     nodes {
                         ${queriesCommon.tag}
@@ -159,6 +168,15 @@ const queriesFeedCategories = {
                 title
                 slug
                 status
+                general {
+                    summary
+                    campus {
+                        ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
                 tags {
                     nodes {
                         ${queriesCommon.tag}
@@ -179,6 +197,9 @@ const queriesFeedCategories = {
                     campus {
                         ${queriesCommon.referenceCampus}
                     }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
                 }
                 tags {
                     nodes {
@@ -195,11 +216,13 @@ const queriesFeedCategories = {
                 title
                 slug
                 status
-                ${queriesCommon.featuredImageFields}
                 general {
                     summary
                     campus {
                         ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
                     }
                 }
                 tags {
@@ -221,6 +244,17 @@ const queriesFeedCategories = {
                     summary
                     campus {
                         ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
+                courseDetails {
+                    courseModality
+                    courseTimeLocation {
+                        startDate
+                        endDateActive
+                        endDate
                     }
                 }
                 tags {

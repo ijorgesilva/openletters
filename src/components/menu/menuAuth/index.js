@@ -1,14 +1,11 @@
 
-import React from 'react'
-import { Link } from 'gatsby'
-import { useTranslation } from 'react-i18next'
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
+import { Link } from 'gatsby'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
-
-
 import './index.scss'
 
 export default function MenuAuth ( { mode } ) {
@@ -20,7 +17,7 @@ export default function MenuAuth ( { mode } ) {
 
     if( settings.settingsAuthenticationActive ) {
         switch( settingsAuthType ) {
-            case 'external':
+            case 'external':{
                 return (
                     <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <a 
@@ -36,8 +33,8 @@ export default function MenuAuth ( { mode } ) {
                         </a>
                     </div>
                 )
-                break
-            case 'internal':
+            }
+            case 'internal':{
                 return (
                     <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <Link 
@@ -52,9 +49,10 @@ export default function MenuAuth ( { mode } ) {
                         </Link>
                     </div>
                 )
-            default:
+            }
+            default:{
                 return <></>
-                break
+            }
         }
     }
     else return <></>

@@ -734,6 +734,60 @@
         }
     }
 
+    .pagination {
+        &.dark {
+            > li {
+                > a {
+                    background-color: hsla(var(--dark-h), var(--light-s), var(--dark-l), 0.1);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    &:focus {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+                > span {
+                    &:focus {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+            }
+            >.active {
+                >a {
+                    font-weight: bold;
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) !important;
+                    border: solid 1px hsla(var(--light-h), var(--light-s), var(--light-l), 1) !important;
+                    &:hover {
+                        background-color: #5A4181 !important;
+                        border: solid 1px #5A4181;
+                    }
+                }
+            }
+            >.disabled {
+                >a {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.5);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1) !important;
+                    border: solid 1px hsla(var(--light-h), var(--light-s), var(--light-l), .1) !important;
+                }
+            }
+        }
+    }
+    
+
 /*
  * Responsive
  */
@@ -875,6 +929,41 @@ a {
         }
         &:hover{
             margin-left: 20px;
+        }
+    }
+}
+// Btn Icon Animation
+.btn {
+    &-iconed{
+        transition: .15s ease-in-out;
+        padding-left: 1.3rem;
+        padding-right: 1.5rem;
+        [class~=fa],
+        [class~=svg-inline--fa],
+        [class~=typcn]::before,
+        [class~=mdi]::before, 
+        [class~=icon]::before {
+            opacity: 0;
+            transform-origin: left right;// Icon to left: left right;
+            transform: translateX(0px) scale(1); // Icon to left: translateX(-10px) scale(1.25);
+            transition: .15s ease-out;
+        }
+    }
+    [class=spn] { /** Span Class **/
+        position: relative;
+        left:0px; // Icon to left: -9px
+        transform-origin: left right; // Icon to left: left right
+        transform: translateX(0px);// Icon to left: -9px
+        transition: .20s ease-in-out;
+    }
+    &:hover { /** -- Icons on Hover properties -- **/
+        [class~=fa], [class~=svg-inline--fa],
+        [class~=mdi]::before, [class~=icon]::before, [class~="typcn"]::before { /** -- Since Material, Iconic and Typicons use ::before -- **/
+            opacity: 1;
+            transform: translateX(20px) scale(1); // Icon to left: translateX(20px) scale(.75);
+        }
+        [class=spn] {/** -- Span on Hover properties -- **/   
+            left:0px; // transform: translateX(0);
         }
     }
 }

@@ -1,17 +1,14 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-import AlertEmptyState from '../../alert/alertEmptyState'
-import BlurbHorizontal from '../../blurb/blurbHorizontal'
+import RenderFeed from '../../feed/renderFeed'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
-import { getDate } from '../../utils/utils'
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {
@@ -63,45 +60,20 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                                 }
             />
 
-            <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
-                <Container className='mt-3 mb-3'>
-                    <Row>
-                        <Col xs={12} md={8}>
-                            {
-                                ( data.events?.nodes.length > 0 ) ?
-                                    data.events.nodes.map( ( event, index ) => (
-                                        <BlurbHorizontal 
-                                            key             = { index }
-                                            className       = { 'mb-3' }
-                                            featuredImage   =   {  
-                                                                    event.featuredImage?.node ? 
-                                                                        event.featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                                                    : 
-                                                                        undefined    
-                                                                }
-                                            mode            = { contentMode }
-                                            title           = { event.title }
-                                            eventDate       = { event.eventDetails.eventDates }
-                                            subtitle        = { getDate(event.modified.toString(), 2, 'us', 'LLLL d, yyyy' ) }
-                                            tags            =   { 
-                                                                    ( event.tags?.nodes ) ? 
-                                                                        event.tags 
-                                                                    : 
-                                                                        undefined  
-                                                                }
-                                            excerpt         = { event.excerpt }
-                                            type            = 'event'
-                                            link            = { `/${breadcrumbs.campus}/${config.eventPostDetailsSlug}/${event.slug}` }
-                                            linkText        = { event.title }
-                                        />
-                                    ))
-                                :
-                                    <AlertEmptyState mode = { mode } className='mt-5' content='' />
-                            }
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
+            {
+                config.archiveMode === 'internal' ?
+                    <RenderFeed 
+                        view            = { 'events' }
+                        feeds           = { data.events }
+                        campus          = { breadcrumbs.campus }
+                        containerWidth  = { 'container' }
+                        size            = { 'md' }
+                        className       = { '' }
+                        mode            = { contentMode }
+                        itemsPerPage    = { 3 }
+                    />
+                : undefined
+            }
 
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
@@ -154,6 +126,14 @@ export const query = graphql`
                     eventLink {
                         eventLinkText
                         eventLinkUrl
+                    }
+                    eventCampus {
+                        ... on WpCampus {
+                            id
+                            slug
+                            title
+                            status
+                        }
                     }
                 }
                 tags {

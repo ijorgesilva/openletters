@@ -56,7 +56,33 @@
 		"copied": "Copiado!",
 		"copied-failed": "Falló en copiar!",
 		"courses": {
-			"title": "Cursos"
+			"apply-now": "Aplicar ahora",
+			"certificate": {
+				"available": "Certificado Disponible"
+			},
+			"description": "",
+			"duration": {
+				"a-week": "a la semana",
+				"recommended-time": "Tiempo recomendado",
+				"total-duration": "Duración Total",
+				"weekly": "semanal"
+			},
+			"ends-on": "Termina el",
+			"enroll-now": "Registrarse Ahora",
+			"instructors": "Instructores",
+			"lessons": "Lecciones",
+			"modality": {
+				"blended": "En persona y En línea",
+				"in-person": "En persona",
+				"online": "En línea"
+			},
+			"pace": {
+				"instructor-paced": "Dirigido por instructor",
+				"self-pace": "Ritmo propio"
+			},
+			"starts-on": "Comienza en",
+			"title": "Curso",
+			"title-plural": "Cursos"
 		},
 		"created-on": "Creado el",
 		"empty": {
@@ -71,6 +97,8 @@
 			"organized-by": "Organizado por",
 			"title": "Eventos"
 		},
+		"faq": "Preguntas Frecuentes",
+		"first": "Primero",
 		"forms": {
 			"sending": "Enviando...",
 			"submit": "Enviar"
@@ -78,8 +106,16 @@
 		"give": {
 			"title": "Dar ahora"
 		},
+		"groupTypes": {
+			"description": "",
+			"title": "Tipos de Grupo",
+			"title-plural": "Tipos de Grupo",
+			"title-singular": "Tipo de Grupo"
+		},
 		"groups": {
+			"description": "",
 			"title": "Grupos",
+			"title-plural": "Grupos",
 			"title-singular": "Grupo"
 		},
 		"help": {
@@ -87,6 +123,16 @@
 			"title": "Ayuda"
 		},
 		"home-page": "Página Principal",
+		"languages": {
+			"iso-name": {
+				"en": "Inglés",
+				"es": "Español"
+			},
+			"languages-available": "Idiomas Disponibles",
+			"title": "Idioma",
+			"title-plural": "Idiomas"
+		},
+		"last": "Último",
 		"legal": {
 			"disclaimer": "© Todos los Derechos Reservados."
 		},
@@ -109,6 +155,9 @@
 		"next": "Siguiente >",
 		"no-records": "Nada que mostrar!",
 		"notes": "Notas",
+		"of": "de",
+		"overview": "Resumen",
+		"page": "Página",
 		"pages": {
 			"name": "Página"
 		},
@@ -122,17 +171,45 @@
 		"read_more": "Leer más",
 		"related-resources": "Recursos",
 		"search": {
-			"placeholder": "Buscar..."
+			"entries-found": "Entradas encontradas",
+			"filter-by-campus": "Filtrar por Campus",
+			"filter-by-speaker": "Filtrar por Orador",
+			"filters": "",
+			"no-results": "Sin resultados",
+			"no-results-for": "No se han encontrado resultados para ",
+			"placeholder": "Buscar...",
+			"reset-title": "Limpiar todos los filtros",
+			"search-title-ellipsis": "Buscar...",
+			"show-less": "Mostrar menos",
+			"show-more": "Mostrar más",
+			"stalled": "La búsqueda está estancada",
+			"submit-title": "Envíe su consulta de búsqueda ",
+			"title": "Buscar"
+		},
+		"time": {
+			"duration": "Duración del curso",
+			"hour": "hora",
+			"hours": "horas",
+			"minute": "minuto",
+			"minutes": "minutos",
+			"second": "segundo",
+			"seconds": "segundos",
+			"year": "año",
+			"years": "años"
 		},
 		"transcripts": "Transcripciones",
 		"view": "Ver",
 		"volunteering": {
+			"description": "",
 			"serve": "Sirve",
+			"title": "Voluntariado",
+			"title-plural": "Voluntariado",
 			"volunteering": "Voluntariado"
 		},
 		"watch": {
 			"about-series": "Acerca de la Serie",
 			"content-empty": "No hay notas disponibles",
+			"latest": "Más Reciente",
 			"meta-description": "",
 			"more-info": "Más información",
 			"playlist": "Listas de reproducción de series",

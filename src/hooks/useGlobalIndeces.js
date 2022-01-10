@@ -17,6 +17,11 @@ export const useGlobalIndeces = ( ) => {
                                     settingsSearchFunctionsEventsActive
                                     settingsSearchFunctionsNewsActive
                                     settingsSearchFunctionsAttachmentsActive
+                                    settingsSearchFunctionsMinistriesActive
+                                    settingsSearchFunctionsCoursesActive
+                                    settingsSearchFunctionsGroupTypesActive
+                                    settingsSearchFunctionsGroupsActive
+                                    settingsSearchFunctionsVolunteeringActive
                                 }
                             }
                         }
@@ -51,6 +56,21 @@ export const useGlobalIndeces = ( ) => {
     }
     if( searchFunctions?.settingsSearchFunctionsAttachmentsActive === true ){
         indexes.push( { name: `attachments`, title: `Attachments` } )
+    }
+    if( searchFunctions?.settingsSearchFunctionsMinistriesActive === true ){
+        indexes.push( { name: `ministries`, title: `Ministries` } )
+    }
+    if( searchFunctions?.settingsSearchFunctionsCoursesActive === true ){
+        indexes.push( { name: `courses`, title: `Courses` } )
+    }
+    if( searchFunctions?.settingsSearchFunctionsGroupTypesActive === true ){
+        indexes.push( { name: `groupTypes`, title: `Group Types` } )
+    }
+    if( searchFunctions?.settingsSearchFunctionsGroupsActive === true ){
+        indexes.push( { name: `groups`, title: `Groups` } )
+    }
+    if( searchFunctions?.settingsSearchFunctionsVolunteeringActive === true ){
+        indexes.push( { name: `volunteering`, title: `Volunteering` } )
     }
     
     return indexes

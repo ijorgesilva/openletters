@@ -1,3 +1,6 @@
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'gatsby'
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
@@ -11,6 +14,9 @@ import './sectionFeedCarousel.scss'
 export default function SectionFeedCarousel( 
     { 
         title, 
+        titleUrl, // Add a Link to the Title
+        titleUrlType, // Determines if link is going to be <Link/> or <a/>
+        titleUrlTarget, // When <a/> the _blank is available
         items, 
         className, 
         id, 
@@ -47,15 +53,51 @@ export default function SectionFeedCarousel(
             break
     }
     
+    const urlType = titleUrlType === 'internal' ? 'internal' : 'external'
+
     return (
 
         <section className={`sectionFeedCarousel ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ ( className ) ? className : '' }`} id={id} style={styles}>
             <Container fluid = { width === 'container' ? false : true }>
                 {
-                    (title) ? 
-                        <h4 className="title">{title}</h4>
-                    : 
-                        undefined
+                    title && titleUrl ? 
+                        urlType === 'internal' ?
+                            <h4 className='title'>
+                                <Link to = {titleUrl} className='btn btn-lg btn-iconed'>
+                                    <span className='spn'>
+                                        {title}
+                                    </span>
+                                    <FontAwesomeIcon 
+                                        icon        = { faChevronRight }
+                                        size        = 'lg' 
+                                        className   = ''
+                                    />
+                                </Link>
+                            </h4>
+                        :
+                            urlType === 'external' ?
+                                <h4 className='title'>
+                                    <a href = {titleUrl} target = { titleUrlTarget ? titleUrlTarget : '_self' }>
+                                        <span className='spn'>
+                                            {title}
+                                        </span>
+                                        <FontAwesomeIcon 
+                                            icon        = { faChevronRight }
+                                            size        = 'lg' 
+                                            className   = ''
+                                        />
+                                    </a>
+                                </h4>
+                            :
+                                undefined
+
+                    :
+                        title ?
+                            <h4 className='title'>
+                                {title}
+                            </h4>
+                        :
+                            undefined
                 }
                 {
                     ( items?.length > 0 ) ?
@@ -66,8 +108,8 @@ export default function SectionFeedCarousel(
                             infinite={ (infinite) ? infinite : false }
                             partialVisible={true}
                             responsive={ responsive[defaultConfig.itemsVisible] }
-                            itemClass="item"
-                            containerClass="carousel-container"
+                            itemClass='item'
+                            containerClass='carousel-container'
                         >
                             {
                                 sortedItems.map( (item, index) => (

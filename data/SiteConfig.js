@@ -1,5 +1,8 @@
 const config = {
   
+  /* Misc */
+  hitsPerPage: 8, // How many items show per page on page search.
+
   /* Layout Configuration */
   watchDetailsViewSidebarBackground: false,
   watchDetailsViewHeroBackground: true,
@@ -11,9 +14,10 @@ const config = {
   /* Gatsby Permalinks */
   
     /* Watch */
-    watchSlug: 'watch',
-    watchMessageDetailsSlug: 'm',
-    watchSeriesDetailsSlug: 's',
+      watchSlug: 'watch', // Watch Main Page per Campus: Builds a page at /campus/watch
+      watchSlugLatest: 'latest', // Watch Latest archive: Builds a page at /campus/watch/latest
+      watchMessageDetailsSlug: 'm', // Message slug: Builds a page at /campus/watch/m/message-slug
+      watchSeriesDetailsSlug: 's', // Series slug: Builds a page at /campus/watch/s/series-slug
 
     /* News */
     newsPostDetailsSlug: 'n',
@@ -28,7 +32,7 @@ const config = {
     blogPostDetailsSlug: 'b',
 
     /* Attachments */
-    attachmentSlug: 'd',
+    attachmentSlug: 'a',
 
     /* Group Types */
     groupTypesSlug: 'gt',
@@ -51,14 +55,14 @@ const config = {
     /* Volunteering */
     volunteeringSlug: 'v',
 
-  /* Features */
-    /* Features Flags */
-    menuCampusSelector: true,
-    menuLanguageSelector: false,
-    hasSearch: true,
-
     /* Post Configuration */
     blogShowDates: true,
+  
+    /* 
+      algolia: Use algolia archiving list. 
+      internal: Use react libraries functions.
+    */
+    archiveMode: 'internal', 
   
 };
 

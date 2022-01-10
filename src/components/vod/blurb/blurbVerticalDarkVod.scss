@@ -33,6 +33,7 @@
             }
         }
         .card-img-container{ 
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
             .gatsby-image-wrapper {
                 &::after {
                     background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);
@@ -69,6 +70,7 @@
             }
         }
         .card-img-container{ 
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
             .gatsby-image-wrapper {
                 &::after {
                     background: linear-gradient(to bottom, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 1%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 39%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.36) 61%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 100%);

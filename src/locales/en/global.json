@@ -56,7 +56,33 @@
 		"copied": "Copied!",
 		"copied-failed": "Failed to copy!",
 		"courses": {
-			"title": "Courses"
+			"apply-now": "Apply now",
+			"certificate": {
+				"available": "Certificate Available"
+			},
+			"description": "",
+			"duration": {
+				"a-week": "a week",
+				"recommended-time": "Recommended time",
+				"total-duration": "Total Duration",
+				"weekly": "weekly"
+			},
+			"ends-on": "Ends on",
+			"enroll-now": "Enroll Now",
+			"instructors": "Instructors",
+			"lessons": "Lessons",
+			"modality": {
+				"blended": "In-person and Online",
+				"in-person": "In-person",
+				"online": "On-line"
+			},
+			"pace": {
+				"instructor-paced": "Instructor-paced",
+				"self-pace": "Self-paced"
+			},
+			"starts-on": "Starts on",
+			"title": "Course",
+			"title-plural": "Courses"
 		},
 		"created-on": "Created on",
 		"empty": {
@@ -71,6 +97,8 @@
 			"organized-by": "Organized by",
 			"title": "Events"
 		},
+		"faq": "FAQ",
+		"first": "First",
 		"forms": {
 			"sending": "Sending...",
 			"submit": "Submit"
@@ -78,8 +106,16 @@
 		"give": {
 			"title": "Give"
 		},
+		"groupTypes": {
+			"description": "",
+			"title": "Group Types",
+			"title-plural": "Group Types",
+			"title-singular": "Group Type"
+		},
 		"groups": {
+			"description": "",
 			"title": "Groups",
+			"title-plural": "Groups",
 			"title-singular": "Group"
 		},
 		"help": {
@@ -87,6 +123,16 @@
 			"title": "Help"
 		},
 		"home-page": "Home Page",
+		"languages": {
+			"iso-name": {
+				"en": "English",
+				"es": "Spanish"
+			},
+			"languages-available": "Languages Available",
+			"title": "Language",
+			"title-plural": "Languages"
+		},
+		"last": "Last",
 		"legal": {
 			"disclaimer": "Copyright ©. All Rights Reserved."
 		},
@@ -109,6 +155,9 @@
 		"next": "Next >",
 		"no-records": "Nothing to show!",
 		"notes": "Notes",
+		"of": "of",
+		"overview": "Overview",
+		"page": "Page",
 		"pages": {
 			"name": "Page"
 		},
@@ -122,17 +171,45 @@
 		"read_more": "Read more",
 		"related-resources": "Resources",
 		"search": {
-			"placeholder": "Search..."
+			"entries-found": "Entries found",
+			"filter-by-campus": "Filter by Campus",
+			"filter-by-speaker": "Filter by Speaker",
+			"filters": "Filtros",
+			"no-results": "No results",
+			"no-results-for": "No results have been found for ",
+			"placeholder": "Search...",
+			"reset-title": "Clear all filters",
+			"search-title-ellipsis": "Search...",
+			"show-less": "Show less",
+			"show-more": "Show more",
+			"stalled": "The search is stalled",
+			"submit-title": "Submit your search query",
+			"title": "Search"
+		},
+		"time": {
+			"duration": "Duration",
+			"hour": "hour",
+			"hours": "hours",
+			"minute": "minute",
+			"minutes": "minutes",
+			"second": "second",
+			"seconds": "seconds",
+			"year": "year",
+			"years": "years"
 		},
 		"transcripts": "Transcripts",
 		"view": "View",
 		"volunteering": {
+			"description": "",
 			"serve": "Serve",
+			"title": "Volunteering",
+			"title-plural": "Volunteering",
 			"volunteering": "Volunteering"
 		},
 		"watch": {
 			"about-series": "About the Series",
 			"content-empty": "No notes available",
+			"latest": "Latest",
 			"meta-description": "",
 			"more-info": "More info",
 			"playlist": "Series playlist",

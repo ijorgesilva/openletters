@@ -92,6 +92,39 @@ const queriesCommon = {
             databaseId
         }
     `,
+    itemConfiguration: `
+        active
+        feedLayout
+        itemConfiguration {
+            itemBorder
+            itemBorderColor
+            itemClass
+            itemGap
+            itemImageAspect
+            itemImageFit
+            itemImagePosition
+            itemOrientation
+            itemTruncate
+            itemTruncateLines
+            itemType
+            maxItems
+            orderBy
+            skip
+            sorting
+            hideButton
+            hideExcerpt
+            hideImage
+            hideSubtitle
+            hideTitle
+            buttonBehavior {
+                buttonCss
+                buttonCssRemoveDefault
+                buttonStretch
+                buttonTarget
+                buttonText
+            }
+        }
+    `,
     blurbConfiguration: `
         sectionBlurbsConfigurationOrientation
         sectionBlurbsConfigurationType

@@ -15,6 +15,7 @@ export default function BlurbVertical (
         title,
         subtitle,
         content,
+        tags,
         buttons,
         itemType,
         stretchedlink,
@@ -42,7 +43,7 @@ export default function BlurbVertical (
     const cardOrientation = ( orientation === 'vertical' || orientation === 'horizontal' ) ? orientation : 'vertical'
 
     return (
-        <Card className = {`${ removeDefaultCss ? '' : 'blurbVertical' } ${ mode ? mode : 'light' } ${ className ? className : ''}  ${ border ? border : '' } ${ borderColor ? borderColor : '' } ${ itemGrow ? 'grow' : ''} ${ cardOrientation ? cardOrientation : ''} ${ itemType ? itemType : ''}`}>
+        <Card className = {`${ removeDefaultCss ? '' : 'blurbVertical' } ${ mode ? mode : 'light' } ${ className ? className : ''}  ${ border ? border : '' } ${ borderColor ? borderColor : '' } ${ itemGrow ? 'grow' : ''} ${ cardOrientation ? cardOrientation : ''} ${ itemType ? itemType : ''} ${ hideImage ? 'no-image' : '' }`}>
 
             {
                 hideImage ?
@@ -77,6 +78,7 @@ export default function BlurbVertical (
                 {
                     hideExcerpt ? undefined
                     :
+                        content ?
                         <>
                         {
                             truncate ?
@@ -85,6 +87,25 @@ export default function BlurbVertical (
                                 <Card.Text  dangerouslySetInnerHTML={{__html: content.replace(/<p>/, '').replace(/<\/p>/, '')}}></Card.Text>    
                         }
                         </>
+                        : undefined
+                }
+                {
+                    tags?.length > 0 ?
+                        <div className='tags'>
+                            {
+                                tags.map( ( obj, index ) => (
+                                    (index < 3) ?
+                                        <div key={index} className={`badge badge-pill badge-image`}>
+                                            {obj.name}
+                                        </div>
+                                    :
+                                        undefined
+
+                                ))
+                            }
+                        </div>
+                    :
+                        undefined
                 }
                 {
                     ( buttons?.length > 0 ) ?

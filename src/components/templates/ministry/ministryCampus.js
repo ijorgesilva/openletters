@@ -1,12 +1,10 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
-import AlertEmptyState from '../../alert/alertEmptyState'
-import BlurbHorizontal from '../../blurb/blurbHorizontal'
+import RenderFeed from '../../feed/renderFeed'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
@@ -69,43 +67,20 @@ export default function MinistryCampus (
                                 }
             />
 
-            <section className = {`content ${ contentMode ? contentMode : 'light' }`}>
-                <Container className='mt-3 mb-3'>
-                    <Row>
-                        <Col xs={12} md={8}>
-                            {
-                                ( data.ministries?.nodes.length > 0 ) ?
-                                    data.ministries.nodes.map( ( _, index ) => (
-                                        <BlurbHorizontal 
-                                            key             = { index }
-                                            className       = { '' }
-                                            featuredImage   =   {  
-                                                                    _.featuredImage?.node ? 
-                                                                        _.featuredImage.node.localFile.childImageSharp.gatsbyImageData
-                                                                    : 
-                                                                        undefined    
-                                                                }
-                                            mode            = { contentMode }
-                                            title           = { _.title }
-                                            subtitle        = { '' }
-                                            tags            =   { 
-                                                                    _.tags?.nodes ? 
-                                                                        _.tags 
-                                                                    : 
-                                                                        undefined  
-                                                                }
-                                            link            = { `/${breadcrumbs.campus}/${config.ministrySlug}/${_.slug}` }
-                                            linkText        = { _.title }
-                                            excerpt         = { _.excerpt }
-                                        />
-                                    ))
-                                :
-                                    <AlertEmptyState mode = { mode } className='mt-5' content='' />
-                            }
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
+            {
+                config.archiveMode === 'internal' ?
+                    <RenderFeed 
+                        view            = { 'ministries' }
+                        feeds           = { data.ministries }
+                        campus          = { breadcrumbs.campus }
+                        containerWidth  = { 'container' }
+                        size            = { 'md' }
+                        className       = { '' }
+                        mode            = { contentMode }
+                        itemsPerPage    = { 3 }
+                    />
+                : undefined
+            }
             
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
@@ -131,7 +106,7 @@ export const query = graphql`
                 fields: modified, 
                 order: DESC
             }
-            limit: 12
+            limit: 100
         ) {
             nodes{
                 id
@@ -141,6 +116,14 @@ export const query = graphql`
                 modified(formatString: "YYYYMMDD")
                 general {
                     summary
+                    campus {
+                        ... on WpCampus {
+                            id
+                            slug
+                            title
+                            status
+                        }
+                    }
                     featuredPhoto {
                         localFile {
                             childImageSharp {

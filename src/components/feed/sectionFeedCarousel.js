@@ -8,16 +8,20 @@ import './sectionFeedCarousel.scss'
 import { getDate } from '../../components/utils/utils'
 import BlurbHorizontal from '../blurb/blurbHorizontal'
 
-export default function SectionFeedCarousel ( { title, items, className, id, slug, itemsVisible, count } ) {
+export default function SectionFeedCarousel ( 
+    { 
+        title, items, className, id, slug, itemsVisible, count 
+    } 
+) {
 
     const defaultVisible = 4
 
     const objLength = items.nodes.length
 
     return (
-        <section className={`sectionFeedCarousel ${className}`} id={id}>
+        <section className={`sectionFeedCarousel ${className ? className : ''}`} id={id}>
             <Container fluid>
-                <h4 className="h-color-six-shade-three mb-5" dangerouslySetInnerHTML={{__html: title}}></h4>
+                <h4 className="mb-5" dangerouslySetInnerHTML={{__html: title}}></h4>
                 <Carousel 
                     swipeable={true}
                     draggable={true}

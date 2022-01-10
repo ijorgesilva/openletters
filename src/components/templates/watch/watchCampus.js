@@ -93,6 +93,9 @@ export default function WatchPage( { pageContext, data, location } ) {
                         className       = 'z-index-2' 
                         id              = 'recent'
                         title           = { t('global.watch.section-latest-title') }
+                        titleUrl        = { `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}` }
+                        titleUrlType    = {'internal'}
+                        titleUrlTarget  = { '_self'}
                         items           = { data.latest.nodes }
                         mode            = { contentMode }
                         campus          = { slug }

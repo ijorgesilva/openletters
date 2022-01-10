@@ -25,6 +25,7 @@ export default function SectionCarousel ( {
         autoplay,
         stretchedlink,
         // Aspect
+        orientation,
         itemType,
         dots,
         dotsClass,
@@ -104,7 +105,7 @@ export default function SectionCarousel ( {
                                             mode                = { mode }
                                             buttons             = { _.buttons }
                                             // counter             = { counter }
-
+                                            orientation         = { orientation }
                                             truncate            = { truncate }
                                             truncateLines       = { truncateLines }
                                             stretchedlink       = { stretchedlink }

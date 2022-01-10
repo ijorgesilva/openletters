@@ -8,8 +8,6 @@ export const useWebsiteConfiguration = () => {
                                         websiteSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
-
-
                                                 settingsNewsletter {
                                                     settingsNewsletterProvider
                                                     settingsNewsletterUrl
@@ -25,7 +23,7 @@ export const useWebsiteConfiguration = () => {
                                                     settingsAppGoogle
                                                     settingsAppApple
                                                 }
-
+                                                
                                                 settingsCode
                                                 settingsCss
 
@@ -51,6 +49,8 @@ export const useWebsiteConfiguration = () => {
                                                 
                                                 settingsMenus {
                                                     settingsMenuCampusSelector
+                                                    settingsMenuLanguageSelector
+                                                    settingsMenuSearch
                                                 }
                                                 
                                                 settingsDefaultCampus {
@@ -69,6 +69,241 @@ export const useWebsiteConfiguration = () => {
                                                         settingsAuthenticationTypeExternalUrl
                                                     }
                                                 }
+                                                # Pages Configuration
+                                                settingsPages {
+                                                    settingsPagesWatch {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesBlog {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesCourses {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesEvents {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesGroups {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesMinistries {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                    settingsPagesVolunteer {                                                    
+                                                        active
+                                                        feedLayout
+                                                        itemConfiguration {
+                                                            itemBorder
+                                                            itemBorderColor
+                                                            itemClass
+                                                            itemGap
+                                                            itemImageAspect
+                                                            itemImageFit
+                                                            itemImagePosition
+                                                            itemOrientation
+                                                            itemTruncate
+                                                            itemTruncateLines
+                                                            itemType
+                                                            maxItems
+                                                            orderBy
+                                                            skip
+                                                            sorting
+                                                            hideButton
+                                                            hideExcerpt
+                                                            hideImage
+                                                            hideSubtitle
+                                                            hideTitle
+                                                            buttonBehavior {
+                                                                buttonCss
+                                                                buttonCssRemoveDefault
+                                                                buttonStretch
+                                                                buttonTarget
+                                                                buttonText
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                # Pages End
 
                                             }
                                         }

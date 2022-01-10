@@ -41,7 +41,7 @@ export default function BlurbVerticalDarkVod (
                                         alt=""
                                     />
                                 : 
-                                    <div className="card-img-top" alt=""></div>
+                                    <div className="card-img-top aspect-ratio-16_9" alt=""></div>
                             }
                         </Link>
                     </div>

@@ -2,7 +2,6 @@
 
 .blurbVertical {
 
-
     &.light {
         &.card {
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
@@ -145,6 +144,9 @@
             min-height: 200px;
             transition: var(--transition-regular);
             text-align: left;
+            &.no-image {
+                grid-template-columns: 1fr;
+            }
             .card-img {
                 height: 100%;
                 .gatsby-image-wrapper {

@@ -36,6 +36,7 @@ export const useGetFeed = (
         skip: Skip the first item in list
      */
     sortBy,
+    type,
     ) => {
 
     const { t } = useTranslation()
@@ -46,18 +47,76 @@ export const useGetFeed = (
     
     let rawList = []
     let listObject = {
-        type: builtFeedObject?.type ? builtFeedObject.type : feedObject?.feedType ? feedObject.feedType : 'custom' ,
+        type: builtFeedObject?.type ? builtFeedObject.type : feedObject?.feedType ? feedObject.feedType : type ? type : 'custom' ,
         list: [],
     } 
+    let eventData = {}
 
     switch( true ) {
+
+        /*
+         * Blog: Posts & News
+         */
+        case listObject.type === 'blog': {
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                     _.postDetails ?
+                        listObject.list.push(
+                            {
+                                title: _.title,
+                                subtitle: '',
+                                excerpt: _.excerpt,
+                                image: _.featuredImage?.node?.localFile.childImageSharp.gatsbyImageData,
+                                cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
+                                itemCssRemoveDefault: _.itemCssRemoveDefault,
+                                tags: _.tags,
+                                buttons: [
+                                    {
+                                        'buttonLink': `/${useGetBestCampus( campus, _.postDetails.postCampus )}/${config.blogPostDetailsSlug}/${_.slug}`,
+                                        'buttonType': 'internal: Internal',
+                                        'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                        'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                        'buttonCss': feedButton?.buttonCss,
+                                        'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                    }
+                                ],
+                            }
+                        )
+                    :   
+                        _.newsDetails ?
+                            listObject.list.push(
+                                {
+                                    title: _.title,
+                                    subtitle: '',
+                                    excerpt: _.excerpt,
+                                    image: _.featuredImage?.node?.localFile.childImageSharp.gatsbyImageData,
+                                    cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
+                                    itemCssRemoveDefault: _.itemCssRemoveDefault,
+                                    tags: _.tags,
+                                    buttons: [
+                                        {
+                                            'buttonLink': `/${useGetBestCampus( campus, _.newsDetails.newsCampus )}/${config.newsPostDetailsSlug}/${_.slug}`,
+                                            'buttonType': 'internal: Internal',
+                                            'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                            'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                            'buttonCss': feedButton?.buttonCss,
+                                            'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                        }
+                                    ],
+                                }
+                            )
+                        : undefined
+                ))
+            }
+            break
+        }
 
         /*
          * Post
          */
         case listObject.type === 'posts': {
             rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.feedPosts.feedPostsCategory.posts.nodes
-            
             if( rawList?.length > 0 ) {
                 rawList.map( (_, index) => (
                     listObject.list.push(
@@ -65,13 +124,13 @@ export const useGetFeed = (
                             title: _.title,
                             subtitle: '',
                             excerpt: _.excerpt,
-                            image: _.itemImage?.localFile.childImageSharp.gatsbyImageData,
+                            image: _.featuredImage?.node?.localFile.childImageSharp.gatsbyImageData,
                             cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
                             itemCssRemoveDefault: _.itemCssRemoveDefault,
                             tags: _.tags,
                             buttons: [
                                 {
-                                    'buttonLink': `/${useGetBestCampus( campus, _.postDetails.postCampus )}/${config.blogPostDetailsSlug}/${_.slug}`,
+                                    'buttonLink': `/${useGetBestCampus( campus, _.postDetails?.postCampus )}/${config.blogPostDetailsSlug}/${_.slug}`,
                                     'buttonType': 'internal: Internal',
                                     'buttonText': feedButton?.buttonText || t('global.read_more'),
                                     'buttonTarget': feedButton?.buttonTarget || '_self: Self',
@@ -91,13 +150,12 @@ export const useGetFeed = (
          */
         case listObject.type === 'videos': {
                 rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.feedVideos.feedVideosCategory.videosOnDemand.nodes
-                // console.log(rawList)
                 if ( rawList?.length > 0 ) {
                     rawList.map( (_, index) => (
                         (_.videoDetails.videoCampus.length > 0) ?
                             listObject.list.push(
                                 {
-                                    title: _.title + ' | ' + _.videoDetails.videoDayDate,
+                                    title: _.title,
                                     subtitle:   _.videoDetails.videoSeries?.slug ? 
                                                     `<a href='${'/' + useGetBestCampus( campus, _.videoDetails.videoCampus ) + '/' + config.watchSeriesDetailsSlug + '/' + _.videoDetails.videoSeries.slug }'>${_.videoDetails.videoSeries.title}</a>`
                                                 : '', 
@@ -127,7 +185,7 @@ export const useGetFeed = (
             break
         }
 
-        /*
+        /* TODO: Faulty implementation
          * Series
          */
         case listObject.type === 'series': {
@@ -165,12 +223,10 @@ export const useGetFeed = (
          * Event
          */
         case listObject.type === 'events': {
-            rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.feedEvents.feedEventsCategory.events.nodes
-            let eventData = {}
-
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined // TODO: Incorporate feedObject query results. feedObject.feedEvents.feedEventsCategory.events.nodes
+            
             if ( rawList?.length > 0 ) {
                 rawList.map( (_, index) => {
-                    
                     if ( _.eventDetails?.eventCampus.length > 0)  {
                         eventData = useFormatEventData( _.eventDetails.eventDates )
                         listObject.list.push(
@@ -273,23 +329,35 @@ export const useGetFeed = (
         }
         
         /*
-         * Ministries
+         * Course
          */
-        case listObject.type === 'ministries': { // Generate Pages
-            break
-        }
-
-        /*
-         * Group
-         */
-        case listObject.type === 'groups': { // Generate Pages
-            break
-        }
-
-        /*
-         * Group type
-         */
-        case listObject.type === 'grouptypes': { // Generate Pages
+        case listObject.type === 'courses': { // Generate Pages
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined //TODO: feedObject.feedCourses.feedCoursesCategory.courses.nodes
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title,
+                            subtitle: '', // TODO: Add extra fields Start and End Date
+                            excerpt: _.general?.summary ? _.general.summary : '',
+                            image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: _.tags,
+                            buttons: [
+                                {
+                                    'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.coursesSlug}/${_.slug}`,
+                                    'buttonType': 'internal: Internal',
+                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                    'buttonCss': feedButton?.buttonCss,
+                                    'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                }
+                            ],
+                        }
+                    )
+                ))
+            }
             break
         }
 
@@ -297,13 +365,165 @@ export const useGetFeed = (
          * Volunteering
          */
         case listObject.type === 'volunteering': { // Generate Pages
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined 
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title,
+                            subtitle: '',
+                            excerpt: _.general?.summary ? _.general.summary : '',
+                            image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index }`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: _.tags,
+                            buttons: [
+                                {
+                                    'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.volunteeringSlug}/${_.slug}`,
+                                    'buttonType': 'internal: Internal',
+                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                    'buttonCss': feedButton?.buttonCss,
+                                    'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                }
+                            ],
+                        }
+                    )
+                ))
+            }
             break
         }
 
         /*
-         * Course
+         * Group
          */
-        case listObject.type === 'courses': { // Generate Pages
+        case listObject.type === 'groups': { // Generate Pages
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title, // TODO: Implement additional fields
+                            subtitle: '',
+                            excerpt: _.general?.summary ? _.general.summary : '',
+                            image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index }`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: _.tags,
+                            buttons: [
+                                {
+                                    'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.groupsSlug}/${_.slug}`,
+                                    'buttonType': 'internal: Internal',
+                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                    'buttonCss': feedButton?.buttonCss,
+                                    'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                }
+                            ],
+                        }
+                    )
+                ))
+            }
+            break
+        }
+
+        /*
+         * Group type
+         */
+        case listObject.type === 'groupTypes': { // Generate Pages
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title,
+                            subtitle: '',
+                            excerpt: _.general?.summary ? _.general.summary : '',
+                            image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index }`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: _.tags,
+                            buttons: [
+                                {
+                                    'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.groupTypesSlug}/${_.slug}`,
+                                    'buttonType': 'internal: Internal',
+                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                    'buttonCss': feedButton?.buttonCss,
+                                    'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                }
+                            ],
+                        }
+                    )
+                ))
+            }
+            break
+        }
+
+        /*
+         * Ministries
+         */
+        case listObject.type === 'ministries': { // Generate Pages
+            rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.nodes
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title,
+                            subtitle: '',
+                            excerpt: _.general?.summary ? _.general.summary : '',
+                            image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index }`,
+                            itemCssRemoveDefault: _.itemCssRemoveDefault,
+                            tags: _.tags,
+                            buttons: [
+                                {
+                                    'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.ministrySlug}/${_.slug}`,
+                                    'buttonType': 'internal: Internal',
+                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                                    'buttonCss': feedButton?.buttonCss,
+                                    'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                                }
+                            ],
+                        }
+                    )
+                ))
+            }
+            break
+        }
+
+        /*
+         * people
+         */
+        case listObject.type === 'people': { // Generate Pages
+            // TODO: Potential Technical debt. Needs to be normalized.
+            rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.nodes ? feedObject.nodes : feedObject ? feedObject : undefined  
+            if( rawList?.length > 0 ) {
+                rawList.map( (_, index) => (
+                    listObject.list.push(
+                        {
+                            title: _.title,
+                            subtitle: '',
+                            excerpt: '',
+                            image: _.featuredImage?.node?.localFile.childImageSharp.gatsbyImageData,
+                            cssClass: `${ 'item-'+index }`,
+                            itemCssRemoveDefault: '',
+                            tags: _.tags,
+                            // buttons: [
+                            //     {
+                            //         'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.ministrySlug}/${_.slug}`,
+                            //         'buttonType': 'internal: Internal',
+                            //         'buttonText': feedButton?.buttonText || t('global.read_more'),
+                            //         'buttonTarget': feedButton?.buttonTarget || '_self: Self',
+                            //         'buttonCss': feedButton?.buttonCss,
+                            //         'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,
+                            //     }
+                            // ],
+                        }
+                    )
+                ))
+            }
             break
         }
 
@@ -314,12 +534,6 @@ export const useGetFeed = (
             break
         }
 
-        /*
-         * people
-         */
-        case listObject.type === 'people': { // Generate Pages
-            break
-        }
 
     }
     

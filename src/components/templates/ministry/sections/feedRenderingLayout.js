@@ -99,7 +99,7 @@ export default function FeedRenderingLayout (
                                 hideImage           = { hideImage }
                                 hideButton          = { hideButton }
                             />
-                            <nav aria-label="Page navigation example">
+                            <nav>
                                 <ReactPaginate
                                     onPageChange={handlePageClick}
                                     pageRangeDisplayed={5}
@@ -181,7 +181,7 @@ function Items(
                 orientation         = { orientation }
                 truncate            = { truncate }
                 truncateLines       = { truncateLines }
-                className           = { itemClass }
+                className           = { `${itemClass ? itemClass : ''} ${_.cssClass ? _.cssClass : ''}` }
                 imagePosition       = { imagePosition }
                 imageFit            = { imageFit }
                 aspectRatio         = { aspectRatio }

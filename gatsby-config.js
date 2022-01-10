@@ -188,7 +188,7 @@ require('dotenv').config({
             appId: process.env.GATSBY_ALGOLIA_APP_ID,
             apiKey: process.env.ALGOLIA_ADMIN_KEY,
             queries: require("./src/utils/algolia-queries"),
-            matchFields: ['slug', 'modified'],
+            matchFields: ['slug', 'modified', 'campus'],
             enablePartialUpdates: process.env.ALGOLIA_PARTIAL_UPDATES || true,
             chunkSize: 10000,
           },
