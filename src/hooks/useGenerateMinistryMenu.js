@@ -63,7 +63,7 @@ export const useGenerateMinistryMenu = ( breadcrumbs, pages, customPages ) => {
                 as: 'Link', 
         } )
     }
-    customPages.map( _ => {
+    customPages?.map( _ => {
         ministryMenu.push( {
             name: _.menuTitle,
             weight: _.menuWeight || 50,
