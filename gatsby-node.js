@@ -686,7 +686,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                                 })
                             }
                             /* Custom Pages Creation */
-                            if( _.ministryDetails.ministryPagesCustom.length > 0 ){
+                            if( _.ministryDetails.ministryPagesCustom?.length > 0 ){
                                 _.ministryDetails.ministryPagesCustom.forEach( ( customPage, index ) => {
                                     customPageSlug = customPage.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() 
                                     actions.createPage({
