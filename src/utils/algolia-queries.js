@@ -1,4 +1,4 @@
-const config    = require('../../data/SiteConfig')
+const config    = require('./data/SiteConfig')
 
 // Post Types Queries
 const videosAndSeries = `
