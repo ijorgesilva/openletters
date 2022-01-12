@@ -10,27 +10,17 @@ phases:
       nodejs: 14.x
     commands:
       - npm install -g gatsby
-  # CP to build-directory is a work-around for AWS Codebuild
-  # Src: https://github.com/gatsbyjs/gatsby/issues/17990
   pre_build:
     commands:
-      - mkdir -p /build-directory
-      - cp -a ${CODEBUILD_SRC_DIR}/. /build-directory
-      - cd /build-directory
       - npm install
   build:
     commands:
-      - cd /build-directory
       - gatsby build
   post_build:
     commands:
-      - cd /build-directory
-      - echo "User-agent:*" > ./public/robots.txt
-      - echo "Disallow:/" >> ./public/robots.txt
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
       - echo "S3 bucket is $DEPLOY_BUCKET"
       - aws s3 sync --delete --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./public s3://$DEPLOY_BUCKET
-      - cp -a /build-directory/. ${CODEBUILD_SRC_DIR}
 
 cache:
   paths:
