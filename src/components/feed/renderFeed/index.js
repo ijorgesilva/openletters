@@ -31,13 +31,6 @@ export default function RenderFeed (
 
     switch (true) {
         
-        case (builtFeedObject.list.length === 0): {
-            console.log
-            return (
-                <AlertEmptyState />
-            )
-        }
-
         case view === 'ministries': {
             builtFeedObject.list = feeds.nodes
             layoutType      = itemConf.settingsPagesMinistries.feedLayout.split(':')[0]
@@ -438,10 +431,10 @@ export default function RenderFeed (
 
         }
 
-        default:{
+        case (builtFeedObject.list.length === 0):
+        default: {
             return(
-                <>
-                </>
+                <AlertEmptyState />
             )
         }
 
