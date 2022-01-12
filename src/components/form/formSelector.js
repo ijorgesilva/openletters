@@ -72,7 +72,7 @@ export default function FormSelector (
                                     layers      = { secondaryColumnBackground }
                                 />
                             </Col>
-                            <Col className = 'primary-column'>
+                            <Col className = {`primary-column ${ jumbotronMode === 'dark' ? 'bg-dark' : 'bg-light'}`}>
                                 {
                                     ( form.formDetails.formGeneral.formGeneralTitle || form.formDetails.formGeneral.formGeneralContent ) ?
                                         <div className = 'general-content'>
