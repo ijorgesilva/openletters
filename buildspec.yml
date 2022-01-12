@@ -24,7 +24,8 @@ phases:
       ## copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
       # aws sync vs cp https://stackoverflow.com/questions/64728076/aws-s3-cp-vs-aws-s3-sync-behavior-and-cost
       # - aws s3 cp --recursive --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./public s3://$DEPLOY_BUCKET
-      - aws s3 sync --delete --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./public s3://$DEPLOY_BUCKET
+      # Cache control recommended directives https://www.gatsbyjs.com/docs/caching/
+      - aws s3 sync --delete --acl public-read --cache-control="public, max-age=0, must-revalidate" ./public s3://$DEPLOY_BUCKET
       ## set the cache-control headers for index.html to prevent browser caching | Use ${DeployBucket} with CloudFormation
       # - >
       #   aws s3 cp --acl public-read 
@@ -38,11 +39,11 @@ phases:
 
 cache:
   paths:
-    - 'node_modules/*'
-    - '.cache/*'
-    - 'data/*'
-    - 'public/*'
-    - 'WordPress/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - '.cache/**/*'
+    - 'WordPress/**/*'
+    - 'data/**/*'
 
 artifacts:
   files:
