@@ -1,0 +1,44 @@
+version: 0.2
+
+env:
+  variables:
+    NODE_ENV: "production"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14.x
+    commands:
+      - npm install -g gatsby
+
+  pre_build:
+    commands:
+      - echo Installing app dependencies...
+      - npm install
+
+  build:
+    commands:
+      - echo Building App...
+      - gatsby build
+
+  post_build:
+    commands:
+      ## copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
+      - aws s3 sync --delete --acl public-read --cache-control="public, max-age=0, must-revalidate" ./public s3://$DEPLOY_BUCKET
+      ## invalidate the CloudFront cache for /public | Use ${CloudFrontDistribution} with CloudFormation
+      - >
+        aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION
+        --paths /*
+
+artifacts:
+  files:
+    - './public/**/*'
+  base-directory: public
+
+cache:
+  paths:
+    - './node_modules/**/*'
+    - './public/**/*'
+    - './.cache/**/*'
+    - './WordPress/**/*'
+    - './data/**/*'

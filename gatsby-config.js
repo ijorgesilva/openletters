@@ -48,7 +48,6 @@ require('dotenv').config({
         /*
         * Functions
         */
-        `gatsby-plugin-styled-components`, // REMOVE
         "gatsby-plugin-react-helmet", 
         {
           resolve: `gatsby-plugin-sass`,
