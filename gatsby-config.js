@@ -96,9 +96,9 @@ require('dotenv').config({
             url: process.env.WPGRAPHQL_URL,
             verbose: true,
             schema: {
-              perPage: process.env.SCHEMA_PER_PAGE || 50, // currently set to 100
-              requestConcurrency: process.env.SCHEMA_REQUEST_CONCURRENCY || 50, // currently set to 5
-              previewRequestConcurrency: process.env.SCHEMA_PREVIEW_REQUEST_CONCURRENCY || 2, // currently set to 2
+              perPage: process.env.SCHEMA_PER_PAGE || 50,
+              requestConcurrency: process.env.SCHEMA_REQUEST_CONCURRENCY || 50,
+              previewRequestConcurrency: process.env.SCHEMA_PREVIEW_REQUEST_CONCURRENCY || 2,
               timeout: process.env.SCHEMA_TIMEOUT || 120000,
             },
             debug: {
@@ -109,7 +109,7 @@ require('dotenv').config({
             },
             type: {
               __all: {
-                limit: process.env.LIMIT_ALL,
+                limit: process.env.LIMIT_ALL || null,
               },
             },
           },

@@ -19,6 +19,7 @@ import SectionAccordion from './accordion/sectionAccordion'
 import SectionBlurbs from './content/sectionBlurbs'
 import SectionVideo from './content/sectionVideo'
 import SectionForm from './form/sectionForm'
+import SectionIframe from './iframe/sectionIframe'
 import SectionLatestSeries from './vod/feed/sectionLatestSeries'
 
 export default function RenderSection ( 
@@ -613,8 +614,22 @@ export default function RenderSection (
         * iframe
         */
         case ( sectionType === 'iframe' && sectionStatus ): {
+            // const iframeConfiguration   = section.sectionDetails.sectionIframe
+            const iframeUrl             = section.sectionDetails.sectionIframe.sectionIframeOembed
+            
             return(
-                <></>
+                <SectionIframe 
+                    title               = { sectionTitle }
+                    id                  = { sectionId }
+                    content             = { sectionContent }
+                    className           = { sectionClassname }
+                    containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme }
+                    size                = { sectionSize }
+                    location            = { location }
+                    iframeUrl           = { iframeUrl }
+                    backgroundLayers    = { sectionBackground }
+                />
             )
             
         }
