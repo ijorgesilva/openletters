@@ -192,7 +192,7 @@ export const query = graphql`
                 sort: {
                     fields: videoDetails___videoDayDate, 
                     order: DESC
-                }
+                },
             ) {
             nodes{
                 title
@@ -227,7 +227,8 @@ export const query = graphql`
         # Related Resources
         ########
         resources: wpVideoOnDemand (
-            slug: {eq: $slug}
+            slug: {eq: $slug},
+            status: {eq: "publish"}
         ) {
             slug
             id

@@ -36,8 +36,6 @@ export default function WatchPage( { pageContext, data, location } ) {
                             undefined
     const theme         = useTheme()
     const contentMode   = 'dark'
-
-    console.log(campusDetails.campusPages)
         
     return (
         <>

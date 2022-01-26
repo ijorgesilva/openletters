@@ -1,0 +1,120 @@
+version: 0.2
+
+## Buildspec for AWS CodeBuild local cache.
+
+env:
+  variables:
+    NODE_ENV: "production"
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 14.x
+    commands:
+      - npm install -g gatsby
+
+  pre_build:
+    on-failure: ABORT
+    commands:
+      # AWS creates a new instance for each build, the build id is contained in the folder structure, therefore the absolute paths Gatsby stores in the .cache files are invalid for future builds.
+      # source: https://github.com/gatsbyjs/gatsby/issues/17990
+      - echo "Checking cache"
+      - ls .cache/
+      - mkdir -p /build-directory
+      - cp -a ${CODEBUILD_SRC_DIR}/. /build-directory
+
+      - rm -f /build-directory/.cache
+      - rm -f /build-directory/node_modules
+      - rm -f /build-directory/public
+      - rm -f /build-directory/.wordpress-cache
+      - rm -f /build-directory/Wordpress
+
+      - mkdir /build-directory/.cache
+      - mkdir /build-directory/node_modules
+      - mkdir /build-directory/public
+      - mkdir /build-directory/.wordpress-cache
+      - mkdir /build-directory/Wordpress
+      - |
+        if [ -d ${CODEBUILD_SRC_DIR}/.cache/. ]; then 
+        cp -a ${CODEBUILD_SRC_DIR}/.cache/. /build-directory/.cache/
+        else
+        echo ".cache not found"
+        fi
+      - |
+        if [ -d ${CODEBUILD_SRC_DIR}/public/. ]; then 
+        cp -a ${CODEBUILD_SRC_DIR}/public/. /build-directory/public/
+        else
+        echo "public not found"
+        fi
+      - |
+        if [ -d ${CODEBUILD_SRC_DIR}/node_modules/. ]; then 
+        cp -a ${CODEBUILD_SRC_DIR}/node_modules/. /build-directory/node_modules/
+        else
+        echo "node_modules not found"
+        fi
+      - |
+        if [ -d ${CODEBUILD_SRC_DIR}/.wordpress-cache/. ]; then 
+        cp -a ${CODEBUILD_SRC_DIR}/.wordpress-cache/. /build-directory/.wordpress-cache/
+        else
+        echo ".wordpress-cache not found"
+        fi
+      - |
+        if [ -d ${CODEBUILD_SRC_DIR}/Wordpress/. ]; then 
+        cp -a ${CODEBUILD_SRC_DIR}/Wordpress/. /build-directory/Wordpress/
+        else
+        echo "Wordpress not found"
+        fi
+      - cd /build-directory
+      # Installing Dependencies
+      - echo Installing app dependencies...
+      - npm install
+
+  build:
+    on-failure: ABORT
+    commands:
+      - cd /build-directory
+      # Building App
+      - echo Building App...
+      - gatsby build
+      - echo Done building
+      
+  post_build:
+    on-failure: ABORT
+    commands:
+      ## Determine Status code to prevent extra computing
+      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
+      - echo Build stage successfully completed on `date`
+      ## Save Local Cache
+      - cd /build-directory
+      - echo Saving cache...
+      - cp -a /build-directory/.cache/. ${CODEBUILD_SRC_DIR}/.cache/
+      - cp -a /build-directory/public/. ${CODEBUILD_SRC_DIR}/public/
+      - cp -a /build-directory/node_modules/. ${CODEBUILD_SRC_DIR}/node_modules/
+      - cp -a /build-directory/.wordpress-cache/. ${CODEBUILD_SRC_DIR}/.wordpress-cache/
+      - cp -a /build-directory/Wordpress/. ${CODEBUILD_SRC_DIR}/Wordpress/
+      ## Staging Configuration
+      - echo Staging Robots...
+      - echo "User-agent:*" > ./public/robots.txt
+      - echo "Disallow:/" >> ./public/robots.txt
+      ## copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
+      - echo Syncing to S3 and Cloudfront
+      - aws s3 sync --delete --acl public-read --cache-control="public, max-age=0, must-revalidate" ./public s3://$DEPLOY_BUCKET
+      ## invalidate the CloudFront cache for /public | Use ${CloudFrontDistribution} with CloudFormation
+      - echo Invalidating Cloudfront Cache
+      - >
+        aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION
+        --paths /*
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: public
+
+cache:
+  paths:
+    - 'node_modules/'
+    - 'public/'
+    - '.cache/'
+    - '.wordpress-cache/'
+    - 'Wordpress/'
