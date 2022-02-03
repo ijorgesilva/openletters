@@ -138,11 +138,11 @@ export default function MenuLocal ( { campus, mode } ) {
                             :
                                 '/' + campus
 
-    const campusLogo    =   ( theme.graphics.logo ) ?
+    const campusLogo    =   theme.graphics.logo ?
                                 theme.graphics.logo
                             :
-                                ( currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile?.publicURL ) ?
-                                    currentCampus.campusDetails.campusBrand.campusBrandLogo.localFile.publicURL
+                                currentCampus.campusDetails.campusBrand.campusBrandLogo?.localFile.publicURL ?
+                                    currentCampus.campusDetails.campusBrand.campusBrandLogo?.localFile.publicURL
                                 :
                                     undefined
 

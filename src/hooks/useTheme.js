@@ -87,7 +87,7 @@ export const useTheme = () => {
     * Graphics
     */
    theme.graphics = {
-       logo: siteStyles.settingsStylesGraphics.settingsStylesGraphicsLogo.localFile.publicURL
+       logo: siteStyles.settingsStylesGraphics.settingsStylesGraphicsLogo?.localFile.publicURL
    }
 
     /* 

@@ -66,7 +66,7 @@ export const useLatestSeries = ( campus ) => {
     let latestSeries =  ( latestVideos?.nodes?.length > 0 ) ?
                                 latestVideos.nodes.filter( 
                                     _ => (
-                                        _.videoDetails.videoCampus.some( _ => ( _.slug === campus ) )
+                                        _.videoDetails.videoCampus?.some( _ => ( _.slug === campus ) )
                                 ))
                             :
                                 []
