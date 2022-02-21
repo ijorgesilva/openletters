@@ -15,11 +15,13 @@ import SectionShare from '../components/social/sectionShare'
 import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
 import { useGetFeed } from '../hooks/useGetFeed'
 
+
 import SectionAccordion from './accordion/sectionAccordion'
 import SectionBlurbs from './content/sectionBlurbs'
 import SectionVideo from './content/sectionVideo'
 import SectionForm from './form/sectionForm'
 import SectionIframe from './iframe/sectionIframe'
+import SectionQrCode from './qrcode/SectionQrCode'
 import SectionLatestSeries from './vod/feed/sectionLatestSeries'
 
 export default function RenderSection ( 
@@ -77,6 +79,28 @@ export default function RenderSection (
     }
     
     switch( true ) {
+
+        /*
+        * QR Code
+        */
+        case ( sectionType === 'qrcode' && sectionStatus ): {
+            return(
+                <SectionQrCode
+                    title               = { sectionTitle }
+                    id                  = { sectionId }
+                    content             = { sectionContent }
+                    className           = { sectionClassname }
+                    containerWidth      = { sectionContainerWidth }
+                    mode                = { sectionColorScheme }
+                    size                = { sectionSize }
+                    location            = { location }
+                    backgroundLayers    = { sectionBackground }
+                    destinationType     = { section.sectionDetails.sectionQrcode.sectionQrcodeDestination }
+                    destinationUrl      = { section.sectionDetails.sectionQrcode.sectionQrcodeUrl }
+                    destinationText     = { section.sectionDetails.sectionQrcode.sectionQrcodeButtonText }
+                />
+            )
+        }
 
         /*
          * Call To Action
@@ -350,7 +374,6 @@ export default function RenderSection (
                     location         = { location }
                 />
             )
-            
         }
 
         /*

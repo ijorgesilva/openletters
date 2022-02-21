@@ -7,8 +7,13 @@ import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import "./footerSimpleText.scss"
 
-export default function FooterSimpleText( { campus, mode } ) {
-    
+export default function FooterSimpleText( 
+    { 
+        campus, 
+        mode, 
+        hideLinks // Boolean: Hide the Footer Links when true
+    } 
+) {
     
     const { t } = useTranslation()
     const settings = useWebsiteConfiguration()
@@ -30,6 +35,7 @@ export default function FooterSimpleText( { campus, mode } ) {
                                         getPageCampuses[0].slug
                             :
                                 getPageCampuses[0].slug
+    const hideLink = hideLinks ? true : false
 
     return (
         <footer className={`footerSimpleText z-index-2 ${ mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }`}>
@@ -42,7 +48,7 @@ export default function FooterSimpleText( { campus, mode } ) {
                             t('global.legal.disclaimer')
                     }
                     {
-                        (settings.settingsLegalPage?.slug) ?
+                        (settings.settingsLegalPage?.slug && !hideLink ) ?
                             <div className="links">
                                 <Link 
                                     to={ '/' + bestCampusSlug + '/' + config.pagesSlug + '/' + settings.settingsLegalPage.slug }

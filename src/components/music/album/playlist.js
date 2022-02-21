@@ -27,11 +27,11 @@ export default function Playlist (
                                     songs.map ( ( _, index ) => (
                                         <ListGroup.Item className = 'songs' key = { index }>
                                                 <div className={`track track-${index} row justify-content-between`}>
-                                                    <div className='info'>
+                                                    <a className='info' href={`#${_.songTitle.split(' ').join('_')}`}>
                                                         <span className = 'number'> { index + 1 } </span>
                                                         <h5 className = 'title'>{ _.songTitle }</h5>
                                                         <p className = 'duration'>{_.songDuration}</p>
-                                                    </div>
+                                                    </a>
                                                     <div className='buttons'>
                                                         <Button 
                                                             href  = { '#'+ _.songTitle.split(' ').join('_') }

@@ -23,7 +23,6 @@ export default function ShareSection(
 
     let networkList = []
     let networkName
-
     // Variable building for each Network
     if( networks ){
         networks.sectionShareNetworksType.forEach(function(_){

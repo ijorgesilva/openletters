@@ -50,13 +50,18 @@
     $enable-transitions: true;
 
     /* 
-    * Include Media: Breaking Points
+    * Include Media: Media queries overwrite
+    * https://eduardoboucas.github.io/include-media/documentation/
     */
     $breakpoints: (
-        'phone': 320px,
+        'phone': 428px,
         'tablet': 768px,
-        'desktop': 1024px,
+        'desktop': 1680px,
         'largeDesktop': 1920px,
+        'landscape': '(orientation: landscape)',
+        'portrait': '(orientation: portrait)',
+        'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
+        'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)'
     );
 
 /* 
@@ -74,14 +79,3 @@
 /* 
  * Footer
  */
-
-
-/* 
- * Include Media: Media queries overwrite
- * https://eduardoboucas.github.io/include-media/documentation/
- */
-$breakpoints: (
-    'phone': 320px,
-    'tablet': 768px,
-    'desktop': 1024px
-);

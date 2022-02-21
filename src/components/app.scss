@@ -50,8 +50,8 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
 
-@import "~include-media/dist/_include-media.scss";
-
+@import '~include-media/dist/_include-media.scss';
+@import '~@fortawesome/fontawesome-svg-core/styles';
 
 /* 
  * Bootstrap Rewrites
@@ -721,9 +721,7 @@
                 flex-direction: column;
                 justify-content: center;
                 height: 100%;
-                .content {
-                    margin-top: 2.5rem;
-                }
+                padding: 2rem 0px;
             }
         }
         /*
@@ -942,6 +940,7 @@ a {
         }
     }
 }
+
 // Btn Icon Animation
 .btn {
     &-iconed{
@@ -978,49 +977,47 @@ a {
     }
 }
 
-.h-cursor-pointer {
-    cursor: pointer;
-}
-
-.h-blur-body {
-    top:0;
-    position:absolute;
-    z-index: 6;
-    width:100%;
-    height:50px;
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: blur(10px);
-}
-
-ul.h-nobullets {
-    list-style-type: none;
-}
-
-.h-center-absolute {
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-}
-
+/* 
+ * Bootrsap 4.x responsive font size
+ */
 
 @include media("<desktop") {
 }
 
-@include media("<=tablet") {
-    .mobile-only {
-        display: block;
-    }
-    .hide-mobile {
-        display: none;
+@include media("<=tablet", "landscape") {
+    h5 {
+      font-size: 22px;
+      line-height: 22px;
     }
 }
 
-@include media("<=phone") {
+@include media("<=phone", "portrait") {    
+    h1 {
+        font-size: 12vw;
+        line-height: 12vw;
+    }
+    h2 {
+        font-size: 10vw;
+        line-height: 10vw;
+    }
+    h3 {
+        font-size: 8vw;
+        line-height: 8vw;
+    }
+    h4 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    h5 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    h6 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    html.watch {
 
+    }
+    
 }
-
-

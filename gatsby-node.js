@@ -801,6 +801,32 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         })
     }
 
+    /*******************
+     * 11. Landing Pages
+    *******************/
+     if( result.data.landingPages?.nodes?.length > 0 ) {
+        result.data.landingPages.nodes.forEach( _ => {
+            if( _.general.campus?.length > 0 ) {
+                _.general.campus.forEach ( campus => {
+                    actions.createPage({
+                        path: `/${campus.slug}/${config.landingPageSlug}/${_.slug}`,
+                        component: path.resolve(`./src/components/templates/landing/landingDetails.js`),
+                        context: {
+                            ..._,
+                            title: _.title,
+                            slug: _.slug,
+                            id: _.id,
+                            campusId: `/${campus.databaseId}/`,
+                            breadcrumbs: {
+                                            'campus': campus.slug,
+                                        },
+                        }
+                    })
+                })
+            }
+        })
+    }
+    
     /******************* 
      * Redirects creation 
      *******************/
@@ -843,6 +869,8 @@ const query = `
         ${queriesPostTypes.allWpSeries}
 
         ${queriesPostTypes.allWpVideo}
+
+        ${queriesPostTypes.allWpLandingPage}
 
         ${queriesPostTypes.allWpDocument}
         

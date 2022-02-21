@@ -47,13 +47,16 @@ const config = {
     coursesSlug: 'c',
 
     /* Lesson */
-    lessonSlug: 'l',
+    lessonSlug: 'cl',
 
     /* People */
     peopleSlug: 'i',
 
     /* Volunteering */
     volunteeringSlug: 'v',
+
+    /* Landing Page */
+    landingPageSlug: 'l',
 
     /* Post Configuration */
     blogShowDates: true,

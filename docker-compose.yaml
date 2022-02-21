@@ -1,0 +1,12 @@
+# Source: https://valenciandigital.com/blog/containerizing-a-gatsbyjs-site-with-docker-compose
+version: "3"
+services:
+  frontend:
+    build: ./
+    command: ts-node node_modules/.bin/gatsby develop -H 0.0.0.0 -p 8000
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+      - "9929:9929"
+      - "9230:9230"

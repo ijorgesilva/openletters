@@ -1,15 +1,12 @@
-import { graphql } from 'gatsby'
 import React from 'react'
-import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import FooterSimpleText from '../components/footer/footerSimpleText'
 import HeaderPage from '../components/headerPage'
-import HeroBasic from '../components/hero/heroBasic'
 import Navigation from '../components/menu/navigation'
 import { useGlobalIndeces } from '../hooks/useGlobalIndeces'
 
-export default function Home( { data, location } ) {
+export default function Home( { location } ) {
 
   const { t } = useTranslation()
 
@@ -17,12 +14,10 @@ export default function Home( { data, location } ) {
 
     <>
 
-
       <HeaderPage
           title       = {t('global.404-title')}
           location    = { location } 
-          className   = '404'
-          cover       = { ( data.poster != null ) ? data.poster.publicURL : undefined }
+          classNameName   = '404'
           description = {t('global.404-description')}
       />
             
@@ -34,17 +29,26 @@ export default function Home( { data, location } ) {
           menuGlobal
           menuLocal
       />
-      
-      <HeroBasic
-        title={t('global.404-title')}
-        subtitle={t('global.404-description')}
-        backgroundPhoto={ ( data.poster != null ) ? data.poster.publicURL : undefined }
-        className={'c-hero position-relative z-index-1'}
-        >
-          <Button className='ml-3' variant='none' href='/' target='_self'>
-            {t('global.404-go-back')}
-          </Button>
-      </HeroBasic>
+
+      <div className='container'>
+          <div className='row'>
+              <div className='col-md-12'>
+                  <div 
+                    className='error-template d-flex flex-column justify-content-center align-content-center flex-wrap'
+                    style={{minHeight: '600px',}}
+                  >
+                      <h1>{t('global.404-title')}</h1>
+                      <h2>404</h2>
+                      <div className='error-details'>
+                        {t('global.404-description')}
+                      </div>
+                      <div className='error-actions'>
+                          <a href='/' className='btn btn-primary btn-lg'>Home</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
       <FooterSimpleText 
           campus = { 'global' } 
@@ -55,11 +59,3 @@ export default function Home( { data, location } ) {
 
   )
 }
-
-export const query = graphql`
-  query fourOfourPage {
-      poster: file(relativePath: {eq: "img/smallgroups/Background.jpg"}) {
-          publicURL
-      }
-  }
-`

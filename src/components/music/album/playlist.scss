@@ -32,6 +32,7 @@
                         margin: unset;
                     }
                     .number {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                         margin-right: 10px;
                         font-weight: normal;
                     }

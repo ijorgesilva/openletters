@@ -26,7 +26,7 @@ export default function ShareSimpleIcon(
         <Dropdown className={`shareSimpleIcon ${ mode ? mode : ''} ${ className ? className : ''}`} drop='up'>
 
             <Dropdown.Toggle
-                alt     = { t('components.social.sharesimpleicon-title') }
+                alt     = { t('components.social.share-on') }
                 variant = { `${ mode === 'light' ? 'outline-light' : 'outline-dark' }` }
             >
                 <FontAwesomeIcon className='icon' icon={faShareSquare} size='lg'/>
@@ -40,7 +40,7 @@ export default function ShareSimpleIcon(
 
             <Dropdown.Menu variant = { mode ? mode : 'light' } >
                 <Dropdown.ItemText className='user-select-none'>
-                    <strong>{t('components.social.sharesimpleicon-title')}</strong>
+                    <strong>{t('components.social.share-on')}</strong>
                 </Dropdown.ItemText>
                 <Dropdown.Item eventKey='1'>
                     <FacebookShareButton 

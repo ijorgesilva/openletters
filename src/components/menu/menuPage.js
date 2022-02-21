@@ -119,21 +119,21 @@ export default function MenuPage (
                                 <Nav.Item key={index} as='li'>
                                     {
                                         item.target ? 
-                                            <Nav.Link 
+                                            <a 
                                                 href        = {item.link} 
-                                                className   = {`${item.className ? item.className : '' } ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
+                                                className   = {`${ item.removeDefaultCss ? '' : 'nav-link'} ${item.className ? item.className : '' } ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
                                                 title       = {item.name} 
                                                 target      = {item.target.split(':')[0]}
                                             >
                                                 {item.name}
-                                            </Nav.Link>
+                                            </a>
                                         :   
                                             <Link 
                                                 to              = {item.link} 
-                                                className       = {`nav-link ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
+                                                className       = {`${ item.removeDefaultCss ? '' : 'nav-link'} ${ item.link === breadcrumbs?.current ? 'active' : ''}`}
                                                 title           = {item.name} 
                                                 activeClassName = 'active'
-                                            >
+                                            > 
                                                 {item.name}
                                             </Link>  
                                     }

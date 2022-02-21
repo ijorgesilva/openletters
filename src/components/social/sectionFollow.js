@@ -41,13 +41,13 @@ export default function SectionFollow (
                         ( title || content ) ?
                             <div className='general'>
                                 {
-                                    ( title ) ?
+                                    title ?
                                         <h2 className = 'title display-4 text-break' dangerouslySetInnerHTML={{__html: title}}></h2>
                                     :
                                         undefined
                                 }
                                 { 
-                                    ( content ) ?
+                                    content ?
                                         <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
                                     :
                                         undefined

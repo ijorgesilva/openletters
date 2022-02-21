@@ -391,6 +391,14 @@ const queriesPostTypes = {
 
                     ministryPagesCustom {
                         menuTitle
+                        menuType
+                        menuLink {
+                          menuItemType
+                          menuItemUrl
+                          menuItemTarget
+                          menuItemCss
+                          menuItemRemoveCss
+                        }
                         menuWeight
                         sections {
                             ${queriesSectionsMain}
@@ -609,6 +617,35 @@ const queriesPostTypes = {
                 tags {
                     nodes {
                         ${queriesCommon.tag}
+                    }
+                }
+            }
+        }
+    `,
+    allWpLandingPage:` 
+        ########
+        # Landing Pages 
+        ########
+        landingPages: allWpLandingPage {
+            nodes {
+                id
+                title
+                slug
+                databaseId
+                ${queriesCommon.seoFields}
+                ${queriesCommon.pageSettings}
+                general {
+                    summary
+                    campus {
+                        ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
+                pageLayout {
+                    pageLayout {
+                        ${queriesSectionsMain}
                     }
                 }
             }

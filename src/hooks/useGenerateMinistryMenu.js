@@ -64,12 +64,42 @@ export const useGenerateMinistryMenu = ( breadcrumbs, pages, customPages ) => {
         } )
     }
     customPages?.map( _ => {
-        ministryMenu.push( {
-            name: _.menuTitle,
-            weight: _.menuWeight || 50,
-            link: `${breadcrumbs.rootApp}/${breadcrumbs.slug}/${ _.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() }`, 
-            as: 'Link', 
-        } )
+        switch( _.menuType ) {
+            case 'link': {
+                if (_.menuLink.menuItemType === 'internal'){
+                    ministryMenu.push( {
+                        name: _.menuTitle,
+                        weight: _.menuWeight || 50,
+                        link: _.menuLink.menuItemUrl, 
+                        className: _.menuLink.menuItemCss,
+                        removeDefaultCss: _.menuLink.menuItemRemoveCss ? true : false,
+                        as: 'Link', 
+                    } )
+                }
+                if (_.menuLink.menuItemType === 'external'){
+                    ministryMenu.push( {
+                        name: _.menuTitle,
+                        weight: _.menuWeight || 50,
+                        link: _.menuLink.menuItemUrl, 
+                        className: _.menuLink.menuItemCss,
+                        removeDefaultCss: _.menuLink.menuItemRemoveCss ? true : false,
+                        target: '_blank',
+                        as: 'a', 
+                    } )
+                }
+                break
+            }
+            case 'page':
+            default: {
+                ministryMenu.push( {
+                    name: _.menuTitle,
+                    weight: _.menuWeight || 50,
+                    link: `${breadcrumbs.rootApp}/${breadcrumbs.slug}/${ _.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() }`, 
+                    as: 'Link', 
+                } )
+                break
+            }
+        }
     })
     
     return orderBy(ministryMenu, ['weight'], ['asc'])

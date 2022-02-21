@@ -6,6 +6,7 @@
     &.light {
         .jumbotron {
             .content {
+                h2, h2 > a,
                 h1, h1 > a {
                     color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
                 }
@@ -26,7 +27,8 @@
     &.dark {
         .jumbotron {
             .content {
-                h1, h1 > a {
+                h1, h1 > a,
+                h2, h2 > a {
                     color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 }
                 p {
@@ -44,34 +46,34 @@
     }
 
     .jumbotron {
-        
         display: flex;
-        flex-direction: column;
+        height: 56.25vw;
         align-items: center;
         margin-bottom: 0px;
         border-radius: unset;
-        padding: 10rem 15px 7rem 15px;
+        padding: 0px;
 
         .content {
             z-index: 2;
-            p {
-                max-width: 520px;
-                font-size: 1.2rem;
-            }
-            h1,
-            h1 > a {
-                font-size: 2rem;
-                line-height: 2rem;
+            h1, h1 > a,
+            h2, h2 > a {
+                font-size: 2vw;
+                line-height: 2vw;
                 letter-spacing: 1px;
                 text-decoration: none;
                 &:hover {
                     text-decoration: none;
                 }
             }
+            p {
+                font-size: 1.5vw;
+                line-height: 2vw;
+                max-width: 520px;
+            }
             a {
                 h1.display-1 {
-                    font-size: 4rem;
-                    line-height: 3.2rem;
+                    font-size: 5vw;
+                    line-height: 5vw;
                     text-transform: uppercase;
                 }
                 &:hover {
@@ -156,10 +158,28 @@
         .row {
             flex-direction: column-reverse;
         }
+        .jumbotron {
+            .content {
+                margin-top: 100px;
+                a {
+                    h1.display-1 {
+                        font-size: 12vw;
+                        line-height: 12vw;
+                    }
+                }
+                h1, h1 > a,
+                h2, h2 > a {
+                    font-size: 6vw;
+                    line-height: 6vw;
+                }
+                p {
+                    display: none;
+                }
+            }
+        }
     }
     .heroSimple { 
         .jumbotron{
-            padding: 10rem 0rem 0rem 0rem;
             .heroBackgroundIcon {
                 display: none;
             }

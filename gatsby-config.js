@@ -15,6 +15,7 @@ require('dotenv').config({
  
    flags: {
      FAST_DEV: true,
+     PRESERVE_FILE_DOWNLOAD_CACHE: process.env.PRESERVE_FILE_DOWNLOAD_CACHE || false,
    },
  
    pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,

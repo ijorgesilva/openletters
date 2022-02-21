@@ -43,7 +43,7 @@ export default function FormSelector (
                                     src         = { iframeFormUrl }
                                     style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}} 
                                     frameborder = '0'
-                                    allowTransparency
+                                    allowtransparency
                                 />
                             : undefined
                         }
@@ -98,7 +98,7 @@ export default function FormSelector (
                                             src         = { iframeFormUrl } 
                                             style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}}
                                             frameborder = '0' 
-                                            allowTransparency
+                                            allowtransparency
                                         />
                                     : undefined
                                 }

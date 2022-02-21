@@ -115,7 +115,8 @@
     * Navbar
     */
     &.navbar {
-        padding: 0rem 1rem;
+        padding: 0rem 15px;
+        height: 60px;
     }
     .navbar-toggler {
         transition: all 300ms ease;
@@ -132,14 +133,14 @@
     .navbrand {
         display: block;
         width: 100%;
-        background-position: center center;
+        background-position: left center;
         background-size: contain;
         align-items: center;
-        min-height: 48px;
+        min-height: 42px;
         max-width: 200px;
         background-repeat: no-repeat;
         margin-right: 30px;
-        padding: 5px;
+        border: 5px solid transparent;
     }
     .mainnav {
         justify-content: flex-end;

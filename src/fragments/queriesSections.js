@@ -232,6 +232,10 @@ const queriesSections = `
         sectionShare {
             sectionShareNetworks {
                 sectionShareNetworksType
+                sectionShareNetworksQrcode {
+                    sectionShareNetworksQrcodeDestination
+                    sectionShareNetworksQrcodeUrl
+                }
                 sectionShareNetworksEmail {
                     sectionShareNetworksEmailBody
                     sectionShareNetworksEmailCustomUrl
@@ -414,6 +418,13 @@ const queriesSections = `
             sectionAlbumConfiguration {
                 ${queriesCommon.carouselConfiguration}
             }
+        }
+
+        ## QR Code
+        sectionQrcode {
+            sectionQrcodeDestination
+            sectionQrcodeUrl
+            sectionQrcodeButtonText
         }
 
     # End Sections

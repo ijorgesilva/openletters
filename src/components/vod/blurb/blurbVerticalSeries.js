@@ -5,14 +5,16 @@ import React from 'react'
 import './blurbVerticalSeries.scss'
 
 export default function BlurbVerticalSeries ( 
-    { title, className, link, iconImage, poster, background, logo, mode } 
-    ) {
+    { 
+        title, className, link, iconImage, poster, background, logo, mode 
+    } 
+) {
     
     return (
         
             <div className={`blurbVerticalSeries card user-select-none ${ ( mode ) ? mode : 'light'} ${ ( className ) ? className : ''}`}>
                 
-                    <div className={`card-img-container`}>
+                    <div className={`card-img-container aspect-ratio-9_16`}>
                         <Link to={link}>
                             {
                                 ( iconImage ) ?

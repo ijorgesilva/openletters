@@ -54,11 +54,11 @@ export default function HeroSimple(
                             : undefined
                     }
                     
-                    <h1 className='position-relative z-index-2'>
+                    <h2 className='position-relative mb-1 z-index-2'>
                         <Link className='' to={playUrl}>
                             {title}
                         </Link>
-                    </h1>
+                    </h2>
                     
                     {
                         (description) ? <TextTruncate className='position-relative z-index-2' line={2} element='p' truncateText='…' text={description.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
@@ -66,21 +66,21 @@ export default function HeroSimple(
                     }
 
                     <div className='buttons z-index-2'>
-                        <Link to={playUrl} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-lg`} >
+                        <Link to={playUrl} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-md`} >
                             <FontAwesomeIcon 
                                 icon={faPlay} 
                                 size='md'
-                                className='mr-2'
+                                className='mr-1'
                             /> 
                             {playText}
                         </Link>
                         {
                             (iconSeriesLink) ?
-                                <Link to={iconSeriesLink} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-lg`} >
+                                <Link to={iconSeriesLink} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-md`} >
                                     <FontAwesomeIcon 
                                         icon={faInfo} 
                                         size='md'
-                                        className='mr-2'
+                                        className='mr-1'
                                     />
                                     {seriesLinkText}
                                 </Link>

@@ -237,6 +237,27 @@ const queriesCommon = {
                 }
             }
         `,
+        pageSettings: `
+            pageSettings {
+                settingsStyles {
+                    settingsStylesFooter {
+                        settingsStylesFooterColor
+                    }
+                    settingsStylesHeader {
+                        settingsStylesHeaderColor
+                    }
+                    settingsStylesGraphics {
+                        settingsStylesGraphicsLogo {
+                            localFile {
+                                childImageSharp {
+                                    gatsbyImageData(layout: FULL_WIDTH)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        `,
         allWpRedirect: `
             ########
             # Redirects 
