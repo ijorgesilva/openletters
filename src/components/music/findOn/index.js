@@ -39,7 +39,7 @@ export default function FindOn (
                             <span>{t('global:components.music.find-on-title')}</span>
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu className = ''>
+                        <Dropdown.Menu variant = { mode ? mode : 'light' } >
                             {
                                 items?.availableonType.map ( ( _, index ) => (
                                     <Dropdown.Item key = { index } as = { 'div' } >

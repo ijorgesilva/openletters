@@ -15,6 +15,7 @@ export default function ShareSimpleIcon(
         className, 
         label, 
         mode,
+        drop,
     } 
 ){
 
@@ -23,7 +24,7 @@ export default function ShareSimpleIcon(
     const canonicalUrl = process.env.SITE_CANONICAL_URL + location.pathname
 
     return (
-        <Dropdown className={`shareSimpleIcon ${ mode ? mode : ''} ${ className ? className : ''}`} drop='up'>
+        <Dropdown className={`shareSimpleIcon ${ mode ? mode : 'light'} ${ className ? className : ''}`} drop = { drop || 'up'} >
 
             <Dropdown.Toggle
                 alt     = { t('components.social.share-on') }
