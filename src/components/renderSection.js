@@ -21,7 +21,7 @@ import SectionBlurbs from './content/sectionBlurbs'
 import SectionVideo from './content/sectionVideo'
 import SectionForm from './form/sectionForm'
 import SectionIframe from './iframe/sectionIframe'
-import SectionQrCode from './qrcode/SectionQrCode'
+import SectionQrCode from './qrcode/sectionQrCode'
 import SectionLatestSeries from './vod/feed/sectionLatestSeries'
 
 export default function RenderSection ( 
