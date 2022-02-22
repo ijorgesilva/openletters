@@ -14,10 +14,10 @@ export default function BlurbVerticalSeries (
         
             <div className={`blurbVerticalSeries card user-select-none ${ ( mode ) ? mode : 'light'} ${ ( className ) ? className : ''}`}>
                 
-                    <div className={`card-img-container aspect-ratio-9_16`}>
+                    <div className={`card-img-container`}>
                         <Link to={link}>
                             {
-                                ( iconImage ) ?
+                                iconImage ?
                                     <div className="card-icon">
                                         <GatsbyImage 
                                             image={iconImage} 
@@ -31,17 +31,17 @@ export default function BlurbVerticalSeries (
     
                             <div className={`card-img-caption ${ ( poster ) ? 'poster' : 'background'}`} >
                                 {
-                                    ( poster ) ?
+                                    poster ?
                                         <GatsbyImage 
                                             image={poster} 
                                             className="card-img-top poster"
                                             alt=""
                                         />
                                     :
-                                        ( background ) ?
+                                        background ?
                                             <>
                                                 {
-                                                    ( logo ) ?
+                                                    logo ?
                                                         <div className="logo">
                                                             <GatsbyImage 
                                                                 image={logo} 
