@@ -10,16 +10,21 @@ import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
+import RenderSection from '../../renderSection'
 import './eventCampus.scss'
 
 export default function EventsCampus ( { data, location, pageContext } ) {
 
-    const { title, featuredImage, breadcrumbs } = pageContext
+    const { title, featuredImage, breadcrumbs, campusDetails } = pageContext
     
     const { t } = useTranslation()
     const theme         = useTheme()
     const contentMode   = 'light'
-    
+
+    const sections =    campusDetails.campusPages.campusEvents.pageSections?.length > 0 ? 
+                            campusDetails.campusPages.campusEvents.pageSections 
+                        : 
+                            undefined
     return (
         <>
 
@@ -76,6 +81,22 @@ export default function EventsCampus ( { data, location, pageContext } ) {
                 : undefined
             }
 
+            {
+                sections ?
+                    sections.map( ( _, index ) => (
+                        <RenderSection 
+                            key         = { index }
+                            section     = { _ }
+                            campus      = { breadcrumbs.campus }
+                            filter      = { { campus: breadcrumbs.campus } }
+                            location    = { location }
+                            mode        = { contentMode }
+                        />
+                    ))
+                :
+                    undefined
+            }
+
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
                 mode   = { theme.styles.footer }
@@ -119,6 +140,7 @@ export const query = graphql`
                     }
                 }
                 eventDetails {
+                    eventExternalOnly
                     eventAddress
                     eventDates {
                         eventDate

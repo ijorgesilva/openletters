@@ -82,7 +82,7 @@ export default function PlaylistDetails(
                                                     : 
                                                         undefined
                                                     }
-                                    className   = 'hide-mobile'
+                                    className   = 'd-none d-md-block'
                                     serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
                                     id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
                                     items       = { videos }
@@ -92,7 +92,7 @@ export default function PlaylistDetails(
                                     count       = { count ? true : false}
                                 />
                                 <ModalPlaylist 
-                                    className   = 'mobile-only'
+                                    className   = 'd-block d-md-none'
                                     mode        = { mode }
                                 >
                                     <SidebarFeedVod 

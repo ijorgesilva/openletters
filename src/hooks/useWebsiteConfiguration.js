@@ -47,11 +47,6 @@ export const useWebsiteConfiguration = () => {
                                                     settingsFooterDisclaimer
                                                 }
                                                 
-                                                settingsMenus {
-                                                    settingsMenuCampusSelector
-                                                    settingsMenuLanguageSelector
-                                                    settingsMenuSearch
-                                                }
                                                 
                                                 settingsDefaultCampus {
                                                     ... on WpCampus {
@@ -309,7 +304,6 @@ export const useWebsiteConfiguration = () => {
                                         }
                                     }
                                 }
-
                             `
                         )   
     return wp.websiteSettings.websiteSettings

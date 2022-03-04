@@ -2,7 +2,7 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { watchDetailsMenu } from '../../../../data/menues'
+import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
@@ -71,7 +71,9 @@ export default function WatchSeries( { pageContext, location, data } ) {
                                         'name': t('global.watch.title')
                                     }
                                 } 
-                menu        = { watchDetailsMenu } 
+                menu        = { [
+                                    {name: t('global:global.watch.latest'), link: `/${campus}/${config.watchSlug}/${config.watchSlugLatest}`, as: '', target: ''},
+                                ] } 
                 close       = { breadcrumbs.back }
                 mode        = { contentMode }
                 className   = 'transparent'

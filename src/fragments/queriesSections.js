@@ -147,11 +147,12 @@ const queriesSections = `
                     ${queriesCommon.featuredImageFields}
                     ${queriesCommon.language}
                     eventDetails {
-                    eventDates {
-                        eventDate
-                        eventTime
-                    }
-                    eventCampus {
+                        eventExternalOnly
+                        eventDates {
+                            eventDate
+                            eventTime
+                        }
+                        eventCampus {
                             ${queriesCommon.referenceCampus}
                         }
                     }
@@ -166,7 +167,7 @@ const queriesSections = `
         sectionPagemenu {
             sectionSticky
             sectionPagemenuMenu{
-                ${queriesMenus}
+                ${queriesMenus.widgetMenu}
             }
         }
 

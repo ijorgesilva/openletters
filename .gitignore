@@ -88,3 +88,4 @@ get-pip.py
 # Visual Studio Configurations
 .vscode
 .vscode
+.VSCodeCounter

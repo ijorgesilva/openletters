@@ -61,7 +61,7 @@ export default function HeroSimple(
                     </h2>
                     
                     {
-                        (description) ? <TextTruncate className='position-relative z-index-2' line={2} element='p' truncateText='…' text={description.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                        description ? <TextTruncate className='position-relative z-index-2' line={2} element='p' truncateText='…' text={description.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                         : <></>
                     }
 
@@ -75,7 +75,7 @@ export default function HeroSimple(
                             {playText}
                         </Link>
                         {
-                            (iconSeriesLink) ?
+                            iconSeriesLink ?
                                 <Link to={iconSeriesLink} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-md`} >
                                     <FontAwesomeIcon 
                                         icon={faInfo} 

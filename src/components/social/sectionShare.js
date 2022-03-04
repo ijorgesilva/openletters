@@ -26,11 +26,19 @@ export default function ShareSection(
     // Variable building for each Network
     if( networks ){
         networks.sectionShareNetworksType.forEach(function(_){
-            networkName = 'networks.sectionShareNetworks'+_.split(':')[1].replace(/ /g,'')
-            networkList.push( { 
-                'type': _.split(':')[0],
-                'params': eval(networkName),
-            })
+            if( _.includes(':') ) {// Support to Old DB structure where ':' was present
+                networkName = 'networks.sectionShareNetworks'+_.split(':')[1].replace(/ /g,'')
+                networkList.push( { 
+                    'type': _.split(':')[0],
+                    'params': eval(networkName),
+                })
+            } else {
+                networkName = `networks.sectionShareNetworks${_[0].toUpperCase()}${_.slice(1)}`
+                networkList.push( { 
+                    'type': _,
+                    'params': eval(networkName),
+                })
+            }
         })
     }
 

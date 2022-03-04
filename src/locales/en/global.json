@@ -1,5 +1,11 @@
 {
 	"components": {
+		"apps": {
+			"adroid-app": "Android App",
+			"apple-app": "Apple App",
+			"get-it-apple-store": "Download on Apple Store",
+			"get-it-play-store": "Get it on the Play Store"
+		},
 		"music": {
 			"find-on-title": "Find on",
 			"playlist-title": "Songs",
@@ -147,7 +153,7 @@
 			"title": "News"
 		},
 		"newsletter": {
-			"description": "Sign up to receive our weekly eNews and updates about what's next.",
+			"description": "Sign up to receive our eNews and updates about what's next.",
 			"subscribe": "Subscribe",
 			"your-email": "Your email",
 			"your-name": "Your name"

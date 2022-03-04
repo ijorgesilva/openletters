@@ -7,17 +7,6 @@ import { useTranslation } from 'react-i18next'
 import MenuPageItem from './menuPageItem'
 import './menuPage.scss'
 
-/*
-    menu: 
-        [
-            {
-                name: 'Link Name', 
-                link: '/', 
-                as: 'Link', 
-                target: '_self',
-            }
-        ]
- */
 export default function MenuPage ( 
     { 
         breadcrumbs,
@@ -26,33 +15,44 @@ export default function MenuPage (
         className, 
         id, 
         mode,
-        menues, 
+        menus, 
         campus, 
         sticky,
         close,
     } 
 ){
 
+    /* Structure:
+        menu: 
+            [
+                {
+                    name: 'Link Name', 
+                    link: '/', 
+                    as: 'Link', 
+                    target: '_self',
+                }
+            ]
+    */
     const { t } = useTranslation()
 
     let base = {}
-    let items =     ( menues?.menuDetails?.menuPagesMenu?.menuPageMenuItems?.length > 0 ) ? 
-                        menues.menuDetails.menuPagesMenu.menuPageMenuItems 
+    let items =     ( menus?.menuDetails?.menuPagesMenu?.menuPageMenuItems?.length > 0 ) ? 
+                        menus.menuDetails.menuPagesMenu.menuPageMenuItems 
                     : 
                         undefined
 
     if (menuBrand) {
         base = menuBrand
     }
-    else if( !menues?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && 
-              menues?.menuDetails?.menuPagesMenu?.menuPagesMenuBase ) {
+    else if( !menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && 
+              menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase ) {
         base = {
-                'link': menues.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseUrl,
-                'name': menues.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseTitle
+                'link': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseUrl,
+                'name': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseTitle
             }
     }
 
-    if( menues?.status === 'publish' ){
+    if( menus?.status === 'publish' ){
         return(
             <Navbar 
                 id                  = { id }
@@ -63,7 +63,7 @@ export default function MenuPage (
             >
 
                 {
-                    ( !menues?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && base ) ?
+                    ( !menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && base ) ?
                         <Navbar.Brand>
                             <Link to={base.link} title={base.name}>
                                 {base.name}

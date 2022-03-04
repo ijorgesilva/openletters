@@ -1,6 +1,4 @@
 ## Develop command
-Allow to be accesed locally:
-`$ gatsby develop -H $HOSTNAME -p 8000`
 
 Start only the GraphQL playgorund
 `$ GATSBY_GRAPHQL_IDE=playground gatsby develop`

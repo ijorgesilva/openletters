@@ -19,16 +19,16 @@ export default function FormSelector (
         secondaryColumnText,
         secondaryColumnAlignment,
         secondaryColumnBackground,
+        location,
     } 
-    ) {
+) {
 
     const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://editor.victorychur.ch'
-
-    const iframeFormUrl = iframeQueryStrings ? 
-                            iframeServerRoot + form.uri + iframeQueryStrings
-                        : 
-                            `${iframeServerRoot}${form.uri}?timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
-
+    const queryParams = location?.href?.substring(location.href.indexOf('?')+1)
+    const iframeFormUrl =   iframeQueryStrings ? `${iframeServerRoot}${form.uri}${iframeQueryStrings}`
+                                : queryParams ? `${iframeServerRoot}${form.uri}?${queryParams}&timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+                                    : `${iframeServerRoot}${form.uri}?timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+    
     switch ( true ){
         /*
         * Single Column

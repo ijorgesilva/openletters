@@ -1,3 +1,4 @@
+// TODO: Replace this for Bootstrap media queries
 const size = {
     mobileS: '320px',
     mobileM: '375px',

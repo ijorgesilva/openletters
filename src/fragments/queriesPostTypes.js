@@ -313,6 +313,7 @@ const queriesPostTypes = {
                 ${queriesCommon.featuredImageFields}
                 ${queriesCommon.seoFields}
                 eventDetails {
+                    eventExternalOnly
                     eventAddress
                     eventCampus {
                         ${queriesCommon.referenceCampus}
@@ -324,6 +325,10 @@ const queriesPostTypes = {
                     eventLink {
                         eventLinkText
                         eventLinkUrl
+                    }
+                    eventLayout
+                    eventSections {
+                        ${queriesSectionsMain}
                     }
                     eventHide {
                         eventHideSearchEngines
@@ -470,7 +475,7 @@ const queriesPostTypes = {
                         ${queriesCommon.referenceCampus}
                     }
                     pageMenues {
-                        ${queriesMenus}
+                        ${queriesMenus.widgetMenu}
                     }
                     pageHideContent
                     pageHideShare

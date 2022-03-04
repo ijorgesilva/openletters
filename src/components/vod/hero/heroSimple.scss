@@ -83,7 +83,11 @@
             .buttons {
                 position: relative;
                 display: inline-flex;
-                gap: 20px;
+                > .btn{
+                    &:last-child {
+                        margin-left: 1rem;
+                    }
+                }
             }
         }
         
@@ -161,6 +165,7 @@
         .jumbotron {
             .content {
                 margin-top: 100px;
+                margin-bottom: 10px;
                 a {
                     h1.display-1 {
                         font-size: 12vw;

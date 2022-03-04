@@ -140,26 +140,24 @@ export default function RenderSection (
         case ( sectionType === 'podcast' && sectionStatus ): {
             const podcastItem = section.sectionDetails.sectionPodcast
             return (
-                <>
-                    <SectionPodcast 
-                        id          = { sectionId }
-                        title       = { sectionTitle }
-                        content     = { sectionContent }
-                        mode        = { sectionColorScheme }
-                        className   = { sectionClassname }
-                        width       = { sectionContainerWidth }
-                        size        = { sectionSize }
-                        subtitle    = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
-                        Spotify     = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
-                        Soundcloud  = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
-                        iTunes      = { (podcastItem.sectionPodcastItunesUrl) ? podcastItem.sectionPodcastItunesUrl : undefined }
-                        graphic     = { (podcastItem.sectionPodcastGraphic) ? 
-                                                podcastItem.sectionPodcastGraphic.localFile.childImageSharp.gatsbyImageData 
-                                        : 
-                                            undefined 
-                                      }
-                    />
-                </>
+                <SectionPodcast 
+                    id          = { sectionId }
+                    title       = { sectionTitle }
+                    content     = { sectionContent }
+                    mode        = { sectionColorScheme }
+                    className   = { sectionClassname }
+                    width       = { sectionContainerWidth }
+                    size        = { sectionSize }
+                    subtitle    = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
+                    Spotify     = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
+                    Soundcloud  = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
+                    iTunes      = { (podcastItem.sectionPodcastItunesUrl) ? podcastItem.sectionPodcastItunesUrl : undefined }
+                    graphic     = { (podcastItem.sectionPodcastGraphic) ? 
+                                            podcastItem.sectionPodcastGraphic.localFile.childImageSharp.gatsbyImageData 
+                                    : 
+                                        undefined 
+                                    }
+                />
             )
             
         }
@@ -388,7 +386,7 @@ export default function RenderSection (
             return(
                 <>
                     <MenuPage
-                        menues      = { pageMenu }
+                        menus       = { pageMenu }
                         mode        = { sectionColorScheme }
                         id          = { section.sectionDetails.sectionId ? section.sectionDetails.sectionId : menuId }
                         campus      = { campus }

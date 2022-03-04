@@ -1,6 +1,6 @@
 
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +13,7 @@ export default function MenuAuth ( { mode } ) {
     const { t } = useTranslation()
 
     const  settings = useWebsiteConfiguration().settingsAuthentication
-    const settingsAuthType = settings.settingsAuthenticationType?.split(":")[0]
+    const settingsAuthType = settings.settingsAuthenticationType?.split(':')[0]
 
     if( settings.settingsAuthenticationActive ) {
         switch( settingsAuthType ) {
@@ -22,13 +22,13 @@ export default function MenuAuth ( { mode } ) {
                     <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <a 
                             href    = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalUrl }
-                            target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(":")[0] }
+                            target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(':')[0] }
                             title   = { t('global.authentication.sign-in') }
                         >
                             <FontAwesomeIcon 
                                 icon={faUserCircle}
-                                size="lg" 
-                                className="loginIcon"
+                                size='lg' 
+                                className='loginIcon'
                             />
                         </a>
                     </div>
@@ -38,13 +38,13 @@ export default function MenuAuth ( { mode } ) {
                 return (
                     <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
                         <Link 
-                            to      = ""
+                            to      = ''
                             title   = { t('global.authentication.sign-in') }
                         >
                             <FontAwesomeIcon 
                                 icon={faUserCircle}
-                                size="lg" 
-                                className="loginIcon"
+                                size='lg' 
+                                className='loginIcon'
                             />
                         </Link>
                     </div>

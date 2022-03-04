@@ -1,28 +1,33 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { NavDropdown } from 'react-bootstrap'
 
-export default function RegularMenu( { className, index, title, content } ){
+import SubItemType from './subItemType'
+
+export default function RegularMenu( 
+    { 
+        className, 
+        index, 
+        title, 
+        menu,
+        mode,
+        alignRight,
+    } 
+) {
     return (
         <NavDropdown
             id          = {`dropdown${index ? index + '-' : ''}`}
-            className   = {`regularmenu navitems ${ className ? className : '' }`}
+            className   = {`regularmenu navitems ${ mode ? mode : 'light' } ${ className ? className : '' }`}
             key         = { index }
             title       = { title ? title : '' } 
+            alignRight  = { alignRight }
         >
             {
-                content.map( (submenu, index) => (
-                    <NavDropdown.Item 
-                        as          = { submenu.as === 'link' ? Link : undefined }
-                        className   = {`submenu-item text-wrap ${ submenu.class ? submenu.class : ''}`}
-                        key         = {index} 
-                        to          = {submenu.link} 
-                        href        = {submenu.link} 
-                        target      = {submenu.target}
-                        rel         = 'noopener noreferrer'
-                    >
-                        {submenu.name}
-                    </NavDropdown.Item>
+                menu.map( (_, index) => (
+                    <SubItemType 
+                        item = { _ } 
+                        key = { index } 
+                        mode = { mode }
+                    />
                 ))
             }
         </NavDropdown>

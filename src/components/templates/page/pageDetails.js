@@ -62,7 +62,7 @@ export default function PageDetails( { location, pageContext } ){
             {
                 pageDetails.pageMenues ?
                     <MenuPage
-                        menues      = { pageDetails.pageMenues }
+                        menus       = { pageDetails.pageMenues }
                         campus      = { breadcrumbs.campus }
                         location    = { location }
                         className   = { pageDetails.pageMenues.menuDetails.menuCss }

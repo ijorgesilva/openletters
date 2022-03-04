@@ -245,9 +245,11 @@ export const useGetFeed = (
                                 buttons: [
                                     {
                                         'buttonType': _.eventDetails.eventRegistrationType === 'internal' ? 'internal: Internal' : 'external: External',
-                                        'buttonTarget': !_.eventDetails.eventExternalOnly ? _.eventDetails.eventRegistrationType === 'internal' ? '_self: Self' : '_blank: Blank' : '_blank: Blank',
-                                        'buttonLink': `/${useGetBestCampus( campus, _.eventDetails.eventCampus )}/${config.eventPostDetailsSlug}/${_.slug}`,
-                                        'buttonUrl': _.eventDetails.eventLink?.eventLinkUrl,
+                                        'buttonTarget': _.eventDetails.eventExternalOnly ? 
+                                                            '_blank: Blank'
+                                                        : '' ,
+                                        'buttonLink': _.eventDetails.eventExternalOnly ? _.eventDetails.eventLink?.eventLinkUrl : `/${useGetBestCampus( campus, _.eventDetails.eventCampus )}/${config.eventPostDetailsSlug}/${_.slug}`,
+                                        'buttonUrl': _.eventDetails.eventExternalOnly ? _.eventDetails.eventLink?.eventLinkUrl : `/${useGetBestCampus( campus, _.eventDetails.eventCampus )}/${config.eventPostDetailsSlug}/${_.slug}`,
                                         'buttonText': _.eventDetails.eventLink?.eventLinkText || t('global.events.view'),
                                         'buttonCss': '',
                                         'buttonCssRemoveDefault': '',

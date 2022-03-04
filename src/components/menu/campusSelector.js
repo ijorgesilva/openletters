@@ -8,7 +8,6 @@ import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import ContextConsumer from '../../provider/context'
 
-
 import './campusSelector.scss'
 
 export default function CampusSelector( { className, location, mode } ) {

@@ -3,7 +3,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { useTranslation } from "react-i18next"
 
-import { watchDetailsMenu } from '../../../../data/menues'
+import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useParticipation } from '../../../hooks/useParticipation'
 import { useTheme } from '../../../hooks/useTheme'
@@ -97,7 +97,9 @@ export default function WatchDetails( { pageContext, location, data } ) {
                                             'name': t('global.watch.title')
                                         }
                                     } 
-                    menu        = { watchDetailsMenu } 
+                    menu        = { [
+                                     {name: t('global:global.watch.latest'), link: `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}`, as: '', target: ''},
+                                    ] } 
                     close       = { breadcrumbs.back }
                     mode        = { theme.styles.header }
                 />

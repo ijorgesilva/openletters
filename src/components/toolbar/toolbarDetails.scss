@@ -33,6 +33,7 @@
         &.sticky-mobile {
             position: sticky;
             top: 219px;
+            z-index: 10;
         }
     }
 }

@@ -30,7 +30,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                                 : 
                                     undefined
 
-    const sections =    ( campusDetails.campusPages.campusWatch.pageSections?.length > 0 ) ? 
+    const sections =    campusDetails.campusPages.campusWatch.pageSections?.length > 0 ? 
                             campusDetails.campusPages.campusWatch.pageSections 
                         : 
                             undefined

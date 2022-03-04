@@ -9,9 +9,14 @@
      }
 
      &.dark {
+        &.top{
+
+        }
         .navlocal{
-            position: absolute;
-            background-color: transparent !important;
+           &.main{
+               position: absolute;
+               background-color: transparent !important;
+           }
         }
      }
 

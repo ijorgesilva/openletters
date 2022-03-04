@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
 
+// TODO: Replace this for Bootstrap media queries
 import { device } from '../../../data/mediaQueries'
 
 import SearchResult from "./search-result"
