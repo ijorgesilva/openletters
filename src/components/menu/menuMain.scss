@@ -247,21 +247,11 @@
         }
     }
 
-    .search {
-        position: relative;
-        width: 30px;
-        line-height: 35px;
-        height: 44px;
-        margin: 0 5px;
-        order: 100;
-    }
     .menuAuth {
+        display: flex;
+        justify-content: space-around;
         position: relative;
-        width: 30px;
-        height: 44px;
-        line-height: 55px;
         margin: 0 5px;
-        order: 100;
     }    
 
     /*
@@ -290,19 +280,14 @@
 }
 
 @include media("<desktop") {
-    .menuGlobal {
-        .search {
-            order: 5;
-        }
-        .navglobal {
-            .menu-collapsed {
-                order: 10;
-            }
-            .menu {
-                // background-color: rgba(var(--color-six-dark-shade-three), 1);
-                // border-bottom: 1px solid var(--color-six);
-            }
-        }
+    .navbar-toggler {
+        order: 3;
+    }
+    .menuAuth {
+        order: 2;
+    }
+    .searchModal {
+        order: 1;
     }
 }
 

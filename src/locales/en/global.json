@@ -189,6 +189,8 @@
 			"no-results-for": "No results have been found for ",
 			"placeholder": "Search...",
 			"reset-title": "Clear all filters",
+			"result": "result",
+			"results": "results",
 			"search-title-ellipsis": "Search...",
 			"show-less": "Show less",
 			"show-more": "Show more",
@@ -196,6 +198,8 @@
 			"submit-title": "Submit your search query",
 			"title": "Search"
 		},
+		"speaker": "Speaker",
+		"speakers": "Speakers",
 		"time": {
 			"duration": "Duration",
 			"hour": "hour",

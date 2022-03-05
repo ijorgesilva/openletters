@@ -189,6 +189,8 @@
 			"no-results-for": "No se han encontrado resultados para ",
 			"placeholder": "Buscar...",
 			"reset-title": "Limpiar todos los filtros",
+			"result": "resultado",
+			"results": "resultados",
 			"search-title-ellipsis": "Buscar...",
 			"show-less": "Mostrar menos",
 			"show-more": "Mostrar más",
@@ -196,6 +198,8 @@
 			"submit-title": "Envíe su consulta de búsqueda ",
 			"title": "Buscar"
 		},
+		"speaker": "Orador",
+		"speakers": "Oradores",
 		"time": {
 			"duration": "Duración del curso",
 			"hour": "hora",

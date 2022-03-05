@@ -150,6 +150,7 @@
             .card-img {
                 height: 100%;
                 .gatsby-image-wrapper {
+                    border-radius: var(--border-radius) 0 0 var(--border-radius);
                     padding-top: unset;
                     height: 100%;
                 }

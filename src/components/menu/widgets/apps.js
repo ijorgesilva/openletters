@@ -10,7 +10,7 @@ export default function Apps (
 ) {
 
     return (
-        <div className={`widgetApps ${ mode ? mode : 'light'}`} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px' }}>
+        <div className={`widgetApps ${ mode ? mode : 'light'}`} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
             {
                 items.length > 0 ?
                     items.map( (_, index) => (

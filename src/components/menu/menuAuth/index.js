@@ -1,8 +1,8 @@
-
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
@@ -19,24 +19,25 @@ export default function MenuAuth ( { mode } ) {
         switch( settingsAuthType ) {
             case 'external':{
                 return (
-                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
-                        <a 
+                    <div className = {`menuAuth ${ mode ? mode : 'light' }`}>
+                        <Button 
                             href    = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalUrl }
                             target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(':')[0] }
                             title   = { t('global.authentication.sign-in') }
+                            variant = {`${ mode ? mode : 'light' }`}
                         >
                             <FontAwesomeIcon 
                                 icon={faUserCircle}
                                 size='lg' 
                                 className='loginIcon'
                             />
-                        </a>
+                        </Button>
                     </div>
                 )
             }
             case 'internal':{
                 return (
-                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
+                    <div className = {`menuAuth ${ mode ? mode : 'light' }`}>
                         <Link 
                             to      = ''
                             title   = { t('global.authentication.sign-in') }

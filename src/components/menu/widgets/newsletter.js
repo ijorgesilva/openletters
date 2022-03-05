@@ -10,7 +10,7 @@ export default function Newsletter (
     }
 ) {
     return (
-        <div className={`widgetMailchimp ${ mode ? mode : 'light'} ${ className ? className : '' }`} style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 5px' }}>
+        <div className={`widgetMailchimp ${ mode ? mode : 'light'} ${ className ? className : '' }`} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
             {
                 items.length > 0 ?
                     items.map( (_, index) => (

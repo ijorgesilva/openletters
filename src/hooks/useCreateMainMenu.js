@@ -42,6 +42,15 @@ export const useCreateMainMenu = (
 
                 /* CUSTOM */
                 case 'custom' : {
+                    rootItem = item.mainMenuMenuItemCustom
+                    parsedItem = {
+                                    name: itemTitle, 
+                                    link: rootItem.mainMenuItemCustomUrl, 
+                                    class: `${ item.configuration?.style?.cssClass ? item.configuration.style.cssClass : '' } ${ item.configuration?.responsiveness?.visibility ? item.configuration.responsiveness.visibility.replace('_', ' ') : ''} ${ rootItem.buttonStyle != undefined ? 'btn btn-'+rootItem.buttonStyle : ''}`,
+                                    type: item.mainMenuItemType,
+                                    target: rootItem.mainMenuItemCustomTarget,
+                                }
+                    parsedMenuArr.push(parsedItem)
                     break
                 }
 

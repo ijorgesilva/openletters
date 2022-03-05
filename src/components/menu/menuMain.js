@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useCampuses } from '../../hooks/useCampuses'
 import { useTheme } from '../../hooks/useTheme'
-import Search from '../search'
+import SearchModal from '../search/modal'
 
 import CampusSelector from './campusSelector'
 import LanguageSelector from './languageSelector'
@@ -161,12 +161,10 @@ export default function MenuMain (
             
             {
                 ( searchIndices?.length > 0 && search && menuLocation === 'top' ) ? 
-                    <div className='search'>
-                        <Search 
-                            indices = {searchIndices} 
-                            mode    = { mode }
-                        />
-                    </div>
+                    <SearchModal 
+                        indices = { searchIndices } 
+                        mode    = { mode }
+                    />
                 :
                     undefined
             }
