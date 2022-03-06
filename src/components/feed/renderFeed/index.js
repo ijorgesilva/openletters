@@ -48,35 +48,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -97,35 +104,43 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -146,35 +161,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -195,35 +217,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -244,35 +273,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -293,35 +329,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -342,35 +385,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -391,35 +441,42 @@ export default function RenderFeed (
                 'buttonCssRemoveDefault': layoutConf.buttonBehavior.buttonCssRemoveDefault,
             }
             return(
-                <FeedRenderingLayout 
-                    nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
-                    layoutType      = { layoutType }
-                    containerWidth  = { containerWidth }
-                    size            = { size }
-                    className       = { className }
-                    mode            = { mode }
-                    itemsPerPage    = { itemsPerPage }
-                    // Aspect
-                    truncate        = { layoutConf.itemTruncate }
-                    truncateLines   = { layoutConf.itemTruncateLines }
-                    orientation     = { layoutConf.itemOrientation }
-                    itemClass       = { layoutConf.itemClass }
-                    imagePosition   = { layoutConf.itemImagePosition }
-                    imageFit        = { layoutConf.itemImageFit }
-                    aspectRatio     = { layoutConf.itemImageAspect }
-                    border          = { layoutConf.itemBorder}
-                    borderColor     = { layoutConf.itemBorderColor }
-                    gap             = { layoutConf.itemGap.split(':')[0] }
-                    // Button Behavior
-                    removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                    stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
-                    // Visibility
-                    hideTitle       = { layoutConf.hideTitle }
-                    hideSubtitle    = { layoutConf.hideSubtitle }
-                    hideExcerpt     = { layoutConf.hideExcerpt }
-                    hideImage       = { layoutConf.hideImage }
-                    hideButton      = { layoutConf.hideButton }
-                />
+                <>
+                {
+                    builtFeedObject.list.length === 0 ?
+                        <AlertEmptyState layout = 'jumbotron'/>
+                    :
+                        <FeedRenderingLayout 
+                            nodes           = { useGetFeed( undefined, campus, feedButton, builtFeedObject, sortBy ) }
+                            layoutType      = { layoutType }
+                            containerWidth  = { containerWidth }
+                            size            = { size }
+                            className       = { className }
+                            mode            = { mode }
+                            itemsPerPage    = { itemsPerPage }
+                            // Aspect
+                            truncate        = { layoutConf.itemTruncate }
+                            truncateLines   = { layoutConf.itemTruncateLines }
+                            orientation     = { layoutConf.itemOrientation }
+                            itemClass       = { layoutConf.itemClass }
+                            imagePosition   = { layoutConf.itemImagePosition }
+                            imageFit        = { layoutConf.itemImageFit }
+                            aspectRatio     = { layoutConf.itemImageAspect }
+                            border          = { layoutConf.itemBorder}
+                            borderColor     = { layoutConf.itemBorderColor }
+                            gap             = { layoutConf.itemGap.split(':')[0] }
+                            // Button Behavior
+                            removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
+                            stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                            // Visibility
+                            hideTitle       = { layoutConf.hideTitle }
+                            hideSubtitle    = { layoutConf.hideSubtitle }
+                            hideExcerpt     = { layoutConf.hideExcerpt }
+                            hideImage       = { layoutConf.hideImage }
+                            hideButton      = { layoutConf.hideButton }
+                        />
+                }
+                </>
             )
         }
 
@@ -431,10 +488,9 @@ export default function RenderFeed (
 
         }
 
-        case (builtFeedObject.list.length === 0):
         default: {
             return(
-                <AlertEmptyState />
+                <AlertEmptyState layout = 'jumbotron'/>
             )
         }
 

@@ -1,14 +1,13 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import algoliasearch from 'algoliasearch/lite'
-import { createRef, default as React, useState, useMemo } from 'react'
+import { default as React, useState, useMemo, useRef, useEffect } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { InstantSearch } from 'react-instantsearch-dom'
 
 import SearchBox from './search-box'
 import SearchResult from './search-result'
-import useClickOutside from './use-click-outside'
 
 import './searchModal.scss'
 
@@ -21,9 +20,8 @@ export default function SearchModal (
 
   const { t } = useTranslation()
 
-  const rootRef = createRef()
+  /* Algolia */
   const [query, setQuery] = useState()
-  const [hasFocus, setFocus] = useState(false)
   const searchClient = useMemo(
     () =>
       algoliasearch(
@@ -32,20 +30,23 @@ export default function SearchModal (
       ),
     []
   )
-  useClickOutside(rootRef, () => setFocus(false))
 
+  /* Auto focus */
+  const innerRef = useRef();
+  useEffect(() => innerRef.current && innerRef.current.focus())
+
+  /* Modal */
   const [show, setShow] = useState(false)
-
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  function handleClose () { setShow(false) }
+  function handleShow () { setShow(true) }
 
   return (
       <div className={`searchModal ${ mode ? mode : 'light'}`}>
 
           <Button 
             variant = { `${ mode ? mode : 'light'}` }
-            onClick = { handleShow }
             title   = { t('global.search.placeholder') }
+            onClick = { handleShow }
           >
             <FontAwesomeIcon 
               icon      = {faSearch} 
@@ -67,10 +68,11 @@ export default function SearchModal (
                 onSearchStateChange = {({ query }) => setQuery(query)}
               >
                 <SearchBox 
+                  innerRef      = { innerRef }
                   placeholder   = { t('global.search.placeholder') }
                 />
                 <SearchResult
-                  show          = { query && query.length > 0 && hasFocus }
+                  show          = { query && query.length > 0 }
                   indices       = { indices }
                 />
               </InstantSearch>

@@ -4,8 +4,8 @@ import React from 'react'
 import { connectSearchBox } from 'react-instantsearch-dom'
 
 export default connectSearchBox(
-  ({ refine, currentRefinement, className, onFocus, placeholder }) => (
-    <form  className={`${ ( className ) ? className : ''}`}>
+  ({ refine, currentRefinement, className, onFocus, placeholder, innerRef }) => (
+    <form  className={`${ className ? className : ''}`}>
       <label className='sr-only' htmlFor='inlineFormInputGroup'>
       </label>
       <div className='input-group mb-2'>
@@ -26,7 +26,8 @@ export default connectSearchBox(
           onChange      = {e => refine(e.target.value)}
           value         = {currentRefinement}
           onFocus       = {onFocus}
-          />
+          ref           = { innerRef }
+        />
       </div>
     </form>
   )

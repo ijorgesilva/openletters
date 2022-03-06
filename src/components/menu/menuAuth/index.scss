@@ -1,11 +1,28 @@
+@import "~include-media/dist/_include-media.scss";
+
 .menuAuth {
     position: relative;
+    margin: 0 5px;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    
+    .btn {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-radius: unset;
+        border: unset;
+    }
 
     &.light {
         a {
             color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.7);
             &:hover {
                 color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+                background-color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),0.05);
             }
         }
     }
@@ -15,8 +32,30 @@
             color: hsla(var(--light-h),var(--light-s),var(--light-l),0.7);
             &:hover {
                 color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+                background-color: hsla(var(--light-h),var(--light-s),var(--light-l),0.1);
             }
         }
     }
 
+}
+
+@include media("<desktop") {
+}
+
+@include media("≥phone", "<850px") {
+    .menuAuth {
+        &.light {
+            .btn {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+        &.dark {
+            .btn {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
+    }
+}
+
+@include media("≥phone", "<tablet") {  
 }

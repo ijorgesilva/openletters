@@ -120,7 +120,7 @@ const SearchResult = ({ indices, className, mode }) => (
     />
     <Tab.Container id='' defaultActiveKey='series'>
         <Row>
-          <Col sm={2}>
+          <Col className='indices' sm={2}>
 
             <Nav variant='pills' className='flex-column'>
             {
@@ -135,7 +135,7 @@ const SearchResult = ({ indices, className, mode }) => (
             </Nav>
           </Col>
 
-          <Col sm={10}>
+          <Col className='results' sm={10}>
             <Tab.Content>
               {
                 indices.map(index => (

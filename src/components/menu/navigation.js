@@ -42,13 +42,13 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
                         campus          = { campus }
                         mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                         menu            = { parsedTopMenu.items }
+                        collapse        = { parsedTopMenu.conf.collapse }
                         menuLocation    = 'top'
                         campusSelector  = { rawMenus.menuPositions.topMenu.campusSelector }
                         languageSelector= { rawMenus.menuPositions.topMenu.languageSelector }
                         search          = { rawMenus.menuPositions.topMenu.search }
                         searchIndices   = { searchIndices }
                         auth            = { true }
-                        collapse        = { parsedTopMenu.conf.collapse }
                         alignRight
                     />
                 :
@@ -63,7 +63,7 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
                         campus          = { campus }
                         mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                         menu            = { parsedMainMenu.items }
-                        collapse        = { parsedTopMenu.conf.collapse }
+                        collapse        = { parsedMainMenu.conf.collapse }
                         menuLocation    = 'main'
                     />
                 :

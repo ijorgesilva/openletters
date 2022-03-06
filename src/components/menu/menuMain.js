@@ -38,8 +38,6 @@ export default function MenuMain (
 
     const { t } = useTranslation()
 
-    const collapsible = collapse ? collapse : false
-
     const currentCampus     = useCampuses( campus )
     const theme             = useTheme()
 
@@ -96,12 +94,20 @@ export default function MenuMain (
             }
 
             {
-                collapsible ?
+                languageSelector && menuLocation === 'top' ?
+                    <LanguageSelector 
+                        className ={`langselector`}
+                    />
+                : 
+                    undefined
+            }
+           
+            {
+                collapse ?
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' className={`navbar-${ mode ? mode : 'light'}`}>
                         <FontAwesomeIcon icon={faBars} size='md' />
                     </Navbar.Toggle>
-                :
-                    undefined
+                : undefined
             }
 
             <Navbar.Collapse className={`mainnav`} id='responsive-navbar-nav'>
@@ -150,15 +156,7 @@ export default function MenuMain (
                     }
                 </Nav>
             </Navbar.Collapse>
-            {
-                languageSelector && menuLocation === 'top' ?
-                    <LanguageSelector 
-                        className ={`langselector`}
-                    />
-                : 
-                    undefined
-            }
-            
+ 
             {
                 ( searchIndices?.length > 0 && search && menuLocation === 'top' ) ? 
                     <SearchModal 
@@ -180,4 +178,3 @@ export default function MenuMain (
         </Navbar>
     )
 }
-

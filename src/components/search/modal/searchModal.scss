@@ -12,6 +12,7 @@
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
             &:hover {
                 color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
             }
         }
     }
@@ -26,15 +27,31 @@
             color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
             &:hover {
                 color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
             }
         }
+    }
+    
+    height: 100%;
+    .btn {
+        border: unset;
+        border-radius: unset;
+        height: 100%;
+        background-color: transparent;
     }
 
     .searchIcon {
         font-size: 19px;
     }
 
+}
 
+.searchResults {
+    .indices,
+    .results {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 /*
@@ -44,6 +61,7 @@
     width: 90vw;
     height: 90vh;
     max-width: 90vw;
+    margin: 1rem auto;
     .nav-item {
         .nav-link {
             padding: 0.25rem 1rem;
@@ -84,6 +102,24 @@
 }
 
 @include media("≥phone", "<850px") {
+    .searchModal {
+        &.light {
+            .btn {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+        &.dark {
+            .btn {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+        }
+        .modal-dialog {
+            height: 95vh;
+            max-width: 95vw;
+            margin-top: 1rem;
+        }
+
+    }
 }
 
 @include media("≥phone", "<tablet") {  
