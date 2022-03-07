@@ -34,15 +34,15 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
         <header className='navigation'>
 
             {
-                menuGlobal ?
+                menuGlobal && parsedTopMenu ?
                     <MenuMain 
-                        className       = { parsedTopMenu.conf.css }
-                        id              = { parsedTopMenu.conf.id }
+                        className       = { parsedTopMenu.conf?.css }
+                        id              = { parsedTopMenu.conf?.id }
                         location        = { location }
                         campus          = { campus }
                         mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                         menu            = { parsedTopMenu.items }
-                        collapse        = { parsedTopMenu.conf.collapse }
+                        collapse        = { parsedTopMenu.conf?.collapse }
                         menuLocation    = 'top'
                         campusSelector  = { rawMenus.menuPositions.topMenu.campusSelector }
                         languageSelector= { rawMenus.menuPositions.topMenu.languageSelector }
@@ -55,15 +55,15 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
                     undefined
             }
             {
-                menuLocal ?
+                menuLocal && parsedMainMenu ?
                     <MenuMain 
-                        className       = { parsedMainMenu.conf.css }
-                        id              = { parsedMainMenu.conf.id }
+                        className       = { parsedMainMenu.conf?.css }
+                        id              = { parsedMainMenu.conf?.id }
                         location        = { location }
                         campus          = { campus }
                         mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
                         menu            = { parsedMainMenu.items }
-                        collapse        = { parsedMainMenu.conf.collapse }
+                        collapse        = { parsedMainMenu.conf?.collapse }
                         menuLocation    = 'main'
                     />
                 :
