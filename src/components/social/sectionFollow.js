@@ -25,13 +25,14 @@ export default function SectionFollow (
     if( networks ){
         networks.sectionFollowNetworksType.forEach(function(_){
             if( _.includes(':') ) {// Support to Old DB structure where ':' was present
-                networkName = 'networks.sectionShareNetworks'+_.split(':')[1].replace(/ /g,'')
+                networkName = 'networks.sectionFollowNetworks'+_.split(':')[1].replace(/ /g,'')
                 networkList.push( { 
                     'type': _.split(':')[0],
-                    'params': eval(networkName),
+                    'params': networkName,
                 })
+                
             } else {
-                networkName = `networks.sectionShareNetworks${_[0].toUpperCase()}${_.slice(1)}`
+                networkName = `networks.sectionFollowNetworks${_[0].toUpperCase()}${_.slice(1)}`
                 networkList.push( { 
                     'type': _,
                     'params': eval(networkName),
