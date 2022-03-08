@@ -1,4 +1,5 @@
-
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
@@ -147,7 +148,7 @@ export default function MenuPage (
                     close ? 
                         <div className={`pl-3 pr-3 z-index-3`}>
                             <Link to = {close} className={`close`} variant={`${ mode === 'light' ? 'black' : mode === 'dark' ? 'white' : mode }`} aria-label={t('global.close')}>
-                                <span aria-hidden="true">✕</span>
+                                <FontAwesomeIcon className='icon' icon={faTimes} size='sm'/>
                                 <span className="sr-only">{t('global.close')} </span>
                             </Link>
                         </div>

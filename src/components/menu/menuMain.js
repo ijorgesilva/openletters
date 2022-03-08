@@ -101,7 +101,31 @@ export default function MenuMain (
                 : 
                     undefined
             }
-           
+
+           {
+                searchIndices || auth ? 
+                    <div className='d-flex functions'>
+                        {
+                            ( searchIndices?.length > 0 && search && menuLocation === 'top' ) ? 
+                                <SearchModal 
+                                    indices = { searchIndices } 
+                                    mode    = { mode }
+                                />
+                            :
+                                undefined
+                        }
+        
+                        {
+                            auth && menuLocation === 'top' ?
+                                <MenuAuth 
+                                    mode    = { mode }
+                                />
+                            : undefined
+                        }
+                    </div>
+                : undefined
+            }
+
             {
                 collapse ?
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' className={`navbar-${ mode ? mode : 'light'}`}>
@@ -156,24 +180,6 @@ export default function MenuMain (
                     }
                 </Nav>
             </Navbar.Collapse>
- 
-            {
-                ( searchIndices?.length > 0 && search && menuLocation === 'top' ) ? 
-                    <SearchModal 
-                        indices = { searchIndices } 
-                        mode    = { mode }
-                    />
-                :
-                    undefined
-            }
-
-            {
-                auth && menuLocation === 'top' ?
-                    <MenuAuth 
-                        mode    = { mode }
-                    />
-                : undefined
-            }
 
         </Navbar>
     )

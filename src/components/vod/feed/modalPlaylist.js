@@ -1,10 +1,8 @@
-
 import { faList } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState } from 'react'
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next"
-
 
 import './modalPlaylist.scss'
 
@@ -40,8 +38,7 @@ export default function ModalPlaylist (
                 <Modal.Header 
                     closeLabel  = {t('global.close')} 
                     closeButton
-                >
-                </Modal.Header>
+                />
 
                 <Modal.Body>
                     {children}

@@ -40,21 +40,27 @@
 }
 
 @include media("<desktop") {
-}
-
-@include media("≥phone", "<850px") {
     .menuAuth {
         &.light {
             .btn {
                 background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                &:hover {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
             }
         }
         &.dark {
             .btn {
                 background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                &:hover {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
             }
         }
     }
+}
+
+@include media("≥phone", "<850px") {
 }
 
 @include media("≥phone", "<tablet") {  

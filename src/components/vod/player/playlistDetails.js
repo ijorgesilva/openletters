@@ -54,7 +54,7 @@ export default function PlaylistDetails(
                             (videoDetails.videoUrl) ?
                                 <VideoReactPlayer
                                     src     = { videoDetails.videoUrl}
-                                    height  = { ( videos?.length > 0  ) ? undefined : '680px' }
+                                    height  = { videos?.length > 0 ? undefined : '680px' }
                                     config  =   {
                                                     {
                                                         file: {
@@ -71,26 +71,27 @@ export default function PlaylistDetails(
                         }
                     </div>
 
-
                     {
-                        ( videos?.length > 0  ) ?
+                        videos?.length > 0 ?
                             <div className = 'playlist'>
+
                                 <SidebarFeedVod 
                                     background  = { 
-                                                    ( config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ) ? 
+                                                    config.watchDetailsViewSidebarBackground && videoDetails.videoSeries?.seriesGraphics.background?.localFile ? 
                                                         videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                                                     : 
                                                         undefined
                                                     }
                                     className   = 'd-none d-md-block'
-                                    serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
-                                    id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
+                                    serieSlug   = { videoDetails.videoSeries?.slug ? videoDetails.videoSeries.slug : undefined }
+                                    id          = { videoDetails.videoSeries?.slug ? videoDetails.videoSeries.slug : undefined }
                                     items       = { videos }
                                     campus      = { campus }
                                     mode        = { mode }
                                     order       = { order }
                                     count       = { count ? true : false}
                                 />
+
                                 <ModalPlaylist 
                                     className   = 'd-block d-md-none'
                                     mode        = { mode }
@@ -103,8 +104,8 @@ export default function PlaylistDetails(
                                                             undefined
                                                         }
                                         className   = ''
-                                        serieSlug   = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined}
-                                        id          = { ( videoDetails.videoSeries?.slug ) ? videoDetails.videoSeries.slug : undefined }
+                                        serieSlug   = { videoDetails.videoSeries?.slug ? videoDetails.videoSeries.slug : undefined}
+                                        id          = { videoDetails.videoSeries?.slug ? videoDetails.videoSeries.slug : undefined }
                                         items       = { videos }
                                         campus      = { campus }
                                         mode        = { mode }
@@ -112,6 +113,7 @@ export default function PlaylistDetails(
                                         count       = { count ? true : false}
                                     />
                                 </ModalPlaylist>
+                                
                             </div>
                         :
                             undefined

@@ -99,18 +99,21 @@
 }
 
 @include media("<desktop") {
-}
-
-@include media("≥phone", "<850px") {
     .searchModal {
         &.light {
             .btn {
                 background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                &:hover {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
             }
         }
         &.dark {
             .btn {
                 background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                &:hover {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
             }
         }
         .modal-dialog {
@@ -118,9 +121,14 @@
             max-width: 95vw;
             margin-top: 1rem;
         }
-
     }
 }
 
-@include media("≥phone", "<tablet") {  
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone", "portrait") {
 }

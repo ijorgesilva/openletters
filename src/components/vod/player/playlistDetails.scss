@@ -64,7 +64,7 @@
 
         &.playlist-grid {
             display: grid;
-            grid-template-columns: 1fr 0.4fr;
+            grid-template-columns: 1fr 0.5fr;
             grid-template-rows: auto;
             
         }
@@ -148,12 +148,32 @@
                     height: 220px;
                 }
             }
+        }
+    }
 
+}
+
+/*
+ * General Breakpoints
+ */
+@include media("<desktop") {
+    .playlist {
+        .sidebarFeedVod {
+            display: none;
+        }
+        .modalPlaylist {
+            display: block;
         }
     }
 }
 
-@include media("<=phone") {
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone", "portrait") {
     .playlistDetails {
         padding: 0px !important;
         .container,

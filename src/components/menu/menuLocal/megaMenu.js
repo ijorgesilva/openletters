@@ -41,7 +41,7 @@ export default function MegaMenu(
             >
                 {
                     organizedByColumns.map( (_, i1) => (
-                        <div key = { i1 } style = { { gridArea: `c${i1}` } } >
+                        <div className = 'column' key = { i1 } style = { { gridArea: `c${i1}` } } >
                             {
                                 _.map( (m, i2) => (
                                     <SubItemType 
