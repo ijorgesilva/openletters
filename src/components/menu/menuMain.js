@@ -129,7 +129,7 @@ export default function MenuMain (
             {
                 collapse ?
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' className={`navbar-${ mode ? mode : 'light'}`}>
-                        <FontAwesomeIcon icon={faBars} size='md' />
+                        <FontAwesomeIcon icon={faBars} size='sm' />
                     </Navbar.Toggle>
                 : undefined
             }

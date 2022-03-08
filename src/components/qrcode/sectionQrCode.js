@@ -94,7 +94,7 @@ export default function SectionQrCode (
                                         />
                                     </div>
                                     <div className='instructions'>
-                                        <span className='icon'><FontAwesomeIcon icon={faMobile} size='md' /></span>
+                                        <span className='icon'><FontAwesomeIcon icon={faMobile} size='sm' /></span>
                                         {t('global:global.qrcode.scan-me')}
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@ export default function SectionQrCode (
                                             />
                                         </div>
                                         <div className='instructions'>
-                                            <span className='icon'><FontAwesomeIcon icon={faMobile} size='md' /></span>
+                                            <span className='icon'><FontAwesomeIcon icon={faMobile} size='sm' /></span>
                                             {t('global:global.qrcode.scan-me')}
                                         </div>
                                     </div>

@@ -149,7 +149,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                     courseDetails.courseCertificate ?
                                         <ListGroup.Item>
                                             <strong>
-                                                <FontAwesomeIcon icon={faCertificate} size='md' /> 
+                                                <FontAwesomeIcon icon={faCertificate} size='sm' /> 
                                                 {' ' + t('global.courses.certificate.available')}
                                             </strong>
                                         </ListGroup.Item>
@@ -159,21 +159,21 @@ export default function CourseDetails( { pageContext, data, location } ){
                                     courseDetails.courseModality === 'inperson' ?
                                         <ListGroup.Item>
                                             <strong>
-                                                <FontAwesomeIcon icon={faUserFriends} size='md' />  {t('global.courses.modality.in-person')}
+                                                <FontAwesomeIcon icon={faUserFriends} size='sm' />  {t('global.courses.modality.in-person')}
                                             </strong>
                                         </ListGroup.Item>
                                     : 
                                         courseDetails.courseModality === 'online' ?
                                             <ListGroup.Item>
                                                 <strong>
-                                                    <FontAwesomeIcon icon={faLaptop} size='md' /> {t('global.courses.modality.online')}
+                                                    <FontAwesomeIcon icon={faLaptop} size='sm' /> {t('global.courses.modality.online')}
                                                 </strong>
                                             </ListGroup.Item>
                                         : 
                                             courseDetails.courseModality === 'blended' ?
                                                 <ListGroup.Item>
                                                     <strong>
-                                                        <FontAwesomeIcon icon={faLaptopHouse} size='md' />  {t('global.courses.modality.blended')}
+                                                        <FontAwesomeIcon icon={faLaptopHouse} size='sm' />  {t('global.courses.modality.blended')}
                                                     </strong>
                                                 </ListGroup.Item>
                                             : undefined
@@ -183,7 +183,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                         <ListGroup.Item>
                                             <strong>
                                                 <span title={t('global.courses.duration.total-duration')}>
-                                                    <FontAwesomeIcon icon={faClock} size='md' /> 
+                                                    <FontAwesomeIcon icon={faClock} size='sm' /> 
                                                     {' ' + courseDetails.courseDuration.duration + ' '}
                                                     {
                                                         courseDetails.courseDuration.duration > 1 ?
@@ -209,7 +209,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                     courseDetails.coursePace.split(':')[0] === 'self-paced' ?
                                         <ListGroup.Item>
                                             <strong>
-                                                <FontAwesomeIcon icon={faFastForward} size='md' /> 
+                                                <FontAwesomeIcon icon={faFastForward} size='sm' /> 
                                                 {' ' + t('global.courses.pace.self-pace')}
                                             </strong>
                                         </ListGroup.Item>
@@ -217,7 +217,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                         courseDetails.coursePace.split(':')[0] === 'instructor-paced' ?
                                             <ListGroup.Item>
                                                 <strong>
-                                                    <FontAwesomeIcon icon={faChalkboardTeacher} size='md' /> 
+                                                    <FontAwesomeIcon icon={faChalkboardTeacher} size='sm' /> 
                                                     {' ' + t('global.courses.pace.instructor-paced')}
                                                 </strong>
                                             </ListGroup.Item>
@@ -227,7 +227,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                     courseDetails.courseLanguages?.length > 0 ?
                                     <ListGroup.Item>
                                         <strong>
-                                            <FontAwesomeIcon icon={faLanguage} size='md' /> 
+                                            <FontAwesomeIcon icon={faLanguage} size='sm' /> 
                                             {' ' + t('global.languages.languages-available') + ' '}
                                         </strong>
                                         {
@@ -250,7 +250,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                     {
                                         courseDetails.courseTimeLocation.startDate ?
                                             <ListGroup.Item>
-                                                <FontAwesomeIcon icon={faCalendarAlt} size='md' /> 
+                                                <FontAwesomeIcon icon={faCalendarAlt} size='sm' /> 
                                                 {' ' + t('global.courses.starts-on') + ' '}
                                                 {
                                                     DateTime.fromFormat(courseDetails.courseTimeLocation.startDate, 'MM/dd/yyyy').toFormat('MMMM dd, yyyy')
@@ -272,7 +272,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                         courseDetails.courseTimeLocation.location?.length >= 0 ?
                                             courseDetails.courseTimeLocation.location[0].venueDetails.venueAddress ?
                                                 <ListGroup.Item>
-                                                    <FontAwesomeIcon icon={faMapMarkedAlt} size='md' /> 
+                                                    <FontAwesomeIcon icon={faMapMarkedAlt} size='sm' /> 
                                                     {' ' + courseDetails.courseTimeLocation.location[0].venueDetails.venueAddress}
                                                 </ListGroup.Item>
                                             : undefined
@@ -298,7 +298,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                                             data.lessons.nodes.map( ( _, index ) => (
                                                 <Card key={index+1}>
                                                     <Accordion.Toggle as={Card.Header} eventKey={index+1}>
-                                                        <FontAwesomeIcon icon={faBookOpen} size='md' /> {_.title}
+                                                        <FontAwesomeIcon icon={faBookOpen} size='sm' /> {_.title}
                                                     </Accordion.Toggle>
                                                     <Accordion.Collapse eventKey={index+1}>
                                                         <Card.Body dangerouslySetInnerHTML={{ __html: _.lessonDetails.lessonSummary }}></Card.Body>

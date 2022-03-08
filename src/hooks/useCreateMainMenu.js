@@ -24,12 +24,13 @@ export const useCreateMainMenu = (
 
     if( rawMenu?.status === 'publish' && campus ) {
         rawMenuItems = rawMenu.menuDetails.mainMenu.mainMenuItems
+        console.log(rawMenu)
         menuConf  = {
             'slug'      : rawMenu.slug,
             'mode'      : rawMenu.menuDetails.menuColorScheme?.split(':')[0] ? rawMenu.menuDetails.menuColorScheme.split(':')[0] : 'light',
             'css'       : rawMenu.menuDetails.menuCss ? rawMenu.menuDetails.menuCss : '',
             'id'        : rawMenu.menuDetails.menuId ? rawMenu.menuDetails.menuId : '',
-            'collapse'  : rawMenu.menuDetails.menuCollapse ? rawMenu.menuDetails.menuCollapse : true,
+            'collapse'  : rawMenu.menuDetails.menuCollapse ? true : false,
         }
         parsedMenu['conf'] = menuConf
         

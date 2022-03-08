@@ -47,7 +47,7 @@
 
     .jumbotron {
         display: flex;
-        height: 56.25vw;
+        height: 40.25vw;
         align-items: center;
         margin-bottom: 0px;
         border-radius: unset;
@@ -92,11 +92,22 @@
         }
         
         .iconSeries {
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
             > .gatsby-image-wrapper {
                 display: block;
                 width: 100%;
                 max-width: 520px;
                 height: 100px;
+            }
+        }
+        .titleSeries {
+            margin-bottom: 0rem;
+            position: relative;
+            z-index: 2;
+            h1 {
+                margin-bottom: 0;
             }
         }
 
@@ -163,6 +174,7 @@
             flex-direction: column-reverse;
         }
         .jumbotron {
+            height: 56.25vw;
             .content {
                 margin-top: 100px;
                 margin-bottom: 10px;
@@ -179,6 +191,7 @@
                 }
                 p {
                     display: none;
+                    max-width: 320px;
                 }
             }
         }

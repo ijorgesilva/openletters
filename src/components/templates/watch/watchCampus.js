@@ -98,6 +98,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                         items           = { data.latest.nodes }
                         mode            = { contentMode }
                         campus          = { slug }
+                        size            = {'sm'}
                         configLayout    =   {{
                                                 excerpt: false,
                                                 itemsVisible: 5,

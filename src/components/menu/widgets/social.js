@@ -10,7 +10,17 @@ export default function Social (
     } 
 ) {
     return (
-        <div className={`widgetSocial ${ mode ? mode : 'light'} ${ className ? className : '' }`} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
+        <div className={`widgetSocial ${ mode ? mode : 'light'} ${ className ? className : '' }`} 
+            style = {
+                { 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    padding: '1rem',
+                    maxWidth: '520px',
+                    margin: '0px auto',
+                }
+            }
+        >
             {
                 items.length > 0 ?
                     items.map( (_, index) => (

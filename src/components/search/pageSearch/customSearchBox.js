@@ -27,7 +27,7 @@ const SearchBox = (
                     className   = 'btn btn-outline-secondary'
                     onClick     = {() => refine('')}
                 >
-                    <FontAwesomeIcon icon={faSearch} size='md' /> { translations.searchTitle }
+                    <FontAwesomeIcon icon={faSearch} size='sm' /> { translations.searchTitle }
                 </button>
             </form>
         </nav>
