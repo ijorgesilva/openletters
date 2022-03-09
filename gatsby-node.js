@@ -688,31 +688,34 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                             /* Custom Pages Creation */
                             if( _.ministryDetails.ministryPagesCustom?.length > 0 ){
                                 _.ministryDetails.ministryPagesCustom.forEach( ( customPage, index ) => {
-                                    customPageSlug = customPage.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() 
-                                    actions.createPage({
-                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
-                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
-                                        context: {
-                                            ..._,
-                                            title: _.title,
-                                            slug: _.slug,
-                                            id: _.id,
-                                            customPageIndex: index,
-                                            featuredImage: _.general.featuredPhoto,
-                                            excerpt: _.general.summary,
-                                            layout: 'ministryDetailsCustomPage',
-                                            view: 'customPage',
-                                            campusId: `/${campus.databaseId}/`,
-                                            breadcrumbs: {
-                                                            'campus': campus.slug,
-                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
-                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
-                                                            'currentPath': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
-                                                            'slug': _.slug,
-                                                            'currentSlug': customPageSlug,
-                                                        },
-                                        }
-                                    })
+                                    if (customPage.menuType === 'page'){
+                                        customPageSlug = customPage.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() 
+                                        actions.createPage({
+                                            path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                            component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                            context: {
+                                                ..._,
+                                                title: _.title,
+                                                slug: _.slug,
+                                                id: _.id,
+                                                customPageIndex: index,
+                                                featuredImage: _.general.featuredPhoto,
+                                                excerpt: _.general.summary,
+                                                layout: 'ministryDetailsCustomPage',
+                                                view: 'customPage',
+                                                campusId: `/${campus.databaseId}/`,
+                                                breadcrumbs: {
+                                                                'campus': campus.slug,
+                                                                'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                                'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                                'currentPath': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                                                'slug': _.slug,
+                                                                'currentSlug': customPageSlug,
+                                                            },
+                                            }
+                                        })
+                                    }
+
                                 })
                             }
                         })
