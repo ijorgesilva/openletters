@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../../data/SiteConfig'
-import HeroPost from '../../../../components/hero/heroPost'
+import HeroDynamic from '../../../hero/heroDynamic'
 import RenderSection from '../../../renderSection'
 import TagSimple from '../../../tag/tagSimple'
 import ToolbarDetails from '../../../toolbar/toolbarDetails'
@@ -31,8 +31,8 @@ export default function DefaultLayoutDetails (
     const [copySuccessTime, setCopySuccessTime] = useState('')
     const copyToClipBoardTime = async copyMe => {
         try {
-          await navigator.clipboard.writeText(copyMe)
-          setCopySuccessTime('Copied!')
+            await navigator.clipboard.writeText(copyMe)
+            setCopySuccessTime('Copied!')
         } catch (err) {
             setCopySuccessTime('Failed to copy!')
         }
@@ -41,10 +41,10 @@ export default function DefaultLayoutDetails (
     const [copySuccess, setCopySuccess] = useState('')
     const copyToClipBoard = async copyMe => {
         try {
-          await navigator.clipboard.writeText(copyMe)
-          setCopySuccess(t('global.copied'))
+            await navigator.clipboard.writeText(copyMe)
+            setCopySuccess(t('global.copied'))
         } catch (err) {
-          setCopySuccess(t('global.copied-failed'))
+            setCopySuccess(t('global.copied-failed'))
         }
     }
 
@@ -56,17 +56,22 @@ export default function DefaultLayoutDetails (
             
         <main className=''>
 
-            <HeroPost 
+            <HeroDynamic
+                id              = { 'hero' }
+                className       = { 'z-index-0' }
+                titleClassName  = { 'display-4' }
                 mode            = { mode }
+                width           = { 'fullwidth' }
                 title           = { title }
+                size            = { 'xl' }
                 backgroundPhoto =   {
                                         featuredImage ? 
                                             featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                         : 
                                             undefined
                                     }
-                className       = 'z-index-0'
-                size            = 'xl'
+                location        = { location }
+                overlay         = { true }
             />
 
             <ToolbarDetails 

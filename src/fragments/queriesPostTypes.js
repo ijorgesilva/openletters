@@ -398,11 +398,11 @@ const queriesPostTypes = {
                         menuTitle
                         menuType
                         menuLink {
-                          menuItemType
-                          menuItemUrl
-                          menuItemTarget
-                          menuItemCss
-                          menuItemRemoveCss
+                            menuItemType
+                            menuItemUrl
+                            menuItemTarget
+                            menuItemCss
+                            menuItemRemoveCss
                         }
                         menuWeight
                         sections {
@@ -656,6 +656,39 @@ const queriesPostTypes = {
             }
         }
     `,
+    allWpVolunteeropportunity: `
+        ########
+        # Volunteering Opportunities
+        ########
+        opportunities: allWpVolunteeropportunity {
+            nodes {
+                id
+                title
+                slug
+                databaseId
+                date(formatString: "YYYYMMDD")
+                modified(formatString: "YYYYMMDD")
+                ${queriesCommon.seoFields}
+                postContent {
+                    content
+                }
+                serveDetails {
+                    volunteerRelatedMinistry {
+                        ${queriesCommon.wpMinistry}
+                    }
+                }
+                general {
+                    summary
+                    campus {
+                        ${queriesCommon.referenceCampus}
+                    }
+                    featuredPhoto {
+                        ${queriesCommon.localFile}
+                    }
+                }
+            }
+        }
+    `
 }
 
 module.exports = queriesPostTypes;

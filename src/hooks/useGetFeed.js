@@ -383,7 +383,7 @@ export const useGetFeed = (
                                 {
                                     'buttonLink': `/${useGetBestCampus( campus, _.general.campus )}/${config.volunteeringSlug}/${_.slug}`,
                                     'buttonType': 'internal: Internal',
-                                    'buttonText': feedButton?.buttonText || t('global.read_more'),
+                                    'buttonText': feedButton?.buttonText || t('global.learn-more'),
                                     'buttonTarget': feedButton?.buttonTarget || '_self: Self',
                                     'buttonCss': feedButton?.buttonCss,
                                     'buttonCssRemoveDefault': feedButton?.buttonCssRemoveDefault,

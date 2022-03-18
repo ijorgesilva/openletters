@@ -139,11 +139,14 @@
 			"title-plural": "Languages"
 		},
 		"last": "Last",
+		"learn-more": "Learn more",
 		"legal": {
 			"disclaimer": "Copyright ©. All Rights Reserved."
 		},
 		"ministry": {
 			"description": "",
+			"related-ministries": "Related Ministries",
+			"related-ministry": "Related Ministry",
 			"title": "Ministry",
 			"title-plural": "Ministries"
 		},
@@ -217,8 +220,8 @@
 		"volunteering": {
 			"description": "",
 			"serve": "Serve",
-			"title": "Volunteering",
-			"title-plural": "Volunteering",
+			"title": "Serve Opportunity",
+			"title-plural": "Serve Opportunities",
 			"volunteering": "Volunteering"
 		},
 		"watch": {

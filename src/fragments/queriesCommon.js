@@ -83,15 +83,6 @@ const queriesCommon = {
         buttonCss
         buttonCssRemoveDefault
     `,
-    referenceCampus: `
-        ... on WpCampus {
-            id
-            title
-            slug
-            status
-            databaseId
-        }
-    `,
     itemConfiguration: `
         active
         feedLayout
@@ -148,130 +139,151 @@ const queriesCommon = {
         hideButton
     `,
     carouselConfiguration: `
-            sectionCarouselConfigurationItemType
-            sectionCarouselConfigurationSwipe
-            sectionCarouselConfigurationDraggable
-            sectionCarouselConfigurationInfinite
-            sectionCarouselConfigurationPartiallyVisible
-            sectionCarouselConfigurationDots
-            sectionCarouselConfigurationDotsClass
-            sectionCarouselConfigurationAutoplay
-            sectionCarouselConfigurationStretched
-            sectionCarouselConfigurationAutoplayInterval
-            sectionCarouselConfigurationGap
-            sectionCarouselConfigurationClass
-            sectionCarouselConfigurationTruncate
-            sectionCarouselConfigurationTruncateLines
-            sectionCarouselConfigurationImageFit
-            sectionCarouselConfigurationImagePosition
-            sectionCarouselConfigurationImageAspect
-            sectionCarouselConfigurationBorder
-            sectionCarouselConfigurationBorderColor
-            sectionCarouselConfigurationGrow
-            hideImage
-            hideTitle
-            hideSubtitle
-            hideExcerpt
-            hideButton
-            sectionCarouselConfigurationResponsive {
-                responsiveXl {
-                    responsiveXlCustom
-                    responsiveXlItems
-                    responsiveXlMax
-                    responsiveXlMin
+        sectionCarouselConfigurationItemType
+        sectionCarouselConfigurationSwipe
+        sectionCarouselConfigurationDraggable
+        sectionCarouselConfigurationInfinite
+        sectionCarouselConfigurationPartiallyVisible
+        sectionCarouselConfigurationDots
+        sectionCarouselConfigurationDotsClass
+        sectionCarouselConfigurationAutoplay
+        sectionCarouselConfigurationStretched
+        sectionCarouselConfigurationAutoplayInterval
+        sectionCarouselConfigurationGap
+        sectionCarouselConfigurationClass
+        sectionCarouselConfigurationTruncate
+        sectionCarouselConfigurationTruncateLines
+        sectionCarouselConfigurationImageFit
+        sectionCarouselConfigurationImagePosition
+        sectionCarouselConfigurationImageAspect
+        sectionCarouselConfigurationBorder
+        sectionCarouselConfigurationBorderColor
+        sectionCarouselConfigurationGrow
+        hideImage
+        hideTitle
+        hideSubtitle
+        hideExcerpt
+        hideButton
+        sectionCarouselConfigurationResponsive {
+            responsiveXl {
+                responsiveXlCustom
+                responsiveXlItems
+                responsiveXlMax
+                responsiveXlMin
+            }
+            responsiveL {
+                responsiveLCustom
+                responsiveLItems
+                responsiveLMax
+                responsiveLMin
+            }
+            responsiveS {
+                responsiveSCustom
+                responsiveSItems
+                responsiveSMax
+                responsiveSMin
+            }
+            responsiveXs {
+                responsiveXsCustom
+                responsiveXsItems
+                responsiveXsMax
+                responsiveXsMin
+            }
+        }
+    `,
+    backgroundLayer: `
+        backgroundLayer {
+            backgroundLayerType
+            backgroundLayerColor {
+                backgroundLayerColorColor
+                backgroundLayerColorOpacity
+            }
+            backgroundLayerImage {
+                backgroundLayerImageImage {
+                    localFile {
+                        publicURL
+                    }
                 }
-                responsiveL {
-                    responsiveLCustom
-                    responsiveLItems
-                    responsiveLMax
-                    responsiveLMin
-                }
-                responsiveS {
-                    responsiveSCustom
-                    responsiveSItems
-                    responsiveSMax
-                    responsiveSMin
-                }
-                responsiveXs {
-                    responsiveXsCustom
-                    responsiveXsItems
-                    responsiveXsMax
-                    responsiveXsMin
+                backgroundLayerImageOpacity
+                backgroundLayerImagePosition
+                backgroundLayerImageRepeat
+                backgroundLayerImageSize
+                backgroundLayerImageSizeCustom
+                backgroundLayerImageFixed
+            }
+            backgroundLayerGradient {
+                backgroundLayerGradientType
+                backgroundLayerGradientAngle
+                backgroundLayerGradientOpacity
+                backgroundLayerGradientSteps {
+                    step {
+                        color
+                        stop
+                    }
                 }
             }
-        `,
-        backgroundLayer: `
-            backgroundLayer {
-                backgroundLayerType
-                backgroundLayerColor {
-                    backgroundLayerColorColor
-                    backgroundLayerColorOpacity
+            backgroundLayerText {
+                backgroundLayerTextOpacity
+                backgroundLayerTextText
+            }
+        }
+    `,
+    pageSettings: `
+        pageSettings {
+            settingsStyles {
+                settingsStylesFooter {
+                    settingsStylesFooterColor
                 }
-                backgroundLayerImage {
-                    backgroundLayerImageImage {
+                settingsStylesHeader {
+                    settingsStylesHeaderColor
+                }
+                settingsStylesGraphics {
+                    settingsStylesGraphicsLogo {
                         localFile {
-                            publicURL
-                        }
-                    }
-                    backgroundLayerImageOpacity
-                    backgroundLayerImagePosition
-                    backgroundLayerImageRepeat
-                    backgroundLayerImageSize
-                    backgroundLayerImageSizeCustom
-                    backgroundLayerImageFixed
-                }
-                backgroundLayerGradient {
-                    backgroundLayerGradientType
-                    backgroundLayerGradientAngle
-                    backgroundLayerGradientOpacity
-                    backgroundLayerGradientSteps {
-                        step {
-                            color
-                            stop
-                        }
-                    }
-                }
-                backgroundLayerText {
-                    backgroundLayerTextOpacity
-                    backgroundLayerTextText
-                }
-            }
-        `,
-        pageSettings: `
-            pageSettings {
-                settingsStyles {
-                    settingsStylesFooter {
-                        settingsStylesFooterColor
-                    }
-                    settingsStylesHeader {
-                        settingsStylesHeaderColor
-                    }
-                    settingsStylesGraphics {
-                        settingsStylesGraphicsLogo {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData(layout: FULL_WIDTH)
-                                }
+                            childImageSharp {
+                                gatsbyImageData(layout: FULL_WIDTH)
                             }
                         }
                     }
                 }
             }
-        `,
-        allWpRedirect: `
-            ########
-            # Redirects 
-            ########
-            redirects: allWpRedirect {
-                nodes {
-                    redirect {
-                        redirectFrompath
-                        redirectIspermanent
-                        redirectTopath
-                    }
+        }
+    `,
+    allWpRedirect: `
+        ########
+        # Redirects 
+        ########
+        redirects: allWpRedirect {
+            nodes {
+                redirect {
+                    redirectFrompath
+                    redirectIspermanent
+                    redirectTopath
                 }
             }
-        `
+        }
+    `,
+
+    /************************* 
+     * Fragments 
+     *************************/
+    referenceCampus: `
+        ... on WpCampus {
+            id
+            title
+            slug
+            status
+            databaseId
+        }
+    `,
+    wpMinistry: `
+        ... on WpMinistry {
+            id
+            status
+            title
+            slug
+        }
+    `
 }
 
 module.exports = queriesCommon;

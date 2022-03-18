@@ -24,7 +24,7 @@ export const useCreateMainMenu = (
 
     if( rawMenu?.status === 'publish' && campus ) {
         rawMenuItems = rawMenu.menuDetails.mainMenu.mainMenuItems
-        console.log(rawMenu)
+        
         menuConf  = {
             'slug'      : rawMenu.slug,
             'mode'      : rawMenu.menuDetails.menuColorScheme?.split(':')[0] ? rawMenu.menuDetails.menuColorScheme.split(':')[0] : 'light',

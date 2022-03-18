@@ -6,46 +6,46 @@
 const path = require("path");
 
 const urljoin = require("url-join");
- 
+
 require('dotenv').config({
   path: `.env${ (process.env.NODE_ENV === 'development' ) ? '.development' : (process.env.NODE_ENV) ? '.'+process.env.NODE_ENV : ''}`
 })
 
- module.exports = {
- 
-   flags: {
-     FAST_DEV: true,
-     PRESERVE_FILE_DOWNLOAD_CACHE: process.env.PRESERVE_FILE_DOWNLOAD_CACHE || false,
-     PARALLEL_SOURCING: true,
-   },
- 
-   pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
- 
-   siteMetadata: {
-     siteUrl: process.env.SITE_URL,
- 
-     title: process.env.SITE_TITLE,
-     titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
-     description: process.env.SITE_DESCRIPTION,
-     url: process.env.SITE_URL,
-     image: process.env.SITE_IMAGE,
-     twitterUsername: process.env.TWITTER_USERNAME,
- 
-     rssMetadata: {
-       site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
-       feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
-       title: process.env.SITE_TITLE,
-       description: process.env.SITE_DESCRIPTION,
-       image_url: `${urljoin(
-         process.env.SITE_URL,
-         process.env.PATH_PREFIX
-       )}/logos/logo-512.png`,
-       copyright: process.env.SITE_COPYRIGHT
-     }
-   },
- 
-   /* Your site config here */
-   plugins: [
+module.exports = {
+
+    flags: {
+      FAST_DEV: true,
+      PRESERVE_FILE_DOWNLOAD_CACHE: process.env.PRESERVE_FILE_DOWNLOAD_CACHE || false,
+      PARALLEL_SOURCING: true,
+    },
+  
+    pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
+  
+    siteMetadata: {
+      siteUrl: process.env.SITE_URL,
+  
+      title: process.env.SITE_TITLE,
+      titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
+      description: process.env.SITE_DESCRIPTION,
+      url: process.env.SITE_URL,
+      image: process.env.SITE_IMAGE,
+      twitterUsername: process.env.TWITTER_USERNAME,
+  
+      rssMetadata: {
+        site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
+        feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
+        title: process.env.SITE_TITLE,
+        description: process.env.SITE_DESCRIPTION,
+        image_url: `${urljoin(
+          process.env.SITE_URL,
+          process.env.PATH_PREFIX
+        )}/logos/logo-512.png`,
+        copyright: process.env.SITE_COPYRIGHT
+      }
+    },
+  
+    /* Your site config here */
+    plugins: [
 
         /*
         * Functions
@@ -201,6 +201,5 @@ require('dotenv').config({
         */
         `gatsby-plugin-meta-redirect`,
           
-   ],
- }
- 
+  ],
+}

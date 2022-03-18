@@ -3,11 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
-import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
+import HeroDynamic from '../../hero/heroDynamic'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
 import TagSimple from '../../tag/tagSimple'
@@ -80,17 +80,22 @@ export default function PostDetails( { location, pageContext } ){
             />
 
             <article className='contentMain mb-5'>
-                <HeroPost 
+                <HeroDynamic
+                    id              = { 'hero' }
+                    className       = { 'z-index-0' }
+                    titleClassName  = { 'display-4' }
                     mode            = { contentMode }
+                    width           = { 'fullwidth' }
                     title           = { title }
+                    size            = { 'md' }
                     backgroundPhoto =   {
                                             featuredImage?.node ? 
                                                 featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                             : 
                                                 undefined
                                         }
-                    className       = 'z-index-0'
-                    size            = 'sm'
+                    location        = { location }
+                    overlay         = { true }
                 />
                 
                 <ToolbarDetails 

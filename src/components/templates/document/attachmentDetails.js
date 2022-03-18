@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
+import HeroDynamic from '../../hero/heroDynamic'
 import Navigation from '../../menu/navigation'
 
 import './attachmentDetails.scss'
@@ -48,32 +48,36 @@ export default function AttachmentDetails ( { location, pageContext } ) {
 
             <main className='main contentMain'>
 
-                <HeroPost 
-                    className       = 'download z-index-0'
-                    excerpt         = { excerpt }
+                <HeroDynamic
+                    id              = { 'hero' }
+                    className       = { 'download z-index-0' }
+                    titleClassName  = { 'display-4' }
+                    mode            = { contentMode }
+                    width           = { 'fullwidth' }
+                    title           = { title }
+                    size            = { 'md' }
+                    backgroundPhoto = { undefined }
+                    location        = { location }
+                    overlay         = {true}
                 >
                     <h4>{title}</h4>
                     <p>
                         {excerpt.replace(/<p>/, '').replace(/<\/p>/, '')}
                     </p>
                     {
-                        ( attachmentDetails.attachmentFile?.localFile ) ?
-                            <a 
-                                className   = 'button button--animation button--three button button-none' 
-                                href        = { attachmentDetails.attachmentFile.localFile.publicURL } 
-                                title       = { title } 
+                        attachmentDetails.attachmentFile?.localFile ?
+                            <a  href        = { attachmentDetails.attachmentFile.localFile.publicURL } 
+                                target      = '_blank' 
                                 rel         = 'noreferrer' 
-                                target      = '_blank'
+                                className   = {`user-select-none ${ contentMode ? 'btn '+ 'btn-' + contentMode : 'btn btn-light' }`}
+                                title       = { title } 
                             >
-                                <h6>
-                                    <FontAwesomeIcon icon={faCloudDownloadAlt} size='lg' />
-                                    <div>{t('global.attachments.download')}</div>
-                                </h6>
+                                <FontAwesomeIcon icon={faCloudDownloadAlt} size='lg' />{t('global.attachments.download')}
                             </a>
                         :
                             <>{t('global.no-records')}</>
                     }
-                </HeroPost>
+                </HeroDynamic>
 
             </main>
 

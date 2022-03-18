@@ -62,11 +62,28 @@ const config = {
     blogShowDates: true,
   
     /* 
-      algolia: Use algolia archiving list. 
-      internal: Use react libraries functions.
-    */
+     * campusPage view list type:
+     * 'algolia': Use algolia archiving list
+     *  'internal': Use react libraries functions
+     */
     archiveMode: 'internal', 
-  
+
+    /* 
+     * Activate/Deactivate Features
+     * When false the CPT pages will not be created or visible anywhere.
+     */
+    cpt: {
+      createWatch: true,
+      createNews: true,
+      createEvents: true,
+      createMinistries: true,
+      createCourses: true,
+      createVolunteering: true,
+      createGroups: true,
+      createAttachments: true,
+      createLandingPages: true,
+    }
+
 };
 
 module.exports = config;
