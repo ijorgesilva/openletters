@@ -9,7 +9,7 @@
                 color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             }
             >.jumbotron {
-                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
                 .about {
                     h2 {

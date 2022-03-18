@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from "react-i18next"
 
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import MainContent from '../../content/mainContent'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
@@ -19,15 +20,15 @@ export default function PageDetails( { location, pageContext } ){
     // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation()
 
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
 
-    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+    const cover =   featuredImage?.node?.localFile?.localFile ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
     
-    const sections =    ( pageDetails.pageSections?.length > 0 ) ? 
+    const sections =    pageDetails.pageSections?.length > 0 ? 
                             pageDetails.pageSections
                         : 
                             undefined
@@ -50,7 +51,7 @@ export default function PageDetails( { location, pageContext } ){
             />
             
             <Navigation
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -59,22 +60,22 @@ export default function PageDetails( { location, pageContext } ){
             />
 
             {
-                (pageDetails.pageMenues) ?
+                pageDetails.pageMenues ?
                     <MenuPage
-                        menues      = { pageDetails.pageMenues }
+                        menus       = { pageDetails.pageMenues }
                         campus      = { breadcrumbs.campus }
                         location    = { location }
                         className   = { pageDetails.pageMenues.menuDetails.menuCss }
                         id          = { pageDetails.pageMenues.menuDetails.menuId }
                         bg          = { pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
-                        mode        = { mode ? mode : pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
+                        mode        = { theme.styles.header ? theme.styles.header : pageDetails.pageMenues.menuDetails.menuColorScheme?.split(':')[0] }
                     />
                 :
                     undefined
             }
 
             {
-                ( sections ) ?
+                sections ?
                     sections.map( ( _, index ) => (
                         <RenderSection 
                             key         = { index }
@@ -90,7 +91,7 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                ( !pageDetails.pageHideShare ) ?
+                !pageDetails.pageHideShare ?
                     <ToolbarDetails 
                         location    = { location } 
                         mode        = { contentMode } 
@@ -100,7 +101,7 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                ( !pageDetails.pageHideContent ) ?
+                !pageDetails.pageHideContent ?
                     <MainContent 
                         date        = { date }
                         modified    = { modified }
@@ -112,7 +113,7 @@ export default function PageDetails( { location, pageContext } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
             
         </>

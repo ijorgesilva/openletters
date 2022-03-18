@@ -66,13 +66,13 @@ export default function SectionAlbum (
                         <Container fluid = { containerWidth === 'container' ? false : true } className = {`${ size ? size : ''}`}>
                             <div className='general pb-3'>
                                 {
-                                    ( title ) ?
+                                    title ?
                                         <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
                                     :
                                         undefined
                                 }
                                 { 
-                                    ( content ) ?
+                                    content ?
                                         <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
                                     :
                                         undefined
@@ -83,11 +83,17 @@ export default function SectionAlbum (
                         undefined
                 }
 
-                <div className = 'album pt-3 pb-3'>
+                <div className = 'album dark pt-3 pb-3' 
+                    style={
+                        { 
+                            'backgroundColor': albumCover?.backgroundColor,
+                        }
+                    }
+                >
                     <Container fluid = { containerWidth === 'container' ? false : true }>
                         <div className = 'albumCover'>
                             {
-                                ( albumCover ) ?
+                                albumCover ?
                                     <GatsbyImage 
                                         image       = {albumCover} 
                                         alt         = ''
@@ -99,14 +105,14 @@ export default function SectionAlbum (
                         </div>
                         <div className = 'albumInfo'>
                                 {
-                                    ( albumTitle ) ?
-                                        <h2 className='albumTitle' dangerouslySetInnerHTML={{__html: albumTitle}}></h2>
+                                    albumTitle ?
+                                        <h2 className = 'albumTitle text-white' dangerouslySetInnerHTML = {{__html: albumTitle}}></h2>
                                     :
                                         undefined
                                 }
                                 {
-                                    ( albumSubtitle ) ?
-                                        <h3 className='albumSubtitle' dangerouslySetInnerHTML={{__html: albumSubtitle}}></h3>
+                                    albumSubtitle ?
+                                        <h3 className = 'albumSubtitle text-white' dangerouslySetInnerHTML = {{__html: albumSubtitle}}></h3>
                                     :
                                         undefined
                                 }
@@ -114,16 +120,19 @@ export default function SectionAlbum (
                                 <div className = 'buttons' >
                                     <FindOn 
                                         items = { albumAvailableOn }
+                                        mode  = 'dark'
                                     />
 
                                     <ShareSimpleIcon 
                                         location    = { location } 
+                                        mode        = 'dark'
                                         label
                                     />
                                 </div>
 
                         </div>
                     </Container>
+                    <div className='background' style={{ 'backgroundImage': `url('${albumCover?.images?.fallback.src}')` }}></div>
                 </div>
 
                 <Playlist 
@@ -134,50 +143,48 @@ export default function SectionAlbum (
                 />
 
                 <div className = 'resources'>
-                    <Container fluid = { containerWidth === 'container' ? false : true }>
-                        {
-                            albumSongs.length > 0 ?
-                                albumSongs.map ( ( _, index ) => (
-                                    _.songResources ? 
-                                        <SectionCarousel 
-                                            key             = { index }
-                                            id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
-                                            title           = { _.songTitle ? _.songTitle : ''}
-                                            className       = { `song-resource-${index+1} pt-4 pb-4 ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
-                                            mode            = { mode }
-                                            containerWidth  = { containerWidth }
-                                            location        = { location }
-                                            items           = { useGetFeed( _.songResources ) }
+                    {
+                        albumSongs.length > 0 ?
+                            albumSongs.map ( ( _, index ) => (
+                                _.songResources ? 
+                                    <SectionCarousel 
+                                        key             = { index }
+                                        id              = { _.songTitle ? _.songTitle.split(' ').join('_') : `song-${index+1}` }
+                                        title           = { _.songTitle ? _.songTitle : ''}
+                                        className       = { `song-resource-${index+1} pt-2 pb-4 border-bottom ${ _.songTitle ? _.songTitle.split(' ').join('_') : ''}` }
+                                        mode            = { mode }
+                                        containerWidth  = { containerWidth }
+                                        location        = { location }
+                                        items           = { useGetFeed( _.songResources ) }
 
-                                            swipeable       = { swipeable }
-                                            draggable       = { draggable }
-                                            infinite        = { infinite }
-                                            partialVisible  = { partialVisible }
-                                            autoplay        = { autoplay }
-                                            stretchedlink   = { stretchedlink }
-                                            itemType        = { itemType }
-                                            dots            = { dots }
-                                            dotsClass       = { dotsClass }
-                                            interval        = { interval }
-                                            itemClass       = { itemClass }
-                                            gap             = { gap }
-                                            truncate        = { truncate }
-                                            truncateLines   = { truncateLines }
-                                            imagePosition   = { imagePosition }
-                                            imageFit        = { imageFit }
-                                            aspectRatio     = { aspectRatio }
-                                            border          = { border }
-                                            borderColor     = { borderColor }
-                                            itemGrow        = { itemGrow }
-                                            responsive      = { responsive }
-                                        />
-                                    :
-                                        undefined
-                                ))
-                            :
-                                undefined
-                        }
-                    </Container>
+                                        swipeable       = { swipeable }
+                                        draggable       = { draggable }
+                                        infinite        = { infinite }
+                                        partialVisible  = { partialVisible }
+                                        autoplay        = { autoplay }
+                                        stretchedlink   = { stretchedlink }
+                                        itemType        = { itemType }
+                                        dots            = { dots }
+                                        dotsClass       = { dotsClass }
+                                        interval        = { interval }
+                                        itemClass       = { itemClass }
+                                        gap             = { gap }
+                                        truncate        = { truncate }
+                                        truncateLines   = { truncateLines }
+                                        imagePosition   = { imagePosition }
+                                        imageFit        = { imageFit }
+                                        aspectRatio     = { aspectRatio }
+                                        border          = { border }
+                                        borderColor     = { borderColor }
+                                        itemGrow        = { itemGrow }
+                                        responsive      = { responsive }
+                                    />
+                                :
+                                    undefined
+                            ))
+                        :
+                            undefined
+                    }
                 </div>
 
         </section>

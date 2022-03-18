@@ -2,12 +2,15 @@
 
 .blurbVertical {
 
-
     &.light {
         &.card {
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
             border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+            transition: var(--transition-fast);
+            &:hover {
+                border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            }
             .card-img {
                 background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.05);
             }
@@ -26,6 +29,19 @@
                     color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
                 }
             }
+            &.expired {
+                &:hover {
+                    border: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+                }
+                .card-body {
+                    .card-title {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                    }
+                    .card-text {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                    }
+                }
+            }
         }
         .number {
             background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
@@ -38,6 +54,10 @@
             color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
             background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.15);
+            transition: var(--transition-fast);
+            &:hover {
+                border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            }
             .card-img {
                 background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.05);
             }
@@ -56,6 +76,19 @@
                     color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
                 }
             }
+            &.expired {
+                &:hover {
+                    border: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.15);
+                }
+                .card-body {
+                    .card-title {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    }
+                    .card-text {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    }
+                }
+            }
         }
         .number {
             background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
@@ -67,7 +100,19 @@
         // Lack of Gap support on Safari https://ishadeed.com/article/flexbox-gap/
         margin-left: 0.1rem;
         margin-right: 0.1rem;
-
+        &.expired {
+            .card-img {
+                .card-img-top {
+                    img {
+                        -webkit-filter: grayscale(100%);
+                        filter: grayscale(100%);
+                    }
+                }
+            }
+            .buttons {
+                display: none;
+            }
+        }
         &.grow {
             height: 100%;
         }
@@ -99,9 +144,13 @@
             min-height: 200px;
             transition: var(--transition-regular);
             text-align: left;
+            &.no-image {
+                grid-template-columns: 1fr;
+            }
             .card-img {
                 height: 100%;
                 .gatsby-image-wrapper {
+                    border-radius: var(--border-radius) 0 0 var(--border-radius);
                     padding-top: unset;
                     height: 100%;
                 }

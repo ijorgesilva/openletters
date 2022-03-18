@@ -1,0 +1,152 @@
+version: 0.2
+
+## Buildspec for AWS CodeBuild local cache.
+env:
+  variables:
+    NODE_ENV: 'staging' ## staging || production
+    SITE_URL: 'https://staging.victoryatl.com'
+    SITE_CANONICAL_URL: 'https://victoryatl.com'
+    PATH_PREFIX: ''
+    ## GraphQL
+    WP_SERVER: 'https://editor.victorychur.ch'
+    WPGRAPHQL_URL: 'https://editor.victorychur.ch/wp/graphql'
+    ## GraphQL Schema
+    SCHEMA_PER_PAGE: '50'
+    SCHEMA_REQUEST_CONCURRENCY: '50'
+    SCHEMA_PREVIEW_REQUEST_CONCURRENCY: '50'
+    SCHEMA_TIMEOUT: '120000'
+    LIMIT_ALL: 99999
+    ## Analytics and Apps
+    GOOGLE_TRACKING_ID: 'UA-76678443-1'
+    FACEBOOK_PIXEL: ''
+    FACEBOOK_APP_ID: ''
+    ## Algolia
+    GATSBY_ALGOLIA_SEARCH_KEY: '878be9b4cafe479d222f972a723a03d5'
+    GATSBY_ALGOLIA_APP_ID: 'S6BNVUIBZ2'
+    ALGOLIA_ADMIN_KEY: '2237aef49a47e34670e8bffba3e238cd'
+    ALGOLIA_PARTIAL_UPDATES: true
+    ## Site schema and Social
+    SITE_TITLE: 'Victory Church'
+    SITE_DESCRIPTION: 'Victory Church located on Atlanta Georgia'
+    SITE_IMAGE: '/logos/logo-1024.png'
+    SITE_SEPARATOR: '|'
+    MANIFEST_THEME_COLOR: '0F0A1B'
+    MANIFEST_THEME_BACKGROUND_COLOR: '0F0A1B'
+    DATE_FROM_FORMAT: 'YYYY-MM-DD'
+    SITE_RSS: '/rss.xml '
+    SITE_RSS_TITLE: 'Victory RSS feed '
+    USER_NAME: ''
+    USER_EMAIL: 'hello@victoryatl.com '
+    USER_LOCATION: ''
+    TWITTER_USERNAME: '@victorychurch'
+    ## Global Configuration
+    SITE_COPYRIGHT: 'Copyright © Victory Church'
+    ## S3
+    DEPLOY_BUCKET: 'staging.victoryatl.com'
+    CLOUDFRONT_DISTRIBUTION: 'ENLED5I40HUR5'
+
+  exported-variables:
+    - NODE_ENV
+    - SITE_URL
+    - SITE_CANONICAL_URL
+    - PATH_PREFIX
+    - WP_SERVER
+    - WPGRAPHQL_URL
+    - SCHEMA_PER_PAGE
+    - SCHEMA_REQUEST_CONCURRENCY
+    - SCHEMA_PREVIEW_REQUEST_CONCURRENCY
+    - SCHEMA_TIMEOUT
+    - LIMIT_ALL
+    - SITE_SEPARATOR
+    - GOOGLE_TRACKING_ID
+    - FACEBOOK_PIXEL
+    - FACEBOOK_APP_ID
+    - GATSBY_ALGOLIA_SEARCH_KEY
+    - GATSBY_ALGOLIA_APP_ID
+    - ALGOLIA_ADMIN_KEY
+    - ALGOLIA_PARTIAL_UPDATES
+    - SITE_TITLE
+    - SITE_DESCRIPTION
+    - SITE_IMAGE
+    - MANIFEST_THEME_COLOR
+    - MANIFEST_THEME_BACKGROUND_COLOR
+    - DATE_FROM_FORMAT
+    - SITE_RSS
+    - SITE_RSS_TITLE
+    - USER_NAME
+    - USER_EMAIL
+    - USER_LOCATION
+    - TWITTER_USERNAME
+    - SITE_COPYRIGHT
+    - DEPLOY_BUCKET
+    - CLOUDFRONT_DISTRIBUTION
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 14.x
+    commands:
+      - npm install -g gatsby@3.0.4
+
+  pre_build:
+    on-failure: ABORT
+    commands:
+      ## Source: https://stackoverflow.com/questions/57025169/gatsby-cache-folder-in-aws-amplify-console
+      # Checking Cache
+      - echo Creating build directory...
+      - mkdir -p /build-directory
+      - cp -a ${CODEBUILD_SRC_DIR}/. /build-directory
+      - cd /build-directory
+      # Installing Dependencies
+      - echo Installing dependencies...
+      - npm install
+
+  build:
+    on-failure: ABORT
+    commands:
+      # Building App
+      - echo Building app...
+      - cd /build-directory
+      - gatsby build
+      - echo Done building
+      
+  post_build:
+    on-failure: ABORT
+    commands:
+      ## Save Local Cache
+      - echo Saving cache...
+      - cd /build-directory
+      - cp -a /build-directory/. ${CODEBUILD_SRC_DIR}
+      ## Staging Configuration
+      - |
+        if [ ${NODE_ENV} = 'staging' ]; then 
+        echo Staging Robots...
+        echo "User-agent:*" > ./public/robots.txt
+        echo "Disallow:/" >> ./public/robots.txt
+        else
+        echo "Env is $NODE_ENV"
+        fi
+      ## copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
+      - echo Syncing to S3 and Cloudfront
+      - aws s3 sync --delete --acl public-read --cache-control="public, max-age=0, must-revalidate" ./public s3://$DEPLOY_BUCKET
+      ## invalidate the CloudFront cache for /public | Use ${CloudFrontDistribution} with CloudFormation
+      - |
+        if [ ${NODE_ENV} = 'staging' ]; then 
+        echo Invalidating Cloudfront Cache
+        aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths /*
+        else
+        echo "Env is $NODE_ENV"
+        fi
+
+artifacts:
+  files:
+    - '**/*'
+
+cache:
+  paths:
+    - '.cache/**/*'
+    - '.wordpress-cache/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'WordPress/**/*'

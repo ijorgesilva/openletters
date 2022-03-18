@@ -20,16 +20,16 @@ export default function HeroPost (
             <Container className={'z-index-2'}>
                 <Row>
                     <Col></Col>
-                    <Col className="" xs={12} md={8}>
+                    <Col className='' xs={12} md={8}>
                         {
-                            (title) ?
+                            title ?
                                 <h1 className='display-1'>
                                     {title}
                                 </h1>
                             : undefined
                         }
                         {
-                            (children)?
+                            children ?
                                 <div className='mt-3'>
                                     {children}
                                 </div>

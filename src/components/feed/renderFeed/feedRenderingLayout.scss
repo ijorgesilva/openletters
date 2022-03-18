@@ -1,0 +1,65 @@
+
+@import "~include-media/dist/_include-media.scss";
+
+.feedLayout {
+
+    &.light {
+       body {
+           background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+       }
+   }
+
+   &.dark {
+       body {
+           background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+       }
+   }
+   .columns {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-areas: "l m r";
+        grid-template-columns: minmax(120px, 0.2fr) minmax(600px, 1fr) minmax(120px, 0.2fr);
+        .sidebar-left {
+            grid-area: l;
+        }
+        .main {
+            grid-area: m;
+        }
+        .sidebar-right {
+            grid-area: r;
+        }
+   }
+   &.default-layout {
+       > .columns {
+            .main {
+                &.default {
+                    display: grid;
+                    grid-template-rows: auto;
+                    grid-gap: 1rem;
+                }
+            }
+        }
+   }
+   
+}
+
+@include media("<desktop") {
+    .feedLayout {
+        .columns {
+             grid-template-areas:   "m"
+                                    "l" 
+                                    "r";
+             grid-template-columns: 1fr;
+             grid-template-rows: auto;
+        }
+    }
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone") {
+}

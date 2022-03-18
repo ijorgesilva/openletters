@@ -1,7 +1,9 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
 import './menuWatchDetails.scss'
 
@@ -22,10 +24,10 @@ export default function MenuWatchDetails (
             id          = { id }
         >
 
-            <Nav className="mr-auto">
+            <Nav className='mr-auto'>
 
                 {
-                    (menuBrand) ?
+                    menuBrand ?
                         <Navbar.Brand>
                             <Link to={menuBrand.link} title={menuBrand.name}>
                                 {menuBrand.name}
@@ -35,15 +37,15 @@ export default function MenuWatchDetails (
                         undefined
                 }
 
-                <Nav className="disable-scrollbars">
+                <Nav className='disable-scrollbars'>
                     {
                         menu.map( (item, index) => (
-                            <Nav.Item key={index} as="li">
+                            <Nav.Item key={index} as='li'>
                                 {
                                     (item.target) ? 
                                         <Nav.Link href={item.link} title={item.name} target={item.target}>{item.name}</Nav.Link>
                                     :   
-                                        <Link to={item.link} className="nav-link" title={item.name} activeClassName="active">{item.name}</Link>  
+                                        <Link to={item.link} className='nav-link' title={item.name} activeClassName='active'>{item.name}</Link>  
                                 }
                             </Nav.Item>
                         ))
@@ -53,11 +55,13 @@ export default function MenuWatchDetails (
             </Nav>
 
             { 
-                ( close ) ?
-                    <Nav className="mr-0">
-                        <Link title="Close" to={close} className="close nav-link">    
-                            <span aria-hidden="true">×</span>
-                            <span className="sr-only">{t('global.close')}</span>
+                close ?
+                    <Nav className='mr-0'>
+                        <Link title='Close' to={close} className='close nav-link'>    
+                            <span aria-hidden='true'>
+                                <FontAwesomeIcon className='icon' icon={faTimes} size='sm'/>
+                            </span>
+                            <span className='sr-only'>{t('global.close')}</span>
                         </Link>
                     </Nav>
                 : 

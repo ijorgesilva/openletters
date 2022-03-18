@@ -7,7 +7,10 @@
 // You can delete this file if you're not using it
 const path      = require('path')
 
-const config    = require('./data/SiteConfig')
+const config            = require('./data/SiteConfig')
+const queriesCommon     = require('./src/fragments/queriesCommon')
+const queriesPostTypes  = require('./src/fragments/queriesPostTypes')
+const queriesWp         = require('./src/fragments/queriesWp')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig(
@@ -35,187 +38,363 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         return
     }
 
-    let createWatch   = false
-    let createBlog    = false
-    let createNews    = false
-    let createEvents  = false
-
+    // Flags to create pages when the CPT have content and a campus is selected.
+    let createWatch         = false
+    let createBlog          = false
+    let createNews          = false
+    let createEvents        = false
+    let createMinistries    = false
+    let createCourses       = false
+    let createVolunteering  = false
+    let createGroups        = false
+    
     // Var for storing created series per campus to avoid duplicates
     let createdSeries = [] 
 
     /*******************
-     * Campus Pages creation 
+     * I. ARCHIVES & CAMPUS PAGE ARCHIVES BY CAMPUS
      *******************/
-    if ( result.data.campuses?.nodes?.length > 0 ) {
+    if ( result.data.campuses?.nodes?.length > 0 ) { // All the Archives and Main pages are circumscribed to a campus
         result.data.campuses.nodes.forEach( campus => {
-
-            /* Watch Page per Campus */
-            if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
-                createWatch = true
-                actions.createPage({
-                    path: `/${campus.slug}/${config.watchSlug}`,
-                    component: path.resolve(`./src/components/templates/watch/watchCampus.js`),
-                    context: {
-                        ...campus,
-                        title: campus.title,
-                        slug: campus.slug,
-                        id: campus.id,
-                        campusId: '/' + campus.databaseId.toString() + '/',
-                        breadcrumbs: {
-                            'campus': campus.slug,
-                            'rootApp': `/${campus.slug}/${config.watchSlug}`,
-                            'back':   `/${campus.slug}/${config.watchSlug}`,
-                            'current': `/${campus.slug}/${config.watchSlug}`
-                        }
+            /*  Watch Main Page*/
+            if( config.cpt.createWatch ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) { // Global flag: Turned on/off on website settings
+                    if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
+                        createWatch = true
+                        // It creates Main Watch Page per Campus at /campus/watch
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.watchSlug}`,
+                            component: path.resolve(`./src/components/templates/watch/watchCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.watchSlug}`,
+                                    'back':   `/${campus.slug}/${config.watchSlug}`,
+                                    'current': `/${campus.slug}/${config.watchSlug}`
+                                }
+                            }
+                        })
+                        // It creates Latest Page Archive per Campus at /campus/watch/latest
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.watchSlug}/${config.watchSlugLatest}`,
+                            component: path.resolve(`./src/components/templates/watch/watchLatest.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.watchSlug}`,
+                                    'back':   `/${campus.slug}/${config.watchSlug}`,
+                                    'current': `/${campus.slug}/${config.watchSlug}`
+                                }
+                            }
+                        })
                     }
-                })
+                }
             }
 
-            /* Blog Page per Campus */
-            if( campus.campusDetails.campusBlog.campusBlogPage === true ) {
-                createBlog = true
-                actions.createPage({
-                    path: `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                    component: path.resolve(`./src/components/templates/post/blogCampus.js`),
-                    context: {
-                        ...campus,
-                        title: campus.title,
-                        slug: campus.slug,
-                        id: campus.id,
-                        campusId: '/' + campus.databaseId.toString() + '/',
-                        breadcrumbs: {
-                            'campus': campus.slug,
-                            'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                            'back':   `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                            'current': `/${campus.slug}/${config.blogPostDetailsSlug}`
-                        }
+            /* Blog Main Page*/
+            if( config.cpt.createBlog ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+                    if( campus.campusDetails.campusPages.campusBlog.pageActive === true ) {
+                        createBlog = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                            component: path.resolve(`./src/components/templates/post/blogCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                    'back':   `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                    'current': `/${campus.slug}/${config.blogPostDetailsSlug}`
+                                }
+                            }
+                        })
                     }
-                })
+                }
             }
 
-            /* News Page per Campus */
-            if( campus.campusDetails.campusNews.campusNewsPage === true ) {
-                createNews = true
-                actions.createPage({
-                    path: `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                    component: path.resolve(`./src/components/templates/news/newsCampus.js`),
-                    context: {
-                        ...campus,
-                        title: campus.title,
-                        slug: campus.slug,
-                        id: campus.id,
-                        campusId: '/' + campus.databaseId.toString() + '/',
-                        breadcrumbs: {
-                            'campus': campus.slug,
-                            'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                            'back':   `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                            'current': `/${campus.slug}/${config.newsPostDetailsSlug}`
-                        }
+            /* News Main Page*/
+            if( config.cpt.createPages ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+                    if( campus.campusDetails.campusPages.campusNews.pageActive === true ) {
+                        createNews = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                            component: path.resolve(`./src/components/templates/news/newsCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                    'back':   `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                    'current': `/${campus.slug}/${config.newsPostDetailsSlug}`
+                                }
+                            }
+                        })
                     }
-                })
+                }
+            }
+            
+            /* Events Main Page */
+            if( config.cpt.createEvents ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
+                    if( campus.campusDetails.campusPages.campusEvents.pageActive === true ) {
+                        createEvents = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                            component: path.resolve(`./src/components/templates/event/eventCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                    'back':   `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                    'current': `/${campus.slug}/${config.eventPostDetailsSlug}`
+                                }
+                            }
+                        })
+                    }
+                }
             }
 
-            /* Events Page per Campus */
-            if( campus.campusDetails.campusEvents.campusEventsPage === true ) {
-                createEvents = true
-                actions.createPage({
-                    path: `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                    component: path.resolve(`./src/components/templates/event/eventCampus.js`),
-                    context: {
-                        ...campus,
-                        title: campus.title,
-                        slug: campus.slug,
-                        id: campus.id,
-                        campusId: '/' + campus.databaseId.toString() + '/',
-                        breadcrumbs: {
-                            'campus': campus.slug,
-                            'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                            'back':   `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                            'current': `/${campus.slug}/${config.eventPostDetailsSlug}`
-                        }
+            /* Ministry Main Page and Sub-pages */
+            if( config.cpt.createMinistries ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
+                    if( campus.campusDetails.campusPages.campusMinistry.pageActive === true ) {
+                        createMinistries = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.ministrySlug}`,
+                            component: path.resolve(`./src/components/templates/ministry/ministryCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                    'back':   `/${campus.slug}/${config.ministrySlug}`,
+                                    'current': `/${campus.slug}/${config.ministrySlug}`
+                                }
+                            }
+                        })
                     }
-                })
+                }
+            }
+
+            /* Courses */
+            if( config.cpt.createCourses ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
+                    if( campus.campusDetails.campusPages.campusCourses.pageActive === true ) {
+                        createCourses = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.coursesSlug}`,
+                            component: path.resolve(`./src/components/templates/course/courseCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.coursesSlug}`,
+                                    'back':   `/${campus.slug}/${config.coursesSlug}`,
+                                    'current': `/${campus.slug}/${config.coursesSlug}`
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+
+            /* Volunteering */
+            if( config.cpt.createVolunteering ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
+                    if( campus.campusDetails.campusPages.campusVolunteering.pageActive === true ) {
+                        createVolunteering = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.volunteeringSlug}`,
+                            component: path.resolve(`./src/components/templates/volunteering/volunteeringCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.volunteeringSlug}`,
+                                    'back':   `/${campus.slug}/${config.volunteeringSlug}`,
+                                    'current': `/${campus.slug}/${config.volunteeringSlug}`
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+
+            /* Groups */
+            if( config.cpt.createGroups ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+                    if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
+                        createGroups = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.groupsSlug}`,
+                            component: path.resolve(`./src/components/templates/group/groupCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.groupsSlug}`,
+                                    'back':   `/${campus.slug}/${config.groupsSlug}`,
+                                    'current': `/${campus.slug}/${config.groupsSlug}`
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+
+            /* Group Types */
+            if( config.cpt.createGroups ) {
+                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+                    if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
+                        createGroups = true
+                        actions.createPage({
+                            path: `/${campus.slug}/${config.groupTypesSlug}`,
+                            component: path.resolve(`./src/components/templates/group/groupTypeCampus.js`),
+                            context: {
+                                ...campus,
+                                title: campus.title,
+                                slug: campus.slug,
+                                id: campus.id,
+                                campusId: '/' + campus.databaseId.toString() + '/',
+                                breadcrumbs: {
+                                    'campus': campus.slug,
+                                    'rootApp': `/${campus.slug}/${config.groupTypesSlug}`,
+                                    'back':   `/${campus.slug}/${config.groupTypesSlug}`,
+                                    'current': `/${campus.slug}/${config.groupTypesSlug}`
+                                }
+                            }
+                        })
+                    }
+                }
             }
 
         })
     }
 
     /*******************
-     * Video Pages creation 
+     * II. PAGE DETAILS CREATION
      *******************/
-    /* Video Detail Pages */
-    if ( createWatch && result.data.videos?.nodes?.length > 0 ) {
-        result.data.videos.nodes.forEach( video => {
-            if( video.videoDetails.videoCampus?.length > 0 ) {
-                video.videoDetails.videoCampus.forEach ( campus => {
-                    if( campus.campusDetails.campusWatch.campusWatchPage === true ) {
-                        /* Videos Page Creation for Each Campus selected */
-                        actions.createPage({
-                            path: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
-                            component: path.resolve(`./src/components/templates/watch/watchDetails.js`),
-                            context: {
-                                ...video,
-                                title: video.title,
-                                slug: video.slug,
-                                tags: video.tags,
-                                id: video.id,
-                                layout: "watchDetails",
-                                serieId: (video.videoDetails.videoSeries) ? 
-                                            video.videoDetails.videoSeries.databaseId.toString() 
-                                        : 
-                                            '',
-                                campusId: `/${campus.databaseId}/`,
-                                participationCampus: campus.participation,
-                                breadcrumbs: {
-                                                'campus': campus.slug,
-                                                'rootApp': `/${campus.slug}/${config.watchSlug}`,
-                                                'back':   (video.videoDetails.videoSeries) ? 
-                                                                `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`
-                                                            : 
-                                                                `/${campus.slug}/${config.watchSlug}`,
-                                                'current': (video.videoDetails.videoSeries) ? 
-                                                                `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.videoDetails.videoSeries.slug}`
-                                                            :
-                                                                `/${campus.slug}/${config.watchSlug}/${video.slug}`,
-
-                                            }
-                            }
-                        })
-                        /* Series Page Creation for Each Campus selected */
-                        if( video.videoDetails.videoSeries ) {
-                            if ( !createdSeries.includes[ campus.slug + '-' + video.videoDetails.videoSeries.slug ] ) {
+    
+    /*******************
+     * 1. Video Detail Pages creation 
+     *******************/
+    if( config.cpt.createWatch ) {
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) {
+            if ( createWatch && result.data.videos?.nodes?.length > 0 ) {
+                result.data.videos.nodes.forEach( video => {
+                    if( video.videoDetails.videoCampus?.length > 0 ) {
+                        video.videoDetails.videoCampus.forEach ( campus => {
+                            if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
+                                /* Videos Page Creation for Each Campus selected */
                                 actions.createPage({
-                                    path: `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
-                                    component: path.resolve(`./src/components/templates/watch/watchSeries.js`),
+                                    path: `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.slug}`,
+                                    component: path.resolve(`./src/components/templates/watch/watchDetails.js`),
                                     context: {
-                                        ...video.videoDetails.videoSeries,
-                                        title: video.videoDetails.videoSeries.title,
-                                        slug: video.videoDetails.videoSeries.slug,
-                                        campus: campus.slug,
-                                        layout: "serieDetails",
-                                        id: video.videoDetails.videoSeries.id,
-                                        serieId: video.videoDetails.videoSeries.databaseId.toString(),
+                                        ...video,
+                                        title: video.title,
+                                        slug: video.slug,
+                                        tags: video.tags,
+                                        id: video.id,
+                                        layout: "watchDetails",
+                                        serieId: (video.videoDetails.videoSeries) ? 
+                                                    video.videoDetails.videoSeries.databaseId.toString() 
+                                                : 
+                                                    '',
                                         campusId: `/${campus.databaseId}/`,
+                                        participationCampus: campus.participation,
                                         breadcrumbs: {
                                                         'campus': campus.slug,
                                                         'rootApp': `/${campus.slug}/${config.watchSlug}`,
-                                                        'back': `/${campus.slug}/${config.watchSlug}`,
-                                                        'current': `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
-                                                    },
+                                                        'back':   (video.videoDetails.videoSeries) ? 
+                                                                        `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`
+                                                                    : 
+                                                                        `/${campus.slug}/${config.watchSlug}`,
+                                                        'current': (video.videoDetails.videoSeries) ? 
+                                                                        `/${campus.slug}/${config.watchMessageDetailsSlug}/${video.videoDetails.videoSeries.slug}`
+                                                                    :
+                                                                        `/${campus.slug}/${config.watchSlug}/${video.slug}`,
+
+                                                    }
                                     }
                                 })
+                                /* Series Page Creation for Each Campus selected */
+                                if( video.videoDetails.videoSeries ) {
+                                    if ( !createdSeries.includes[ campus.slug + '-' + video.videoDetails.videoSeries.slug ] ) {
+                                        actions.createPage({
+                                            path: `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
+                                            component: path.resolve(`./src/components/templates/watch/watchSeries.js`),
+                                            context: {
+                                                ...video.videoDetails.videoSeries,
+                                                title: video.videoDetails.videoSeries.title,
+                                                slug: video.videoDetails.videoSeries.slug,
+                                                campus: campus.slug,
+                                                layout: "serieDetails",
+                                                id: video.videoDetails.videoSeries.id,
+                                                serieId: video.videoDetails.videoSeries.databaseId.toString(),
+                                                campusId: `/${campus.databaseId}/`,
+                                                breadcrumbs: {
+                                                                'campus': campus.slug,
+                                                                'rootApp': `/${campus.slug}/${config.watchSlug}`,
+                                                                'back': `/${campus.slug}/${config.watchSlug}`,
+                                                                'current': `/${campus.slug}/${config.watchSeriesDetailsSlug}/${video.videoDetails.videoSeries.slug}`,
+                                                            },
+                                            }
+                                        })
+                                    }
+                                }
                             }
-                        }
+                        })
                     }
                 })
             }
-        })
+        }
     }
 
     /*******************
-     * Pages creation 
+     * 2. Pages creation 
      *******************/
-     if ( result.data.pages?.nodes?.length > 0 ) {
+    if ( result.data.pages?.nodes?.length > 0 ) {
         result.data.pages.nodes.forEach( page => {
             if( page.pageDetails.pageCampus?.length > 0 ) {
                 page.pageDetails.pageCampus.forEach ( campus => {
@@ -244,61 +423,474 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     }
 
     /*******************
-     * Post Pages creation 
+     * 3. Blog Post Pages creation 
      *******************/
-    if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
-        if ( result.data.posts?.nodes?.length > 0 ){
-            result.data.posts.nodes.forEach( post => {
-                if( post.postDetails.postCampus?.length > 0 ) {
-                    post.postDetails.postCampus.forEach ( campus => {
+    if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+        if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
+            if ( result.data.posts?.nodes?.length > 0 ){
+                result.data.posts.nodes.forEach( post => {
+                    if( post.postDetails.postCampus?.length > 0 ) {
+                        post.postDetails.postCampus.forEach ( campus => {
+                            actions.createPage({
+                                path: `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                                component: path.resolve(`./src/components/templates/post/postDetails.js`),
+                                context: {
+                                    ...post,
+                                    title: post.title,
+                                    slug: post.slug,
+                                    id: post.id,
+                                    layout: "postDetails",
+                                    campusId: `/${campus.databaseId}/`,
+                                    breadcrumbs: {
+                                                    'campus': campus.slug,
+                                                    'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                                    'back': `/${campus.slug}/${config.blogPostDetailsSlug}`,
+                                                    'current': `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                                                },
+                                }
+                            })
+                        })
+                    }
+                })
+            } 
+        }
+    }
+    
+
+    /*******************
+     * 4. News Pages creation 
+     *******************/
+    if( config.cpt.createNews ) {
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+            if ( createNews && result.data.news?.nodes?.length > 0 ) {
+                if ( result.data.news?.nodes?.length > 0 ) {
+                    result.data.news.nodes.forEach( news => {
+                        if( news.newsDetails.newsCampus?.length > 0 ) {
+                            news.newsDetails.newsCampus.forEach ( campus => {
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                                    component: path.resolve(`./src/components/templates/news/newsDetails.js`),
+                                    context: {
+                                        ...news,
+                                        limit: config.postsPerPage,
+                                        title: news.title,
+                                        slug: news.slug,
+                                        id: news.id,
+                                        layout: "newsDetails",
+                                        campusId: `/${campus.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                                        'back': `/${campus.slug}/${config.newsPostDetailsSlug}`,
+                                                        'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                                                    },
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    /*******************
+     * 5. Events Pages creation 
+     *******************/
+    if( config.cpt.createEvents ) {
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
+            if ( createEvents && result.data.events?.nodes?.length > 0 ) {
+                if ( result.data.events?.nodes?.length > 0 ) {
+                    result.data.events.nodes.forEach( event => {
+                        if( event.eventDetails.eventCampus?.length > 0 ) {
+                            event.eventDetails.eventCampus.forEach ( campus => {
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
+                                    component: path.resolve(`./src/components/templates/event/eventDetails.js`),
+                                    context: {
+                                        ...event,
+                                        title: event.title,
+                                        slug: event.slug,
+                                        id: event.id,
+                                        layout: "eventDetails",
+                                        campusId: `/${campus.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                                        'back': `/${campus.slug}/${config.eventPostDetailsSlug}`,
+                                                        'current': `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
+                                                    },
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    /*******************
+     * 6. Ministry Pages creation 
+     *******************/
+    if( config.cpt.createMinistries ) {
+        let customPageSlug
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
+            if ( createMinistries && result.data.ministries?.nodes?.length > 0 ) {
+                if ( result.data.ministries?.nodes?.length > 0 ) {
+                    result.data.ministries.nodes.forEach( _ => {
+                        if( _.general.campus?.length > 0 ) {
+                            _.general.campus.forEach ( campus => {
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                                    component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                    context: {
+                                        ..._,
+                                        title: _.title,
+                                        slug: _.slug,
+                                        id: _.id,
+                                        featuredImage: _.general.featuredPhoto,
+                                        excerpt: _.general.summary,
+                                        layout: 'ministryDetails',
+                                        view: 'frontpage',
+                                        campusId: `/${campus.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                        'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                        'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}`,
+                                                        'slug': _.slug,
+                                                    },
+                                    }
+                                })
+                                /* Video Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageVideos.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.watchSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsVideos',
+                                            view: 'videos',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.watchSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Event Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageEvents.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.eventPostDetailsSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsEvents',
+                                            view: 'events',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.eventPostDetailsSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Blog & News Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageBlogNews.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.blogPostDetailsSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsBlogNews',
+                                            view: 'blog',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.blogPostDetailsSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Courses Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageCourses.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.coursesSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsCourses',
+                                            view: 'courses',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.coursesSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Volunteering Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageVolunteering.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.volunteeringSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsVolunteering',
+                                            view: 'volunteering',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.volunteeringSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Groups Page Creation */
+                                if( _.ministryDetails.ministryPages.ministryPageGroups.active ) {
+                                    actions.createPage({
+                                        path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.groupsSlug}`,
+                                        component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                        context: {
+                                            ..._,
+                                            title: _.title,
+                                            slug: _.slug,
+                                            id: _.id,
+                                            featuredImage: _.general.featuredPhoto,
+                                            excerpt: _.general.summary,
+                                            layout: 'ministryDetailsGroups',
+                                            view: 'groups',
+                                            campusId: `/${campus.databaseId}/`,
+                                            breadcrumbs: {
+                                                            'campus': campus.slug,
+                                                            'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                            'current': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${config.groupsSlug}`,
+                                                            'slug': _.slug,
+                                                        },
+                                        }
+                                    })
+                                }
+                                /* Custom Pages Creation */
+                                if( _.ministryDetails.ministryPagesCustom?.length > 0 ){
+                                    _.ministryDetails.ministryPagesCustom.forEach( ( customPage, index ) => {
+                                        if (customPage.menuType === 'page'){
+                                            customPageSlug = customPage.menuTitle.replace(/[^\w\s]/gi, '').replace(/ /g,"_").toLowerCase() 
+                                            actions.createPage({
+                                                path: `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                                component: path.resolve(`./src/components/templates/ministry/ministryDetails.js`),
+                                                context: {
+                                                    ..._,
+                                                    title: _.title,
+                                                    slug: _.slug,
+                                                    id: _.id,
+                                                    customPageIndex: index,
+                                                    featuredImage: _.general.featuredPhoto,
+                                                    excerpt: _.general.summary,
+                                                    layout: 'ministryDetailsCustomPage',
+                                                    view: 'customPage',
+                                                    campusId: `/${campus.databaseId}/`,
+                                                    breadcrumbs: {
+                                                                    'campus': campus.slug,
+                                                                    'rootApp': `/${campus.slug}/${config.ministrySlug}`,
+                                                                    'back': `/${campus.slug}/${config.ministrySlug}`,
+                                                                    'currentPath': `/${campus.slug}/${config.ministrySlug}/${_.slug}/${customPageSlug}`,
+                                                                    'slug': _.slug,
+                                                                    'currentSlug': customPageSlug,
+                                                                },
+                                                }
+                                            })
+                                        }
+
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    /*******************
+     * 7. Course Pages creation 
+     *******************/
+    if( config.cpt.createCourses ) {
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
+            if ( createCourses && result.data.courses?.nodes?.length > 0 ) {
+                if ( result.data.courses?.nodes?.length > 0 ) {
+                    result.data.courses.nodes.forEach( _ => {
+                        if( _.general.campus?.length > 0 ) {
+                            _.general.campus.forEach ( campus => {
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.coursesSlug}/${_.slug}`,
+                                    component: path.resolve(`./src/components/templates/course/courseDetails.js`),
+                                    context: {
+                                        ..._,
+                                        title: _.title,
+                                        slug: _.slug,
+                                        id: _.id,
+                                        featuredImage: _.general.featuredPhoto,
+                                        excerpt: _.general.summary,
+                                        layout: "courseDetails",
+                                        campusId: `/${campus.databaseId}/`,
+                                        courseId: `/${_.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.coursesSlug}`,
+                                                        'back': `/${campus.slug}/${config.coursesSlug}`,
+                                                        'current': `/${campus.slug}/${config.coursesSlug}/${_.slug}`,
+                                                    },
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    /*******************
+     * 8. Group & Group Types Pages creation 
+     *******************/
+    // if( config.cpt.createGroups ) {
+    //  if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+    //  }
+    // }
+    
+    /*******************
+     * 9. Volunteer Pages creation 
+     *******************/
+    if( config.cpt.createVolunteering ) {
+        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
+            if ( createVolunteering && result.data.opportunities?.nodes?.length > 0 ) {
+                if ( result.data.opportunities?.nodes?.length > 0 ) {
+                    result.data.opportunities.nodes.forEach( _ => {
+                        if( _.general.campus?.length > 0 ) {
+                            _.general.campus.forEach ( campus => {
+                                actions.createPage({
+                                    path: `/${campus.slug}/${config.volunteeringSlug}/${_.slug}`,
+                                    component: path.resolve(`./src/components/templates/volunteering/volunteeringDetails.js`),
+                                    context: {
+                                        ..._,
+                                        title: _.title,
+                                        slug: _.slug,
+                                        id: _.id,
+                                        featuredImage: _.general.featuredPhoto,
+                                        excerpt: _.general.summary,
+                                        layout: "volunteeringDetails",
+                                        campusId: `/${campus.databaseId}/`,
+                                        volunteeringId: `/${_.databaseId}/`,
+                                        breadcrumbs: {
+                                                        'campus': campus.slug,
+                                                        'rootApp': `/${campus.slug}/${config.volunteeringSlug}`,
+                                                        'back': `/${campus.slug}/${config.volunteeringSlug}`,
+                                                        'current': `/${campus.slug}/${config.volunteeringSlug}/${_.slug}`,
+                                                    },
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    /*******************
+     * 10. Attachment Pages creation 
+    *******************/
+    if( config.cpt.createAttachments ) {
+        if( result.data.attachments?.nodes?.length > 0 ) {
+            result.data.attachments.nodes.forEach( _ => {
+                if( _.attachment.attachmentCampus?.length > 0 ) {
+                    _.attachment.attachmentCampus.forEach ( campus => {
                         actions.createPage({
-                            path: `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
-                            component: path.resolve(`./src/components/templates/post/postDetails.js`),
+                            path: `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
+                            component: path.resolve(`./src/components/templates/document/attachmentDetails.js`),
                             context: {
-                                ...post,
-                                title: post.title,
-                                slug: post.slug,
-                                id: post.id,
-                                layout: "postDetails",
+                                ..._,
+                                title: _.title,
+                                slug: _.slug,
+                                id: _.id,
                                 campusId: `/${campus.databaseId}/`,
+                                attachmentDetails: _.attachment,
                                 breadcrumbs: {
                                                 'campus': campus.slug,
-                                                'rootApp': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                                                'back': `/${campus.slug}/${config.blogPostDetailsSlug}`,
-                                                'current': `/${campus.slug}/${config.blogPostDetailsSlug}/${post.slug}`,
+                                                'rootApp': `/${campus.slug}/${config.attachmentSlug}`,
+                                                'back': `/${campus.slug}/${config.attachmentSlug}`,
+                                                'current': `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
                                             },
                             }
                         })
                     })
                 }
             })
-        } 
+        }
     }
 
     /*******************
-     * News Pages creation 
-     *******************/
-    if ( createNews && result.data.news?.nodes?.length > 0 ) {
-        if ( result.data.news?.nodes?.length > 0 ) {
-            result.data.news.nodes.forEach( news => {
-                if( news.newsDetails.newsCampus?.length > 0 ) {
-                    news.newsDetails.newsCampus.forEach ( campus => {
+     * 11. Landing Pages
+    *******************/
+    if( config.cpt.createLandingPages ) {
+        if( result.data.landingPages?.nodes?.length > 0 ) {
+            result.data.landingPages.nodes.forEach( _ => {
+                if( _.general.campus?.length > 0 ) {
+                    _.general.campus.forEach ( campus => {
                         actions.createPage({
-                            path: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
-                            component: path.resolve(`./src/components/templates/news/newsDetails.js`),
+                            path: `/${campus.slug}/${config.landingPageSlug}/${_.slug}`,
+                            component: path.resolve(`./src/components/templates/landing/landingDetails.js`),
                             context: {
-                                ...news,
-                                limit: config.postsPerPage,
-                                title: news.title,
-                                slug: news.slug,
-                                id: news.id,
-                                layout: "newsDetails",
+                                ..._,
+                                title: _.title,
+                                slug: _.slug,
+                                id: _.id,
                                 campusId: `/${campus.databaseId}/`,
                                 breadcrumbs: {
                                                 'campus': campus.slug,
-                                                'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                                                'back': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                                                'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
                                             },
                             }
                         })
@@ -308,69 +900,6 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         }
     }
     
-    /*******************
-     * Events Pages creation 
-     *******************/
-    if ( createEvents && result.data.events?.nodes?.length > 0 ) {
-        if ( result.data.events?.nodes?.length > 0 ) {
-            result.data.events.nodes.forEach( event => {
-                if( event.eventDetails.eventCampus?.length > 0 ) {
-                    event.eventDetails.eventCampus.forEach ( campus => {
-                        actions.createPage({
-                            path: `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                            component: path.resolve(`./src/components/templates/event/eventDetails.js`),
-                            context: {
-                                ...event,
-                                title: event.title,
-                                slug: event.slug,
-                                id: event.id,
-                                layout: "eventDetails",
-                                campusId: `/${campus.databaseId}/`,
-                                breadcrumbs: {
-                                                'campus': campus.slug,
-                                                'rootApp': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                                                'back': `/${campus.slug}/${config.eventPostDetailsSlug}`,
-                                                'current': `/${campus.slug}/${config.eventPostDetailsSlug}/${event.slug}`,
-                                            },
-                            }
-                        })
-                    })
-                }
-            })
-        }
-    }
-
-
-    /*******************
-     * Attachment Pages creation 
-    *******************/
-    if( result.data.attachments?.nodes?.length > 0 ) {
-        result.data.attachments.nodes.forEach( _ => {
-            if( _.attachment.attachmentCampus?.length > 0 ) {
-                _.attachment.attachmentCampus.forEach ( campus => {
-                    actions.createPage({
-                        path: `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
-                        component: path.resolve(`./src/components/templates/document/attachmentDetails.js`),
-                        context: {
-                            ..._,
-                            title: _.title,
-                            slug: _.slug,
-                            id: _.id,
-                            campusId: `/${campus.databaseId}/`,
-                            attachmentDetails: _.attachment,
-                            breadcrumbs: {
-                                            'campus': campus.slug,
-                                            'rootApp': `/${campus.slug}/${config.attachmentSlug}`,
-                                            'back': `/${campus.slug}/${config.attachmentSlug}`,
-                                            'current': `/${campus.slug}/${config.attachmentSlug}/${_.slug}`,
-                                        },
-                        }
-                    })
-                })
-            }
-        })
-    }
-
     /******************* 
      * Redirects creation 
      *******************/
@@ -386,1434 +915,41 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
 }
 
-
-/************************* 
- * Fragments 
- *************************/
-
-const language = `
-    language {
-        code
-        locale
-        name
-    }
-`
-const tag = `
-    id
-    slug
-    name
-`
-
-const wpParent = `
-    wpParent {
-        node {
-            id
-            slug
-            status
-        }
-    }
-`
-
-const customMenues = `
-    ... on WpCustomMenu {
-        id
-        status
-        menuDetails {
-            menuCustomTitle
-            menuLocation
-            menuCss
-            menuId
-            menuColorScheme
-            menuCampusMenu {
-                menuCampusMenuItems {
-                    menuCampusMenuItem {
-                        menuCampusMenuItemTitle
-                        menuCampusMenuItemType
-                        menuCampusMenuItemWatch
-                        menuCampusMenuItemBlog {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemCustom {
-                            menuCampusMenuItemCustomUrl
-                            menuCampusMenuItemCustomTitle
-                            menuCampusMenuItemCustomTarget
-                            menuCampusMenuItemCustomLinkType
-                        }
-                        menuCampusMenuItemDropdown {
-                            menuCampusMenuItemDropdownMegamenu
-                            menuCampusMenuItemDropdownItems {
-                                menuItemGroupDropdownItemTitle
-                                menuItemGroupDropdownItemType
-                                menuItemGroupDropdownItemGroupWatch
-                                menuItemGroupDropdownItemGroupNews {
-                                    fieldGroupName
-                                }
-                                menuItemGroupDropdownItemGroupEvents {
-                                    fieldGroupName
-                                }
-                                menuItemGroupDropdownItemGroupCustom {
-                                    menuItemGroupDropdownItemGroupCustomTitle
-                                    menuItemGroupDropdownItemGroupCustomUrl
-                                    menuItemGroupDropdownItemGroupCustomTarget
-                                    menuItemGroupDropdownItemGroupCustomLinkType
-                                }
-                                menuItemGroupDropdownItemGroupBlog {
-                                    fieldGroupName
-                                }
-                            }
-                        }
-                        menuCampusMenuItemEvents {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemNews {
-                            fieldGroupName
-                        }
-                        menuCampusMenuItemPage {
-                            menuCampusMenuItemPageTitle
-                            menuCampusMenuItemPagePage {
-                                ... on WpPage {
-                                    id
-                                    slug
-                                    status
-                                    pageDetails {
-                                        pageCampus {
-                                            ... on WpCampus {
-                                                id
-                                                slug
-                                            }
-                                        }
-                                    }
-                                    ${wpParent}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            menuPagesMenu {
-                menuPageMenuItems {
-                    menuPageMenuItem {
-                        menuPageMenuItemType
-                        menuPageMenuItemPage {
-                            menuPageMenuItemPageTitle
-                            menuPageMenuItemPagePage {
-                                ... on WpPage {
-                                    id
-                                    slug
-                                    status
-                                    pageDetails {
-                                        pageCampus {
-                                            ... on WpCampus {
-                                                id
-                                                slug
-                                            }
-                                        }
-                                    }
-                                    ${wpParent}
-                                }
-                            }
-                            menuPageMenuItemPageCss
-                            menuPageMenuItemPageRemoveDefault
-                        }
-                        menuPageMenuItemCustom {
-                            menuPageMenuItemCustomLinkType
-                            menuPageMenuItemCustomTarget
-                            menuPageMenuItemCustomTitle
-                            menuPageMenuItemCustomUrl
-                            menuPageMenuItemCustomCss
-                            removeDefaultCssClasses
-                        }
-                    }
-                }
-                menuPagesMenuBase {
-                    menuPagesMenuHideBase
-                    menuPagesMenuBaseUrl
-                    menuPagesMenuBaseTitle
-                }
-            }
-        }
-    }
-`
-const buttons = `
-    buttonLink
-    buttonTarget
-    buttonText
-    buttonType
-    buttonUrl
-    buttonCss
-    buttonCssRemoveDefault
-`
-
-const localFile = `
-    localFile {
-        childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-        }
-    }
-`
-
-const featuredImageFields = `
-    featuredImage {
-        node {
-            ${localFile}
-        }
-    }
-`
-
-const seoFields = `
-    seo {
-        title
-        focuskw 
-        metaDesc 
-        metaKeywords 
-        opengraphDescription 
-        opengraphImage {
-            altText
-            uri
-            sourceUrl
-            title
-        }
-        opengraphTitle 
-        twitterDescription 
-        twitterImage {
-            altText
-            uri
-            sourceUrl
-            title
-        }
-        twitterTitle
-    }
-`
-
-const blurb = `
-    itemImage {
-        ${localFile}
-    }
-    itemTitle
-    itemSubtitle
-    itemContent
-    itemCss
-    itemCssRemoveDefault
-    itemButtons {
-        itemButtonsButton {
-            ${buttons}
-        }
-    }
-`
-
-const referenceSeries = `
-    ... on WpSerie {
-        id
-        title
-        slug
-        status
-        tags {
-            nodes {
-                ${tag}
-            }
-        }
-    }
-`
-const referenceCampus = `
-    ... on WpCampus {
-        id
-        slug
-        status
-    }
-`
-
-const carouselConfiguration = `
-    sectionCarouselConfigurationItemType
-    sectionCarouselConfigurationSwipe
-    sectionCarouselConfigurationDraggable
-    sectionCarouselConfigurationInfinite
-    sectionCarouselConfigurationPartiallyVisible
-    sectionCarouselConfigurationDots
-    sectionCarouselConfigurationDotsClass
-    sectionCarouselConfigurationAutoplay
-    sectionCarouselConfigurationStretched
-    sectionCarouselConfigurationAutoplayInterval
-    sectionCarouselConfigurationGap
-    sectionCarouselConfigurationClass
-    sectionCarouselConfigurationTruncate
-    sectionCarouselConfigurationTruncateLines
-    sectionCarouselConfigurationImageFit
-    sectionCarouselConfigurationImagePosition
-    sectionCarouselConfigurationImageAspect
-    sectionCarouselConfigurationBorder
-    sectionCarouselConfigurationBorderColor
-    sectionCarouselConfigurationGrow
-    sectionCarouselConfigurationResponsive {
-        responsiveXl {
-            responsiveXlCustom
-            responsiveXlItems
-            responsiveXlMax
-            responsiveXlMin
-        }
-        responsiveL {
-            responsiveLCustom
-            responsiveLItems
-            responsiveLMax
-            responsiveLMin
-        }
-        responsiveS {
-            responsiveSCustom
-            responsiveSItems
-            responsiveSMax
-            responsiveSMin
-        }
-        responsiveXs {
-            responsiveXsCustom
-            responsiveXsItems
-            responsiveXsMax
-            responsiveXsMin
-        }
-    }
-`
-
-const feed = `
-    feedType
-    
-    ## Feed Videos
-    feedVideos {
-        feedVideosCategory {
-            ${tag}
-            videosOnDemand {
-                nodes {
-                    id
-                    title
-                    slug
-                    excerpt
-                    status
-                    ${featuredImageFields}
-                    tags {
-                      nodes {
-                        ${tag}
-                      }
-                    }
-                    videoDetails {
-                        videoDayDate
-                        videoCampus {
-                            ${referenceCampus}
-                        }
-                        videoSeries {
-                            ${referenceSeries}
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    ## Feed Series
-    feedSeries {
-        feedSeriesCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Posts
-    feedPosts {
-        feedPostsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed News
-    feedNews {
-        feedNewsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Group Types
-    feedGrouptypes {
-        feedGrouptypesCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Groups
-    feedGroups {
-        feedGroupsCategory {
-            ${tag}
-        }
-    }
-
-    ## Feed Events
-    feedEvents {
-        feedEventsCategory {
-            ${tag}
-        }
-    }
-
-    ## Ministries
-    feedMinistries {
-        feedMinistriesCategory {
-            ${tag}
-        }
-    }
-    
-    ## Volunteering
-    feedVolunteering {
-        feedVolunteeringCategory {
-            ${tag}
-        }
-    }
-
-    ## Courses
-    feedCourses {
-        feedCoursesCategory {
-            ${tag}
-        }
-    }
-
-    ## Lessons
-    feedLessons {
-        feedLessonsCategory {
-            ${tag}
-        }
-    }
-`
-
-const backgroundLayer = `
-    backgroundLayer {
-        backgroundLayerType
-        backgroundLayerColor {
-            backgroundLayerColorColor
-            backgroundLayerColorOpacity
-        }
-        backgroundLayerImage {
-            backgroundLayerImageImage {
-                localFile {
-                    publicURL
-                }
-            }
-            backgroundLayerImageOpacity
-            backgroundLayerImagePosition
-            backgroundLayerImageRepeat
-            backgroundLayerImageSize
-            backgroundLayerImageSizeCustom
-            backgroundLayerImageFixed
-        }
-        backgroundLayerGradient {
-            backgroundLayerGradientType
-            backgroundLayerGradientAngle
-            backgroundLayerGradientOpacity
-            backgroundLayerGradientSteps {
-                step {
-                    color
-                    stop
-                }
-            }
-        }
-        backgroundLayerText {
-            backgroundLayerTextOpacity
-            backgroundLayerTextText
-        }
-    }
-`
-
-const sections = `
-    sectionType
-    
-    # General
-    sectionTitle
-    sectionContent
-
-    # Configuration: Style, Background, etc.
-    sectionConfiguration {
-        sectionConfigurationClassname
-        sectionConfigurationId
-        sectionConfigurationColorScheme
-        sectionConfigurationContainerWidth
-        sectionConfigurationSize
-
-        sectionConfigurationBackground {
-            ${backgroundLayer}
-        }
-    }
-    
-    # Sections
-        ## Call To Actions
-        sectionCta {
-            sectionCtaSubtitle
-            sectionCtaLink {
-                sectionLinkText
-                sectionLinkType
-                sectionLinkUrl
-            }
-            sectionCtaButton {
-                sectionButtonUrl
-                sectionButtonType
-                sectionButtonText
-            }
-            sectionCtaPhoto {
-                ${localFile}
-            }
-        }
-
-        ## Podcast
-        sectionPodcast {
-            sectionPodcastSubtitle
-            sectionPodcastItunesUrl
-            sectionPodcastSpotifyUrl
-            sectionPodcastSoundcloudUrl
-            sectionPodcastGraphic {
-                ${localFile}
-            }
-        }
-
-        ## VOD by Tag
-        sectionVodTags {
-            sectionVodTag {
-                slug
-                databaseId
-                description
-                name
-                videosOnDemand {
-                    nodes {
-                        title
-                        slug
-                        excerpt
-                        status
-                        ${featuredImageFields}
-                        videoDetails {
-                            videoOneLiner
-                            videoDayDate
-                            videoUrl
-                            videoSeries {
-                                ... on WpSerie {
-                                    id
-                                    title
-                                    slug
-                                }
-                            }
-                            videoCampus {
-                                ... on WpCampus {
-                                    id
-                                    slug
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        ## Hero
-        sectionHero {
-            sectionHeroButtons {
-                sectionHeroButton {
-                    sectionHeroButtonType
-                    sectionHeroButtonTarget
-                    sectionHeroButtonText
-                    sectionHeroButtonUrl
-                    sectionHeroButtonLink
-                }
-            }
-            sectionHeroBackground {
-                ${localFile}
-            }
-            sectionHeroRelated {
-                ... on WpPost {
-                    id
-                    title
-                    slug
-                    excerpt
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    postDetails {
-                        postCampus {
-                            ... on WpCampus {
-                                id
-                                status
-                                slug
-                            }
-                        }
-                    }
-                }
-                ... on WpNewspost {
-                    id
-                    title
-                    slug
-                    excerpt
-                    date(formatString: "YYYYMMDD")
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    newsDetails {
-                        newsCampusId
-                        newsCampus {
-                            ... on WpCampus {
-                                id
-                                slug
-                            }
-                        }
-                    }
-                }
-                ... on WpEvent {
-                    id
-                    title
-                    slug
-                    excerpt
-                    modified(formatString: "YYYYMMDD")
-                    status
-                    nodeType
-                    ${featuredImageFields}
-                    ${language}
-                    eventDetails {
-                    eventDates {
-                        eventDate
-                        eventTime
-                    }
-                    eventCampus {
-                        ... on WpCampus {
-                                id
-                                slug
-                            }
-                        }
-                    }
-                }
-            }
-            sectionHeroConfiguration {
-              sectionHeroConfigurationOverlay
-            }
-        }
-
-        ## Page Menu
-        sectionPagemenu {
-            sectionSticky
-            sectionPagemenuMenu{
-                ${customMenues}
-            }
-        }
-
-        ## Text
-        ### Because Text section contain nested elements is also under allWpPage.
-        ### Object Fields / Relashionship elements has been removed below.
-        sectionText {
-            sectionTextButtons {
-                sectionTextButton {
-                    ${buttons}
-                }
-            }
-            sectionTextMedia {
-                sectionTextbasicMediaType
-                sectionTextbasicMediaAlignment
-                sectionTextbasicMediaPhoto {
-                    ${localFile}
-                }
-            }
-            ## Don't loads nested elements
-        }
-
-        ## Tabs
-        ### Because Tab section contain nested elements is also under allWpPage. 
-        ### Object Fields / Relationship elements has been removed below.
-        sectionTabs {
-            sectionTabsTab {
-                sectionTabsTabType
-                sectionTabsTabName
-                sectionTabsTabContent
-            }
-        }
-
-        ## Carousel
-        sectionCarousel {
-            sectionCarouselType
-            sectionCarouselFeed {
-                ${feed}
-            }
-            sectionCarouselItems {
-                ${blurb}
-            }
-            sectionCarouselConfiguration {
-                ${carouselConfiguration}
-            }
-        }
-
-        ## Share
-        sectionShare {
-            sectionShareNetworks {
-                sectionShareNetworksType
-                sectionShareNetworksEmail {
-                    sectionShareNetworksEmailBody
-                    sectionShareNetworksEmailCustomUrl
-                    sectionShareNetworksEmailCustomUrlUrl
-                    sectionShareNetworksEmailSubject
-                }
-                sectionShareNetworksFacebook {
-                    sectionShareNetworksFacebookCustomUrl
-                    sectionShareNetworksFacebookCustomUrlUrl
-                    sectionShareNetworksFacebookHashtags
-                    sectionShareNetworksFacebookQuote
-                }
-                sectionShareNetworksPocket {
-                    sectionShareNetworksPocketCustomUrl
-                    sectionShareNetworksPocketCustomUrlUrl
-                    sectionShareNetworksPocketTitle
-                }
-                sectionShareNetworksTelegram {
-                    sectionShareNetworksTelegramCustomUrl
-                    sectionShareNetworksTelegramCustomUrlUrl
-                    sectionShareNetworksTelegramTitle
-                }
-                sectionShareNetworksTwitter {
-                    sectionShareNetworksTwitterCustomUrl
-                    sectionShareNetworksTwitterCustomUrlUrl
-                    sectionShareNetworksTwitterHashtags
-                    sectionShareNetworksTwitterRelated
-                    sectionShareNetworksTwitterTitle
-                    sectionShareNetworksTwitterVia
-                }
-                sectionShareNetworksWhatsapp {
-                    sectionShareNetworksWhatsappCustomUrl
-                    sectionShareNetworksWhatsappCustomUrlUrl
-                    sectionShareNetworksWhatsappTitle
-                }
-            }
-            sectionShareImage {
-              sectionShareImageAlignment
-              sectionShareImageImage {
-                ${localFile}
-              }
-            }
-            sectionShareItemClass
-        }
-
-        ## Video
-        sectionVideo {
-            sectionVideoUrl
-            sectionVideoThumbnail {
-                localFile {
-                    publicURL
-                }
-            }
-            sectionVideoConfiguration {
-                sectionVideoConfigurationControls
-                sectionVideoConfigurationLight
-                sectionVideoConfigurationLoop
-                sectionVideoConfigurationMuted
-                sectionVideoConfigurationPip
-                sectionVideoConfigurationVolume
-                sectionVideoConfigurationWidth
-                sectionVideoConfigurationHeight
-                sectionVideoConfigurationMaxWidth
-                sectionVideoConfigurationAutoplay
-            }
-        }
-
-        ## Blurb
-        sectionBlurbs {
-            sectionBlurbsType
-            sectionBlurbsFeed {
-                ${feed}
-            }
-            sectionBlurbsItems {
-                ${blurb}
-            }
-            sectionBlurbsConfiguration {
-                sectionBlurbsConfigurationOrientation
-                sectionBlurbsConfigurationType
-                sectionBlurbsConfigurationDirection
-                sectionBlurbsConfigurationClass
-                sectionBlurbsConfigurationGap
-                sectionBlurbsConfigurationImagePosition
-                sectionBlurbsConfigurationImageFit
-                sectionBlurbsConfigurationImageAspect
-                sectionBlurbsConfigurationJustification
-                sectionBlurbsConfigurationStretch
-                sectionBlurbsConfigurationTruncate
-                sectionBlurbsConfigurationTruncateLines
-                sectionBlurbsConfigurationBorder
-                sectionBlurbsConfigurationBorderColor
-                sectionBlurbsConfigurationGrow
-            }
-        }
-
-        ## IFrame
-        sectionIframe {
-            sectionIframeType
-            sectionIframeCustom
-            sectionIframeOembed
-        }
-        
-        ## Accordion
-        sectionAccordion {
-            sectionAccordionItem {
-              itemTitle
-              itemContent
-              itemCss
-              itemCssRemoveDefault
-            }
-            sectionAccordionConfiguration {
-                sectionAccordionConfigurationClass
-                sectionAccordionConfigurationAccordionClass
-            }
-        }
-
-        ## Form
-        sectionForm {
-            sectionFormType
-            sectionFormIframe
-            sectionFormForm {
-                ... on WpForm {
-                    id
-                    title
-                    uri
-                    status
-                    formDetails {
-                        formGeneral {
-                            formGeneralTitle
-                            formGeneralContent
-                        }
-                    }
-                }
-            }
-            sectionFormColumns {
-                sectionFormColumnsText
-                sectionFormColumnsAlignment
-                sectionFormColumnsBackground {
-                    ${backgroundLayer}
-                }
-            }
-            sectionFormConfiguration {
-                sectionFormConfigurationClass
-                sectionFormConfigurationJumbotron
-                sectionFormConfigurationJumbotronMode
-                sectionFormConfigurationJumbotronPadding
-                sectionFormConfigurationJumbotronFluid
-                sectionFormConfigurationQuerystring
-            }
-        }
-
-        ## Follow Us
-        sectionFollow {
-          sectionFollowNetworks {
-            sectionFollowNetworksType
-            sectionFollowNetworksFacebook {
-              sectionFollowNetworksFacebookUrl
-            }
-            sectionFollowNetworksPinterest {
-              sectionFollowNetworksPinterestUrl
-            }
-            sectionFollowNetworksInstagram {
-              sectionFollowNetworksInstagramUrl
-            }
-            sectionFollowNetworksTiktok {
-              sectionFollowNetworksTiktokUrl
-            }
-            sectionFollowNetworksTwitter {
-              sectionFollowNetworksTwitterUrl
-            }
-            sectionFollowNetworksYoutube {
-              sectionFollowNetworksYoutubeUrl
-            }
-          }
-          sectionFollowConfiguration {
-            sectionFollowConfigurationAlignment
-          }
-        }
-
-        ## Album
-        sectionAlbum {
-            sectionAlbumItems {
-                album {
-                    albumTitle
-                    albumSubtitle
-                    albumCover {
-                        ${localFile}
-                    }
-                }
-                availableon {
-                    availableonType
-                    availableonSpotify
-                    availableonTidal
-                    availableonPandora
-                    availableonDeezer
-                    availableonApple
-                    availableonAmazon
-                }
-                song {
-                    songTitle
-                    songAuthor
-                    songDuration
-                    songResources {
-                        ${blurb}
-                    }
-                }
-            }
-            sectionAlbumConfiguration {
-                sectionCarouselConfiguration {
-                    ${carouselConfiguration}
-                }
-            }
-        }
-
-    # End Sections
-
-`
-
-/*************************
- * Pages & Posts
- *************************/
-/* Custom Post Types */
-const allWpCampus = `
-    ########
-    # Campuses
-    ########
-    campuses: allWpCampus(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            status
-            databaseId
-            ${featuredImageFields}
-            ${seoFields}
-            campusDetails {
-                campusWatch {
-                    campusWatchPage
-                    campusWatchSections {
-                        ... on WpContentSection {
-                            id
-                            slug
-                            databaseId
-                            status
-                            sectionDetails {
-                                ${sections}
-                            }
-                        }
-                    }
-                }
-                campusBlog {
-                    campusBlogPage
-                }
-                campusNews {
-                    campusNewsPage
-                }
-                campusEvents {
-                    campusEventsPage
-                }
-                campusBrand {
-                    campusBrandOverwrite
-                    campusBrandUrl
-                    campusBrandLogo {
-                        ${localFile}
-                    }
-                }
-                campusSelector {
-                    campusSelectorOverwrite
-                    campusSelectorHome {
-                        campusHomeUrl
-                        campusHomeType
-                    }
-                }
-            }
-        }
-    }
-`
-
-const allWpVideo = `
-    ########
-    # Videos on Demand
-    ########
-    videos: allWpVideoOnDemand (
-            filter: {
-                status: {eq: "publish"}
-            }  
-        ) {
-        nodes {
-            id
-            title
-            slug
-            content
-            excerpt
-            modified
-            ${seoFields}
-            ${featuredImageFields}
-            videoDetails {
-                videoOneLiner
-                videoTranscript
-                videoDayDate
-                videoUrl
-                videoAttachments {
-                    ... on WpDocument {
-                        id
-                        title
-                        status
-                        attachment {
-                            attachmentFile {
-                                id
-                                title
-                                localFile {
-                                    publicURL
-                                }
-                            }
-                        }
-                    }
-                }
-                videoCampusId
-                videoCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                        ${featuredImageFields}
-                        campusDetails {
-                            campusWatch {
-                                campusWatchPage
-                            }
-                        }
-                        participation {
-                            participationRaisehand {
-                                participationRaisehandBehavior
-                                participationRaisehandCustom {
-                                    participationRaisehandCustomType
-                                    participationRaisehandCustomTitle
-                                    participationRaisehandCustomUrl
-                                    participationRaisehandCustomTarget
-                                    participationRaisehandCustomClass
-                                    participationRaisehandCustomIcon {
-                                        localFile {
-                                            childImageSharp {
-                                                gatsbyImageData(
-                                                    layout: FIXED
-                                                    width: 32
-                                                    height: 32
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                videoSerieId
-                videoSeries {
-                    ... on WpSerie {
-                        id
-                        databaseId
-                        title
-                        slug
-                        excerpt
-                        seriesDetails {
-                            seriesTrailer
-                            seriesTrailerPoster {
-                                ${localFile}
-                            }
-                            seriesSeasonsActive
-                        }
-                        seriesGraphics {
-                            poster {
-                                ${localFile}
-                            }
-                            logo {
-                                ${localFile}
-                            }
-                            background {
-                                ${localFile}
-                            }
-                        }
-                    }
-                }
-                videoSpeaker {
-                    ... on WpSpeaker {
-                        id
-                        title
-                        uri
-                        ${featuredImageFields}
-                    }
-                }
-                videoHide {
-                  videoHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpSeries = `
-    ########
-    # Series 
-    ########
-    series: allWpSerie (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            slug
-            databaseId
-            excerpt
-            ${seoFields}
-            seriesDetails {
-                seriesTrailer
-                seriesSeasonsActive
-                seriesTrailerPoster {
-                    ${localFile}
-                }
-                seriesHide {
-                    seriesHideSearchEngines
-                }
-            }
-            seriesGraphics {
-                poster {
-                    ${localFile}
-                }
-                logo {
-                    ${localFile}
-                }
-                background {
-                    ${localFile}
-                }
-            }
-        }
-    }
-`
-
-const allWpNews = `
-    ########
-    # News 
-    ########
-    news: allWpNewspost (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            newsDetails {
-                newsCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                    }
-                }
-                newsHide {
-                  newsHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpEvents = `
-    ########
-    # Events 
-    ########
-    events: allWpEvent(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            eventDetails {
-                eventAddress
-                eventCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                    }
-                }
-                eventDates {
-                    eventDate
-                    eventTime
-                }
-                eventLink {
-                    eventLinkText
-                    eventLinkUrl
-                }
-                eventHide {
-                    eventHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpRedirect = `
-    ########
-    # Redirects 
-    ########
-    redirects: allWpRedirect {
-        nodes {
-            redirect {
-                redirectFrompath
-                redirectIspermanent
-                redirectTopath
-            }
-        }
-    }
-`
-
-/* Standard Post Types */
-const allWpPage = `
-    ########
-    # Pages
-    ########
-    pages: allWpPage(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            status
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            isFrontPage
-            ${seoFields}
-            ${featuredImageFields}
-            pageDetails {
-                pageCampus {
-                    ... on WpCampus {
-                        id
-                        slug
-                    }
-                }
-                pageMenues {
-                    ${customMenues}
-                }
-                pageHideContent
-                pageHideShare
-                pageSections {
-                    ... on WpContentSection {
-                        status
-                        sectionDetails {
-
-                            ${sections}
-                            
-                            ## Tabs
-                            sectionTabs {
-                                sectionTabsTab {
-                                    sectionTabsTabType
-                                    sectionTabsTabName
-                                    sectionTabsTabContent
-                                    sectionTabsTabSection {
-                                        ... on WpContentSection {
-                                            status
-                                            sectionDetails {
-                                                ${sections}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            ## Text, Media and Buttons
-                            sectionText {
-                                sectionTextButtons {
-                                    sectionTextButton {
-                                        ${buttons}
-                                    }
-                                }
-                                sectionTextMedia {
-                                    sectionTextbasicMediaType
-                                    sectionTextbasicMediaAlignment
-                                    sectionTextbasicMediaPhoto {
-                                        ${localFile}
-                                    }
-                                }
-                                sectionTextSections {
-                                    ... on WpContentSection {
-                                        id
-                                        slug
-                                        databaseId
-                                        status
-                                        sectionDetails {
-                                            ${sections}
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-                pageHide {
-                  pageHideSearchEngines
-                }
-            }
-            ${wpParent}
-        }
-    }
-`
-
-const allWpPosts = `
-    ########
-    # Posts 
-    ########
-    posts: allWpPost(
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes{
-            id
-            title
-            excerpt
-            slug
-            content
-            date(formatString: "YYYYMMDD")
-            modified(formatString: "YYYYMMDD")
-            ${featuredImageFields}
-            ${seoFields}
-            postDetails {
-                postCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                        ${featuredImageFields}
-                    }
-                }
-                postAuthor {
-                    ... on WpSpeaker {
-                        id
-                        title
-                        slug
-                        ${featuredImageFields}
-                    }
-                }
-                postFooterSection {
-                    ... on WpContentSection {
-                            id
-                            slug
-                            databaseId
-                            status
-                            sectionDetails {
-                                ${sections}
-                            }
-                    }
-                }
-                postHide {
-                    postHideSearchEngines
-                }
-            }
-            tags {
-                nodes {
-                    ${tag}
-                }
-            }
-        }
-    }
-`
-
-const allWpResources = `
-    ########
-    # Attachments
-    ########
-    attachments: allWpDocument (
-        filter: {
-            status: {eq: "publish"}
-        }
-    ) {
-        nodes {
-            id
-            title
-            slug
-            excerpt
-            attachment {
-                attachmentCampus {
-                    ... on WpCampus {
-                        id
-                        title
-                        slug
-                        databaseId
-                    }
-                }
-                attachmentFile {
-                    id
-                    title
-                    localFile {
-                        publicURL
-                    }
-                }
-                attachmentHide {
-                    attachmentHideSearchEngines
-                }
-            }
-        }
-    }
-`
-
 /* 
  * Main Query 
  */
 const query = `
     query {
 
-        ${allWpCampus}
+        ${queriesWp}
 
-        ${allWpRedirect}
+        ## Always True CPTs on Headless
+        ${queriesPostTypes.allWpCampus}
 
-        ${allWpPage}
+        ${queriesPostTypes.allWpPage}
         
-        ${allWpPosts}
+        ${queriesPostTypes.allWpPosts}
 
-        ${allWpNews}
+        ${queriesCommon.allWpRedirect}
 
-        ${allWpEvents}
+        ## CPTs
+        ${config.cpt.createCourses ? queriesPostTypes.allWpCourse : ''}
 
-        ${allWpSeries}
+        ${config.cpt.createNews ? queriesPostTypes.allWpNews : ''}
 
-        ${allWpVideo}
+        ${config.cpt.createEvents ? queriesPostTypes.allWpEvents : ''}
 
-        ${allWpResources}
+        ${config.cpt.createWatch ? queriesPostTypes.allWpSeries : ''}
+
+        ${config.cpt.createWatch ? queriesPostTypes.allWpVideo : ''}
+
+        ${config.cpt.createMinistries ? queriesPostTypes.allWpMinistry : ''}
+
+        ${config.cpt.createVolunteering ? queriesPostTypes.allWpVolunteeropportunity : ''}
+
+        ${config.cpt.createLandingPages ? queriesPostTypes.allWpLandingPage : ''}
+
+        ${config.cpt.createAttachments ? queriesPostTypes.allWpDocument : ''}
         
     }
 `

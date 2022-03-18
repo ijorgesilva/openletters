@@ -2,7 +2,7 @@ import React from 'react'
 import './tagSimple.scss'
 
 export default function TagSimple( { items, mode, className } ) {
-    console.log(items)
+
     return (
         <div className={`tagSimple ${ mode ? mode : 'light' } ${ className ? className : '' }`}>
             {

@@ -6,49 +6,50 @@
 const path = require("path");
 
 const urljoin = require("url-join");
- 
+
 require('dotenv').config({
   path: `.env${ (process.env.NODE_ENV === 'development' ) ? '.development' : (process.env.NODE_ENV) ? '.'+process.env.NODE_ENV : ''}`
 })
 
- module.exports = {
- 
-   flags: {
-     FAST_DEV: true,
-   },
- 
-   pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
- 
-   siteMetadata: {
-     siteUrl: process.env.SITE_URL,
- 
-     title: process.env.SITE_TITLE,
-     titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
-     description: process.env.SITE_DESCRIPTION,
-     url: process.env.SITE_URL,
-     image: process.env.SITE_IMAGE,
-     twitterUsername: process.env.TWITTER_USERNAME,
- 
-     rssMetadata: {
-       site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
-       feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
-       title: process.env.SITE_TITLE,
-       description: process.env.SITE_DESCRIPTION,
-       image_url: `${urljoin(
-         process.env.SITE_URL,
-         process.env.PATH_PREFIX
-       )}/logos/logo-512.png`,
-       copyright: process.env.SITE_COPYRIGHT
-     }
-   },
- 
-   /* Your site config here */
-   plugins: [
+module.exports = {
+
+    flags: {
+      FAST_DEV: true,
+      PRESERVE_FILE_DOWNLOAD_CACHE: process.env.PRESERVE_FILE_DOWNLOAD_CACHE || false,
+      PARALLEL_SOURCING: true,
+    },
+  
+    pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
+  
+    siteMetadata: {
+      siteUrl: process.env.SITE_URL,
+  
+      title: process.env.SITE_TITLE,
+      titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
+      description: process.env.SITE_DESCRIPTION,
+      url: process.env.SITE_URL,
+      image: process.env.SITE_IMAGE,
+      twitterUsername: process.env.TWITTER_USERNAME,
+  
+      rssMetadata: {
+        site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
+        feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
+        title: process.env.SITE_TITLE,
+        description: process.env.SITE_DESCRIPTION,
+        image_url: `${urljoin(
+          process.env.SITE_URL,
+          process.env.PATH_PREFIX
+        )}/logos/logo-512.png`,
+        copyright: process.env.SITE_COPYRIGHT
+      }
+    },
+  
+    /* Your site config here */
+    plugins: [
 
         /*
         * Functions
         */
-        `gatsby-plugin-styled-components`, // REMOVE
         "gatsby-plugin-react-helmet", 
         {
           resolve: `gatsby-plugin-sass`,
@@ -96,13 +97,10 @@ require('dotenv').config({
           options: {
             url: process.env.WPGRAPHQL_URL,
             verbose: true,
-            develop: {
-              hardCacheMediaFiles: true,
-            },
             schema: {
-              perPage: process.env.SCHEMA_PER_PAGE || 50, // currently set to 100
-              requestConcurrency: process.env.SCHEMA_REQUEST_CONCURRENCY || 50, // currently set to 5
-              previewRequestConcurrency: process.env.SCHEMA_PREVIEW_REQUEST_CONCURRENCY || 50, // currently set to 2
+              perPage: process.env.SCHEMA_PER_PAGE || 50,
+              requestConcurrency: process.env.SCHEMA_REQUEST_CONCURRENCY || 50,
+              previewRequestConcurrency: process.env.SCHEMA_PREVIEW_REQUEST_CONCURRENCY || 2,
               timeout: process.env.SCHEMA_TIMEOUT || 120000,
             },
             debug: {
@@ -112,8 +110,8 @@ require('dotenv').config({
               },
             },
             type: {
-              Post: {
-                limit: 5000,
+              __all: {
+                limit: process.env.LIMIT_ALL || null,
               },
             },
           },
@@ -191,8 +189,8 @@ require('dotenv').config({
             appId: process.env.GATSBY_ALGOLIA_APP_ID,
             apiKey: process.env.ALGOLIA_ADMIN_KEY,
             queries: require("./src/utils/algolia-queries"),
-            matchFields: ['slug', 'modified'],
-            enablePartialUpdates: true,
+            matchFields: ['slug', 'modified', 'campus'],
+            enablePartialUpdates: process.env.ALGOLIA_PARTIAL_UPDATES || true,
             chunkSize: 10000,
           },
         },
@@ -203,6 +201,5 @@ require('dotenv').config({
         */
         `gatsby-plugin-meta-redirect`,
           
-   ],
- }
- 
+  ],
+}

@@ -3,9 +3,10 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { useTranslation } from "react-i18next"
 
-import { watchDetailsMenu } from '../../../../data/menues'
+import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useParticipation } from '../../../hooks/useParticipation'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
@@ -35,7 +36,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
 
     let videos          = { nodes: [] }
     let resources       = data.resources.videoDetails.videoResources
-    const mode          = 'dark'
+    const theme         = useTheme()
     const modeContent   = 'light'
 
     /* Participation Options */
@@ -50,7 +51,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
         ))
     }
     
-    const poster = ( featuredImage?.node?.localFile ) ? 
+    const poster = featuredImage?.node ? 
                         featuredImage.node.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
                         ( videoDetails.videoSeries?.seriesGraphics?.background?.localFile ) ?
@@ -64,15 +65,15 @@ export default function WatchDetails( { pageContext, location, data } ) {
                             undefined
     
     return (
-        <div className={`watchDetails bg-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } ${ mode ? mode : 'light' }`}>
+        <div className={`watchDetails bg-${ theme.styles.header === 'light' ? 'dark' : theme.styles.header === 'dark' ? 'light' : theme.styles.header } ${ theme.styles.header ? theme.styles.header : 'light' }`}>
             
-            <div className={`player ${ mode ? mode : 'light'}`}>
+            <div className={`player ${ theme.styles.header ? theme.styles.header : 'light'}`}>
                 <HeaderPage
                     title       = { title + ' | ' + t('global.watch.videos') } 
                     location    = { location } 
                     cover       = { poster }
                     description = { excerpt }
-                    mode        = { mode }
+                    mode        = { modeContent }
                     article     = { true }
                     metaTags    =   {{
                                         noIndex: ( typeof videoDetails.videoHide?.videoHideSearchEngines === 'undefined' ) ? 
@@ -84,7 +85,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
                     location        = { location }
                     campus          = { breadcrumbs.campus }
                     searchIndices   = { useGlobalIndeces() }
-                    mode            = { mode }
+                    mode            = { theme.styles.header }
                     menuGlobal
                 />
 
@@ -96,9 +97,11 @@ export default function WatchDetails( { pageContext, location, data } ) {
                                             'name': t('global.watch.title')
                                         }
                                     } 
-                    menu        = { watchDetailsMenu } 
+                    menu        = { [
+                                     {name: t('global:global.watch.latest'), link: `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}`, as: '', target: ''},
+                                    ] } 
                     close       = { breadcrumbs.back }
-                    mode        = { mode }
+                    mode        = { theme.styles.header }
                 />
 
                 <PlaylistDetails 
@@ -108,7 +111,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
                     videos          = { ( videos?.nodes?.length > 0 ) ? videos.nodes : undefined }
                     campus          = { breadcrumbs.campus }
                     width           = 'fullwidth'
-                    mode            = { mode }
+                    mode            = { theme.styles.header }
                     order           = 'desc'
                     count
                 />
@@ -118,7 +121,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
             <ToolbarDetails 
                 className           = {'sticky-mobile'}
                 location            = { location }
-                mode                = { mode }
+                mode                = { theme.styles.header }
                 participation       =  {{
                                             raiseHandList: ( participationCombined.raiseHandList?.length > 0 ) ? participationCombined.raiseHandList : undefined,
                                         }}
@@ -166,7 +169,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus } 
-                mode    = { modeContent }
+                mode    = { theme.styles.footer }
             />
             
         </div>
@@ -191,7 +194,7 @@ export const query = graphql`
                 sort: {
                     fields: videoDetails___videoDayDate, 
                     order: DESC
-                }
+                },
             ) {
             nodes{
                 title
@@ -226,7 +229,8 @@ export const query = graphql`
         # Related Resources
         ########
         resources: wpVideoOnDemand (
-            slug: {eq: $slug}
+            slug: {eq: $slug},
+            status: {eq: "publish"}
         ) {
             slug
             id

@@ -1,5 +1,11 @@
 {
 	"components": {
+		"apps": {
+			"adroid-app": "Aplicación de Android",
+			"apple-app": "Aplicación de Apple",
+			"get-it-apple-store": "Descarga en Apple Store",
+			"get-it-play-store": "Consíguelo en Play Store "
+		},
 		"music": {
 			"find-on-title": "Consíguelo en",
 			"playlist-title": "Canciones",
@@ -15,7 +21,7 @@
 			"follow-us": "Síguenos en",
 			"share": "Compartir",
 			"share-on": "Compartir en",
-			"sharesimpleicon-title": "Compartir en"
+			"share-with": "Comparte usando"
 		}
 	},
 	"global": {
@@ -39,6 +45,7 @@
 			"youversion-default": "https://chop.bible.com/es-ES/bible/149/GEN.1.rvr1960"
 		},
 		"blog": {
+			"blog-and-news-title": "Blog & Noticias",
 			"created-date": "Creado el ",
 			"description": "Consulte nuestras últimas publicaciones y artículos",
 			"meta-description": "",
@@ -54,6 +61,35 @@
 		},
 		"copied": "Copiado!",
 		"copied-failed": "Falló en copiar!",
+		"courses": {
+			"apply-now": "Aplicar ahora",
+			"certificate": {
+				"available": "Certificado Disponible"
+			},
+			"description": "",
+			"duration": {
+				"a-week": "a la semana",
+				"recommended-time": "Tiempo recomendado",
+				"total-duration": "Duración Total",
+				"weekly": "semanal"
+			},
+			"ends-on": "Termina el",
+			"enroll-now": "Registrarse Ahora",
+			"instructors": "Instructores",
+			"lessons": "Lecciones",
+			"modality": {
+				"blended": "En persona y En línea",
+				"in-person": "En persona",
+				"online": "En línea"
+			},
+			"pace": {
+				"instructor-paced": "Dirigido por instructor",
+				"self-pace": "Ritmo propio"
+			},
+			"starts-on": "Comienza en",
+			"title": "Curso",
+			"title-plural": "Cursos"
+		},
 		"created-on": "Creado el",
 		"empty": {
 			"text-not-available": "No hay descripción disponible"
@@ -67,6 +103,8 @@
 			"organized-by": "Organizado por",
 			"title": "Eventos"
 		},
+		"faq": "Preguntas Frecuentes",
+		"first": "Primero",
 		"forms": {
 			"sending": "Enviando...",
 			"submit": "Enviar"
@@ -74,13 +112,43 @@
 		"give": {
 			"title": "Dar ahora"
 		},
+		"groupTypes": {
+			"description": "",
+			"title": "Tipos de Grupo",
+			"title-plural": "Tipos de Grupo",
+			"title-singular": "Tipo de Grupo"
+		},
+		"groups": {
+			"description": "",
+			"title": "Grupos",
+			"title-plural": "Grupos",
+			"title-singular": "Grupo"
+		},
 		"help": {
 			"need-help": "Necesita ayuda?",
 			"title": "Ayuda"
 		},
 		"home-page": "Página Principal",
+		"languages": {
+			"iso-name": {
+				"en": "Inglés",
+				"es": "Español"
+			},
+			"languages-available": "Idiomas Disponibles",
+			"title": "Idioma",
+			"title-plural": "Idiomas"
+		},
+		"last": "Último",
+		"learn-more": "Aprenda más",
 		"legal": {
 			"disclaimer": "© Todos los Derechos Reservados."
+		},
+		"ministry": {
+			"description": "",
+			"related-ministries": "Ministerios Relacionado",
+			"related-ministry": "Ministerio Relacionado",
+			"title": "Ministerio",
+			"title-plural": "Ministerios"
 		},
 		"modified-on": "Modificado el",
 		"news": {
@@ -88,13 +156,17 @@
 			"title": "Noticias"
 		},
 		"newsletter": {
-			"description": "Regístrese para recibir nuestras noticias electrónicas semanales y actualizaciones sobre lo que sigue. ",
+			"description": "Regístrese para recibir nuestras noticias electrónicas y actualizaciones sobre lo que sigue. ",
 			"subscribe": "Subscríbete",
 			"your-email": "Tú email",
 			"your-name": "Tú nombre"
 		},
+		"next": "Siguiente >",
 		"no-records": "Nada que mostrar!",
 		"notes": "Notas",
+		"of": "de",
+		"overview": "Resumen",
+		"page": "Página",
 		"pages": {
 			"name": "Página"
 		},
@@ -104,14 +176,58 @@
 				"title": "Levantar Mano"
 			}
 		},
+		"previous": "< Anterior",
+		"qrcode": {
+			"scan-me": "Escanéame",
+			"title": "Código QR"
+		},
+		"read_more": "Leer más",
 		"related-resources": "Recursos",
 		"search": {
-			"placeholder": "Buscar..."
+			"entries-found": "Entradas encontradas",
+			"filter-by-campus": "Filtrar por Campus",
+			"filter-by-speaker": "Filtrar por Orador",
+			"filters": "",
+			"no-results": "Sin resultados",
+			"no-results-for": "No se han encontrado resultados para ",
+			"placeholder": "Buscar...",
+			"reset-title": "Limpiar todos los filtros",
+			"result": "resultado",
+			"results": "resultados",
+			"search-title-ellipsis": "Buscar...",
+			"show-less": "Mostrar menos",
+			"show-more": "Mostrar más",
+			"stalled": "La búsqueda está estancada",
+			"submit-title": "Envíe su consulta de búsqueda ",
+			"title": "Buscar"
+		},
+		"speaker": "Orador",
+		"speakers": "Oradores",
+		"time": {
+			"duration": "Duración del curso",
+			"hour": "hora",
+			"hours": "horas",
+			"minute": "minuto",
+			"minutes": "minutos",
+			"second": "segundo",
+			"seconds": "segundos",
+			"year": "año",
+			"years": "años"
 		},
 		"transcripts": "Transcripciones",
+		"view": "Ver",
+		"visit": "Visitar ahora",
+		"volunteering": {
+			"description": "",
+			"serve": "Sirve",
+			"title": "Oportunidad de Servicio",
+			"title-plural": "Oportunidades de Servicio",
+			"volunteering": "Voluntariado"
+		},
 		"watch": {
 			"about-series": "Acerca de la Serie",
 			"content-empty": "No hay notas disponibles",
+			"latest": "Más Reciente",
 			"meta-description": "",
 			"more-info": "Más información",
 			"playlist": "Listas de reproducción de series",
@@ -126,103 +242,5 @@
 			"view-playlist": "Ver lista de mensajes",
 			"watch-now": "Reproducir ahora"
 		}
-	},
-	"smallgroups": {
-		"alertbar-content": "",
-		"alertbar-link": "Regístrate ya",
-		"alertbar-title": "Nuestros líderes están listos para conocerte el 3 de septiembre. Regístrate para el Open House en línea",
-		"apply-now": "Aplica ahora",
-		"find-a-group": "Únete a un grupo",
-		"hero": "Encuentra tu <i>Comunidad</i>",
-		"hero-subtitle": "Ya sea que te sientas llamado a liderar un grupo pequeño o convertirte en miembro de uno, encontrarás tu comunidad aquí.",
-		"host-a-group": "Lidera un grupo",
-		"leader-login": "Login Líderes",
-		"meta-description": "Ya sea que te sientas llamado a liderar un grupo pequeño o convertirte en miembro de uno, encontrarás tu comunidad aquí.",
-		"share-content": "Invita a otros a ser parte",
-		"share-title": "#SomosVictory",
-		"tab-host": "Lidera un grupo",
-		"tab-host-section-faq-four-content": "<p>Si tienes más preguntas que no se hayan abordado anteriormente, envíenos un correo electrónico a  <a href='mailto:smallgroups@victoryatl.com'>smallgroups@victoryatl.com</a> . </p> ",
-		"tab-host-section-faq-four-title": "¿Alguna otra pregunta?",
-		"tab-host-section-faq-one-content": "Los grupos pequeños operan de forma estacional con descansos intermedios. La mayoría de los líderes sirven durante un año (tres semestres). Consulte la sección de <a href='#news'>noticias</a> para obtener más información.",
-		"tab-host-section-faq-one-title": "¿Cuánto dura el compromiso?",
-		"tab-host-section-faq-three-content": "<p>Envíe una verificación de antecedentes para su campus:</p><ul><li><a href='https://www.ministryopportunities.org/Details.aspx?oid=27209' target='_blank'>Norcross</a></li><li><a href='https://www.ministryopportunities.org/Details.aspx?oid=27267' target='_blank'>Hamilton Mills</a></li><li><a href='https://www.ministryopportunities.org/Details.aspx?oid=42346' target='_blank'>Midtown</a></li><li><a href='https://www.ministryopportunities.org/Details.aspx?oid=27209' target='_blank'>Online</a></li></ul>",
-		"tab-host-section-faq-three-title": "Ya envié mi solicitud, ¿qué sigue?",
-		"tab-host-section-faq-title": "Preguntas frecuentes",
-		"tab-host-section-faq-two-content": "Absolutamente! <a href='https://signup.com/group/226982843016240052/' target='_blank'>Aplica ahora</a>",
-		"tab-host-section-faq-two-title": "¿Puedo recibir capacitación antes de aplicar?",
-		"tab-host-section-form-content": "Complete la breve solicitud a continuación para conectarse personalmente con uno de los miembros de nuestro equipo. También pedimos que todos los líderes se sometan a una verificación de antecedentes.",
-		"tab-host-section-form-content-text": "<p class='mb-3 mt-3'>Ya sea que tu grupo se reúna en persona o en línea, te proporcionaremos las herramientas para garantizar que estés preparado para recibirlos con confianza</p><ul class='h-nobullets m-0 p-0'><li class='mt-2'><img src='' class='rounded-circle' mr-1 alt='' />Entrenamiento</li><li class='mt-2'><img src='' class='rounded-circle mr-1' alt='' />Herramientas de liderazgo</li><li class='mt-2'><img src='' class='rounded-circle mr-1' alt='' />Coaching</li></ul>",
-		"tab-host-section-form-content-title": "<h2 class='display-5 text-uppercase'>¡Equípate para liderar tu grupo!</h2>",
-		"tab-host-section-form-iframe": "https://editor.victorychur.ch/form/online-training-small-groups-formulario-de-aplicacion/",
-		"tab-host-section-form-title": "Formulario",
-		"tab-host-section-intro-content": "Cada creyente estaba consagrado a seguir las enseñanzas de los apóstoles. Sus corazones estaban ligados los unos a los otros, compartiendo comidas y reuniéndose regularmente para orar.’ - Hechos 2:42. Grupos Pequeños existe para crear auténticas comunidades, donde se cultive amistades y se persiga el discipulado.",
-		"tab-host-section-intro-title": "<span class='h-six-outline h-six-outline-over-white'>Haciendo amigos</span><br> <span class='font-italic'>convirtiéndonos</span> en discípulos",
-		"tab-host-section-news-one-content": "<br/>⚬ Primavera 2/1/20 a 5/23/20, <br/>⚬ Verano 6/7/20 a 8/1/20 and, <br/>⚬ Otoño 8/29/20 a 11/21/20  </p>",
-		"tab-host-section-news-one-title": "Fechas del semestre del año 2020 son:",
-		"tab-host-section-news-title": "Noticias &amp; actualizaciones",
-		"tab-host-section-player-title": "<span class='h-white-outline h-white-outline-over-six'>¿Por qué</span><br/><span class='text-white'>hospedar un grupo?</span>",
-		"tab-host-section-steps-content": "No hay nada como estar en comunidad con otros creyentes. Como líder, ten el poder de crear una atmósfera para que otros hagan conexiones increíbles, aprendan y crezcan juntos en su fe.",
-		"tab-host-section-steps-faq-content": "<ul><li>Gobernado por la autoridad de la Palabra de Dios</li><li>Asistió a una clase de membresía de Victory</li><li>Fieles en el diezmo en Victory</li><li>Someterse voluntariamente a una verificación de antecedentes</li></ul>",
-		"tab-host-section-steps-faq-title": "¿Cuáles deberían ser mis cualificaciones?",
-		"tab-host-section-steps-one-text": "Complete la corta aplicación a continuación para conectarte personalmente con uno de los miembros de nuestro equipo. También pedimos que todos los líderes se sometan a una verificación de antecedentes.",
-		"tab-host-section-steps-one-title": "Aplica",
-		"tab-host-section-steps-three-text": "Ahora estás listo para lanzar con éxito tu grupo.",
-		"tab-host-section-steps-three-title": "Lanzamiento",
-		"tab-host-section-steps-title": "Pasos para convertirse en<br>Un hacedor de discipulos",
-		"tab-host-section-steps-two-text": " La Orientación más las clases de capacitación adicionales te prepararán para promover, retener a tus miembros e informar a la iglesia. También aprenderás sobre los recursos clave disponibles para ti.",
-		"tab-host-section-steps-two-title": "Recibe Orientación",
-		"tab-host-section-video-link": "https://player.vimeo.com/external/397690965.m3u8?s=8431b857535182a67e52a9b812e2d2b99169953d",
-		"tab-host-section-video-poster": "https://i.vimeocdn.com/video/865005508.jpg",
-		"tab-host-sticky-about": "Acerca",
-		"tab-host-sticky-application": "Formulario",
-		"tab-host-sticky-faq": "Preguntas frecuentes",
-		"tab-host-sticky-steps": "Pasos",
-		"tab-join": "Únete a un grupo",
-		"tab-join-grouptypes-care-content": "<p>Nuestros grupos de cuidado pueden ser esenciales para tu crecimiento personal, asi como tu bienestar mental y espiritual. Estos grupos se han creado para brindarte una motivación más profunda con respecto a algunos de los temas más difíciles a afrontar en la vida como el divorcio, la depresión, las dificultades financieras y entre otros. Obtenga más información sobre cada grupo de cuidado que ofrecemos.</p>",
-		"tab-join-grouptypes-care-link": "https://my.victoryatl.com/default.aspx?page=4364",
-		"tab-join-grouptypes-care-linktext": "Encuentra un Grupo de Cuidado",
-		"tab-join-grouptypes-care-tab-title": "Grupos de Cuidado",
-		"tab-join-grouptypes-care-title": "¡Nos importa!",
-		"tab-join-grouptypes-online-content": "<p>¡Reunamonos en línea y mantengamos la conexión durante estos tiempos de 'distanciamiento social'! Para los miembros del grupo, es fácil unirse. Te tenemos cubierto con grupos basados en diversas necesidades e intereses.</p> <p>Para los líderes de grupo, nuestros videos de capacitación y recursos de liderazgo, garantizarán que estés equipado para liderar de forma remota.</p>",
-		"tab-join-grouptypes-online-link": "https://my.victoryatl.com/default.aspx?page=4364",
-		"tab-join-grouptypes-online-linktext": "Encuentra un grupo en Línea",
-		"tab-join-grouptypes-online-tab-title": "Grupos en Línea",
-		"tab-join-grouptypes-online-title": "Crea conexiones<br/> genuinas en línea",
-		"tab-join-grouptypes-single-content": "<p>Al ser parte de un grupo de solteros en Victory, la vida se hace mucho más dulce. Conéctate, desarrolla amistades memorables, y crece como discípulo de Jesús en compañía de otros solteros. ¡Encuentra tu lugar en un grupo cerca de ti! </p>",
-		"tab-join-grouptypes-single-link": "https://my.victoryatl.com/default.aspx?page=4364",
-		"tab-join-grouptypes-single-linktext": "Encuentra un grupo para Solteros",
-		"tab-join-grouptypes-single-tab-title": "Grupos para Solteros",
-		"tab-join-grouptypes-single-title": "¡Solteros<br/>hagamos vida juntos!",
-		"tab-join-intro-content": "Los Grupos Pequeños de Victory existen para crear una comunidad auténtica, donde cultivamos amistades, mientras buscamos el discipulado. ¡Únete ahora!",
-		"tab-join-intro-title": "<span class='h-six-outline h-six-outline-over-white'>Haciendo amigos</span><br/><span class='font-italic'>convirtiéndonos</span> en discípulos",
-		"tab-join-section-grouptypes-content": "Todos tenemos diferentes intereses y necesidades. Ya sea que estés buscando un grupo para solteros, parejas casadas, de cuidado, o algun otro, las opciones son diversas. Integrate a uno y encuentra tu comunidad.",
-		"tab-join-section-grouptypes-title": "Grupos destacados<br/>Un grupo para cada quien",
-		"tab-join-section-news-one-content": "¡El semestre de otoño está por comenzar! Únate a nosotros el jueves 3 de septiembre para nuestra primera jornada en línea de Open House. ¡Tendrás la oportunidad de conectarte con líderes de grupos del área de Atlanta, líderes en línea, y de acuerdo con tus intereses! Estarán más que felices de compartir detalles o responder preguntas y, sobre todo, ¡están emocionados de conocerte!",
-		"tab-join-section-news-one-link": "https://victoryatl.zoom.us/meeting/register/tJ0kce6rqTwtE9aSz7LUL6SqG_68lA6hikAd",
-		"tab-join-section-news-one-link-text": "Registrate",
-		"tab-join-section-news-one-title": "Online Open House",
-		"tab-join-section-phototext-content": "Comunidades bíblicas es el corazón de Victory... Es por eso que nos reunimos en 'Grupos pequeños'. Los grupos pequeños nos dan la oportunidad de conectarnos a un nivel más íntimo con otros creyentes y aquellos que estan creciendo en su fe, para reconciliar culturas y transformar el mundo juntos. ¡Únete ahora!",
-		"tab-join-section-phototext-title": "<span>¿Por qué</span><br/>'Nos reunimos en grupos pequeños'?",
-		"tab-join-sticky-about": "Acerca",
-		"tab-join-sticky-grouptypes": "Grupos Disponibles",
-		"tab-join-sticky-testimonials": "Testimonios",
-		"tab-join-testimonial-eight-quote": "Mi grupo pequeño ha proporcionado un catalizador para cambios intencionales y positivos en mi vida. Y entre los líderes y miembros de mi grupo hay un sentimiento no solo de comunidad, sino también de amistad, que he llegado a apreciar.",
-		"tab-join-testimonial-eleven-quote": "Una comunidad centrada en el evangelio. El hierro con el hierro se afila. ¡Amo a mi pequeño grupo!",
-		"tab-join-testimonial-fifteen-quote": "Ha sido una gran experiencia conocer nuevos hombres de fe. Ha sido bastante refrescante escuchar los distintos testimonios de superación. ¡Me he inspirado y espero nuestra reunión cada semana!",
-		"tab-join-testimonial-five-quote": "Mi grupo pequeño ha sido una bendición absoluta para mí. Nuestro líder nos anima de la manera más completa. Ella le da un 110% y su hospitalidad es inigualable.",
-		"tab-join-testimonial-four-quote": "Ha sido una gran experiencia conocer nuevos hombres de fe. Ha sido bastante refrescante escuchar los distintos testimonios de superación. ¡Me he inspirado y espero nuestra reunión cada semana!",
-		"tab-join-testimonial-fourteen-quote": "Unirse a este pequeño grupo ha sido una gran bendición. Un grupo de mujeres cristianas tan amorosas y comprensivas que son tan transparentes con sus vidas.",
-		"tab-join-testimonial-nine-quote": "En una sola palabra, ¡increíble! He crecido mucho desde que me uní a mi grupo pequeño. El grupo me reta a acercarme más a Dios y crecer a través de Sus procesos.",
-		"tab-join-testimonial-one-quote": "En una sola palabra, ¡increíble! He crecido mucho desde que me uní a mi grupo pequeño. El grupo me reta a acercarme más a Dios y crecer a través de Sus procesos.",
-		"tab-join-testimonial-seven-quote": "Disfruto mi grupo pequeño. Las mujeres realmente muestran apoyo mutuo, y las conversaciones son alentadoras y estimulantes.",
-		"tab-join-testimonial-six-quote": "En una sola palabra, ¡increíble! He crecido mucho desde que me uní a mi grupo pequeño. El grupo me reta a acercarme más a Dios y crecer a través de Sus procesos.",
-		"tab-join-testimonial-subtitle": "Miembro de grupo pequeño",
-		"tab-join-testimonial-ten-quote": "Mi grupo pequeño ha proporcionado un catalizador para cambios intencionales y positivos en mi vida. Y entre los líderes y miembros de mi grupo hay un sentimiento no solo de comunidad, sino también de amistad, que he llegado a apreciar.",
-		"tab-join-testimonial-thirteen-quote": "Ha sido una experiencia positiva. Estoy aprendiendo mucho de los otros miembros. Me animan a continuar en mi crecimiento espiritual.",
-		"tab-join-testimonial-three-quote": "Ha sido una gran experiencia conocer nuevos hombres de fe. Ha sido bastante refrescante escuchar los distintos testimonios de superación. ¡Me he inspirado y espero nuestra reunión cada semana!",
-		"tab-join-testimonial-twelve-quote": "Ha sido una experiencia positiva. Estoy aprendiendo mucho de los otros miembros. Me animan a continuar en mi crecimiento espiritual.",
-		"tab-join-testimonial-two-quote": "Unirse a este pequeño grupo ha sido una gran bendición. Un grupo de mujeres cristianas tan amorosas y comprensivas que son tan transparentes con sus vidas.",
-		"testimonials-title": "<h2 class='h-color-six'>Lo que dice<br/>nuestra increíble comunidad…</h2>",
-		"title": "Grupos Pequeños"
 	}
 }

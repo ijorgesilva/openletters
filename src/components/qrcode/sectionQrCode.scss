@@ -1,0 +1,88 @@
+@import "~include-media/dist/_include-media.scss";
+
+.sectionQrCode {
+    
+    &.light {
+        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+        .qrcontainer {
+            .qrcode {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                .graphic {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+                .instructions {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    .icon {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+            }
+        }
+    }
+    &.dark { 
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .qrcontainer {
+            .qrcode {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                .graphic {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+                .instructions {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    .icon {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
+                }
+            }
+        }
+    }
+
+    .qrcontainer{
+        display: flex;
+        justify-content: flex-end;
+        .qrcode {
+            padding: 20px;
+            border-radius: var(--border-radius);
+            .graphic {
+                padding: 10px;
+                border-radius: var(--border-radius);
+            }
+            .instructions {
+                padding: 1rem 0 0;
+                font-size: 2vw;
+                display: flex;
+                justify-content: center;
+                .icon {
+                    padding: 0px 2px;
+                    border-radius: 3px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+    .sectionQrCode {
+        .qrcontainer{
+            justify-content: center;
+            .qrcode {
+                .instructions {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@include media("<=phone", "portrait") {
+}

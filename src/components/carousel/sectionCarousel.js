@@ -17,16 +17,19 @@ export default function SectionCarousel ( {
         containerWidth, 
         mode, 
         size,
-        itemType,
+        // Behavior
         swipeable, 
         draggable, 
         infinite,
         partialVisible, 
         autoplay,
         stretchedlink,
-        interval,
+        // Aspect
+        orientation,
+        itemType,
         dots,
         dotsClass,
+        interval,
         gap,
         itemClass,
         truncate,
@@ -37,6 +40,13 @@ export default function SectionCarousel ( {
         border,
         borderColor,
         itemGrow,
+        // Visibility
+        hideImage,
+        hideTitle,
+        hideSubtitle,
+        hideExcerpt,
+        hideButton,
+        // Responsive
         responsive,
     } ) {
 
@@ -51,14 +61,13 @@ export default function SectionCarousel ( {
                     ( title || content ) ?
                         <div className='general'>
                             {
-                                ( title ) ?
+                                title ?
                                     <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
                                 :
                                     undefined
                             }
-        
                             { 
-                                ( content ) ?
+                                content ?
                                     <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
                                 :
                                     undefined
@@ -96,11 +105,11 @@ export default function SectionCarousel ( {
                                             mode                = { mode }
                                             buttons             = { _.buttons }
                                             // counter             = { counter }
-
+                                            orientation         = { orientation }
                                             truncate            = { truncate }
                                             truncateLines       = { truncateLines }
                                             stretchedlink       = { stretchedlink }
-                                            className           = { `${_.itemCss} ${ itemClass ? itemClass : '' }` }
+                                            className           = { `${ _.cssClass ? _.cssClass : '' } ${ itemClass ? itemClass : '' }` }
                                             removeDefaultCss    = { _.itemCssRemoveDefault }
                                             imagePosition       = { imagePosition }
                                             imageFit            = { imageFit }
@@ -108,6 +117,12 @@ export default function SectionCarousel ( {
                                             border              = { border }
                                             borderColor         = { borderColor }
                                             itemGrow            = { itemGrow }
+                                            // Visibility
+                                            hideImage           = { hideImage }
+                                            hideTitle           = { hideTitle }
+                                            hideSubtitle        = { hideSubtitle }
+                                            hideExcerpt         = { hideExcerpt }
+                                            hideButton          = { hideButton }
                                         />
                                     ))
                                 }

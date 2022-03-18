@@ -1,11 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { menuHelp, menuGive, followOptions } from '../../../data/menues'
+import { useCreateMainMenu } from '../../hooks/useCreateMainMenu'
 import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
-import MenuGlobal from "../menu/menuGlobal"
-import MenuLocal from "../menu/menuLocal"
+import { useWebsiteConfigurationMenus } from '../../hooks/useWebsiteConfigurationMenus'
+import MenuMain from "../menu/menuMain"
 import './navigation.scss'
 
 export default function Navigation( { menuLocal, menuGlobal, location, campus, searchIndices, mode } ){
@@ -21,30 +21,51 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
         campus = defaultCampus
     }
     
+    /* 
+     * Get and parse menus
+     */
+    const rawMenus = useWebsiteConfigurationMenus()
+    // Format Top Menu
+    const parsedTopMenu = rawMenus?.menuPositions.topMenu?.menu ? useCreateMainMenu(campus, rawMenus.menuPositions.topMenu.menu) : undefined
+    // Format Main Menu
+    const parsedMainMenu = rawMenus?.menuPositions.mainMenu?.menu ? useCreateMainMenu(campus, rawMenus.menuPositions.mainMenu.menu) : undefined
+
     return (
         <header className='navigation'>
 
             {
-                ( menuGlobal ) ?
-                    <MenuGlobal 
-                        className       = ''
-                        followOptions   = { followOptions }
-                        helpMenu        = { menuHelp } 
-                        giveMenu        = { menuGive } 
+                menuGlobal && parsedTopMenu ?
+                    <MenuMain 
+                        className       = { parsedTopMenu.conf?.css }
+                        id              = { parsedTopMenu.conf?.id }
                         location        = { location }
                         campus          = { campus }
+                        mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
+                        menu            = { parsedTopMenu.items }
+                        collapse        = { parsedTopMenu.conf?.collapse }
+                        menuLocation    = 'top'
+                        campusSelector  = { rawMenus.menuPositions.topMenu.campusSelector }
+                        languageSelector= { rawMenus.menuPositions.topMenu.languageSelector }
+                        search          = { rawMenus.menuPositions.topMenu.search }
                         searchIndices   = { searchIndices }
-                        mode            = { ( mode ) ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
+                        auth            = { true }
+                        alignRight
                     />
                 :
                     undefined
             }
+
             {
-                ( menuLocal ) ?
-                    <MenuLocal 
+                menuLocal && parsedMainMenu ?
+                    <MenuMain 
+                        className       = { parsedMainMenu.conf?.css }
+                        id              = { parsedMainMenu.conf?.id }
                         location        = { location }
                         campus          = { campus }
-                        mode            = { ( mode ) ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
+                        mode            = { mode ? mode : theme?.layout.header.mode ? theme.layout.header.mode : 'light' }
+                        menu            = { parsedMainMenu.items }
+                        collapse        = { parsedMainMenu.conf?.collapse }
+                        menuLocation    = 'main'
                     />
                 :
                     undefined

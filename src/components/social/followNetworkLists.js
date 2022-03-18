@@ -18,7 +18,7 @@ export default function FollowNetworkLists (
             className   = {`followNetworkLists ${ mode ? mode : 'light' } noselect`} 
             style       = {{ justifyContent: alignment }} 
         >
-            <span>{t('components.social.share-on')}</span>
+            <span>{t('components.social.follow-us')}</span>
             <div className = 'list'  style = {{ justifyContent: alignment }} >
                 {
                     ( items?.length > 0 ) ?

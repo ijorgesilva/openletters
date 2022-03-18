@@ -19,16 +19,16 @@ export default function FormSelector (
         secondaryColumnText,
         secondaryColumnAlignment,
         secondaryColumnBackground,
+        location,
     } 
-    ) {
+) {
 
     const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://editor.victorychur.ch'
-
-    const iframeFormUrl = iframeQueryStrings ? 
-                            iframeServerRoot + form.uri + iframeQueryStrings
-                        : 
-                            `${iframeServerRoot}${form.uri}?classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
-
+    const queryParams = location?.href?.substring(location.href.indexOf('?')+1)
+    const iframeFormUrl =   iframeQueryStrings ? `${iframeServerRoot}${form.uri}${iframeQueryStrings}`
+                                : queryParams ? `${iframeServerRoot}${form.uri}?${queryParams}&timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+                                    : `${iframeServerRoot}${form.uri}?timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+    
     switch ( true ){
         /*
         * Single Column
@@ -43,7 +43,7 @@ export default function FormSelector (
                                     src         = { iframeFormUrl }
                                     style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}} 
                                     frameborder = '0'
-                                    allowTransparency
+                                    allowtransparency
                                 />
                             : undefined
                         }
@@ -72,7 +72,7 @@ export default function FormSelector (
                                     layers      = { secondaryColumnBackground }
                                 />
                             </Col>
-                            <Col className = 'primary-column'>
+                            <Col className = {`primary-column ${ jumbotronMode === 'dark' ? 'bg-dark' : 'bg-light'}`}>
                                 {
                                     ( form.formDetails.formGeneral.formGeneralTitle || form.formDetails.formGeneral.formGeneralContent ) ?
                                         <div className = 'general-content'>
@@ -98,7 +98,7 @@ export default function FormSelector (
                                             src         = { iframeFormUrl } 
                                             style       = {{minHeight: '600px', minWidth: '100%', width: '1px'}}
                                             frameborder = '0' 
-                                            allowTransparency
+                                            allowtransparency
                                         />
                                     : undefined
                                 }

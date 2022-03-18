@@ -1,6 +1,8 @@
 .attachmentDetails {
     .contentMain {
         .download {
+            height: calc(100vh - 120px - 58px);
+            
             h6 {
                 display: flex;
                 align-items: center;

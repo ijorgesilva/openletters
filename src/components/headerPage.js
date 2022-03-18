@@ -11,7 +11,7 @@ export default function HeaderPage( { title, location, cover, description, artic
     return (
         <>
             <Helmet>
-                <html className = {`${ className ? className : '' } page-${current[1]}${ (current[2]) ? ' ' + current[2] : ''} ${ mode ? mode : 'light' }`} />
+                <html className = {`page-${current[1]}${ (current[2]) ? ' ' + current[2] : ''} ${ mode ? mode : 'light' } ${ className ? className : '' }`} />
                 {
                     ( metaTags?.noIndex ) ?
                         <meta name="robots" content="noindex" />

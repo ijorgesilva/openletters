@@ -1,14 +1,11 @@
-
-import React from 'react'
+import { faUserCircle } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'gatsby'
+import React from 'react'
+import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 
 import { useWebsiteConfiguration } from '../../../hooks/useWebsiteConfiguration'
-
-
 import './index.scss'
 
 export default function MenuAuth ( { mode } ) {
@@ -16,45 +13,47 @@ export default function MenuAuth ( { mode } ) {
     const { t } = useTranslation()
 
     const  settings = useWebsiteConfiguration().settingsAuthentication
-    const settingsAuthType = settings.settingsAuthenticationType?.split(":")[0]
+    const settingsAuthType = settings.settingsAuthenticationType?.split(':')[0]
 
     if( settings.settingsAuthenticationActive ) {
         switch( settingsAuthType ) {
-            case 'external':
+            case 'external':{
                 return (
-                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
-                        <a 
+                    <div className = {`menuAuth ${ mode ? mode : 'light' }`}>
+                        <Button 
                             href    = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalUrl }
-                            target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(":")[0] }
+                            target  = { settings.settingsAuthenticationTypeExternal.settingsAuthenticationTypeExternalTarget?.split(':')[0] }
                             title   = { t('global.authentication.sign-in') }
+                            variant = {`${ mode ? mode : 'light' }`}
                         >
                             <FontAwesomeIcon 
                                 icon={faUserCircle}
-                                size="lg" 
-                                className="loginIcon"
+                                size='lg' 
+                                className='loginIcon'
                             />
-                        </a>
+                        </Button>
                     </div>
                 )
-                break
-            case 'internal':
+            }
+            case 'internal':{
                 return (
-                    <div className = {`menuAuth ${ ( mode ) ? mode : 'light' }`}>
+                    <div className = {`menuAuth ${ mode ? mode : 'light' }`}>
                         <Link 
-                            to      = ""
+                            to      = ''
                             title   = { t('global.authentication.sign-in') }
                         >
                             <FontAwesomeIcon 
                                 icon={faUserCircle}
-                                size="lg" 
-                                className="loginIcon"
+                                size='lg' 
+                                className='loginIcon'
                             />
                         </Link>
                     </div>
                 )
-            default:
+            }
+            default:{
                 return <></>
-                break
+            }
         }
     }
     else return <></>

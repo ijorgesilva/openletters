@@ -43,8 +43,10 @@ export const useCampuses = ( campus ) => {
                                                     campusHomeTarget
                                                 }
                                             }
-                                            campusWatch {
-                                                campusWatchPage
+                                            campusPages {
+                                                campusWatch {
+                                                    pageActive
+                                                }
                                             }
                                         }
                                     }

@@ -5,8 +5,10 @@ import React from 'react'
 import './blurbVerticalSeries.scss'
 
 export default function BlurbVerticalSeries ( 
-    { title, className, link, iconImage, poster, background, logo, mode } 
-    ) {
+    { 
+        title, className, link, iconImage, poster, background, logo, mode 
+    } 
+) {
     
     return (
         
@@ -15,7 +17,7 @@ export default function BlurbVerticalSeries (
                     <div className={`card-img-container`}>
                         <Link to={link}>
                             {
-                                ( iconImage ) ?
+                                iconImage ?
                                     <div className="card-icon">
                                         <GatsbyImage 
                                             image={iconImage} 
@@ -29,17 +31,17 @@ export default function BlurbVerticalSeries (
     
                             <div className={`card-img-caption ${ ( poster ) ? 'poster' : 'background'}`} >
                                 {
-                                    ( poster ) ?
+                                    poster ?
                                         <GatsbyImage 
                                             image={poster} 
                                             className="card-img-top poster"
                                             alt=""
                                         />
                                     :
-                                        ( background ) ?
+                                        background ?
                                             <>
                                                 {
-                                                    ( logo ) ?
+                                                    logo ?
                                                         <div className="logo">
                                                             <GatsbyImage 
                                                                 image={logo} 

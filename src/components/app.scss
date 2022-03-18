@@ -50,8 +50,8 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
 
-@import "~include-media/dist/_include-media.scss";
-
+@import '~include-media/dist/_include-media.scss';
+@import '~@fortawesome/fontawesome-svg-core/styles';
 
 /* 
  * Bootstrap Rewrites
@@ -306,20 +306,20 @@
                 color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 font-weight: 100;
                 &.active {
-                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                font-weight: 600;
-                border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
-                border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    font-weight: 600;
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
                 }
                 &:hover {
-                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
-                border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-                border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-right: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    border-bottom: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    border-left: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
                 }
             }
         }
@@ -596,6 +596,16 @@
         }
     }
 
+    .leftColumn {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .rightColumn {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
     /*
      * Footer Placing
      * Align footer always to the bottom of the page
@@ -711,9 +721,7 @@
                 flex-direction: column;
                 justify-content: center;
                 height: 100%;
-                .content {
-                    margin-top: 2.5rem;
-                }
+                padding: 2rem 0px;
             }
         }
         /*
@@ -730,6 +738,77 @@
                     padding-top: 1rem;
                     padding-bottom: 1rem;
                 }
+            }
+        }
+    }
+
+    .pagination {
+        &.dark {
+            > li {
+                > a {
+                    background-color: hsla(var(--dark-h), var(--light-s), var(--dark-l), 0.1);
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                    border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+                    &:focus {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+                > span {
+                    &:focus {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                    &:hover {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                        border-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+            }
+            >.active {
+                >a {
+                    font-weight: bold;
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) !important;
+                    border: solid 1px hsla(var(--light-h), var(--light-s), var(--light-l), 1) !important;
+                    &:hover {
+                        background-color: #5A4181 !important;
+                        border: solid 1px #5A4181;
+                    }
+                }
+            }
+            >.disabled {
+                >a {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.5);
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1) !important;
+                    border: solid 1px hsla(var(--light-h), var(--light-s), var(--light-l), .1) !important;
+                }
+            }
+        }
+    }
+    
+    .stretched-link {
+        &.hide {
+            width: 0;
+            height: 0;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+            &:active,
+            &:focus,
+            &:active:focus {
+                border: 0;
+                box-shadow: unset;
             }
         }
     }
@@ -879,49 +958,83 @@ a {
     }
 }
 
-.h-cursor-pointer {
-    cursor: pointer;
+// Btn Icon Animation
+.btn {
+    &-iconed{
+        transition: .15s ease-in-out;
+        padding-left: 1.3rem;
+        padding-right: 1.5rem;
+        [class~=fa],
+        [class~=svg-inline--fa],
+        [class~=typcn]::before,
+        [class~=mdi]::before, 
+        [class~=icon]::before {
+            opacity: 0;
+            transform-origin: left right;// Icon to left: left right;
+            transform: translateX(0px) scale(1); // Icon to left: translateX(-10px) scale(1.25);
+            transition: .15s ease-out;
+        }
+        [class=spn] { /** Span Class **/
+            position: relative;
+            left:0px; // Icon to left: -9px
+            transform-origin: left right; // Icon to left: left right
+            transform: translateX(0px);// Icon to left: -9px
+            transition: .20s ease-in-out;
+        }
+        &:hover { /** -- Icons on Hover properties -- **/
+            [class~=fa], [class~=svg-inline--fa],
+            [class~=mdi]::before, [class~=icon]::before, [class~="typcn"]::before { /** -- Since Material, Iconic and Typicons use ::before -- **/
+                opacity: 1;
+                transform: translateX(20px) scale(1); // Icon to left: translateX(20px) scale(.75);
+            }
+            [class=spn] {/** -- Span on Hover properties -- **/   
+                left:0px; // transform: translateX(0);
+            }
+        }
+    }
 }
 
-.h-blur-body {
-    top:0;
-    position:absolute;
-    z-index: 6;
-    width:100%;
-    height:50px;
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: blur(10px);
-}
-
-ul.h-nobullets {
-    list-style-type: none;
-}
-
-.h-center-absolute {
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-}
-
+/* 
+ * Bootrsap 4.x responsive font size
+ */
 
 @include media("<desktop") {
 }
 
-@include media("<=tablet") {
-    .mobile-only {
-        display: block;
-    }
-    .hide-mobile {
-        display: none;
+@include media("<=tablet", "landscape") {
+    h5 {
+      font-size: 22px;
+      line-height: 22px;
     }
 }
 
-@include media("<=phone") {
+@include media("<=phone", "portrait") {    
+    h1 {
+        font-size: 12vw;
+        line-height: 12vw;
+    }
+    h2 {
+        font-size: 10vw;
+        line-height: 10vw;
+    }
+    h3 {
+        font-size: 8vw;
+        line-height: 8vw;
+    }
+    h4 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    h5 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    h6 {
+        font-size: 6vw;
+        line-height: 6vw;
+    }
+    html.watch {
 
+    }
+    
 }
-
-

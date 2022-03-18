@@ -5,9 +5,11 @@ import {
     faGetPocket,
     faWhatsapp
 } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faQrcode } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import QRCode from 'qrcode.react'
+import React, { useState } from 'react'
+import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { 
     FacebookShareButton, 
@@ -18,6 +20,8 @@ import {
     WhatsappShareButton
 } from 'react-share'
 
+import { useTheme } from '../../hooks/useTheme'
+
 export default function SocialNetwork ( 
     { 
         type,
@@ -27,13 +31,67 @@ export default function SocialNetwork (
         itemClass,
     } 
     ) {
-
+    const [show, setShow] = useState(false)
+    const theme = useTheme()
+    
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const { t } = useTranslation()
     const typeCaps = type.charAt(0).toUpperCase() + type.slice(1)
 
     switch ( type ) {
         
+        case 'qrcode':{
+
+            return (
+                <>
+                <a 
+                    className = {`user-select-none ${ itemClass ? itemClass : ''} ${ mode ? 'btn btn-'+mode : 'btn btn-light' }`}
+                    url       = { '#' }
+                    onClick   = { handleShow }
+                >
+                    <FontAwesomeIcon icon={faQrcode} size='lg' title={t('components.social.share-with') + ' ' + typeCaps} /> 
+                </a>
+                <Modal show={show} onHide={handleClose} centered 
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{t('components.social.share-with') + 'QR Code'}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style = {{ display: 'flex', justifyContent: 'center' }}>
+                        {
+                            params.sectionShareNetworksQrcodeDestination === 'current' && location ?
+                                <QRCode 
+                                    value = { location.href }
+                                    bgColor={ theme.colors.hex.light }
+                                    fgColor={ theme.colors.hex.dark }
+                                    size = {320}
+                                    imageSettings={{
+                                        src: theme.graphics.favicon,
+                                        x: null,
+                                        y: null,
+                                        height: 48,
+                                        width: 48,
+                                        excavate: true,
+                                    }}
+                                />
+                            :
+                                params.sectionShareNetworksQrcodeDestination === 'personalized' && params.sectionShareNetworksQrcodeUrl ?
+                                    <QRCode 
+                                        value = {params.sectionShareNetworksQrcodeUrl}
+                                        bgColor={ theme.colors.hex.light }
+                                        fgColor={ theme.colors.hex.dark }
+                                        size = {320}
+                                    />
+                                : undefined
+                        }
+                    </Modal.Body>
+                </Modal>
+                
+                </>
+            )
+        }
+
         case 'facebook':{
             return (
                 <FacebookShareButton 

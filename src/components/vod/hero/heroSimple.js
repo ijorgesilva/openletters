@@ -38,49 +38,49 @@ export default function HeroSimple(
 
                 <Container className='content' fluid>
                     {
-                        (iconSeries && iconSeriesLink) ?
+                        iconSeries && iconSeriesLink ?
                             <Link to={`${iconSeriesLink}`}>
-                                <div className='position-relative z-index-2 iconSeries mb-4'>
+                                <div className='iconSeries'>
                                     <GatsbyImage image={iconSeries} alt={iconSeriesTitle}/>
                                 </div>
                             </Link>
                         : 
-                            (iconSeriesTitle && iconSeriesLink) ?
+                            iconSeriesTitle && iconSeriesLink ?
                                 <Link to={`${iconSeriesLink}`}>
-                                    <div className='position-relative z-index-2 mb-1'>
+                                    <div className='titleSeries'>
                                         <h1 className='display-1'>{iconSeriesTitle}</h1>
                                     </div>
                                 </Link>
                             : undefined
                     }
                     
-                    <h1 className='position-relative z-index-2'>
+                    <h2 className='position-relative z-index-2'>
                         <Link className='' to={playUrl}>
                             {title}
                         </Link>
-                    </h1>
+                    </h2>
                     
                     {
-                        (description) ? <TextTruncate className='position-relative z-index-2' line={2} element='p' truncateText='…' text={description.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
+                        description ? <TextTruncate className='position-relative z-index-2' line={2} element='p' truncateText='…' text={description.replace(/<p>/, '').replace(/<\/p>/, '')} /> 
                         : <></>
                     }
 
                     <div className='buttons z-index-2'>
-                        <Link to={playUrl} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-lg`} >
+                        <Link to={playUrl} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-md`} >
                             <FontAwesomeIcon 
                                 icon={faPlay} 
-                                size='md'
-                                className='mr-2'
+                                size='sm'
+                                className='mr-1'
                             /> 
                             {playText}
                         </Link>
                         {
-                            (iconSeriesLink) ?
-                                <Link to={iconSeriesLink} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-lg`} >
+                            iconSeriesLink ?
+                                <Link to={iconSeriesLink} className={`btn btn-outline-${ mode === 'light' ? 'dark' : mode === 'dark' ? 'light' : mode } btn-md`} >
                                     <FontAwesomeIcon 
                                         icon={faInfo} 
-                                        size='md'
-                                        className='mr-2'
+                                        size='sm'
+                                        className='mr-1'
                                     />
                                     {seriesLinkText}
                                 </Link>
@@ -92,8 +92,8 @@ export default function HeroSimple(
                 <div className='z-index-1 heroBackground'>
                     <div className='z-index-2 heroBackgroundIcon'>
                         {
-                            (iconPlayFlag) ?
-                                (iconPlay) ?
+                            iconPlayFlag ?
+                                iconPlay ?
                                     
                                         <Link className='' to={playUrl}>
                                                 <GatsbyImage image={iconPlay} alt=''/>
@@ -113,7 +113,7 @@ export default function HeroSimple(
                     </div>
                     <div className='z-index-2 backgroundImage'>
                         {
-                            (backgroundImage) ?
+                            backgroundImage ?
                                 <div className='background' style={styleBackground}></div>
                             : 
                                 undefined

@@ -72,11 +72,11 @@ export default function SidebarFeedVod(
                 sortedItems.map( (obj, index) => (
                     <BlurbHorizontalVod 
                         key             = { index }
-                        className       = { ( obj.active ) ? 'active' : ''}
+                        className       = { obj.active ? 'active' : ''}
                         title           = { `${ ( count === true ) ? ( order === 'asc' ) ? '<span>' + (index + 1) + ' |</span> ' : ( order === 'desc' ) ? '<span>' + Math.abs( index - sortedItems.length ) + ' |</span> ' : '' : ''}  ${obj.title}` }
-                        featuredImage   = { ( obj.featuredImage?.node?.localFile ) ? obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
+                        featuredImage   = { obj.featuredImage?.node ? obj.featuredImage.node.localFile.childImageSharp.gatsbyImageData : undefined }
                         link            = { `${ campus ? '/' + campus : '' }/${config.watchMessageDetailsSlug}/${obj.slug}` }
-                        excerpt         = { ( obj.excerpt ) ? obj.excerpt : undefined }
+                        excerpt         = { obj.excerpt ? obj.excerpt : undefined }
                         mode            = { mode }
                     />
                 ))

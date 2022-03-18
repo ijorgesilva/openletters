@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { DateTime } from 'luxon'
 import React from 'react'
 import Helmet from "react-helmet"
 import urljoin from "url-join"
@@ -31,14 +31,15 @@ export default function SEO({ postNode, postPath, postSEO }){
         return imageURI;
     }
 
+    // TODO: Fix Publication date for WP Gatsby
     const getPublicationDate = () => {
         if (!postNode) return null;
   
         if (!postNode.frontmatter) return null;
   
         if (!postNode.frontmatter.date) return null;
-  
-        return moment(postNode.frontmatter.date, process.env.DATE_FROM_FORMAT).toDate();
+
+        return DateTime(postNode.frontmatter.date, process.env.DATE_FROM_FORMAT)
     }
 
     image = getImagePath(image)

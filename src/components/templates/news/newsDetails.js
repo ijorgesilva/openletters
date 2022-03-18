@@ -3,10 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
-import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
+import HeroDynamic from '../../hero/heroDynamic'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
 import TagSimple from '../../tag/tagSimple'
@@ -18,16 +19,16 @@ import './newsDetails.scss'
 export default function NewsDetails( { pageContext, location } ){
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
         
     const { title, excerpt, date, modified, featuredImage, content, terms, breadcrumbs } = pageContext
 
-    const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
-    const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
-    const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
+    const htmlDate = modified ? getDate(modified,2, config.dateLocale, 'yyyy-MM-dd' ) : getDate(date, 2, config.dateLocale, 'yyyy-MM-dd' )
+    const createdDate = getDate(date, 2, config.dateLocale, config.dateFormat )
+    const modifiedDate = getDate(modified, 2, config.dateLocale, config.dateFormat )
 
-    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+    const cover =   featuredImage?.node?.localFile?.localFile ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
@@ -39,13 +40,13 @@ export default function NewsDetails( { pageContext, location } ){
                 title       = { title + ' | ' + t('global.blog.title') }
                 location    = { location } 
                 cover       = { cover }
-                description = { ( excerpt ) ? excerpt : excerpt}
+                description = { excerpt ? excerpt : excerpt}
                 article     = { true }
                 mode        = { contentMode }
             />
             
             <Navigation
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
@@ -54,14 +55,14 @@ export default function NewsDetails( { pageContext, location } ){
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.newsPostDetailsSlug }
                 menuBrand   =   { 
-                    {
-                        'name': t('global.blog.title'),
-                        'link': '/' + breadcrumbs.campus + '/' + config.blogPostDetailsSlug,
-                    }
-                } 
+                                    {
+                                        'name': t('global.blog.title'),
+                                        'link': '/' + breadcrumbs.campus + '/' + config.blogPostDetailsSlug,
+                                    }
+                                } 
                 menu        =   { 
                                     [
                                         {
@@ -76,17 +77,22 @@ export default function NewsDetails( { pageContext, location } ){
 
             <article className='contentMain mb-5'>
 
-                <HeroPost 
+                <HeroDynamic
+                    id              = { 'hero' }
+                    className       = { 'z-index-0' }
+                    titleClassName  = { 'display-4' }
                     mode            = { contentMode }
+                    width           = { 'fullwidth' }
                     title           = { title }
+                    size            = { 'md' }
                     backgroundPhoto =   {
-                                            ( featuredImage ) ? 
+                                            featuredImage ? 
                                                 featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                             : 
                                                 undefined
                                         }
-                    className       = 'z-index-0'
-                    size            = 'sm'
+                    location        = { location }
+                    overlay         = { true }
                 />
 
                 <ToolbarDetails 
@@ -112,13 +118,13 @@ export default function NewsDetails( { pageContext, location } ){
                                     undefined
                             }
                             {
-                                ( config.blogShowDates ) ?
+                                config.blogShowDates ?
                                     <div className='createdDate user-select-none'>
                                         { 
-                                            (modifiedDate) ? 
-                                                <time dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
+                                            modifiedDate ? 
+                                                <time className = 'text-muted' dateTime={htmlDate}> {t('global.modified-on')} {modifiedDate} </time> 
                                             : 
-                                                <time dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
+                                                <time className = 'text-muted' dateTime={htmlDate}> {t('global.created-on')} {createdDate} </time>
                                         }
                                     </div>
                                 :
@@ -134,7 +140,7 @@ export default function NewsDetails( { pageContext, location } ){
 
             <FooterSimpleText 
                 campus  = { breadcrumbs.campus }
-                mode    = { contentMode }
+                mode    = { theme.styles.footer }
             />
             
         </>

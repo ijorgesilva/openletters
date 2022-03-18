@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../../data/SiteConfig'
 import SectionFeedCarousel from '../../../components/vod/feed/sectionFeedCarousel'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
@@ -21,21 +22,19 @@ export default function WatchPage( { pageContext, data, location } ) {
     const { t } = useTranslation()
 
     let hero = data.hero?.nodes[0]
-    let backgroundImage =   ( hero?.featuredImage?.node?.localFile?.childImageSharp ) ? 
+    let backgroundImage =   hero?.featuredImage?.node?.localFile?.childImageSharp ? 
                                 hero?.featuredImage.node.localFile.childImageSharp.gatsbyImageData
                             : 
-                                ( hero?.videoDetails?.videoSeries?.seriesGraphics?.background ) ? 
+                                hero?.videoDetails?.videoSeries?.seriesGraphics?.background ? 
                                     hero?.videoDetails.videoSeries.seriesGraphics.background.localFile.childImageSharp.gatsbyImageData
                                 : 
                                     undefined
 
-    const sections =    ( campusDetails.campusWatch.campusWatchSections?.length > 0 ) ? 
-                            campusDetails.campusWatch.campusWatchSections 
+    const sections =    campusDetails.campusPages.campusWatch.pageSections?.length > 0 ? 
+                            campusDetails.campusPages.campusWatch.pageSections 
                         : 
                             undefined
-    // TODO: Force mode on page with mode override? Is that even needed?
-    // TODO: Add secondary mode for content contentMode
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'dark'
         
     return (
@@ -54,7 +53,7 @@ export default function WatchPage( { pageContext, data, location } ) {
                 location        = { location }
                 campus          = { breadcrumbs.campus }
                 searchIndices   = { useGlobalIndeces() }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 menuGlobal
                 menuLocal
             />
@@ -63,17 +62,17 @@ export default function WatchPage( { pageContext, data, location } ) {
                 id              = 'latest'
                 className       = 'z-index-1'
                 mode            = { contentMode }
-                iconSeries       =   { ( hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ) ? 
+                iconSeries       =   { hero.videoDetails?.videoSeries?.seriesGraphics?.logo?.localFile ? 
                                         hero.videoDetails.videoSeries.seriesGraphics.logo.localFile.childImageSharp.gatsbyImageData 
                                     : 
                                         undefined 
                                     }
-                iconSeriesTitle  =   { ( hero.videoDetails?.videoSeries?.title ) ? 
+                iconSeriesTitle  =   { hero.videoDetails?.videoSeries?.title ? 
                                         hero.videoDetails.videoSeries.title 
                                     : 
                                         undefined 
                                     }
-                iconSeriesLink   =   { ( hero.videoDetails?.videoSeries?.slug ) ? 
+                iconSeriesLink   =   { hero.videoDetails?.videoSeries?.slug ? 
                                         `/${slug}/${config.watchSeriesDetailsSlug}/`+ hero.videoDetails.videoSeries.slug 
                                     : 
                                         undefined 
@@ -82,8 +81,8 @@ export default function WatchPage( { pageContext, data, location } ) {
                 description     = { getHeroDescription(hero) }
                 playText        = { t('global.watch.watch-now') }
                 seriesLinkText   = { t('global.watch.more-info') }
-                playUrl         = { (hero.slug) ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
-                seriesUrl       = { (hero.videoDetails.videoSeries) ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
+                playUrl         = { hero.slug ? `/${slug}/${config.watchMessageDetailsSlug}/${hero.slug}` : undefined }
+                seriesUrl       = { hero.videoDetails.videoSeries ? `/${slug}/${config.watchSeriesDetailsSlug}/${hero.videoDetails.videoSeries.slug}` : undefined }
                 backgroundImage = { backgroundImage }
             />
 
@@ -93,9 +92,13 @@ export default function WatchPage( { pageContext, data, location } ) {
                         className       = 'z-index-2' 
                         id              = 'recent'
                         title           = { t('global.watch.section-latest-title') }
+                        titleUrl        = { `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}` }
+                        titleUrlType    = {'internal'}
+                        titleUrlTarget  = { '_self'}
                         items           = { data.latest.nodes }
                         mode            = { contentMode }
                         campus          = { slug }
+                        size            = {'sm'}
                         configLayout    =   {{
                                                 excerpt: false,
                                                 itemsVisible: 5,
@@ -106,7 +109,7 @@ export default function WatchPage( { pageContext, data, location } ) {
             }
             
             {
-                ( sections ) ?
+                sections ?
                     sections.map( ( section, index ) => (
                         <RenderSection 
                             key     = { index }
@@ -120,8 +123,9 @@ export default function WatchPage( { pageContext, data, location } ) {
             }
 
             <FooterSimpleText 
-                campus = { breadcrumbs.campus } 
-                mode   = { contentMode }
+                campus = { breadcrumbs.campus }
+                mode = { theme.styles.footer }
+
             />
             
         </>

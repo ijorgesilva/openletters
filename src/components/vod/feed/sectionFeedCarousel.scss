@@ -6,6 +6,16 @@
         background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         .title {
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            > a {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+                &:hover {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    &[class~=fa], 
+                    &[class~=svg-inline--fa] {
+                        color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
+                }
+            }
         }
         .description {
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.9);
@@ -27,7 +37,17 @@
     &.dark {
         background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         .title {
-            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.8);
+            > a {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.8);
+                &:hover {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    &[class~=fa], 
+                    &[class~=svg-inline--fa] {
+                        color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                    }
+                }
+            }
         }
         .description {
             color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.9);
@@ -49,6 +69,21 @@
         font-weight: 600;
         font-size: 1.2em;
         margin-bottom: 15px;
+        > a {
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+            padding-left: 0;
+        }
+    }
+    .description {
+        opacity: 0.3;
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: 1px;
     }
 
     .react-multiple-carousel__arrow {
@@ -71,12 +106,6 @@
     }
     .react-multiple-carousel__arrow--left {
         left: 0px;
-    }
-    .description {
-        opacity: 0.3;
-        font-size: 1.2rem;
-        font-weight: 400;
-        letter-spacing: 1px;
     }
 
 }

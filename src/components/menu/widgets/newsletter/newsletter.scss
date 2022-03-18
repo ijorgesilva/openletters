@@ -1,0 +1,66 @@
+.widgetMailchimp {
+
+    &.light {
+        h3 {
+            color: hsla(var(--dark-h),var(--dark-s),var(--dark-l),1);
+        }
+        p {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+        }
+        .mailchimp{
+            a {
+                color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.7);
+                &:hover {
+                    color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                }
+            }
+        }
+        > button {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            &:hover,
+            &.button-primary:hover {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            &[aria-expanded="true"] {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.03);
+            }
+        }
+    }
+    &.dark {
+        h3 {
+            color: hsla(var(--light-h),var(--light-s),var(--light-l),1);
+        }
+        p {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+        }
+        .mailchimp{
+            a {
+                color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.7);
+                &:hover {
+                    color: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1);
+                }
+            }
+        }
+        > button {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            &:hover,
+            &.button-primary:hover {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            }
+            &[aria-expanded="true"] {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            }
+        }
+    }
+
+    .mailchimp{
+        padding: .5rem 2rem;
+        .form-group{
+            margin-bottom: 0px;
+        }
+    }
+
+}

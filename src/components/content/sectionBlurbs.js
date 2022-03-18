@@ -30,6 +30,12 @@ export default function SectionBlurbs (
         border,
         borderColor,
         itemGrow,
+        // Visibility
+        hideImage,
+        hideTitle,
+        hideSubtitle,
+        hideExcerpt,
+        hideButton,
     } 
     ) {
 
@@ -52,13 +58,13 @@ export default function SectionBlurbs (
                     ( title || content ) ?
                         <div className='general'>
                             {
-                                ( title ) ?
+                                title ?
                                     <h2 className='title' dangerouslySetInnerHTML={{__html: title}}></h2>
                                 :
                                     undefined
                             }
                             { 
-                                ( content ) ?
+                                content ?
                                     <div className='content' dangerouslySetInnerHTML={{__html: content}}></div>
                                 :
                                     undefined
@@ -68,9 +74,9 @@ export default function SectionBlurbs (
                         undefined
                 }
 
-                <div className="items" style={flexConfig}>
+                <div className='items' style={flexConfig}>
                     {
-                        ( items?.list.length > 0 ) ?
+                        ( items?.list?.length > 0 ) ?
                             items.list.map( (_, index) => (
                                 <BlurbVertical
                                     key                 = { index }
@@ -78,7 +84,6 @@ export default function SectionBlurbs (
                                     title               = { _.title }
                                     subtitle            = { _.subtitle }
                                     content             = { _.excerpt }
-                                    removeDefaultCss    = { _.itemCssRemoveDefault }
                                     tags                = { _.tags }
                                     
                                     itemType            = { itemType }
@@ -91,13 +96,20 @@ export default function SectionBlurbs (
                                     truncate            = { truncate }
                                     truncateLines       = { truncateLines }
                                     stretchedlink       = { stretchedlink }
-                                    className           = { `${_.cssClass} ${ itemClass ? itemClass : '' }` }
+                                    className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
+                                    removeDefaultCss    = { _.itemCssRemoveDefault }
                                     aspectRatio         = { aspectRatio }
                                     imageFit            = { imageFit }
                                     imagePosition       = { imagePosition }
                                     border              = { border }
                                     borderColor         = { borderColor }
                                     itemGrow            = { itemGrow }
+                                    // Visibility
+                                    hideImage           = { hideImage }
+                                    hideTitle           = { hideTitle }
+                                    hideSubtitle        = { hideSubtitle }
+                                    hideExcerpt         = { hideExcerpt }
+                                    hideButton          = { hideButton }
                                 />
                             ))
                         :

@@ -18,6 +18,11 @@ export const useTheme = () => {
                                             publicURL
                                         }
                                     }
+                                    settingsStylesGraphicsFavicon{
+                                        localFile {
+                                            publicURL
+                                        }
+                                    }
                                 }
 
                                 settingsStylesColors {
@@ -77,13 +82,18 @@ export const useTheme = () => {
         buttons: {},
         font: {},
         cssVariables: '',
+        styles: {
+            header: siteStyles.settingsStylesFooter.settingsStylesFooterColor,
+            footer: siteStyles.settingsStylesHeader.settingsStylesHeaderColor,
+        }
     }
 
     /* 
     * Graphics
     */
    theme.graphics = {
-       logo: siteStyles.settingsStylesGraphics.settingsStylesGraphicsLogo.localFile.publicURL
+       logo: siteStyles.settingsStylesGraphics.settingsStylesGraphicsLogo?.localFile.publicURL,
+       favicon: siteStyles.settingsStylesGraphics.settingsStylesGraphicsFavicon?.localFile.publicURL
    }
 
     /* 
@@ -91,23 +101,43 @@ export const useTheme = () => {
     */
     theme.colors = {
     
-            'primary': ( siteStyles.settingsStylesColors.settingsStylesColorsPrimary ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsPrimary.replace('#','')) : [216, 99, 52],
-            'secondary': ( siteStyles.settingsStylesColors.settingsStylesColorsSecondary ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSecondary.replace('#','')) : [208, 7, 46],
+            'primary': siteStyles.settingsStylesColors.settingsStylesColorsPrimary ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsPrimary.replace('#','')) : [216, 99, 52],
+            'secondary': siteStyles.settingsStylesColors.settingsStylesColorsSecondary ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSecondary.replace('#','')) : [208, 7, 46],
 
-            'third':  ( siteStyles.settingsStylesColors.settingsStylesColorsThird ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsThird.replace('#','')) : [0, 100, 100],
-            'fourth':  ( siteStyles.settingsStylesColors.settingsStylesColorsFourth ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsFourth.replace('#','')) : [0, 100, 100],
-            'fifth':  ( siteStyles.settingsStylesColors.settingsStylesColorsFifth ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsFifth.replace('#','')) : [0, 100, 100],
-            'sixth':  ( siteStyles.settingsStylesColors.settingsStylesColorsSixth ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSixth.replace('#','')) : [0, 100, 100],
+            'third':  siteStyles.settingsStylesColors.settingsStylesColorsThird ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsThird.replace('#','')) : [0, 100, 100],
+            'fourth':  siteStyles.settingsStylesColors.settingsStylesColorsFourth ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsFourth.replace('#','')) : [0, 100, 100],
+            'fifth':  siteStyles.settingsStylesColors.settingsStylesColorsFifth ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsFifth.replace('#','')) : [0, 100, 100],
+            'sixth':  siteStyles.settingsStylesColors.settingsStylesColorsSixth ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSixth.replace('#','')) : [0, 100, 100],
 
-            'bodyBg': ( siteStyles.settingsStylesColors.settingsStylesColorsBackground ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsBackground.replace('#','')) : [0, 100, 100],
+            'bodyBg': siteStyles.settingsStylesColors.settingsStylesColorsBackground ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsBackground.replace('#','')) : [0, 100, 100],
 
-            'light': ( siteStyles.settingsStylesColors.settingsStylesColorsLight ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsLight.replace('#','')) : [210, 17, 98],
-            'dark': ( siteStyles.settingsStylesColors.settingsStylesColorsDark ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsDark.replace('#','')) : [210, 10, 23],
+            'light': siteStyles.settingsStylesColors.settingsStylesColorsLight ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsLight.replace('#','')) : [210, 17, 98],
+            'dark': siteStyles.settingsStylesColors.settingsStylesColorsDark ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsDark.replace('#','')) : [210, 10, 23],
         
-            'success': ( siteStyles.settingsStylesColors.settingsStylesColorsSuccess ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSuccess.replace('#','')) : [134, 61, 41],
-            'info': ( siteStyles.settingsStylesColors.settingsStylesColorsInfo ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsInfo.replace('#','')) : [188, 78, 41],
-            'warning': ( siteStyles.settingsStylesColors.settingsStylesColorsWarning ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsWarning.replace('#','')) : [45, 100, 51],
-            'danger': ( siteStyles.settingsStylesColors.settingsStylesColorsDanger ) ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsDanger.replace('#','')) : [354, 70, 54],
+            'success': siteStyles.settingsStylesColors.settingsStylesColorsSuccess ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsSuccess.replace('#','')) : [134, 61, 41],
+            'info': siteStyles.settingsStylesColors.settingsStylesColorsInfo ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsInfo.replace('#','')) : [188, 78, 41],
+            'warning': siteStyles.settingsStylesColors.settingsStylesColorsWarning ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsWarning.replace('#','')) : [45, 100, 51],
+            'danger': siteStyles.settingsStylesColors.settingsStylesColorsDanger ? convert.hex.hsl(siteStyles.settingsStylesColors.settingsStylesColorsDanger.replace('#','')) : [354, 70, 54],
+
+            'hex': {
+                'primary': siteStyles.settingsStylesColors.settingsStylesColorsPrimary ? siteStyles.settingsStylesColors.settingsStylesColorsPrimary : '#0b6cfe',
+                'secondary': siteStyles.settingsStylesColors.settingsStylesColorsSecondary ? siteStyles.settingsStylesColors.settingsStylesColorsSecondary : '#6d767e',
+    
+                'third':  siteStyles.settingsStylesColors.settingsStylesColorsThird ? siteStyles.settingsStylesColors.settingsStylesColorsThird : '#ffffff',
+                'fourth':  siteStyles.settingsStylesColors.settingsStylesColorsFourth ? siteStyles.settingsStylesColors.settingsStylesColorsFourth : '#ffffff',
+                'fifth':  siteStyles.settingsStylesColors.settingsStylesColorsFifth ? siteStyles.settingsStylesColors.settingsStylesColorsFifth : '#ffffff',
+                'sixth':  siteStyles.settingsStylesColors.settingsStylesColorsSixth ? siteStyles.settingsStylesColors.settingsStylesColorsSixth : '#ffffff',
+    
+                'bodyBg': siteStyles.settingsStylesColors.settingsStylesColorsBackground ? siteStyles.settingsStylesColors.settingsStylesColorsBackground : '#ffffff',
+    
+                'light': siteStyles.settingsStylesColors.settingsStylesColorsLight ? siteStyles.settingsStylesColors.settingsStylesColorsLight : '#f9fafb',
+                'dark': siteStyles.settingsStylesColors.settingsStylesColorsDark ? siteStyles.settingsStylesColors.settingsStylesColorsDark : '#353b41',
+            
+                'success': siteStyles.settingsStylesColors.settingsStylesColorsSuccess ? siteStyles.settingsStylesColors.settingsStylesColorsSuccess : '#29a847',
+                'info': siteStyles.settingsStylesColors.settingsStylesColorsInfo ? siteStyles.settingsStylesColors.settingsStylesColorsInfo : '#17a4ba',
+                'warning': siteStyles.settingsStylesColors.settingsStylesColorsWarning ? siteStyles.settingsStylesColors.settingsStylesColorsWarning : '#ffc105',
+                'danger': siteStyles.settingsStylesColors.settingsStylesColorsDanger ? siteStyles.settingsStylesColors.settingsStylesColorsDanger : '#dc3848',
+            }
             
     }
 

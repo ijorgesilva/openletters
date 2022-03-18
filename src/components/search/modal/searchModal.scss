@@ -1,0 +1,134 @@
+@import "~include-media/dist/_include-media.scss";
+
+.searchModal {
+    
+    &.light {
+        // Search
+        .searchResults {
+            background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            border: 1px solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        }
+        .btn {
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+            &:hover {
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+            }
+        }
+    }
+
+    &.dark {
+        // Search
+        .searchResults {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            border: 1px solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
+        }
+        .btn {
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+            &:hover {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.1);
+            }
+        }
+    }
+    
+    height: 100%;
+    .btn {
+        border: unset;
+        border-radius: unset;
+        height: 100%;
+        background-color: transparent;
+    }
+
+    .searchIcon {
+        font-size: 19px;
+    }
+
+}
+
+.searchResults {
+    .indices,
+    .results {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/*
+ * Search Results Algolia
+ */
+.modal-dialog {
+    width: 90vw;
+    height: 90vh;
+    max-width: 90vw;
+    margin: 1rem auto;
+    .nav-item {
+        .nav-link {
+            padding: 0.25rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            .badge{
+                font-size: 0.8rem;
+                font-weight: bold;
+                line-height: 1rem;
+            }
+        }
+    }
+    .modal-content {
+        height: 100%;
+        .modal-body {
+            overflow-y: auto;
+        }
+    }
+    .searchResults {
+        margin-top: 0.5em;
+        z-index: 2;
+        right: 0;
+        border-radius: var(--border-radius);
+        -webkit-overflow-scrolling: touch;
+        .hits {
+            ul {
+                padding-left: 0;
+                list-style: none;
+                li {
+                    padding-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@include media("<desktop") {
+    .searchModal {
+        &.light {
+            .btn {
+                background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                &:hover {
+                    background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
+            }
+        }
+        &.dark {
+            .btn {
+                background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                &:hover {
+                    background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
+            }
+        }
+        .modal-dialog {
+            height: 95vh;
+            max-width: 95vw;
+            margin-top: 1rem;
+        }
+    }
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone", "portrait") {
+}

@@ -3,10 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../../data/SiteConfig'
-import HeroPost from '../../../components/hero/heroPost'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
+import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
 import HeaderPage from '../../headerPage'
+import HeroDynamic from '../../hero/heroDynamic'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
 import TagSimple from '../../tag/tagSimple'
@@ -20,14 +21,14 @@ export default function PostDetails( { location, pageContext } ){
     const { title, excerpt, date, modified, featuredImage, content, terms, postDetails, breadcrumbs } = pageContext
 
     const { t } = useTranslation()
-    const mode          = 'dark'
+    const theme         = useTheme()
     const contentMode   = 'light'
     
-    const htmlDate = (modified) ? getDate(modified,2,'us','yyyy-MM-dd' ) : getDate(date,2,'us','yyyy-MM-dd' )
-    const createdDate = getDate(date,2,'us','LLLL d, yyyy' )
-    const modifiedDate = getDate(modified,2,'us','LLLL d, yyyy' )
+    const htmlDate = modified ? getDate(modified,2, config.dateLocale, 'yyyy-MM-dd' ) : getDate(date, 2, config.dateLocale, 'yyyy-MM-dd' )
+    const createdDate = getDate(date, 2, config.dateLocale, config.dateFormat )
+    const modifiedDate = getDate(modified, 2, config.dateLocale, config.dateFormat )
 
-    const cover = ( featuredImage?.node?.localFile?.localFile ) ?
+    const cover =   featuredImage?.node?.localFile?.localFile ?
                         featuredImage.node.localFile.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     :
                         undefined
@@ -40,7 +41,7 @@ export default function PostDetails( { location, pageContext } ){
                 location    = { location } 
                 mode        = { contentMode }
                 cover       = { cover }
-                description = { ( excerpt ) ? excerpt : excerpt}
+                description = { excerpt ? excerpt : excerpt}
                 article     = { true }
                 metaTags    =   {{
                                     noIndex: ( typeof postDetails.postHide?.postHideSearchEngines === 'undefined' ) ? 
@@ -51,14 +52,14 @@ export default function PostDetails( { location, pageContext } ){
             <Navigation
                 location        = { location }
                 campus          = { breadcrumbs.campus }
-                mode            = { mode }
+                mode            = { theme.styles.header }
                 searchIndices   = { useGlobalIndeces() }
                 menuGlobal
                 menuLocal
             />
             
             <MenuPage
-                mode        = { mode }
+                mode        = { theme.styles.header }
                 close       = { '/' + breadcrumbs.campus + '/' +  config.blogPostDetailsSlug }
                 menuBrand   =   { 
                                     {
@@ -79,17 +80,22 @@ export default function PostDetails( { location, pageContext } ){
             />
 
             <article className='contentMain mb-5'>
-                <HeroPost 
+                <HeroDynamic
+                    id              = { 'hero' }
+                    className       = { 'z-index-0' }
+                    titleClassName  = { 'display-4' }
                     mode            = { contentMode }
+                    width           = { 'fullwidth' }
                     title           = { title }
+                    size            = { 'md' }
                     backgroundPhoto =   {
-                                            ( featuredImage?.node?.localFile ) ? 
+                                            featuredImage?.node ? 
                                                 featuredImage.node.localFile.childImageSharp.gatsbyImageData
                                             : 
                                                 undefined
                                         }
-                    className       = 'z-index-0'
-                    size            = 'sm'
+                    location        = { location }
+                    overlay         = { true }
                 />
                 
                 <ToolbarDetails 
@@ -116,7 +122,7 @@ export default function PostDetails( { location, pageContext } ){
                                     undefined
                             }
                             {
-                                ( config.blogShowDates ) ?
+                                config.blogShowDates ?
                                     <div className='createdDate user-select-none'>
                                         { 
                                             (modifiedDate) ? 
@@ -130,7 +136,7 @@ export default function PostDetails( { location, pageContext } ){
                             }
                             <div className='authors'>
                                 {   
-                                    (postDetails.postAuthor) ?
+                                    postDetails.postAuthor ?
                                         postDetails.postAuthor.map( (author, index) => (
                                                 <div key = { index } className = 'author'>
                                                     {
@@ -156,7 +162,7 @@ export default function PostDetails( { location, pageContext } ){
 
             <FooterSimpleText 
                 campus = { breadcrumbs.campus } 
-                mode   = { contentMode }
+                mode   = { theme.styles.footer }
             />
             
         </>

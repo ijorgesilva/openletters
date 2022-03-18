@@ -94,10 +94,10 @@ export default function HeroSeries (
                                         }}
                                     />
                                 :
-                                    (featuredVideo?.featuredImage?.node?.localFile) ?
+                                    featuredVideo?.featuredImage?.node ?
                                         <GatsbyImage 
                                             className='noTrailer' 
-                                            image={featuredVideo.featuredImage.node.localFile.childImageSharp.gatsbyImageData}
+                                            image={featuredVideo.featuredImage?.node.localFile.childImageSharp.gatsbyImageData}
                                             layout='fullWidth'
                                             objectFit='cover'
                                             objectPosition='50% 50%'

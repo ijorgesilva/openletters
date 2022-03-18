@@ -25,7 +25,7 @@ class ContextProviderComponent extends React.Component {
   setData(newData) {
     this.setState(state => ({
       data: {
-        ...state.data,
+        ...state?.data,
         ...newData,
       },
     }))

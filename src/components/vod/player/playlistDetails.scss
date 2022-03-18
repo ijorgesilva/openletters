@@ -5,7 +5,7 @@
     position: relative;
 
     &.light {
-        border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+        border-top: var(--border-width, 1px) solid hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.2);
         .container,
         .container-fluid {
             .player {
@@ -26,7 +26,7 @@
     }
 
     &.dark {
-        border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+        border-top: var(--border-width, 1px) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.2);
         .container,
         .container-fluid {
             .player {
@@ -47,12 +47,12 @@
     }
 
     .player {
-      display: flex;
-      justify-content: center;
-      min-height: 200px;
-      .player-wrapper{
-          width: 100%;
-      }
+        display: flex;
+        justify-content: center;
+        min-height: 200px;
+        .player-wrapper{
+            width: 100%;
+        }
     }
 
     .container,
@@ -64,7 +64,7 @@
 
         &.playlist-grid {
             display: grid;
-            grid-template-columns: 1fr 0.4fr;
+            grid-template-columns: 1fr 0.5fr;
             grid-template-rows: auto;
             
         }
@@ -148,12 +148,32 @@
                     height: 220px;
                 }
             }
+        }
+    }
 
+}
+
+/*
+ * General Breakpoints
+ */
+@include media("<desktop") {
+    .playlist {
+        .sidebarFeedVod {
+            display: none;
+        }
+        .modalPlaylist {
+            display: block;
         }
     }
 }
 
-@include media("<=phone") {
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+}
+
+@include media("<=phone", "portrait") {
     .playlistDetails {
         padding: 0px !important;
         .container,

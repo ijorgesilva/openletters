@@ -1,6 +1,5 @@
 @import "~include-media/dist/_include-media.scss";
 
-
 /* 
  * React-player 
  */
@@ -28,7 +27,6 @@
 /* 
 REFACTOR 
 */
-
 
 .h-background-black {
   background-color: rgba(var(--bs-dark),1) !important;
@@ -568,9 +566,9 @@ figcaption {
   &.active {
     .page-link {
       z-index: 3;
-      color: #fff;
-      background-color: var(--color-one);
-      border-color: var(--color-one);
+      color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+      background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+      border-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
     }
   }
 
@@ -585,7 +583,7 @@ figcaption {
     border: 1px solid #dee2e6;
     &:hover {
       z-index: 2;
-      color: var(--color-one-dark-shade-two);
+      color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
       text-decoration: none;
       background-color: #e9ecef;
       border-color: #dee2e6;

@@ -3,13 +3,13 @@
     &.light {
         background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         .title {
-            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.3);
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.8);
         }
     }
     &.dark {
         background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         .title {
-            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.3);
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.8);
         }
     }
     .title {
