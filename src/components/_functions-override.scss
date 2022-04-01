@@ -210,7 +210,7 @@
     $c: to-hsl($color);
     $l: map-get($c, l);
 
-    $th: $yiq-contrasted-threshold / 2.56; // convert hex to dec
+    $th: calc($yiq-contrasted-threshold / 2.56); // convert hex to dec
     $lightness: calc(-100 * calc(#{$l} - #{$th * 1%}));
 
     // ignoring hue and saturation, just a light or dark gray

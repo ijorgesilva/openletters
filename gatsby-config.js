@@ -52,10 +52,7 @@ module.exports = {
         */
         "gatsby-plugin-react-helmet", 
         {
-          resolve: `gatsby-plugin-sass`,
-          options: {
-            implementation: require("node-sass"),
-          },
+          resolve: `gatsby-plugin-sass`
         },
         {
           resolve: `gatsby-plugin-layout`,
