@@ -35,7 +35,7 @@ export default function SectionForm (
         return (
             <section id = {id} className = {`sectionForm ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
 
-                <Container fluid = { containerWidth === 'container' ? false : true }>
+                <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
                         ( title || content ) ?
                             <div className='general'>

@@ -28,7 +28,7 @@ export default function SectionTextPhoto(
     return (
 
         <section className={`sectionTextPhoto ${ size ? size : 'md'} ${ mode ? mode : 'light'} ${ className ? className : ''}`} id={id}>
-            <Container fluid = { width === 'container' ? false : true } className='pl-0 pr-0'>
+            <Container fluid = { width === 'container' ? undefined : true } className='pl-0 pr-0'>
                 <Row>
                     <Col xs={12} md={6} lg={6} className='content'>
                         <h4 className='subtitle user-select-none z-index-2 text-break'>
@@ -73,7 +73,7 @@ export default function SectionTextPhoto(
                     <Col xs={12} md={6} lg={6}>
                         {
                             (photo) ?
-                                <GatsbyImage image={photo} className='photo'/>
+                                <GatsbyImage image={photo} className='photo' alt=''/>
                             :
                                 <div className='photo'></div>
                         }

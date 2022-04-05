@@ -58,7 +58,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
         result.data.campuses.nodes.forEach( campus => {
             /*  Watch Main Page*/
             if( config.cpt.createWatch ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) { // Global flag: Turned on/off on website settings
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) { // Global flag: Turned on/off on website settings
                     if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
                         createWatch = true
                         // It creates Main Watch Page per Campus at /campus/watch
@@ -103,7 +103,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Blog Main Page*/
             if( config.cpt.createBlog ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusBlog.pageActive === true ) {
                         createBlog = true
                         actions.createPage({
@@ -129,7 +129,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* News Main Page*/
             if( config.cpt.createPages ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusNews.pageActive === true ) {
                         createNews = true
                         actions.createPage({
@@ -155,7 +155,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
             
             /* Events Main Page */
             if( config.cpt.createEvents ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
                     if( campus.campusDetails.campusPages.campusEvents.pageActive === true ) {
                         createEvents = true
                         actions.createPage({
@@ -181,7 +181,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Ministry Main Page and Sub-pages */
             if( config.cpt.createMinistries ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
                     if( campus.campusDetails.campusPages.campusMinistry.pageActive === true ) {
                         createMinistries = true
                         actions.createPage({
@@ -207,7 +207,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Courses */
             if( config.cpt.createCourses ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
                     if( campus.campusDetails.campusPages.campusCourses.pageActive === true ) {
                         createCourses = true
                         actions.createPage({
@@ -233,7 +233,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Volunteering */
             if( config.cpt.createVolunteering ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
                     if( campus.campusDetails.campusPages.campusVolunteering.pageActive === true ) {
                         createVolunteering = true
                         actions.createPage({
@@ -259,7 +259,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Groups */
             if( config.cpt.createGroups ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
                     if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
                         createGroups = true
                         actions.createPage({
@@ -285,7 +285,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
 
             /* Group Types */
             if( config.cpt.createGroups ) {
-                if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+                if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
                     if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
                         createGroups = true
                         actions.createPage({
@@ -320,7 +320,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 1. Video Detail Pages creation 
      *******************/
     if( config.cpt.createWatch ) {
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) {
             if ( createWatch && result.data.videos?.nodes?.length > 0 ) {
                 result.data.videos.nodes.forEach( video => {
                     if( video.videoDetails.videoCampus?.length > 0 ) {
@@ -425,7 +425,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     /*******************
      * 3. Blog Post Pages creation 
      *******************/
-    if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+    if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
         if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
             if ( result.data.posts?.nodes?.length > 0 ){
                 result.data.posts.nodes.forEach( post => {
@@ -461,7 +461,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 4. News Pages creation 
      *******************/
     if( config.cpt.createNews ) {
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
             if ( createNews && result.data.news?.nodes?.length > 0 ) {
                 if ( result.data.news?.nodes?.length > 0 ) {
                     result.data.news.nodes.forEach( news => {
@@ -498,7 +498,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 5. Events Pages creation 
      *******************/
     if( config.cpt.createEvents ) {
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
             if ( createEvents && result.data.events?.nodes?.length > 0 ) {
                 if ( result.data.events?.nodes?.length > 0 ) {
                     result.data.events.nodes.forEach( event => {
@@ -535,7 +535,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      *******************/
     if( config.cpt.createMinistries ) {
         let customPageSlug
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
             if ( createMinistries && result.data.ministries?.nodes?.length > 0 ) {
                 if ( result.data.ministries?.nodes?.length > 0 ) {
                     result.data.ministries.nodes.forEach( _ => {
@@ -758,7 +758,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 7. Course Pages creation 
      *******************/
     if( config.cpt.createCourses ) {
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
             if ( createCourses && result.data.courses?.nodes?.length > 0 ) {
                 if ( result.data.courses?.nodes?.length > 0 ) {
                     result.data.courses.nodes.forEach( _ => {
@@ -797,7 +797,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 8. Group & Group Types Pages creation 
      *******************/
     // if( config.cpt.createGroups ) {
-    //  if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
+    //  if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
     //  }
     // }
     
@@ -805,7 +805,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      * 9. Volunteer Pages creation 
      *******************/
     if( config.cpt.createVolunteering ) {
-        if ( result.data.wp.websiteSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
+        if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
             if ( createVolunteering && result.data.opportunities?.nodes?.length > 0 ) {
                 if ( result.data.opportunities?.nodes?.length > 0 ) {
                     result.data.opportunities.nodes.forEach( _ => {

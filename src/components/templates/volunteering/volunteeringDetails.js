@@ -22,9 +22,6 @@ export default function VolunteeringDetails( { pageContext, location } ){
     const contentMode   = 'light'
         
     const { title, excerpt, date, modified, breadcrumbs, general, postContent, serveDetails } = pageContext
-    
-    console.log('Volunteering pageContext')
-    console.log(pageContext)
 
     const htmlDate = modified ? getDate( modified, 2, config.dateLocale, 'yyyy-MM-dd' ) : getDate( date, 2, config.dateLocale, 'yyyy-MM-dd' )
     const createdDate = getDate( date, 2, config.dateLocale, config.dateFormat )

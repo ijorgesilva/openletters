@@ -14,7 +14,7 @@ export default function SectionSeriesDescription ( { excerpt, className, id, mod
             className={`sectionSeriesDescription ${ mode ? mode : 'light'} ${ className ? className : ''}`} 
             id = { id } 
         >
-            <Container fluid = { width === 'container' ? false : true }>
+            <Container fluid = { width === 'container' ? undefined : true }>
                 {
                     ( excerpt ) ?
                         <>

@@ -6,7 +6,7 @@ export const useParticipation = ( campusData, videoData ) => {
                         graphql`
                             {
                                 wp {
-                                    websiteSettings {
+                                    websiteGeneralSettings {
                                         participation {
                                             participationRaisehand {
                                                 participationRaisehandCustom {
@@ -40,8 +40,8 @@ export const useParticipation = ( campusData, videoData ) => {
                             }
 
     /* Lists of Data */
-    const globalRaiseHandList   = ( wp.websiteSettings.participation.participationRaisehand.participationRaisehandCustom ) ?
-                                    wp.websiteSettings.participation.participationRaisehand?.participationRaisehandCustom : []
+    const globalRaiseHandList   = ( wp.websiteGeneralSettings.participation.participationRaisehand.participationRaisehandCustom ) ?
+                                    wp.websiteGeneralSettings.participation.participationRaisehand?.participationRaisehandCustom : []
     const campusRaiseHandList   = ( campusData?.participationRaisehand.participationRaisehandCustom ) ?
                                     campusData.participationRaisehand.participationRaisehandCustom : []
     const videoRaiseHandList    = ( videoData?.participationRaisehand.participationRaisehandCustom ) ? 

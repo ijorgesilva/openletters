@@ -20,7 +20,7 @@ export default function Playlist (
             {
                 songs.length > 0 ?
                     <section className = {`playlist ${ className ? className : '' }`}>
-                        <Container fluid = { containerWidth === 'container' ? false : true }>
+                        <Container fluid = { containerWidth === 'container' ? undefined : true }>
                             <h6 className = {'title'} >{t('global:components.music.playlist-title')}</h6>
                             <ListGroup variant='flush' >
                                 {

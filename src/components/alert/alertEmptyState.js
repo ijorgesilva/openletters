@@ -18,7 +18,7 @@ export default function AlertEmptyState ( { mode, className, title, content, lay
                     justifyContent: 'center',
                     flexDirection: 'column',
                     textAlign: 'center',
-
+                    alignItems: 'center',
                 }}
                 >
                     <FontAwesomeIcon 

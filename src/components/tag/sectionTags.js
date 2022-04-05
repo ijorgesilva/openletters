@@ -18,7 +18,7 @@ export default function SectionTags (
             className = {`sectionTags pb-5 ${ mode ? mode : '' } ${ className ? className : '' }`} 
             id        = { id } 
         >
-            <Container fluid = { width === 'container' ? false : true }>
+            <Container fluid = { width === 'container' ? undefined : true }>
                 {
                     ( tags?.length > 0 ) ?
                         <TagSimple 

@@ -68,7 +68,7 @@ export default function FeedRenderingLayout (
         case 'default':{
             return(
                 <section  id = {id} className = {`feedLayout ${ layoutType ? layoutType+'-layout' : ''} ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
-                    <Container fluid = { containerWidth === 'container' ? false : true } className='columns'>
+                    <Container fluid = { containerWidth === 'container' ? undefined : true } className='columns'>
                         {
                             sidebar?.left ?
                                 <div className='sidebar-left'>{sidebar.left}</div>

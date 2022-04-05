@@ -28,7 +28,7 @@ export default function SectionText ( {
         <section  id = {id} className = {`sectionText ${ size ? size : 'md' } ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
             
             <div className={`columns ${ ( media?.sectionTextbasicMediaType ) ? 'two-columns' : 'one-column' }`}>
-                <Container fluid = { containerWidth === 'container' ? false : true }>
+                <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
                         ( title || content || buttons?.length > 0 ) ?
                             <div className='general'>
@@ -84,6 +84,7 @@ export default function SectionText ( {
                                 <GatsbyImage 
                                     image           = { media.sectionTextbasicMediaPhoto.localFile.childImageSharp.gatsbyImageData }
                                     height          = '100%'
+                                    alt             = ''
                                 />
                             </div>
                         :

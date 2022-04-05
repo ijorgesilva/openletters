@@ -22,13 +22,16 @@ export default function FormSelector (
         location,
     } 
 ) {
-
-    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://editor.victorychur.ch'
-    const queryParams = location?.href?.substring(location.href.indexOf('?')+1)
-    const iframeFormUrl =   iframeQueryStrings ? `${iframeServerRoot}${form.uri}${iframeQueryStrings}`
-                                : queryParams ? `${iframeServerRoot}${form.uri}?${queryParams}&timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
-                                    : `${iframeServerRoot}${form.uri}?timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
     
+    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : ''
+    const queryParams = location?.search
+
+    const iframeFormUrl =   iframeQueryStrings ? 
+                                `${iframeServerRoot}${form.uri}${iframeQueryStrings}`
+                            : queryParams ? 
+                                    `${iframeServerRoot}${form.uri}${queryParams}&timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+                                : `${iframeServerRoot}${form.uri}?timestap=${Date.now()}&classname=${jumbotronMode ? jumbotronMode : 'light'}-primary&origin=${form.title.split(' ').join('_')}`
+
     switch ( true ){
         /*
         * Single Column
@@ -59,7 +62,7 @@ export default function FormSelector (
             return (
                 <div 
                     className={`formSelector ${ jumbotronPadding ? jumbotronPadding : ''} ${ jumbotron ? 'jumbotron' : ''} ${ jumbotronFluid ? 'jumbotron-fluid' : ''} ${ jumbotronMode ? jumbotronMode : 'light' } ${ containerClass ? containerClass : ''}`}
-                    fluid = { jumbotronFluid ? true : false }
+                    fluid = { jumbotronFluid ? true : undefined }
                 >
                     <Container>
                         <Row>

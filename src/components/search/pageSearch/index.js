@@ -69,7 +69,7 @@ export default function PageSearch (
 
     return (
         <section id = {id} className = {`pageSearch ${ size ? size : 'md'} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
-            <Container fluid = { containerWidth === 'container' ? false : true }>
+            <Container fluid = { containerWidth === 'container' ? undefined : true }>
                 <InstantSearch 
                     indexName       = { indices } 
                     searchClient    = { searchClient }

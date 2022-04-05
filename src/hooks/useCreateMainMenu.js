@@ -23,14 +23,14 @@ export const useCreateMainMenu = (
     const webConf = useWebsiteConfiguration()
 
     if( rawMenu?.status === 'publish' && campus ) {
-        rawMenuItems = rawMenu.menuDetails.mainMenu.mainMenuItems
+        rawMenuItems = rawMenu.mainMenuDetails.mainMenu.mainMenuItems
         
         menuConf  = {
             'slug'      : rawMenu.slug,
-            'mode'      : rawMenu.menuDetails.menuColorScheme?.split(':')[0] ? rawMenu.menuDetails.menuColorScheme.split(':')[0] : 'light',
-            'css'       : rawMenu.menuDetails.menuCss ? rawMenu.menuDetails.menuCss : '',
-            'id'        : rawMenu.menuDetails.menuId ? rawMenu.menuDetails.menuId : '',
-            'collapse'  : rawMenu.menuDetails.menuCollapse ? true : false,
+            'mode'      : rawMenu.mainMenuDetails.menuColorScheme?.split(':')[0] ? rawMenu.mainMenuDetails.menuColorScheme.split(':')[0] : 'light',
+            'css'       : rawMenu.mainMenuDetails.menuCss ? rawMenu.mainMenuDetails.menuCss : '',
+            'id'        : rawMenu.mainMenuDetails.menuId ? rawMenu.mainMenuDetails.menuId : '',
+            'collapse'  : rawMenu.mainMenuDetails.menuCollapse ? true : false,
         }
         parsedMenu['conf'] = menuConf
         
@@ -338,7 +338,6 @@ export const useCreateMainMenu = (
         })
         parsedMenu['items'] = parsedMenuArr
         /* End Parsing Raw Menu */
-
     }
 
     return parsedMenu

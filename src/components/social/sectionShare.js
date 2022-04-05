@@ -48,7 +48,7 @@ export default function ShareSection(
             
             <div className = {`${ image?.sectionTextbasicMediaType ? 'two-columns' : 'one-column' }`}>
 
-                <Container fluid = { containerWidth === 'container' ? false : true }>
+                <Container fluid = { containerWidth === 'container' ? undefined : true }>
 
                     <div className = 'general'>
                         {
@@ -79,6 +79,7 @@ export default function ShareSection(
                             <GatsbyImage 
                                 image           = { image }
                                 height          = '100%'
+                                alt             = ''
                             />
                         </div>
                     :

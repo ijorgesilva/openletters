@@ -5,7 +5,7 @@ export const useWebsiteConfigurationMenus = () => {
         graphql`
         {
             wp {
-                websiteSettings {
+                websiteGeneralSettings {
                     websiteSettings {
                         ## Setings Menu
                         settingsMenus {
@@ -18,7 +18,7 @@ export const useWebsiteConfigurationMenus = () => {
                                             id
                                             status
                                             slug
-                                            menuDetails {
+                                            mainMenuDetails {
                                                 menuTitle
                                                 menuId
                                                 menuCss
@@ -178,7 +178,7 @@ export const useWebsiteConfigurationMenus = () => {
                                             id
                                             status
                                             slug
-                                            menuDetails {
+                                            mainMenuDetails {
                                                 menuTitle
                                                 menuId
                                                 menuCss
@@ -334,5 +334,5 @@ export const useWebsiteConfigurationMenus = () => {
         `
     )
 
-    return wp.websiteSettings.websiteSettings.settingsMenus
+    return wp.websiteGeneralSettings.websiteSettings.settingsMenus
 }

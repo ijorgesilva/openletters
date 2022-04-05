@@ -25,6 +25,7 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
      * Get and parse menus
      */
     const rawMenus = useWebsiteConfigurationMenus()
+    
     // Format Top Menu
     const parsedTopMenu = rawMenus?.menuPositions.topMenu?.menu ? useCreateMainMenu(campus, rawMenus.menuPositions.topMenu.menu) : undefined
     // Format Main Menu

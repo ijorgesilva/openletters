@@ -26,7 +26,7 @@ export default function SectionPodcast (
     
     return(
         <section className={`sectionPodcast ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id}>
-            <Container fluid = { width === 'container' ? false : true }>
+            <Container fluid = { width === 'container' ? undefined : true }>
                 <Row>
 
                     <Col xs={12} md={4} className="graphic">

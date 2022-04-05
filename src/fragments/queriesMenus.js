@@ -7,7 +7,6 @@ const queriesMenus = {
             status
             menuDetails {
                 menuCustomTitle
-                menuLocation
                 menuCss
                 menuId
                 menuColorScheme

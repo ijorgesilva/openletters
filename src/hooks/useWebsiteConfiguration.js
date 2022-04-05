@@ -5,7 +5,7 @@ export const useWebsiteConfiguration = () => {
                             graphql`
                                 {
                                     wp {
-                                        websiteSettings {
+                                        websiteGeneralSettings {
                                             websiteSettings {
                                                 settingsSiteTitle
                                                 settingsNewsletter {
@@ -306,5 +306,5 @@ export const useWebsiteConfiguration = () => {
                                 }
                             `
                         )   
-    return wp.websiteSettings.websiteSettings
+    return wp.websiteGeneralSettings.websiteSettings
 }

@@ -7,7 +7,7 @@ export const useTheme = () => {
         graphql`                                
             {
                 wp {
-                    websiteSettings {
+                    websiteGeneralSettings {
                         websiteSettings {
 
                             settingsStyles {
@@ -71,7 +71,7 @@ export const useTheme = () => {
             }
     `)
 
-    const siteStyles    = wp.websiteSettings.websiteSettings.settingsStyles
+    const siteStyles    = wp.websiteGeneralSettings.websiteSettings.settingsStyles
     const layoutStyles  = siteStyles.settingsStylesLayout
     
     // Variables Map

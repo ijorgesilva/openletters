@@ -46,7 +46,7 @@ export default function PlaylistDetails(
             <div className={`playlistDetails ${ mode ? mode : 'light' } ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
 
                 <Container 
-                    fluid = { width === 'container' ? false : true }
+                    fluid = { width === 'container' ? undefined : true }
                     className={`${ (videos?.length > 0) ? 'playlist-grid' : ''}`}
                 >
                     <div className={playerClasses.join(" ")}>

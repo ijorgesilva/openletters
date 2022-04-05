@@ -37,20 +37,18 @@ export default function MenuPage (
     const { t } = useTranslation()
 
     let base = {}
-    let items =     ( menus?.menuDetails?.menuPagesMenu?.menuPageMenuItems?.length > 0 ) ? 
+    let items =     menus?.menuDetails?.menuPagesMenu?.menuPageMenuItems?.length > 0 ? 
                         menus.menuDetails.menuPagesMenu.menuPageMenuItems 
                     : 
                         undefined
-
     if (menuBrand) {
         base = menuBrand
     }
-    else if( !menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && 
-              menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase ) {
-        base = {
-                'link': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseUrl,
-                'name': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseTitle
-            }
+    else if( !menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase?.menuPagesMenuHideBase && menus?.menuDetails?.menuPagesMenu?.menuPagesMenuBase ) {
+        base =  {
+                    'link': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseUrl,
+                    'name': menus.menuDetails.menuPagesMenu?.menuPagesMenuBase.menuPagesMenuBaseTitle
+                }
     }
 
     if( menus?.status === 'publish' ){

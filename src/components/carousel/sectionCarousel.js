@@ -56,7 +56,7 @@ export default function SectionCarousel ( {
 
         <section id = {id} className = {`sectionCarousel ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
 
-            <Container fluid = { containerWidth === 'container' ? false : true }>
+            <Container fluid = { containerWidth === 'container' ? undefined : true }>
                 {
                     ( title || content ) ?
                         <div className='general'>

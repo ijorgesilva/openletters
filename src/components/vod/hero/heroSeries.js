@@ -25,7 +25,7 @@ export default function HeroSeries (
     return (
         <section className={`heroSeries ${ mode ? mode : '' } ${ className ? className : '' }`} >
 
-            <Container fluid = { width === 'container' ? false : true }>
+            <Container fluid = { width === 'container' ? undefined : true }>
 
                 <div className={`serieName`}>
                     {

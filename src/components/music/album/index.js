@@ -63,7 +63,7 @@ export default function SectionAlbum (
         >
                 {
                     ( title || content ) ?
-                        <Container fluid = { containerWidth === 'container' ? false : true } className = {`${ size ? size : ''}`}>
+                        <Container fluid = { containerWidth === 'container' ? undefined : true } className = {`${ size ? size : ''}`}>
                             <div className='general pb-3'>
                                 {
                                     title ?
@@ -90,14 +90,14 @@ export default function SectionAlbum (
                         }
                     }
                 >
-                    <Container fluid = { containerWidth === 'container' ? false : true }>
+                    <Container fluid = { containerWidth === 'container' ? undefined : true }>
                         <div className = 'albumCover'>
                             {
                                 albumCover ?
                                     <GatsbyImage 
                                         image       = {albumCover} 
-                                        alt         = ''
                                         className   = 'cover'
+                                        alt         = ''
                                     />
                                 :
                                     undefined

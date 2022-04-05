@@ -45,7 +45,7 @@ export default function SectionFollow (
 
         <section className = {`sectionFollow ${ className ? className : '' } ${ size ? size : 'md' } ${ mode ? mode : 'light' }`} id = {id} >
         
-                <Container fluid = { containerWidth === 'container' ? false : true }>
+                <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
                         ( title || content ) ?
                             <div className='general'>

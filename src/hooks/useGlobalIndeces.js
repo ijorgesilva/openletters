@@ -6,7 +6,7 @@ export const useGlobalIndeces = ( ) => {
         graphql`
             {
                 wp {
-                    websiteSettings {
+                    websiteGeneralSettings {
                         websiteSettings {
                             settingsSearch {
                                 settingsSearchFunctions {
@@ -31,8 +31,8 @@ export const useGlobalIndeces = ( ) => {
         `
     )  
     let indexes = []
-    let searchFunctions = ( wp.websiteSettings.websiteSettings.settingsSearch.settingsSearchFunctions ) ?
-                                wp.websiteSettings.websiteSettings.settingsSearch.settingsSearchFunctions
+    let searchFunctions = ( wp.websiteGeneralSettings.websiteSettings.settingsSearch.settingsSearchFunctions ) ?
+                                wp.websiteGeneralSettings.websiteSettings.settingsSearch.settingsSearchFunctions
                             :
                                 undefined
     

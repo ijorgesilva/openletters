@@ -102,7 +102,7 @@ export default function MenuMain (
                     undefined
             }
 
-           {
+            {
                 searchIndices || auth ? 
                     <div className='d-flex functions'>
                         {

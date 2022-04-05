@@ -2,7 +2,7 @@ const queriesWebsiteSettings = require('./queriesWebsiteSettings')
 
 const queriesWp = `
     wp {
-        websiteSettings {
+        websiteGeneralSettings {
             websiteSettings {
                 settingsPages {
                     ${queriesWebsiteSettings.archivesConf}

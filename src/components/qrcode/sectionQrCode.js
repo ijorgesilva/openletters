@@ -36,7 +36,7 @@ export default function SectionQrCode (
         <section  id = {id} className = {`sectionQrCode ${ size ? size : 'md' } ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
 
             <Container 
-                fluid = { containerWidth === 'container' ? false : true }
+                fluid = { containerWidth === 'container' ? undefined : true }
             >
                 <Row>
                     <Col>

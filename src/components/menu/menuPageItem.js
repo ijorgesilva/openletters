@@ -10,13 +10,12 @@ export default function MenuPageItem (
         campus,
     } 
 ) {
-
     // Get Menu Type
-    let menuType =  (item?.menuPageMenuItem?.menuPageMenuItemType) ?
-                        item.menuPageMenuItem.menuPageMenuItemType.split(':')[0]
+    let menuType =  item?.menuPageMenuItem?.menuPageMenuItemType ?
+                        item.menuPageMenuItem.menuPageMenuItemType
                     :
                         undefined
-    
+                        
     const defaultCampusSlug = useWebsiteConfiguration().settingsDefaultCampus.slug
 
     switch ( menuType ) {
@@ -56,7 +55,6 @@ export default function MenuPageItem (
         }
 
         case 'custom': {
-
             let customItem = item.menuPageMenuItem.menuPageMenuItemCustom
 
             if ( customItem.menuPageMenuItemCustomLinkType === 'internal' ) {
@@ -83,6 +81,12 @@ export default function MenuPageItem (
                     </a>
                 )       
             }
+            else {
+                return <></>
+            }
+        }
+        default: { 
+            return <></>
         }
     }
 

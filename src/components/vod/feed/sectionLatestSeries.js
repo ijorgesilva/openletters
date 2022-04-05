@@ -43,7 +43,7 @@ export default function SectionLatestSeries (
             id          = {id} 
             style       = {styles}
         >
-            <Container fluid = { width === 'container' ? true : false }>
+            <Container fluid = { width === 'container' ? undefined : false }>
                 {
                     (title) ? 
                         <h4 className="title">{title}</h4>

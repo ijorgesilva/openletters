@@ -19,7 +19,7 @@ export default function SectionAccordion (
         return (
             <section id = {id} className = {`sectionAccordion ${ size ? size : ''} ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
 
-                <Container fluid = { containerWidth === 'container' ? false : true }>
+                <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
                         ( title || content ) ?
                             <div className='general'>

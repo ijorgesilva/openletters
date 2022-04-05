@@ -34,7 +34,7 @@ export default function SectionSeriesTabs (
             className = {`sectionSeriesTabs ${ mode ? mode : 'light'} ${ className ? className : ''}`}
             id = { id }
         >
-            <Container fluid = { width === 'container' ? false : true }>
+            <Container fluid = { width === 'container' ? undefined : true }>
 
                 <Tabs className={`${ mode ? mode : 'light'}`} defaultActiveKey="0">
 
