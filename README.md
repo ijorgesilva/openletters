@@ -1,6 +1,6 @@
 ## Develop command
 
-Start only the GraphQL playgorund
+Start only the GraphQL playground
 `$ GATSBY_GRAPHQL_IDE=playground gatsby develop`
 [Source](https://github.com/gatsbyjs/gatsby/issues/5801#issuecomment-395786936)
 

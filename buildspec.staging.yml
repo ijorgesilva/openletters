@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     NODE_ENV: "staging"
-    DeployBucket: "staging.victorychur.ch"
+    DeployBucket: "editor.example.com"
 
 phases:
   install:
@@ -23,7 +23,7 @@ phases:
   post_build:
     commands:
       # copy the contents of /public to S3  | Use ${DeployBucket} with CloudFormation
-      - aws s3 cp --recursive --acl public-read ./public s3://staging.victorychur.ch/ 
+      - aws s3 cp --recursive --acl public-read ./public s3://editor.example.com/ 
 
 cache:
   paths:

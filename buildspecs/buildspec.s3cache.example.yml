@@ -4,12 +4,12 @@ version: 0.2
 env:
   variables:
     NODE_ENV: 'staging' ## staging || production
-    SITE_URL: 'https://staging.victoryatl.com'
-    SITE_CANONICAL_URL: 'https://victoryatl.com'
+    SITE_URL: 'https://staging.example.com'
+    SITE_CANONICAL_URL: 'https://example.com'
     PATH_PREFIX: ''
     ## GraphQL
-    WP_SERVER: 'https://editor.victorychur.ch'
-    WPGRAPHQL_URL: 'https://editor.victorychur.ch/wp/graphql'
+    WP_SERVER: 'https://editor.example.com'
+    WPGRAPHQL_URL: 'https://editor.example.com/wp/graphql'
     ## GraphQL Schema
     SCHEMA_PER_PAGE: '50'
     SCHEMA_REQUEST_CONCURRENCY: '50'
@@ -21,29 +21,29 @@ env:
     FACEBOOK_PIXEL: ''
     FACEBOOK_APP_ID: ''
     ## Algolia
-    GATSBY_ALGOLIA_SEARCH_KEY: '878be9b4cafe479d222f972a723a03d5'
-    GATSBY_ALGOLIA_APP_ID: 'S6BNVUIBZ2'
-    ALGOLIA_ADMIN_KEY: '2237aef49a47e34670e8bffba3e238cd'
+    GATSBY_ALGOLIA_SEARCH_KEY: ''
+    GATSBY_ALGOLIA_APP_ID: ''
+    ALGOLIA_ADMIN_KEY: ''
     ALGOLIA_PARTIAL_UPDATES: true
     ## Site schema and Social
-    SITE_TITLE: 'Victory Church'
-    SITE_DESCRIPTION: 'Victory Church located on Atlanta Georgia'
+    SITE_TITLE: ''
+    SITE_DESCRIPTION: ''
     SITE_IMAGE: '/logos/logo-1024.png'
     SITE_SEPARATOR: '|'
     MANIFEST_THEME_COLOR: '0F0A1B'
     MANIFEST_THEME_BACKGROUND_COLOR: '0F0A1B'
     DATE_FROM_FORMAT: 'YYYY-MM-DD'
     SITE_RSS: '/rss.xml '
-    SITE_RSS_TITLE: 'Victory RSS feed '
+    SITE_RSS_TITLE: 'RSS feed'
     USER_NAME: ''
-    USER_EMAIL: 'hello@victoryatl.com '
+    USER_EMAIL: 'hello@example.com '
     USER_LOCATION: ''
-    TWITTER_USERNAME: '@victorychurch'
+    TWITTER_USERNAME: ''
     ## Global Configuration
-    SITE_COPYRIGHT: 'Copyright © Victory Church'
+    SITE_COPYRIGHT: 'Copyright © Example Church'
     ## S3
-    DEPLOY_BUCKET: 'staging.victoryatl.com'
-    CLOUDFRONT_DISTRIBUTION: 'ENLED5I40HUR5'
+    DEPLOY_BUCKET: 'staging.examples.com'
+    CLOUDFRONT_DISTRIBUTION: ''
 
   exported-variables:
     - NODE_ENV
