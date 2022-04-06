@@ -22,10 +22,9 @@ export default function FormSelector (
         location,
     } 
 ) {
-    
     const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : ''
     const queryParams = location?.search
-
+    
     const iframeFormUrl =   iframeQueryStrings ? 
                                 `${iframeServerRoot}${form.uri}${iframeQueryStrings}`
                             : queryParams ? 

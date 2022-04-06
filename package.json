@@ -30,6 +30,7 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "gatsby": "^4.11.1",
     "gatsby-cli": "^4.11.1",
+    "gatsby-source-wordpress": "^6.11.1",
     "gatsby-plugin-algolia": "^0.26.0",
     "gatsby-plugin-canonical-urls": "^4.11.0",
     "gatsby-plugin-gdpr-cookies": "^2.0.8",

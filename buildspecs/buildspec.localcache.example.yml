@@ -86,7 +86,8 @@ phases:
     runtime-versions:
       nodejs: 14.x
     commands:
-      - npm install -g gatsby@3.0.4
+      - npm -g config set user $USER
+      - npm install -g gatsby@4.11.2
 
   pre_build:
     on-failure: ABORT
