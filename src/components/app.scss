@@ -2,7 +2,7 @@
  * @author Wick
  * @src https://blog.wick.technology/runtime-dynamic-bootstrap-theme/
  */
- 
+
 // functions and mixins first
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/mixins';
@@ -30,7 +30,8 @@
 @import "~bootstrap/scss/input-group";
 @import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/navbar"; // TODO: Warning/Error Error: SvgoParserError: <input>:1:1: Non-whitespace before first tag. > 1 | %3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30… 
+@import 'navbar-override';
 @import "~bootstrap/scss/card";
 @import "~bootstrap/scss/breadcrumb";
 @import "~bootstrap/scss/pagination";
