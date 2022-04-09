@@ -22,7 +22,7 @@ export default function FormSelector (
         location,
     } 
 ) {
-    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : ''
+    const iframeServerRoot = process.env.WP_SERVER ? process.env.WP_SERVER : 'https://editor.victoryatl.com'
     const queryParams = location?.search
     
     const iframeFormUrl =   iframeQueryStrings ? 
