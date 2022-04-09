@@ -232,7 +232,7 @@ export default function RenderSection (
                     configLayout    =  {{
                                             excerpt: false,
                                             itemsVisible: 5,
-                                       }}
+                                        }}
                 />
             )
             
@@ -346,7 +346,6 @@ export default function RenderSection (
                     related         = { ( relatedPost ) ? relatedPost : undefined }
                     location        = { location }
                 />
-      
             )
             
         }
@@ -691,7 +690,7 @@ export default function RenderSection (
             const secondaryColumn = section.sectionDetails.sectionForm.sectionFormColumns
 
             return(
-                 <SectionForm 
+                <SectionForm 
                     id                  = { sectionId }
                     className           = { sectionClassname }
                     title               = { sectionTitle }
@@ -713,7 +712,7 @@ export default function RenderSection (
                     secondaryColumnAlignment  = { secondaryColumn.sectionFormColumnsAlignment.split(':')[0] }
                     secondaryColumnBackground = { secondaryColumn.sectionFormColumnsBackground?.backgroundLayer?.reverse() }
                     location            = { location }
-                 />
+                />
             )
             
         }

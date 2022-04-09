@@ -164,40 +164,39 @@ function Items(
         hideButton,
 }) {
     return (
-      <>
-        {currentItems &&
-          currentItems.map((_, index) => (
-
-            <BlurbVertical
-                key                 = { index }
-                itemType            = { itemType }
-                image               = { _.image }
-                title               = { _.title }
-                subtitle            = { _.subtitle }
-                content             = { _.excerpt }
-                buttons             = { _.buttons }
-                // Aspect
-                mode                = { mode }
-                orientation         = { orientation }
-                truncate            = { truncate }
-                truncateLines       = { truncateLines }
-                className           = { `${itemClass ? itemClass : ''} ${_.cssClass ? _.cssClass : ''}` }
-                imagePosition       = { imagePosition }
-                imageFit            = { imageFit }
-                aspectRatio         = { aspectRatio }
-                border              = { border }
-                borderColor         = { borderColor }
-                // Button Behavior
-                // removeDefaultCss    = { removeDefaultCss }
-                stretchedlink       = { stretchedlink }
-                // Visibility
-                hideTitle           = { hideTitle }
-                hideSubtitle        = { hideSubtitle }
-                hideExcerpt         = { hideExcerpt }
-                hideImage           = { hideImage }
-                hideButton          = { hideButton }
-            />
-          ))}
-      </>
+        <>
+            {currentItems &&
+            currentItems.map((_, index) => (
+                <BlurbVertical
+                    key                 = { index }
+                    itemType            = { itemType }
+                    image               = { _.image }
+                    title               = { _.title }
+                    subtitle            = { _.subtitle }
+                    content             = { _.excerpt }
+                    buttons             = { _.buttons }
+                    // Aspect
+                    mode                = { mode }
+                    orientation         = { orientation }
+                    truncate            = { truncate }
+                    truncateLines       = { truncateLines }
+                    className           = { `${itemClass ? itemClass : ''} ${_.cssClass ? _.cssClass : ''}` }
+                    imagePosition       = { imagePosition }
+                    imageFit            = { imageFit }
+                    aspectRatio         = { aspectRatio }
+                    border              = { border }
+                    borderColor         = { borderColor }
+                    // Button Behavior
+                    // removeDefaultCss    = { removeDefaultCss }
+                    stretchedlink       = { stretchedlink }
+                    // Visibility
+                    hideTitle           = { hideTitle }
+                    hideSubtitle        = { hideSubtitle }
+                    hideExcerpt         = { hideExcerpt }
+                    hideImage           = { hideImage }
+                    hideButton          = { hideButton }
+                />
+            ))}
+        </>
     );
 }

@@ -3,9 +3,9 @@ import React, { useMemo } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import {
-  InstantSearch,
-  Configure,
-  connectStateResults,
+    InstantSearch,
+    Configure,
+    connectStateResults,
 } from 'react-instantsearch-dom'
 
 import AlertEmptyState from '../../alert/alertEmptyState'
