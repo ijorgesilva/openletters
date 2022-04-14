@@ -26,7 +26,7 @@ export default function BlurbVerticalDarkVod (
                     <div className="card-img-container">
                         <Link to={link}>
                             {
-                                ( iconImage ) ?
+                                iconImage ?
                                     <div className="card-icon">
                                         <img src={iconImage} alt=""/>
                                     </div>
@@ -34,7 +34,7 @@ export default function BlurbVerticalDarkVod (
                                     undefined
                             }
                             { 
-                                ( featuredImage ) ? 
+                                featuredImage ? 
                                     <GatsbyImage 
                                         image={featuredImage} 
                                         className="card-img-top aspect-ratio-16_9"

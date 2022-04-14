@@ -77,7 +77,7 @@ export default function SectionTabs (
                                                     {
                                                         ( _.sectionTabsTabType.split(':')[0] === 'nestedsection' ) ?
                                                             <RenderSection 
-                                                                index       = { index }
+                                                                key         = { index }
                                                                 mode        = { mode }
                                                                 size        = { size }
                                                                 section     = { _.sectionTabsTabSection }

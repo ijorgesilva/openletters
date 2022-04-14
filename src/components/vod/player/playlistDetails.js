@@ -43,13 +43,13 @@ export default function PlaylistDetails(
 
     return (
 
-            <div className={`playlistDetails ${ mode ? mode : 'light' } ${ ( videos?.length > 0 ) ? '' : 'single' }`} id="video">
+            <div className={`playlistDetails ${ mode ? mode : 'light' } ${ ( videos?.length > 0 ) ? '' : 'single' }`} id='video'>
 
                 <Container 
                     fluid = { width === 'container' ? undefined : true }
                     className={`${ (videos?.length > 0) ? 'playlist-grid' : ''}`}
                 >
-                    <div className={playerClasses.join(" ")}>
+                    <div className={playerClasses.join(' ')}>
                         {
                             (videoDetails.videoUrl) ?
                                 <VideoReactPlayer
@@ -120,14 +120,14 @@ export default function PlaylistDetails(
                     }
                 </Container>
 
-                <div className="background">
-                    <div className="overlay"></div>
+                <div className='background'>
+                    <div className='overlay'></div>
                     {
-                        (config.watchDetailsViewHeroBackground) ?
+                        config.watchDetailsViewHeroBackground && backgroundHero ?
                             <GatsbyImage 
-                                className="poster"
+                                className='poster'
                                 image={backgroundHero} 
-                                alt=""
+                                alt=''
                             />
                         :
                             undefined

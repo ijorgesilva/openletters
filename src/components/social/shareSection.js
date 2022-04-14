@@ -69,11 +69,15 @@ export default function ShareSection( { title, id, subtitle, className, variant,
                     </Col>
 
                     <Col xs={12} md={6} lg={6}>
-                        <GatsbyImage 
-                            className="photo"
-                            image={photo} 
-                            alt=""
-                        />
+                        {
+                            photo ? 
+                                <GatsbyImage 
+                                    className="photo"
+                                    image={photo} 
+                                    alt=""
+                                />
+                            : undefined
+                        }
                     </Col>
                     
                 </Row>

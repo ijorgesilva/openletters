@@ -97,6 +97,17 @@ const queriesSections = `
                     sectionHeroButtonText
                     sectionHeroButtonUrl
                     sectionHeroButtonLink
+                    sectionHeroButtonCss
+                    sectionHeroButtonCssRemoveDefault
+                    sectionHeroButtonModal {
+                        modalTitle
+                        modalVideoUrl
+                        modalWidth
+                        modalHtml
+                        modalHeight
+                        modalFrameless
+                        modalTransparent
+                    }
                 }
             }
             sectionHeroBackground {

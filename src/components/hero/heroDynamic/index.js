@@ -1,10 +1,11 @@
-import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-import BlurbHorizontalDarkFeatured from '../blurb/blurbHorizontalDarkFeatured'
-import Background from '../UI/background'
+import BlurbHorizontalDarkFeatured from '../../blurb/blurbHorizontalDarkFeatured'
+import Background from '../../UI/background'
+
+import HeroButtons from './heroButtons.js'
 import './heroDynamic.scss'
 
 export default function HeroDynamic ( 
@@ -29,7 +30,7 @@ export default function HeroDynamic (
 
     return (
 
-        <div id={id} className={`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
+        <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
 
             <Container className={'z-index-2'} fluid = { width === 'container' ? true : undefined }>
                 <div className={`content ${ textAlignment ? 'align-items-'+textAlignment : 'align-items-center'}`}>
@@ -39,32 +40,14 @@ export default function HeroDynamic (
                         
                         {
                             buttons ?
-                                <div className='buttons mt-3'>
-                                    {
-                                        buttons.map( (button, index) => (
-                                            ( button.sectionHeroButtonType === 'internal' && button.sectionHeroButtonLink) ?
-                                                    <Link 
-                                                        index       = { index }
-                                                        className   = { button.className || 'btn btn-primary btn-lg' }
-                                                        to          = { button.sectionHeroButtonLink }  
-                                                        target      = { button.sectionHeroButtonTarget }
-                                                    >
-                                                        {button.sectionHeroButtonText}
-                                                    </Link>
-                                                :
-                                                    <a 
-                                                        index       = { index }
-                                                        className   = { button.className || 'btn btn-primary btn-lg' }
-                                                        href        = { button.sectionHeroButtonUrl }  
-                                                        target      = { button.sectionHeroButtonTarget }
-                                                    >
-                                                        {button.sectionHeroButtonText}
-                                                    </a>
+                                <div className='buttons'>
+                                    { 
+                                        buttons?.map( ( _ , index ) => (
+                                            <HeroButtons button = { _ } key = {index} />
                                         ))
                                     }
                                 </div>
-                            :
-                                undefined
+                            : undefined
                         }
 
                         {
@@ -101,13 +84,16 @@ export default function HeroDynamic (
             </Container>
 
             <div className={`background noselect z-index-1 ${ overlay ? 'overlay' : ''}`}>
-                <GatsbyImage 
-                    image     = {backgroundPhoto}
-                    className = 'card-img-top'
-                    height    = '100%'
-                    alt = ''
-                />
-
+                {
+                    backgroundPhoto ?
+                        <GatsbyImage 
+                            image     = {backgroundPhoto}
+                            className = 'card-img-top'
+                            height    = '100%'
+                            alt = ''
+                        />
+                    : undefined
+                }
                 <Background
                     layers  = { backgroundLayers }
                 />

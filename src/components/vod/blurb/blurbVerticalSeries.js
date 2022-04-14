@@ -1,5 +1,5 @@
 import { Link } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image"
+import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 import './blurbVerticalSeries.scss'
@@ -18,11 +18,11 @@ export default function BlurbVerticalSeries (
                         <Link to={link}>
                             {
                                 iconImage ?
-                                    <div className="card-icon">
+                                    <div className='card-icon'>
                                         <GatsbyImage 
                                             image={iconImage} 
-                                            className="card-img-top"
-                                            alt=""
+                                            className='card-img-top'
+                                            alt=''
                                         />
                                     </div>
                                 : 
@@ -34,38 +34,42 @@ export default function BlurbVerticalSeries (
                                     poster ?
                                         <GatsbyImage 
                                             image={poster} 
-                                            className="card-img-top poster"
-                                            alt=""
+                                            className='card-img-top poster'
+                                            alt=''
                                         />
                                     :
                                         background ?
                                             <>
                                                 {
                                                     logo ?
-                                                        <div className="logo">
+                                                        <div className='logo'>
                                                             <GatsbyImage 
                                                                 image={logo} 
-                                                                alt=""
+                                                                alt=''
                                                             />
                                                         </div>
                                                     :
-                                                        <div className="card-text">
+                                                        <div className='card-text'>
                                                             <h5>{title}</h5>
                                                         </div>
 
                                                 }
-                                                <GatsbyImage 
-                                                    image={background} 
-                                                    className="card-img-top background"
-                                                    alt=""
-                                                />
+                                                {
+                                                    background ?
+                                                        <GatsbyImage 
+                                                            image={background} 
+                                                            className='card-img-top background'
+                                                            alt=''
+                                                        />
+                                                    : undefined
+                                                }
                                             </>
                                         :
                                             <>
-                                                <div className="card-text">
+                                                <div className='card-text'>
                                                     <h5>{title}</h5>
                                                 </div>
-                                                <div className="card-img-top no-poster gatsby-image-wrapper"></div>
+                                                <div className='card-img-top no-poster gatsby-image-wrapper'></div>
                                             </>
                                 }
 

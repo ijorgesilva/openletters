@@ -57,14 +57,18 @@ export default function BlurbHorizontal(
                 >
                     <Link to = { link }>
         
-                        <div className='card-img position-relative'>
-                            <GatsbyImage 
-                                image           = {image}
-                                className       = 'card-img-top' 
-                                height          = '100%' 
-                                alt             = {title} 
-                            />
-                        </div>
+                        {
+                            image ? 
+                                <div className='card-img position-relative'>
+                                    <GatsbyImage 
+                                        image           = {image}
+                                        className       = 'card-img-top' 
+                                        height          = '100%' 
+                                        alt             = {title} 
+                                    />
+                                </div>
+                            : undefined
+                        }
 
                         <div className='card-body'>
                             <div>
@@ -136,14 +140,18 @@ export default function BlurbHorizontal(
                     
                     <Link to={link}>
         
-                        <div className='card-img position-relative'>
-                            <GatsbyImage 
-                                image={image}
-                                className='card-img-top'
-                                height='100%'
-                                alt=''
-                            />
-                        </div>
+                        {
+                            image ?
+                                <div className='card-img position-relative'>
+                                    <GatsbyImage 
+                                        image={image}
+                                        className='card-img-top'
+                                        height='100%'
+                                        alt=''
+                                    />
+                                </div>
+                            : undefined
+                        }
                         
                         <div className='card-body'>
         

@@ -85,9 +85,9 @@
             line-height: 2rem;
         }
         .buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            a:not(:last-child){
+                margin-right: 1rem;
+            }
         }
         .children {
             position: relative;

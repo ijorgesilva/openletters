@@ -72,7 +72,7 @@ export default function SectionTextPhoto(
                     </Col>
                     <Col xs={12} md={6} lg={6}>
                         {
-                            (photo) ?
+                            photo ?
                                 <GatsbyImage image={photo} className='photo' alt=''/>
                             :
                                 <div className='photo'></div>

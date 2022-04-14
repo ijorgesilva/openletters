@@ -46,7 +46,7 @@ export default function WatchDetailsContent (
                         <div className='introCard introCardGrid'>
                             <Link className='serieGraphic' to={ backUrl }>
                                 {
-                                    ( seriesIcon ) ?
+                                    seriesIcon ?
                                         <GatsbyImage 
                                             image       = { seriesIcon }
                                             className   = 'graphic'

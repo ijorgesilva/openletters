@@ -54,7 +54,7 @@ export default function BlurbVerticalDark (
                     <Link to={link}>
                         <div className="card-img-container">
                             {
-                                (iconImage) ?
+                                iconImage ?
                                     <div className="card-icon">
                                         <img src={iconImage} alt=""/>
                                     </div>
@@ -62,7 +62,7 @@ export default function BlurbVerticalDark (
                                     undefined
                             }
                             { 
-                                (featuredImage) ? 
+                                featuredImage ? 
                                     <GatsbyImage 
                                         image={featuredImage} 
                                         className="card-img-top"

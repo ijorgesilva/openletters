@@ -46,10 +46,14 @@ export default function SidebarFeedVod(
         >
             <Card className='header' >
                 <div className={'card-img'} aria-hidden="true">
-                    <GatsbyImage
-                        image={background}
-                        alt=''
-                    />
+                    {
+                        background ?
+                            <GatsbyImage
+                                image={background}
+                                alt=''
+                            />
+                        : undefined
+                    }
                 </div>
                 <Card.ImgOverlay>
                     <Card.Title>

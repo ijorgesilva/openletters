@@ -115,16 +115,15 @@ export default function HeroSeries (
 
             <div className='background'>
                 <div className='overlay'></div>
-                <GatsbyImage
-                    className   = 'background-image'
-                    image       = { 
-                            ( seriesGraphics?.background?.localFile ) ?
-                                seriesGraphics.background.localFile.childImageSharp.gatsbyImageData 
-                            :
-                                undefined
-                        }
-                    alt         = ''
-                />
+                {
+                    seriesGraphics?.background?.localFile ?
+                        <GatsbyImage
+                            className   = 'background-image'
+                            image       = { seriesGraphics.background.localFile.childImageSharp.gatsbyImageData }
+                            alt         = ''
+                        />
+                    : undefined
+                }
             </div>
 
         </section>

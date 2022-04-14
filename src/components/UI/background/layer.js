@@ -26,32 +26,36 @@ export default function Layer ( { params, zindex, className } ) {
         }
 
         case 'image':{
-            const layerImage = {
-                imageFile: params.backgroundLayerImage.backgroundLayerImageImage?.localFile.publicURL,
-                position: params.backgroundLayerImage.backgroundLayerImagePosition.replace('-',' '),
-                repeat: params.backgroundLayerImage.backgroundLayerImageRepeat,
-                size: params.backgroundLayerImage.backgroundLayerImageSize?.split(':')[0],
-                sizeCustom: params.backgroundLayerImage.backgroundLayerImageSizeCustom,
-                opacity: params.backgroundLayerImage.backgroundLayerImageOpacity,
-                fixed: params.backgroundLayerImage.backgroundLayerImageFixed,
+
+            if(params.backgroundLayerImage.backgroundLayerImageImage?.localFile){
+                const layerImage = {
+                    imageFile: params.backgroundLayerImage.backgroundLayerImageImage?.localFile.publicURL,
+                    position: params.backgroundLayerImage.backgroundLayerImagePosition.replace('-',' '),
+                    repeat: params.backgroundLayerImage.backgroundLayerImageRepeat,
+                    size: params.backgroundLayerImage.backgroundLayerImageSize?.split(':')[0],
+                    sizeCustom: params.backgroundLayerImage.backgroundLayerImageSizeCustom,
+                    opacity: params.backgroundLayerImage.backgroundLayerImageOpacity,
+                    fixed: params.backgroundLayerImage.backgroundLayerImageFixed,
+                }
+                
+                return (
+                    <div
+                        className   =   { `layer-image ${ className ? className : '' }` }
+                        style       =   {{
+                                            'zIndex': zindex,
+                                            'backgroundImage': "url('"+layerImage.imageFile+"')",
+                                            'backgroundPosition': layerImage.position,
+                                            'backgroundRepeat': ( layerImage.fixed ) ? 'no-repeat' : layerImage.repeat,
+                                            'backgroundSize': ( layerImage.size === 'custom' ) ? layerImage.sizeCustom : layerImage.size,
+                                            'opacity': layerImage.opacity,
+                                            'backgroundColor': 'transparent',
+                                            'backgroundAttachment': ( layerImage.fixed ) ? 'fixed' : 'unset',
+                                        }}
+                    >
+                    </div>
+                )
             }
-            
-            return (
-                <div
-                    className   =   { `layer-image ${ ( className ) ? className : '' }` }
-                    style       =   {{
-                                        'zIndex': zindex,
-                                        'backgroundImage': "url('"+layerImage.imageFile+"')",
-                                        'backgroundPosition': layerImage.position,
-                                        'backgroundRepeat': ( layerImage.fixed ) ? 'no-repeat' : layerImage.repeat,
-                                        'backgroundSize': ( layerImage.size === 'custom' ) ? layerImage.sizeCustom : layerImage.size,
-                                        'opacity': layerImage.opacity,
-                                        'backgroundColor': 'transparent',
-                                        'backgroundAttachment': ( layerImage.fixed ) ? 'fixed' : 'unset',
-                                    }}
-                >
-                </div>
-            )
+            return <></>
         }
 
         case 'gradient':{

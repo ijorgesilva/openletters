@@ -26,7 +26,7 @@ export default function Html(
         },
         selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' ],
         allowProtocolRelative: true,
-      })
+    })
     return (
         <div className = 'html' dangerouslySetInnerHTML={{__html: sanitizedHTML}}></div>
     )

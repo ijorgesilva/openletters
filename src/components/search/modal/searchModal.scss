@@ -57,41 +57,72 @@
 /*
  * Search Results Algolia
  */
-.modal-dialog {
-    width: 90vw;
-    height: 90vh;
-    max-width: 90vw;
-    margin: 1rem auto;
-    .nav-item {
-        .nav-link {
-            padding: 0.25rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            .badge{
-                font-size: 0.8rem;
-                font-weight: bold;
-                line-height: 1rem;
+.modalRoot {
+    .modal {
+        .modal-dialog {
+            width: 90vw;
+            height: 90vh;
+            max-width: 90vw;
+            margin: 1rem auto;
+            .nav-item {
+                .nav-link {
+                    padding: 0.25rem 1rem;
+                    display: flex;
+                    justify-content: space-between;
+                    .badge{
+                        font-size: 0.8rem;
+                        font-weight: bold;
+                        line-height: 1rem;
+                    }
+                }
+            }
+            .modal-content {
+                height: 100%;
+                .modal-body {
+                    overflow-y: auto;
+                }
+            }
+            .searchResults {
+                margin-top: 0.5em;
+                z-index: 2;
+                right: 0;
+                border-radius: var(--border-radius);
+                -webkit-overflow-scrolling: touch;
+                .hits {
+                    ul {
+                        padding-left: 0;
+                        list-style: none;
+                        li {
+                            padding-bottom: 1rem;
+                        }
+                    }
+                }
             }
         }
     }
-    .modal-content {
-        height: 100%;
-        .modal-body {
-            overflow-y: auto;
+}
+.modal {
+    &.transparent  {
+        >.modal-dialog {
+            >.modal-content {
+                border: unset;
+                background-color: transparent;
+                border-radius: unset;
+                >.modal-header {
+                    border-bottom: unset;
+                    border-radius: unset;
+                    >.close {
+                        color: white;
+                    }
+                }
+            }
         }
     }
-    .searchResults {
-        margin-top: 0.5em;
-        z-index: 2;
-        right: 0;
-        border-radius: var(--border-radius);
-        -webkit-overflow-scrolling: touch;
-        .hits {
-            ul {
-                padding-left: 0;
-                list-style: none;
-                li {
-                    padding-bottom: 1rem;
+    &.frameless {
+        >.modal-dialog {
+            >.modal-content {
+                >.modal-header, >.modal-body {
+                    padding: unset;
                 }
             }
         }

@@ -41,8 +41,8 @@ export default function SectionBlurbs (
 
     const flexConfig = {
         display: 'flex',
-        flexDirection: direction ? direction : 'row',
         gap: gap ? gap : '1rem',
+        flexDirection: direction ? direction : 'row',
         justifyContent: justification ? justification : 'flex-start',
         alignItems: stretchedlink ? 'stretch' : 'flex-start',
         alignContent: stretchedlink ? 'stretch' : 'flex-start',

@@ -29,7 +29,11 @@ export default function CourseDetails( { pageContext, data, location } ){
 
     const searchIndices = [{ name: `vod`, title: `Messages` }, { name: `pages`, title: `Pages`} ]
     
-    const button = ( courseDetails.courseProvider.providerType.split(':')[0] === 'external' ) ?
+    const linkType =    courseDetails.courseProvider.providerType?.includes(':') ? 
+                            courseDetails.courseProvider.providerType.split(':')[0]
+                        : courseDetails.courseProvider.providerType
+
+    const button = (  linkType === 'external' ) ?
                 [
                     {
                         'sectionHeroButtonType': 'internal',
@@ -38,7 +42,7 @@ export default function CourseDetails( { pageContext, data, location } ){
                         'sectionHeroButtonText': courseDetails.courseProvider.providerExternal?.providerExternalUrlText || t('global.courses.enroll-now'),
                     } 
                 ]
-                : ( courseDetails.courseProvider.providerType.split(':')[0] === 'internal' ) ?
+                : ( linkType === 'internal' ) ?
                     [
                         {
                             'sectionHeroButtonType': 'internal',

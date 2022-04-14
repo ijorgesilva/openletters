@@ -1,12 +1,12 @@
 import { navigate } from 'gatsby'
-import React, { useContext } from 'react'
+import React from 'react' //ContextProviderComponent
 import { useState } from 'react'
 import Select from 'react-select'
 import Cookies from 'universal-cookie'
 
 import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
-import ContextConsumer from '../../provider/context'
+// import ContextConsumer from '../../provider/context'
 
 import './campusSelector.scss'
 
@@ -15,7 +15,7 @@ export default function CampusSelector( { className, location, mode } ) {
     let initialCampus
     const cookies = new Cookies()
     const defaultCampus = useWebsiteConfiguration().settingsDefaultCampus
-    const contextData = useContext( ContextConsumer )
+    // const contextData = useContext( ContextConsumer )
 
     // Getter Campuses and Formatter
     const campusesData = useCampuses()
@@ -56,7 +56,7 @@ export default function CampusSelector( { className, location, mode } ) {
         
         let currentCampus
         let currentUrl          =  location.pathname.split( '/' )
-        let currentCampusState  = ( contextData?.data?.currentCampus ) ? contextData.data.currentCampus : undefined
+        let currentCampusState  = ''//( contextData?.data?.currentCampus ) ? contextData.data.currentCampus : undefined
         let currentCampusCookie = ( campuses.find( x => x.value === cookies.get('campus') ) ) ? true : false
 
         // Current Campus Resolver

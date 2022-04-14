@@ -8,7 +8,7 @@ env:
     SITE_CANONICAL_URL: 'https://example.com'
     PATH_PREFIX: ''
     ## GraphQL
-    WP_SERVER: 'https://editor.example.com'
+    GATSBY_WP_SERVER: 'https://editor.example.com'
     WPGRAPHQL_URL: 'https://editor.example.com/wp/graphql'
     ## GraphQL Schema
     SCHEMA_PER_PAGE: '50'
@@ -50,7 +50,7 @@ env:
     - SITE_URL
     - SITE_CANONICAL_URL
     - PATH_PREFIX
-    - WP_SERVER
+    - GATSBY_WP_SERVER
     - WPGRAPHQL_URL
     - SCHEMA_PER_PAGE
     - SCHEMA_REQUEST_CONCURRENCY

@@ -40,11 +40,15 @@ export default function HeroPost (
                 </Row>
             </Container>
             <div className='background z-index-1'>
-                <GatsbyImage 
-                    image={backgroundPhoto} 
-                    className='card-img-top'
-                    alt=''
-                />
+                {
+                    backgroundPhoto ?
+                        <GatsbyImage 
+                            image={backgroundPhoto} 
+                            className='card-img-top'
+                            alt=''
+                        />
+                    : undefined
+                }
             </div>
         </div>
     )

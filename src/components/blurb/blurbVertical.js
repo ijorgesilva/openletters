@@ -56,13 +56,17 @@ export default function BlurbVertical (
                             :
                                 undefined
                         }
-                        <GatsbyImage
-                            className       = {`card-img-top ${ aspectRatio ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' }`}
-                            image           = { image }
-                            objectPosition  = { imagePosition }
-                            objectFit       = { imageFit }
-                            alt             = { title }
-                        />
+                        {
+                            image ?
+                                <GatsbyImage
+                                    className       = {`card-img-top ${ aspectRatio ? 'aspect-ratio-' + aspectRatio : 'aspect-ratio-16_9' }`}
+                                    image           = { image }
+                                    objectPosition  = { imagePosition }
+                                    objectFit       = { imageFit }
+                                    alt             = { title }
+                                />
+                            : undefined
+                        }
                     </div>
             }
 

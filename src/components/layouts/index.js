@@ -26,7 +26,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
 
                     <Helmet>
                         <style>
-                            { ( theme?.cssVariables ) ? `${ theme.cssVariables }` : ''} 
+                            { `${theme?.cssVariables ? theme.cssVariables : ''}`} 
                         </style>
                     </Helmet>
 
@@ -35,21 +35,29 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                     </main>
 
                     <CookieConsent
-                        location            = "bottom"
+                        location            = 'bottom'
                         buttonText          = { t('global.accept') } 
                         declineButtonText   = { t('global.cookie-consent.decline') }
-                        cookieName          = "gatsby-gdpr-google-analytics"
-                        style               = {{ background: "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)", color: "hsla(var(--light-h), var(--light-s), var(--light-l), 1)", borderTop: "var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)" }}
-                        buttonStyle         = {{ backgroundColor: "hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)", fontSize: "13px", color: "var(--light)", border: "var(--border-width) solid var(--light)" }}
+                        cookieName          = 'gatsby-gdpr-google-analytics'
+                        style               = {{ background: 'hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)', color: 'hsla(var(--light-h), var(--light-s), var(--light-l), 1)', borderTop: 'var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)' }}
+                        buttonStyle         = {{ backgroundColor: 'hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)', fontSize: '13px', color: 'var(--light)', border: 'var(--border-width) solid var(--light)' }}
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
 
-                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
-
-                    <style>
-                        { ( customCss ) ? customCss : ''}
-                    </style>
+                    {
+                        customCode ? 
+                            <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+                        : undefined
+                    }
+                    
+                    {
+                        customCss ?
+                            <style>
+                                {customCss}
+                            </style>
+                        : undefined
+                    }
 
                 </ContextProviderComponent>
             )
@@ -70,21 +78,29 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                     </main>
     
                     <CookieConsent
-                        location="bottom"
+                        location='bottom'
                         buttonText          = { t('global.accept') } 
                         declineButtonText   = { t('global.cookie-consent.decline') }
-                        cookieName          = "gatsby-gdpr-google-analytics"
-                        style               = {{ background: "hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)", color: "hsla(var(--light-h), var(--light-s), var(--light-l), 1)", borderTop: "var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)" }}
-                        buttonStyle         = {{ backgroundColor: "hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)", fontSize: "13px", color: "var(--light)", border: "var(--border-width) solid var(--light)" }}
+                        cookieName          = 'gatsby-gdpr-google-analytics'
+                        style               = {{ background: 'hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1)', color: 'hsla(var(--light-h), var(--light-s), var(--light-l), 1)', borderTop: 'var(--border-width) solid hsla(var(--light-h), var(--light-s), var(--light-l), 0.3)' }}
+                        buttonStyle         = {{ backgroundColor: 'hsla(var(--primary-h), var(--primary-s), var(--primary-l), 1)', fontSize: '13px', color: 'var(--light)', border: 'var(--border-width) solid var(--light)' }}
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
 
-                    <div dangerouslySetInnerHTML={{__html: customCode}}></div>
-
-                    <style>
-                        { ( customCss ) ? customCss : ''}
-                    </style>
+                    {
+                        customCode ? 
+                            <div dangerouslySetInnerHTML={{__html: customCode}}></div>
+                        : undefined
+                    }
+                    
+                    {
+                        customCss ?
+                            <style>
+                                {customCss}
+                            </style>
+                        : undefined
+                    }
 
                 </ContextProviderComponent>
             )
@@ -93,7 +109,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
     }
     
 }
-  
+
 Layout.propTypes = {
     children: PropTypes.node.isRequired,
 }

@@ -74,7 +74,7 @@ export default function ShareSection(
                 </Container>
 
                 {
-                    ( image ) ?
+                    image ?
                         <div className = {`media ${ ( imageAlignment ) ? imageAlignment : '' }`}>
                             <GatsbyImage 
                                 image           = { image }

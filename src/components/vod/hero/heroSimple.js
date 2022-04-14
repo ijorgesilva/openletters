@@ -94,19 +94,18 @@ export default function HeroSimple(
                         {
                             iconPlayFlag ?
                                 iconPlay ?
-                                    
-                                        <Link className='' to={playUrl}>
-                                                <GatsbyImage image={iconPlay} alt=''/>
-                                        </Link>
+                                    <Link className='' to={playUrl}>
+                                            <GatsbyImage image={iconPlay} alt=''/>
+                                    </Link>
                                 : 
-                                        <Link className='' to={playUrl}>
-                                            <StaticImage
-                                                src='../../../assets/img/global/button__play-white.svg'
-                                                alt=''
-                                                layout='fixed'
-                                                className='photo'
-                                            />
-                                        </Link>
+                                    <Link className='' to={playUrl}>
+                                        <StaticImage
+                                            src='../../../assets/img/global/button__play-white.svg'
+                                            alt=''
+                                            layout='fixed'
+                                            className='photo'
+                                        />
+                                    </Link>
                             :
                                 undefined
                         }

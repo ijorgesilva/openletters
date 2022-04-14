@@ -60,7 +60,7 @@ export default function RaiseHand (
                                 className   = { ( option.participationRaisehandCustomClass ) ? option.participationRaisehandCustomClass : '' }
                             >
                                 {
-                                    ( option.participationRaisehandCustomIcon?.localFile ) ?
+                                    option.participationRaisehandCustomIcon?.localFile ?
                                         <GatsbyImage 
                                             image           = {option.participationRaisehandCustomIcon.localFile.childImageSharp.gatsbyImageData}
                                             className       = 'item-icon'
