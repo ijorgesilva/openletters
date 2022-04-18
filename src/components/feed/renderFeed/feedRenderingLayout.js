@@ -45,25 +45,25 @@ export default function FeedRenderingLayout (
     const { t } = useTranslation()
 
     // We start with an empty list of items.
-    const [currentItems, setCurrentItems] = useState(null);
-    const [pageCount, setPageCount] = useState(0);
+    const [currentItems, setCurrentItems] = useState(null)
+    const [pageCount, setPageCount] = useState(0)
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
-    const [itemOffset, setItemOffset] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0)
 
     useEffect(() => {
         // Fetch items from another resources.
-        const endOffset = itemOffset + itemsPP;
-        setCurrentItems(items.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(items.length / itemsPP));
-    }, [itemOffset, itemsPP]);
+        const endOffset = itemOffset + itemsPP
+        setCurrentItems(items.slice(itemOffset, endOffset))
+        setPageCount(Math.ceil(items.length / itemsPP))
+    }, [itemOffset, itemsPP])
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPP) % items.length;
-        setItemOffset(newOffset);
-    };
-
+        const newOffset = (event.selected * itemsPP) % items.length
+        setItemOffset(newOffset)
+    }
+    
     switch (layoutType) {
         case 'default':{
             return(
@@ -164,40 +164,39 @@ function Items(
         hideButton,
 }) {
     return (
-      <>
-        {currentItems &&
-          currentItems.map((_, index) => (
-
-            <BlurbVertical
-                key                 = { index }
-                itemType            = { itemType }
-                image               = { _.image }
-                title               = { _.title }
-                subtitle            = { _.subtitle }
-                content             = { _.excerpt }
-                buttons             = { _.buttons }
-                // Aspect
-                mode                = { mode }
-                orientation         = { orientation }
-                truncate            = { truncate }
-                truncateLines       = { truncateLines }
-                className           = { `${itemClass ? itemClass : ''} ${_.cssClass ? _.cssClass : ''}` }
-                imagePosition       = { imagePosition }
-                imageFit            = { imageFit }
-                aspectRatio         = { aspectRatio }
-                border              = { border }
-                borderColor         = { borderColor }
-                // Button Behavior
-                // removeDefaultCss    = { removeDefaultCss }
-                stretchedlink       = { stretchedlink }
-                // Visibility
-                hideTitle           = { hideTitle }
-                hideSubtitle        = { hideSubtitle }
-                hideExcerpt         = { hideExcerpt }
-                hideImage           = { hideImage }
-                hideButton          = { hideButton }
-            />
-          ))}
-      </>
+    <>
+        { 
+            currentItems?.map((_, index) => (
+                <BlurbVertical
+                    key                 = { index }
+                    itemType            = { itemType }
+                    image               = { _.image }
+                    title               = { _.title }
+                    subtitle            = { _.subtitle }
+                    content             = { _.excerpt }
+                    buttons             = { _.buttons }
+                    // Aspect
+                    mode                = { mode }
+                    orientation         = { orientation }
+                    truncate            = { truncate }
+                    truncateLines       = { truncateLines }
+                    className           = { `${itemClass ? itemClass : ''} ${_.cssClass ? _.cssClass : ''}` }
+                    imagePosition       = { imagePosition }
+                    imageFit            = { imageFit }
+                    aspectRatio         = { aspectRatio }
+                    border              = { border }
+                    borderColor         = { borderColor }
+                    // Button Behavior
+                    // removeDefaultCss    = { removeDefaultCss }
+                    stretchedlink       = { stretchedlink }
+                    // Visibility
+                    hideTitle           = { hideTitle }
+                    hideSubtitle        = { hideSubtitle }
+                    hideExcerpt         = { hideExcerpt }
+                    hideImage           = { hideImage }
+                    hideButton          = { hideButton }
+                />
+        ))}
+    </>
     );
 }

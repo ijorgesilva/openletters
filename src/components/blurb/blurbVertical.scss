@@ -158,12 +158,18 @@
         }
     }
 
+    .buttons {
+        a:not(:last-child){
+            margin-right: 1rem;
+        }
+    }
+    
     /*
      * Item Types
      */
     
     &.card {
-       &.brand {
+        &.brand {
             background-color: transparent;
             border: unset;
             > .card-img {
@@ -176,7 +182,7 @@
                     margin-top: -50%;
                 }
             }
-       } 
+        } 
     }
 
     /*

@@ -29,6 +29,7 @@
     "eslint-config-react-app": "^7.0.0",
     "eslint-plugin-flowtype": "^8.0.3",
     "fortawesome": "0.0.1-security",
+    "fuse.js": "^6.5.3",
     "gatsby": "^4.11.1",
     "gatsby-cli": "^4.11.1",
     "gatsby-plugin-algolia": "^0.26.0",

@@ -82,6 +82,15 @@ const queriesCommon = {
         buttonUrl
         buttonCss
         buttonCssRemoveDefault
+        buttonModal {
+            modalTitle
+            modalVideoUrl
+            modalWidth
+            modalHtml
+            modalHeight
+            modalFrameless
+            modalTransparent
+        }
     `,
     itemConfiguration: `
         active
@@ -120,7 +129,8 @@ const queriesCommon = {
         sectionBlurbsConfigurationOrientation
         sectionBlurbsConfigurationType
         sectionBlurbsConfigurationDirection
-        sectionBlurbsConfigurationStretch
+        sectionBlurbsConfigurationStretchedBlurb
+        sectionBlurbsConfigurationStretchedLink
         sectionBlurbsConfigurationClass
         sectionBlurbsConfigurationGap
         sectionBlurbsConfigurationImagePosition

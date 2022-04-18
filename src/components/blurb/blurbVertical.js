@@ -3,7 +3,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import TextTruncate from 'react-text-truncate'
 
-import Buttons from '../buttons/buttons'
+import AdvancedButton from '../buttons/advanced'
 
 import './blurbVertical.scss'
 
@@ -16,6 +16,7 @@ export default function BlurbVertical (
         subtitle,
         content,
         tags,
+        style,
         buttons,
         itemType,
         stretchedlink,
@@ -43,7 +44,9 @@ export default function BlurbVertical (
     const cardOrientation = ( orientation === 'vertical' || orientation === 'horizontal' ) ? orientation : 'vertical'
 
     return (
-        <Card className = {`${ removeDefaultCss ? '' : 'blurbVertical' } ${ mode ? mode : 'light' } ${ className ? className : ''}  ${ border ? border : '' } ${ borderColor ? borderColor : '' } ${ itemGrow ? 'grow' : ''} ${ cardOrientation ? cardOrientation : ''} ${ itemType ? itemType : ''} ${ hideImage ? 'no-image' : '' }`}>
+        <Card className = {`${ removeDefaultCss ? '' : 'blurbVertical' } ${ mode ? mode : 'light' } ${ className ? className : ''}  ${ border ? border : '' } ${ borderColor ? borderColor : '' } ${ itemGrow ? 'grow' : ''} ${ cardOrientation ? cardOrientation : ''} ${ itemType ? itemType : ''} ${ hideImage ? 'no-image' : '' }`}
+                style = { style }
+        >
 
             {
                 hideImage ?
@@ -111,15 +114,22 @@ export default function BlurbVertical (
                     :
                         undefined
                 }
+
                 {
-                    ( buttons?.length > 0 ) ?
-                        <Buttons 
-                            stretchedlink   = { stretchedlink }
-                            buttons         = { buttons }
-                            className       = { hideButton ? 'hide' : '' }    
-                        />
-                    :
-                        undefined
+                    buttons?.length >= 0 ?
+                        <div className='buttons'>
+                            { 
+                                buttons?.map( ( _ , index ) => (
+                                    <AdvancedButton 
+                                        button          = { _ } 
+                                        key             = {index} 
+                                        stretchedLink   = { stretchedlink } 
+                                        className       = { hideButton ? 'hide' : '' }
+                                    />
+                                ))
+                            }
+                        </div>
+                    : undefined
                 }
             </Card.Body>
 

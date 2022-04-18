@@ -5,18 +5,22 @@ import { Modal } from 'react-bootstrap'
 import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import Html from '../../widget/html'
 
-export default function HeroButtons ( { button } ) {
+import './index.scss'
+
+export default function AdvancedButton ( { button, stretchedLink } ) {
 
     let buttonType = null;
-    switch(button.sectionHeroButtonType) {
+    const buttonTypeParsed = button.buttonType.includes(':') ? button.buttonType.split(':')[0] : button.buttonType
+
+    switch(buttonTypeParsed) {
         case 'internal':
-            buttonType = <InternalButton button = {button} />
+            buttonType = <InternalButton button = {button} stretchedLink = {stretchedLink} />
             break
         case 'external':
-            buttonType = <ExternalButton button = {button} />
+            buttonType = <ExternalButton button = {button} stretchedLink = {stretchedLink} />
             break
         case 'modal':
-            buttonType = <ModalButton button = {button} />
+            buttonType = <ModalButton button = {button} stretchedLink = {stretchedLink} />
             break
         default:
         buttonType = <></>
@@ -27,44 +31,42 @@ export default function HeroButtons ( { button } ) {
             {buttonType}
         </>
     )
-    
 
 }
 
-function InternalButton( { button } ){
-
+function InternalButton( { button, stretchedLink } ){
     return (
         <Link
-            className   = { `${ button.sectionHeroButtonCssRemoveDefault ? '' : 'btn btn-primary btn-lg' } ${ button.sectionHeroButtonCss ? button.sectionHeroButtonCss : '' }` }
-            to          = { button.sectionHeroButtonLink }  
-            target      = { button.sectionHeroButtonTarget }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
+            to          = { button.buttonLink }  
+            target      = { button.buttonTarget }
         >
-            {button.sectionHeroButtonText}
+            {button.buttonText}
         </Link>
     )
 }
 
-function ExternalButton( { button } ) {
+function ExternalButton( { button, stretchedLink } ) {
     return (
         <a 
-            className   = { `${ button.sectionHeroButtonCssRemoveDefault ? '' : 'btn btn-primary btn-lg' } ${ button.sectionHeroButtonCss ? button.sectionHeroButtonCss : '' }` }
-            href        = { button.sectionHeroButtonUrl }  
-            target      = { button.sectionHeroButtonTarget }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
+            href        = { button.buttonUrl }  
+            target      = { button.buttonTarget }
         >
-            {button.sectionHeroButtonText}
+            {button.buttonText}
         </a>
     )
 }
 
-function ModalButton( { button } ) {
+function ModalButton( { button, stretchedLink } ) {
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const modalInfo = button.sectionHeroButtonModal
-
+    const modalInfo = button.buttonModal
+    
     const heroModalCss = `
         .modal.heroModal > .modal-dialog{
             height: ${modalInfo.modalHeight}vh;
@@ -78,9 +80,9 @@ function ModalButton( { button } ) {
             <a  
                 onClick={handleShow} 
                 href    = { '#'}
-                className = { `${ button.sectionHeroButtonCssRemoveDefault ? '' : 'btn btn-primary btn-lg' } ${ button.sectionHeroButtonCss ? button.sectionHeroButtonCss : '' }` }
+                className = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
             >
-                { button.sectionHeroButtonText }
+                { button.buttonText }
             </a>
             <Modal  
                 show        = { show }

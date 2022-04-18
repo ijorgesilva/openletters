@@ -10,10 +10,10 @@ export default function Buttons (
         mode,
         className,
     } 
-    ) {
+) {
     
     return (
-        <div className="buttons">
+        <div className='buttons'>
             {
                 buttons.map ( ( _, index) => (
                     ( _.buttonType.split(":")[0] === 'internal' ) ?

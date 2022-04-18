@@ -2,7 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-import Buttons from '../buttons/buttons'
+import AdvancedButton from '../buttons/advanced'
 import RenderSection from '../renderSection'
 import Background from '../UI/background'
 
@@ -47,14 +47,20 @@ export default function SectionText ( {
                                 }
 
                                 {
-                                    ( buttons?.length > 0 ) ?
-                                        <Buttons 
-                                            buttons     = { buttons }
-                                            mode        = { mode }
-                                        />
-                                    :
-                                        undefined
+                                    buttons?.length >= 0 ?
+                                        <div className='buttons'>
+                                            { 
+                                                buttons?.map( ( _ , index ) => (
+                                                    <AdvancedButton 
+                                                        button = { _ } 
+                                                        key    = {index}
+                                                    />
+                                                ))
+                                            }
+                                        </div>
+                                    : undefined
                                 }
+
                             </div>
                         :
                             undefined

@@ -39,7 +39,7 @@ export default function HeroDynamic (
                         <h5 className={`mt-2 ${ mode === 'dark' ? 'text-white' : 'text-black'}`} dangerouslySetInnerHTML={{__html: subtitle}}></h5>
                         
                         {
-                            buttons ?
+                            buttons?.length >= 0 ?
                                 <div className='buttons'>
                                     { 
                                         buttons?.map( ( _ , index ) => (

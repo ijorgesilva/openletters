@@ -465,6 +465,7 @@ export default function RenderSection (
                     size            = { sectionSize }
                     campus          = { campus }
                     location        = { location }
+                    backgroundLayers    = { sectionBackground }
                     // Items
                     items           = { carouselItemsFeed }
                     // Configuration
@@ -511,6 +512,7 @@ export default function RenderSection (
             const blurbsConfiguration           = section.sectionDetails.sectionBlurbs.sectionBlurbsConfiguration
             const blurbsItemsCustom             = section.sectionDetails.sectionBlurbs.sectionBlurbsItems
             const blurbsButtonConfiguration     = section.sectionDetails.sectionBlurbs.sectionBlurbsFeed.buttonBehavior
+            const blurbsNFSConf                 = section.sectionDetails.sectionBlurbs.sectionNfs
 
             const blurbsDataType      = section.sectionDetails.sectionBlurbs.sectionBlurbsType
             const blurbsItemsFeed     =   ( blurbsDataType === 'custom' && blurbsItemsCustom.length > 0 ) ? 
@@ -530,11 +532,13 @@ export default function RenderSection (
                     containerWidth  = { sectionContainerWidth }
                     size            = { sectionSize }
                     items           = { blurbsItemsFeed }
+                    backgroundLayers    = { sectionBackground }
                     // Configuration
                     itemType        = { blurbsConfiguration.sectionBlurbsConfigurationType?.split(':')[0] }
                     orientation     = { blurbsConfiguration.sectionBlurbsConfigurationOrientation?.split(':')[0] }
                     direction       = { blurbsConfiguration.sectionBlurbsConfigurationDirection }
-                    stretchedlink   = { blurbsConfiguration.sectionBlurbsConfigurationStretch }
+                    stretchedLink   = { blurbsConfiguration.sectionBlurbsConfigurationStretchedLink }
+                    stretchedBlurb  = { blurbsConfiguration.sectionBlurbsConfigurationStretchedBlurb }
                     justification   = { blurbsConfiguration.sectionBlurbsConfigurationJustification?.split(':')[0] }
                     itemClass       = { blurbsConfiguration.sectionBlurbsConfigurationClass }
                     gap             = { blurbsConfiguration.sectionBlurbsConfigurationGap?.split(':')[0] }
@@ -552,6 +556,9 @@ export default function RenderSection (
                     hideSubtitle    = { blurbsConfiguration.hideSubtitle }
                     hideExcerpt     = { blurbsConfiguration.hideExcerpt }
                     hideButton      = { blurbsConfiguration.hideButton }
+                    // Navigation, Filtering and Sorting
+                    navigation      = { blurbsNFSConf?.navigation }
+                    filtering       = { blurbsNFSConf?.filtering.search }
                 />
             )
             

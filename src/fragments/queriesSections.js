@@ -238,6 +238,16 @@ const queriesSections = `
             sectionBlurbsConfiguration {
                 ${queriesCommon.blurbConfiguration}
             }
+            # NFS: Navigation, Filtering and Sorting
+            sectionNfs {
+                filtering {
+                    search
+                }
+                navigation {
+                    pagination
+                    itemsPerPage
+                }
+            }
         }
 
         ## Share

@@ -3,7 +3,7 @@ import React from 'react'
 
 import './paginationBasic.scss'
 
-export default function paginationBasic( {className, pages, slug} ) {
+export default function PaginationBasic( {className, pages, slug} ) {
 
     const { currentPage, numberPages } = pages
     const isFirst = currentPage === 1

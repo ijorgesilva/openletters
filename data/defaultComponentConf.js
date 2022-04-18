@@ -1,5 +1,5 @@
 const componentConf = {
-  
+
     blurbVertical: {
         'orientation': 'horizontal',
         'truncate': true,
@@ -21,5 +21,5 @@ const componentConf = {
     }
 
 };
-  
+
 module.exports = componentConf;

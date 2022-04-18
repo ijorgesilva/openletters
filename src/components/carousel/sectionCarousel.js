@@ -4,6 +4,7 @@ import Carousel from 'react-multi-carousel'
 
 import { useGetResponsive } from '../../hooks/useGetResponsive'
 import BlurbVertical from '../blurb/blurbVertical'
+import Background from '../UI/background'
 
 import 'react-multi-carousel/lib/styles.css'
 import './sectionCarousel.scss'
@@ -17,6 +18,7 @@ export default function SectionCarousel ( {
         containerWidth, 
         mode, 
         size,
+        backgroundLayers,
         // Behavior
         swipeable, 
         draggable, 
@@ -132,6 +134,10 @@ export default function SectionCarousel ( {
                     }
                 </div>
             </Container>
+
+            <Background
+                layers  = { backgroundLayers }
+            />
 
         </section>
         
