@@ -59,6 +59,16 @@ export default function SectionBlurbs (
 
     let itemList = items?.list
 
+    // Pagination
+    const [currentItems, setCurrentItems] = useState(null)
+    const [pageCount, setPageCount] = useState(0)
+    const [itemOffset, setItemOffset] = useState(0)
+    // Search Queries
+    const [query, updateQuery] = useState('') 
+
+    let itemsPP = navigation?.itemsPerPage ? navigation.itemsPerPage : 12
+    const endOffset = itemOffset + itemsPP
+
     const flexConfig = {
         display: 'flex',
         gap: gap.includes('-') ? `${gap?.split('-')[1]}rem` : '1rem',
@@ -66,45 +76,6 @@ export default function SectionBlurbs (
         justifyContent: justification ? justification : 'flex-start',
         alignItems: stretchedBlurb ? 'stretch' : 'flex-start',
         alignContent: stretchedBlurb ? 'stretch' : 'flex-start',
-    }
-
-    // Pagination
-    const [currentItems, setCurrentItems] = useState(null)
-    const [pageCount, setPageCount] = useState(0)
-    const [itemOffset, setItemOffset] = useState(0)
-
-    let itemsPP = navigation?.itemsPerPage ? navigation.itemsPerPage : 12
-    const endOffset = itemOffset + itemsPP
-
-    useEffect(() => {
-        if ( !navigation?.pagination && !filtering ) {
-            setCurrentItems(itemList)
-        }
-        else {
-            // TODO: Reset listing when query === '', currently not working as expected.
-            if( query != '' ) {
-                setCurrentItems(liveQueryResults.slice(itemOffset, endOffset))
-                setPageCount(Math.ceil(liveQueryResults.length / itemsPP))
-            } 
-            if( query === '' ) {
-                setCurrentItems( itemList.slice(itemOffset, endOffset ) )
-                setPageCount(Math.ceil( itemList.length / itemsPP ) )
-            }
-        }
-    }, [ itemOffset, itemsPP, query, pageCount, liveQueryResults ])
-
-    const handlePageClick = ( event ) => {
-        const newOffset = (event.selected * itemsPP) % itemList.length
-        setItemOffset(newOffset)
-    }
-
-    // Sorting: Search
-    const [query, updateQuery] = useState('')
-
-    function onSearch( { currentTarget } ) {
-        updateQuery(currentTarget.value)
-        setItemOffset(0)
-        setPageCount( Math.ceil( liveQueryResults.length / itemsPP ) )
     }
 
     const searchOptions = {
@@ -133,7 +104,34 @@ export default function SectionBlurbs (
     const resultsQuery = fuse.search(query)
     const liveQueryResults = query != '' ? resultsQuery.map( _ => _.item ) : itemList
 
-    console.log( { pageCount, itemOffset, currentItems, resultsQuery, liveQueryResults, query } )
+    useEffect(() => {
+        if ( !navigation?.pagination && !filtering ) {
+            setCurrentItems(itemList)
+        }
+        else {
+            // TODO: Reset listing when query === '', currently not working as expected.
+            if( query != '' ) {
+                setCurrentItems(liveQueryResults.slice(itemOffset, endOffset))
+                setPageCount(Math.ceil(liveQueryResults.length / itemsPP))
+            } 
+            if( query === '' ) {
+                setCurrentItems( itemList.slice(itemOffset, endOffset ) )
+                setPageCount(Math.ceil( itemList.length / itemsPP ) )
+            }
+        }
+    }, [ itemOffset, itemsPP, query, pageCount, liveQueryResults ])
+
+    const handlePageClick = ( event ) => {
+        const newOffset = (event.selected * itemsPP) % itemList.length
+        setItemOffset(newOffset)
+    }
+
+    function onSearch( { currentTarget } ) {
+        updateQuery(currentTarget.value)
+        setItemOffset(0)
+        setPageCount( Math.ceil( liveQueryResults.length / itemsPP ) )
+    }
+
 
     return (
         <section 
