@@ -5,7 +5,7 @@ import playStoreIcon from "../../assets/img/global/Google_Play_Store_badge_EN.sv
 
 export default function AppLinks ( { className, appStoreUrl, playStoreUrl } ){
     return (
-        <div className={`${ ( className ) ? className + ' ' : ''}applinks`}>
+        <div className={`${ className ? className + ' ' : ''}applinks`}>
 
             <a href={ appStoreUrl } 
                 title="Download on App Store" 

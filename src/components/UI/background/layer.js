@@ -14,7 +14,7 @@ export default function Layer ( { params, zindex, className } ) {
             }
             return (
                 <div
-                    className   =   { `layer-color ${ ( className ) ? className : '' }` }
+                    className   =   { `layer-color ${ className ? className : '' }` }
                     style       =   {{
                                         'zIndex': zindex,
                                         'backgroundColor': layerColor.color,
@@ -77,7 +77,7 @@ export default function Layer ( { params, zindex, className } ) {
 
             return (
                 <div
-                    className               =   { `layer-gradient ${ ( className ) ? className : '' }` }
+                    className               =   { `layer-gradient ${ className ? className : '' }` }
                     style                   =   {{
                                                     'zIndex': zindex,
                                                     'opacity': '',
@@ -95,7 +95,7 @@ export default function Layer ( { params, zindex, className } ) {
             }
             return (
                 <div
-                    className               =   { `layer-text ${ ( className ) ? className : '' }` }
+                    className               =   { `layer-text ${ className ? className : '' }` }
                     style                   =   {{
                                                     'zIndex': zindex,
                                                     'opacity': layerText.opacity,

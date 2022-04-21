@@ -11,7 +11,7 @@ export default function BlurbVerticalDark (
 
     return (
         
-            <div className={`blurbVerticalDark card ${ ( mode ) ? mode : 'light'} ${ ( className ) ? className : '' }`}>
+            <div className={`blurbVerticalDark card ${ ( mode ) ? mode : 'light'} ${ className ? className : '' }`}>
             {
                 (linkType === 'external') ?
                     <a href={link} target={ target ? target : '_self' }>

@@ -50,8 +50,8 @@ export default function RenderSection (
                                         sectionConfiguration.sectionConfigurationId 
                                     : section.slug
     const sectionClassname      =   ( sectionConfiguration?.sectionConfigurationClassname ) ? 
-                                        `${sectionConfiguration.sectionConfigurationClassname} ${ ( className ) ? className : ''}`
-                                    : `${ ( className ) ? className : ''}`
+                                        `${sectionConfiguration.sectionConfigurationClassname} ${ className ? className : ''}`
+                                    : `${ className ? className : ''}`
     const sectionColorScheme    =   ( sectionConfiguration?.sectionConfigurationColorScheme.split(':')[0]  ) ? 
                                         sectionConfiguration.sectionConfigurationColorScheme.split(':')[0] === 'inherit' ?
                                             mode

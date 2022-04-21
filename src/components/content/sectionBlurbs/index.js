@@ -1,6 +1,8 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Fuse from 'fuse.js'
 import React, { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Form, InputGroup, FormControl, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import ReactPaginate from 'react-paginate'
 
@@ -50,14 +52,13 @@ export default function SectionBlurbs (
         // Visibility
         hideImage, hideTitle, hideSubtitle, hideExcerpt, hideButton,
         // Navigation, Filtering and Sorting
-        filtering,
-        navigation,
+        filtering, navigation,
     }
 ) {
     const { t } = useTranslation()
 
     let itemList = items?.list
-    
+
     const flexConfig = {
         display: 'flex',
         gap: gap.includes('-') ? `${gap?.split('-')[1]}rem` : '1rem',
@@ -67,51 +68,80 @@ export default function SectionBlurbs (
         alignContent: stretchedBlurb ? 'stretch' : 'flex-start',
     }
 
-    // Sorting
-        // Search
-        const [query, updateQuery] = useState('')
-        function onSearch({ currentTarget }) {
-            updateQuery(currentTarget.value)
-        }
-        const fuse = new Fuse(itemList, {
-            keys: [
-                'name',
-                'company',
-                'species'
-            ],
-            includeScore: true
-        })
-        const results = fuse.search(query)
-        const itemResults = results.map(_ => _)
-
-
     // Pagination
-    let itemsPP = navigation?.itemsPerPage ? navigation.itemsPerPage : 12
     const [currentItems, setCurrentItems] = useState(null)
     const [pageCount, setPageCount] = useState(0)
     const [itemOffset, setItemOffset] = useState(0)
 
-    useEffect(() => {
-        const endOffset = itemOffset + itemsPP
-        setCurrentItems(itemList.slice(itemOffset, endOffset))
-        setPageCount(Math.ceil(itemList.length / itemsPP))
-    }, [itemOffset, itemsPP])
+    let itemsPP = navigation?.itemsPerPage ? navigation.itemsPerPage : 12
+    const endOffset = itemOffset + itemsPP
 
-    const handlePageClick = (event) => {
+    useEffect(() => {
+        if ( !navigation?.pagination && !filtering ) {
+            setCurrentItems(itemList)
+        }
+        else {
+            // TODO: Reset listing when query === '', currently not working as expected.
+            if( query != '' ) {
+                setCurrentItems(liveQueryResults.slice(itemOffset, endOffset))
+                setPageCount(Math.ceil(liveQueryResults.length / itemsPP))
+            } 
+            if( query === '' ) {
+                setCurrentItems( itemList.slice(itemOffset, endOffset ) )
+                setPageCount(Math.ceil( itemList.length / itemsPP ) )
+            }
+        }
+    }, [ itemOffset, itemsPP, query, pageCount, liveQueryResults ])
+
+    const handlePageClick = ( event ) => {
         const newOffset = (event.selected * itemsPP) % itemList.length
         setItemOffset(newOffset)
     }
-    
-    console.log({filtering, itemResults})
-    // console.log({navigation, items})
-    // console.log({name:`${itemType}`,items})
+
+    // Sorting: Search
+    const [query, updateQuery] = useState('')
+
+    function onSearch( { currentTarget } ) {
+        updateQuery(currentTarget.value)
+        setItemOffset(0)
+        setPageCount( Math.ceil( liveQueryResults.length / itemsPP ) )
+    }
+
+    const searchOptions = {
+        keys: [
+            {
+                name: 'title',
+                weight: 0.9,
+            },
+            {
+                name: 'subtitle',
+                weight: 0.7,
+            },
+            {
+                name: 'excerpt',
+                weight: 0.6,
+            },
+            {
+                name: 'tags',
+                weight: 0.1,
+            },
+        ],
+        includeScore: true,
+    }
+
+    const fuse = new Fuse(itemList, searchOptions)
+    const resultsQuery = fuse.search(query)
+    const liveQueryResults = query != '' ? resultsQuery.map( _ => _.item ) : itemList
+
+    console.log( { pageCount, itemOffset, currentItems, resultsQuery, liveQueryResults, query } )
 
     return (
         <section 
-            id          = {id}
+            id          = { id}
             className   = {`sectionBlurbs ${ size ? size : ''}  ${ className ? className : ''} ${ mode ? mode : 'light' }`}
         >
             <Container fluid = { containerWidth === 'container' ? undefined : true }>
+
                 {
                     ( title || content ) ?
                         <div className='general'>
@@ -134,99 +164,116 @@ export default function SectionBlurbs (
 
                 {
                     filtering ? 
-                        <div>
-                            <input type='text' value={query} onChange={onSearch} />
-                        </div>
+                        <Form>
+                            <Form.Row className='align-items-center'>
+                                <Col xs='auto'>
+                                    <Form.Label htmlFor='inlineFormInputGroup' srOnly>
+                                        {t('global.search.placeholder')}
+                                    </Form.Label>
+                                    <InputGroup 
+                                    >
+                                        <InputGroup.Append>
+                                            <InputGroup.Text>
+                                                <FontAwesomeIcon 
+                                                    icon      = {faSearch} 
+                                                    size      = 'lg'
+                                                    className = {`SearchIcon ${ ( mode ) ? mode : 'light'}`}
+                                                />
+                                            </InputGroup.Text>
+                                        </InputGroup.Append>
+                                        <FormControl 
+                                            id='inlineFormInputGroup'
+                                            className     = {`SearchInput ${ mode ? mode : 'light'}`}
+                                            type          = 'text'
+                                            placeholder   = { t('global.search.placeholder') }
+                                            aria-label    = { t('global.search.placeholder') }
+                                            value         = { query }
+                                            onChange      = { onSearch }
+                                            aria-describedby = 'search'
+                                        />
+                                    </InputGroup>
+                                </Col>
+                            </Form.Row>
+                        </Form>
                     : undefined
                 }
 
-                <div className='items' style={flexConfig}>
-                    {/* {
-                        filtering ? 
-                            itemResults?.map( ( _, index ) => (
-
-                            ))
-                        : undefined
-                            
-                    } */}
+                <div className = 'items' style = {flexConfig}>
                     {
-                        navigation?.pagination ?
-                            currentItems?.map( (_, index) => (
-                                <BlurbVertical
-                                    key                 = { index }
-                                    image               = { _.image }
-                                    title               = { _.title }
-                                    subtitle            = { _.subtitle }
-                                    content             = { _.excerpt }
-                                    tags                = { _.tags }
-                                    style               = { { maxWidth: stretchedBlurb ? '100%' : '320px', } }
-                                    
-                                    itemType            = { itemType }
-                                    mode                = { mode }
-                                    buttons             = { _.buttons }
+                        query === '' ?
+                        currentItems?.map( (_, index) => (
+                            <BlurbVertical
+                                key                 = { index }
+                                image               = { _.image }
+                                title               = { _.title }
+                                subtitle            = { _.subtitle }
+                                content             = { _.excerpt }
+                                tags                = { _.tags }
+                                style               = { { maxWidth: stretchedBlurb ? '100%' : '320px', } }
+                                
+                                itemType            = { itemType }
+                                mode                = { mode }
+                                buttons             = { _.buttons }
 
-                                    counter             = { index + 1 }
-                                    orientation         = { orientation }
-                                    
-                                    truncate            = { truncate }
-                                    truncateLines       = { truncateLines }
-                                    stretchedlink       = { stretchedLink }
-                                    className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
-                                    removeDefaultCss    = { _.itemCssRemoveDefault }
-                                    aspectRatio         = { aspectRatio }
-                                    imageFit            = { imageFit }
-                                    imagePosition       = { imagePosition }
-                                    border              = { border }
-                                    borderColor         = { borderColor }
-                                    itemGrow            = { itemGrow }
-                                    // Visibility
-                                    hideImage           = { hideImage }
-                                    hideTitle           = { hideTitle }
-                                    hideSubtitle        = { hideSubtitle }
-                                    hideExcerpt         = { hideExcerpt }
-                                    hideButton          = { hideButton }
-                                />
-                            )) 
-                        :   
-                            ( itemList?.length > 0 ) ?
-                                itemList.map( (_, index) => (
-                                    <BlurbVertical
-                                        key                 = { index }
-                                        image               = { _.image }
-                                        title               = { _.title }
-                                        subtitle            = { _.subtitle }
-                                        content             = { _.excerpt }
-                                        tags                = { _.tags }
-                                        style               = { { maxWidth: stretchedBlurb ? '100%' : '320px', } }
-                                        
-                                        itemType            = { itemType }
-                                        mode                = { mode }
-                                        buttons             = { _.buttons }
+                                counter             = { index + 1 }
+                                orientation         = { orientation }
+                                
+                                truncate            = { truncate }
+                                truncateLines       = { truncateLines }
+                                stretchedlink       = { stretchedLink }
+                                className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
+                                removeDefaultCss    = { _.itemCssRemoveDefault }
+                                aspectRatio         = { aspectRatio }
+                                imageFit            = { imageFit }
+                                imagePosition       = { imagePosition }
+                                border              = { border }
+                                borderColor         = { borderColor }
+                                itemGrow            = { itemGrow }
+                                // Visibility
+                                hideImage           = { hideImage }
+                                hideTitle           = { hideTitle }
+                                hideSubtitle        = { hideSubtitle }
+                                hideExcerpt         = { hideExcerpt }
+                                hideButton          = { hideButton }
+                            />
+                        ))
+                        :
+                        currentItems?.map( (_, index) => (
+                            <BlurbVertical
+                                key                 = { index }
+                                image               = { _.image }
+                                title               = { _.title }
+                                subtitle            = { _.subtitle }
+                                content             = { _.excerpt }
+                                tags                = { _.tags }
+                                style               = { { maxWidth: stretchedBlurb ? '100%' : '320px', } }
+                                
+                                itemType            = { itemType }
+                                mode                = { mode }
+                                buttons             = { _.buttons }
 
-                                        counter             = { index + 1 }
-                                        orientation         = { orientation }
-                                        
-                                        truncate            = { truncate }
-                                        truncateLines       = { truncateLines }
-                                        stretchedlink       = { stretchedLink }
-                                        className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
-                                        removeDefaultCss    = { _.itemCssRemoveDefault }
-                                        aspectRatio         = { aspectRatio }
-                                        imageFit            = { imageFit }
-                                        imagePosition       = { imagePosition }
-                                        border              = { border }
-                                        borderColor         = { borderColor }
-                                        itemGrow            = { itemGrow }
-                                        // Visibility
-                                        hideImage           = { hideImage }
-                                        hideTitle           = { hideTitle }
-                                        hideSubtitle        = { hideSubtitle }
-                                        hideExcerpt         = { hideExcerpt }
-                                        hideButton          = { hideButton }
-                                    />
-                                ))
-                            :
-                                undefined
+                                counter             = { index + 1 }
+                                orientation         = { orientation }
+                                
+                                truncate            = { truncate }
+                                truncateLines       = { truncateLines }
+                                stretchedlink       = { stretchedLink }
+                                className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
+                                removeDefaultCss    = { _.itemCssRemoveDefault }
+                                aspectRatio         = { aspectRatio }
+                                imageFit            = { imageFit }
+                                imagePosition       = { imagePosition }
+                                border              = { border }
+                                borderColor         = { borderColor }
+                                itemGrow            = { itemGrow }
+                                // Visibility
+                                hideImage           = { hideImage }
+                                hideTitle           = { hideTitle }
+                                hideSubtitle        = { hideSubtitle }
+                                hideExcerpt         = { hideExcerpt }
+                                hideButton          = { hideButton }
+                            />
+                        ))
                     }
                 </div>
 
@@ -234,27 +281,29 @@ export default function SectionBlurbs (
                     navigation?.pagination ?
                         <nav className='mt-2'>
                             <ReactPaginate
-                                onPageChange={handlePageClick}
-                                pageRangeDisplayed={5}
-                                pageCount={pageCount}
-                                nextLabel={t('global.next')}
-                                previousLabel={t('global.previous')}
-                                renderOnZeroPageCount={null}
+                                onPageChange            = { handlePageClick }
+                                pageRangeDisplayed      = {5}
+                                pageCount               = { pageCount }
+                                nextLabel               = { t('global.next') }
+                                previousLabel           = { t('global.previous') }
+                                renderOnZeroPageCount   = {null}
                                 // Class Assignment
-                                containerClassName='pagination'
-                                breakClassName='page-item'
-                                breakLabel={<a className='page-link'>...</a>}
-                                pageClassName='page-item'
-                                previousClassName='page-item'
-                                nextClassName='page-item'
-                                pageLinkClassName='page-link'
-                                previousLinkClassName='page-link'
-                                nextLinkClassName='page-link'
-                                activeClassName='active'
+                                containerClassName      = 'pagination'
+                                breakClassName          = 'page-item'
+                                breakLabel              = {<a className='page-link'>...</a>}
+                                pageClassName           = 'page-item'
+                                previousClassName       = 'page-item'
+                                nextClassName           = 'page-item'
+                                pageLinkClassName       = 'page-link'
+                                previousLinkClassName   = 'page-link'
+                                nextLinkClassName       = 'page-link'
+                                activeClassName         = 'active'
+                                forcePage               = { query ? 0 : undefined }
                             />
                         </nav>
                     : undefined
                 }
+
             </Container>
 
             <Background

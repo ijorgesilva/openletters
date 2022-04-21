@@ -57,7 +57,7 @@ export default function SectionFeedCarousel(
 
     return (
 
-        <section className={`sectionFeedCarousel ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ ( className ) ? className : '' }`} id={id} style={styles}>
+        <section className={`sectionFeedCarousel ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id} style={styles}>
             <Container fluid = { width === 'container' ? undefined : true }>
                 {
                     title && titleUrl ? 

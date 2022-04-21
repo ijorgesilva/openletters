@@ -61,7 +61,7 @@ export const useGetFeed = (
             rawList = builtFeedObject?.list ? builtFeedObject.list : undefined
             if( rawList?.length > 0 ) {
                 rawList.map( (_, index) => (
-                     _.postDetails ?
+                    _.postDetails ?
                         listObject.list.push(
                             {
                                 title: _.title,

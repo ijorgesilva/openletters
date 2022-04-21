@@ -12,7 +12,7 @@ export default function BlurbVerticalSeries (
     
     return (
         
-            <div className={`blurbVerticalSeries card user-select-none ${ ( mode ) ? mode : 'light'} ${ ( className ) ? className : ''}`}>
+            <div className={`blurbVerticalSeries card user-select-none ${ ( mode ) ? mode : 'light'} ${ className ? className : ''}`}>
                 
                     <div className={`card-img-container`}>
                         <Link to={link}>

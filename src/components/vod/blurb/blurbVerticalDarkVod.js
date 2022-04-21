@@ -21,7 +21,7 @@ export default function BlurbVerticalDarkVod (
 
     return (
         
-            <div className={`blurbVerticalVod card user-select-none ${ ( mode ) ? mode : 'light' } ${ ( className ) ? className : '' }`}>
+            <div className={`blurbVerticalVod card user-select-none ${ ( mode ) ? mode : 'light' } ${ className ? className : '' }`}>
                 
                     <div className="card-img-container">
                         <Link to={link}>
