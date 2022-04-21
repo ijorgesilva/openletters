@@ -60,24 +60,25 @@ export default function SectionText ( {
                                         </div>
                                     : undefined
                                 }
+                                
+                                {
+                                    ( sections?.length > 0 ) ?
+                                        sections.map( ( section, index ) => (
+                                            <RenderSection 
+                                                key         = { index }
+                                                section     = { section }
+                                                campus      = { campus }
+                                                mode        = { mode }
+                                                filter      = { { campus: campus } }
+                                                location    = { location }
+                                                className   = { 'nested' }
+                                            />
+                                        ))
+                                    :
+                                        undefined
+                                }
 
                             </div>
-                        :
-                            undefined
-                    }
-                    {
-                        ( sections?.length > 0 ) ?
-                            sections.map( ( section, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { section }
-                                    campus      = { campus }
-                                    mode        = { mode }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    className   = { 'nested' }
-                                />
-                            ))
                         :
                             undefined
                     }
