@@ -1,4 +1,4 @@
-### Type definitions saved at 2022-04-21T18:27:46.422Z ###
+### Type definitions saved at 2022-04-21T21:28:07.856Z ###
 
 enum RemoteFileFit {
   COVER
@@ -257,8 +257,6 @@ type Directory implements Node @dontInfer {
 type Site implements Node @derivedTypes @dontInfer {
   buildTime: Date @dateformat
   siteMetadata: SiteSiteMetadata
-  port: Int
-  host: String
   flags: SiteFlags
   pathPrefix: String
   polyfill: Boolean
