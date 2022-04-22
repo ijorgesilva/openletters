@@ -105,7 +105,7 @@ export default function SectionBlurbs (
     const liveQueryResults = query != '' ? resultsQuery.map( _ => _.item ) : itemList
 
     useEffect(() => {
-        console.log({navigation, filtering})
+        
         if ( !navigation?.pagination && !filtering ) {
             setCurrentItems(itemList)
         }
@@ -140,8 +140,6 @@ export default function SectionBlurbs (
         setItemOffset(0)
         setPageCount( Math.ceil( liveQueryResults.length / itemsPP ) )
     }
-
-    console.log( { itemList, currentItems, liveQueryResults, itemsPP } )
 
     return (
         <section 

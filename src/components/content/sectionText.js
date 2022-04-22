@@ -30,7 +30,7 @@ export default function SectionText ( {
             <div className={`columns ${ media?.sectionTextbasicMediaType ? 'two-columns' : 'one-column' }`}>
                 <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
-                        ( title || content || buttons?.length > 0 ) ?
+                        ( title || content || buttons?.length > 0 || sections?.length > 0 ) ?
                             <div className='general'>
                                 {
                                     ( title ) ?
