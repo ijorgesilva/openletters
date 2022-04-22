@@ -2,6 +2,8 @@
 
 .searchModal {
     
+    height: 100%;
+
     &.light {
         // Search
         .searchResults {
@@ -32,7 +34,6 @@
         }
     }
     
-    height: 100%;
     .btn {
         border: unset;
         border-radius: unset;
@@ -46,19 +47,11 @@
 
 }
 
-.searchResults {
-    .indices,
-    .results {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-}
-
 /*
  * Search Results Algolia
  */
 .modalRoot {
-    .modal {
+    &.modal {
         .modal-dialog {
             width: 90vw;
             height: 90vh;
@@ -66,9 +59,12 @@
             margin: 1rem auto;
             .nav-item {
                 .nav-link {
-                    padding: 0.25rem 1rem;
+                    padding: 0.25rem 0.25rem;
                     display: flex;
                     justify-content: space-between;
+                    &.active {
+                        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                    }
                     .badge{
                         font-size: 0.8rem;
                         font-weight: bold;
@@ -88,6 +84,11 @@
                 right: 0;
                 border-radius: var(--border-radius);
                 -webkit-overflow-scrolling: touch;
+                .indices,
+                .results {
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
+                }
                 .hits {
                     ul {
                         padding-left: 0;
@@ -96,33 +97,6 @@
                             padding-bottom: 1rem;
                         }
                     }
-                }
-            }
-        }
-    }
-}
-.modal {
-    &.transparent  {
-        >.modal-dialog {
-            >.modal-content {
-                border: unset;
-                background-color: transparent;
-                border-radius: unset;
-                >.modal-header {
-                    border-bottom: unset;
-                    border-radius: unset;
-                    >.close {
-                        color: white;
-                    }
-                }
-            }
-        }
-    }
-    &.frameless {
-        >.modal-dialog {
-            >.modal-content {
-                >.modal-header, >.modal-body {
-                    padding: unset;
                 }
             }
         }

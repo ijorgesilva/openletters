@@ -9,7 +9,7 @@ env:
     SITE_DESCRIPTION: ''
     SITE_URL: ''
     SITE_COPYRIGHT: ''
-    SITE_CANONICAL_URL: ''
+    GATSBY_SITE_CANONICAL_URL: ''
     PATH_PREFIX: ''
     ## GraphQL Server and Schema conf
     GATSBY_WP_SERVER: ''
@@ -47,7 +47,7 @@ env:
   exported-variables:
     - NODE_ENV
     - SITE_URL
-    - SITE_CANONICAL_URL
+    - GATSBY_SITE_CANONICAL_URL
     - PATH_PREFIX
     - GATSBY_WP_SERVER
     - WPGRAPHQL_URL

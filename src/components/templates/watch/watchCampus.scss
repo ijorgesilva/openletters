@@ -1,23 +1,28 @@
-/** 
- Page Specific 
- **/
- .watchCampus {
+/* 
+ * Page Specific 
+ */
+.watchCampus {
 
-     &.light {
-        .navlocal{
-        }
-     }
+   &.light {
+      .navlocal{
+         // 
+      }
+   }
 
-     &.dark {
-        &.top{
+   &.dark {
+      &.top{
 
-        }
-        .navlocal{
-           &.main{
-               position: absolute;
-               background-color: transparent !important;
-           }
-        }
-     }
+      }
+      .navlocal{
+         &.main{
+            position: absolute;
+         }
+         background-color: transparent !important;
+         transition: var(--transition-regular);
+         &:hover {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) !important;
+         }
+      }
+   }
 
 }

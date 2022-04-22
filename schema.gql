@@ -1,4 +1,4 @@
-### Type definitions saved at 2022-04-21T21:28:07.856Z ###
+### Type definitions saved at 2022-04-22T15:50:24.589Z ###
 
 enum RemoteFileFit {
   COVER
@@ -257,6 +257,8 @@ type Directory implements Node @dontInfer {
 type Site implements Node @derivedTypes @dontInfer {
   buildTime: Date @dateformat
   siteMetadata: SiteSiteMetadata
+  port: Int
+  host: String
   flags: SiteFlags
   pathPrefix: String
   polyfill: Boolean
@@ -7851,11 +7853,6 @@ type WpContentSection_Sectiondetails_SectionVideo_SectionVideoConfiguration impl
   """Select No to hide native player controls."""
   sectionVideoConfigurationControls: Boolean
   sectionVideoConfigurationHeight: String
-
-  """
-  Set to true to show just the video thumbnail, which loads the full player on click.
-  """
-  sectionVideoConfigurationLight: Boolean
 
   """Select Yes or No to loop the media."""
   sectionVideoConfigurationLoop: Boolean

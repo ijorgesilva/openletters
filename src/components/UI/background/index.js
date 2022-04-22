@@ -12,11 +12,11 @@ export default function Background ( { className, layers } ) {
                 layers?.length > 0 ?
                     <div className={`background ${ className ? className : '' }`}>
                         {
-                            layers?.reverse().map( (_, index) => (
+                            layers.reverse().map( (_, index) => (
                                 <Layer
                                     key         = { index }
                                     params      = { _ }
-                                    zindex      = { index }
+                                    zIndex      = { index }
                                     className   = {`layer-${index}`}
                                 />
                             ))

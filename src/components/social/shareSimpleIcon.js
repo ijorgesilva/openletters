@@ -21,7 +21,7 @@ export default function ShareSimpleIcon(
 
     const { t } = useTranslation()
 
-    const canonicalUrl = process.env.SITE_CANONICAL_URL + location.pathname
+    const canonicalUrl = process.env.GATSBY_SITE_CANONICAL_URL + location.pathname
 
     return (
         <Dropdown className={`shareSimpleIcon ${ mode ? mode : 'light'} ${ className ? className : ''}`} drop = { drop || 'up'} >

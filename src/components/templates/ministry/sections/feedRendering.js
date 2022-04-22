@@ -75,7 +75,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }
@@ -132,7 +132,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }
@@ -188,7 +188,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }
@@ -243,7 +243,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }
@@ -298,7 +298,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }
@@ -353,7 +353,7 @@ export default function FeedRendering (
                         gap             = { layoutConf.itemGap.split(':')[0] }
                         // Button Behavior
                         removeDefaultCss= { layoutConf.buttonBehavior.removeDefaultCss }
-                        stretchedlink   = { layoutConf.buttonBehavior.buttonStretch }
+                        stretchedLink   = { layoutConf.buttonBehavior.buttonStretch }
                         // Visibility
                         hideTitle       = { layoutConf.hideTitle }
                         hideSubtitle    = { layoutConf.hideSubtitle }

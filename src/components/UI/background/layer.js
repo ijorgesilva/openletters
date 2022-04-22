@@ -1,10 +1,12 @@
 
 import React from 'react'
 
-export default function Layer ( { params, zindex, className } ) {
+export default function Layer ( { params, zIndex, className } ) {
 
-    const layerType = ( params ) ? params.backgroundLayerType.split(':')[0] : ''
-    
+    const layerType =    params?.backgroundLayerType?.includes(':') ? 
+                            params.backgroundLayerType.split(':')[0]
+                        : params.backgroundLayerType
+
     switch( layerType ){
 
         case 'color':{
@@ -16,7 +18,7 @@ export default function Layer ( { params, zindex, className } ) {
                 <div
                     className   =   { `layer-color ${ className ? className : '' }` }
                     style       =   {{
-                                        'zIndex': zindex,
+                                        'zIndex': zIndex,
                                         'backgroundColor': layerColor.color,
                                         'opacity': layerColor.opacity,
                                     }}
@@ -42,7 +44,7 @@ export default function Layer ( { params, zindex, className } ) {
                     <div
                         className   =   { `layer-image ${ className ? className : '' }` }
                         style       =   {{
-                                            'zIndex': zindex,
+                                            'zIndex': zIndex,
                                             'backgroundImage': "url('"+layerImage.imageFile+"')",
                                             'backgroundPosition': layerImage.position,
                                             'backgroundRepeat': ( layerImage.fixed ) ? 'no-repeat' : layerImage.repeat,
@@ -79,7 +81,7 @@ export default function Layer ( { params, zindex, className } ) {
                 <div
                     className               =   { `layer-gradient ${ className ? className : '' }` }
                     style                   =   {{
-                                                    'zIndex': zindex,
+                                                    'zIndex': zIndex,
                                                     'opacity': '',
                                                     'background': layerGradientStyle,
                                                 }}
@@ -97,7 +99,7 @@ export default function Layer ( { params, zindex, className } ) {
                 <div
                     className               =   { `layer-text ${ className ? className : '' }` }
                     style                   =   {{
-                                                    'zIndex': zindex,
+                                                    'zIndex': zIndex,
                                                     'opacity': layerText.opacity,
                                                 }}
                     dangerouslySetInnerHTML = {{__html:layerText.content}}

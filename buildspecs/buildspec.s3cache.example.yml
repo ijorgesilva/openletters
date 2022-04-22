@@ -5,7 +5,7 @@ env:
   variables:
     NODE_ENV: 'staging' ## staging || production
     SITE_URL: 'https://staging.example.com'
-    SITE_CANONICAL_URL: 'https://example.com'
+    GATSBY_SITE_CANONICAL_URL: 'https://example.com'
     PATH_PREFIX: ''
     ## GraphQL
     GATSBY_WP_SERVER: 'https://editor.example.com'
@@ -48,7 +48,7 @@ env:
   exported-variables:
     - NODE_ENV
     - SITE_URL
-    - SITE_CANONICAL_URL
+    - GATSBY_SITE_CANONICAL_URL
     - PATH_PREFIX
     - GATSBY_WP_SERVER
     - WPGRAPHQL_URL

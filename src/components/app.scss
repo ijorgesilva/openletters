@@ -516,7 +516,7 @@
     /*
      * Text Utils
      */
-     .light {
+    .light {
         .text-outline {
                 color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
                 text-shadow: -1px -1px 0 hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1),
@@ -524,8 +524,8 @@
                             -1px 1px 0 hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1),
                             1px 1px 0 hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
         }
-     }
-     .dark {
+    }
+    .dark {
         .text-outline {
             color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             text-shadow: -1px -1px 0 hsla(var(--light-h), var(--light-s), var(--light-l), 1),
@@ -533,7 +533,7 @@
                         -1px 1px 0 hsla(var(--light-h), var(--light-s), var(--light-l), 1),
                         1px 1px 0 hsla(var(--light-h), var(--light-s), var(--light-l), 1);
         }
-     }
+    }
 
     /*
      * Spacing
@@ -811,6 +811,38 @@
                 border: 0;
                 box-shadow: unset;
             }
+        }
+    }
+
+    /*
+    * Modal
+    */
+    .modal {
+        &.transparent  {
+            >.modal-dialog {
+                >.modal-content {
+                    border: unset;
+                    background-color: transparent;
+                    border-radius: unset;
+                    >.modal-header {
+                        border-bottom: unset;
+                        border-radius: unset;
+                        >.close {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+        &.frameless {
+            >.modal-dialog {
+                >.modal-content {
+                    >.modal-header {
+                        padding: unset;
+                    }
+                }
+            }
+    
         }
     }
 

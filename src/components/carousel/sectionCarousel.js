@@ -25,7 +25,7 @@ export default function SectionCarousel ( {
         infinite,
         partialVisible, 
         autoplay,
-        stretchedlink,
+        stretchedLink,
         // Aspect
         orientation,
         itemType,
@@ -110,7 +110,7 @@ export default function SectionCarousel ( {
                                             orientation         = { orientation }
                                             truncate            = { truncate }
                                             truncateLines       = { truncateLines }
-                                            stretchedlink       = { stretchedlink }
+                                            stretchedLink       = { stretchedLink }
                                             className           = { `${ _.cssClass ? _.cssClass : '' } ${ itemClass ? itemClass : '' }` }
                                             removeDefaultCss    = { _.itemCssRemoveDefault }
                                             imagePosition       = { imagePosition }

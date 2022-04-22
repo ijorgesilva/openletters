@@ -313,7 +313,6 @@ const queriesSections = `
             }
             sectionVideoConfiguration {
                 sectionVideoConfigurationControls
-                sectionVideoConfigurationLight
                 sectionVideoConfigurationLoop
                 sectionVideoConfigurationMuted
                 sectionVideoConfigurationPip

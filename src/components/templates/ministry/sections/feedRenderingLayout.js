@@ -29,7 +29,7 @@ export default function FeedRenderingLayout (
         imagePosition,
         border,
         borderColor,
-        stretchedlink,
+        stretchedLink,
         gap,
         // Visibility
         hideTitle,
@@ -91,7 +91,7 @@ export default function FeedRenderingLayout (
                                 borderColor         = { borderColor }
                                 // Button Behavior
                                 // removeDefaultCss    = { removeDefaultCss }
-                                stretchedlink       = { stretchedlink }
+                                stretchedLink       = { stretchedLink }
                                 // Visibility
                                 hideTitle           = { hideTitle }
                                 hideSubtitle        = { hideSubtitle }
@@ -156,7 +156,7 @@ function Items(
         aspectRatio,
         border,
         borderColor,
-        stretchedlink,
+        stretchedLink,
         hideTitle,
         hideSubtitle,
         hideExcerpt,
@@ -188,7 +188,7 @@ function Items(
                     borderColor         = { borderColor }
                     // Button Behavior
                     // removeDefaultCss    = { removeDefaultCss }
-                    stretchedlink       = { stretchedlink }
+                    stretchedLink       = { stretchedLink }
                     // Visibility
                     hideTitle           = { hideTitle }
                     hideSubtitle        = { hideSubtitle }

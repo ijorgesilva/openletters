@@ -35,7 +35,7 @@ export default function Hit(
             orientation         = { componentConf.blurbVertical.orientation }
             truncate            = { componentConf.blurbVertical.truncate }
             truncateLines       = { componentConf.blurbVertical.truncateLines }
-            stretchedlink       = { componentConf.blurbVertical.stretchedlink }
+            stretchedLink       = { componentConf.blurbVertical.stretchedlink }
             className           = { `${componentConf.blurbVertical.itemClass} mb-1 ml-0 mr-0`}
             removeDefaultCss    = { componentConf.blurbVertical.itemCssRemoveDefault }
             aspectRatio         = { componentConf.blurbVertical.aspectRatio }

@@ -15,7 +15,7 @@ export default function ItemSelector ( {
     orientation,
     counter,
     mode,
-    stretchedlink,
+    stretchedLink,
     truncate,
     truncateLines,
     className,
@@ -44,7 +44,7 @@ export default function ItemSelector ( {
 
                     truncate            = { truncate }
                     truncateLines       = { truncateLines }
-                    stretchedlink       = { stretchedlink }
+                    stretchedLink       = { stretchedLink }
                     className           = { className }
                     removeDefaultCss    = { removeDefaultCss }
                     aspectRatio         = { imageAspect }
@@ -172,14 +172,14 @@ export default function ItemSelector ( {
                     
                     truncate            = { truncate }
                     truncateLines       = { truncateLines }
-                    stretchedlink       = { stretchedlink }
+                    stretchedLink       = { stretchedLink }
                     className           = { className }
                     removeDefaultCss    = { removeDefaultCss }
                     aspectRatio         = { imageAspect }
                 />
             )
         }
-   
+
         /*
         * Default
         */

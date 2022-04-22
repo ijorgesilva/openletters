@@ -56,7 +56,7 @@ export default function SearchModal (
           </Button>
 
           <Modal 
-            className='modalRoot'
+            className={`modalRoot ${ mode ? 'mode' : 'light'}`}
             show={show} onHide={handleClose} animation={false}
           >
             <Modal.Header closeButton />

@@ -105,10 +105,19 @@ export default function SectionBlurbs (
     const liveQueryResults = query != '' ? resultsQuery.map( _ => _.item ) : itemList
 
     useEffect(() => {
+        console.log({navigation, filtering})
         if ( !navigation?.pagination && !filtering ) {
             setCurrentItems(itemList)
         }
-        else {
+        if( navigation?.pagination && !filtering ) {
+            setCurrentItems(itemList)
+            setCurrentItems(itemList.slice(itemOffset, endOffset))
+            setPageCount(Math.ceil(itemList.length / itemsPP))
+        }
+        if( !navigation?.pagination && filtering ) {
+            setCurrentItems(liveQueryResults)
+        }
+        if( navigation?.pagination && filtering ) {
             // TODO: Reset listing when query === '', currently not working as expected.
             if( query != '' ) {
                 setCurrentItems(liveQueryResults.slice(itemOffset, endOffset))
@@ -119,7 +128,7 @@ export default function SectionBlurbs (
                 setPageCount(Math.ceil( itemList.length / itemsPP ) )
             }
         }
-    }, [ itemOffset, itemsPP, query, pageCount, liveQueryResults ])
+    }, [ itemOffset, itemsPP, query, pageCount ] )
 
     const handlePageClick = ( event ) => {
         const newOffset = (event.selected * itemsPP) % itemList.length
@@ -132,6 +141,7 @@ export default function SectionBlurbs (
         setPageCount( Math.ceil( liveQueryResults.length / itemsPP ) )
     }
 
+    console.log( { itemList, currentItems, liveQueryResults, itemsPP } )
 
     return (
         <section 
@@ -198,7 +208,6 @@ export default function SectionBlurbs (
 
                 <div className = 'items' style = {flexConfig}>
                     {
-                        query === '' ?
                         currentItems?.map( (_, index) => (
                             <BlurbVertical
                                 key                 = { index }
@@ -218,44 +227,7 @@ export default function SectionBlurbs (
                                 
                                 truncate            = { truncate }
                                 truncateLines       = { truncateLines }
-                                stretchedlink       = { stretchedLink }
-                                className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
-                                removeDefaultCss    = { _.itemCssRemoveDefault }
-                                aspectRatio         = { aspectRatio }
-                                imageFit            = { imageFit }
-                                imagePosition       = { imagePosition }
-                                border              = { border }
-                                borderColor         = { borderColor }
-                                itemGrow            = { itemGrow }
-                                // Visibility
-                                hideImage           = { hideImage }
-                                hideTitle           = { hideTitle }
-                                hideSubtitle        = { hideSubtitle }
-                                hideExcerpt         = { hideExcerpt }
-                                hideButton          = { hideButton }
-                            />
-                        ))
-                        :
-                        currentItems?.map( (_, index) => (
-                            <BlurbVertical
-                                key                 = { index }
-                                image               = { _.image }
-                                title               = { _.title }
-                                subtitle            = { _.subtitle }
-                                content             = { _.excerpt }
-                                tags                = { _.tags }
-                                style               = { { maxWidth: stretchedBlurb ? '100%' : '320px', } }
-                                
-                                itemType            = { itemType }
-                                mode                = { mode }
-                                buttons             = { _.buttons }
-
-                                counter             = { index + 1 }
-                                orientation         = { orientation }
-                                
-                                truncate            = { truncate }
-                                truncateLines       = { truncateLines }
-                                stretchedlink       = { stretchedLink }
+                                stretchedLink       = { stretchedLink }
                                 className           = { `${ _.cssClass ? _.cssClass : ''} ${ itemClass ? itemClass : '' }` }
                                 removeDefaultCss    = { _.itemCssRemoveDefault }
                                 aspectRatio         = { aspectRatio }
@@ -277,6 +249,7 @@ export default function SectionBlurbs (
 
                 {
                     navigation?.pagination ?
+                    liveQueryResults.length > itemsPP || currentItems.length > itemsPP ?
                         <nav className='mt-2'>
                             <ReactPaginate
                                 onPageChange            = { handlePageClick }
@@ -299,7 +272,7 @@ export default function SectionBlurbs (
                                 forcePage               = { query ? 0 : undefined }
                             />
                         </nav>
-                    : undefined
+                    : undefined : undefined
                 }
 
             </Container>

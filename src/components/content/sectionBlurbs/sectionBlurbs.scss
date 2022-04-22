@@ -15,12 +15,12 @@
 }
 
 @include media("<desktop") {
-    .sectionBlurbs {
-        .items {
-            > div {
-            }
-        }
-    }
+    // .sectionBlurbs {
+    //     .items {
+    //         > div {
+    //         }
+    //     }
+    // }
 }
 
 @include media("<=tablet") {

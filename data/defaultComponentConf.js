@@ -4,7 +4,7 @@ const componentConf = {
         'orientation': 'horizontal',
         'truncate': true,
         'truncateLines': 3,
-        'stretchedlink': true,
+        'stretchedLink': true,
         'itemClass': '',
         'aspectRatio': '16_9',
         'imageFit': 'cover',

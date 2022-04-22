@@ -27,7 +27,7 @@ export default function SectionText ( {
     return (
         <section  id = {id} className = {`sectionText ${ size ? size : 'md' } ${ className ? className : ''} ${ mode ? mode : 'light' }`}>
             
-            <div className={`columns ${ ( media?.sectionTextbasicMediaType ) ? 'two-columns' : 'one-column' }`}>
+            <div className={`columns ${ media?.sectionTextbasicMediaType ? 'two-columns' : 'one-column' }`}>
                 <Container fluid = { containerWidth === 'container' ? undefined : true }>
                     {
                         ( title || content || buttons?.length > 0 ) ?

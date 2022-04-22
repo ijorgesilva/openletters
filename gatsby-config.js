@@ -173,7 +173,7 @@ module.exports = {
         {
           resolve: `gatsby-plugin-canonical-urls`,
           options: {
-            siteUrl: process.env.SITE_CANONICAL_URL,
+            siteUrl: process.env.GATSBY_SITE_CANONICAL_URL,
             stripQueryString: true,
           },
         },

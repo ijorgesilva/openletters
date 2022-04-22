@@ -34,7 +34,7 @@ export default function SectionAlbum (
         infinite,
         partialVisible,
         autoplay,
-        stretchedlink,
+        stretchedLink,
         itemType,
         dots,
         dotsClass,
@@ -162,7 +162,7 @@ export default function SectionAlbum (
                                         infinite        = { infinite }
                                         partialVisible  = { partialVisible }
                                         autoplay        = { autoplay }
-                                        stretchedlink   = { stretchedlink }
+                                        stretchedLink   = { stretchedLink }
                                         itemType        = { itemType }
                                         dots            = { dots }
                                         dotsClass       = { dotsClass }

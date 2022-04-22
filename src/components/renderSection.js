@@ -475,7 +475,7 @@ export default function RenderSection (
                         infinite        = { carouselConfiguration.sectionCarouselConfigurationInfinite }
                         partialVisible  = { carouselConfiguration.sectionCarouselConfigurationPartiallyVisible }
                         autoplay        = { carouselConfiguration.sectionCarouselConfigurationAutoplay }
-                        stretchedlink   = { carouselConfiguration.sectionCarouselConfigurationStretched }
+                        stretchedLink   = { carouselConfiguration.sectionCarouselConfigurationStretched }
                         // Aspect
                         itemType        = { carouselConfiguration.sectionCarouselConfigurationItemType }
                         dots            = { carouselConfiguration.sectionCarouselConfigurationDots }
@@ -601,7 +601,6 @@ export default function RenderSection (
                 'height': videoParams.sectionVideoConfigurationHeight,
                 'width': videoParams.sectionVideoConfigurationWidth,
                 'maxWidth': videoParams.sectionVideoConfigurationMaxWidth,
-                'light': videoParams.sectionVideoConfigurationLight,
                 'loop': videoParams.sectionVideoConfigurationLoop,
                 'muted': videoParams.sectionVideoConfigurationMuted,
                 'pip': videoParams.sectionVideoConfigurationPip,
@@ -717,7 +716,7 @@ export default function RenderSection (
                     iframeQueryStrings  = { formConfiguration.sectionFormConfigurationQuerystring }
                     secondaryColumnText       = { secondaryColumn.sectionFormColumnsText }
                     secondaryColumnAlignment  = { secondaryColumn.sectionFormColumnsAlignment.split(':')[0] }
-                    secondaryColumnBackground = { secondaryColumn.sectionFormColumnsBackground?.backgroundLayer?.reverse() }
+                    secondaryColumnBackground = { secondaryColumn.sectionFormColumnsBackground?.backgroundLayer }
                     location            = { location }
                 />
             )
@@ -783,7 +782,7 @@ export default function RenderSection (
                         infinite        = { albumCarouselConf.sectionCarouselConfigurationInfinite }
                         partialVisible  = { albumCarouselConf.sectionCarouselConfigurationPartiallyVisible }
                         autoplay        = { albumCarouselConf.sectionCarouselConfigurationAutoplay }
-                        stretchedlink   = { albumCarouselConf.sectionCarouselConfigurationStretched }
+                        stretchedLink   = { albumCarouselConf.sectionCarouselConfigurationStretched }
                         // Aspect
                         itemType        = { albumCarouselConf.sectionCarouselConfigurationItemType }
                         dots            = { albumCarouselConf.sectionCarouselConfigurationDots }
