@@ -247,7 +247,7 @@ export default function SectionBlurbs (
 
                 {
                     navigation?.pagination ?
-                    liveQueryResults.length > itemsPP || currentItems.length > itemsPP ?
+                    liveQueryResults?.length > itemsPP || currentItems?.length > itemsPP ?
                         <nav className='mt-2'>
                             <ReactPaginate
                                 onPageChange            = { handlePageClick }
