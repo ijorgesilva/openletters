@@ -63,7 +63,7 @@ export default function HeroDynamic (
                                         className       = { 'mt-5' }
                                         tag             = { related.tag }
                                         tagClassName    = { related.tagClassName }
-                                        eventDates       = { ( related.eventDates.length > 0 ) ? related.eventDates : undefined }
+                                        eventDates       = { ( related.eventDates?.length > 0 ) ? related.eventDates : undefined }
                                     />
                                 </div>
                             :
