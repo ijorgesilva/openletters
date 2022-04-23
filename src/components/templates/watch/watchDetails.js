@@ -213,6 +213,7 @@ export const query = graphql`
                     videoOneLiner
                     videoDayDate
                     videoUrl
+                    
                     videoSeries {
                         ... on WpSerie {
                             id
@@ -220,6 +221,56 @@ export const query = graphql`
                             slug
                         }
                     }
+
+                    videoResources {
+                        ... on WpPost {
+                            id
+                            slug
+                            title
+                            excerpt
+                            status
+                            featuredImage {
+                                node {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH)
+                                        }
+                                    }
+                                }
+                            }
+                            postDetails {
+                                postCampus {
+                                    ... on WpCampus {
+                                        id
+                                        slug
+                                    }
+                                }
+                            }
+                        }
+                        ... on WpLinkitem {
+                            id
+                            title
+                            excerpt
+                            status
+                            featuredImage {
+                                node {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH)
+                                        }
+                                    }
+                                }
+                            }
+                            linkDetails {
+                                linkLink {
+                                    linkLinkTarget
+                                    linkLinkType
+                                    linkLinkUrl
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
