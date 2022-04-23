@@ -123,8 +123,8 @@ export default function BlurbVertical (
                                     <AdvancedButton 
                                         button          = { _ } 
                                         key             = { index }
-                                        stretchedLink   = { stretchedLink } 
-                                        className       = { hideButton ? 'hide' : '' }
+                                        stretchedLink   = { stretchedLink }
+                                        hideButton      = { hideButton }
                                     />
                                 ))
                             }

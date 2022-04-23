@@ -7,20 +7,20 @@ import Html from '../../widget/html'
 
 import './index.scss'
 
-export default function AdvancedButton ( { button, stretchedLink } ) {
+export default function AdvancedButton ( { button, stretchedLink, hideButton } ) {
 
     let buttonType = null;
     const buttonTypeParsed = button.buttonType.includes(':') ? button.buttonType.split(':')[0] : button.buttonType
 
     switch(buttonTypeParsed) {
         case 'internal':
-            buttonType = <InternalButton button = {button} stretchedLink = {stretchedLink} />
+            buttonType = <InternalButton button = {button} stretchedLink = {stretchedLink} hideButton = {hideButton} />
             break
         case 'external':
-            buttonType = <ExternalButton button = {button} stretchedLink = {stretchedLink} />
+            buttonType = <ExternalButton button = {button} stretchedLink = {stretchedLink} hideButton = {hideButton} />
             break
         case 'modal':
-            buttonType = <ModalButton button = {button} stretchedLink = {stretchedLink} />
+            buttonType = <ModalButton button = {button} stretchedLink = {stretchedLink} hideButton = {hideButton} />
             break
         default:
         buttonType = <></>
@@ -34,10 +34,10 @@ export default function AdvancedButton ( { button, stretchedLink } ) {
 
 }
 
-function InternalButton( { button, stretchedLink } ){
+function InternalButton( { button, stretchedLink, hideButton } ){
     return (
         <Link
-            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             to          = { button.buttonLink }  
             target      = { button.buttonTarget }
         >
@@ -46,10 +46,10 @@ function InternalButton( { button, stretchedLink } ){
     )
 }
 
-function ExternalButton( { button, stretchedLink } ) {
+function ExternalButton( { button, stretchedLink, hideButton } ) {
     return (
         <a 
-            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             href        = { button.buttonUrl }  
             target      = { button.buttonTarget }
         >
@@ -58,7 +58,7 @@ function ExternalButton( { button, stretchedLink } ) {
     )
 }
 
-function ModalButton( { button, stretchedLink } ) {
+function ModalButton( { button, stretchedLink, hideButton } ) {
 
     const [show, setShow] = useState(false);
 
@@ -80,7 +80,7 @@ function ModalButton( { button, stretchedLink } ) {
             <a  
                 onClick={handleShow} 
                 href    = { '#'}
-                className = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' }` }
+                className = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             >
                 { button.buttonText }
             </a>
