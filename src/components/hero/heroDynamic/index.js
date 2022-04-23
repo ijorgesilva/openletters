@@ -27,7 +27,7 @@ export default function HeroDynamic (
         backgroundLayers,
     } 
     ) {
-
+        console.log({related})
     return (
 
         <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
@@ -64,7 +64,13 @@ export default function HeroDynamic (
                                         mode                = { mode }
                                         orientation         = { 'horizontal' }
                                         imagePosition       = { 'center-center' }
-                                        // buttons             = { _.buttons }
+                                        buttons             =   { [{
+                                                                    buttonType: 'internal',
+                                                                    buttonLink: related.url,
+                                                                    buttonCss: 'test',
+                                                                    buttonCssRemoveDefault: false,
+                                                                    buttonTarget: '_self',
+                                                                }] }
                                         truncate            = { true }
                                         truncateLines       = { 3 }
                                         stretchedLink       = { true }

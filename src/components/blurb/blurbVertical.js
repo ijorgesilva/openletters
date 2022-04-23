@@ -122,7 +122,7 @@ export default function BlurbVertical (
                                 buttons?.map( ( _ , index ) => (
                                     <AdvancedButton 
                                         button          = { _ } 
-                                        key             = {index} 
+                                        key             = { index }
                                         stretchedLink   = { stretchedLink } 
                                         className       = { hideButton ? 'hide' : '' }
                                     />
