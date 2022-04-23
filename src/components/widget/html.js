@@ -14,7 +14,7 @@ export default function Html(
         "ul", "a", "abbr", "b", "bdi", "bdo", "br", "cite", "code", "data", "dfn",
         "em", "i", "kbd", "mark", "q", "rb", "rp", "rt", "rtc", "ruby", "s", "samp",
         "small", "span", "strong", "sub", "sup", "time", "u", "var", "wbr", "caption",
-        "col", "colgroup", "table", "tbody", "td", "tfoot", "th", "thead", "tr" ],
+        "col", "colgroup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "iframe" ],
         allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'tel' ],
         allowedAttributes: {
             a: [ 'href', 'name', 'target', 'class', 'style' ],
@@ -23,8 +23,9 @@ export default function Html(
             ul: [ 'class', 'style' ], li: [ 'class', 'style' ],
             table: [ 'class', 'style' ],
             h1: [ 'class', 'style' ], h2: [ 'class', 'style' ], h3: [ 'class', 'style' ], h4: [ 'class', 'style' ], h5: [ 'class', 'style' ], h6: [ 'class', 'style' ],
+            iframe: [ 'scrolling', 'frameborder', 'id', 'title', 'style' ]
         },
-        selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' ],
+        selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta', 'iframe' ],
         allowProtocolRelative: true,
     })
     return (

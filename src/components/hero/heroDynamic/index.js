@@ -2,7 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-import BlurbHorizontalDarkFeatured from '../../blurb/blurbHorizontalDarkFeatured'
+import BlurbVertical from '../../blurb/blurbVertical'
 import Background from '../../UI/background'
 
 import HeroButtons from './heroButtons.js'
@@ -27,7 +27,7 @@ export default function HeroDynamic (
         backgroundLayers,
     } 
     ) {
-
+console.log({related})
     return (
 
         <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
@@ -53,21 +53,31 @@ export default function HeroDynamic (
                         {
                             related ? 
                                 <div className='related'>
-                                    <BlurbHorizontalDarkFeatured 
-                                        type            = { related.type }
-                                        title           = { related.title }
-                                        excerpt         = { related.excerpt }
-                                        subtitle        = { related.subtitle ? related.subtitle : undefined }
-                                        link            = { related.url }
-                                        featuredImage   = { related.featuredImage }
-                                        className       = { 'mt-5' }
-                                        tag             = { related.tag }
-                                        tagClassName    = { related.tagClassName }
-                                        eventDates       = { ( related.eventDates?.length > 0 ) ? related.eventDates : undefined }
+                                    <BlurbVertical
+                                        image               = { related.featuredImage }
+                                        title               = { related.title }
+                                        content             = { related.excerpt }
+                                        style               = { { maxWidth: '100%' } }
+                                        subtitle            = {`${ related.subtitle ? related.subtitle : ''} ${ related.eventDates?.length > 0 ? related.eventDates : ''}`}
+                                        itemType            = { related.type }
+                                        className           = { `mt-1` }
+                                        mode                = { mode }
+                                        orientation         = { 'horizontal' }
+                                        imagePosition       = { 'center-center' }
+                                        // buttons             = { _.buttons }
+                                        truncate            = { true }
+                                        truncateLines       = { 3 }
+                                        stretchedLink       = { true }
+                                        hideButton          = { true }
+
+                                        // aspectRatio         = { aspectRatio }
+                                        // hideImage           = { hideImage }
+                                        // hideTitle           = { hideTitle }
+                                        // hideSubtitle        = { hideSubtitle }
+                                        // hideExcerpt         = { hideExcerpt }
                                     />
                                 </div>
-                            :
-                                undefined
+                            : undefined
                         }
 
                         {
@@ -75,8 +85,7 @@ export default function HeroDynamic (
                                 <div className='children'>
                                     {children}
                                 </div>
-                            :
-                                undefined
+                            : undefined
                         }
 
                     </div>

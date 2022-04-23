@@ -55,6 +55,7 @@ export default function SectionBlurbs (
         filtering, navigation,
     }
 ) {
+
     const { t } = useTranslation()
 
     let itemList = items?.list
