@@ -239,54 +239,6 @@ export const query = graphql`
                     videoBibleActive
                     videoBibleUrl
                 }
-                videoResources {
-                    ... on WpPost {
-                        id
-                        slug
-                        title
-                        excerpt
-                        status
-                        featuredImage {
-                            node {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData(layout: FULL_WIDTH)
-                                    }
-                                }
-                            }
-                        }
-                        postDetails {
-                            postCampus {
-                                ... on WpCampus {
-                                    id
-                                    slug
-                                }
-                            }
-                        }
-                    }
-                    ... on WpLinkitem {
-                        id
-                        title
-                        excerpt
-                        status
-                        featuredImage {
-                            node {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData(layout: FULL_WIDTH)
-                                    }
-                                }
-                            }
-                        }
-                        linkDetails {
-                            linkLink {
-                                linkLinkTarget
-                                linkLinkType
-                                linkLinkUrl
-                            }
-                        }
-                    }
-                }
             }
             participation {
                 participationRaisehand {

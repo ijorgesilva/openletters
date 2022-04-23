@@ -1,6 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import BlurbVertical from '../../blurb/blurbVertical'
 import Background from '../../UI/background'
@@ -27,7 +28,9 @@ export default function HeroDynamic (
         backgroundLayers,
     } 
     ) {
-        console.log({related})
+
+    const { t } = useTranslation()
+
     return (
 
         <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
@@ -67,9 +70,10 @@ export default function HeroDynamic (
                                         buttons             =   { [{
                                                                     buttonType: 'internal',
                                                                     buttonLink: related.url,
-                                                                    buttonCss: 'test',
-                                                                    buttonCssRemoveDefault: false,
+                                                                    buttonCss: 'btn btn-outline-dark',
+                                                                    buttonCssRemoveDefault: true,
                                                                     buttonTarget: '_self',
+                                                                    buttonText: t('global.read_more'),
                                                                 }] }
                                         truncate            = { true }
                                         truncateLines       = { 3 }

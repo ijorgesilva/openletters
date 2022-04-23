@@ -10,11 +10,6 @@
     position: relative;
 
     &.light {
-        .buttons {
-            .btn {
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-            }
-        }
         > .background {
             background-color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
             &.overlay {
@@ -28,11 +23,6 @@
     }
 
     &.dark {
-        .buttons {
-            .btn {
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
-            }
-        }
         > .background {
             background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
             &.overlay {
