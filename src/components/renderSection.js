@@ -354,7 +354,7 @@ export default function RenderSection (
         * Text Basic
         */
         case ( sectionType === 'text' && sectionStatus ): {
-            console.log(section.sectionDetails.sectionText?.sectionTextSections)
+
             return(
                 <SectionText 
                     id               = { sectionId }

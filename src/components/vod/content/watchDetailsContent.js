@@ -32,7 +32,7 @@ export default function WatchDetailsContent (
     
     const { t } = useTranslation()
     
-    const seriesIcon = ( videoDetails.videoSeries?.seriesGraphics?.poster?.localFile ) ?
+    const seriesIcon = videoDetails.videoSeries?.seriesGraphics?.poster?.localFile ?
                             videoDetails.videoSeries.seriesGraphics.poster.localFile.childImageSharp.gatsbyImageData 
                         :
                             undefined
@@ -61,7 +61,7 @@ export default function WatchDetailsContent (
                                     {title}
                                 </h1>
                                 {
-                                    ( videoDetails.videoSeries?.title ) ? 
+                                    videoDetails.videoSeries?.title ? 
                                         <Link to={backUrl}>
                                             {/* ${config.watchSeriesDetailsSlug}/${videoDetails.videoSeries.slug} */}
                                             <h2>
@@ -78,7 +78,7 @@ export default function WatchDetailsContent (
                             <div>
                                 <h1 className=''>{title}</h1>
                                 {
-                                    ( videoDetails.videoSeries?.title ) ? 
+                                    videoDetails.videoSeries?.title ? 
                                         <h2 className=''>{videoDetails.videoSeries.title}</h2> 
                                     : 
                                         undefined
@@ -87,7 +87,7 @@ export default function WatchDetailsContent (
                         </div>
                 }
                 {
-                    ( excerpt ) ?
+                    excerpt ?
                         <div className='extract lead' dangerouslySetInnerHTML={{__html: excerpt}}></div>
                     :
                         undefined
@@ -130,8 +130,9 @@ export default function WatchDetailsContent (
             }
 
             <Tabs className='sticky z-index-5' defaultActiveKey='notes' id=''>
+
                 {
-                    ( content ) ? 
+                    content ? 
                         <Tab 
                             eventKey='notes' 
                             title={t('global.notes')}
@@ -145,8 +146,9 @@ export default function WatchDetailsContent (
                             {t('global.watch.content-empty')}
                         </Alert>
                 }
+
                 {
-                    ( bible ) ?
+                    bible ?
                         <Tab 
                             eventKey='bible' 
                             title={t('global.bible.title')}
@@ -160,8 +162,9 @@ export default function WatchDetailsContent (
                     :
                         undefined
                 }
+
                 {
-                    ( videoDetails.videoTranscript ) ? 
+                    videoDetails.videoTranscript ? 
                         <Tab 
                             eventKey='transcript' 
                             title={t('global.transcripts')}
@@ -172,8 +175,9 @@ export default function WatchDetailsContent (
                     :
                         undefined
                 }
+
                 {
-                    ( resources ) ?
+                    resources ?
                         <Tab 
                             eventKey='resources' 
                             title={t('global.related-resources')}
@@ -194,7 +198,7 @@ export default function WatchDetailsContent (
             </Tabs>
             
             {
-                ( tags?.length > 0 ) ?
+                tags?.length > 0 ?
                     <TagSimple 
                         variant = { mode } 
                         width   = 'container'

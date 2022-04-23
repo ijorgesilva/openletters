@@ -27,7 +27,7 @@ export default function HeroDynamic (
         backgroundLayers,
     } 
     ) {
-console.log({related})
+
     return (
 
         <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
