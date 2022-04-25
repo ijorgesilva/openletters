@@ -8,6 +8,8 @@ import VideoReactPlayer from '../../vod/player/videoReactPlayer'
 import ModalPlaylist from '../feed/modalPlaylist'
 import './playlistDetails.scss'
 
+const isBrowser = typeof window !== "undefined"
+
 export default function PlaylistDetails( 
     { 
         videoDetails, 
@@ -26,11 +28,13 @@ export default function PlaylistDetails(
     const [ scrolledPlayer, setScrolledPlayer ] = React.useState(false)
     const handleScroll=() => {
         const offset=window.scrollY
-        if(offset > 125 ){
-            setScrolledPlayer(true)
-        }
-        else{
-            setScrolledPlayer(false)
+        if(isBrowser) {
+            if(offset > 125 ){
+                setScrolledPlayer(true)
+            }
+            else{
+                setScrolledPlayer(false)
+            }
         }
     }
     useEffect(() => {

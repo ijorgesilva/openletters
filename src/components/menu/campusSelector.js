@@ -8,6 +8,8 @@ import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 // import ContextConsumer from '../../provider/context'
 
+const isBrowser = typeof window !== "undefined"
+
 import './campusSelector.scss'
 
 export default function CampusSelector( { className, location, mode } ) {
@@ -114,7 +116,7 @@ export default function CampusSelector( { className, location, mode } ) {
         // contextData.set({currentCampus: option.value})
 
         if(option.link) { 
-            if ( option.target === '_blank') {
+            if ( option.target === '_blank' && isBrowser ) {
                 window.open( option.link , "_blank")
             } else {
                 navigate( option.link, { state: {option} })
