@@ -23,7 +23,7 @@ export default function Html(
             ul: [ 'class', 'style' ], li: [ 'class', 'style' ],
             table: [ 'class', 'style' ],
             h1: [ 'class', 'style' ], h2: [ 'class', 'style' ], h3: [ 'class', 'style' ], h4: [ 'class', 'style' ], h5: [ 'class', 'style' ], h6: [ 'class', 'style' ],
-            iframe: [ 'scrolling', 'frameborder', 'id', 'title', 'style', 'url' ]
+            iframe: [ 'scrolling', 'frameborder', 'id', 'title', 'style', 'src', 'width', 'sandbox', 'allowfullscreen', 'allow', 'height', 'loading', 'referrerpolicy']
         },
         selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta', 'iframe' ],
         allowProtocolRelative: true,
