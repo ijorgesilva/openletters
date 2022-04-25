@@ -163,8 +163,8 @@ module.exports = {
           options: {
             defaults: {},// Defaults used for gatsbyImageData and StaticImage
             failOnError: false, // Set to false to allow builds to continue on image errors
-            stripMetadata: true,
-            defaultQuality: 60,
+            // stripMetadata: true,
+            // defaultQuality: 60,
             // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
           },
         },

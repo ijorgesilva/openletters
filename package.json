@@ -46,7 +46,7 @@
     "gatsby-plugin-sitemap": "^5.11.1",
     "gatsby-plugin-utils": "^3.5.1",
     "gatsby-source-filesystem": "^4.11.1",
-    "gatsby-transformer-sharp": "^4.11.0",
+    "gatsby-transformer-sharp": "^4.12.1",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.0.1",
     "iframe-resizer-react": "^1.0.4",
