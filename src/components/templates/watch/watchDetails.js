@@ -98,7 +98,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
                                         }
                                     } 
                     menu        = { [
-                                     {name: t('global:global.watch.latest'), link: `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}`, as: '', target: ''},
+                                        {name: t('global:global.watch.latest'), link: `/${breadcrumbs.campus}/${config.watchSlug}/${config.watchSlugLatest}`, as: '', target: ''},
                                     ] } 
                     close       = { breadcrumbs.back }
                     mode        = { theme.styles.header }
@@ -213,7 +213,7 @@ export const query = graphql`
                     videoOneLiner
                     videoDayDate
                     videoUrl
-                    
+
                     videoSeries {
                         ... on WpSerie {
                             id

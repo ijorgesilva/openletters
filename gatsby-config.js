@@ -17,6 +17,7 @@ module.exports = {
       FAST_DEV: true,
       PRESERVE_FILE_DOWNLOAD_CACHE: process.env.PRESERVE_FILE_DOWNLOAD_CACHE || false,
       PARALLEL_SOURCING: true,
+      // LMDB_STORE: true,
     },
   
     pathPrefix: process.env.PATH_PREFIX === "" ? "/" : process.env.PATH_PREFIX,
@@ -114,8 +115,8 @@ module.exports = {
             },
             debug: {
               graphql: {
-                writeQueriesToDisk: true,
-                showQueryVarsOnError: true,
+                writeQueriesToDisk: false,
+                showQueryVarsOnError: false,
               },
             },
             type: {
@@ -161,7 +162,7 @@ module.exports = {
           resolve: `gatsby-plugin-sharp`,
           options: {
             defaults: {},// Defaults used for gatsbyImageData and StaticImage
-            failOnError: true, // Set to false to allow builds to continue on image errors
+            failOnError: false, // Set to false to allow builds to continue on image errors
             stripMetadata: true,
             defaultQuality: 60,
             // useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,

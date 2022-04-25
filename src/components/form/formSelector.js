@@ -23,7 +23,7 @@ export default function FormSelector (
     } 
 ) {
     
-    const iframeServerRoot = process.env.GATSBY_WP_SERVER ? process.env.GATSBY_WP_SERVER : 'https://undefined'
+    const iframeServerRoot = process.env.GATSBY_WP_SERVER ? process.env.GATSBY_WP_SERVER : ''
     const queryParams = location?.search
     
     const iframeFormUrl =   iframeQueryStrings ? 
