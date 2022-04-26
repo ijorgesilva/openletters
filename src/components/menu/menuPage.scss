@@ -1,3 +1,5 @@
+@import "~include-media/dist/_include-media.scss";
+
 .menuPage {
     padding: 0px;
     overflow: hidden;
@@ -43,13 +45,15 @@
             }
         }
         .close {
-            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
-            &:hover {
-                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            > a{
+                color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.7);
+                &:hover {
+                    color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+                }
             }
         }
         &::after{
-            background: linear-gradient(270deg, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 100%);
+            background: linear-gradient(270deg, hsla(var(--light-h), var(--light-s), var(--light-l), 1) 0%, hsla(var(--light-h), var(--light-s), var(--light-l), 0.75) 50%, hsla(var(--light-h), var(--light-s), var(--light-l), 0) 100%);
         }
     }
 
@@ -91,13 +95,15 @@
             }
         }
         .close {
-            color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
-            &:hover {
-                color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            a {
+                color: hsla(var(--light-h), var(--light-s), var(--light-l), 0.7);
+                &:hover {
+                    color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+                }
             }
         }
         &::after{
-            background: linear-gradient(270deg, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 100%);
+            background: linear-gradient(270deg, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1) 0%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.85) 60%, hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0) 100%);
         }
     }
 
@@ -110,18 +116,27 @@
 
     &::after{
         content: '';
-        height: 100px;
-        width: 50px;
         z-index: 2;
         position: absolute;
         right: 0;
+        width: 48px;
+        height: 100%;
     }
     
     .navbar-brand {
         margin-right: 0px;
+        height: 100%;
+        padding: 0px;
         a {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             font-weight: 400;
-            padding: .5rem 1rem;
+            padding: 0.5rem 1rem;
+            height: 100%;
+            line-height: 1.5rem;
+            font-size: 1rem;
             &:hover {
                 text-decoration: none;
             }
@@ -151,8 +166,22 @@
             }
         }
     }
+    
     .close {
+        opacity: unset;
         font-weight: 100;
+        position: absolute;
+        height: 100%;
+        right: 0px;
+        display: flex;
+        align-items: center;
+        margin: 0 1rem;
+        z-index: 3;
+        &:not(:disabled):not(.disabled):hover, 
+        .close:not(:disabled):not(.disabled):focus,
+        &:hover{
+            opacity: unset;
+        }
     }
 
     &.sticky {
@@ -162,4 +191,23 @@
         min-height: 70px;
     }
 
+}
+
+@include media("<desktop") {
+}
+
+@include media("<=tablet") {
+}
+
+@include media("<tablet") {
+    .menuPage {
+        .navbar-brand {
+            a {
+                max-width: 15ch;
+            }
+        }
+    }
+}
+
+@include media("<=phone", "portrait") {
 }

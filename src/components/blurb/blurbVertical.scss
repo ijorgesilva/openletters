@@ -98,8 +98,10 @@
 
     &.card {
         // Lack of Gap support on Safari https://ishadeed.com/article/flexbox-gap/
+        overflow: hidden;
         margin-left: 0.1rem;
         margin-right: 0.1rem;
+        position: relative;
         &.expired {
             .card-img {
                 .card-img-top {
@@ -207,5 +209,12 @@
 }
 
 @include media("<desktop") {}
-@include media("<=tablet") {}
+@include media("<=tablet") {
+    .blurbVertical {
+        &.card{ 
+            height: 320px;
+            max-height: 420px;
+        }
+    }
+}
 @include media("<=phone") {}
