@@ -14,8 +14,15 @@ import RenderSection from '../../renderSection'
 
 import './newsCampus.scss'
 
-export default function NewsCampus ( { data, location, pageContext } ){
+export default function NewsCampus ( 
+    { 
+        data, 
+        location, 
+        pageContext 
+    } 
+){
 
+    
     const { title, featuredImage, breadcrumbs, campusDetails } = pageContext
 
     const { t } = useTranslation()
@@ -113,11 +120,10 @@ export default function NewsCampus ( { data, location, pageContext } ){
     )
 }
 
-
 export const query = graphql`
     query news ( $campusId: String! ) {
 
-        news: allWpNewspost(
+        news: allWpNewspost (
             filter: {
                 status: {
                     eq: "publish"
@@ -131,7 +137,7 @@ export const query = graphql`
                 fields: modified, 
                 order: DESC
             }
-            limit: 12
+            limit: 100
         ) {
             nodes{
                 id

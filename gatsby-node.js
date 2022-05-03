@@ -102,7 +102,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
             }
 
             /* Blog Main Page*/
-            if( config.cpt.createBlog ) {
+            if( config.cpt.createBlogNews ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusBlog.pageActive === true ) {
                         createBlog = true
@@ -128,7 +128,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
             }
 
             /* News Main Page*/
-            if( config.cpt.createPages ) {
+            if( config.cpt.createBlogNews ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusNews.pageActive === true ) {
                         createNews = true
@@ -460,29 +460,29 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     /*******************
      * 4. News Pages creation 
      *******************/
-    if( config.cpt.createNews ) {
+    if( config.cpt.createBlogNews ) {
         if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
             if ( createNews && result.data.news?.nodes?.length > 0 ) {
                 if ( result.data.news?.nodes?.length > 0 ) {
-                    result.data.news.nodes.forEach( news => {
-                        if( news.newsDetails.newsCampus?.length > 0 ) {
-                            news.newsDetails.newsCampus.forEach ( campus => {
+                    result.data.news.nodes.forEach( _ => {
+                        if( _.newsDetails.newsCampus?.length > 0 ) {
+                            _.newsDetails.newsCampus.forEach ( campus => {
                                 actions.createPage({
-                                    path: `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                                    path: `/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
                                     component: path.resolve(`./src/components/templates/news/newsDetails.js`),
                                     context: {
-                                        ...news,
+                                        ..._,
                                         limit: config.postsPerPage,
-                                        title: news.title,
-                                        slug: news.slug,
-                                        id: news.id,
+                                        title: _.title,
+                                        slug: _.slug,
+                                        id: _.id,
                                         layout: "newsDetails",
                                         campusId: `/${campus.databaseId}/`,
                                         breadcrumbs: {
                                                         'campus': campus.slug,
                                                         'rootApp': `/${campus.slug}/${config.newsPostDetailsSlug}`,
                                                         'back': `/${campus.slug}/${config.newsPostDetailsSlug}`,
-                                                        'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${news.slug}`,
+                                                        'current': `/${campus.slug}/${config.newsPostDetailsSlug}/${_.slug}`,
                                                     },
                                     }
                                 })
@@ -935,7 +935,7 @@ const query = `
         ## CPTs
         ${config.cpt.createCourses ? queriesPostTypes.allWpCourse : ''}
 
-        ${config.cpt.createNews ? queriesPostTypes.allWpNews : ''}
+        ${config.cpt.createBlogNews ? queriesPostTypes.allWpNews : ''}
 
         ${config.cpt.createEvents ? queriesPostTypes.allWpEvents : ''}
 

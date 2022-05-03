@@ -19,8 +19,8 @@ export default function SectionPodcast (
         mode, 
         width, 
         size,
-     } 
-    ){
+    } 
+) {
         
     const { t } = useTranslation()
     
@@ -31,36 +31,33 @@ export default function SectionPodcast (
 
                     <Col xs={12} md={4} className="graphic">
                         {
-                            (graphic) ? 
+                            graphic ? 
                                 <GatsbyImage 
                                     image={graphic} 
                                     alt=""
                                 />
                             :
-                                <StaticImage
-                                    src="../../assets/img/global/img-podcast.png"
-                                    alt=""
-                                />
+                                undefined
                         }
                     </Col>
 
                     <Col xs={12} md={8}>
                         {
-                            (subtitle) ?
+                            subtitle ?
                                 <span>{subtitle}</span>
                             :
                                 <span>{t('components.podcast.subtitle')}</span>
                         }
 
                         {
-                            (title) ?
+                            title ?
                                 <h2>{title}</h2>
                             : 
                                 <h2>{t('components.podcast.title')}</h2>
                         }
 
                         {
-                            (content) ?
+                            content ?
                                 <p>{content}</p>
                             :
                                 <p>{t('components.podcast.text')}</p>
@@ -68,7 +65,7 @@ export default function SectionPodcast (
 
                         <div className="links">
                             {
-                                (iTunes) ?
+                                iTunes ?
                                     <a href={iTunes} target="_blank" rel="noreferrer">
                                         <StaticImage
                                                 src="../../assets/img/global/icon-podcast-apple.svg"
@@ -78,7 +75,7 @@ export default function SectionPodcast (
                                 : undefined
                             }
                             {
-                                (Spotify) ?
+                                Spotify ?
                                     <a href={Spotify} target="_blank" rel="noreferrer">
                                         <StaticImage
                                                 src="../../assets/img/global/icon-podcast-spotify.svg"
@@ -89,7 +86,7 @@ export default function SectionPodcast (
                                 : undefined
                             }
                             {
-                                (Soundcloud) ?
+                                Soundcloud ?
                                     <a href={Soundcloud} target="_blank" rel="noreferrer">
                                         <StaticImage
                                             src="../../assets/img/global/icon-podcast-soundcloud.svg"

@@ -716,7 +716,7 @@ const queries = [
     }] : ''),
 
     /* News Index */
-    ...(config.cpt.createNews ?
+    ...(config.cpt.createBlogNews ?
     [{
         query: news,
         transformer: ({ data }) => {

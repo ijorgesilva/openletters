@@ -28,7 +28,7 @@ env:
     ## Site schema and Social
     SITE_TITLE: ''
     SITE_DESCRIPTION: ''
-    SITE_IMAGE: '/logos/logo-1024.png'
+    SITE_IMAGE: ''
     SITE_SEPARATOR: '|'
     MANIFEST_THEME_COLOR: '0F0A1B'
     MANIFEST_THEME_BACKGROUND_COLOR: '0F0A1B'

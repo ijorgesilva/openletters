@@ -73,9 +73,8 @@ const config = {
      * When false the CPT pages will not be created or visible anywhere.
      */
     cpt: {
-      createBlog: true,
+      createBlogNews: true,
       createWatch: true,
-      createNews: true,
       createEvents: true,
       createMinistries: true,
       createCourses: true,

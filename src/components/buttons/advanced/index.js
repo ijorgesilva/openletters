@@ -37,7 +37,7 @@ export default function AdvancedButton ( { button, stretchedLink, hideButton } )
 function InternalButton( { button, stretchedLink, hideButton } ){
     return (
         <Link
-            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-secondary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             to          = { button.buttonLink }  
             target      = { button.buttonTarget }
         >
@@ -49,7 +49,7 @@ function InternalButton( { button, stretchedLink, hideButton } ){
 function ExternalButton( { button, stretchedLink, hideButton } ) {
     return (
         <a 
-            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
+            className   = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-secondary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             href        = { button.buttonUrl }  
             target      = { button.buttonTarget }
         >
@@ -69,9 +69,9 @@ function ModalButton( { button, stretchedLink, hideButton } ) {
     
     const heroModalCss = `
         .modal.heroModal > .modal-dialog{
-            height: ${modalInfo.modalHeight}vh;
-            width: ${modalInfo.modalWidth}vw;
-            max-width: ${modalInfo.modalWidth}vw;
+            ${modalInfo.modalHeight ? 'height: '+modalInfo.modalHeight+'vh' : ''};
+            ${modalInfo.modalWidth ? 'width: '+modalInfo.modalWidth+'vw' : ''};
+            ${modalInfo.modalWidth ? 'max-width: '+modalInfo.modalWidth+'vw' : ''};
         }
     `
 
@@ -80,7 +80,7 @@ function ModalButton( { button, stretchedLink, hideButton } ) {
             <a  
                 onClick={handleShow} 
                 href    = { '#'}
-                className = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-primary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
+                className = { `${ button.buttonCssRemoveDefault ? '' : 'btn btn-secondary' } ${ button.buttonCss ? button.buttonCss : '' } ${ stretchedLink ? 'stretched-link' : '' } ${ hideButton ? 'hide' : '' }` }
             >
                 { button.buttonText }
             </a>

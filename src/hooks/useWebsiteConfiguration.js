@@ -99,7 +99,7 @@ export const useWebsiteConfiguration = () => {
                                                             }
                                                         }
                                                     }
-                                                    settingsPagesBlog {                                                    
+                                                    settingsPagesBlog {
                                                         active
                                                         feedLayout
                                                         itemConfiguration {
