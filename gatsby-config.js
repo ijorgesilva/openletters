@@ -63,20 +63,6 @@ module.exports = {
         },
 
         /*
-        * Schema Snapshot
-        * Source: https://www.gatsbyjs.com/plugins/gatsby-plugin-schema-snapshot/  
-        */
-        {
-          resolve: `gatsby-plugin-schema-snapshot`,
-          include: {
-            types: [ 'WpCampus', 'WpPost', 'WpPage', 'WpCategory', 'WpNewspost', 'WpContentSection', 'WpLinkitem', 'WpSeason', 'WpSerie', 'WpSpeaker', 'WpMinistry', 'WpMediaItem', 'WpMainMenu', 'WpCustomMenu', 'WpEvent', 'WpEventVenue', 'WpCourse', 'WpDocument', 'WpForm' ],
-          },
-          options: {
-            update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT || false,
-          },
-        },
-        
-        /*
         * Sources & Assets
         */
         {
