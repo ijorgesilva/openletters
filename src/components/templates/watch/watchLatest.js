@@ -5,9 +5,9 @@ import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 import PageSearch from '../../search/pageSearch'
 
 export default function WatchLatest( { location, pageContext } ) {
@@ -23,7 +23,7 @@ export default function WatchLatest( { location, pageContext } ) {
     return (
         <>
 
-            <HeaderPage 
+            <PageHeader 
                 title       = { t('global.watch.title') + ' | ' + title  }
                 location    = { location } 
                 className   = 'watchLatest'

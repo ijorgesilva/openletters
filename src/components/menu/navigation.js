@@ -16,7 +16,6 @@ export default function Navigation( { menuLocal, menuGlobal, location, campus, s
 
     const defaultCampus = useWebsiteConfiguration().settingsDefaultCampus?.slug
 
-    // TODO: Temp fix. Needs better logic. Use states instead.
     if( campus === undefined ) {
         campus = defaultCampus
     }

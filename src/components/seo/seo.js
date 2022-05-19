@@ -31,7 +31,6 @@ export default function SEO({ postNode, postPath, postSEO }){
         return imageURI;
     }
 
-    // TODO: Fix Publication date for WP Gatsby
     const getPublicationDate = () => {
         if (!postNode) return null;
   

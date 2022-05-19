@@ -6,9 +6,9 @@ import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
-import RenderSection from '../../renderSection.js'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 import ShareSimpleIcon from '../../social/shareSimpleIcon'
 import SectionTags from '../../tag/sectionTags'
 import SectionSeriesDescription from '../../vod/content/sectionSeriesDescription'
@@ -24,14 +24,14 @@ export default function WatchSeries( { pageContext, location, data } ) {
 
     const { t } = useTranslation()
 
-    const cover = ( seriesDetails?.seriesTrailerPoster?.localFile ) ? 
+    const cover = seriesDetails?.seriesTrailerPoster?.localFile ? 
                         seriesDetails.seriesTrailerPoster.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                     : 
                         ( seriesGraphics.background?.localFile ) ? 
                             seriesGraphics.background.localFile.childImageSharp.gatsbyImageData.images.fallback.src
                         : 
                             undefined
-    const sections = ( data.series.seriesDetails.seriesSections?.length > 0 ) ?  
+    const sections = data.series.seriesDetails.seriesSections?.length > 0 ?  
                         data.series.seriesDetails.seriesSections 
                     : 
                         undefined
@@ -41,7 +41,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
 
     return (
         <>
-            <HeaderPage 
+            <PageHeader 
                 title       = { title + ' | ' + t('global.watch.series') + ' | '  } 
                 location    = { location }
                 cover       = { cover }
@@ -137,17 +137,13 @@ export default function WatchSeries( { pageContext, location, data } ) {
             </div>
 
             {
-                (sections) ?
-                    sections.map( ( section, index ) => (
-                        <RenderSection 
-                            key     = {index}
-                            section = {section}
-                            campus  = {`/${campus}/`}
-                            filter  = { {campus: campus } }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( section, index ) => (
+                    <RenderComponent 
+                        key     = {index}
+                        section = {section}
+                        campus  = {`/${campus}/`}
+                    />
+                ))
             }
             
             <FooterSimpleText 

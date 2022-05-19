@@ -42,7 +42,6 @@ export default function MenuPage (
                     : 
                         undefined
 
-    // TODO: Parse this structure on a separate function
     if (menuBrand) {
         base = menuBrand
     }

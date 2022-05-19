@@ -1,37 +1,44 @@
-# Multipurpose Church Website
+<h1 align="center">
+  OpenLetters.io
+</h1><br/>
+<p align="center" style="font-size: 1.2rem;">Openletters is a Gatsby.js project that allows multi-campus organizations to manage content complexity and while retaining flexibility. </p>
 
-## Dependencies
+## Development 
 
-- Node v14.17.1
-- Gatsby CLI 4.11.2 | npm install -g gatsby@4.11.2
+### Environment file
 
-## Develop command
+`.env.production` is used when `gatsby build` is run, and `.env.development` when `gatsby develop` is used.
+Use `.env.example` as a guideline for both .env files.
+
+### Run project
+
+Start gatsby on specific port:
+`gatsby develop --host 0.0.0.0 --port 8000`
 
 Start only the GraphQL playground
 `$ GATSBY_GRAPHQL_IDE=playground gatsby develop`
 [Source](https://github.com/gatsbyjs/gatsby/issues/5801#issuecomment-395786936)
 
-Start gatsby on specific port:
-`gatsby develop --host 0.0.0.0 --port 8000`
+### Search Functions
 
-## Responsiveness
+The global search is managed by Algolia. An account is required to be setup and env variables need to setup to work.
 
-Is being managed by include-media.js
-<https://www.npmjs.com/package/include-media>
-
-## Component Library
-
-### Storybook
-
-Component Library.
-`$ npm run storybook`
-
-## Search
+#### Algolia
 
 Handle by Algolia. Requires an account and the API keys to be added to .env
 When changing the data structure on algolia-queries.js, change the `enablePartialUpdates` to false, to allow the index to be reconstructed.
 `enablePartialUpdates: false`
 
-## Additional Notes
+### Sass Library for Responsiveness
 
-*Date formats*: All dates are YYYYMMDD.
+Is being managed by include-media.js
+<https://www.npmjs.com/package/include-media>
+### Dateformats
+All dates are YYYYMMDD.
+### UI Components visualization
+Managed by Storybooks (<https://storybook.js.org/>).
+`$ npm run storybook`
+
+## LICENSE
+
+MIT

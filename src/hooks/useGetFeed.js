@@ -185,7 +185,7 @@ export const useGetFeed = (
             break
         }
 
-        /* TODO: Faulty implementation
+        /*
          * Series
          */
         case listObject.type === 'series': {
@@ -203,7 +203,7 @@ export const useGetFeed = (
                             cssClass: `${ 'item-'+index } ${ _.itemCss ? _.itemCss : '' }`,
                             buttons: [
                                 {
-                                    'buttonLink': `/${useGetBestCampus( campus )}/${config.watchSeriesDetailsSlug}/${_.slug}`, // TODO: Not checking if URL exists 
+                                    'buttonLink': `/${useGetBestCampus( campus )}/${config.watchSeriesDetailsSlug}/${_.slug}`,
                                     'buttonType': 'internal: Internal',
                                     'buttonText': feedButton?.buttonText || t('global:global.watch.more-info'),
                                     'buttonTarget': feedButton?.buttonTarget || '_self: Self',
@@ -223,7 +223,7 @@ export const useGetFeed = (
          * Event
          */
         case listObject.type === 'events': {
-            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined // TODO: Incorporate feedObject query results. feedObject.feedEvents.feedEventsCategory.events.nodes
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined
             
             if ( rawList?.length > 0 ) {
                 rawList.map( (_, index) => {
@@ -334,13 +334,13 @@ export const useGetFeed = (
          * Course
          */
         case listObject.type === 'courses': { // Generate Pages
-            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined //TODO: feedObject.feedCourses.feedCoursesCategory.courses.nodes
+            rawList = builtFeedObject?.list ? builtFeedObject.list : undefined 
             if( rawList?.length > 0 ) {
                 rawList.map( (_, index) => (
                     listObject.list.push(
                         {
                             title: _.title,
-                            subtitle: '', // TODO: Add extra fields Start and End Date
+                            subtitle: '',
                             excerpt: _.general?.summary ? _.general.summary : '',
                             image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
                             cssClass: `${ 'item-'+index } ${_.itemCss ? _.itemCss : ''}`,
@@ -405,7 +405,7 @@ export const useGetFeed = (
                 rawList.map( (_, index) => (
                     listObject.list.push(
                         {
-                            title: _.title, // TODO: Implement additional fields
+                            title: _.title,
                             subtitle: '',
                             excerpt: _.general?.summary ? _.general.summary : '',
                             image: _.general?.featuredPhoto?.localFile.childImageSharp.gatsbyImageData,
@@ -499,7 +499,6 @@ export const useGetFeed = (
          * people
          */
         case listObject.type === 'people': { // Generate Pages
-            // TODO: Potential Technical debt. Needs to be normalized.
             rawList = builtFeedObject?.list ? builtFeedObject.list : feedObject.nodes ? feedObject.nodes : feedObject ? feedObject : undefined  
             if( rawList?.length > 0 ) {
                 rawList.map( (_, index) => (

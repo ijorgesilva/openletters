@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RenderSection from '../../../renderSection'
+import RenderComponent from '../../renderer'
 
 export default function SectionRendering(
     {
@@ -23,11 +23,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -46,11 +45,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -69,11 +67,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -92,11 +89,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -115,11 +111,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -138,11 +133,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -161,11 +155,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />
@@ -185,11 +178,10 @@ export default function SectionRendering(
                     {
                         sections ?
                             sections.map( ( _, index ) => (
-                                <RenderSection 
+                                <RenderComponent 
                                     key         = { index }
                                     section     = { _ }
                                     campus      = { campus }
-                                    filter      = { { campus: campus } }
                                     location    = { location }
                                     mode        = { contentMode }
                                 />

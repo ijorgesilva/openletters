@@ -1,40 +1,45 @@
 import React from 'react'
 import { useTranslation } from "react-i18next"
 
-import config from '../../data/SiteConfig'
-import SectionCarousel from '../components/carousel/sectionCarousel'
-import SectionPodcast from '../components/content/sectionPodcast'
-import SectionTabs from '../components/content/sectionTabs'
-import SectionText from "../components/content/sectionText"
-import SectionTextPhoto from '../components/content/sectionTextPhoto'
-import HeroDynamic from '../components/hero/heroDynamic'
-import MenuPage from '../components/menu/menuPage'
-import SectionAlbum from '../components/music/album'
-import SectionFollow from '../components/social/sectionFollow'
-import SectionShare from '../components/social/sectionShare'
-import SectionFeedCarousel from '../components/vod/feed/sectionFeedCarousel'
-import { useGetFeed } from '../hooks/useGetFeed'
+import config from '../../../../data/SiteConfig'
+import { useGetFeed } from '../../../hooks/useGetFeed'
+import SectionAccordion from '../../accordion/sectionAccordion'
+import SectionCarousel from '../../carousel/sectionCarousel'
+import SectionBlurbs from '../../content/sectionBlurbs'
+import SectionPodcast from '../../content/sectionPodcast'
+import SectionTabs from '../../content/sectionTabs'
+import SectionText from "../../content/sectionText"
+import SectionTextPhoto from '../../content/sectionTextPhoto'
+import SectionVideo from '../../content/sectionVideo'
+import SectionForm from '../../form/sectionForm'
+import HeroDynamic from '../../hero/heroDynamic'
+import SectionIframe from '../../iframe/sectionIframe'
+import MenuPage from '../../menu/menuPage'
+import SectionAlbum from '../../music/album'
+import SectionQrCode from '../../qrcode/sectionQrCode'
+import SectionFollow from '../../social/sectionFollow'
+import SectionShare from '../../social/sectionShare'
+import SectionFeedCarousel from '../../vod/feed/sectionFeedCarousel'
+import SectionLatestSeries from '../../vod/feed/sectionLatestSeries'
 
-
-import SectionAccordion from './accordion/sectionAccordion'
-import SectionBlurbs from './content/sectionBlurbs'
-import SectionVideo from './content/sectionVideo'
-import SectionForm from './form/sectionForm'
-import SectionIframe from './iframe/sectionIframe'
-import SectionQrCode from './qrcode/sectionQrCode'
-import SectionLatestSeries from './vod/feed/sectionLatestSeries'
-
-export default function RenderSection ( 
+/**
+ * @param  {object} section
+ * @param  {string} campus: Use Slug form
+ * @param  {object} location
+ * @param  {string} className
+ * @param  {string} mode
+ * @param  {string} size: Spacing around section
+ */
+export default function RenderComponent ( 
     { 
-        section, 
-        filter, 
+        section,
         campus, 
         location, 
         className,
         mode,
         size,
     }
-    ) {
+) {
     
     const { t } = useTranslation()
 
@@ -64,7 +69,6 @@ export default function RenderSection (
     const sectionSize           =   sectionConfiguration?.sectionConfigurationSize ?
                                         sectionConfiguration.sectionConfigurationSize.split(':')[0]
                                     : size ? size : 'md'
-
 
     function sortByDate(a, b) {
         const dateA = parseInt(a.videoDetails.videoDayDate, 10)
@@ -105,7 +109,6 @@ export default function RenderSection (
         /*
          * Call To Action
          */
-        // TODO: Move buttons to Buttons component on frontend and backend
         case ( sectionType === 'cta' && sectionStatus ): {
             const ctaItem = section.sectionDetails.sectionCta
             return (
@@ -146,17 +149,13 @@ export default function RenderSection (
                     content     = { sectionContent }
                     mode        = { sectionColorScheme }
                     className   = { sectionClassname }
-                    width       = { sectionContainerWidth }
+                    containerWidth = { sectionContainerWidth }
                     size        = { sectionSize }
-                    subtitle    = { (podcastItem.sectionPodcastSubtitle) ? podcastItem.sectionPodcastSubtitle : undefined }
-                    Spotify     = { (podcastItem.sectionPodcastSpotifyUrl) ? podcastItem.sectionPodcastSpotifyUrl : undefined }
-                    Soundcloud  = { (podcastItem.sectionPodcastSoundcloudUrl) ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
-                    iTunes      = { (podcastItem.sectionPodcastItunesUrl) ? podcastItem.sectionPodcastItunesUrl : undefined }
-                    graphic     = { (podcastItem.sectionPodcastGraphic) ? 
-                                            podcastItem.sectionPodcastGraphic.localFile.childImageSharp.gatsbyImageData 
-                                    : 
-                                        undefined 
-                                    }
+                    subtitle    = { podcastItem.sectionPodcastSubtitle ? podcastItem.sectionPodcastSubtitle : undefined }
+                    Spotify     = { podcastItem.sectionPodcastSpotifyUrl ? podcastItem.sectionPodcastSpotifyUrl : undefined }
+                    Soundcloud  = { podcastItem.sectionPodcastSoundcloudUrl ? podcastItem.sectionPodcastSoundcloudUrl : undefined }
+                    iTunes      = { podcastItem.sectionPodcastItunesUrl ? podcastItem.sectionPodcastItunesUrl : undefined }
+                    graphic     = { podcastItem.sectionPodcastGraphic ? podcastItem.sectionPodcastGraphic.localFile.childImageSharp.gatsbyImageData : undefined }
                 />
             )
             
@@ -165,7 +164,6 @@ export default function RenderSection (
         /*
          * Videos by Tags
          */
-        // TODO: Get order and Count variables from CMS. Both params should be active by default.
         case ( sectionType === 'vodtags' && sectionStatus ): {
             const videoItems = section.sectionDetails.sectionVodTags.sectionVodTag ? section.sectionDetails.sectionVodTags.sectionVodTag : {}
 
@@ -173,7 +171,7 @@ export default function RenderSection (
                                         videoItems.videosOnDemand?.nodes?.filter( item => (
                                             item.status === 'publish'
                                         )).filter( item => (
-                                            item.videoDetails.videoCampus.some( item => item.slug === filter.campus )
+                                            item.videoDetails.videoCampus.some( item => item.slug === campus )
                                         ))
                                     :
                                         {}
@@ -817,4 +815,3 @@ export default function RenderSection (
         }
     }
 }
-

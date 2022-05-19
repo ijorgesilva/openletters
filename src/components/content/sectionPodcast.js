@@ -1,7 +1,7 @@
-import { StaticImage, GatsbyImage } from "gatsby-plugin-image"
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
-import { Container, Row, Col } from "react-bootstrap"
-import { useTranslation } from "react-i18next"
+import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import './sectionPodcast.scss'
 
@@ -17,7 +17,7 @@ export default function SectionPodcast (
         iTunes, 
         graphic, 
         mode, 
-        width, 
+        containerWidth, 
         size,
     } 
 ) {
@@ -26,22 +26,24 @@ export default function SectionPodcast (
     
     return(
         <section className={`sectionPodcast ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} id={id}>
-            <Container fluid = { width === 'container' ? undefined : true }>
+            <Container fluid = { containerWidth === 'container' ? undefined : true }>
                 <Row>
 
-                    <Col xs={12} md={4} className="graphic">
+                    <Col xs={12} md={2} className='graphic'>
                         {
                             graphic ? 
                                 <GatsbyImage 
-                                    image={graphic} 
-                                    alt=""
+                                    width  = '100%'
+                                    image = { graphic }
+                                    alt = ''
                                 />
                             :
                                 undefined
                         }
                     </Col>
 
-                    <Col xs={12} md={8}>
+                    <Col className = 'content' xs={12} md={10}>
+
                         {
                             subtitle ?
                                 <span>{subtitle}</span>
@@ -63,35 +65,35 @@ export default function SectionPodcast (
                                 <p>{t('components.podcast.text')}</p>
                         }
 
-                        <div className="links">
+                        <div className='links'>
                             {
                                 iTunes ?
-                                    <a href={iTunes} target="_blank" rel="noreferrer">
+                                    <a href={iTunes} target='_blank' rel='noreferrer'>
                                         <StaticImage
-                                                src="../../assets/img/global/icon-podcast-apple.svg"
-                                                alt="iTunes"
+                                                src='../../assets/img/global/icon-podcast-apple.svg'
+                                                alt='iTunes'
                                             />
                                     </a>
                                 : undefined
                             }
                             {
                                 Spotify ?
-                                    <a href={Spotify} target="_blank" rel="noreferrer">
+                                    <a href={Spotify} target='_blank' rel='noreferrer'>
                                         <StaticImage
-                                                src="../../assets/img/global/icon-podcast-spotify.svg"
-                                                alt="Spotify"
-                                                className=""
+                                                src='../../assets/img/global/icon-podcast-spotify.svg'
+                                                alt='Spotify'
+                                                className=''
                                             />
                                     </a>
                                 : undefined
                             }
                             {
                                 Soundcloud ?
-                                    <a href={Soundcloud} target="_blank" rel="noreferrer">
+                                    <a href={Soundcloud} target='_blank' rel='noreferrer'>
                                         <StaticImage
-                                            src="../../assets/img/global/icon-podcast-soundcloud.svg"
-                                            alt="Soundcloud"
-                                            className=""
+                                            src='../../assets/img/global/icon-podcast-soundcloud.svg'
+                                            alt='Soundcloud'
+                                            className=''
                                         />
                                     </a>
                                 : undefined

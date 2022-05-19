@@ -6,7 +6,6 @@ import Cookies from 'universal-cookie'
 
 import { useCampuses } from '../../hooks/useCampuses'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
-// import ContextConsumer from '../../provider/context'
 
 const isBrowser = typeof window !== "undefined"
 
@@ -17,7 +16,6 @@ export default function CampusSelector( { className, location, mode } ) {
     let initialCampus
     const cookies = new Cookies()
     const defaultCampus = useWebsiteConfiguration().settingsDefaultCampus
-    // const contextData = useContext( ContextConsumer )
 
     // Getter Campuses and Formatter
     const campusesData = useCampuses()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab, Nav } from 'react-bootstrap'
 
-import RenderSection from '../renderSection'
+import RenderComponent from '../renderer'
 import './sectionTabs.scss'
 
 export default function SectionTabs ( 
@@ -76,13 +76,12 @@ export default function SectionTabs (
                                                     }
                                                     {
                                                         ( _.sectionTabsTabType.split(':')[0] === 'nestedsection' ) ?
-                                                            <RenderSection 
+                                                            <RenderComponent 
                                                                 key         = { index }
                                                                 mode        = { mode }
                                                                 size        = { size }
                                                                 section     = { _.sectionTabsTabSection }
                                                                 campus      = { campus }
-                                                                filter      = { { campus: campus } }
                                                                 location    = { location }
                                                                 className   = { 'nested' }
                                                             />

@@ -24,7 +24,6 @@ export default function FooterSimpleText(
     let findPageCampus = getPageCampuses.find( x => x.slug === campus )
     let findPageCampusSlug = (findPageCampus?.slug) ? findPageCampus.slug : undefined
     
-    /* Todo: Convert this into a Hook */
     let bestCampusSlug =   ( findPageCampusSlug ) ?
                                 ( findPageCampusSlug === campus ) ?
                                     campus

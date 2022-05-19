@@ -39,14 +39,14 @@ export default function SectionLatestSeries (
 
     return (
         <section 
-            className   = {`sectionLatestSeries ${ size ? size : 'mf' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} 
-            id          = {id} 
-            style       = {styles}
+            className   = { `sectionLatestSeries ${ size ? size : 'md' } ${ mode ? mode : 'light' } ${ className ? className : '' }`} 
+            id          = { id } 
+            style       = { styles }
         >
-            <Container fluid = { width === 'container' ? undefined : false }>
+            <Container fluid = { width === 'container' ? undefined : true }>
                 {
-                    (title) ? 
-                        <h4 className="title">{title}</h4>
+                    title ? 
+                        <h4 className='title'>{title}</h4>
                     : 
                         undefined
                 }
@@ -59,8 +59,8 @@ export default function SectionLatestSeries (
                             infinite        = { (infinite) ? infinite : false }
                             partialVisible  = { true }
                             responsive      = { responsive[defaultConfig.itemsVisible] }
-                            itemClass       = "item"
-                            containerClass  = "carousel-container"
+                            itemClass       = 'item'
+                            containerClass  = 'carousel-container'
                         >
                             {
                                 latestSeries.map ( ( _, index ) => (

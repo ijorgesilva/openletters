@@ -332,7 +332,6 @@ export const useTheme = () => {
 
             /*
              * Misc
-             * TODO: Refactor to standard Bootstrap
              */
             --section-padding: 5rem 0rem;
             --section-padding-compact: 2rem 0rem;

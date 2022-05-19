@@ -3,7 +3,6 @@ import React from 'react'
 import { action } from "@storybook/addon-actions"
 
 import '../src/components/global.scss'
-import '../src/components/layout.scss'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

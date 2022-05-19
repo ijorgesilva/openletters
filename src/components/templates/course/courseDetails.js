@@ -11,11 +11,11 @@ import { useGetFeed } from '../../../hooks/useGetFeed'
 import { useTheme } from '../../../hooks/useTheme'
 import SectionCarousel from '../../carousel/sectionCarousel'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import HeroDynamic from '../../hero/heroDynamic'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
-import RenderSection from '../../renderSection'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 import TagSimple from '../../tag/tagSimple'
 import './courseDetails.scss'
 
@@ -79,7 +79,7 @@ export default function CourseDetails( { pageContext, data, location } ){
 
     return (
         <>
-            <HeaderPage 
+            <PageHeader 
                 title       = { title + ' | ' + t('global.courses.title') }
                 location    = { location }
                 className   = 'eventDetails'
@@ -343,11 +343,10 @@ export default function CourseDetails( { pageContext, data, location } ){
             {
                 pageLayout.pageLayout ?
                     pageLayout.pageLayout.map( ( _, index ) => (
-                        <RenderSection 
+                        <RenderComponent 
                             key         = { index }
                             section     = { _ }
                             campus      = { breadcrumbs.campus }
-                            filter      = { { campus: breadcrumbs.campus } }
                             location    = { location }
                             mode        = { contentMode }
                         />

@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next"
 
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
-import RenderSection from '../../renderSection'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 
 import Menu from './menu'
 
@@ -33,7 +33,7 @@ export default function landingDetails( { location, pageContext } ){
     return (
         <>
 
-            <HeaderPage 
+            <PageHeader 
                 mode        = { contentMode }
                 title       = { title }
                 location    = { location }
@@ -53,19 +53,15 @@ export default function landingDetails( { location, pageContext } ){
             />
             
             {
-                sections ?
-                    sections.map( ( _, index ) => (
-                        <RenderSection 
-                            key         = { index }
-                            section     = { _ }
-                            campus      = { breadcrumbs.campus }
-                            filter      = { { campus: breadcrumbs.campus } }
-                            location    = { location }
-                            mode        = { contentMode }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( _, index ) => (
+                    <RenderComponent 
+                        key         = { index }
+                        section     = { _ }
+                        campus      = { breadcrumbs.campus }
+                        location    = { location }
+                        mode        = { contentMode }
+                    />
+                ))
             }
 
             <FooterSimpleText 

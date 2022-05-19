@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import HeroDynamic from '../../hero/heroDynamic'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 
 import './attachmentDetails.scss'
 
@@ -24,7 +24,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
     return (
         <div className={'attachmentDetails'}>
 
-            <HeaderPage 
+            <PageHeader 
                 title       = { title + ' | ' + t('global.attachment.title-alt') } 
                 location    = { location } 
                 description = { excerpt }

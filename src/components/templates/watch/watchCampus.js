@@ -7,9 +7,9 @@ import SectionFeedCarousel from '../../../components/vod/feed/sectionFeedCarouse
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
-import RenderSection from '../../renderSection'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 import { getHeroDescription } from '../../utils/utils'
 import HeroSimple from '../../vod/hero/heroSimple'
 
@@ -40,7 +40,7 @@ export default function WatchPage( { pageContext, data, location } ) {
     return (
         <>
         
-            <HeaderPage 
+            <PageHeader 
                 title       = { t('global.watch.title') + ' | ' + title  }
                 location    = { location } 
                 mode        = { contentMode }
@@ -109,17 +109,13 @@ export default function WatchPage( { pageContext, data, location } ) {
             }
             
             {
-                sections ?
-                    sections.map( ( section, index ) => (
-                        <RenderSection 
-                            key     = { index }
-                            section = { section }
-                            campus  = { slug }
-                            filter  = { {campus: slug } }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( section, index ) => (
+                    <RenderComponent 
+                        key     = { index }
+                        section = { section }
+                        campus  = { slug }
+                    />
+                ))
             }
 
             <FooterSimpleText 

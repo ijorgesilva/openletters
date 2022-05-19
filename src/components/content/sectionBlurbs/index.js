@@ -119,7 +119,6 @@ export default function SectionBlurbs (
             setCurrentItems(liveQueryResults)
         }
         if( navigation?.pagination && filtering ) {
-            // TODO: Reset listing when query === '', currently not working as expected.
             if( query != '' ) {
                 setCurrentItems(liveQueryResults.slice(itemOffset, endOffset))
                 setPageCount(Math.ceil(liveQueryResults.length / itemsPP))

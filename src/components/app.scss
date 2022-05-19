@@ -30,7 +30,6 @@
 @import "~bootstrap/scss/input-group";
 @import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/nav";
-// @import "~bootstrap/scss/navbar"; // TODO: Warning/Error Error: SvgoParserError: <input>:1:1: Non-whitespace before first tag. > 1 | %3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30… 
 @import 'navbar-override';
 @import "~bootstrap/scss/card";
 @import "~bootstrap/scss/breadcrumb";
@@ -57,6 +56,7 @@
 /* 
  * Bootstrap Rewrites
  */
+
     /* 
     * Utilities
     */
@@ -853,60 +853,165 @@
     .mobile-only {
         display: none;
     }
-    
+
 /*
- * TODO: REFACTOR
+ * Live Icon
  */
-/* * Font Family */
-// TODO: Replace with CMS variables using Bootstrap theming capabilities
-@font-face {
-    font-family: 'Proxima nova';
-    src: url('../assets/fonts/proximanova/ProximaNova-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
+span.live-icon{
+    display: inline-block;
+    position: relative;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    margin-left: 20px;
+    border: 1px solid rgba(black, .1);
+    border-radius: 50%;
+    z-index: 1;
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background-color: rgba(red,.6);
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        animation: live 2s ease-in-out infinite;
+        z-index: -1;
+    }
+}
+@keyframes live {
+    0% {
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(3.5,3.5);
+        background-color: rgba(red,0);
+    }
 }
 
-@font-face {
-    font-family: 'Proxima nova';
-    src: url('../assets/fonts/proximanova/ProximaNova-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
+/* 
+ * React-player 
+ */
+.player-container {
+    .react-player__preview {
+        background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        .react-player__shadow {
+            position: absolute;
+        }
+        &::after {
+            padding-top: 56.9%;
+            position: relative;
+            width: 100%;
+            height: 0px;
+            content: ' ';
+        }
+    }
+    .react-player {
+        video {
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+        }
+    }
 }
 
-@font-face {
-    font-family: 'Proxima nova';
-    src: url('../assets/fonts/proximanova/ProximaNova-Black.otf') format('opentype');
-    font-weight: 900;
-    font-style: normal;
+/* 
+* Bootstrap
+*/
+
+/* Pagination */
+.page-item{
+
+    &.active {
+        .page-link {
+            z-index: 3;
+            color: hsla(var(--light-h), var(--light-s), var(--light-l), 1);
+            background-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            border-color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 0.1);
+        }
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: var(--color-one);
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        &:hover {
+            z-index: 2;
+            color: hsla(var(--dark-h), var(--dark-s), var(--dark-l), 1);
+            text-decoration: none;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+    }
 }
 
-@font-face {
-    font-family: 'Proxima nova';
-    src: url('../assets/fonts/proximanova/ProximaNova-Thin.otf') format('opentype');
-    font-weight: 100;
-    font-style: normal;
+/*******************************************************
+ * Wordpress code
+ *******************************************************/
+img.wp-post-image,
+article img,
+figure,
+#secondary img {
+    margin-bottom: 10px; 
 }
 
-@font-face {
-    font-family: 'Proxima nova';
-    src: url('../assets/fonts/proximanova/ProximaNova-Extrabold.otf') format('opentype');
-    font-weight: 800;
-    font-style: normal;
+.wp-caption-text {
+    margin-bottom: 10px; 
+}
+
+figcaption {
+    caption-side: top; 
+}
+
+.widget-area aside {
+    padding-bottom: 10px;
+    padding-top: 10px; 
+}
+
+.size-auto,
+.size-full,
+.size-large,
+.size-medium,
+.size-thumbnail {
+    max-width: 100%;
+    height: auto; 
+}
+
+#page {
+    word-wrap: break-word; 
+}
+
+.wp-block-image figcaption {
+    margin-top: .5em;
+    margin-bottom: 1em;
+    color: #BACBD9 !important;
+    text-align: center; 
+}
+
+.wp-block-image .alignleft {
+    margin-right: 0 !important; 
+}
+
+@media (min-width: 912px) {
+    .jumbotron {
+        padding: 8rem 2rem; 
+    } 
+}
+
+#wrapper-navbar img {
+    width: 202px;
+    height: 33px; 
+}
+
+iframe {
+    width: 1px;
+    min-width: 100%;
 }
 
 /* General */
-
-.body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-    font-family: 'Proxima nova', sans-serif;
-}
-
 h1 {
     font-size: 72px;
     line-height: 72px;
@@ -958,9 +1063,9 @@ h6 {
 
 /* Portrait and Landscape */
 @media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
+and (min-device-width: 375px) 
+and (max-device-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) { 
     .display-1 {
         font-size: 3rem;
     }
@@ -974,7 +1079,6 @@ h6 {
         font-size: 2rem;
     }
 }
-
 
 a {
     &.arrow {
@@ -1036,8 +1140,8 @@ a {
 
 @include media("<=tablet", "landscape") {
     h5 {
-      font-size: 22px;
-      line-height: 22px;
+        font-size: 22px;
+        line-height: 22px;
     }
 }
 
@@ -1066,8 +1170,41 @@ a {
         font-size: 6vw;
         line-height: 6vw;
     }
-    html.watch {
+}
 
+@media (max-width: 1200px) {
+    legend {
+    font-size: calc(1.275rem + 0.3vw);
     }
-    
+    h1.responsive,
+    .h1.responsive {
+    font-size: calc(1.375rem + 1.5vw);
+    }
+    h2.responsive,
+    .h2.responsive {
+    font-size: calc(1.325rem + 0.9vw);
+    }
+    h3.responsive,
+    .h3.responsive {
+    font-size: calc(1.3rem + 0.6vw);
+    }
+    h4.responsive,
+    .h4.responsive {
+    font-size: calc(1.275rem + 0.3vw);
+    }
+    .display-1 {
+    font-size: calc(1.725rem + 5.7vw);
+    }
+    .display-2 {
+    font-size: calc(1.675rem + 5.1vw);
+    }
+    .display-3 {
+    font-size: calc(1.575rem + 3.9vw);
+    }
+    .display-4 {
+    font-size: calc(1.475rem + 2.7vw);
+    }
+    .close {
+    font-size: calc(1.275rem + 0.3vw);
+    }
 }

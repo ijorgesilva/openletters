@@ -7,10 +7,10 @@ import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import RenderFeed from '../../feed/renderFeed'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
-import RenderSection from '../../renderSection'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 
 import './groupCampus.scss'
 
@@ -36,7 +36,7 @@ export default function GroupTypeCampus (
     return (
         <>
 
-            <HeaderPage 
+            <PageHeader 
                 title       = { t('global.groupTypes.title') + ' | ' + title }
                 location    = { location } 
                 className   = 'groupTypesCampus'
@@ -94,19 +94,15 @@ export default function GroupTypeCampus (
             }
             
             {
-                sections ?
-                    sections.map( ( _, index ) => (
-                        <RenderSection 
-                            key         = { index }
-                            section     = { _ }
-                            campus      = { breadcrumbs.campus }
-                            filter      = { { campus: breadcrumbs.campus } }
-                            location    = { location }
-                            mode        = { contentMode }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( _, index ) => (
+                    <RenderComponent 
+                        key         = { index }
+                        section     = { _ }
+                        campus      = { breadcrumbs.campus }
+                        location    = { location }
+                        mode        = { contentMode }
+                    />
+                ))
             }
             
             <FooterSimpleText 

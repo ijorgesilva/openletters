@@ -5,10 +5,10 @@ import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import MainContent from '../../content/mainContent'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
-import RenderSection from '../../renderSection'
+import PageHeader from '../../pageHeader'
+import RenderComponent from '../../renderer'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 
 import './pageDetails.scss'
@@ -36,7 +36,7 @@ export default function PageDetails( { location, pageContext } ){
     return (
         <>
 
-            <HeaderPage 
+            <PageHeader 
                 mode        = { contentMode }
                 title       = { title }
                 location    = { location }
@@ -75,19 +75,15 @@ export default function PageDetails( { location, pageContext } ){
             }
 
             {
-                sections ?
-                    sections.map( ( _, index ) => (
-                        <RenderSection 
-                            key         = { index }
-                            section     = { _ }
-                            campus      = { campus }
-                            filter      = { { campus: campus } }
-                            location    = { location }
-                            mode        = { contentMode }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( _, index ) => (
+                    <RenderComponent 
+                        key         = { index }
+                        section     = { _ }
+                        campus      = { campus }
+                        location    = { location }
+                        mode        = { contentMode }
+                    />
+                ))
             }
 
             {

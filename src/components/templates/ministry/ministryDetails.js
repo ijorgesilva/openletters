@@ -6,9 +6,9 @@ import { useGenerateMinistryMenu } from '../../../hooks/useGenerateMinistryMenu'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 
 import FeedRendering from './sections/feedRendering'
 import SectionRendering from './sections/sectionRendering'
@@ -35,7 +35,7 @@ export default function MinistryDetails(
     return (
         <>
 
-            <HeaderPage 
+            <PageHeader 
                 title       = { title + ' | ' + t('global.blog.title') }
                 location    = { location } 
                 cover       = { cover }

@@ -143,6 +143,10 @@
 		"legal": {
 			"disclaimer": "Copyright ©. All Rights Reserved."
 		},
+		"live": {
+			"we_are_live": "We are Live",
+			"we_will_live_on": "We will be live on "
+		},
 		"ministry": {
 			"description": "",
 			"related-ministries": "Related Ministries",

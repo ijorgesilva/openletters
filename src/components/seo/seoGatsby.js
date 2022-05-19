@@ -19,7 +19,7 @@ export default function SEO ( { title, description, image, article } ) {
     twitterUsername,
   } = site.siteMetadata
 
-  const imageGraphic = (image) ? image : siteUrl + defaultImage
+  const imageGraphic = image ? image : siteUrl + defaultImage
 
   const seo = {
     title: title || defaultTitle,

@@ -35,7 +35,7 @@ export default function HeroDynamic (
 
         <div id = {id} className = {`heroDynamic hero ${ mode ? mode : 'light' } ${ size ? size : 'md' } ${ className ? className : '' }`}>
 
-            <Container className={'z-index-2'} fluid = { width === 'container' ? true : undefined }>
+            <Container className={'z-index-2'} fluid = { width === 'container' ? undefined : true }>
                 <div className={`content ${ textAlignment ? 'align-items-'+textAlignment : 'align-items-center'}`}>
                     <div>
                         <h1 className={`${ mode === 'dark' ? 'text-white' : 'text-black'} ${ titleClassName ? titleClassName : ''}`} dangerouslySetInnerHTML={{__html: title}}></h1>

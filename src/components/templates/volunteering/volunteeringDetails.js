@@ -6,10 +6,10 @@ import config from '../../../../data/SiteConfig'
 import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import HeroDynamic from '../../hero/heroDynamic'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 import { getDate } from '../../utils/utils'
 
@@ -29,8 +29,8 @@ export default function VolunteeringDetails( { pageContext, location } ){
     
     return (
         <>
-            {/* TODO: Add Control Visibility */}
-            <HeaderPage 
+
+            <PageHeader 
                 title       = { title + ' | ' + t('global.volunteering.title') }
                 location    = { location } 
                 cover       = { general.featuredPhoto?.localFile.childImageSharp.gatsbyImageData.images.fallback.src }

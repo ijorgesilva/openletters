@@ -8,8 +8,8 @@ import { useGlobalIndeces } from '../../../hooks/useGlobalIndeces'
 import { useParticipation } from '../../../hooks/useParticipation'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 import ToolbarDetails from '../../toolbar/toolbarDetails'
 import WatchDetailsContent from '../../vod/content/watchDetailsContent'
 import WatchDetailsSidebar from '../../vod/content/watchDetailsSidebar'
@@ -68,7 +68,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
         <div className={`watchDetails bg-${ theme.styles.header === 'light' ? 'dark' : theme.styles.header === 'dark' ? 'light' : theme.styles.header } ${ theme.styles.header ? theme.styles.header : 'light' }`}>
             
             <div className={`player ${ theme.styles.header ? theme.styles.header : 'light'}`}>
-                <HeaderPage
+                <PageHeader
                     title       = { title + ' | ' + t('global.watch.videos') } 
                     location    = { location } 
                     cover       = { poster }

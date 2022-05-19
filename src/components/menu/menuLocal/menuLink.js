@@ -2,9 +2,14 @@ import { Link } from 'gatsby'
 import IframeResizer from 'iframe-resizer-react'
 import React, {useState} from 'react'
 import {  Nav, Modal } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
-export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, as, mode } ){
+import { useGetLiveStreaming } from '../../../hooks/useGetLiveStreaming'
+
+export default function MenuLink( { type, className, link, target, index, name, iframe, iframeTitle, live, campus, as, mode } ){
     
+    const liveEvents = useGetLiveStreaming( campus )
+    const { t } = useTranslation()
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -14,6 +19,7 @@ export default function MenuLink( { type, className, link, target, index, name, 
         <>
             {(function(){
                 switch ( type ) {
+
                     case 'button':
                         return (
                             <>
@@ -31,6 +37,7 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                 </div>
                             </>
                         )
+
                     case 'iframe':
                         return (
                                 <>
@@ -64,15 +71,34 @@ export default function MenuLink( { type, className, link, target, index, name, 
                                     }
                                 </>
                             )
+
+                    case 'watch':
+                        console.log({liveEvents: liveEvents, campus: campus, live: live})
+                        return (
+                            <Nav.Link
+                                as                      = { as === 'link' ? Link : undefined }
+                                key                     = {index}
+                                target                  = {target}
+                                className               = {`navitems watch navmain ${ className ? className : '' }`}
+                                to                      = {link}
+                                href                    = {link}
+                                title                   = { live ? t('global.live.we_are_live') : '' }
+                            >
+                                <div dangerouslySetInnerHTML = {{__html: name}}></div>
+                                { live ? <span className="live-icon"></span> : undefined }
+                            </Nav.Link>
+                        )
+
                     default:
                         return (
                                 <Nav.Link 
-                                    as                      = { as === 'link' ? Link : undefined } 
-                                    key                     = {index} target={target} 
+                                    as                      = { as === 'link' ? Link : undefined }
+                                    key                     = {index}
+                                    target                  = {target}
                                     className               = {`navitems navmain ${ className ? className : '' }`} 
-                                    to                      = {link} 
-                                    dangerouslySetInnerHTML = {{__html: name}} 
-                                    href                    = {link} 
+                                    to                      = {link}
+                                    dangerouslySetInnerHTML = {{__html: name}}
+                                    href                    = {link}
                                 />
                             )
                 }

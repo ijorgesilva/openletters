@@ -62,7 +62,6 @@ const Pagination = (
         new Array(nbPages).fill(null).map((_, index) => {
           const page = index + 1
           const limit = itemLimit ? itemLimit : 10
-           // TODO: Flimsy logic when previous items is less than 3 and last item not showing previous pages.
           let nextPages = 
                           currentRefinement === 1 ? // Current Page is the first page, show the next N elements
                             6
@@ -82,7 +81,6 @@ const Pagination = (
           return (
             <>
               {
-                // TODO: DRY Page Item
                 // Show All if Total Pages is under the Limit/itemLimit
                 nbPages <= limit ?
                   <li className='page-item' key={index}>

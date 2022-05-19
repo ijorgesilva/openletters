@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../../data/SiteConfig'
 import { useTheme } from '../../../hooks/useTheme'
 import FooterSimpleText from '../../footer/footerSimpleText'
-import HeaderPage from '../../headerPage'
 import MenuPage from '../../menu/menuPage'
 import Navigation from '../../menu/navigation'
+import PageHeader from '../../pageHeader'
 
 import Layout from './layouts'
 import './eventDetails.scss'
@@ -32,7 +32,7 @@ export default function EventDetails( { pageContext, location } ){
 
     return (
         <>
-            <HeaderPage 
+            <PageHeader 
                 title       = { title + ' | ' + t('global.events.title') }
                 location    = { location }
                 className   = 'eventDetails'
@@ -40,11 +40,6 @@ export default function EventDetails( { pageContext, location } ){
                 cover       = { cover }
                 description = { ( excerpt ) ? excerpt : excerpt}
                 article     = { true }
-                // TODO: Incorporate meta tags into header
-                // metaTags    =   {{
-                //                     noIndex: ( typeof eventDetails.eventHide?.eventHideSearchEngines === 'undefined' ) ? 
-                //                                     false : (eventDetails.eventHide?.eventHideSearchEngines === true ) ? true : false,
-                //                 }}
             />
             
             <Navigation

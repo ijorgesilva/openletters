@@ -2,8 +2,8 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import FooterSimpleText from '../components/footer/footerSimpleText'
-import HeaderPage from '../components/headerPage'
 import Navigation from '../components/menu/navigation'
+import PageHeader from '../components/pageHeader'
 import { useGlobalIndeces } from '../hooks/useGlobalIndeces'
 
 export default function Home( { location } ) {
@@ -14,7 +14,7 @@ export default function Home( { location } ) {
 
     <>
 
-      <HeaderPage
+      <PageHeader
           title       = {t('global.404-title')}
           location    = { location } 
           classNameName   = '404'

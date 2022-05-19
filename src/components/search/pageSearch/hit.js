@@ -13,7 +13,7 @@ export default function Hit(
 ) {
     const { t } = useTranslation()
     return (
-        <BlurbVertical // TODO: Video (doesn't work for other types)
+        <BlurbVertical
             key                 = { hit.__position }
             image               = { hit.image }
             title               = { `${hit.title} ${ hit.series ? ' | ' + hit.series : ''}` }

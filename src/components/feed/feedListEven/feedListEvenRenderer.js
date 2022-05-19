@@ -20,7 +20,6 @@ export default function FeedListEvenRenderer (
     let bestCampusSlug
     let components = []
 
-    // TODO: Refactor
     items.map( ( item, index ) => {
         if ( item.linkDetails ) {
             components.push(<BlurbVerticalDark 

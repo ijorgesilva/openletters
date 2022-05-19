@@ -3,7 +3,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 
 import AdvancedButton from '../buttons/advanced'
-import RenderSection from '../renderSection'
+import RenderComponent from '../renderer'
 import Background from '../UI/background'
 
 import './sectionText.scss'
@@ -64,12 +64,11 @@ export default function SectionText ( {
                                 {
                                     ( sections?.length > 0 ) ?
                                         sections.map( ( section, index ) => (
-                                            <RenderSection 
+                                            <RenderComponent 
                                                 key         = { index }
                                                 section     = { section }
                                                 campus      = { campus }
                                                 mode        = { mode }
-                                                filter      = { { campus: campus } }
                                                 location    = { location }
                                                 className   = { 'nested' }
                                             />

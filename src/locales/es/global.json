@@ -143,6 +143,10 @@
 		"legal": {
 			"disclaimer": "© Todos los Derechos Reservados."
 		},
+		"live": {
+			"we_are_live": "Estamos en vivo",
+			"we_will_live_on": "Estaremos en vivo en "
+		},
 		"ministry": {
 			"description": "",
 			"related-ministries": "Ministerios Relacionado",

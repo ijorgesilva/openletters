@@ -141,8 +141,8 @@ export default function MenuMain (
                             menu.map( (_, index) => 
                                 (
                                     _.submenu ?
-                                        (_.megamenu === true) ?
-                                            <MegaMenu 
+                                        _.megamenu === true ?
+                                            <MegaMenu
                                                 className   = {`${_.class ? _.class : ''}`} 
                                                 key         = {index} 
                                                 content     = {_.submenu} 
@@ -151,8 +151,8 @@ export default function MenuMain (
                                                 columns     = {_.columns}
                                                 mode        = { mode }
                                             />
-                                        : 
-                                            <RegularMenu 
+                                        :
+                                            <RegularMenu
                                                 className   = {`${_.class ? _.class : ''}`} 
                                                 key         = {index} 
                                                 menu        = {_.submenu}
@@ -161,17 +161,19 @@ export default function MenuMain (
                                                 alignRight  = { alignRight }
                                                 mode        = { mode }
                                             />
-                                    : 
+                                    :
                                         <MenuLink 
-                                            key         = {index} 
-                                            className   = {`${_.class ? _.class : ''}`} 
-                                            content     = {_.submenu} 
-                                            name        = {_.name} 
-                                            type        = {_.type} 
-                                            link        = {_.link} 
+                                            key         = {index}
+                                            campus      = {campus}
+                                            className   = {`${_.class ? _.class : ''}`}
+                                            content     = {_.submenu}
+                                            name        = {_.name}
+                                            type        = {_.type}
+                                            link        = {_.link}
+                                            live        = {_.live}
                                             target      = {_.target}
-                                            iframe      = {_.iframe} 
-                                            iframeTitle = {_.iframeTitle} 
+                                            iframe      = {_.iframe}
+                                            iframeTitle = {_.iframeTitle}
                                             mode        = { mode }
                                         />
                                 )

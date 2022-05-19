@@ -46,6 +46,7 @@ export const useWebsiteConfigurationMenus = () => {
                                                             }
                                                             mainMenuItemWatch {
                                                                 mainMenuItemCampusLocation
+                                                                mainMenuItemLiveStreaming
                                                             }
                                                             mainMenuItemNews {
                                                                 mainMenuItemCampusLocation
@@ -206,6 +207,7 @@ export const useWebsiteConfigurationMenus = () => {
                                                             }
                                                             mainMenuItemWatch {
                                                                 mainMenuItemCampusLocation
+                                                                mainMenuItemLiveStreaming
                                                             }
                                                             mainMenuItemNews {
                                                                 mainMenuItemCampusLocation

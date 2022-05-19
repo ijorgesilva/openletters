@@ -26,6 +26,18 @@ export const useCampuses = ( campus ) => {
                                             campusConfiguration {
                                                 campusConfigurationVisibility
                                             }
+                                            campusLocal {
+                                                campusTimeZone
+                                                campusMapLocation {
+                                                    state
+                                                    country
+                                                    city
+                                                    latitude
+                                                    longitude
+                                                    streetAddress
+                                                    postCode
+                                                }
+                                            }
                                             campusBrand {
                                                 campusBrandOverwrite
                                                 campusBrandUrl

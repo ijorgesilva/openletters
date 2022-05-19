@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RenderSection from '../../../renderSection'
+import RenderComponent from '../../../renderer'
 
 export default function SectionRendering(
     {
@@ -21,19 +21,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -44,19 +40,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -67,19 +59,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -90,19 +78,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -113,19 +97,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -136,19 +116,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -159,19 +135,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent 
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )
@@ -183,19 +155,15 @@ export default function SectionRendering(
             return(
                 <>
                     {
-                        sections ?
-                            sections.map( ( _, index ) => (
-                                <RenderSection 
-                                    key         = { index }
-                                    section     = { _ }
-                                    campus      = { campus }
-                                    filter      = { { campus: campus } }
-                                    location    = { location }
-                                    mode        = { contentMode }
-                                />
-                            ))
-                        :
-                            undefined
+                        sections?.map( ( _, index ) => (
+                            <RenderComponent
+                                key         = { index }
+                                section     = { _ }
+                                campus      = { campus }
+                                location    = { location }
+                                mode        = { contentMode }
+                            />
+                        ))
                     }
                 </>
             )

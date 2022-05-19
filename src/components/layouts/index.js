@@ -6,10 +6,8 @@ import { Helmet } from 'react-helmet'
 import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import { withTrans } from '../../i18n/withTrans'
-import { ContextProviderComponent } from '../../provider/context'
 
 import '../app.scss'
-import '../layout.scss'
 
 // eslint-disable-next-line no-unused-vars
 const Layout = ( { children, pageContext, t, i18n, location } ) => {
@@ -22,8 +20,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
         case 'serieDetails':
         case 'watchDetails':{
             return (
-                <ContextProviderComponent>
-
+                <>
                     <Helmet>
                         <style>
                             { `${theme?.cssVariables ? theme.cssVariables : ''}`} 
@@ -59,14 +56,13 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                         : undefined
                     }
 
-                </ContextProviderComponent>
+                </>
             )
         }
             
         default:{
             return (
-                <ContextProviderComponent>
-
+                <>
                     <Helmet>
                         <style>
                             { ( theme?.cssVariables ) ? `${ theme.cssVariables }` : ''} 
@@ -87,13 +83,11 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                     >
                         {t('global.cookie-consent.description')}
                     </CookieConsent>
-
                     {
                         customCode ? 
                             <div dangerouslySetInnerHTML={{__html: customCode}}></div>
                         : undefined
                     }
-                    
                     {
                         customCss ?
                             <style>
@@ -101,8 +95,7 @@ const Layout = ( { children, pageContext, t, i18n, location } ) => {
                             </style>
                         : undefined
                     }
-
-                </ContextProviderComponent>
+                </>
             )
         }
 

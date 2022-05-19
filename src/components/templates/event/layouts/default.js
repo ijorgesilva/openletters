@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../../../data/SiteConfig'
 import HeroDynamic from '../../../hero/heroDynamic'
-import RenderSection from '../../../renderSection'
+import RenderComponent from '../../../renderer'
 import TagSimple from '../../../tag/tagSimple'
 import ToolbarDetails from '../../../toolbar/toolbarDetails'
 import { getDate } from '../../../utils/utils'
@@ -189,18 +189,15 @@ export default function DefaultLayoutDetails (
             </Container>
 
             {
-                sections ?
-                    sections.map( ( section, index ) => (
-                        <RenderSection 
-                            key         = { index }
-                            section     = { section }
-                            campus      = { `/${campus}/` }
-                            filter      = { {campus: campus } }
-                            location    = { location }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( section, index ) => (
+                    <RenderComponent 
+                        key         = { index }
+                        section     = { section }
+                        campus      = { `/${campus}/` }
+                        filter      = { {campus: campus } }
+                        location    = { location }
+                    />
+                ))
             }
         </main>
     )

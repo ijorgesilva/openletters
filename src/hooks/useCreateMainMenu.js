@@ -63,6 +63,7 @@ export const useCreateMainMenu = (
                                     link: `/${useGetBestCampus( campus )}/${config.watchSlug}`, 
                                     class: `${ item.configuration?.style?.cssClass ? item.configuration.style.cssClass : '' } ${ item.configuration?.responsiveness?.visibility ? item.configuration.responsiveness.visibility.replace('_', ' ') : ''} ${ rootItem.buttonStyle != undefined ? 'btn btn-'+rootItem.buttonStyle : ''}`,
                                     type: item.mainMenuItemType,
+                                    live: item.mainMenuItemWatch.mainMenuItemLiveStreaming ? true : false,
                                 }
                     parsedMenuArr.push(parsedItem)
                     break
@@ -230,9 +231,6 @@ export const useCreateMainMenu = (
                                                     {name: 'Facebook', link: webConf.settingsSocial.settingsSocialFacebookUrl },
                                                     {name: 'Twitter', link: webConf.settingsSocial.settingsSocialTwitterUrl },
                                                     {name: 'Youtube', link: webConf.settingsSocial.settingsSocialYoutubeUrl },
-                                                    // TODO: Add same social links as custom
-                                                    // {name: 'TikTok', link: subItem.sectionFollowNetworks.sectionFollowNetworksTiktok.sectionFollowNetworksTiktokUrl },
-                                                    // {name: 'Pinterest', link: subItem.sectionFollowNetworks.sectionFollowNetworksPinterest.sectionFollowNetworksPinterestUrl },
                                                 ]
                                             }
                                         )

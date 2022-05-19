@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RenderSection from '../../../renderSection'
+import RenderComponent from '../../../renderer'
 import '../eventDetails.scss'
 
 export default function CleanLayoutDetails ( 
@@ -15,19 +15,15 @@ export default function CleanLayoutDetails (
     return (
         <>
             {
-                sections ?
-                    sections.map( ( _, index ) => (
-                        <RenderSection 
-                            key         = { index }
-                            section     = { _ }
-                            campus      = { campus }
-                            filter      = { { campus: campus } }
-                            location    = { location }
-                            mode        = { mode }
-                        />
-                    ))
-                :
-                    undefined
+                sections?.map( ( _, index ) => (
+                    <RenderComponent 
+                        key         = { index }
+                        section     = { _ }
+                        campus      = { campus }
+                        location    = { location }
+                        mode        = { mode }
+                    />
+                ))
             }
         </>
     )
