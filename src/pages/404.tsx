@@ -1,23 +1,25 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from '@reach/router'
 
 import FooterSimpleText from '../components/footer/footerSimpleText'
 import Navigation from '../components/menu/navigation'
 import PageHeader from '../components/pageHeader'
 import { useGlobalIndeces } from '../hooks/useGlobalIndeces'
 
-export default function Home( { location } ) {
+const default404 = {
+  mode: 'light',
+}
+export default function Home() {
 
   const { t } = useTranslation()
+  const location = useLocation()
 
   return (
-
     <>
-
       <PageHeader
           title       = {t('global.404-title')}
-          location    = { location } 
-          classNameName   = '404'
+          className   = '404'
           description = {t('global.404-description')}
       />
             
@@ -53,9 +55,9 @@ export default function Home( { location } ) {
       <FooterSimpleText 
           campus = { 'global' } 
           mode   = { 'dark' }
+          hideLinks = { false }
       />
 
     </>
-
   )
 }

@@ -1,12 +1,11 @@
-# Source: https://valenciandigital.com/blog/containerizing-a-gatsbyjs-site-with-docker-compose
 version: "3"
 services:
-  frontend:
-    build: ./
-    command: ts-node node_modules/.bin/gatsby develop -H 0.0.0.0 -p 8000
+  client:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./scripts/docker/Dockerfile.dev
     volumes:
-      - ./:/app
+      - ./src:/app/src # Links the source files to the running container
     ports:
-      - "8000:8000"
-      - "9929:9929"
-      - "9230:9230"
+      - "8001:8000"

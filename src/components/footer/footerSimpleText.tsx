@@ -7,12 +7,14 @@ import { useTheme } from '../../hooks/useTheme'
 import { useWebsiteConfiguration } from '../../hooks/useWebsiteConfiguration'
 import "./footerSimpleText.scss"
 
+interface DataProps {
+    campus: string,
+    mode?: string,
+    hideLinks?: boolean,
+}
+
 export default function FooterSimpleText( 
-    { 
-        campus, 
-        mode, 
-        hideLinks // Boolean: Hide the Footer Links when true
-    } 
+    { campus, mode, hideLinks, } : DataProps
 ) {
     
     const { t } = useTranslation()
@@ -22,10 +24,10 @@ export default function FooterSimpleText(
     const theme = useTheme()
 
     let findPageCampus = getPageCampuses.find( x => x.slug === campus )
-    let findPageCampusSlug = (findPageCampus?.slug) ? findPageCampus.slug : undefined
+    let findPageCampusSlug = findPageCampus?.slug ? findPageCampus.slug : undefined
     
-    let bestCampusSlug =   ( findPageCampusSlug ) ?
-                                ( findPageCampusSlug === campus ) ?
+    let bestCampusSlug =   findPageCampusSlug ?
+                                findPageCampusSlug === campus ?
                                     campus
                                 :
                                     ( findPageCampusSlug === defaultCampusSlug ) ?

@@ -39,7 +39,6 @@ export default function NewsCampus (
 
             <PageHeader 
                 title       = { t('global.news.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'newsCampus'
                 mode        = { contentMode }
                 cover       = { 

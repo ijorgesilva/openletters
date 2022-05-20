@@ -1,0 +1,8 @@
+version: "3"
+services:
+  client:
+    dockerfile: ./scripts/docker/Dockerfile
+    build:
+      context: .
+    ports:
+      - "80:80"

@@ -1,11 +1,8 @@
-/**
+/*
  * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.org/docs/gatsby-config/
+ * https://www.gatsbyjs.org/docs/gatsby-config/
  */
 const path = require("path");
-
-const urljoin = require("url-join");
 
 require('dotenv').config({
   path: `.env${ (process.env.NODE_ENV === 'development' ) ? '.development' : (process.env.NODE_ENV) ? '.'+process.env.NODE_ENV : ''}`
@@ -24,33 +21,19 @@ module.exports = {
   
     siteMetadata: {
       siteUrl: process.env.SITE_URL,
-  
       title: process.env.SITE_TITLE,
       titleTemplate: "%s"+' '+process.env.SITE_SEPARATOR+' '+process.env.SITE_TITLE,
       description: process.env.SITE_DESCRIPTION,
       url: process.env.SITE_URL,
       image: process.env.SITE_IMAGE,
-      twitterUsername: process.env.TWITTER_USERNAME,
-  
-      rssMetadata: {
-        site_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX),
-        feed_url: urljoin(process.env.SITE_URL, process.env.PATH_PREFIX, process.env.SITE_RSS),
-        title: process.env.SITE_TITLE,
-        description: process.env.SITE_DESCRIPTION,
-        image_url: `${urljoin(
-          process.env.SITE_URL,
-          process.env.PATH_PREFIX
-        )}/logos/logo-512.png`,
-        copyright: process.env.SITE_COPYRIGHT
-      }
     },
   
     /* Your site config here */
     plugins: [
 
         /*
-        * Functions
-        */
+         * Functions
+         */
         "gatsby-plugin-react-helmet", 
         {
           resolve: `gatsby-plugin-sass`
@@ -63,8 +46,8 @@ module.exports = {
         },
 
         /*
-        * Sources & Assets
-        */
+         * Sources & Assets
+         */
         {
           resolve: `gatsby-source-wordpress`,
           options: {
@@ -99,8 +82,8 @@ module.exports = {
         },
 
         /*
-        * Analytics
-        */
+         * Analytics
+         */
         {
           resolve: `gatsby-plugin-gdpr-cookies`,
           options: {
@@ -116,8 +99,8 @@ module.exports = {
         },
 
         /*
-        * Image Processing
-        */
+         * Image Processing
+         */
         `gatsby-plugin-image`,
         `gatsby-transformer-sharp`,
         {
@@ -132,8 +115,8 @@ module.exports = {
         },
 
         /*
-        * SEO related
-        */
+         * SEO related
+         */
         {
           resolve: `gatsby-plugin-canonical-urls`,
           options: {
@@ -153,9 +136,9 @@ module.exports = {
         `gatsby-plugin-sitemap`,
 
         /*
-        * Search: Algolia
-        * Description: This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
-        */
+         * Algolia
+         * This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+         */
         {
           resolve: `gatsby-plugin-algolia`,
           options: {

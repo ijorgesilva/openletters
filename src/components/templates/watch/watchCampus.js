@@ -42,7 +42,6 @@ export default function WatchPage( { pageContext, data, location } ) {
         
             <PageHeader 
                 title       = { t('global.watch.title') + ' | ' + title  }
-                location    = { location } 
                 mode        = { contentMode }
                 className   = 'watchCampus'
                 cover       = { ( backgroundImage?.images ) ? backgroundImage.images.fallback.src : undefined }

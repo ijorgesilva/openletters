@@ -1,24 +1,37 @@
 import React from 'react'
+import { useLocation } from '@reach/router'
 import { Helmet } from 'react-helmet'
-import { PageProps } from 'gatsby'
 
 import SEO from '../components/seo/seoGatsby'
 
-type DataProps = {
+interface confProps {
     title: string,
-    location: object,
-    cover: string,
-    description: string,
-    article: boolean,
-    className: string,
-    metaTags: object,
-    mode: string,
+    cover?: string,
+    description?: string,
+    article?: boolean,
+    className?: string,
+    metaTags?: {
+        noIndex?: boolean,
+    },
+    mode?: string,
+}
+const defaultProps : confProps = {
+    title: '',
+    cover: undefined,
+    description: undefined,
+    article: false,
+    className: null,
+    metaTags: {
+        noIndex: true,
+    },
+    mode: 'light',
 }
 export default function PageHeader( 
-    title, location, cover, description, article, className, metaTags, mode : PageProps<DataProps>
-){
+    { title, cover, description, article, className, metaTags, mode } : typeof defaultProps
+) {
 
-    const current : string = location.pathname.split( '/' )
+    const { pathname } = useLocation()
+    const current : Array<String> = pathname?.split( '/' )
     
     return (
         <>

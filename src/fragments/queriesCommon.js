@@ -259,7 +259,7 @@ const queriesCommon = {
             }
         }
     `,
-    allWpRedirect: `
+    redirects: `
         ########
         # Redirects 
         ########

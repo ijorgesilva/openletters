@@ -25,8 +25,7 @@ export default function AttachmentDetails ( { location, pageContext } ) {
         <div className={'attachmentDetails'}>
 
             <PageHeader 
-                title       = { title + ' | ' + t('global.attachment.title-alt') } 
-                location    = { location } 
+                title       = { title + ' | ' + t('global.attachment.title-alt') }
                 description = { excerpt }
                 article     = { false }
                 className   = 'groupsCampus'

@@ -31,7 +31,6 @@ export default function BlogCampus ( { data, location, pageContext } ){
 
             <PageHeader 
                 title       = { t('global.blog.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'blogCampus'
                 mode        = { contentMode }
                 cover       = { 

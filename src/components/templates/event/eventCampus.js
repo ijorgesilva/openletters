@@ -30,7 +30,6 @@ export default function EventsCampus ( { data, location, pageContext } ) {
 
             <PageHeader
                 title       = { t('global.events.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'eventCampus'
                 mode        = { contentMode }
                 cover       = { 

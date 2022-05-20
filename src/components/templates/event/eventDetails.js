@@ -34,7 +34,6 @@ export default function EventDetails( { pageContext, location } ){
         <>
             <PageHeader 
                 title       = { title + ' | ' + t('global.events.title') }
-                location    = { location }
                 className   = 'eventDetails'
                 mode        = { contentMode }
                 cover       = { cover }

@@ -69,8 +69,7 @@ export default function WatchDetails( { pageContext, location, data } ) {
             
             <div className={`player ${ theme.styles.header ? theme.styles.header : 'light'}`}>
                 <PageHeader
-                    title       = { title + ' | ' + t('global.watch.videos') } 
-                    location    = { location } 
+                    title       = { title + ' | ' + t('global.watch.videos') }
                     cover       = { poster }
                     description = { excerpt }
                     mode        = { modeContent }

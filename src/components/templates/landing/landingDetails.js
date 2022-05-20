@@ -36,7 +36,6 @@ export default function landingDetails( { location, pageContext } ){
             <PageHeader 
                 mode        = { contentMode }
                 title       = { title }
-                location    = { location }
                 className   = 'landingDetails'
                 cover       = { cover }
                 description = { seo.metaDesc }

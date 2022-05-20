@@ -25,7 +25,6 @@ export default function WatchLatest( { location, pageContext } ) {
 
             <PageHeader 
                 title       = { t('global.watch.title') + ' | ' + title  }
-                location    = { location } 
                 className   = 'watchLatest'
                 mode        = { contentMode }
                 cover       = {''}

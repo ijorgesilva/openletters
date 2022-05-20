@@ -5,7 +5,7 @@ const queriesSections       = require('./queriesSections')
 const queriesSectionsMain     = require('./queriesSectionsMain')
 
 const queriesPostTypes = {
-    allWpCampus: `
+    campuses: `
         ########
         # Campuses
         ########
@@ -91,7 +91,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpVideo: `
+    vod: `
         ########
         # Videos on Demand
         ########
@@ -218,7 +218,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpSeries: `
+    series: `
         ########
         # Series 
         ########
@@ -258,7 +258,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpNews: `
+    news: `
         ########
         # News 
         ########
@@ -293,7 +293,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpEvents: `
+    events: `
         ########
         # Events 
         ########
@@ -342,7 +342,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpMinistry: `
+    ministries: `
         ########
         # Ministries 
         ########
@@ -418,7 +418,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpDocument: `
+    attachments: `
         ########
         # Attachments
         ########
@@ -450,7 +450,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpPage: `
+    pages: `
         ########
         # Pages
         ########
@@ -490,7 +490,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpPosts: `
+    posts: `
         ########
         # Posts 
         ########
@@ -550,7 +550,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpCourse: `
+    courses: `
         ########
         # Courses 
         ########
@@ -627,7 +627,7 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpLandingPage:` 
+    landingPages:` 
         ########
         # Landing Pages 
         ########
@@ -656,11 +656,11 @@ const queriesPostTypes = {
             }
         }
     `,
-    allWpVolunteeropportunity: `
+    volunteering: `
         ########
         # Volunteering Opportunities
         ########
-        opportunities: allWpVolunteeropportunity {
+        volunteering: allWpVolunteeropportunity {
             nodes {
                 id
                 title

@@ -39,7 +39,6 @@ export default function PageDetails( { location, pageContext } ){
             <PageHeader 
                 mode        = { contentMode }
                 title       = { title }
-                location    = { location }
                 className   = 'pageDetails'
                 cover       = { cover }
                 description = { seo.metaDesc }

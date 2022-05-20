@@ -32,7 +32,6 @@ export default function VolunteeringDetails( { pageContext, location } ){
 
             <PageHeader 
                 title       = { title + ' | ' + t('global.volunteering.title') }
-                location    = { location } 
                 cover       = { general.featuredPhoto?.localFile.childImageSharp.gatsbyImageData.images.fallback.src }
                 description = { excerpt ? excerpt : excerpt}
                 article     = { true }

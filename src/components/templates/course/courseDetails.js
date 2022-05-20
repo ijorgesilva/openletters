@@ -81,7 +81,6 @@ export default function CourseDetails( { pageContext, data, location } ){
         <>
             <PageHeader 
                 title       = { title + ' | ' + t('global.courses.title') }
-                location    = { location }
                 className   = 'eventDetails'
                 mode        = { contentMode }
                 cover       = { general.featuredPhoto?.localFile.childImageSharp.gatsbyImageData.images.fallback.src }

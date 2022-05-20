@@ -4,7 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
 const path      = require('path')
 
 const config            = require('./data/SiteConfig')
@@ -47,21 +46,19 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     let createCourses       = false
     let createVolunteering  = false
     let createGroups        = false
-    
-    // Var for storing created series per campus to avoid duplicates
-    let createdSeries = [] 
+    let createdSeries       = [] // Var for storing created series per campus to avoid duplicates
 
     /*******************
      * I. ARCHIVES & CAMPUS PAGE ARCHIVES BY CAMPUS
      *******************/
     if ( result.data.campuses?.nodes?.length > 0 ) { // All the Archives and Main pages are circumscribed to a campus
         result.data.campuses.nodes.forEach( campus => {
-            /*  Watch Main Page*/
+            /*  VOD Main Page*/
             if( config.cpt.createWatch ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) { // Global flag: Turned on/off on website settings
                     if( campus.campusDetails.campusPages.campusWatch.pageActive === true ) {
                         createWatch = true
-                        // It creates Main Watch Page per Campus at /campus/watch
+                        // VOD Page per Campus
                         actions.createPage({
                             path: `/${campus.slug}/${config.watchSlug}`,
                             component: path.resolve(`./src/components/templates/watch/watchCampus.js`),
@@ -79,7 +76,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                                 }
                             }
                         })
-                        // It creates Latest Page Archive per Campus at /campus/watch/latest
+                        // VOD Latest Page/Archive per Campus
                         actions.createPage({
                             path: `/${campus.slug}/${config.watchSlug}/${config.watchSlugLatest}`,
                             component: path.resolve(`./src/components/templates/watch/watchLatest.js`),
@@ -101,7 +98,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Blog Main Page*/
+            /* Blog Campus Page*/
             if( config.cpt.createBlogNews ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusBlog.pageActive === true ) {
@@ -127,7 +124,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* News Main Page*/
+            /* News Campus Page*/
             if( config.cpt.createBlogNews ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
                     if( campus.campusDetails.campusPages.campusNews.pageActive === true ) {
@@ -153,7 +150,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
             
-            /* Events Main Page */
+            /* Events Campus Page */
             if( config.cpt.createEvents ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesEvents.active === true ) {
                     if( campus.campusDetails.campusPages.campusEvents.pageActive === true ) {
@@ -179,7 +176,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Ministry Main Page and Sub-pages */
+            /* Ministry Campus Page and Sub-pages */
             if( config.cpt.createMinistries ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesMinistries.active === true ) {
                     if( campus.campusDetails.campusPages.campusMinistry.pageActive === true ) {
@@ -205,7 +202,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Courses */
+            /* Courses Main Page */
             if( config.cpt.createCourses ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesCourses.active === true ) {
                     if( campus.campusDetails.campusPages.campusCourses.pageActive === true ) {
@@ -231,7 +228,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Volunteering */
+            /* Volunteering Main Page */
             if( config.cpt.createVolunteering ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesVolunteer.active === true ) {
                     if( campus.campusDetails.campusPages.campusVolunteering.pageActive === true ) {
@@ -257,7 +254,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Groups */
+            /* Groups Main Page */
             if( config.cpt.createGroups ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
                     if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
@@ -283,7 +280,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
                 }
             }
 
-            /* Group Types */
+            /* Group Types Main Page */
             if( config.cpt.createGroups ) {
                 if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesGroups.active === true ) {
                     if( campus.campusDetails.campusPages.campusGroups.pageActive === true ) {
@@ -317,7 +314,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
      *******************/
     
     /*******************
-     * 1. Video Detail Pages creation 
+     * 1. VOD Page creation 
      *******************/
     if( config.cpt.createWatch ) {
         if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesWatch.active === true ) {
@@ -423,7 +420,7 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
     }
 
     /*******************
-     * 3. Blog Post Pages creation 
+     * 3. Blog Post creation 
      *******************/
     if ( result.data.wp.websiteGeneralSettings.websiteSettings.settingsPages.settingsPagesBlog.active === true ) {
         if ( createBlog && result.data.posts?.nodes?.length > 0 ) {
@@ -920,36 +917,22 @@ exports.createPages = async( { actions, graphql, reporter } ) => {
  */
 const query = `
     query {
-
+        ## Website Settings
         ${queriesWp}
-
-        ## Always True CPTs on Headless
-        ${queriesPostTypes.allWpCampus}
-
-        ${queriesPostTypes.allWpPage}
-        
-        ${queriesPostTypes.allWpPosts}
-
-        ${queriesCommon.allWpRedirect}
-
-        ## CPTs
-        ${config.cpt.createCourses ? queriesPostTypes.allWpCourse : ''}
-
-        ${config.cpt.createBlogNews ? queriesPostTypes.allWpNews : ''}
-
-        ${config.cpt.createEvents ? queriesPostTypes.allWpEvents : ''}
-
-        ${config.cpt.createWatch ? queriesPostTypes.allWpSeries : ''}
-
-        ${config.cpt.createWatch ? queriesPostTypes.allWpVideo : ''}
-
-        ${config.cpt.createMinistries ? queriesPostTypes.allWpMinistry : ''}
-
-        ${config.cpt.createVolunteering ? queriesPostTypes.allWpVolunteeropportunity : ''}
-
-        ${config.cpt.createLandingPages ? queriesPostTypes.allWpLandingPage : ''}
-
-        ${config.cpt.createAttachments ? queriesPostTypes.allWpDocument : ''}
-        
+        ## Conditional PTs & CPTs
+        ${queriesPostTypes.campuses}
+        ${queriesPostTypes.pages}
+        ${queriesPostTypes.posts}
+        ${queriesCommon.redirects}
+        ## Conditional CPTs
+        ${config.cpt.createWatch ? queriesPostTypes.vod : ''}
+        ${config.cpt.createWatch ? queriesPostTypes.series : ''}
+        ${config.cpt.createBlogNews ? queriesPostTypes.news : ''}
+        ${config.cpt.createMinistries ? queriesPostTypes.ministries : ''}
+        ${config.cpt.createEvents ? queriesPostTypes.events : ''}
+        ${config.cpt.createCourses ? queriesPostTypes.courses : ''}
+        ${config.cpt.createVolunteering ? queriesPostTypes.volunteering : ''}
+        ${config.cpt.createLandingPages ? queriesPostTypes.landingPages : ''}
+        ${config.cpt.createAttachments ? queriesPostTypes.attachments : ''}
     }
 `

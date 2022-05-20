@@ -32,13 +32,6 @@ env:
     SITE_SEPARATOR: '|'
     MANIFEST_THEME_COLOR: '0F0A1B'
     MANIFEST_THEME_BACKGROUND_COLOR: '0F0A1B'
-    DATE_FROM_FORMAT: 'YYYY-MM-DD'
-    SITE_RSS: '/rss.xml '
-    SITE_RSS_TITLE: 'RSS feed'
-    USER_NAME: ''
-    USER_EMAIL: 'hello@example.com '
-    USER_LOCATION: ''
-    TWITTER_USERNAME: ''
     ## Global Configuration
     SITE_COPYRIGHT: 'Copyright © Example Church'
     ## S3
@@ -70,13 +63,6 @@ env:
     - SITE_IMAGE
     - MANIFEST_THEME_COLOR
     - MANIFEST_THEME_BACKGROUND_COLOR
-    - DATE_FROM_FORMAT
-    - SITE_RSS
-    - SITE_RSS_TITLE
-    - USER_NAME
-    - USER_EMAIL
-    - USER_LOCATION
-    - TWITTER_USERNAME
     - SITE_COPYRIGHT
     - DEPLOY_BUCKET
     - CLOUDFRONT_DISTRIBUTION

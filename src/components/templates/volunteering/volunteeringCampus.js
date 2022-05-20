@@ -38,7 +38,6 @@ export default function VolunteeringCampus (
 
             <PageHeader 
                 title       = { t('global.volunteering.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'volunteeringCampus'
                 mode        = { contentMode }
                 cover       = { 

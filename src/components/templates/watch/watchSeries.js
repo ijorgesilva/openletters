@@ -42,8 +42,7 @@ export default function WatchSeries( { pageContext, location, data } ) {
     return (
         <>
             <PageHeader 
-                title       = { title + ' | ' + t('global.watch.series') + ' | '  } 
-                location    = { location }
+                title       = { title + ' | ' + t('global.watch.series') + ' | '  }
                 cover       = { cover }
                 description = { excerpt }
                 mode        = { contentMode }

@@ -38,7 +38,6 @@ export default function MinistryCampus (
 
             <PageHeader 
                 title       = { t('global.ministry.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'ministryCampus'
                 mode        = { contentMode }
                 cover       = { 

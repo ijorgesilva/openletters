@@ -37,7 +37,6 @@ export default function MinistryDetails(
 
             <PageHeader 
                 title       = { title + ' | ' + t('global.blog.title') }
-                location    = { location } 
                 cover       = { cover }
                 description = { excerpt ? excerpt : excerpt }
                 article     = { true }

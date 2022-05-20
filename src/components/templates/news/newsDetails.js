@@ -38,7 +38,6 @@ export default function NewsDetails( { pageContext, location } ){
 
             <PageHeader 
                 title       = { title + ' | ' + t('global.blog.title') }
-                location    = { location } 
                 cover       = { cover }
                 description = { excerpt ? excerpt : excerpt}
                 article     = { true }

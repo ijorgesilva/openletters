@@ -4,7 +4,7 @@ const config    = require('../../data/SiteConfig')
 const videosAndSeries = `
 {
     ########
-    # Videos on Demand
+    # VOD
     ########
     videos: allWpVideoOnDemand (
             sort: {
@@ -103,7 +103,7 @@ const pages = `
                     }
                 }
                 pageHide {
-                  pageHideSearchResults
+                    pageHideSearchResults
                 }
             }
             wpParent {
@@ -155,7 +155,7 @@ const posts = `
                     }
                 }
                 postHide {
-                  postHideSearchResults
+                    postHideSearchResults
                 }
             }
         }
@@ -202,7 +202,7 @@ const news = `
                     }
                 }
                 newsHide {
-                  newsHideSearchResults
+                    newsHideSearchResults
                 }
             }
         }

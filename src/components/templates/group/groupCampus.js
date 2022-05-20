@@ -38,7 +38,6 @@ export default function GroupCampus (
 
             <PageHeader 
                 title       = { t('global.groups.title') + ' | ' + title }
-                location    = { location } 
                 className   = 'groupsCampus'
                 mode        = { contentMode }
                 cover       = { 

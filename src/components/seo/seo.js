@@ -47,9 +47,9 @@ export default function SEO({ postNode, postPath, postSEO }){
 
     const authorJSONLD = {
         "@type": "Person",
-        name: process.env.USER_NAME,
-        email: process.env.USER_EMAIL,
-        address: process.env.USER_LOCATION
+        name: process.env.GATSBY_USER_NAME,
+        email: process.env.GATSBY_USER_EMAIL,
+        address: process.env.GATSBY_USER_LOCATION
     }
 
     const logoJSONLD = {

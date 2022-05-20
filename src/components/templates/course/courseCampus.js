@@ -38,7 +38,6 @@ export default function CoursesCampus (
 
             <PageHeader 
                 title       = { t('global.courses.title-plural') + ' | ' + title }
-                location    = { location } 
                 className   = 'coursesCampus'
                 mode        = { contentMode }
                 cover       = { 

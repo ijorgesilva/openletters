@@ -38,7 +38,6 @@ export default function PostDetails( { location, pageContext } ){
 
             <PageHeader 
                 title       = { title + ' | ' + t('global.blog.title') }
-                location    = { location } 
                 mode        = { contentMode }
                 cover       = { cover }
                 description = { excerpt ? excerpt : excerpt}
